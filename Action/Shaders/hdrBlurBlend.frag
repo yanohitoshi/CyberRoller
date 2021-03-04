@@ -23,11 +23,7 @@ void main()
 
     hdrColor += bloomColor1 + bloomColor2 + bloomColor3; //+ bloomColor4 + bloomColor5; 
   
-    // �I�o�g�[���}�b�s���O
     vec3 mapped = vec3(1.0) - exp(-hdrColor * exposure);
-    
-    // �K���}�R���N�V����
-    //const float gamma = 2.2;
-    //mapped = pow(mapped, vec3(1.0 / gamma));  
+
     FragColor = vec4(mapped, 1.0);
 }  
