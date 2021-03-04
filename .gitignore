@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -14,7 +13,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -24,7 +22,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -34,14 +31,3 @@ Action/.vs/
 Action/Debug/
 Action/Release/
 Action/x64/
-External/
-Action/OpenGL.filters
-Action/OpenGL.iobj
-Action/OpenGL.ipdb
-Action/OpenGL.pdb
-Action/OpenGL.psess
-Action/OpenGL.sln
-Action/OpenGL.vcxproj
-Action/OpenGL.vcxproj.filters
-Action/OpenGL.vcxproj.user
-Action/OpenGL190926.vspx
