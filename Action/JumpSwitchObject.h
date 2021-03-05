@@ -11,6 +11,12 @@ class JumpSwitchObject :
 
 public:
 
+    /*
+    @fn コンストラクタ
+    @param	ポジション
+    @param	objectのサイズ
+    @param	オブジェクト判別用tag
+    */
     JumpSwitchObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag);
     ~JumpSwitchObject();
 

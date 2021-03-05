@@ -108,25 +108,7 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ClearSceneUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverSceneUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleSceneUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleEffectBase.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="SandSmokeParticle.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="SwitchParticleEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="SwitchEffectMakeManeger.cpp">
       <Filter>GameObjects\Effect</Filter>
     </ClCompile>
     <ClCompile Include="CountDownFont.cpp">
@@ -134,12 +116,6 @@
     </ClCompile>
     <ClCompile Include="TimeSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSandSmokeEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClearTutorialParticle.cpp">
-      <Filter>UI\ParticleUI</Filter>
     </ClCompile>
     <ClCompile Include="JumpTutorialParticl.cpp">
       <Filter>UI\ParticleUI</Filter>
@@ -150,12 +126,6 @@
     <ClCompile Include="TutorialSwitchParticlEffect.cpp">
       <Filter>UI\ParticleUI</Filter>
     </ClCompile>
-    <ClCompile Include="SandSmokeMakeManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSandSmokeMakeManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
@@ -165,26 +135,11 @@
     <ClCompile Include="Music.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="GameClearEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClearEffectManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="FierWorksEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="FireWorksEffectManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="StartCountDownSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
     <ClCompile Include="FirstStageScene.cpp">
       <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstStageUI.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="SecondStageScene.cpp">
       <Filter>Scene</Filter>
@@ -195,32 +150,11 @@
     <ClCompile Include="StageCreatorBase.cpp">
       <Filter>StageCreator</Filter>
     </ClCompile>
-    <ClCompile Include="BoxObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpSwitchObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveWallBlock.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="SwitchBlock.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="WallBlockObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
     <ClCompile Include="TitleStageCreator.cpp">
       <Filter>StageCreator</Filter>
     </ClCompile>
     <ClCompile Include="SecondStageCreator.cpp">
       <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearPointObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="NextSceneObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
     </ClCompile>
     <ClCompile Include="ThirdStageCreator.cpp">
       <Filter>StageCreator</Filter>
@@ -237,29 +171,8 @@
     <ClCompile Include="TutorialSwitchOkEffect.cpp">
       <Filter>UI\ParticleUI</Filter>
     </ClCompile>
-    <ClCompile Include="FinalStageUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondStageUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdStageUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpParticleEffectManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpParticleEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="CountDownBackFont.cpp">
       <Filter>UI\FontUI</Filter>
-    </ClCompile>
-    <ClCompile Include="LandingEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="LandingEffectManeger.cpp">
-      <Filter>GameObjects\Effect</Filter>
     </ClCompile>
     <ClCompile Include="ContinueSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
@@ -270,9 +183,6 @@
     <ClCompile Include="ResultScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ResultSceneUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="ThankYouSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
@@ -282,47 +192,134 @@
     <ClCompile Include="GameOverSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
-    <ClCompile Include="RespawnPoint.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="NeedleObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="NeedlePanelObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PushBoxObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveBlockObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PushBoardObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveNeedleObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
     <ClCompile Include="HDRRenderer.cpp">
       <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="CrystalDefaultEffect.cpp">
-      <Filter>GameObjects\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="CrystalEffectManager.cpp">
-      <Filter>GameObjects\Effect</Filter>
     </ClCompile>
     <ClCompile Include="TitleBackGroundSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
-    <ClCompile Include="SwitchBaseObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleGroundObject.cpp">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClCompile>
     <ClCompile Include="WarningSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FierWorksEffect.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireWorksEffectManeger.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearEffect.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearEffectManeger.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDefaultEffect.cpp">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalEffectManager.cpp">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpParticleEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpParticleEffectManeger.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffectManeger.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeMakeManeger.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandSmokeMakeManeger.cpp">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandSmokeParticle.cpp">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchEffectMakeManeger.cpp">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchParticleEffect.cpp">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBlockObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="WallBlockObject.cpp">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveWallBlock.cpp">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearPointObject.cpp">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NextSceneObject.cpp">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpSwitchObject.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBaseObject.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBlock.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGroundObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveNeedleObject.cpp">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NeedleObject.cpp">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NeedlePanelObject.cpp">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PushBoardObject.cpp">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PushBoxObject.cpp">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RespawnPoint.cpp">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -438,25 +435,7 @@
     <ClInclude Include="GameOverScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ClearSceneUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverSceneUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleSceneUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleEffectBase.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="SandSmokeParticle.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchParticleEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchEffectMakeManeger.h">
       <Filter>GameObjects\Effect</Filter>
     </ClInclude>
     <ClInclude Include="CountDownFont.h">
@@ -464,12 +443,6 @@
     </ClInclude>
     <ClInclude Include="TimeSprite.h">
       <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSandSmokeEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClearTutorialParticle.h">
-      <Filter>UI\ParticleUI</Filter>
     </ClInclude>
     <ClInclude Include="JumpTutorialParticl.h">
       <Filter>UI\ParticleUI</Filter>
@@ -480,12 +453,6 @@
     <ClInclude Include="TutorialSwitchParticlEffect.h">
       <Filter>UI\ParticleUI</Filter>
     </ClInclude>
-    <ClInclude Include="SandSmokeMakeManeger.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSandSmokeMakeManeger.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Sound</Filter>
     </ClInclude>
@@ -495,26 +462,11 @@
     <ClInclude Include="Music.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="GameClearEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClearEffectManeger.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="FierWorksEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="FireWorksEffectManeger.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="StartCountDownSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
     <ClInclude Include="FirstStageScene.h">
       <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstStageUI.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="SecondStageScene.h">
       <Filter>Scene</Filter>
@@ -525,32 +477,11 @@
     <ClInclude Include="FirstStageCreator.h">
       <Filter>StageCreator</Filter>
     </ClInclude>
-    <ClInclude Include="BoxObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpSwitchObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveWallBlock.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchBlock.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="WallBlockObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
     <ClInclude Include="TitleStageCreator.h">
       <Filter>StageCreator</Filter>
     </ClInclude>
     <ClInclude Include="SecondStageCreator.h">
       <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearPointObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="NextSceneObject.h">
-      <Filter>GameObjects\StageObject</Filter>
     </ClInclude>
     <ClInclude Include="ThirdStageCreator.h">
       <Filter>StageCreator</Filter>
@@ -567,29 +498,8 @@
     <ClInclude Include="TutorialSwitchOkEffect.h">
       <Filter>UI\ParticleUI</Filter>
     </ClInclude>
-    <ClInclude Include="FinalStageUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondStageUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdStageUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpParticleEffectManeger.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpParticleEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="CountDownBackFont.h">
       <Filter>UI\FontUI</Filter>
-    </ClInclude>
-    <ClInclude Include="LandingEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="LandingEffectManeger.h">
-      <Filter>GameObjects\Effect</Filter>
     </ClInclude>
     <ClInclude Include="ContinueSprite.h">
       <Filter>UI\SpriteUI</Filter>
@@ -600,9 +510,6 @@
     <ClInclude Include="ResultScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ResultSceneUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="ThankYouSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
@@ -612,47 +519,134 @@
     <ClInclude Include="GameOverSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
-    <ClInclude Include="RespawnPoint.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="NeedleObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="NeedlePanelObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PushBoxObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveBlockObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PushBoardObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveNeedleObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
     <ClInclude Include="HDRRenderer.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="CrystalDefaultEffect.h">
-      <Filter>GameObjects\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="CrystalEffectManager.h">
-      <Filter>GameObjects\Effect</Filter>
     </ClInclude>
     <ClInclude Include="TitleBackGroundSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
-    <ClInclude Include="SwitchBaseObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleGroundObject.h">
-      <Filter>GameObjects\StageObject</Filter>
-    </ClInclude>
     <ClInclude Include="WarningSprite.h">
       <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FierWorksEffect.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireWorksEffectManeger.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearEffect.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearEffectManeger.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDefaultEffect.h">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalEffectManager.h">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpParticleEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpParticleEffectManeger.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffectManeger.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeMakeManeger.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandSmokeMakeManeger.h">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandSmokeParticle.h">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchEffectMakeManeger.h">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchParticleEffect.h">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBlockObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="WallBlockObject.h">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveWallBlock.h">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearPointObject.h">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NextSceneObject.h">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpSwitchObject.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchBaseObject.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchBlock.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGroundObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveNeedleObject.h">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NeedleObject.h">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NeedlePanelObject.h">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PushBoardObject.h">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PushBoxObject.h">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RespawnPoint.h">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -710,11 +704,50 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{cf86a356-ee92-4d85-8748-5fd8bc2f8787}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\StageObject">
-      <UniqueIdentifier>{11af32dc-6357-49d7-b8da-5a348d9f3504}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StageCreator">
       <UniqueIdentifier>{79d68f3c-2d8d-4ecf-a877-91a62ecaa99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\ClearEffect">
+      <UniqueIdentifier>{1b4d2354-df87-43a5-85fc-d6e303938786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\CrystalEffect">
+      <UniqueIdentifier>{d8285a44-6da1-4928-9015-ee8a2a3d9924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect">
+      <UniqueIdentifier>{c707438e-9d4a-4b49-8225-79e51dae6791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\WallEffect">
+      <UniqueIdentifier>{8d5950e9-c64c-4938-a132-2ee9f6286e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\SwitchEffect">
+      <UniqueIdentifier>{fa333578-8800-4fbc-81b6-2527e3bb3663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects">
+      <UniqueIdentifier>{11af32dc-6357-49d7-b8da-5a348d9f3504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\GroundObject">
+      <UniqueIdentifier>{a20fe376-0424-429d-af75-edb8880ec6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\WallObject">
+      <UniqueIdentifier>{ec1b9505-6fe2-4883-a9c2-4261b5449ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\ClearObject">
+      <UniqueIdentifier>{8a017935-e09d-406f-8d5b-cabf94520cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\SwitchObject">
+      <UniqueIdentifier>{fed01ebe-accf-4161-9b28-d00b8c06e951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\NeedleObject">
+      <UniqueIdentifier>{7726ba89-db61-493d-a8e5-7a61b0269300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\PushBoardObject">
+      <UniqueIdentifier>{d0e239d5-262a-4adc-b45d-0ed026f66789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\RespawnObject">
+      <UniqueIdentifier>{d239bcb1-d219-4f4f-bba4-92020076add2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SceneUI">
+      <UniqueIdentifier>{d75e6610-2c3b-40ff-9285-7012d2f0b8dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

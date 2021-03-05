@@ -9,7 +9,6 @@ RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _obje
 	reSpownFlag = false;
 
 	boxCollider = new BoxCollider(this,ColliderComponent::ReSpownTag, GetOnCollisionFunc());
-	//AABB box = { Vector3(-1.0f,-3000.0f,-5000.0f),Vector3(1.0f,3000.0f,5000.0f) };
 	boxCollider->SetObjectBox(_box);
 
 }

@@ -13,6 +13,15 @@ class Mesh;
 class MoveWallBlock : public GameObject
 {
 public:
+
+	/*
+	@fn コンストラクタ
+	@param	ポジション
+	@param	objectのサイズ
+	@param	オブジェクト判別用tag
+	@param	動く速度
+	@param	止まる位置
+	*/
 	MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag& _objectTag,float _speed,Vector3 _stopPos);
 	~MoveWallBlock();
 

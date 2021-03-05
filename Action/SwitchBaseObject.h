@@ -10,6 +10,13 @@ class SwitchBaseObject :
 {
 public:
 
+	/*
+	@fn コンストラクタ
+	@param	ポジション
+	@param	objectのサイズ
+	@param	オブジェクト判別用tag
+	@param  どの区画のスイッチなのかを判別させるようのTag
+	*/
 	SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag);
 	~SwitchBaseObject();
 

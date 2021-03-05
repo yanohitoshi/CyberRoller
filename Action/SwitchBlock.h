@@ -16,10 +16,16 @@ class ChangeColorMeshComponent;
 class SwitchBlock : public GameObject
 {
 public:
-	// コンストラクタ
+
+	/*
+	@fn コンストラクタ
+	@param	ポジション
+	@param	objectのサイズ
+	@param	オブジェクト判別用tag
+	*/
 	SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag);
-	// デストラクタ
 	~SwitchBlock();
+
 	// アップデート
 	void UpdateGameObject(float _deltaTime)override;
 
