@@ -1,6 +1,10 @@
 #pragma once
 #include "NeedleObject.h"
 
+/*
+@file MoveNeedleObject.h
+@brief MoveNeedleObjectの生成と更新を行う
+*/
 class MoveNeedleObject :
     public NeedleObject
 {
@@ -19,7 +23,7 @@ public:
 
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

@@ -30,6 +30,7 @@ public:
 
 	/*
 	@fn 派生クラスの更新関数を呼び座標に移動量を足し続ける
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

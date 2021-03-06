@@ -2,6 +2,9 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+/*
+@enum クリスタル用effectの色のTag
+*/
 enum CrystalColor
 {
     WHITE,
@@ -10,6 +13,10 @@ enum CrystalColor
     GREEN,
 };
 
+/*
+@file CrystalEffectManager.h
+@brief CrystalEffectManagerの生成と更新を行う
+*/
 class CrystalEffectManager :
     public GameObject
 {
@@ -25,7 +32,7 @@ public:
     
     /*
     @fn 更新処理
-    @param	フレームレート固定用deltaTime
+    @param	最後のフレームを完了するのに要した時間
     */
     void UpdateGameObject(float _deltaTime)override;
 

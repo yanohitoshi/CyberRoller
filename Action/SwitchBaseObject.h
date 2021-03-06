@@ -5,6 +5,10 @@ class BoxCollider;
 class Mesh;
 class MeshComponent;
 
+/*
+@file SwitchBaseObject.h
+@brief Switchの土台の生成を行う
+*/
 class SwitchBaseObject :
     public GameObject
 {
@@ -22,7 +26,7 @@ public:
 	
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

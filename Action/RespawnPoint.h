@@ -2,7 +2,10 @@
 #include "GameObject.h"
 
 class BoxCollider;
-
+/*
+@file RespawnPoint.h
+@brief RespawnPointの生成を行う
+*/
 class RespawnPoint :
     public GameObject
 {
@@ -19,7 +22,7 @@ public:
 	
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

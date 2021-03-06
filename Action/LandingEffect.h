@@ -1,5 +1,10 @@
 #pragma once
 #include "ParticleEffectBase.h"
+
+/*
+@file LandingEffect.h
+@brief LandingEffectの生成と更新を行う
+*/
 class LandingEffect :
     public ParticleEffectBase
 {
@@ -12,6 +17,11 @@ public:
     */
     LandingEffect(const Vector3& _pos, const Vector3& _velocity);
     ~LandingEffect()override;
+
+    /*
+    @fn 更新処理
+    @param	最後のフレームを完了するのに要した時間
+    */
     void UpdateGameObject(float _deltaTime)override;
 
 private:

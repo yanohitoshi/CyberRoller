@@ -5,6 +5,10 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+/*
+@file PushBoxObject.h
+@brief PushBoxObjectの生成と更新を行う
+*/
 class PushBoxObject :
     public GameObject
 {
@@ -26,7 +30,7 @@ public:
 
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

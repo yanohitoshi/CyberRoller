@@ -3,6 +3,10 @@
 #include "ParticleEffectBase.h"
 #include "CrystalEffectManager.h"
 
+/*
+@file FierWorksEffect.h
+@brief FierWorksEffectの生成と更新を行う
+*/
 class FierWorksEffect :
     public ParticleEffectBase
 {
@@ -16,6 +20,10 @@ public:
     */
     FierWorksEffect(const Vector3& _pos, const Vector3& _velocity , CrystalColor _crystalColor);
     ~FierWorksEffect()override;
+    /*
+    @fn 更新処理
+    @param	最後のフレームを完了するのに要した時間
+    */
     void UpdateGameObject(float _deltaTime)override;
 
 private:

@@ -2,6 +2,7 @@
 #include "GameObject.h"
 
 class SpriteComponent;
+
 /*
 @file ThankYouSprite.h
 @brief ƒŠƒUƒ‹ƒg‰æ–Ê‚ð•\Ž¦‚·‚é

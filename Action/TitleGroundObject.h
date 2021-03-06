@@ -1,5 +1,10 @@
 #pragma once
 #include "BoxObject.h"
+
+/*
+@file TitleGroundObject.h
+@brief TitleGroundObjectの生成と更新を行う
+*/
 class TitleGroundObject :
     public BoxObject
 {
@@ -17,7 +22,7 @@ public:
 	
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

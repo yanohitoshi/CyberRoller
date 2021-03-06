@@ -9,8 +9,6 @@ class Mesh;
 @file BoxObject.h
 @brief ボックスオブジェクトの生成と更新処理を行う
 */
-
-
 class BoxObject : public GameObject
 {
 public:
@@ -26,7 +24,7 @@ public:
 	
 	/*
 	@fn 更新処理
-	@param	フレームレート固定用deltaTime
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

@@ -2,7 +2,10 @@
 #include "GameObject.h"
 
 #include "ParticleEffectBase.h"
-
+/*
+@file SwitchEffectMakeManeger.h
+@brief SwitchEffectMakeManegerの生成と更新を行う
+*/
 class SwitchEffectMakeManeger :
     public GameObject
 {
@@ -17,7 +20,7 @@ public:
     
     /*
     @fn 更新処理
-    @param	フレームレート固定用deltaTime
+    @param	最後のフレームを完了するのに要した時間
     */
     void UpdateGameObject(float _deltaTime)override;
 

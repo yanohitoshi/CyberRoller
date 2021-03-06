@@ -1,5 +1,10 @@
 #pragma once
 #include "ParticleEffectBase.h"
+
+/*
+@file PlayerSandSmokeEffect.h
+@brief PlayerSandSmokeEffectの生成と更新を行う
+*/
 class PlayerSandSmokeEffect :
     public ParticleEffectBase
 {
@@ -16,7 +21,7 @@ public:
 
     /*
     @fn 更新処理
-    @param	フレームレート固定用deltaTime
+    @param	最後のフレームを完了するのに要した時間
     */
     void UpdateGameObject(float _deltaTime)override;
 

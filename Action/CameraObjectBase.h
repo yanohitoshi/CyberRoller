@@ -18,7 +18,7 @@ public:
 
     /*
     @brief	更新処理
-    @param	deltaTime固定
+    @param	最後のフレームを完了するのに要した時間
     */
     virtual void UpdateGameObject(float _deltaTime = 1.0f);
     virtual void GameObjectInput(const InputState& _keyState);

@@ -3,15 +3,15 @@
 #include "CameraObjectBase.h"
 #include "PlayerObject.h"
 
-/*
-@file MainCameraObject.h
-@brief メインカメラ ゲーム中のオブジェクトを映す
-*/
 
 class LineSegmentCollider;
 class SphereCollider;
 class BoxCollider;
 
+/*
+@file MainCameraObject.h
+@brief メインカメラ ゲーム中のオブジェクトを映す
+*/
 class MainCameraObject :
 	public CameraObjectBase
 {
