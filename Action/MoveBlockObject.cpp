@@ -30,13 +30,13 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	boxCollider = new BoxCollider(this, ColliderComponent::MoveGroungTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
-	// イージング変数
-	start = 0.0f;
-	// 移動する時間
-	totalTime = 1.0f;
-	elapseTime = 0.0f;
-	// 到達点
-	differencePos = 0.0f;
+	//// イージング変数
+	//start = 0.0f;
+	//// 移動する時間
+	//totalTime = 1.0f;
+	//elapseTime = 0.0f;
+	//// 到達点
+	//differencePos = 0.0f;
 }
 
 MoveBlockObject::~MoveBlockObject()

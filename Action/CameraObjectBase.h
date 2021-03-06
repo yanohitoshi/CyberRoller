@@ -16,7 +16,10 @@ public:
     CameraObjectBase(bool _reUseGameObject, const Tag _objectTag);
     ~CameraObjectBase();
 
-    //このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+    /*
+    @brief	更新処理
+    @param	deltaTime固定
+    */
     virtual void UpdateGameObject(float _deltaTime = 1.0f);
     virtual void GameObjectInput(const InputState& _keyState);
 

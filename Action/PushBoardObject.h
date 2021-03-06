@@ -9,9 +9,26 @@ class PushBoardObject :
 	public GameObject
 {
 public:
+	
+	/*
+	@fn コンストラクタ
+	@param	親となるobjectのポインタ
+	@param	ポジション
+	@param	objectのサイズ
+	@param	オブジェクト判別用tag
+	@param  どれくらいの距離動くのか
+	@param　どの方向に動くのか
+	@param　速度
+	@param　戻る際に速度を落とす割合
+	@param　どの方向に動くのか判別するためのタグ
+	*/
 	PushBoardObject(GameObject* _owner,const Vector3& _p, const Vector3& _size, const Tag& _objectTag ,const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag);
 	~PushBoardObject();
-
+	
+	/*
+	@fn 更新処理
+	@param	フレームレート固定用deltaTime
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
@@ -31,7 +48,7 @@ private:
 	const float cutBackSpeed;
 	//移動方向
 	Vector3 direction;
-
+	// どの方向に動くかを判定するためのTag変数
 	MoveDirectionTag moveTag;
 
 };

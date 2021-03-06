@@ -48,7 +48,7 @@ private:
     // アニメーションの状態用変数
     int animState;
 
-    // SkeletalMeshComponentのポインタ変数
+    //3Dモデルの描画を行うクラス
     SkeletalMeshComponent* skeltalMeshComponent;
     
     // 重力定数

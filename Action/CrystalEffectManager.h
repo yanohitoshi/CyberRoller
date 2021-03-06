@@ -14,8 +14,19 @@ class CrystalEffectManager :
     public GameObject
 {
 public:
+    
+    /*
+    @fn コンストラクタ
+    @param	親クラスのポインタ
+    @param	何色か判定用Tag
+    */
     CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor);
     ~CrystalEffectManager()override;
+    
+    /*
+    @fn 更新処理
+    @param	フレームレート固定用deltaTime
+    */
     void UpdateGameObject(float _deltaTime)override;
 
 private:

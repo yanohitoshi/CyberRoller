@@ -25,11 +25,9 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	height = 0.0f;
 	tmpMovePos = Vector3(0.0f,0.0f,0.0f);
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
-	cameraTutorialCount = 0;
 	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-80.0f,-80.0f,-50.0f),Vector3(80.0f,80.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
-	tutorialCameraFlag = true;
 
 }
 

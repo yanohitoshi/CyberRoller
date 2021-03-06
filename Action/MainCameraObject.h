@@ -23,23 +23,60 @@ public:
 	MainCameraObject(const Vector3 _pos);
 	~MainCameraObject();
 
-	//このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+	/*
+	@brief	更新処理
+	@param	deltaTime固定
+	*/
 	void UpdateGameObject(float _deltaTime = 1.0f)override;
 	void GameObjectInput(const InputState& _keyState)override;
+
 	/*
+	@brief	見る対象物の情報を得る
 	@param _offset　見たい座標との差
 	@param _parentPos　見る座標
 	*/
 	void SetViewMatrixLerpObject(const Vector3& _offset, const Vector3& _parentPos);
-	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
-	void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 
+	/*
+	@brief 押し戻しを行う
+	@param 自分のAABB
+	@param 相手のAABB
+	@param ペアとなる相手のTag
+	*/
+	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
+
+	/*
+	@brief 押し戻し計算を行う
+	@param 自分のAABB
+	@param 相手のAABB
+	@param 押し戻し量
+	*/
+	void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
+	
+	/*
+	@brief	player以外のものを注視する際に使うsetter
+	@param 見る対象物のポジション
+	*/
 	void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
+	
+	/*
+	@brief カメラの前方ベクトルを得るためのgetter
+	@param カメラの前方ベクトル
+	*/
 	Vector3 GetCameraVec() { return forwardVec; }
+	
+	/*
+	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
+	*/
 	void ReSetYaw() { yaw = Math::ToRadians(180); }
 
 private:
 
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数
+	@param	当たったGameObject
+	*/
+	void OnCollision(const GameObject& _hitObject)override;
 
 	//親オブジェクトとの差
 	Vector3 offsetPos;
@@ -66,18 +103,14 @@ private:
 	//移動先position
 	Vector3 tmpMovePos;
 	Vector3 tmpPosition;
-	//前方ベクトル
-	//Vector3 forwardVec;
-	void OnCollision(const GameObject& _hitObject)override;
+
+	// 当たり判定を行うクラス(AABB/線分/球体※線分未実装)
+	BoxCollider* boxcollider;
 	LineSegmentCollider* lineSegmentCollider;
 	SphereCollider* sphereCollider;
-	BoxCollider* boxcollider;
 
+	// view行列
 	Matrix4 view;
 
-	int cameraTutorialCount;
-	bool tutorialCameraFlag;
-
-	bool input;
 };
 

@@ -24,24 +24,44 @@ public:
 	*/
 	MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag& _objectTag,float _speed,Vector3 _stopPos);
 	~MoveWallBlock();
-
+	
+	/*
+	@fn 更新処理
+	@param	フレームレート固定用deltaTime
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
-
+	
+	/*
+	@fn スイッチの状態を確認する関数
+	@param	どの種類のobjectか判定する用のTag
+	@param	フレームレート固定用deltaTime
+	*/
 	void ChackSwitch(Tag& _tag, float _deltaTime);
+	
+	/*
+	@fn どの壁がどのスイッチを確認するかセットする関数
+	@param	どの種類のobjectか判定する用のTag
+	*/
 	void SetChackSwitchTag(Tag& _tag);
+
+	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+
+	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
 	//開閉速度
 	const float moveSpeed;
 	//objectの初期位置を保存する用のvector
 	Vector3 initPos;
+	//objectの停止位置を保存する用のvector
 	Vector3 stopPos;
 	//open/close判定用flag
 	bool openFlag;
+	// チェックするTag保存用
 	Tag chackTag;
 };
 

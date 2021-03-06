@@ -4,6 +4,12 @@ class LandingEffect :
     public ParticleEffectBase
 {
 public:
+    
+    /*
+    @fn コンストラクタ
+    @param	ポジション
+    @param	移動速度
+    */
     LandingEffect(const Vector3& _pos, const Vector3& _velocity);
     ~LandingEffect()override;
     void UpdateGameObject(float _deltaTime)override;

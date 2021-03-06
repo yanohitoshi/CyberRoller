@@ -94,7 +94,9 @@ class GameObject
 {
 public:
 	/*
-	@param	ゲームクラスのポインタ
+	@fn コンストラクタ
+	@param	再利用するかどうかのフラグ
+	@param	オブジェクト判別用tag
 	*/
 	GameObject(bool _reUseGameObject,const Tag _objectTag);
 	virtual ~GameObject();

@@ -4,6 +4,12 @@ class JumpParticleEffect :
     public ParticleEffectBase
 {
 public:
+    
+    /*
+    @fn コンストラクタ
+    @param	ポジション
+    @param	移動速度
+    */
     JumpParticleEffect(const Vector3& _pos, const Vector3& _velocity);
     ~JumpParticleEffect()override;
     void UpdateGameObject(float _deltaTime)override;

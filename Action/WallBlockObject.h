@@ -23,12 +23,19 @@ public:
 	WallBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag);
 	~WallBlockObject();
 
+	/*
+	@fn 更新処理
+	@param	フレームレート固定用deltaTime
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
 
+	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
-	BoxCollider* boxCollider;
 	Mesh* mesh;
+
+	// 当たり判定を行うクラス
+	BoxCollider* boxCollider;
 
 };

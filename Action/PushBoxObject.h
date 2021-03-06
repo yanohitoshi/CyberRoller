@@ -24,12 +24,18 @@ public:
 	PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed , MoveDirectionTag _moveTag);
 	~PushBoxObject();
 
+	/*
+	@fn 更新処理
+	@param	フレームレート固定用deltaTime
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
 
+	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;
 	MeshComponent* meshComponent;
+	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
 };

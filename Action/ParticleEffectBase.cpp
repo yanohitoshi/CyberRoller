@@ -16,7 +16,6 @@ ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velo
 
 ParticleEffectBase::~ParticleEffectBase()
 {
-	//delete particleComponent;
 }
 
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)

@@ -89,15 +89,22 @@ private:
 	BoxCollider* boxCollider;
 	SphereCollider* groundChackSphereCol;
 
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数
+	@param	当たったGameObject
+	*/	
 	void OnCollision(const GameObject& _hitObject)override;
+
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
+	@param	当たったGameObject
+	*/
 	void OnCollisionGround(const GameObject& _hitObject);
 
 	//押し戻しに使うプレイヤーのAABB
 	AABB playerBox;
 	//-----------アニメーション関係------------//
 	std::vector<const Animation*> animTypes;
-
-
 	//再生するアニメーションの状態
 	int animState;
 	//切り替わったかを判断するための変数

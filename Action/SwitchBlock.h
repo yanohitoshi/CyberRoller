@@ -26,18 +26,31 @@ public:
 	SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag);
 	~SwitchBlock();
 
-	// アップデート
+	/*
+	@fn 更新処理
+	@param	フレームレート固定用deltaTime
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
 	// 区画ごとに分かれたswitchがすべて押されたかどうかチェックする関数
 	void ChackOnFlag(Tag& _Tag);
-	// 動く床と接している時にその速度をもらうためのOnCollision
+
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数
+		動く床と接している時にその速度をもらうための
+	@param	当たったGameObject
+	*/
 	void OnCollision(const GameObject& _hitObject)override;
-	// プレイヤーの足元判定とのOnCollision
+	
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数
+		プレイヤーの足元判定とのOnCollision
+	@param	当たったGameObject
+	*/
 	void PlayerFootOnCollision(const GameObject& _hitObject);
 
-	// メッシュコンポーネント
+	// 色変更機能付きMeshComponent
 	ChangeColorMeshComponent* meshComponent;
 	// 動く床と接している時にその速度をもらうためのCollider
 	BoxCollider* boxCollider;

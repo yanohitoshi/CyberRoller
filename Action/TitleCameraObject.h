@@ -19,7 +19,10 @@ public:
     TitleCameraObject(const Vector3 _pos);
     ~TitleCameraObject();
 
-    //このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+    /*
+    @brief	更新処理
+    @param	deltaTime固定
+    */
     void UpdateGameObject(float _deltaTime = 1.0f);
     void GameObjectInput(const InputState& _keyState);
 
