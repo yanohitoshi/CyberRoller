@@ -12,13 +12,35 @@ class ChangeColorMeshComponent :
 {
 public:
 
+    /*
+    @fn コンストラクタ
+    @param _skelton スケルトンデータを用いるか。
+    @param _color 途中で色の変更を用いるか。
+    @sa SkeletalMeshComponent.h
+    */
     ChangeColorMeshComponent(GameObject* _owner, bool _skelton, bool _color);
+    
+    /*
+    @fn デストラクタ
+    @brief  componentの削除を行う
+    */
     ~ChangeColorMeshComponent();
 
+    /*
+    @brief　描画処理
+    @param	_shader 使用するシェーダークラスのポインタ
+    */
     void Draw(Shader* _shader)override;
+
+    /*
+    @brief  color変数のsetter
+    @param  _color 変更したい色のRGB(Vector3)
+    */
     void SetColor(const Vector3& _color) { color = _color; }
     
 private:
+
+    // 色情報を持つVector3変数
     Vector3 color;
 
 };

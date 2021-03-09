@@ -16,11 +16,17 @@ class TimeSprite :
 public:
 
     TimeSprite();
+    
+    /*
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
     ~TimeSprite();
 
     /*
-    @brief	アップデート
-    @param	deltaTime
+    @fn アップデート関数
+    @brief	更新処理を行う
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void UpdateGameObject(float _deltaTime)override;
 

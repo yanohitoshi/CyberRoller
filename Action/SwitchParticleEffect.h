@@ -16,11 +16,17 @@ public:
     @param	移動速度
     */
     SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity);
+
+    /*
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
     ~SwitchParticleEffect()override;
     
     /*
-    @fn 更新処理
-    @param	最後のフレームを完了するのに要した時間
+    @fn アップデート関数
+    @brief	更新処理を行う
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void UpdateGameObject(float _deltaTime)override;
 

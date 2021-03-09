@@ -14,12 +14,20 @@ class ContinueSprite :
 public:
 
     ContinueSprite();
-    ~ContinueSprite();
+    
     /*
-    @brief	アップデート
-    @param	deltaTime
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
+    ~ContinueSprite();
+    
+    /*
+    @fn アップデート関数
+    @brief	更新処理を行う
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void UpdateGameObject(float _deltaTime)override;
+
     /*
     @brief	入力
     @param	入力情報

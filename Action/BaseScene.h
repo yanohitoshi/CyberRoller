@@ -14,11 +14,16 @@ public:
 
 	// コンストラクタ（仮想関数）
 	BaseScene() {};
-	// デストラクタ（仮想関数）
+
+	/*
+	@fn デストラクタ(仮想関数)
+	@brief  sceneの削除を行う
+	*/
 	virtual ~BaseScene() {};
 
 	/*
-	@brief	アップデート（仮想関数）
+	@fn　シーンのアップデート関数(純粋仮想関数)
+	@brief	シーンの更新処理を行う
 	@param	入力情報
 	@return シーンの遷移を判定するためのenum型のSceneState
 	*/

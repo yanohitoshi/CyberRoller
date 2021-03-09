@@ -7,11 +7,17 @@ class GameObject;
 class Component
 {
 public:
+
 	/*
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
 	Component(GameObject* _owner,int _updateOrder = 100);
+
+	/*
+	@fn デストラクタ
+	@brief  componentの削除を行う
+	*/
 	virtual ~Component();
 
 	/*
@@ -30,12 +36,14 @@ public:
 	@brief	Transformのワールド変換
 	*/
 	virtual void OnUpdateWorldTransform() {}
+
 protected:
 
 	//アタッチしているゲームオブジェクトのポインタ
 	GameObject* owner;			
 	// コンポーネントの更新順番（数値が小さいほど早く更新される）
 	int updateOrder;
+
 public: //ゲッターセッター
 	/*
 	@return 更新順番

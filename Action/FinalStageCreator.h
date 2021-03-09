@@ -10,6 +10,11 @@ class FinalStageCreator :
 {
 public:
 	FinalStageCreator(bool _reUseGameObject, const Tag _objectTag);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~FinalStageCreator()override;
 	/*
 	@fn ファイルを開く

@@ -26,11 +26,17 @@ public:
 	@param　どの方向に動くのか判別するためのタグ
 	*/
 	PushBoardObject(GameObject* _owner,const Vector3& _p, const Vector3& _size, const Tag& _objectTag ,const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~PushBoardObject();
 	
 	/*
-	@fn 更新処理
-	@param	最後のフレームを完了するのに要した時間
+	@fn アップデート関数
+	@brief	更新処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

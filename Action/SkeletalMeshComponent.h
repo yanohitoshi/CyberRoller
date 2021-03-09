@@ -27,6 +27,7 @@ public:
 	@return アニメーションの残り時間
 	*/
 	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
+
 protected:
 	/*
 	@fn 行列パレットの計算

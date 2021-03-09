@@ -115,10 +115,6 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 
 }
 
-void TitlePlayerObject::GameObjectInput(const InputState& _keyState)
-{
-}
-
 void TitlePlayerObject::AnimationUpdate()
 {
 	if (onGround == false)

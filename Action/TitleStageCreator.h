@@ -14,7 +14,11 @@ public:
 
 	// コンストラクタ
 	TitleStageCreator(bool _reUseGameObject, const Tag _objectTag);
-	// デストラクタ
+
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~TitleStageCreator()override;
 
 	/*

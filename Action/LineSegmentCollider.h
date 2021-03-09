@@ -48,11 +48,16 @@ public:
 	float GetContactPoint(){ return contactPoint; }
 	float contactPoint;
 private:
-	//===================== privateのメンバ変数 ======================//
 
+	//オブジェクトに設定する用の線分（中心をオブジェクトの中心にする）
 	LineSegment objectLineSegment;
+
+	//当たり判定するときに使う線分（中心をワールド座標の中心にする）
 	LineSegment worldLineSegment;
+
 	float value;
+
+	// 前方ベクトル
 	Vector3 forwardVec;
 
 };

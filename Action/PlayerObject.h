@@ -46,27 +46,33 @@ public:
 
 	/*
 	@fn デストラクタ
+	@brief  objectの削除を行う
 	*/
 	~PlayerObject();
 
 	/*
-	@fn 更新処理
-	@param	最後のフレームを完了するのに要した時間
+	@fn アップデート関数
+	@brief	更新処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
+	
 	/*
 	@fn 入力処理
 	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
 	*/
 	void GameObjectInput(const InputState& _keyState)override;
+	
 	/*
 	@fn アニメーションの更新処理
 	*/
 	void AnimationUpdate();
+	
 	/*
 	@fn めり込み判定
 	*/
 	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
+	
 	/*
 	@fn 押し戻し処理
 	*/

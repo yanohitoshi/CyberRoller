@@ -55,10 +55,14 @@ public:
 	PhysicsTag GetBoxTag() const{ return mTag; }
 
 private:
-//===================== privateのメンバ変数 ======================//
 
-	AABB objectBox;			//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
-	AABB worldBox;			//当たり判定するときに使うボックス（中心をワールド座標の中心にする）
+	//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
+	AABB objectBox;
+
+	//当たり判定するときに使うボックス（中心をワールド座標の中心にする）
+	AABB worldBox;
+
+	// 回転計算が必要かどうか
 	bool shouldRotate;
 };
 

@@ -23,19 +23,20 @@ public:
     @param	オブジェクト判別用tag
     */
     TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag);
-    ~TitlePlayerObject()override;
+
     /*
-    @fn 更新処理
-    @param	最後のフレームを完了するのに要した時間
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
+    ~TitlePlayerObject()override;
+    
+    /*
+    @fn アップデート関数
+    @brief	更新処理を行う
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void UpdateGameObject(float _deltaTime)override;
     
-    /*
-    @fn 入力を引数で受け取る更新関数
-    @brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
-    */
-    void GameObjectInput(const InputState& _keyState)override;
-
 private:
 
     /*

@@ -14,11 +14,17 @@ public:
     @param	ObjectTag
     */
     CameraObjectBase(bool _reUseGameObject, const Tag _objectTag);
+
+    /*
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
     ~CameraObjectBase();
 
     /*
-    @brief	更新処理
-    @param	最後のフレームを完了するのに要した時間
+    @fn アップデート関数
+    @brief	更新処理を行う
+    @param	_deltaTime 前のフレームでかかった時間
     */
     virtual void UpdateGameObject(float _deltaTime = 1.0f);
     virtual void GameObjectInput(const InputState& _keyState);

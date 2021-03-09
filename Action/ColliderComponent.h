@@ -51,22 +51,15 @@ public:
 	*/
 	int GetCollisionOrder() const { return collisionOrder; }
 
-	//未実装
-	////オブジェクトが球に当たった時にめりこみからずらす処理
-	//virtual void ShiftObject(const Sphere& _hirSphere) {}
-	////オブジェクトが平面に当たった時にめりこみからずらす処理
-	//virtual void ShiftObject(const Plane& _hitPlane) {}
-	////オブジェクトがAABBに当たった時にめりこみからずらす処理
-	//virtual void ShiftObject(const AABB& _hitBox) {}
-	////オブジェクトがカプセルに当たった時にめりこみからずらす処理
-	//virtual void ShiftObject(const Capsule& _hitCapsule) {}
-
 private:
-//===================== privateのメンバ変数 ======================//
 
 	bool isTrigger;			//実体を伴う当たり判定をするかどうか
-	int	 collisionOrder;	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない
+	int	 collisionOrder;	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない)
+
 protected:
+
+	// 当たり判定を行うかどうかの判定用Tag
 	PhysicsTag mTag;
+
 };
 

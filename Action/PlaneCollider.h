@@ -41,14 +41,15 @@ public:
 	@brief	当たり判定時に使うワールド空間でのPlaneを取得する
 	@return 中心をワールド座標に合わせたPlane
 	*/
-
 	Plane GetWorldPlane() const { return worldPlane; }
 
 
 private:
-	//===================== privateのメンバ変数 ======================//
 
+	//オブジェクトに設定する用の平面（中心をオブジェクトの中心にする）
 	Plane objectPlane;
+
+	//当たり判定するときに使う平面（中心をワールド座標の中心にする）
 	Plane worldPlane;
 
 };

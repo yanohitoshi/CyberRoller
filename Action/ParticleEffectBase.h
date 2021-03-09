@@ -23,13 +23,19 @@ public:
 	@param _velocity オブジェクトの移動量
 	@param _lifeCount オブジェクトの生存時間
 	@param _spriteFileName 画像へのアドレス
-	@param _scale 画像の拡大サイズ
+	@param _scale 画像の拡大サイズ(デフォルトの値は10)
 	*/
 	ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, const float& _scale = 10);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~ParticleEffectBase();
 
 	/*
-	@fn 派生クラスの更新関数を呼び座標に移動量を足し続ける
+	@fn 更新処理関数
+	@brief 派生クラスの更新関数を呼び座標に移動量を足し続ける
 	@param	最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;

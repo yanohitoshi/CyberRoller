@@ -11,6 +11,11 @@ class ThirdStageCreator
 public:
 
 	ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~ThirdStageCreator()override;
 
 	/*

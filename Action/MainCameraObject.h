@@ -21,11 +21,17 @@ public:
 	@param	ポジション
 	*/
 	MainCameraObject(const Vector3 _pos);
+
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~MainCameraObject();
 
 	/*
-	@brief	更新処理
-	@param	deltaTime固定
+	@fn アップデート関数
+	@brief	更新処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime = 1.0f)override;
 	void GameObjectInput(const InputState& _keyState)override;

@@ -36,6 +36,7 @@ public:
 	// カメラ距離でのソート用
 	bool operator < (const ParticleComponent& rhs) const;
 	bool operator > (const ParticleComponent& rhs) const;
+
 private:
 	//親オブジェクトクラスと画像を描画する位置の差
 	Vector3 offset;
@@ -59,6 +60,7 @@ private:
 	int drawOrder;
 	//反転を行うか
 	bool reverce;
+
 public: //ゲッターセッター
 	/*
 	@return テクスチャID

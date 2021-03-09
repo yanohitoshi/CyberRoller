@@ -17,10 +17,16 @@ public:
     @param	ポジション
     */
     TitleCameraObject(const Vector3 _pos);
+
+    /*
+    @fn デストラクタ
+    @brief  objectの削除を行う
+    */
     ~TitleCameraObject();
 
     /*
-    @brief	更新処理
+    @fn アップデート関数
+    @brief	更新処理を行う
     @param	deltaTime固定
     */
     void UpdateGameObject(float _deltaTime = 1.0f);

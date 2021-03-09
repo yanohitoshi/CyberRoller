@@ -11,7 +11,6 @@
 class SphereCollider final : public ColliderComponent
 {
 public:
-//===================== publicのメンバ関数 ======================//
 
 	/**
 	@brief	コンストラクタ
@@ -49,10 +48,12 @@ public:
 	PhysicsTag GetSphereTag() const { return mTag; }
 
 private:
-//===================== privateのメンバ変数 ======================//
 
-	Sphere objectSphere;	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
-	Sphere worldSphere;		//当たり判定するときに使う球（中心をワールド座標の中心にする）
+	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
+	Sphere objectSphere;
+
+	//当たり判定するときに使う球（中心をワールド座標の中心にする）
+	Sphere worldSphere;
 
 };
 

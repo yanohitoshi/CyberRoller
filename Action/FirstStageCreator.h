@@ -12,6 +12,11 @@ class FirstStageCreator
 {
 public:
 	FirstStageCreator(bool _reUseGameObject, const Tag _objectTag);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~FirstStageCreator()override;
 	/*
 	@fn ファイルを開く

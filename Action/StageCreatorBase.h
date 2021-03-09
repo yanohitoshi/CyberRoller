@@ -12,6 +12,11 @@ class StageCreatorBase :
 {
 public:
 	StageCreatorBase(bool _reUseGameObject, const Tag _objectTag);
+	
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~StageCreatorBase()override;
 
 protected:

@@ -21,6 +21,7 @@ public:
 	@param _shader 使用するシェーダークラスのポインタ
 	*/
     virtual void Draw(Shader* _shader);
+
 protected:
 	//クラスのポインタ
     Texture* texture;
@@ -37,6 +38,7 @@ protected:
 	float alpha;
 
 public://ゲッターセッター
+
 	/*
 	@fn テクスチャをセットし縦横の長さを計算する
 	@param _texture 使用するテクスチャのポインタ

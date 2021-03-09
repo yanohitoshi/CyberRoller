@@ -18,11 +18,17 @@ public:
 	@param	オブジェクト判別用tag
 	*/
 	TitleGroundObject(const Vector3& _p, const Vector3& _size,const Vector3& _playerPos , const Tag& _objectTag);
+
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
 	~TitleGroundObject();
 	
 	/*
-	@fn 更新処理
-	@param	最後のフレームを完了するのに要した時間
+	@fn アップデート関数
+	@brief	更新処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 

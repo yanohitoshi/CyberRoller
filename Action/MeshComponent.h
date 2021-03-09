@@ -13,8 +13,11 @@ class Mesh;
 class MeshComponent : public Component
 {
 public:
+
 	/*
+	@fn コンストラクタ
 	@param _skelton スケルトンデータを用いるか。
+	@param _color 途中で色の変更を用いるか。
 	@sa SkeletalMeshComponent.h
 	*/
     MeshComponent(GameObject* _owner,bool _skelton,bool _color);
