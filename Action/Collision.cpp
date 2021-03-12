@@ -558,6 +558,124 @@ bool Intersect(const LineSegment & _line, const AABB & _AABB, float & _outT, Vec
 	return false;
 }
 
+bool ColRayBox(const LineSegment& lineSegment, const AABB& aabb, float& t, Vector3& colPos)
+{
+	// 交差判定
+	float p[3], d[3], min[3], max[3];
+	memcpy(p, &lineSegment.start, sizeof(Vector3));
+	memcpy(d, &lineSegment.end, sizeof(Vector3));
+	memcpy(min, &aabb.min, sizeof(Vector3));
+	memcpy(max, &aabb.max, sizeof(Vector3));
+
+	t = -FLT_MAX;
+	float t_max = FLT_MAX;
+
+	for (int i = 0; i < 3; ++i) {
+		if (abs(d[i]) < FLT_EPSILON) {
+			if (p[i] < min[i] || p[i] > max[i])
+				return false; // 交差していない
+		}
+		else {
+			// スラブとの距離を算出
+			// t1が近スラブ、t2が遠スラブとの距離
+			float odd = 1.0f / d[i];
+			float t1 = (min[i] - p[i]) * odd;
+			float t2 = (max[i] - p[i]) * odd;
+			if (t1 > t2) {
+				float tmp = t1; t1 = t2; t2 = tmp;
+			}
+
+			if (t1 > t) t = t1;
+			if (t2 < t_max) t_max = t2;
+
+			// スラブ交差チェック
+			if (t >= t_max)
+				return false;
+		}
+	}
+
+	// 交差している
+	if (&colPos) {
+		colPos = lineSegment.start + t * (lineSegment.end);
+	}
+
+	return true;
+
+}
+
+/**
+* @brief 光線と境界ボックスとの交差判定
+* @param pos ワールド空間での光線の基点
+* @param dir_w ワールド空間での光線の方向
+* @param aabb 境界ボックス（ローカル）
+* @param mat 境界ボックスのワールド変換行列
+* @param t 衝突間隔（出力）
+* @param colPos 衝突位置
+* @return 衝突していればtrue
+*/
+//bool ColRayBox(
+//	D3DXVECTOR3* pos,
+//	D3DXVECTOR3* dir_w,
+//	AABB* aabb,
+//	D3DXMATRIX* mat,
+//	float& t,
+//	D3DXVECTOR3* colPos = 0)
+//{
+//
+//	// 光線を境界ボックスの空間へ移動
+//	D3DXMATRIX invMat;
+//	D3DXMatrixInverse(&invMat, 0, mat);
+//
+//	D3DXVECTOR3 p_l, dir_l;
+//	D3DXVec3TransformCoord(&p_l, pos, &invMat);
+//	invMat._41 = 0.0f;
+//	invMat._42 = 0.0f;
+//	invMat._43 = 0.0f;
+//	D3DXVec3TransformCoord(&dir_l, dir_w, &invMat);
+//
+//	// 交差判定
+//	float p[3], d[3], min[3], max[3];
+//	memcpy(p, &p_l, sizeof(D3DXVECTOR3));
+//	memcpy(d, &dir_l, sizeof(D3DXVECTOR3));
+//	memcpy(min, &aabb->min, sizeof(D3DXVECTOR3));
+//	memcpy(max, &aabb->max, sizeof(D3DXVECTOR3));
+//
+//	t = -FLT_MAX;
+//	float t_max = FLT_MAX;
+//
+//	for (int i = 0; i < 3; ++i) {
+//		if (abs(d[i]) < FLT_EPSILON) {
+//			if (p[i] < min[i] || p[i] > max[i])
+//				return false; // 交差していない
+//		}
+//		else {
+//			// スラブとの距離を算出
+//			// t1が近スラブ、t2が遠スラブとの距離
+//			float odd = 1.0f / d[i];
+//			float t1 = (min[i] - p[i]) * odd;
+//			float t2 = (max[i] - p[i]) * odd;
+//			if (t1 > t2) {
+//				float tmp = t1; t1 = t2; t2 = tmp;
+//			}
+//
+//			if (t1 > t) t = t1;
+//			if (t2 < t_max) t_max = t2;
+//
+//			// スラブ交差チェック
+//			if (t >= t_max)
+//				return false;
+//		}
+//	}
+//
+//	// 交差している
+//	if (colPos) {
+//		*colPos = *pos + t * (*dir_w);
+//	}
+//
+//	return true;
+//}
+
+
 
 /*
 @fn	球スイープの当たり判定
@@ -597,3 +715,4 @@ bool SweptSphere(const Sphere & _sphere1, const Sphere & _sphere2, const Sphere 
 		}
 	}
 }
+

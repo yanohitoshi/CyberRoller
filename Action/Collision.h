@@ -273,3 +273,13 @@ bool Intersect(const LineSegment& _line, const AABB& _AABB, float& _outT,
 */
 bool SweptSphere(const Sphere& _sphere1, const Sphere& _sphere2,
     const Sphere& _sphere3, const Sphere& _sphere4, float& _outT);
+
+/*
+@brief 光線と境界ボックスとの交差判定
+@param lineSegment 線分データ
+@param aabb 境界ボックス
+@param t 衝突間隔（出力）
+@param colPos 衝突位置
+@return 衝突していればtrue
+*/
+bool ColRayBox(const LineSegment& lineSegment, const AABB& aabb,float& t,Vector3& colPos);

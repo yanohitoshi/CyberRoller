@@ -29,6 +29,9 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	AABB aabb = { Vector3(-80.0f,-80.0f,-50.0f),Vector3(80.0f,80.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
 
+	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
+	//LineSegment line = { Vector3(lerpObjectPos),Vector3(position) };
+	//lineSegmentCollider->SetObjectLineSegment(line);
 }
 
 

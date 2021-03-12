@@ -533,7 +533,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	}
 }
 
-//線分とAABBの当たり判定チェック関数
+//線分とAABBの当たり判定チェック関数(未実装)
 void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -542,16 +542,36 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 		return;
 	}
 
+	//for (auto itr : wallBoxes)
+	//{
+	//	float a;
+	//	Vector3 b;
+	//	//コライダーの親オブジェクトがActiveじゃなければ終了する
+	//	if (itr->GetOwner()->GetState() != State::Active)
+	//	{
+	//		continue;
+	//	}
+	//		bool hit = Intersect(_line->GetWorldLineSegment(), itr->GetWorldBox(),a,b);
+	//	if (hit)
+	//	{
+	//		onCollisionFunc func = collisionFunction.at(_line);
+	//		func(*(itr->GetOwner()));
+	//		func = collisionFunction.at(itr);
+	//		func(*(_line->GetOwner()));
+	//	}
+	//}
 	for (auto itr : wallBoxes)
 	{
-		float a;
-		Vector3 b;
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
-		bool hit = Intersect(_line->GetWorldLineSegment(), itr->GetWorldBox(),a,b);
+
+		float t;
+		Vector3 colPos;
+		bool hit = ColRayBox(_line->GetWorldLineSegment(), itr->GetWorldBox(),t,colPos);
+
 		if (hit)
 		{
 			onCollisionFunc func = collisionFunction.at(_line);
@@ -560,6 +580,7 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 			func(*(_line->GetOwner()));
 		}
 	}
+
 
 }
 
@@ -909,42 +930,6 @@ void PhysicsWorld::RemovePlane(PlaneCollider* _plane)
 
 }
 
-void PhysicsWorld::Debug()
-{
-	std::cout << "boxes----------------" << std::endl;
-	for (auto itr : boxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-
-	std::cout << "playerBoxes----------------" << std::endl;
-	for (auto itr : playerBoxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-	std::cout << "wallBoxes----------------" << std::endl;
-	for (auto itr : wallBoxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-	std::cout << "groundBoxes----------------" << std::endl;
-	for (auto itr : groundBoxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-
-	std::cout << "SwithBoxes----------------" << std::endl;
-	for (auto itr : switchBoxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-	std::cout << "GroundCheckBoxes----------------" << std::endl;
-	for (auto itr : groundCheckBoxes)
-	{
-		std::cout << itr->GetBoxTag() << std::endl;
-	}
-
-}
 
 //void PhysicsWorld::SphereAndSphere()
 //{

@@ -47,6 +47,12 @@ public:
 	LineSegment GetWorldLineSegment() const { return worldLineSegment; }
 	float GetContactPoint(){ return contactPoint; }
 	float contactPoint;
+
+	void SetInterval(const float& _interval) { interval = _interval; }
+	float GetInterval() const { return interval; }
+
+	void SetHitPointVector(const Vector3& _hitPoint) { hitPoint = _hitPoint; }
+	Vector3 GetHitPointVector()const { return hitPoint; }
 private:
 
 	//オブジェクトに設定する用の線分（中心をオブジェクトの中心にする）
@@ -59,6 +65,11 @@ private:
 
 	// 前方ベクトル
 	Vector3 forwardVec;
+
+	// hitした間隔
+	float interval;
+	// 衝突した場所
+	Vector3 hitPoint;
 
 };
 

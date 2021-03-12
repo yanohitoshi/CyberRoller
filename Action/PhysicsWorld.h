@@ -32,25 +32,93 @@ public:
 	static void CreateInstance();
 	static void DeleteInstance();
 
-	//当たり判定
-    void HitCheck();
+	/*
+	@fn HitCheck関数
+	@brief　当たり判定を行う
+	*/
+	void HitCheck();
+
+	/*
+	@fn HitCheck関数(Box)
+	@brief　BoxCollider(AABB)の当たり判定を行う
+	@param	_box 当たり判定に用いるBoxColliderのポインタ
+	*/
     void HitCheck(BoxCollider* _box);
+	
+	/*
+	@fn HitCheck関数(Sphere)
+	@brief　SphereCollider(Sphere)の当たり判定を行う
+	@param	_sphere 当たり判定に用いるSphereColliderのポインタ
+	*/
     void HitCheck(SphereCollider* _sphere);
+
+	/*
+	@fn HitCheck関数(LineSegment)
+	@brief　LineSegmentCollider(LineSegment)の当たり判定を行う
+	@param	_line　当たり判定に用いるLineSegmentColliderのポインタ
+	*/
 	void HitCheck(LineSegmentCollider* _line);
 
-
+	/*
+	@fn BoxColliderを追加する関数
+	@brief　BoxColliderの追加を行う
+	@param	_box　追加するBoxColliderのポインタ
+	@param	_func 関数ポインタに紐づけする関数
+	*/
     void AddBox(BoxCollider* _box, onCollisionFunc _func);
+	
+	/*
+	@fn BoxColliderを削除する関数
+	@brief　使わなくなったBoxCollider削除を行う
+	@param	_line　削除するBoxColliderのポインタ
+	*/
     void RemoveBox(BoxCollider* _box);
+	
+	/*
+	@fn SphereColliderを追加する関数
+	@brief　SphereColliderの追加を行う
+	@param	_sphere　追加するSphereColliderのポインタ
+	@param	_func 関数ポインタに紐づけする関数
+	*/
 	void AddSphere(SphereCollider* _sphere, onCollisionFunc _func);
+	
+	/*
+	@fn SphereColliderを削除する関数
+	@brief　使わなくなったSphereCollider削除を行う
+	@param	_sphere　削除するSphereColliderのポインタ
+	*/
 	void RemoveSphere(SphereCollider* _sphere);
+	
+	/*
+	@fn LineSegmentColliderを追加する関数
+	@brief　LineSegmentColliderの追加を行う
+	@param	_line　追加するLineSegmentColliderのポインタ
+	@param	_func 関数ポインタに紐づけする関数
+	*/
 	void AddLineSegment(LineSegmentCollider* _line, onCollisionFunc _func);
+	
+	/*
+	@fn LineSegmentColliderを削除する関数
+	@brief　使わなくなったLineSegmentCollider削除を行う
+	@param	_line　削除するLineSegmentColliderのポインタ
+	*/
 	void RemoveLineSegment(LineSegmentCollider* _line);
+	
+	/*
+	@fn PlaneColliderを追加する関数
+	@brief　PlaneColliderの追加を行う
+	@param	_plane　追加するPlaneColliderのポインタ
+	@param	_func 関数ポインタに紐づけする関数
+	*/
 	void AddPlane(PlaneCollider* _plane, onCollisionFunc _func);
+	
+	/*
+	@fn PlaneColliderを削除する関数
+	@brief　使わなくなったPlaneCollider削除を行う
+	@param	_plane　削除するPlaneColliderのポインタ
+	*/
 	void RemovePlane(PlaneCollider* _plane);
-
-	void Debug();
-
-
+	
 private:
 	//コンストラクタの隠蔽
 	PhysicsWorld();
