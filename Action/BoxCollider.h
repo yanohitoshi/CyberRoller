@@ -11,7 +11,6 @@
 class BoxCollider final : public ColliderComponent
 {
 public:
-//===================== publicのメンバ関数 ======================//
 
 	/**
 	@brief	コンストラクタ

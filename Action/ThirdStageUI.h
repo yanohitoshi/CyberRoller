@@ -11,6 +11,10 @@ class ThirdStageUI :
 {
 public:
 
+    /*
+    @fn コンストラクタ
+    @brief  objectの生成を行う
+    */
     ThirdStageUI();
     
     /*

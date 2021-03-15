@@ -13,7 +13,18 @@ class Texture;
 class SpriteComponent : public Component
 {
 public:
+	
+	/*
+	@fn コンストラクタ
+	@param _owner 親となるGameObjectのポインタ
+	@param _isBackGround 背景画像かどうかのフラグ(bool)
+	@param _drawOrder 描画順を決める値(int)
+	*/
     SpriteComponent(GameObject* _owner,bool _isBackGround, int _drawOrder = 100);
+	/*
+	@fn デストラクタ
+	@brief  Componentの削除を行う
+	*/
     ~SpriteComponent();
 
 	/*
@@ -72,11 +83,22 @@ public://ゲッターセッター
 	*/
 	bool GetVisible() const { return visible; }
 
-	// 背景かどうかのフラグを得るgetter
+	/*
+	@brief　背景画像かどうかを取得する
+	@return	true : 背景 , false : 背景じゃない
+	*/
 	bool GetIsBackGround()const { return isBackGround; }
 
-	// Alpha値のgetter/setter
+	/*
+	@brief　Alpha値の値を設定する
+	@return	_alpha 設定するAlpha値の値(float)
+	*/
 	void SetAlpha(float _alpha) { alpha = _alpha; }
+	
+	/*
+	@brief　Alpha値の値を取得する
+	@return	設定されているAlpha値の値(float)
+	*/
 	float GetAlpha() const { return alpha; }
 
 };

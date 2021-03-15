@@ -37,9 +37,10 @@ public:
 		ReSpownTag
 	};
 
-    /**
+    /*
 	@brief	コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
+	@param	なんのColliderなのか判定用Tag(PhysicsTag)
     @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
     @param  当たり判定時に、めり込みから動かす処理の優先度を決める数値
     */

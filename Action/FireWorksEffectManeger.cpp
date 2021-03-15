@@ -35,7 +35,6 @@ void FireWorksEffectManeger::UpdateGameObject(float _deltaTime)
 		++frameCount;
 		position = owner->GetPosition();
 
-
 		if (generateFlag == true)
 		{
 			for (int i = 0; i < 24; i++)
@@ -43,8 +42,6 @@ void FireWorksEffectManeger::UpdateGameObject(float _deltaTime)
 				++particleCount;
 				Vector3 randV((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f);
 				velocity = randV * 0.1f;
-
-				//Vector3 randC((rand() % 10) / 10.0f , (rand() % 10) / 10.0f , (rand() % 10) / 10.0f);
 
 				//”­¶ˆÊ’u‚ðÝ’è
 				Vector3 vel = velocity;

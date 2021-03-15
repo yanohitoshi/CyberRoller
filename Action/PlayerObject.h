@@ -8,7 +8,7 @@ class Mesh;
 class SphereCollider;
 
 /*
-	 @enum AnimState
+@enum AnimState
 	　プレイヤーのアニメーションの状態
 */
 enum AnimState
@@ -184,7 +184,6 @@ private:
 	int reSpawnCount;
 	// リスポーン用フラグ
 	bool reSpawnFlag;
-
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
 

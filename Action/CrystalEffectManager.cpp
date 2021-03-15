@@ -85,11 +85,6 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 			revers = true;
 		}
 
-		////”­¶ˆÊ’u‚ðÝ’è
-		//Vector3 vel = owner->GetVelocity();
-		//vel.Normalize();
-		////ƒ‰ƒ“ƒ_ƒ€‚È’l‚ð“n‚·
-		//vel = vel * -1.0;
 
 		Vector3 randPos((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f + 2.0f);
 		Vector3 pos = randPos * 0.1f;

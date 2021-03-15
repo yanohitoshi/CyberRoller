@@ -146,7 +146,7 @@ public:
 	@param _fileName アニメーションへのアドレス
 	@return スケルトンアニメーションの取得
 	*/
-	const class Animation* GetAnimation(const char* fileName, bool _loop);                     // スケルタルアニメーションの取得
+	const class Animation* GetAnimation(const char* fileName, bool _loop);
 
 	/*
 	@brief  メッシュの取得

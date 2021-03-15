@@ -13,7 +13,10 @@ class TitleSceneUI :
     public GameObject
 {
 public:
-
+    /*
+    @fn コンストラクタ
+    @brief  objectの生成を行う
+    */
     TitleSceneUI();
     
     /*

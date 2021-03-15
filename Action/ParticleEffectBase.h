@@ -42,11 +42,14 @@ public:
 
 
 private:
+	
 	/*
 	@fn 派生クラスごとに決定する更新関数
 	*/
 	virtual void UpdateParticleObject(float _deltaTime);
+
 protected:
+	
 	/*
 	@fn 生存時間をカウントダウンする関数。派生クラスで更新関数を決定した場合そこに追加すること。
 	*/
@@ -55,8 +58,7 @@ protected:
 	ParticleComponent* particleComponent;
 	//生存時間
 	int lifeCount;
-
+	// particleの状態管理変数
 	ParticleState particleState;
-public:
-	void SetReverve(float _flag);
+
 };

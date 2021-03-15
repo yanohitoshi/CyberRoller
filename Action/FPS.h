@@ -7,7 +7,15 @@
 class FPS
 {
 public:
+
+	/*
+	@fn コンストラクタ
+	*/
 	FPS();
+
+	/*
+	@fn デストラクタ
+	*/
 	~FPS();
 
 	/*
@@ -40,6 +48,8 @@ public:
 
 	//ゲッターセッター
 	/*
+	@fn デルタタイムのgetter関数
+	@brief 現在のフレームにかかった時間を取得
 	@return 現在のフレームにかかった時間
 	*/
 	float GetDeltaTime() { return deltaTime; }

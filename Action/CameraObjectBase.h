@@ -9,7 +9,7 @@ class CameraObjectBase :
 public:
 
     /*
-    @brief	コンストラクタ
+    @fn コンストラクタ
     @param	再利用するかフラグ
     @param	ObjectTag
     */

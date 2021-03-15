@@ -23,6 +23,11 @@ public:
 	 @param _scale 画像の描画サイズ
 	*/
 	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
+	
+	/*
+	@fn デストラクタ
+	@brief  Componentの削除を行う
+	*/
 	~ParticleComponent();
 
 	virtual void Update(float _deltaTime) override {};
@@ -127,4 +132,7 @@ public: //ゲッターセッター
 	void SetReverce(bool _flag) { reverce = _flag; }
 };
 
+/*
+@return ビルボード行列(Matrix4)
+*/
 Matrix4 GetBillboardMatrix();

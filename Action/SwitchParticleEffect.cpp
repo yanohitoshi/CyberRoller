@@ -3,7 +3,6 @@
 SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Star.png")
 {
-	particleState = ParticleState::PARTICLE_DISABLE;
 	mScale = 96.0f;
 	mAlpha = 1.0f;
 	particleComponent->SetScale(mScale);

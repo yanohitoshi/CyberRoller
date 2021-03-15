@@ -9,7 +9,11 @@
 class SkeletalMeshComponent : public MeshComponent
 {
 public:
-
+	
+	/*
+	@fn コンストラクタ
+	@param _owner 親となるGameObjectのポインタ
+	*/
 	SkeletalMeshComponent(class GameObject* owner);
 
 	void Update(float deltaTime) override;
@@ -60,6 +64,5 @@ public://ゲッターセッター
 
 	//再生中かどうか
 	bool IsPlaying();
-
 
 };

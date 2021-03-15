@@ -33,11 +33,16 @@ public:
 
 private:
 
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // particleの状態管理用変数
     ParticleState particleState;
+    // クリスタルeffectの色を管理する変数
     CrystalColor crystalColor;
     int frameCount;
+    // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
+    // 発生させたparticleの数を数える変数
     int particleCount;
 };
 

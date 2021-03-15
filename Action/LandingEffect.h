@@ -31,13 +31,13 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
-    ParticleState particleState;
+    
+    // e‚ÌGameObject•Û‘¶—p•Ï”
     GameObject* owner;
+    // Šg‘åk¬•Ï”
     float mScale;
+    // “§–¾“x•Ï”
     float mAlpha;
-    bool ChackOnFlag;
-    bool tmpChackOnFlag;
-    bool generateFlag;
 
 };
 

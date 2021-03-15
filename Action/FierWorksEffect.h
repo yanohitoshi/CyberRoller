@@ -34,10 +34,16 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // フェードインフラグ
     bool inFlag;
+    // 拡大縮小変数
     float mScale;
+    // 透明度変数
     float mAlpha;
+    // 速度変数
     float speed;
 };
 

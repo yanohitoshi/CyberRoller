@@ -31,10 +31,14 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
-    ParticleState particleState;
+    
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // 拡大縮小変数
     float mScale;
+    // 透明度変数    
     float mAlpha;
+    // 速度変数
     float speed;
 };
 

@@ -31,9 +31,14 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // particleの状態管理用変数
     ParticleState particleState;
+    // フレームカウント用変数
     int frameCount;
+    // 親となる動く壁のサイズを見てどれくらいの幅でeffectを出すか決める用の変数
     Vector3 ownerSize;
 };
 

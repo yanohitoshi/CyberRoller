@@ -46,8 +46,3 @@ void ParticleEffectBase::LifeCountDown()
 
 }
 
-void ParticleEffectBase::SetReverve(float _flag)
-{
-	particleComponent->SetReverce(_flag);
-
-}

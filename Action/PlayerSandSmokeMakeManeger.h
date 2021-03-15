@@ -32,10 +32,16 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // particleの状態管理用変数
     ParticleState particleState;
+    // アニメーションに合わせて土煙の位置をずらす用のポジション変数
     Vector3 effectPosition;
+    // フレームカウント用変数
     int frameCount;
+    // 生成した数を数えてずらす方向を決めるためのカウント
     int generateCount;
 
 };

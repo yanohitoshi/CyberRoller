@@ -12,7 +12,12 @@ class TitleStageCreator :
 {
 public:
 
-	// コンストラクタ
+	/*
+	@fn コンストラクタ
+	@brief  objectの生成を行う
+	@param	_reUseGameObject 再利用するかどうかフラグ
+	@param	_objectTag オブジェクト判別用Tag
+	*/
 	TitleStageCreator(bool _reUseGameObject, const Tag _objectTag);
 
 	/*

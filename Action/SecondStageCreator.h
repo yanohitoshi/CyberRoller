@@ -9,6 +9,12 @@ class SecondStageCreator
 	: public StageCreatorBase
 {
 public:
+	/*
+	@fn コンストラクタ
+	@brief  objectの生成を行う
+	@param	_reUseGameObject 再利用するかどうかフラグ
+	@param	_objectTag オブジェクト判別用Tag
+	*/
 	SecondStageCreator(bool _reUseGameObject, const Tag _objectTag);
 	
 	/*

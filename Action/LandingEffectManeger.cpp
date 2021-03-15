@@ -8,7 +8,6 @@ LandingEffectManeger::LandingEffectManeger(GameObject* _owner)
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
-	ChackOnFlag = false;
 	tmpVelZ = 0.0f;
 	generateFlag = false;
 }

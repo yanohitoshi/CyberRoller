@@ -31,13 +31,15 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+    
+    // particleのステータス管理用変数
     ParticleState particleState;
+    // 親のGameObject保存用変数
     GameObject* owner;
+    // 拡大縮小変数
     float mScale;
+    // 透明度変数
     float mAlpha;
-    bool ChackOnFlag;
-    bool tmpChackOnFlag;
-    bool generateFlag;
 
 };
 

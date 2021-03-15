@@ -40,7 +40,6 @@ void GameClearEffectManeger::UpdateGameObject(float _deltaTime)
 			for (int i = 0; i < 10; i++)
 			{
 				++particleCount;
-				//Vector3 randV((rand() % 300) / 10.0f - 5.0f, (rand() % 300) / 10.0f - 5.0f, (rand() % 100) / 10.0f);
 				Vector3 randV((rand() % 300) / 10.0f - 5.0f, (rand() % 300) / 10.0f - 5.0f,0);
 
 				velocity = randV * 0.1f;

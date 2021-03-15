@@ -7,6 +7,7 @@
 #include "Math.h"
 #include "Collision.h"
 
+// PhysicsWorld のインスタンスgetter関数
 #define PHYSICS PhysicsWorld::GetInstance()
 
 class Game;
