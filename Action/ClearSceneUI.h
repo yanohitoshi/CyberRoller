@@ -1,14 +1,16 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 
 /*
 @file ResultUI.h
 @brief リザルト画面でのUIの表示を行う
 */
-
 class ClearSceneUI :
     public GameObject
 {

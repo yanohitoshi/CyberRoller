@@ -1,5 +1,7 @@
 ﻿#pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <vector>
 #include <map>
 #include <functional>
@@ -10,6 +12,7 @@
 // PhysicsWorld のインスタンスgetter関数
 #define PHYSICS PhysicsWorld::GetInstance()
 
+// クラスの前方宣言
 class Game;
 class GameObject;
 class BoxCollider;
@@ -25,7 +28,6 @@ typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> onCollisi
 @file PhysicsWorld.h
 @brief 当たり判定を行うclass
 */
-
 class PhysicsWorld
 {
 public:

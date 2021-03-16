@@ -1,5 +1,7 @@
 ﻿#pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
 
@@ -7,7 +9,6 @@
 @file BoxCollider.h
 @brief AABBを用いた当たり判定用class
 */
-
 class BoxCollider final : public ColliderComponent
 {
 public:

@@ -1,9 +1,14 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+
 /*
 @file PushBoardObject.h
 @brief PushBoardObjectの生成と更新を行う

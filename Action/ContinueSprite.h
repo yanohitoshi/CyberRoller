@@ -1,13 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 
 /*
 @file ContinueSprite.h
 @brief コンテニュー用画像を表示する
 */
-
 class ContinueSprite :
     public GameObject
 {

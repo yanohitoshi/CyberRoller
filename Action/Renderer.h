@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -20,7 +23,9 @@ struct DirectionalLight
 	Vector3 specColor;
 };
 
-
+/*
+@enum textureステージの列挙
+*/
 enum class TextureStage
 {
 	DiffuseMap,
@@ -30,6 +35,7 @@ enum class TextureStage
 	ShadowMap,
 };
 
+// クラスの前方宣言
 class SpriteComponent;
 class Texture;
 class Mesh;
@@ -42,6 +48,7 @@ class ChangeColorMeshComponent;
 class TileMapSpriteComponent;
 class Font;
 class HDRRenderer;
+
 /*
 @file Renderer.h
 @brief 描画の進行を行うクラス
@@ -261,10 +268,15 @@ private:
 	@return true : 成功 , false : 失敗
 	*/
 	bool LoadShaders();
+	
 	/*
 	@brief  Sprite用の頂点バッファとインデックスバッファの作成
 	*/
 	void CreateSpriteVerts();
+	
+	/*
+	@brief  Particle用の頂点バッファとインデックスバッファの作成
+	*/
 	void CreateParticleVerts();
 
 	void CreateTimeFontTexture(int _value,int _fontSize);

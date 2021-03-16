@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "MeshComponent.h"
 #include "Math.h"
 
@@ -6,7 +9,6 @@
  @file ChangeColorMeshComponent.h
  @brief MeshComponentを継承したゲーム中にshaderを使用して色を変更することができるComponentクラス
 */
-
 class ChangeColorMeshComponent :
     public MeshComponent
 {

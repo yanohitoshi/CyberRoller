@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "SDL_TTF.h"
 
@@ -6,7 +9,6 @@
 @file FirstStageUI.h
 @brief FirstStageのUI表示を行う
 */
-
 class FirstStageUI :
     public GameObject
 {

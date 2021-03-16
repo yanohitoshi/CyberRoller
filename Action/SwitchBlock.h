@@ -1,8 +1,11 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include <glew.h>
 
+// クラスの前方宣言
 class BoxCollider;
 class Mesh;
 class ChangeColorMeshComponent;

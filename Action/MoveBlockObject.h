@@ -1,6 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MeshComponent;
 class BoxCollider;
 class Mesh;
@@ -61,9 +65,5 @@ private:
 	// どの方向に動くかを判定するためのTag変数
 	MoveDirectionTag moveTag;
 
-	//float start;
-	//float totalTime;	
-	//float elapseTime;
-	//float differencePos;
 };
 

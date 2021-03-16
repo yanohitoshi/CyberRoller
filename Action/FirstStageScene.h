@@ -1,16 +1,21 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
 
 /*
-@file PlayScene.h
-@brief プレイシーンの初期化と生成、次のシーンへのシーン遷移を行う
+@file FirstStageScene.h
+@brief 第一ステージ(チュートリアル)の初期化と生成、次のシーンへのシーン遷移を行う
 */
-
 class FirstStageScene : public BaseScene
 {
 public:
-
+	/*
+	@fn コンストラクタ
+	@brief  Sceneの生成を行う
+	*/
 	FirstStageScene();
 	
 	/*

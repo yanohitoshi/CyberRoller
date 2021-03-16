@@ -12,7 +12,7 @@ int GameObject::gameObjectId = 0;
 MainCameraObject* GameObject::mainCamera = nullptr;
 TitleCameraObject* GameObject::titleCamera = nullptr;
 
-PauzingEvent GameObject::pauzingEvent = PauzingEvent::NoneEvent;
+//PauzingEvent GameObject::pauzingEvent = PauzingEvent::NoneEvent;
 
 std::vector<GameObject*> GameObject::pendingGameObjects;
 std::unordered_map<Tag, std::vector<GameObject*>> GameObject::gameObjectMap;
@@ -59,30 +59,21 @@ GameObject::~GameObject()
 */
 void GameObject::Update(float _deltaTime)
 {
-	//更新停止のイベント中でないか(ポーズ画面など)
-	if (pauzingEvent == PauzingEvent::NoneEvent)
+	//更新状態がアクティブ
+	if (state == Active)
 	{
-		//更新状態がアクティブ
-		if (state == Active)
-		{
-			//Transformのワールド変換
-			ComputeWorldTransform();
-			//ゲームオブジェクトの更新
-			UpdateGameObject(_deltaTime);
-			//このゲームオブジェクトに付属するコンポーネントの更新
-			UpdateComponents(_deltaTime);
-			//Transformのワールド変換
-			ComputeWorldTransform();
-		}
-	}
-	//ポーズ画面のときコンポーネントを更新させない(アニメーションなども止めるため)
-	else if(pauzingEvent== PauzingEvent::PausingEvent)
-	{
-		PausingUpdateGameObject();
+		//Transformのワールド変換
+		ComputeWorldTransform();
+		//ゲームオブジェクトの更新
+		UpdateGameObject(_deltaTime);
+		//このゲームオブジェクトに付属するコンポーネントの更新
+		UpdateComponents(_deltaTime);
+		//Transformのワールド変換
+		ComputeWorldTransform();
 	}
 	else
 	{
-		PausingUpdateGameObject();
+		//PausingUpdateGameObject();
 		UpdateComponents(_deltaTime);
 	}
 }
@@ -107,13 +98,6 @@ void GameObject::UpdateComponents(float _deltaTime)
 @param	最後のフレームを完了するのに要した時間
 */
 void GameObject::UpdateGameObject(float _deltaTime)
-{
-}
-/*
-@fn ゲームオブジェクトが静止中に更新されるアップデート関数
-@brief pauzingUpdateがtrueのときだけ呼ばれる更新関数
-*/
-void GameObject::PausingUpdateGameObject()
 {
 }
 

@@ -1,7 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
-//GameObjectを継承したカメラの基底クラス
+/*
+@file CameraObjectBase.h
+@brief GameObjectを継承したカメラの基底クラス
+*/
 class CameraObjectBase :
     public GameObject
 {

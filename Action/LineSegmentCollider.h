@@ -1,15 +1,14 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
-
-
 
 /*
  @file LineSegmentCollider.h
  @brief 線分の当たり判定クラス（未実装）
 */
-
 class LineSegmentCollider : public ColliderComponent
 {
 public:

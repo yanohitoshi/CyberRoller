@@ -1,14 +1,14 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
-
 
 /*
  @file PlaneCollider.h
  @brief 平面の当たり判定クラス（未実装）
 */
-
 class PlaneCollider : public ColliderComponent
 {
 public:

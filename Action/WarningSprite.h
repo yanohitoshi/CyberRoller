@@ -1,6 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 class CountDownFont;
 
@@ -8,7 +12,6 @@ class CountDownFont;
 @file WarningSprite.h
 @brief 時間経過を知らせるUIを表示
 */
-
 class WarningSprite :
     public GameObject
 {

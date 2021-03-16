@@ -1,7 +1,10 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 class Texture;
 
@@ -9,7 +12,6 @@ class Texture;
 @file TimeSprite.h
 @brief 時間表示フレーム用のUIを表示
 */
-
 class TimeSprite :
     public GameObject
 {

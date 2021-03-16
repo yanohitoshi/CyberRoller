@@ -1,8 +1,15 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleComponent.h"
 #include <string>
 
+
+/*
+@enum particleの状態の列挙
+*/
 enum ParticleState
 {
 	PARTICLE_ACTIVE,

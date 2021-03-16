@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <vector>
 #include <functional>
 #include "Math.h"
@@ -6,6 +9,7 @@
 #include <unordered_map>
 #include "Game.h"
 
+// クラスの前方宣言
 class Vector3;
 class Matrix4;
 class Component;
@@ -26,8 +30,7 @@ enum State
 };
 
 /*
-	@enum　GameObjectタグ
-	objectがなんなのかの判別に使用
+@enum　GameObjectタグ(objectがなんなのかの判別に使用)
 */
 enum Tag
 {
@@ -65,29 +68,14 @@ enum Tag
 	PARTICLE,
 };
 
+/*
+@enum　動く方向のタグ
+*/
 enum MoveDirectionTag
 {
 	MOVE_X,
 	MOVE_Y,
 	MOVE_Z
-};
-
-
-/*
-@enum ゲームオブジェクトの更新を停止するイベント名
-*/
-enum PauzingEvent
-{
-	//ボスの特殊演出
-	SummonMageEvent,
-	//ポーズ画面中
-	PausingEvent,
-	//プレイヤーが撃破されてしまった際の演出
-	DeadPlayerEvent,
-	//ゲームオーバー時の演出 DeadPlayerEventと関連
-	GameOverEvent,
-	//ゲームオブジェクトの更新が行われている。
-	NoneEvent
 };
 
 class GameObject
@@ -118,12 +106,6 @@ public:
 	@param	最後のフレームを完了するのに要した時間
 	*/
 	virtual void UpdateGameObject(float _deltaTime);
-
-	/*
-	@fn ゲームオブジェクトが静止中に更新されるアップデート関数
-	@brief pauzingUpdateがtrueのときだけ呼ばれる更新関数
-	*/
-	virtual void PausingUpdateGameObject();
 
 	/*
 	@fn 入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
@@ -178,13 +160,27 @@ public:
 	Vector3 GetScaleFloat() const { return scale; }
 
 	/*
-	@brief　オブジェクトのスケールを設定する
-	@param	scale
+	@brief　オブジェクトのスケールを設定する(x.y.zの比率が同じとき)
+	@param	scale float型
 	*/
 	void SetScale(float _scale) { scale.x = _scale; scale.y = _scale; scale.z = _scale; recomputeWorldTransform = true; }
+	
+	/*
+	@brief　オブジェクトのスケールを設定する(x.y.zの比率が違うとき)
+	@param	scale Vector3型
+	*/
 	void SetScale(Vector3 _scale) { scale.x = _scale.x; scale.y = _scale.y; scale.z = _scale.z; recomputeWorldTransform = true; }
-
+	
+	/*
+	@brief　オブジェクトのスケールを取得(x.y.zの比率が同じとき)
+	@return	scale Vector3型
+	*/
 	float GetScale() { return scale.x; }
+	
+	/*
+	@brief　オブジェクトのスケールを取得する(x.y.zの比率が違うとき)
+	@return	scale Vector3型
+	*/
 	Vector3 GetScaleVec() {return scale;}
 	/*
 	@brief　オブジェクトのクォータニオンを取得する
@@ -234,16 +230,48 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
+	/*
+	@fn Tagのgetter関数
+	@brief オブジェクトを識別するTagを取得
+	@return Tag オブジェクトを識別するTag
+	*/
 	Tag GetTag() const { return tag; }
-		
+	
+	/*
+	@fn myObjectId変数のgetter関数
+	@brief それぞれのオブジェクトが持つIDの取得
+	@return int myObjectId それぞれのオブジェクトが持つID
+	*/
 	int GetObjectId() { return myObjectId; };
+
+	/*
+	@fn gameObjectId変数のgetter関数
+	@brief 全オブジェクト総数を確認するためのトータルIDの取得
+	@return int gameObjectId オブジェクトが生成されるたびに1増えるID
+	*/
 	static int GetTotalObjectId() { return gameObjectId; };
 
-
+	/*
+	@fn reUseObject変数のgetter関数
+	@brief シーンをまたいで利用するかどうかフラグの取得
+	@return bool reUseObject シーンをまたいで利用するかどうかフラグ
+	*/
 	bool GetReUseGameObject() { return reUseObject; }
 
+	/*
+	@fn 押し戻し関数(仮想関数)
+	@brief 押し戻しを行う
+	@param myAABB 自分のAABB
+	@param pairAABB 相手のAABB
+	@param _pairTag 相手がなんのオブジェクトなのか見る用のTag
+	*/
 	virtual void FixCollision(const AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
 
+	/*
+	@fn オブジェクトの回転を計算する関数
+	@brief 前方ベクトルを使用してオブジェクトを回転させる
+	@param forward 前方ベクトル
+	*/
 	void RotateToNewForward(const Vector3& forward);
 
 	/*
@@ -286,11 +314,10 @@ protected:
 	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
 	virtual void OnCollision(const GameObject& _hitObject) {}
 
-	//ゲーム中メインカメラ
+	// ゲーム中メインカメラ
 	static class MainCameraObject* mainCamera;
+	// タイトル画面で使用するカメラ
 	static class TitleCameraObject* titleCamera;
-	//ゲームオブジェクトの更新を止めるイベント状態
-	static PauzingEvent pauzingEvent;
 
 	//ゲームオブジェクトの状態
 	State state;
@@ -308,6 +335,7 @@ protected:
 	Matrix4 worldTransform;
 	Vector3 velocity;
 	Vector3 forwardVec;
+
 	//ワールド変換の処理を行う必要性があるか
 	bool recomputeWorldTransform;
 

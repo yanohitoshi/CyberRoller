@@ -1,5 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "Math.h"
+
+// クラスの前方宣言
 struct InputState;
 enum SceneState;
 
@@ -7,7 +12,6 @@ enum SceneState;
 @file BaseScene.h
 @brief Sceneの基底クラス
 */
-
 class BaseScene
 {
 public:

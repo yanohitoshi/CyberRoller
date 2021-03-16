@@ -1,5 +1,7 @@
 ﻿#pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ColliderComponent.h"
 #include "PhysicsWorld.h"
 
@@ -7,7 +9,6 @@
 @file SphereCollider.h
 @brief Sphereの当たり判定class
 */
-
 class SphereCollider final : public ColliderComponent
 {
 public:

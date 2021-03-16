@@ -678,7 +678,7 @@ void PlayerObject::AnimationUpdate()
 }
 
 /*
-@fn めり込み判定
+@fn めり込み判定と押し戻し
 */
 void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag)
 {

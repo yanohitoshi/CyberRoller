@@ -1,15 +1,17 @@
 ﻿#pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "Component.h"
 #include "Collision.h"
 
+// クラスの前方宣言
 class GameObject;
 
 /*
 @file ColliderComponent.h
 @brief ColliderComponent系派生classの基底のクラス
 */
-
 class ColliderComponent : public Component
 {
 public:

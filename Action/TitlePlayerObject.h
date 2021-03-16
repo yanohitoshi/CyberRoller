@@ -1,7 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
-
+// クラスの前方宣言
 class SkeletalMeshComponent;
 class Animation;
 
@@ -10,7 +13,6 @@ class Animation;
 @brief タイトルシーン中でのプレイヤー
        ただアニメーションを再生するだけのクラス
 */
-
 class TitlePlayerObject :
     public GameObject
 {

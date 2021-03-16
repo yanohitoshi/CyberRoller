@@ -1,13 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 
 /*
 @file ThankYouSprite.h
 @brief リザルト画面を表示する
 */
-
 class ThankYouSprite :
     public GameObject
 {

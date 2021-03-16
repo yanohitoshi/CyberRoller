@@ -1,13 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 class Texture;
+
 /*
 @file StartCountDownSprite.h
 @brief ゲーム開始用カウントダウンを表示する
 */
-
 class StartCountDownSprite :
     public GameObject
 {

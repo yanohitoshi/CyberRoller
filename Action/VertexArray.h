@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+/*
+@file VertexArray.h
+@brief 頂点配列データを作る
+*/
 class VertexArray
 {
 public:

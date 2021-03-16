@@ -61,7 +61,7 @@ HDRRenderer::~HDRRenderer()
 
 void HDRRenderer::HdrRecordBegin()
 {
-	// 描画対象をmHdrFBOに変更( HDRcolor + HDRHighBrightの２枚へ出力)
+	// 描画対象をHdrFBOに変更( HDRcolor + HDRHighBrightの２枚へ出力)
 	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
 	glEnable(GL_DEPTH_TEST);
 

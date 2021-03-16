@@ -1,11 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 /*
 @file SecondStageUI.h
 @brief SecondStageのUI表示を行う
 */
-
 class SecondStageUI :
     public GameObject
 {

@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
 /*
@@ -40,7 +43,7 @@ public:
 
 private:
 
-	//ファーストステージデータ
+	//第二ステージデータ
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
 	std::vector<std::vector<int>> layer3StageData;

@@ -1,17 +1,23 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+// クラスの前方宣言
 class ClearSceneUI;
 
 /*
 @file ClearScene.h
-@brief リザルトシーンの初期化と生成、次のシーンへのシーン遷移を行う
+@brief クリアシーンの初期化と生成、次のシーンへのシーン遷移を行う
 */
-
 class ClearScene : public BaseScene
 {
 public:
-
+	/*
+	@fn コンストラクタ
+	@brief  Sceneの生成を行う
+	*/
 	ClearScene();
 	
 	/*

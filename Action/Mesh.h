@@ -1,14 +1,18 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <vector>
 #include <string>
 #include "Math.h"
 #include "Collision.h"
 #include "Renderer.h"
 
+// クラスの前方宣言
 class Renderer;
 class VertexArray;
 class Texture;
+
 /*
 @file Mesh.h
 @brief メッシュデータ
@@ -16,8 +20,19 @@ class Texture;
 class Mesh
 {
 public:
+
+	/*
+	@fn コンストラクタ
+	@brief Meshクラスの生成
+	*/
     Mesh();
+	
+	/*
+	@fn デストラクタ
+	@brief Meshクラスの削除
+	*/
     ~Mesh();
+
 	/*
 	@brief  メッシュデータの読み込み
 	@param	_fileName ロードしたいメッシュのファイル名
@@ -30,6 +45,7 @@ public:
 	@brief  ロードしたメッシュデータの解放
 	*/
     void Unload();
+
 	//ゲッターセッター
 	/*
 	@return	VertexArray型のポインタ
@@ -80,19 +96,25 @@ private:
 
     //このメッシュに使うテクスチャのポインタの可変長コンテナ
     std::vector<Texture*> textures;
+
 	//このメッシュに使う頂点データ
 	std::vector<Vector3> verts;
+
 	//クラスのポインタ
     VertexArray* vertexArray;
 
     //このメッシュに使うシェーダーの名前
     std::string shaderName;
+
     //オブジェクト空間での境界球の半径
     float radius;
+
     //鏡面反射成分の大きさ
     float specPower;
+	
 	// 自己発行強度
 	float luminance;
+	
 	// テクスチャステージに割り当てられたテクスチャ
 	std::unordered_map<TextureStage, int> stageDefTexture;
 

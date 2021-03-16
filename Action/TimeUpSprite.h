@@ -1,13 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 
 /*
 @file TimeUpSprite.h
 @brief タイムオーバー用UIを表示
 */
-
 class TimeUpSprite :
     public GameObject
 {

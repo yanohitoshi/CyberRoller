@@ -1,11 +1,21 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+/*
+@file FinalStageScene.h
+@brief 最終ステージの初期化と生成、次のシーンへのシーン遷移を行う
+*/
 class FinalStageScene :
     public BaseScene
 {
 public:
-
+	/*
+	@fn コンストラクタ
+	@brief  Sceneの生成を行う
+	*/
 	FinalStageScene();
 	
 	/*

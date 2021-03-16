@@ -1,5 +1,7 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <SDL_scancode.h>
 #include <SDL_gamecontroller.h>
 #include <SDL_mouse.h>
@@ -27,14 +29,19 @@ enum ButtonState
 class KeyboardState
 {
 public:
+
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
+
 private:
+	
 	//現在のキーボードの入力状態
 	const Uint8* currState;
 	//１フレーム前のキーボードの入力状態
 	Uint8 prevState[SDL_NUM_SCANCODES];
+
 public://ゲッターセッター
+	
 	/*
 	@brief	現在のキーの入力状態のみを取得する
 	@param	SDL_Scancodeのキーコード
@@ -49,6 +56,7 @@ public://ゲッターセッター
 	@return	ButtonState型の現在の状態
 	*/
 	ButtonState GetKeyState(SDL_Scancode _keyCode) const;
+
 };
 
 /*
@@ -58,9 +66,12 @@ public://ゲッターセッター
 class MouseState
 {
 public:
+	
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
+
 private:
+	
 	//マウスのポジション
 	Vector2 mousePos;
 	//スクロールホイールのスクロール量
@@ -71,6 +82,7 @@ private:
 	Uint32 prevButtons;
 	// 相対マウスモードかどうか
 	bool isRelative;
+
 public://ゲッターセッター
 
 	/*
@@ -116,6 +128,7 @@ public:
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
 private:
+
 	//現在のボタンの入力状態
 	Uint8 currButtons[SDL_CONTROLLER_BUTTON_MAX];
 	//１フレーム前のボタンの入力状態
@@ -123,11 +136,17 @@ private:
 
 	//両スティックの情報
 	float axisValues[SDL_CONTROLLER_AXIS_MAX];
+
+	// 入力情報を元に左右のスティックの情報をベクトル化した情報を保存する変数
 	Vector2 lAxisLeft;
 	Vector2 lAxisRight;
+
+	// 左右のトリガーの入力情報
 	float leftTriggerAxis;
 	float rightTriggerAxis;
+
 public://ゲッターセッター
+  
 	/*
 	@brief	現在の入力状態のみを取得する
 	@param	SDL_GameControllerButtonのボタンコード
@@ -149,14 +168,29 @@ public://ゲッターセッター
 	@return スティックの入力情報
 	*/
 	float GetAxisValue(const SDL_GameControllerAxis iAxis) const;
+	
 	/*
-	@brief スティックの入力を0~1で返す
-	@return スティックの入力情報
+	@brief 左スティックの入力を0~1で返す
+	@return 左スティックの入力情報
 	*/
 	const Vector2& GetLAxisLeftVec() const { return lAxisLeft; }
+	
+	/*
+	@brief 右スティックの入力を0~1で返す
+	@return 右スティックの入力情報
+	*/
 	const Vector2& GetLAxisRightVec() const { return lAxisRight; }
 
+	/*
+	@brief 左トリガーの入力を0~1で返す
+	@return 左トリガーの入力情報
+	*/
 	const float& GetLeftTrigger() const { return leftTriggerAxis; }
+	
+	/*
+	@brief 右トリガーの入力を0~1で返す
+	@return 右トリガーの入力情報
+	*/
 	const float& GetRightTrigger() const { return rightTriggerAxis; }
 
 };
@@ -171,6 +205,7 @@ struct InputState
 	MouseState Mouse;
 	ControllerState Controller;
 };
+
 /*
 @file InputSystem.h
 @brief 入力情報を管理
@@ -242,5 +277,10 @@ public://ゲッターセッター
 	*/
 	void SetRelativeMouseMode(bool _value);
 
+	/*
+	@fn controllerConnectedのgetter静的関数
+	@brief コントローラーが接続されているかを判定するフラグを取得
+	@return bool controllerConnected
+	*/
 	static bool GetConnectedController() { return controllerConnected; }
 };

@@ -1,6 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MeshComponent;
 class BoxCollider;
 class Mesh;
@@ -9,7 +13,6 @@ class Mesh;
 @file WallBlockObject.h
 @brief 壁objectの生成を行う
 */
-
 class WallBlockObject : public GameObject
 {
 public:

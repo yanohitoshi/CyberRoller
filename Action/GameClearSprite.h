@@ -1,12 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
+
 /*
 @file GameClearSprite.h
 @brief ゲームクリア用画像を表示する
 */
-
 class GameClearSprite :
     public GameObject
 {

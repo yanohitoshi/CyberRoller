@@ -1,6 +1,9 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
+
 /*
 @file SwitchParticleEffect.h
 @brief SwitchParticleEffectの生成と更新を行う

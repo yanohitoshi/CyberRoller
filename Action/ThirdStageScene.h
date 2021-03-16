@@ -1,11 +1,21 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+/*
+@file ThirdStageScene.h
+@brief 第三ステージの初期化と生成、次のシーンへのシーン遷移を行う
+*/
 class ThirdStageScene :
     public BaseScene
 {
 public:
-
+	/*
+	@fn コンストラクタ
+	@brief  Sceneの生成を行う
+	*/
 	ThirdStageScene();
 	
 	/*

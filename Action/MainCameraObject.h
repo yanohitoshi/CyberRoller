@@ -1,9 +1,12 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "CameraObjectBase.h"
 #include "PlayerObject.h"
 
-
+// クラスの前方宣言
 class LineSegmentCollider;
 class SphereCollider;
 class BoxCollider;

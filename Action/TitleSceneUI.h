@@ -1,14 +1,16 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 
 /*
 @file TitleUI.h
 @brief タイトル画面のUIを表示
 */
-
 class TitleSceneUI :
     public GameObject
 {

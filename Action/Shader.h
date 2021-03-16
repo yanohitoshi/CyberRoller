@@ -1,5 +1,7 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include <glew.h>
 #include <string>
 #include "Math.h"
@@ -11,8 +13,19 @@
 class Shader
 {
 public:
+
+	/*
+	@fn コンストラクタ
+	@brief Shaderクラスの生成を行う
+	*/
     Shader();
+
+	/*
+	@fn デストラクタ
+	@brief Shaderクラスの削除を行う
+	*/
     ~Shader();
+
 	/*
 	@brief	頂点シェーダーとフラグメントシェーダーのロード
 	@param	_vertName 頂点シェーダーのファイル名
@@ -20,6 +33,7 @@ public:
 	@return	true : 成功 , false : 失敗
 	*/
 	bool Load(const std::string& _vertName,const std::string& _fragName);
+	
 	/*
 	@brief	ロードしたシェーダーの解放
 	*/
@@ -37,7 +51,8 @@ public:
 	*/
 	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
 	void SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count);
-    /*
+    
+	/*
     @brief	Vector3のUniform変数を設定する
     @param	_name 設定するUniform変数名
     @param	_vector 設定するVector3
@@ -59,6 +74,7 @@ public:
 	void SetIntUniform(const char* name, int value);
 
 private:
+	
 	/*
 	@brief	シェーダーをコンパイルする
 	@param	_fileName コンパイルするシェーダーのファイル名
@@ -74,6 +90,7 @@ private:
 	@return	true : 成功 , false : 失敗
 	*/
 	bool IsCompiled(GLuint _shader);
+	
 	/*
 	@brief	シェーダーがリンク出来ているか確認
 	@param	シェーダーのID
@@ -81,6 +98,7 @@ private:
 	*/
 	bool IsVaildProgram();
 
+	// GLuint型変数
 	GLuint vertexShader;
 	GLuint fragShader;
 	GLuint shaderProgram;

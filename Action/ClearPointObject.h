@@ -1,6 +1,10 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MeshComponent;
 class BoxCollider;
 class Mesh;
@@ -9,7 +13,6 @@ class Mesh;
 @file ClearPointObject.h
 @brief クリアポイントの生成と更新処理を行う
 */
-
 class ClearPointObject :
     public GameObject
 {

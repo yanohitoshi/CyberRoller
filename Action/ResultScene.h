@@ -1,11 +1,21 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+/*
+@file ResultScene.h
+@brief リザルトシーンの初期化と生成、次のシーンへのシーン遷移を行う
+*/
 class ResultScene :
     public BaseScene
 {
 public:
-
+	/*
+	@fn コンストラクタ
+	@brief  Sceneの生成を行う
+	*/
 	ResultScene();
 	
 	/*

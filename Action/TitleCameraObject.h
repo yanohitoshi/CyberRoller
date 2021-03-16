@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectBase.h"
 
 /*
@@ -6,7 +9,6 @@
 @brief タイトル画面を映すカメラの生成と更新処理
        CameraObjectBaseを継承
 */
-
 class TitleCameraObject :
     public CameraObjectBase
 {
