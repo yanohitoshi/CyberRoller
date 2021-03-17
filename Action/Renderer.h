@@ -10,6 +10,7 @@
 #include "ParticleComponent.h"
 #include "GameObject.h"
 
+// シングルトンなのでインスタンスのgetterを静的領域にdefineで定義
 #define RENDERER Renderer::GetInstance()
 
 //平行光源用の構造体
