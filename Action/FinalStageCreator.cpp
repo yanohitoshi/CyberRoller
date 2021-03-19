@@ -516,6 +516,9 @@ void FinalStageCreator::CreateStage()
 			case(69):
 				new BoxObject(layer11Pos, blockSize, Tag::GROUND);
 				break;
+			case(22):
+				new SwitchBaseObject(layer11SwitchPos, switchBaseSize, Tag::GROUND, Tag::SECOND_SWITCH);
+				break;
 			case(23):
 				new SwitchBaseObject(layer11SwitchPos, switchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 				break;

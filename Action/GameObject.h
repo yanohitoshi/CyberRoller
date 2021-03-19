@@ -15,6 +15,7 @@ class Matrix4;
 class Component;
 struct InputState;
 class ColliderComponent;
+class MainCameraObject;
 
 /*
 @brief	ゲームオブジェクトの状態
@@ -306,6 +307,8 @@ public:
 	@param	velocity(Vector3型)
 	*/
 	const Vector3& GetVelocity() const { return velocity; }
+
+	static MainCameraObject* GetMainCamera() { return mainCamera;}
 
 	AABB aabb;
 

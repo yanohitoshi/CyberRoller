@@ -560,6 +560,9 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 	//		func(*(_line->GetOwner()));
 	//	}
 	//}
+	float t;
+	Vector3 colPos = Vector3::Zero;
+
 	for (auto itr : wallBoxes)
 	{
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -568,8 +571,6 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 			continue;
 		}
 
-		float t;
-		Vector3 colPos;
 		bool hit = ColRayBox(_line->GetWorldLineSegment(), itr->GetWorldBox(),t,colPos);
 
 		if (hit)
@@ -578,6 +579,8 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 			func(*(itr->GetOwner()));
 			func = collisionFunction.at(itr);
 			func(*(_line->GetOwner()));
+			printf("t:%f\n", t);
+			printf("colPosx:%fy:%fz:%f\n", colPos.x, colPos.y, colPos.z);
 		}
 	}
 

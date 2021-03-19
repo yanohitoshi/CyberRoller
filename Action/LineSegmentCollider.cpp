@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Collision.h"
 #include "Game.h"
+#include "MainCameraObject.h"
 
 LineSegmentCollider::LineSegmentCollider(GameObject* _owner, ColliderComponent::PhysicsTag tag, onCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner,tag, _updateOrder, _collisionOrder)
@@ -23,10 +24,13 @@ LineSegmentCollider::~LineSegmentCollider()
 
 void LineSegmentCollider::OnUpdateWorldTransform()
 {
-	Vector3 backVec = forwardVec * -1.0f;
+	mainCamera = GameObject::GetMainCamera();
+
 	worldLineSegment = objectLineSegment;
-	worldLineSegment.start += owner->GetPosition();
-	worldLineSegment.end += owner->GetPosition() + backVec * value;
+
+	point = mainCamera->GetlerpObjectPos();
+	worldLineSegment.start += point;
+	worldLineSegment.end += owner->GetPosition();
 
 	PHYSICS->HitCheck(this);
 }

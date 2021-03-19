@@ -5,6 +5,8 @@
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
 
+class MainCameraObject;
+
 /*
  @file LineSegmentCollider.h
  @brief 線分の当たり判定クラス（未実装）
@@ -105,8 +107,16 @@ private:
 
 	// hitした間隔
 	float interval;
+
 	// 衝突した場所
 	Vector3 hitPoint;
+
+	// 衝突した場所
+	Vector3 point;
+
+	// 使用するカメラのポインタ
+	MainCameraObject* mainCamera;
+
 
 };
 

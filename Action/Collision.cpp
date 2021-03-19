@@ -570,32 +570,44 @@ bool ColRayBox(const LineSegment& lineSegment, const AABB& aabb, float& t, Vecto
 	t = -FLT_MAX;
 	float t_max = FLT_MAX;
 
-	for (int i = 0; i < 3; ++i) {
-		if (abs(d[i]) < FLT_EPSILON) {
+	for (int i = 0; i < 3; ++i) 
+	{
+		if (abs(d[i]) < FLT_EPSILON) 
+		{
 			if (p[i] < min[i] || p[i] > max[i])
 				return false; // 交差していない
 		}
-		else {
+		else 
+		{
 			// スラブとの距離を算出
 			// t1が近スラブ、t2が遠スラブとの距離
 			float odd = 1.0f / d[i];
 			float t1 = (min[i] - p[i]) * odd;
 			float t2 = (max[i] - p[i]) * odd;
-			if (t1 > t2) {
+			if (t1 > t2) 
+			{
 				float tmp = t1; t1 = t2; t2 = tmp;
 			}
 
-			if (t1 > t) t = t1;
-			if (t2 < t_max) t_max = t2;
-
+			if (t1 > t)
+			{
+				t = t1;
+			}
+			if (t2 < t_max)
+			{
+				t_max = t2;
+			}
 			// スラブ交差チェック
 			if (t >= t_max)
+			{
 				return false;
+			}
 		}
 	}
 
 	// 交差している
-	if (&colPos) {
+	if (&colPos) 
+	{
 		colPos = lineSegment.start + t * (lineSegment.end);
 	}
 

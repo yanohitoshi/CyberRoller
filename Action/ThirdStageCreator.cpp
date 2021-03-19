@@ -271,11 +271,11 @@ void ThirdStageCreator::CreateStage()
 				new SwitchBaseObject(layer5SwitchPos, switchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
 				break;
 			case(5):
-				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 400.0f, MoveDirectionTag::MOVE_X);
+				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 300.0f, MoveDirectionTag::MOVE_X);
 				break;
-			case(6):
-				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(-1200.0f, 0.0f, 0.0f), Vector3::NegUnitX, 500.0f, MoveDirectionTag::MOVE_X);
-				break;
+			//case(6):
+			//	new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(-1200.0f, 0.0f, 0.0f), Vector3::NegUnitX, 500.0f, MoveDirectionTag::MOVE_X);
+			//	break;
 			case(7):
 				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(-800.0f, 0.0f, 0.0f), Vector3::NegUnitX, 300.0f, MoveDirectionTag::MOVE_X);
 				break;
@@ -310,7 +310,7 @@ void ThirdStageCreator::CreateStage()
 				new NeedlePanelObject(layer6SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
 				break;
 			case(8):
-				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
+				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 				break;
 
 
@@ -335,7 +335,7 @@ void ThirdStageCreator::CreateStage()
 				new NeedlePanelObject(layer7SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
 				break;
 			case(9):
-				new MoveBlockObject(layer7Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
+				new MoveBlockObject(layer7Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 				break;
 
 			}
@@ -412,6 +412,9 @@ void ThirdStageCreator::CreateStage()
 			case(21):
 				new SwitchBaseObject(layer10SwitchPos, switchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
 				break;
+			case(40):
+				new JumpSwitchObject(layer10SwitchPos, jumpSwitchSize, Tag::JUMP_SWITCH);
+				break;
 			}
 
 			const unsigned int layer11 = layer11StageData[(int)iy][(int)ix];
@@ -443,14 +446,21 @@ void ThirdStageCreator::CreateStage()
 			case(22):
 				new SwitchBaseObject(layer12SwitchPos, switchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
 				break;
+			case(21):
+				new SwitchBaseObject(layer12SwitchPos, switchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
+				break;
 			case(40):
 				new JumpSwitchObject(layer12SwitchPos, jumpSwitchSize, Tag::JUMP_SWITCH);
 				break;
 			case(6):
-				new PushBoxObject(layer12Pos, blockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1200.0f, 0.5f, MoveDirectionTag::MOVE_X);
+				new PushBoxObject(layer12Pos, blockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1600.0f, 0.5f, MoveDirectionTag::MOVE_X);
 				break;
 			case(4):
 				new NeedlePanelObject(layer12SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
+				break;
+
+			case(5):
+				new MoveBlockObject(layer12Pos, blockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
 				break;
 
 			}
@@ -463,13 +473,12 @@ void ThirdStageCreator::CreateStage()
 			case(67):
 				new BoxObject(layer13Pos, blockSize, Tag::GROUND);
 				break;
-			case(5):
-				new MoveBlockObject(layer13Pos, blockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
-				break;
 			case(40):
 				new JumpSwitchObject(layer13SwitchPos, jumpSwitchSize, Tag::JUMP_SWITCH);
 				break;
-
+			case(4):
+				new NeedlePanelObject(layer13SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
+				break;
 			}
 			const unsigned int layer14 = layer14StageData[(int)iy][(int)ix];
 			Vector3 layer14Pos = Vector3(offset * ix, -offset * iy, 2600);
@@ -483,11 +492,13 @@ void ThirdStageCreator::CreateStage()
 			case(22):
 				new SwitchBaseObject(layer14SwitchPos, switchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
 				break;
-			case(7):
-				new PushBoxObject(layer14Pos, blockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1400.0f, 0.5f, MoveDirectionTag::MOVE_X);
-				break;
+
 			case(4):
 				new NeedlePanelObject(layer14SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
+				break;
+
+			case(5):
+				new MoveBlockObject(layer14Pos, blockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
 				break;
 
 
@@ -510,6 +521,13 @@ void ThirdStageCreator::CreateStage()
 				break;
 			case(20):
 				new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::NEXT_SCENE_POINT);
+				break;
+
+			case(7):
+				new PushBoxObject(layer15Pos, blockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1400.0f, 0.5f, MoveDirectionTag::MOVE_X);
+				break;
+			case(4):
+				new NeedlePanelObject(layer15SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
 				break;
 			}
 

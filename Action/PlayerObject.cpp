@@ -328,13 +328,13 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 					jumpFlag = true;
 					velocity.z = jumpPower;
 
-					if (jumpFrameCount > 0 && jumpFrameCount < 13 && switchJumpFlag == false)
+					if (jumpFrameCount > 0 && jumpFrameCount < 10 && switchJumpFlag == false)
 					{
-						jumpPower += 150.0f;
+						jumpPower += 140.0f;
 					}
-					else if (switchJumpFlag == true && jumpFrameCount < 17)
+					else if (switchJumpFlag == true && jumpFrameCount < 10)
 					{
-						jumpPower += 150.0f;
+						jumpPower += 160.0f;
 					}
 					else
 					{

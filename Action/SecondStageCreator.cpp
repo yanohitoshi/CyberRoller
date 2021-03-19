@@ -270,10 +270,10 @@ void SecondStageCreator::CreateStage()
 				new BoxObject(layer6Pos, blockSize, Tag::GROUND);
 				break;
 			case(6):
-				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 250.0f, MoveDirectionTag::MOVE_Y);
+				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
 				break;
 			case(7):
-				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 500.0f, MoveDirectionTag::MOVE_Y);
+				new MoveBlockObject(layer6Pos, blockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 350.0f, MoveDirectionTag::MOVE_Y);
 				break;
 			case(21):
 				new SwitchBaseObject(layer6SwitchPos, switchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);

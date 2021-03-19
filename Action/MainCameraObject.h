@@ -79,10 +79,19 @@ public:
 	*/
 	Vector3 GetCameraVec() { return forwardVec; }
 	
+
+	/*
+	@brief 追跡する対象オブジェクトのポジションのgetter
+	@param 追跡する対象オブジェクトポジション
+	*/
+	Vector3 GetlerpObjectPos() { return lerpObjectPos; }
+
 	/*
 	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
 	*/
 	void ReSetYaw() { yaw = Math::ToRadians(180); }
+	//追従先のオブジェクト座標
+	Vector3 lerpObjectPos;
 
 private:
 
@@ -94,8 +103,6 @@ private:
 
 	//親オブジェクトとの差
 	Vector3 offsetPos;
-	//追従先のオブジェクト座標
-	Vector3 lerpObjectPos;
 	//追従先のオブジェクトを所持しているか
 	bool hasParentObject;
 	Vector3 cameraFront = Vector3(0.0f, 0.0f, -1.0f);
@@ -126,5 +133,7 @@ private:
 	// view行列
 	Matrix4 view;
 
+
+	Vector3 hitPosition;
 };
 

@@ -32,22 +32,22 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	boxCollider->SetObjectBox(mesh->GetBox());
 	if (_direction.x == 1.0f)
 	{
-		Vector3 boardSize = Vector3(20.0f, 200.0f, 200.0f);
+		Vector3 boardSize = Vector3(50.0f, 200.0f, 200.0f);
 		new PushBoardObject(this,Vector3(_p.x + offsetX, _p.y, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed,_moveTag);
 	}
 	if (_direction.x == -1.0f)
 	{
-		Vector3 boardSize = Vector3(20.0f, 200.0f, 200.0f);
+		Vector3 boardSize = Vector3(50.0f, 200.0f, 200.0f);
 		new PushBoardObject(this, Vector3(_p.x - offsetX, _p.y, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed, _moveTag);
 	}
 	if (_direction.y == 1.0f)
 	{
-		Vector3 boardSize = Vector3(200.0f, 20.0f, 200.0f);
+		Vector3 boardSize = Vector3(200.0f, 50.0f, 200.0f);
 		new PushBoardObject(this, Vector3(_p.x, _p.y + offsetY, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed, _moveTag);
 	}
 	if (_direction.y == -1.0f)
 	{
-		Vector3 boardSize = Vector3(200.0f, 20.0f, 200.0f);
+		Vector3 boardSize = Vector3(200.0f, 50.0f, 200.0f);
 		new PushBoardObject(this, Vector3(_p.x, _p.y - offsetY, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed, _moveTag);
 	}
 }

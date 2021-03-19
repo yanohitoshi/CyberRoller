@@ -30,8 +30,10 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	boxcollider->SetObjectBox(aabb);
 
 	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
-	//LineSegment line = { Vector3(lerpObjectPos),Vector3(position) };
+	//LineSegment line = { Vector3(0.0f,0.0f,0.0f),Vector3(0.0f,0.0f,0.0f) };
 	//lineSegmentCollider->SetObjectLineSegment(line);
+	lerpObjectPos = Vector3::Zero;
+	hitPosition = Vector3::Zero;
 }
 
 
@@ -43,6 +45,7 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	if (PlayerObject::GetClearFlag() == false && CountDownFont::timeOverFlag == false)
 	{
+
 		tmpMovePos.x = r * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
 		tmpMovePos.y = r * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
 		tmpMovePos.z = r * sinf(pitch) + height + lerpObjectPos.z;
@@ -56,6 +59,8 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		forwardVec = lerpObjectPos - position;
 		forwardVec.Normalize();
 		forwardVec.z = 0.0f;
+
+		hitPosition = Vector3::Zero;
 	}
 	else if (PlayerObject::GetClearFlag() == true)
 	{
@@ -136,9 +141,11 @@ void MainCameraObject::SetViewMatrixLerpObject(const Vector3 & _offset, const Ve
 
 
 void MainCameraObject::OnCollision(const GameObject& _hitObject)
-{
+{	
+	//printf("Hit\n");
 	AABB myAabb = boxcollider->GetWorldBox();
 	FixCollision(myAabb, _hitObject.aabb, _hitObject.GetTag());
+	hitPosition = _hitObject.GetPosition();
 }
 
 void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag)
@@ -153,6 +160,7 @@ void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Ta
 	}
 
 }
+
 void MainCameraObject::calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	_calcFixVec = Vector3(0, 0, 0);
