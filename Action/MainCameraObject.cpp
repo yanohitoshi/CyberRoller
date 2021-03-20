@@ -26,7 +26,7 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	tmpMovePos = Vector3(0.0f,0.0f,0.0f);
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-80.0f,-80.0f,-50.0f),Vector3(80.0f,80.0f,50.0f) };
+	AABB aabb = { Vector3(-100.0f,-100.0f,-50.0f),Vector3(100.0f,100.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
 
 	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
@@ -34,6 +34,9 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	//lineSegmentCollider->SetObjectLineSegment(line);
 	lerpObjectPos = Vector3::Zero;
 	hitPosition = Vector3::Zero;
+
+	hitFlag = false;
+	tmpHitFlag = false;
 }
 
 
@@ -45,6 +48,55 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	if (PlayerObject::GetClearFlag() == false && CountDownFont::timeOverFlag == false)
 	{
+		// 今のフレームで当たっていて前のフレームで当たっていなければ
+		if (hitFlag == true && tmpHitFlag == false)
+		{
+			// 当たったポジションがマイナスだったら
+			if (hitPosition.x < 0.0f)
+			{
+				hitPosition.x *= -1.0f;
+			}
+			if (hitPosition.y < 0.0f)
+			{
+				hitPosition.y *= -1.0f;
+			}
+
+			// 当たったポジションを比べ小さい方をカメラの回転半径として採用
+			if (hitPosition.x < hitPosition.y)
+			{
+				r = lerpObjectPos.x - hitPosition.x;
+				// 見る対象物から当たった場所を引いて長さを取る
+				// そのまま使うと壁にめり込む可能性があるので少し小さくする
+				r -= 20.f;
+			}
+			else if (hitPosition.x > hitPosition.y)
+			{
+				// 見る対象物から当たった場所を引いて長さを取る
+				r = lerpObjectPos.y - hitPosition.y;
+				// そのまま使うと壁にめり込む可能性があるので少し小さくする
+				r -= 20.f;
+			}
+
+			// 半径がマイナスになっていたらプラスに変換
+			if (r <= 0.0f)
+			{
+				r *= -1.0f;
+			}
+
+		}
+		else
+		{
+			r = 700.0f;
+		}
+
+		if (r >= 700.0f)
+		{
+			r = 700.0f;
+		}
+		else if (r <= 10.0f)
+		{
+			r = 10.0f;
+		}
 
 		tmpMovePos.x = r * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
 		tmpMovePos.y = r * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
@@ -61,6 +113,9 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		forwardVec.z = 0.0f;
 
 		hitPosition = Vector3::Zero;
+		tmpHitFlag = hitFlag;
+		hitFlag = false;
+
 	}
 	else if (PlayerObject::GetClearFlag() == true)
 	{
@@ -142,10 +197,20 @@ void MainCameraObject::SetViewMatrixLerpObject(const Vector3 & _offset, const Ve
 
 void MainCameraObject::OnCollision(const GameObject& _hitObject)
 {	
-	//printf("Hit\n");
+	if (hitFlag == false)
+	{
+		hitFlag = true;
+		hitPosition = _hitObject.GetPosition();
+		//if (_hitObject.GetTag() == Tag::GROUND)
+		//{
+		//	hitPosition.x -= 200.0f;
+		//	hitPosition.y -= 200.0f;
+		//}
+	}
+
 	AABB myAabb = boxcollider->GetWorldBox();
 	FixCollision(myAabb, _hitObject.aabb, _hitObject.GetTag());
-	hitPosition = _hitObject.GetPosition();
+
 }
 
 void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag)
@@ -157,6 +222,8 @@ void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Ta
 		Vector3 ment = Vector3(0, 0, 0);
 		calcCollisionFixVec(myAABB, pairAABB, ment);
 		SetPosition(position + ment);
+
+
 	}
 
 }

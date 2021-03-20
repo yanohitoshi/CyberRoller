@@ -133,7 +133,12 @@ private:
 	// view行列
 	Matrix4 view;
 
-
+	// 押し戻しを行う相手と当たった位置を保存するVector3変数
 	Vector3 hitPosition;
+
+	// 押し戻しを行う相手と当たったかを判定するフラグ
+	bool hitFlag;
+	// 前のフレームで押し戻しを行う相手と当たったかを判定するフラグ
+	bool tmpHitFlag;
 };
 
