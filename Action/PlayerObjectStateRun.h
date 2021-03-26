@@ -1,0 +1,43 @@
+#pragma once
+#include "PlayerObjectStateBase.h"
+
+class PlayerObjectStateRun :
+    public PlayerObjectStateBase
+{
+public:
+
+	/*
+	@fn コンストラクタ
+	*/
+	PlayerObjectStateRun(PlayerObject* _owner);
+
+	/*
+	@fn デストラクタ
+	*/
+	~PlayerObjectStateRun()override;
+
+	/*
+	@fn アップデート
+	@brief	stateに応じてアップデートを行う
+	@param	_owner 親クラスのポインタ
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	PlayerState Update(float _deltaTime)override;
+
+	/*
+	@fn インプット
+	@brief	stateに応じて入力処理を行う
+	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
+	*/
+	void Input(const InputState& _keyState)override;
+
+	/*
+	@fn コンストラクタ
+	@param	_owner 親クラスのポインタ
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	void Enter(float _deltaTime)override;
+
+};
+

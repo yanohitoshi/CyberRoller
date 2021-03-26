@@ -13,6 +13,14 @@
 #include "JumpParticleEffectManeger.h"
 #include "LandingEffectManeger.h"
 #include "CountDownFont.h"
+#include "PlayerObjectStateIdle.h"
+#include "PlayerObjectStateRun.h"
+#include "PlayerObjectStateWalk.h"
+#include "PlayerObjectStateDead.h"
+#include "PlayerObjectStateJumpEnd.h"
+#include "PlayerObjectStateJumpLoop.h"
+#include "PlayerObjectStateJumpStart.h"
+#include "PlayerObjectStateOver.h"
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 6000.0f;
@@ -100,26 +108,46 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/robo_model/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
 	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/robo_model/SK_Rob.gpskel"));
+
+	////Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
+	////アニメ―ション用の可変長配列をリサイズ
+	//animTypes.resize(AnimState::ITEMNUM);
+	////アニメーションを読み込み
+	//animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
+	//animTypes[WALK] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
+	//animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
+	//animTypes[JUMPLOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
+	//animTypes[JUMPSTART] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
+	//animTypes[JUMPEND] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
+	//animTypes[DOWN] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
+	//animTypes[DOWN_LOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
+	//animTypes[DOWN_UP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
+	//animTypes[DOWN_OVER] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
+	//animTypes[PLAYER_DEAD] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
+
+	////anim変数を速度1.0fで再生
+	//skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
+
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
-	animTypes.resize(AnimState::ITEMNUM);
+	animTypes.resize(static_cast<unsigned int>(AnimState::ITEMNUM));
+
 	//アニメーションを読み込み
-	animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
-	animTypes[WALK] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
-	animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
-	animTypes[JUMPLOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
-	animTypes[JUMPSTART] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
-	animTypes[JUMPEND] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
-	animTypes[DOWN] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
-	animTypes[DOWN_LOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
-	animTypes[DOWN_UP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
-	animTypes[DOWN_OVER] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
-	animTypes[PLAYER_DEAD] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
-
-
+	animTypes[static_cast<unsigned int>(IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
+	animTypes[static_cast<unsigned int>(WALK)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
+	animTypes[static_cast<unsigned int>(RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
+	animTypes[static_cast<unsigned int>(JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
+	animTypes[static_cast<unsigned int>(JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(JUMPEND)] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
+	animTypes[static_cast<unsigned int>(DOWN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
+	animTypes[static_cast<unsigned int>(DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PLAYER_DEAD)] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
 
 	//anim変数を速度1.0fで再生
-	skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
+	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(IDLE)], 1.0f);
+
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
@@ -139,6 +167,15 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	new PlayerSandSmokeMakeManeger(this);
 	new LandingEffectManeger(this);
 
+	// stateプールの初期化
+	statePools.push_back(new PlayerObjectStateIdle);
+	statePools.push_back(new PlayerObjectStateRun);
+	statePools.push_back(new PlayerObjectStateWalk);
+	statePools.push_back(new PlayerObjectStateJumpStart);
+	statePools.push_back(new PlayerObjectStateJumpLoop);
+	statePools.push_back(new PlayerObjectStateJumpEnd);
+	statePools.push_back(new PlayerObjectStateOver);
+	statePools.push_back(new PlayerObjectStateDead);
 
 }
 
@@ -154,6 +191,25 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
+	// ステート外部からステート変更があったか？
+	if (nowState != nextState)
+	{
+		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		nowState = nextState;
+		return;
+	}
+
+	// ステート実行
+	nextState = statePools[static_cast<unsigned int>(nowState)]->Update(this, _deltaTime);
+
+	// ステート内部からステート変更あったか？
+	if (nowState != nextState)
+	{
+		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		nowState = nextState;
+	}
+
+
 	// アニメーション更新処理
 	AnimationUpdate();
 
@@ -878,5 +934,10 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 		_calcFixVec.z = dz;
 	}
 
+}
+
+const Animation* PlayerObject::GetAnimation(PlayerState _state)
+{
+	return animTypes[static_cast<unsigned int>(_state)];
 }
 

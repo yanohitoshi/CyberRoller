@@ -3,6 +3,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
+#include "PlayerObjectStateBase.h"
 
 // クラスの前方宣言
 class SkeletalMeshComponent;
@@ -90,6 +91,21 @@ public:
 	// 着地effect側で使用するフラグ用のgetter
 	static bool GetChackJumpFlag() { return chackJumpFlag; }
 	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
+
+	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
+	const Animation* GetAnimation(PlayerState _state);
+
+	Vector3 GetForwardVec() { return forwardVec; }
+	Vector3 GetRightVec() { return rightVec; }
+
+	Vector3 GetCharaForwardVec() { return charaForwardVec;	}
+	Vector3 GetTmpCharaForwardVec() { return tmpCharaForwardVec; }
+	Vector3 GetRotateVec() { return rotateVec; }
+	float GetMoveSpeed() { return moveSpeed; }
+
+	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
+	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
+	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
 
 private:
 
@@ -190,6 +206,12 @@ private:
 	bool reSpawnFlag;
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
+
+	
+	PlayerState nowState;
+	PlayerState nextState;
+	// stateプール
+	std::vector<class PlayerObjectStateBase*> statePools;
 
 };
 
