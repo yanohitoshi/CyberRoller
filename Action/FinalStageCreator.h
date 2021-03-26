@@ -62,10 +62,6 @@ private:
 	std::vector<std::vector<int>> layer15StageData;
 	std::vector<std::vector<int>> layer16StageData;
 	std::vector<std::vector<int>> layer17StageData;
-	std::vector<std::vector<int>> layer18StageData;
-	std::vector<std::vector<int>> layer19StageData;
-	std::vector<std::vector<int>> layer20StageData;
-
 
 	//player‚Ìƒf[ƒ^
 	std::vector<std::vector<int>> playerData;

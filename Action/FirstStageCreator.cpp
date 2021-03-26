@@ -111,7 +111,6 @@ void FirstStageCreator::CreateStage()
 		for (float ix = 0; ix < sizeX; ix++)
 		{
 			Vector3 blockSize = Vector3(200, 200, 100);
-			Vector3 switchSize = Vector3(4, 4, 0.5);
 			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
 			Vector3 needlePanelSize = Vector3(200, 200, 3);
 			Vector3 jumpSwitchSize = Vector3(200, 200, 3);

@@ -50,6 +50,7 @@ protected:
 	// ライトを落とすかどうかフラグ
 	bool lightDownFlag;
 
-
+	// ライトの強さの最大値
+	const float MAX_LIGHT = 0.8f;
 };
 

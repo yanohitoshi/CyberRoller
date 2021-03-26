@@ -169,7 +169,6 @@ void SecondStageCreator::CreateStage()
 			Vector3 layer1Pos = Vector3(offset * ix, -offset * iy, 0);
 			Vector3 blockSize = Vector3(200, 200, 100);
 			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
-			Vector3 switchSize = Vector3(4, 4, 0.5);
 			Vector3 needlePanelSize = Vector3(200, 200, 3);
 			Vector3 jumpSwitchSize = Vector3(200, 200, 5);
 			Vector3 wallBlockSizeNum1 = Vector3(600.0f, 200.0f, 2400.0f);

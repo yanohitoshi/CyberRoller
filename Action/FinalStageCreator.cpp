@@ -48,9 +48,6 @@ FinalStageCreator::~FinalStageCreator()
 	layer15StageData.clear();
 	layer16StageData.clear();
 	layer17StageData.clear();
-	layer18StageData.clear();
-	layer19StageData.clear();
-	layer20StageData.clear();
 
 	//プレイヤーのマップデータ削除
 	playerData.clear();
@@ -165,25 +162,6 @@ bool FinalStageCreator::OpenFile()
 		printf("do'nt have Layer/layer17\n");
 		return true;
 	}
-	//// ステージデータ読み込み (layer18) 
-	//if (!readTiledJson(layer18StageData, "Assets/Config/finalStageMap.json", "layer18"))
-	//{
-	//	printf("do'nt have Layer/layer18\n");
-	//	return true;
-	//}
-	//// ステージデータ読み込み (layer19) 
-	//if (!readTiledJson(layer19StageData, "Assets/Config/finalStageMap.json", "layer19"))
-	//{
-	//	printf("do'nt have Layer/layer19\n");
-	//	return true;
-	//}
-	//// ステージデータ読み込み (layer20) 
-	//if (!readTiledJson(layer20StageData, "Assets/Config/finalStageMap.json", "layer20"))
-	//{
-	//	printf("do'nt have Layer/layer20\n");
-	//	return true;
-	//}
-
 
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/finalStageMap.json", "Player"))
@@ -229,7 +207,6 @@ void FinalStageCreator::CreateStage()
 			Vector3 layer1Pos = Vector3(offset * ix, -offset * iy, 0);
 			Vector3 blockSize = Vector3(200, 200, 100);
 			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
-			Vector3 switchSize = Vector3(4, 4, 0.5);
 			Vector3 jumpSwitchSize = Vector3(200, 200, 3);
 			Vector3 needlePanelSize = Vector3(200, 200, 3);
 			Vector3 wallBlockSizeNum1 = Vector3(600.0f, 200.0f, 3000.0f);

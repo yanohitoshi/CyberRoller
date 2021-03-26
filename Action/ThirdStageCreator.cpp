@@ -190,7 +190,6 @@ void ThirdStageCreator::CreateStage()
 			Vector3 layer1Pos = Vector3(offset * ix, -offset * iy, 0);
 			Vector3 blockSize = Vector3(200, 200, 100);
 			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
-			Vector3 switchSize = Vector3(4, 4, 0.5);
 			Vector3 needlePanelSize = Vector3(200, 200, 3);
 			Vector3 jumpSwitchSize = Vector3(200, 200, 3);
 			Vector3 wallBlockSizeNum1 = Vector3(600.0f, 200.0f, 2400.0f);
@@ -273,9 +272,6 @@ void ThirdStageCreator::CreateStage()
 			case(5):
 				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 300.0f, MoveDirectionTag::MOVE_X);
 				break;
-			//case(6):
-			//	new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(-1200.0f, 0.0f, 0.0f), Vector3::NegUnitX, 500.0f, MoveDirectionTag::MOVE_X);
-			//	break;
 			case(7):
 				new MoveBlockObject(layer5Pos, blockSize, Tag::MOVE_GROUND, Vector3(-800.0f, 0.0f, 0.0f), Vector3::NegUnitX, 300.0f, MoveDirectionTag::MOVE_X);
 				break;

@@ -53,7 +53,7 @@ SceneState ThirdStageScene::Update(const InputState& state)
 	{
 		light += Vector3(0.01f, 0.01f, 0.01f);
 		RENDERER->SetAmbientLight(light);
-		if (light.x >= 0.8f)
+		if (light.x >= MAX_LIGHT)
 		{
 			startScene = false;
 			RENDERER->SetAmbientLight(light);
