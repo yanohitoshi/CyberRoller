@@ -8,7 +8,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateIdle(PlayerObject* _owner);
+	PlayerObjectStateIdle();
 
 	/*
 	@fn デストラクタ

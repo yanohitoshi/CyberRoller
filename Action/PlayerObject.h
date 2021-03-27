@@ -11,7 +11,7 @@ class Animation;
 class BoxCollider;
 class Mesh;
 class SphereCollider;
-
+enum class PlayerState;
 /*
 @enum AnimState
 	　プレイヤーのアニメーションの状態
@@ -101,11 +101,30 @@ public:
 	Vector3 GetCharaForwardVec() { return charaForwardVec;	}
 	Vector3 GetTmpCharaForwardVec() { return tmpCharaForwardVec; }
 	Vector3 GetRotateVec() { return rotateVec; }
+	Vector3 GetVelocity() { return velocity; }
+
 	float GetMoveSpeed() { return moveSpeed; }
+	bool GetOnGround() { return onGround; }
+	bool GetJumpFlag() { return jumpFlag; }
+	bool GetIsJumping() { return isJumping; }
+	bool GetSwitchJumpFlag() { return switchJumpFlag; }
+	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
+	const float GetFirstJumpPower() { return FirstJumpPower; }
+	float GetJumpPower() { return jumpPower; }
+	int GetJumpFrameCount() { return jumpFrameCount; }
 
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
 	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
+	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
+
+	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
+	void SetIsJumping(bool _isJumpFlag) { isJumping = _isJumpFlag; }
+	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
+	void SetIsAvailableJumpKey(bool _isAvailableJumpKey) { isAvailableJumpKey = _isAvailableJumpKey; }
+	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
+
+	static const float GetGravity() { return Gravity; }
 
 private:
 

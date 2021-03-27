@@ -9,7 +9,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateJumpLoop(PlayerObject* _owner);
+	PlayerObjectStateJumpLoop();
 
 	/*
 	@fn デストラクタ
@@ -38,5 +38,9 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
+
+private:
+
+	int jumpFrameCount;
 };
 

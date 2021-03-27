@@ -9,7 +9,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateWalk(PlayerObject* _owner);
+	PlayerObjectStateWalk();
 
 	/*
 	@fn デストラクタ
@@ -22,7 +22,7 @@ public:
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
-	PlayerState Update(float _deltaTime)override;
+	PlayerState Update(PlayerObject* _owner,float _deltaTime)override;
 
 	/*
 	@fn インプット
@@ -30,7 +30,7 @@ public:
 	@param	_owner 親クラスのポインタ
 	@param	_keyState 入力情報
 	*/
-	void Input( const InputState& _keyState)override;
+	void Input(PlayerObject* _owner, const InputState& _keyState)override;
 
 	/*
 	@fn コンストラクタ

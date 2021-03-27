@@ -1,8 +1,8 @@
 #include "PlayerObjectStateRun.h"
+#include "SkeletalMeshComponent.h"
 #include "GameObject.h"
 
-PlayerObjectStateRun::PlayerObjectStateRun(PlayerObject* _owner)
-	: PlayerObjectStateBase(_owner)
+PlayerObjectStateRun::PlayerObjectStateRun()
 {
 }
 
@@ -10,16 +10,16 @@ PlayerObjectStateRun::~PlayerObjectStateRun()
 {
 }
 
-PlayerState PlayerObjectStateRun::Update(float _deltaTime)
+PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 {
 
 	// positionに速度を足してキャラクターを動かす
-	owner->SetPosition(owner->GetPosition() + velocity * _deltaTime);
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 	return state;
 }
 
-void PlayerObjectStateRun::Input(const InputState& _keyState)
+void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyState)
 {
 	//Axisの値をとる32700~-32700
 	float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
@@ -37,21 +37,21 @@ void PlayerObjectStateRun::Input(const InputState& _keyState)
 	{
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		// charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
-		Vector3 tmpVec = owner->GetForwardVec() * axis.x + owner->GetRightVec() * axis.y;
+		Vector3 tmpVec = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 		tmpVec.Normalize();
-		owner->SetCharaForwardVec(tmpVec);
+		_owner->SetCharaForwardVec(tmpVec);
 		// inputFlag = true;
 
-		velocity.x = owner->GetCharaForwardVec().x * owner->GetMoveSpeed() * 2.0f;
-		velocity.y = owner->GetCharaForwardVec().y * owner->GetMoveSpeed() * 2.0f;
+		velocity.x = _owner->GetCharaForwardVec().x * _owner->GetMoveSpeed() * 2.0f;
+		velocity.y = _owner->GetCharaForwardVec().y * _owner->GetMoveSpeed() * 2.0f;
 
 
-		if (owner->GetTmpCharaForwardVec() != owner->GetCharaForwardVec())
+		if (_owner->GetTmpCharaForwardVec() != _owner->GetCharaForwardVec())
 		{
-			Vector3 tmpRotateVec = owner->GetCharaForwardVec();
+			Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
 			tmpRotateVec.Normalize();
 			//回転
-			owner->SetRotateVec(Vector3::Lerp(owner->GetRotateVec(), tmpRotateVec, 0.2f));
+			_owner->SetRotateVec(Vector3::Lerp(_owner->GetRotateVec(), tmpRotateVec, 0.2f));
 			//RotateToNewForward(rotateVec);
 		}
 	}
@@ -71,6 +71,9 @@ void PlayerObjectStateRun::Input(const InputState& _keyState)
 
 }
 
-void PlayerObjectStateRun::Enter( float _deltaTime)
+void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN));
+	state = PlayerState::PLAYER_STATE_RUN;
 }

@@ -1,7 +1,7 @@
 #include "PlayerObjectStateDead.h"
+#include "SkeletalMeshComponent.h"
 
-PlayerObjectStateDead::PlayerObjectStateDead(PlayerObject* _owner)
-	: PlayerObjectStateBase(_owner)
+PlayerObjectStateDead::PlayerObjectStateDead()
 {
 }
 
@@ -11,7 +11,7 @@ PlayerObjectStateDead::~PlayerObjectStateDead()
 
 PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime)
 {
-	return PlayerState();
+	return state;
 }
 
 void PlayerObjectStateDead::Input(PlayerObject* _owner, const InputState& _keyState)
@@ -20,4 +20,7 @@ void PlayerObjectStateDead::Input(PlayerObject* _owner, const InputState& _keySt
 
 void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_PLAYER_DEAD));
+	state = PlayerState::PLAYER_STATE_PLAYER_DEAD;
 }

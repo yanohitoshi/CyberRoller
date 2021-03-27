@@ -9,7 +9,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateJumpStart(PlayerObject* _owner);
+	PlayerObjectStateJumpStart();
 
 	/*
 	@fn デストラクタ

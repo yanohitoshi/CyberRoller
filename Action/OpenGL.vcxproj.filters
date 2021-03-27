@@ -342,7 +342,16 @@
     <ClCompile Include="PlayerObjectStateDead.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObjectStateOver.cpp">
+    <ClCompile Include="PlayerObjectStateDownLoop.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownOver.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownUp.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -696,7 +705,16 @@
     <ClInclude Include="PlayerObjectStateDead.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObjectStateOver.h">
+    <ClInclude Include="PlayerObjectStateDownLoop.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownOver.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownStart.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownUp.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
   </ItemGroup>
