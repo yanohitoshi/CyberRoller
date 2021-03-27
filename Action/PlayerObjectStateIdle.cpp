@@ -11,9 +11,28 @@ PlayerObjectStateIdle::~PlayerObjectStateIdle()
 
 PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
+	state = PlayerState::PLAYER_STATE_IDLE;
+	
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
+	}
+
+	if (_owner->GetInputFlag())
+	{
+		if (_owner->GetRunFlag())
+		{
+			state = PlayerState::PLAYER_STATE_RUN;
+		}
+		else if (_owner->GetRunFlag())
+		{
+			state = PlayerState::PLAYER_STATE_WALK;
+		}
+	}
+
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag())
+	{
+		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
 	return state;
@@ -21,7 +40,6 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 
 void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-	//state = PlayerState::PLAYER_STATE_IDLE;
 
 	//Axisの値をとる32700~-32700
 	float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
@@ -37,11 +55,20 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 	//入力があるか
 	if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
 	{
-		state = PlayerState::PLAYER_STATE_RUN;
+		_owner->SetInputFlag(true);
+		//アナログスティックの入力状態で歩きか走りかを判定
+		if (ALX >= 28000.0f || ALX <= -28000.0f || ALY >= 28000.0f || ALY <= -28000.0f)
+		{
+			_owner->SetRunFlag(true);
+		}
+		else 
+		{
+			_owner->SetRunFlag(false);
+		}
 	}
 	else
 	{
-		state = PlayerState::PLAYER_STATE_IDLE;
+		_owner->SetInputFlag(false);
 	}
 
 	if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
@@ -56,12 +83,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 			_owner->SetJumpFlag(true);
 			//isJumping = true;
 			_owner->SetIsJumping(true);
-			state = PlayerState::PLAYER_STATE_JUMPSTART;
 		}
-	}
-	else
-	{
-		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
 }

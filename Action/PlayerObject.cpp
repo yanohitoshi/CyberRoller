@@ -258,6 +258,12 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 void PlayerObject::GameObjectInput(const InputState& _keyState)
 {
+	//今カメラが向いている方向をplayerに渡す
+	forwardVec = mainCamera->GetCameraVec();
+
+	//カメラの向きから右方向を計算
+	rightVec = Vector3::Cross(forwardVec, Vector3(0.0f, 0.0f, 1.0f));
+
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
@@ -280,11 +286,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	////前のフレームと今のフレームを比較するために保存
 	//tmpAnimState = animState;
 
-	////今カメラが向いている方向をplayerに渡す
-	//forwardVec = mainCamera->GetCameraVec();
-
-	////カメラの向きから右方向を計算
-	//rightVec = Vector3::Cross(forwardVec, Vector3(0.0f, 0.0f, 1.0f));
 
 	//// スタート時のカウントダウンが終わったら入力可能状態にする
 	//if (CountDownFont::countStartFlag == true)
@@ -780,6 +781,30 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _
 		Vector3 ment = Vector3(0, 0, 0);
 		playerCalcCollisionFixVec(myAABB, pairAABB, ment, _pairTag);
 		SetPosition(position + ment);
+	}
+}
+
+void PlayerObject::RotateToNewForward(const Vector3& forward)
+{
+	// X軸ベクトル(1,0,0)とforwardの間の角度を求める
+	float dot = Vector3::Dot(Vector3::UnitX, forward);
+	float angle = Math::Acos(dot);
+	// 下向きだった場合
+	if (dot > 0.9999f)
+	{
+		SetRotation(Quaternion::Identity);
+	}
+	// 上向きだった場合
+	else if (dot < -0.9999f)
+	{
+		SetRotation(Quaternion(Vector3::UnitZ, Math::Pi));
+	}
+	else
+	{
+		// 軸ベクトルとforwardとの外積から回転軸をもとめ、回転させる
+		Vector3 axis = Vector3::Cross(Vector3::UnitX, forward);
+		axis.Normalize();
+		SetRotation(Quaternion(axis, angle));
 	}
 }
 

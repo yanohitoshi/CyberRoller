@@ -38,5 +38,7 @@ public:
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
+private:
+
 };
 

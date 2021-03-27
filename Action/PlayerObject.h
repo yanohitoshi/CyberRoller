@@ -109,9 +109,13 @@ public:
 	bool GetIsJumping() { return isJumping; }
 	bool GetSwitchJumpFlag() { return switchJumpFlag; }
 	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
+	bool GetInputFlag() { return inputFlag; }
+	bool GetRunFlag() { return runFlag; }
+
 	const float GetFirstJumpPower() { return FirstJumpPower; }
 	float GetJumpPower() { return jumpPower; }
 	int GetJumpFrameCount() { return jumpFrameCount; }
+
 
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
@@ -123,8 +127,14 @@ public:
 	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
 	void SetIsAvailableJumpKey(bool _isAvailableJumpKey) { isAvailableJumpKey = _isAvailableJumpKey; }
 	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
+	void SetInputFlag(bool _inputFlag) { inputFlag = _inputFlag; }
+	void SetRunFlag(bool _runFlag) { runFlag = _runFlag; }
+
 
 	static const float GetGravity() { return Gravity; }
+
+	void RotateToNewForward(const Vector3& forward);
+
 
 private:
 

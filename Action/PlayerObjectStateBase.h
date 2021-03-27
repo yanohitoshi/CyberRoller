@@ -7,16 +7,16 @@ enum class PlayerState
 {
 	// 待機
 	PLAYER_STATE_IDLE = 0,
-	// 走る
-	PLAYER_STATE_RUN,
-	// ジャンプスタート
-	PLAYER_STATE_JUMPSTART,
-	// ジャンプループ
-	PLAYER_STATE_JUMPLOOP, 
-	// ジャンプ終了
-	PLAYER_STATE_JUMPEND,
 	// ジャンプ終了
 	PLAYER_STATE_WALK,
+	// 走る
+	PLAYER_STATE_RUN,
+	// ジャンプループ
+	PLAYER_STATE_JUMPLOOP, 
+	// ジャンプスタート
+	PLAYER_STATE_JUMPSTART,
+	// ジャンプ終了
+	PLAYER_STATE_JUMPEND,
 	// ジャンプ終了
 	PLAYER_STATE_DOWN,
 	// ジャンプ終了

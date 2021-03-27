@@ -12,9 +12,13 @@ PlayerObjectStateJumpEnd::~PlayerObjectStateJumpEnd()
 PlayerState PlayerObjectStateJumpEnd::Update(PlayerObject* _owner, float _deltaTime)
 {
 	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
-	if (!skeletalMeshComponent->IsPlaying())
+	if (!skeletalMeshComponent->IsPlaying() && _owner->GetInputFlag() == false)
 	{
 		state = PlayerState::PLAYER_STATE_IDLE;
+	}
+	else
+	{
+		state = PlayerState::PLAYER_STATE_JUMPEND;
 	}
 
 	return state;

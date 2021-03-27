@@ -16,11 +16,23 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
+	if (!_owner->GetInputFlag())
+	{
+		state = PlayerState::PLAYER_STATE_IDLE;
+	}
+
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag())
+	{
+		state = PlayerState::PLAYER_STATE_JUMPSTART;
+	}
+
 	return state;
+
 }
 
 void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyState)
 {
+
 	//Axisの値をとる32700~-32700
 	float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
 	float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
@@ -35,12 +47,11 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 	//入力があるか
 	if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
 	{
+		_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		// charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
-		Vector3 tmpVec = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
-		tmpVec.Normalize();
-		_owner->SetCharaForwardVec(tmpVec);
-		// inputFlag = true;
+		Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
+		_owner->SetCharaForwardVec(forward);
 
 		velocity.x = _owner->GetCharaForwardVec().x * _owner->GetMoveSpeed() * 2.0f;
 		velocity.y = _owner->GetCharaForwardVec().y * _owner->GetMoveSpeed() * 2.0f;
@@ -50,10 +61,18 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 		{
 			Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
 			tmpRotateVec.Normalize();
+
 			//回転
-			_owner->SetRotateVec(Vector3::Lerp(_owner->GetRotateVec(), tmpRotateVec, 0.2f));
-			//RotateToNewForward(rotateVec);
+			Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.2f);
+			_owner->RotateToNewForward(rotatioin);
+			_owner->SetRotateVec(rotatioin);
+
 		}
+
+	}
+	else
+	{
+		_owner->SetInputFlag(false);
 	}
 
 	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
@@ -61,13 +80,12 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
 		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
 	{
-		state = PlayerState::PLAYER_STATE_JUMPSTART;
+		//jumpFlag = true;
+		_owner->SetJumpFlag(true);
+		//isJumping = true;
+		_owner->SetIsJumping(true);
 	}
 
-	if (state != PlayerState::PLAYER_STATE_JUMPSTART && state != PlayerState::PLAYER_STATE_RUN)
-	{
-		state = PlayerState::PLAYER_STATE_IDLE;
-	}
 
 }
 
