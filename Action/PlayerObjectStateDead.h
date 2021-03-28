@@ -40,5 +40,9 @@ public:
 	@param	_deltaTime ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
+
+private:
+
+	int reSpawnCount;
 };
 

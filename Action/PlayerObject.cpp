@@ -24,9 +24,10 @@
 #include "PlayerObjectStateDownOver.h"
 #include "PlayerObjectStateDownStart.h"
 #include "PlayerObjectStateDownUp.h"
+#include "PlayerObjectStateRespown.h"
 
 // 定数と静的メンバーの初期化
-const float PlayerObject::Gravity = 6000.0f;
+const float PlayerObject::Gravity = 4500.0f;
 bool PlayerObject::clearFlag = false;
 bool PlayerObject::nextSceneFlag = false;
 bool PlayerObject::reStartFlag = false;
@@ -36,7 +37,7 @@ bool PlayerObject::chackIsJumping = false;
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	,playerBox({ Vector3::Zero,Vector3::Zero })
-	, FirstJumpPower(1100.0f)
+	, FirstJumpPower(1200.0f)
 	,moveSpeed(600.0f)
 {
 
@@ -50,9 +51,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	firstPos = Vector3(position.x, position.y, 5000.0f);
 	jumpPower = FirstJumpPower;
 	//リスポ－ンするまでのカウント初期化
-	reSpawnCount = 0;
+	respawnCount = 0;
 	//リスポ－ンflag初期化
-	reSpawnFlag = false;
+	respawnFlag = false;
 	// リスポ－ンflag位置初期化
 	respownPos = _pos;
 
@@ -112,25 +113,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
 	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/robo_model/SK_Rob.gpskel"));
 
-	////Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
-	////アニメ―ション用の可変長配列をリサイズ
-	//animTypes.resize(AnimState::ITEMNUM);
-	////アニメーションを読み込み
-	//animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
-	//animTypes[WALK] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
-	//animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
-	//animTypes[JUMPLOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
-	//animTypes[JUMPSTART] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
-	//animTypes[JUMPEND] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
-	//animTypes[DOWN] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
-	//animTypes[DOWN_LOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
-	//animTypes[DOWN_UP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
-	//animTypes[DOWN_OVER] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
-	//animTypes[PLAYER_DEAD] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
-
-	////anim変数を速度1.0fで再生
-	//skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
-
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
 	animTypes.resize(static_cast<unsigned int>(AnimState::ITEMNUM));
@@ -146,7 +128,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_PLAYER_DEAD)] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)], 1.0f);
@@ -158,7 +140,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,ColliderComponent::PlayerTag, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
-	playerBox = { Vector3(-55.0f,-6.5f,0.0f),Vector3(55.0f,6.5f,179.0f) };
+	//playerBox = { Vector3(-55.0f,-6.5f,0.0f),Vector3(55.0f,6.5f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
@@ -183,6 +165,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateDownUp);
 	statePools.push_back(new PlayerObjectStateDownOver);
 	statePools.push_back(new PlayerObjectStateDead);
+	statePools.push_back(new PlayerObjectStateRespown);
 
 
 	nowState = PlayerState::PLAYER_STATE_IDLE;
@@ -222,28 +205,15 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		nowState = nextState;
 	}
 
-
-	//// アニメーション更新処理
-	//AnimationUpdate();
-
-	//// 接地中じゃなければ重力をかける（一定数以上かかったら止めて定数にする）
-	//if (onGround == false)
-	//{
-	//	velocity.z -= Gravity * _deltaTime;
-	//	if (velocity.z <= -2000.0f)
-	//	{
-	//		velocity.z = -2000.0f;
-	//	}
-	//}
-	//
-	//// ほかのオブジェクトから影響を受けた速度をプレイヤーの速度に追加
-	//velocity = velocity + pushedVelocity;
-	// positionに速度を足してキャラクターを動かす
-
 	//カメラにplayerのpositionを渡す
 	if (clearFlag == false && nextSceneFlag == false && position.z >= -500.0f)
 	{
 		mainCamera->SetLerpObjectPos(position);
+	}
+
+	if (respawnFlag == true)
+	{
+		mainCamera->ReSetYaw();
 	}
 
 	// RENDERERに現在のポジションを送る
@@ -584,8 +554,8 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	//	}
 	//}
 
-	//chackJumpFlag = jumpFlag;
-	//chackIsJumping = isJumping;
+	chackJumpFlag = jumpFlag;
+	chackIsJumping = isJumping;
 
 	//if (deadFlag == true)
 	//{
@@ -918,28 +888,24 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 			jumpFrameCount = 0;
 		}
 
-		if (animState == JUMPLOOP)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[JUMPEND], 1.0f);
-			animState = JUMPEND;
-		}
-
 		if (jumpFlag == true)
 		{
 			jumpFlag = false;
+			//isJumping = false;
 			isAvailableJumpKey = true;
 			jumpPower = FirstJumpPower;
 		}
+
 		switchJumpFlag = false;
+
+		//if (animState == JUMPLOOP)
+		//{
+		//	skeltalMeshComponent->PlayAnimation(animTypes[JUMPEND], 1.0f);
+		//	animState = JUMPEND;
+		//}
+
 	}
 
-	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND ||
-		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
-		_hitObject.GetTag() == Tag::SECOND_SWITCH || _hitObject.GetTag() == Tag::NEXT_SCENE_SWITCH ||
-		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
-	{
-		pushedVelocity = _hitObject.GetVelocity();
-	}
 
 	if (_hitObject.GetTag() == Tag::JUMP_SWITCH && jumpFlag == false)
 	{
@@ -950,6 +916,14 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 			switchJumpFlag = true;
 
 		}
+	}
+
+	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND ||
+		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
+		_hitObject.GetTag() == Tag::SECOND_SWITCH || _hitObject.GetTag() == Tag::NEXT_SCENE_SWITCH ||
+		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
+	{
+		pushedVelocity = _hitObject.GetVelocity();
 	}
 }
 

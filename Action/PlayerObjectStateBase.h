@@ -17,16 +17,18 @@ enum class PlayerState
 	PLAYER_STATE_JUMPSTART,
 	// ジャンプ終了
 	PLAYER_STATE_JUMPEND,
-	// ジャンプ終了
+	// コンテニュー選択状態に入る前の状態
 	PLAYER_STATE_DOWN,
-	// ジャンプ終了
+	// コンテニュー選択状態
 	PLAYER_STATE_DOWN_LOOP,
-	// ジャンプ終了
+	// コンテニュー状態
 	PLAYER_STATE_DOWN_UP,
-	// ジャンプ終了
+	// ゲームオーバー状態
 	PLAYER_STATE_DOWN_OVER,
-	// ジャンプ終了
-	PLAYER_STATE_PLAYER_DEAD,
+	// 死亡状態
+	PLAYER_STATE_DEAD,
+	// リスポーン状態
+	PLAYER_STATE_RESPAWN,
 
 	// 総アニメーション数
 	PLAYER_STATE_NUM,

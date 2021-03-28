@@ -17,8 +17,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	{
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
-
-	if (_owner->GetInputFlag())
+	else if (_owner->GetInputFlag())
 	{
 		if (_owner->GetRunFlag())
 		{
@@ -29,10 +28,14 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 			state = PlayerState::PLAYER_STATE_WALK;
 		}
 	}
-
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag())
+	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
+	}
+
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
 	}
 
 	return state;

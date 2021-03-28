@@ -1,6 +1,8 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
 
+class SkeletalMeshComponent;
+
 class PlayerObjectStateJumpLoop :
     public PlayerObjectStateBase
 {
@@ -42,5 +44,7 @@ public:
 private:
 
 	int jumpFrameCount;
+	bool animChangeFlag;
+	SkeletalMeshComponent* skeletalMeshComponent;
 };
 

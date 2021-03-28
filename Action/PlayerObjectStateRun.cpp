@@ -16,14 +16,24 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
+	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
+	{
+		state = PlayerState::PLAYER_STATE_JUMPLOOP;
+	}
+
 	if (!_owner->GetInputFlag())
 	{
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
+	}
+
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
 	}
 
 	return state;
@@ -48,9 +58,11 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 	if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
 	{
 		_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
+
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		// charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
 		Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
+		forward.Normalize();
 		_owner->SetCharaForwardVec(forward);
 
 		velocity.x = _owner->GetCharaForwardVec().x * _owner->GetMoveSpeed() * 2.0f;

@@ -102,6 +102,8 @@ public:
 	Vector3 GetTmpCharaForwardVec() { return tmpCharaForwardVec; }
 	Vector3 GetRotateVec() { return rotateVec; }
 	Vector3 GetVelocity() { return velocity; }
+	Vector3 GetRespownPos() { return respownPos; }
+
 
 	float GetMoveSpeed() { return moveSpeed; }
 	bool GetOnGround() { return onGround; }
@@ -111,16 +113,21 @@ public:
 	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
 	bool GetInputFlag() { return inputFlag; }
 	bool GetRunFlag() { return runFlag; }
+	bool GetDeadFlag() { return deadFlag; };
+	bool GetRespawnFlag() { return respawnFlag; };
+
 
 	const float GetFirstJumpPower() { return FirstJumpPower; }
 	float GetJumpPower() { return jumpPower; }
 	int GetJumpFrameCount() { return jumpFrameCount; }
-
+	PlayerState GetNowState() { return nowState; }
 
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
 	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
 	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
+	void SetrespownPos(Vector3 _respownPos) { velocity = _respownPos; }
+
 
 	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
 	void SetIsJumping(bool _isJumpFlag) { isJumping = _isJumpFlag; }
@@ -129,7 +136,9 @@ public:
 	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
 	void SetInputFlag(bool _inputFlag) { inputFlag = _inputFlag; }
 	void SetRunFlag(bool _runFlag) { runFlag = _runFlag; }
-
+	void SetJumpFrameCount(bool _jumpFrameCount) { jumpFrameCount = _jumpFrameCount; }
+	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
+	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
 
 	static const float GetGravity() { return Gravity; }
 
@@ -230,9 +239,9 @@ private:
 	static bool chackIsJumping;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
-	int reSpawnCount;
+	int respawnCount;
 	// リスポーン用フラグ
-	bool reSpawnFlag;
+	bool respawnFlag;
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
 

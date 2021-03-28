@@ -102,7 +102,7 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		tmpMovePos.y = r * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
 		tmpMovePos.z = r * sinf(pitch) + height + lerpObjectPos.z;
 
-		position = Vector3::Lerp(position , tmpMovePos, _deltaTime * 10.0f);
+		position = Vector3::Lerp(position , tmpMovePos, _deltaTime * 6.0f);
 		SetPosition(position);
 		Vector3 viewPosition = Vector3(lerpObjectPos.x, lerpObjectPos.y, lerpObjectPos.z + 100.0f);
 		view = Matrix4::CreateLookAt(position, viewPosition, Vector3(0.0f,0.0f,1.0f));
@@ -201,11 +201,6 @@ void MainCameraObject::OnCollision(const GameObject& _hitObject)
 	{
 		hitFlag = true;
 		hitPosition = _hitObject.GetPosition();
-		//if (_hitObject.GetTag() == Tag::GROUND)
-		//{
-		//	hitPosition.x -= 200.0f;
-		//	hitPosition.y -= 200.0f;
-		//}
 	}
 
 	AABB myAabb = boxcollider->GetWorldBox();

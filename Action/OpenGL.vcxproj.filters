@@ -354,6 +354,9 @@
     <ClCompile Include="PlayerObjectStateDownUp.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObjectStateRespown.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -715,6 +718,9 @@
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateDownUp.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRespown.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
   </ItemGroup>

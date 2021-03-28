@@ -12,6 +12,7 @@ PlayerObjectStateJumpLoop::~PlayerObjectStateJumpLoop()
 PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
 	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
+
 	if (velocity.z <= -2000.0f)
 	{
 		velocity.z = -2000.0f;
@@ -19,11 +20,21 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	if (_owner->GetOnGround() == true && state == PlayerState::PLAYER_STATE_JUMPLOOP)
+	if (animChangeFlag == true && velocity.z <= 0.0f)
+	{
+		skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPLOOP));
+		animChangeFlag = false;
+	}
+
+	if (_owner->GetOnGround() == true)
 	{
 		state = PlayerState::PLAYER_STATE_JUMPEND;
 	}
 
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
 	return state;
 }
 
@@ -44,12 +55,12 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 	//入力があるか
 	if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
 	{
+		_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		// charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
-		Vector3 tmpVec = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
-		tmpVec.Normalize();
-		_owner->SetCharaForwardVec(tmpVec);
-		// inputFlag = true;
+		Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
+		forward.Normalize();
+		_owner->SetCharaForwardVec(forward);
 
 		velocity.x = _owner->GetCharaForwardVec().x * _owner->GetMoveSpeed() * 2.0f;
 		velocity.y = _owner->GetCharaForwardVec().y * _owner->GetMoveSpeed() * 2.0f;
@@ -59,66 +70,27 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		{
 			Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
 			tmpRotateVec.Normalize();
+
 			//回転
-			_owner->SetRotateVec(Vector3::Lerp(_owner->GetRotateVec(), tmpRotateVec, 0.2f));
-			//RotateToNewForward(rotateVec);
+			Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.2f);
+			_owner->RotateToNewForward(rotatioin);
+			_owner->SetRotateVec(rotatioin);
+
 		}
+
 	}
 
-	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Released ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Released ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Released )
-	{
-		//isAvailableJumpKey = false;
-		_owner->SetIsAvailableJumpKey(false);
-		//isJumping = false;
-		_owner->SetIsJumping(false);
-		//jumpPower = FirstJumpPower;
-		_owner->SetJumpPower(_owner->GetFirstJumpPower());
-	}
-
-
-	if (_owner->GetIsAvailableJumpKey() == true && _owner->GetIsJumping()  == true || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
-	{
-		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Held ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Held ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Held ||
-			_owner->GetSwitchJumpFlag() == true)
-		{
-			++jumpFrameCount;
-			//jumpFlag = true;
-			_owner->SetJumpFlag(true);
-			velocity.z = _owner->GetJumpPower();
-
-			if (jumpFrameCount > 0 && jumpFrameCount < 12 && _owner->GetSwitchJumpFlag() == false)
-			{
-				_owner->SetJumpPower( _owner->GetJumpPower() + 100.0f);
-			}
-			else if (_owner->GetSwitchJumpFlag() == true && jumpFrameCount < 14)
-			{
-				_owner->SetJumpPower(_owner->GetJumpPower() + 150.0f);
-				//jumpPower += 150.0f;
-			}
-			else
-			{
-				//isAvailableJumpKey = false;
-				_owner->SetIsAvailableJumpKey(false);
-				//isJumping = false;
-				_owner->SetIsJumping(false);
-				//switchJumpFlag = false;
-				_owner->SetSwitchJumpFlag(false);
-			}
-		}
-	}
 }
 
 void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
-	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPLOOP));
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	state = PlayerState::PLAYER_STATE_JUMPLOOP;
+	animChangeFlag = true;
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	velocity = _owner->GetVelocity();
-	state = PlayerState::PLAYER_STATE_JUMPLOOP;
+	if (_owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART)
+	{
+		velocity.z = _owner->GetJumpPower();
+	}
 }

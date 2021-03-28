@@ -1,6 +1,8 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
 
+class SkeletalMeshComponent;
+
 class PlayerObjectStateJumpStart :
     public PlayerObjectStateBase
 {
@@ -38,5 +40,11 @@ public:
 	@param	_deltaTime ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
+
+private:
+
+	int jumpFrameCount;
+	bool endFlag;
+	SkeletalMeshComponent* skeletalMeshComponent;
 };
 

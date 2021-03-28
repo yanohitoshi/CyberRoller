@@ -193,6 +193,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerObjectStateJumpEnd.cpp" />
     <ClCompile Include="PlayerObjectStateJumpLoop.cpp" />
     <ClCompile Include="PlayerObjectStateJumpStart.cpp" />
+    <ClCompile Include="PlayerObjectStateRespown.cpp" />
     <ClCompile Include="PlayerObjectStateRun.cpp" />
     <ClCompile Include="PlayerObjectStateWalk.cpp" />
     <ClCompile Include="PushBoardObject.cpp" />
@@ -334,6 +335,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerObjectStateJumpEnd.h" />
     <ClInclude Include="PlayerObjectStateJumpLoop.h" />
     <ClInclude Include="PlayerObjectStateJumpStart.h" />
+    <ClInclude Include="PlayerObjectStateRespown.h" />
     <ClInclude Include="PlayerObjectStateRun.h" />
     <ClInclude Include="PlayerObjectStateWalk.h" />
     <ClInclude Include="PushBoardObject.h" />
