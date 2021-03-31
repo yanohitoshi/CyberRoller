@@ -115,6 +115,7 @@ public:
 	bool GetRunFlag() { return runFlag; }
 	bool GetDeadFlag() { return deadFlag; };
 	bool GetRespawnFlag() { return respawnFlag; };
+	bool GetIsAvailableInput() { return isAvailableInput; };
 
 
 	const float GetFirstJumpPower() { return FirstJumpPower; }
@@ -126,7 +127,7 @@ public:
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
 	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
 	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
-	void SetrespownPos(Vector3 _respownPos) { velocity = _respownPos; }
+	void SetRespownPos(Vector3 _respownPos) { velocity = _respownPos; }
 
 
 	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
@@ -139,6 +140,7 @@ public:
 	void SetJumpFrameCount(bool _jumpFrameCount) { jumpFrameCount = _jumpFrameCount; }
 	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
 	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
+	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
 
 	static const float GetGravity() { return Gravity; }
 

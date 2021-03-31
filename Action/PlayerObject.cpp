@@ -124,7 +124,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND)] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
@@ -228,6 +228,18 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 void PlayerObject::GameObjectInput(const InputState& _keyState)
 {
+
+	// スタート時のカウントダウンが終わったら入力可能状態にする
+	if (CountDownFont::countStartFlag == true)
+	{
+		isAvailableInput = true;
+	}
+	else if (CountDownFont::countStartFlag == false || CountDownFont::timeOverFlag == true)
+	{
+		// カウントダウンが終わっていないまたはタイムオーバーになったら入力を切る
+		isAvailableInput = false;
+	}
+
 	//今カメラが向いている方向をplayerに渡す
 	forwardVec = mainCamera->GetCameraVec();
 
@@ -237,6 +249,45 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
+	if (CountDownFont::timeOverFlag == true)
+	{
+		isAvailableInput = false;
+		velocity.x = 0.0f;
+		velocity.y = 0.0f;
+		downFlag = true;
+
+		if (downUpFlag == false && downOverFlag == false)
+		{
+			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+				_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
+			{
+				downUpFlag = true;
+			}
+			else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+				_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
+			{
+				downOverFlag = true;
+			}
+		}
+	}
+
+	chackJumpFlag = jumpFlag;
+	chackIsJumping = isJumping;
+
+
+	// 一定時間入力が無かったらタイトルに戻る
+	if (inputFlag == false && jumpFlag == false)
+	{
+		++reStartCount;
+		if (reStartCount >= 10000)
+		{
+			reStartFlag = true;
+		}
+	}
+	else
+	{
+		reStartCount = 0;
+	}
 	//// ステート外部からステート変更があったか？
 	//if (nowState != nextState)
 	//{
@@ -257,16 +308,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	//tmpAnimState = animState;
 
 
-	//// スタート時のカウントダウンが終わったら入力可能状態にする
-	//if (CountDownFont::countStartFlag == true)
-	//{
-	//	isAvailableInput = true;
-	//}
-	//else if (CountDownFont::countStartFlag == false || CountDownFont::timeOverFlag == true)
-	//{
-	//	// カウントダウンが終わっていないまたはタイムオーバーになったら入力を切る
-	//	isAvailableInput = false;
-	//}
 
 	//// クリア状態でなく入力可能状態でタイムオーバーでも死んでもいなければ入力処理を行う
 	//if (clearFlag == false && isAvailableInput == true && 
@@ -532,30 +573,7 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	//}
 
-	//if (CountDownFont::timeOverFlag == true)
-	//{
-	//	isAvailableInput = false;
-	//	velocity.x = 0.0f;
-	//	velocity.y = 0.0f;
-	//	downFlag = true;
 
-	//	if (downUpFlag == false && downOverFlag == false)
-	//	{
-	//		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-	//			_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
-	//		{
-	//			downUpFlag = true;
-	//		}
-	//		else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-	//				 _keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
-	//			 {
-	//				downOverFlag = true;
-	//			 }
-	//	}
-	//}
-
-	chackJumpFlag = jumpFlag;
-	chackIsJumping = isJumping;
 
 	//if (deadFlag == true)
 	//{
@@ -582,19 +600,7 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	//	}
 	//}
 
-	//// 一定時間入力が無かったらタイトルに戻る
-	//if (inputFlag == false && jumpFlag == false)
-	//{
-	//	++reStartCount;
-	//	if (reStartCount >= 10000)
-	//	{
-	//		reStartFlag = true;
-	//	}
-	//}
-	//else
-	//{
-	//	reStartCount = 0;
-	//}
+
 
 }
 

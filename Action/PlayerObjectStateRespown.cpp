@@ -11,7 +11,10 @@ PlayerObjectStateRespown::~PlayerObjectStateRespown()
 
 PlayerState PlayerObjectStateRespown::Update(PlayerObject* _owner, float _deltaTime)
 {
-	// リスポーン演出入れてもいいかも
+	//// リスポーン演出入れてもいいかも
+
+	_owner->SetRespawnFlag(false);
+	_owner->SetIsAvailableInput(true);
 
 	state = PlayerState::PLAYER_STATE_IDLE;
 
@@ -28,4 +31,5 @@ void PlayerObjectStateRespown::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
 	state = PlayerState::PLAYER_STATE_RESPAWN;
 	velocity = _owner->GetVelocity();
+
 }

@@ -18,7 +18,7 @@ enum class PlayerState
 	// ジャンプ終了
 	PLAYER_STATE_JUMPEND,
 	// コンテニュー選択状態に入る前の状態
-	PLAYER_STATE_DOWN,
+	PLAYER_STATE_DOWNSTART,
 	// コンテニュー選択状態
 	PLAYER_STATE_DOWN_LOOP,
 	// コンテニュー状態

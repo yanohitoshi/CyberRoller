@@ -11,6 +11,7 @@ PlayerObjectStateJumpEnd::~PlayerObjectStateJumpEnd()
 
 PlayerState PlayerObjectStateJumpEnd::Update(PlayerObject* _owner, float _deltaTime)
 {
+	_owner->SetVelocity(velocity);
 
 	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 

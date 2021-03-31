@@ -42,6 +42,6 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 	velocity = _owner->GetVelocity();
 	velocity.x = 0.0f;
 	velocity.y = 0.0f;
-
 	reSpawnCount = 0;
+	_owner->SetIsAvailableInput(false);
 }
