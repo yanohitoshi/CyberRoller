@@ -43,6 +43,7 @@ public:
 
 private:
 
+	float move;
 	int jumpFrameCount;
 	bool endFlag;
 	SkeletalMeshComponent* skeletalMeshComponent;

@@ -1,5 +1,6 @@
 #include "PlayerObjectStateJumpEnd.h"
 #include "SkeletalMeshComponent.h"
+#include "CountDownFont.h"
 
 PlayerObjectStateJumpEnd::PlayerObjectStateJumpEnd()
 {
@@ -33,6 +34,11 @@ PlayerState PlayerObjectStateJumpEnd::Update(PlayerObject* _owner, float _deltaT
 	if (_owner->GetDeadFlag())
 	{
 		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	if (CountDownFont::timeOverFlag == true)
+	{
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
 	return state;
@@ -70,5 +76,6 @@ void PlayerObjectStateJumpEnd::Enter(PlayerObject* _owner, float _deltaTime)
 	state = PlayerState::PLAYER_STATE_JUMPEND;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
+	//_owner->SetMoveSpeed(_owner->GetFirstMovePower());
 	endFlag = false;
 }

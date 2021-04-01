@@ -38,7 +38,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	: GameObject(_reUseGameObject, _objectTag)
 	,playerBox({ Vector3::Zero,Vector3::Zero })
 	, FirstJumpPower(1200.0f)
-	,moveSpeed(600.0f)
+	,moveSpeed(0.0f)
+	,movePower(100.0f)
+	,FirstMovePower(200.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -184,6 +186,7 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
+
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
 	{
@@ -249,27 +252,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
-	if (CountDownFont::timeOverFlag == true)
-	{
-		isAvailableInput = false;
-		velocity.x = 0.0f;
-		velocity.y = 0.0f;
-		downFlag = true;
-
-		if (downUpFlag == false && downOverFlag == false)
-		{
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-				_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
-			{
-				downUpFlag = true;
-			}
-			else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-				_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
-			{
-				downOverFlag = true;
-			}
-		}
-	}
 
 	chackJumpFlag = jumpFlag;
 	chackIsJumping = isJumping;
@@ -288,6 +270,29 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	{
 		reStartCount = 0;
 	}
+
+	//if (CountDownFont::timeOverFlag == true)
+	//{
+	//	isAvailableInput = false;
+	//	velocity.x = 0.0f;
+	//	velocity.y = 0.0f;
+	//	downFlag = true;
+
+	//	if (downUpFlag == false && downOverFlag == false)
+	//	{
+	//		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+	//			_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
+	//		{
+	//			downUpFlag = true;
+	//		}
+	//		else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+	//			_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
+	//		{
+	//			downOverFlag = true;
+	//		}
+	//	}
+	//}
+
 	//// ステート外部からステート変更があったか？
 	//if (nowState != nextState)
 	//{
@@ -903,12 +908,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		}
 
 		switchJumpFlag = false;
-
-		//if (animState == JUMPLOOP)
-		//{
-		//	skeltalMeshComponent->PlayAnimation(animTypes[JUMPEND], 1.0f);
-		//	animState = JUMPEND;
-		//}
 
 	}
 

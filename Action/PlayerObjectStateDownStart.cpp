@@ -10,6 +10,11 @@ PlayerObjectStateDownStart::~PlayerObjectStateDownStart()
 
 PlayerState PlayerObjectStateDownStart::Update(PlayerObject* _owner, float _deltaTime)
 {
+	if (!skeletalMeshComponent->IsPlaying())
+	{
+		state = PlayerState::PLAYER_STATE_DOWN_LOOP;
+	}
+
 	return state;
 }
 
@@ -19,7 +24,7 @@ void PlayerObjectStateDownStart::Input(PlayerObject* _owner, const InputState& _
 
 void PlayerObjectStateDownStart::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
-	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DOWN));
-	state = PlayerState::PLAYER_STATE_DOWN;
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DOWNSTART));
+	state = PlayerState::PLAYER_STATE_DOWNSTART;
 }

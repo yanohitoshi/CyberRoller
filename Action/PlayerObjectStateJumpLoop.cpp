@@ -1,5 +1,6 @@
 #include "PlayerObjectStateJumpLoop.h"
 #include "SkeletalMeshComponent.h"
+#include "CountDownFont.h"
 
 PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
 {
@@ -11,7 +12,16 @@ PlayerObjectStateJumpLoop::~PlayerObjectStateJumpLoop()
 
 PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
-	_owner->SetVelocity(velocity);
+
+	//if (!_owner->GetInputFlag())
+	//{
+	//	move -= 100.0f;
+	//	if (move <= 0.0f)
+	//	{
+	//		move = 0.0f;
+	//	}
+	//}
+
 	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 
 	if (velocity.z <= -2000.0f)
@@ -29,6 +39,8 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 
 	if (_owner->GetOnGround() == true)
 	{
+		_owner->SetVelocity(velocity);
+		_owner->SetMoveSpeed(move);
 		state = PlayerState::PLAYER_STATE_JUMPEND;
 	}
 
@@ -36,6 +48,12 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 	{
 		state = PlayerState::PLAYER_STATE_DEAD;
 	}
+
+	if (CountDownFont::timeOverFlag == true)
+	{
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
+	}
+
 	return state;
 }
 
@@ -59,13 +77,19 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
-			// charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
 			_owner->SetCharaForwardVec(forward);
 
-			velocity.x = _owner->GetCharaForwardVec().x * _owner->GetMoveSpeed() * 2.0f;
-			velocity.y = _owner->GetCharaForwardVec().y * _owner->GetMoveSpeed() * 2.0f;
+			move += _owner->GetMovePower();
+
+			if (move >= 1600.0f)
+			{
+				move = 1600.0f;
+			}
+
+			velocity.x = _owner->GetCharaForwardVec().x * move;
+			velocity.y = _owner->GetCharaForwardVec().y * move;
 
 
 			if (_owner->GetTmpCharaForwardVec() != _owner->GetCharaForwardVec())
@@ -83,7 +107,6 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		}
 	}
 
-
 }
 
 void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
@@ -93,8 +116,16 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	animChangeFlag = true;
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	velocity = _owner->GetVelocity();
+
 	if (_owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART)
 	{
 		velocity.z = _owner->GetJumpPower();
 	}
+
+	move = _owner->GetMoveSpeed();
+	if (move <= 0.0f)
+	{
+		move = _owner->GetFirstMovePower();
+	}
+
 }

@@ -104,7 +104,8 @@ public:
 	Vector3 GetVelocity() { return velocity; }
 	Vector3 GetRespownPos() { return respownPos; }
 
-
+	const float GetFirstMovePower() { return FirstMovePower; }
+	const float GetMovePower() { return movePower; }
 	float GetMoveSpeed() { return moveSpeed; }
 	bool GetOnGround() { return onGround; }
 	bool GetJumpFlag() { return jumpFlag; }
@@ -141,6 +142,8 @@ public:
 	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
 	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
+	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
+
 
 	static const float GetGravity() { return Gravity; }
 
@@ -179,7 +182,9 @@ private:
 	//-----------------------------------------//
 
 	//速度の定数
-	const float moveSpeed;
+	const float movePower;
+	const float FirstMovePower;
+	float moveSpeed;
 	//入力があったかどうか判定するためのフラグ
 	bool inputFlag = false;
 	//右方向ベクトル
@@ -234,6 +239,8 @@ private:
 	static bool nextSceneFlag;
 	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
 	static bool reStartFlag;
+
+
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
 	static bool chackJumpFlag;

@@ -66,8 +66,9 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//入力があるか
-		if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
+		if (Math::Abs(axis.x) > 0.1f || Math::Abs(axis.y) > 0.1f)
 		{
+
 			_owner->SetInputFlag(true);
 			//アナログスティックの入力状態で歩きか走りかを判定
 			if (ALX >= 28000.0f || ALX <= -28000.0f || ALY >= 28000.0f || ALY <= -28000.0f)
@@ -100,6 +101,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 		}
 	}
 
+
 }
 
 void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
@@ -107,4 +109,6 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
 	state = PlayerState::PLAYER_STATE_IDLE;
+	_owner->SetMoveSpeed(_owner->GetFirstMovePower());
+	
 }
