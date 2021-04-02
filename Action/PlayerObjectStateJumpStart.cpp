@@ -45,7 +45,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		_owner->SetMoveSpeed(move);
 		_owner->SetVelocity(velocity);
 
-		state = PlayerState::PLAYER_STATE_JUMPEND;
+		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
 	if (_owner->GetDeadFlag())

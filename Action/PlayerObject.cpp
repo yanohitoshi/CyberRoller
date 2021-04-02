@@ -17,7 +17,8 @@
 #include "PlayerObjectStateRun.h"
 #include "PlayerObjectStateWalk.h"
 #include "PlayerObjectStateDead.h"
-#include "PlayerObjectStateJumpEnd.h"
+#include "PlayerObjectStateJumpEndToIdle.h"
+#include "PlayerObjectStateJunpEndToRun.h"
 #include "PlayerObjectStateJumpLoop.h"
 #include "PlayerObjectStateJumpStart.h"
 #include "PlayerObjectStateDownLoop.h"
@@ -25,6 +26,10 @@
 #include "PlayerObjectStateDownStart.h"
 #include "PlayerObjectStateDownUp.h"
 #include "PlayerObjectStateRespown.h"
+#include "PlayerObjectStateRunStart.h"
+#include "PlayerObjectStateRunStop.h"
+#include "PlayerObjectStateRunTurn.h"
+#include "PlayerObjectStateIdlingDance.h"
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
@@ -117,19 +122,40 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
-	animTypes.resize(static_cast<unsigned int>(AnimState::ITEMNUM));
+	animTypes.resize(static_cast<unsigned int>(PlayerState::PLAYER_STATE_NUM));
 
-	//アニメーションを読み込み
+	//-----------アニメーションを読み込み-----------------//
+	// アイドリングアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
+	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Tut_Hip_Hop_Dance.gpanim", true);
+	// 歩きアニメーション（無くすかも）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_WALK)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
+	// 走りアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
+	// 走りだしアニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", true);
+	// 走り終わりアニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", true);
+	// 走り中の切り替えしアニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running_Turn.gpanim", true);
+	// ジャンプループアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
+	// ジャンプ開始アニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND)] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
+	// 次の状態が待機の時の着地アニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
+	// 次の状態が走りの時の着地アニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Falling_To_Roll.gpanim", false);
+	// タイムオーバー時のアニメーション（start）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
+	// タイムオーバー時のアニメーション（loop）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
+	// タイムオーバー時のアニメーション（コンティニュー）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
+	// タイムオーバー時のアニメーション（ゲームオーバー）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
+	// 死亡時のアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
 
 	//anim変数を速度1.0fで再生
@@ -157,11 +183,16 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new PlayerObjectStateIdle);
+	statePools.push_back(new PlayerObjectStateIdlingDance);
 	statePools.push_back(new PlayerObjectStateWalk);
 	statePools.push_back(new PlayerObjectStateRun);
+	statePools.push_back(new PlayerObjectStateRunStart);
+	statePools.push_back(new PlayerObjectStateRunStop);
+	statePools.push_back(new PlayerObjectStateRunTurn);
 	statePools.push_back(new PlayerObjectStateJumpLoop);
 	statePools.push_back(new PlayerObjectStateJumpStart);
-	statePools.push_back(new PlayerObjectStateJumpEnd);
+	statePools.push_back(new PlayerObjectStateJumpEndToIdle);
+	statePools.push_back(new PlayerObjectStateJunpEndToRun);
 	statePools.push_back(new PlayerObjectStateDownStart);
 	statePools.push_back(new PlayerObjectStateDownLoop);
 	statePools.push_back(new PlayerObjectStateDownUp);

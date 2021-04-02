@@ -33,7 +33,7 @@ public:
 	void Input(PlayerObject* _owner,const InputState& _keyState)override;
 
 	/*
-	@fn コンストラクタ
+	@fn state変更時の初期化
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/

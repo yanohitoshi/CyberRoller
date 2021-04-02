@@ -7,16 +7,26 @@ enum class PlayerState
 {
 	// 待機
 	PLAYER_STATE_IDLE = 0,
+	// 一定以上入力がなかった際の待機モーション
+	PLAYER_STATE_IDLE_DANCE,
 	// ジャンプ終了
 	PLAYER_STATE_WALK,
 	// 走る
 	PLAYER_STATE_RUN,
+	// 走り状態開始
+	PLAYER_STATE_RUN_START,
+	// 走り状態停止
+	PLAYER_STATE_RUN_STOP,
+	// 走り状態から振り返り
+	PLAYER_STATE_RUN_TURN,
 	// ジャンプループ
 	PLAYER_STATE_JUMPLOOP, 
 	// ジャンプスタート
 	PLAYER_STATE_JUMPSTART,
-	// ジャンプ終了
-	PLAYER_STATE_JUMPEND,
+	// ジャンプ終了から待機状態へ遷移
+	PLAYER_STATE_JUMPEND_TO_IDLE,
+	// ジャンプ終了から走り状態へ遷移
+	PLAYER_STATE_JUMPEND_TO_RUN,
 	// コンテニュー選択状態に入る前の状態
 	PLAYER_STATE_DOWNSTART,
 	// コンテニュー選択状態
@@ -65,7 +75,7 @@ public:
 	virtual void Input(PlayerObject* _owner, const InputState& _keyState) {};
 	
 	/*
-	@fn コンストラクタ
+	@fn state変更時の初期化
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/

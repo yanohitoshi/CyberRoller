@@ -321,41 +321,56 @@
     <ClCompile Include="TitleSceneUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObjectStateIdle.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerObjectStateRun.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerObjectStateJumpEnd.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerObjectStateJumpLoop.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerObjectStateJumpStart.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObjectStateWalk.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObjectStateDead.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+    <ClCompile Include="PlayerObjectStateJumpEndToIdle.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpLoop.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJunpEndToRun.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateDownLoop.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateDownOver.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateDownStart.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateDownUp.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateIdle.cpp">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateIdlingDance.cpp">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDead.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateRespown.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRun.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunStop.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunTurn.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -687,41 +702,56 @@
     <ClInclude Include="PlayerObjectStateBase.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObjectStateIdle.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerObjectStateRun.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerObjectStateJumpEnd.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerObjectStateJumpLoop.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerObjectStateJumpStart.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerObjectStateWalk.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObjectStateDead.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+    <ClInclude Include="PlayerObjectStateJumpEndToIdle.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpLoop.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpStart.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJunpEndToRun.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateDownLoop.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateDownOver.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateDownStart.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateDownUp.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateIdle.h">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateIdlingDance.h">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDead.h">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateRespown.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRun.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunStart.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunStop.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunTurn.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -826,6 +856,21 @@
     </Filter>
     <Filter Include="GameObjects\PlayerObjects\State">
       <UniqueIdentifier>{ec42b851-463a-4355-8d38-ee8518a0f40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\JumpState">
+      <UniqueIdentifier>{989395e2-a301-4f98-8084-f15c7ae69de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\DownState">
+      <UniqueIdentifier>{8aa8a2bb-4495-49bb-8909-0fbfffdd91ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\IdleState">
+      <UniqueIdentifier>{9d4b679f-0d6b-48c9-a34c-b70a5bdfdfb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\DeadState">
+      <UniqueIdentifier>{8aa78689-c0d8-43ee-b7e1-d47c05ef74ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\RunState">
+      <UniqueIdentifier>{2df9d01b-cd9f-48e8-9dda-dae01d1b7c92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
