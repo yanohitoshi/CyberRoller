@@ -42,5 +42,6 @@ public:
 private:
 
 	float move;
+	bool isTurn;
 };
 

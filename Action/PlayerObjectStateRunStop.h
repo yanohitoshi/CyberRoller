@@ -1,5 +1,8 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
+
+class SkeletalMeshComponent;
+
 class PlayerObjectStateRunStop :
     public PlayerObjectStateBase
 {

@@ -134,11 +134,11 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 走りアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
 	// 走りだしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", false);
 	// 走り終わりアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running_Turn.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running_Turn.gpanim", false);
 	// ジャンプループアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	// ジャンプ開始アニメーション

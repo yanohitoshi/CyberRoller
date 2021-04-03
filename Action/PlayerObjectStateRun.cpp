@@ -14,7 +14,6 @@ PlayerObjectStateRun::~PlayerObjectStateRun()
 PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 {
 
-	_owner->SetVelocity(velocity);
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
@@ -30,7 +29,7 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 		if (move <= 0.0f)
 		{
 			move = 0.0f;
-			state = PlayerState::PLAYER_STATE_IDLE;
+			state = PlayerState::PLAYER_STATE_RUN_STOP;
 		}
 	}
 
@@ -48,6 +47,13 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	{
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
+
+	//if (isTurn)
+	//{
+	//	state = PlayerState::PLAYER_STATE_RUN_TURN;
+	//}
+
+	_owner->SetVelocity(velocity);
 
 	return state;
 
@@ -70,7 +76,7 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//入力があるか
-		if (Math::Abs(axis.x) > 0.1f || Math::Abs(axis.y) > 0.1f)
+		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 
@@ -78,6 +84,7 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
 			_owner->SetCharaForwardVec(forward);
+
 
 			move += _owner->GetMovePower();
 
@@ -123,6 +130,20 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 
 		_owner->SetMoveSpeed(move);
 
+//		if (tmpVelocity.x > 0.0f && velocity.x < 0.0f ||
+//			tmpVelocity.x < 0.0f && velocity.x > 0.0f //|| 
+///*			tmpVelocity.y > 0.0f && velocity.y < 0.0f ||
+//			tmpVelocity.y < 0.0f && velocity.y > 0.0f */)
+//		{
+//			isTurn = true;
+//		}
+//		else
+//		{
+//			isTurn = false;
+//		}
+		
+
+
 	}
 
 }
@@ -133,8 +154,7 @@ void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN));
 	state = PlayerState::PLAYER_STATE_RUN;
 	move = _owner->GetMoveSpeed();
-	if (move <= 0.0f)
-	{
-		move = _owner->GetFirstMovePower();
-	}
+
+	isTurn = false;
+
 }

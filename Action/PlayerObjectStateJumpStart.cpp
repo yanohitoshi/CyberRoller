@@ -20,15 +20,6 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		velocity.z = -2000.0f;
 	}
 
-	//if (!_owner->GetInputFlag())
-	//{
-	//	move -= 100.0f;
-	//	if (move <= 0.0f)
-	//	{
-	//		move = 0.0f;
-	//	}
-	//}
-
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 
@@ -79,7 +70,7 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		////入力があるか
-		if (Math::Abs(axis.x) > 0.1f || Math::Abs(axis.y) > 0.1f)
+		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 			// 方向キーの入力値とカメラの向きから、移動方向を決定

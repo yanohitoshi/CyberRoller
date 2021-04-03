@@ -13,15 +13,6 @@ PlayerObjectStateJumpLoop::~PlayerObjectStateJumpLoop()
 PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
 
-	//if (!_owner->GetInputFlag())
-	//{
-	//	move -= 100.0f;
-	//	if (move <= 0.0f)
-	//	{
-	//		move = 0.0f;
-	//	}
-	//}
-
 	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 
 	if (velocity.z <= -2000.0f)
@@ -37,10 +28,12 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		animChangeFlag = false;
 	}
 
-	if (_owner->GetOnGround() == true)
+	if (_owner->GetOnGround() == true && _owner->GetInputFlag())
 	{
-		_owner->SetVelocity(velocity);
-		_owner->SetMoveSpeed(move);
+		state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
+	}
+	else if (_owner->GetOnGround() == true)
+	{
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
@@ -53,6 +46,9 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 	{
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
+
+	_owner->SetVelocity(velocity);
+	_owner->SetMoveSpeed(move);
 
 	return state;
 }
@@ -73,7 +69,7 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//入力があるか
-		if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
+		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 			// 方向キーの入力値とカメラの向きから、移動方向を決定

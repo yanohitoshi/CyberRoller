@@ -12,7 +12,9 @@ PlayerObjectStateJumpEndToIdle::~PlayerObjectStateJumpEndToIdle()
 
 PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
-	_owner->SetVelocity(velocity);
+
+	// positionに速度を足してキャラクターを動かす
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 
@@ -28,7 +30,7 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 
 	if (_owner->GetInputFlag())
 	{
-		state = PlayerState::PLAYER_STATE_RUN;
+		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
 
 	if (_owner->GetDeadFlag())
@@ -40,6 +42,8 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 	{
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
+
+	_owner->SetVelocity(velocity);
 
 	return state;
 }
@@ -58,7 +62,7 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 	Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 	//入力があるか
-	if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
+	if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
 	{
 		_owner->SetInputFlag(true);
 	}
@@ -76,6 +80,5 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
-	//_owner->SetMoveSpeed(_owner->GetFirstMovePower());
 	endFlag = false;
 }

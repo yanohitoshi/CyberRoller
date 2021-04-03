@@ -25,11 +25,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	{
 		if (_owner->GetRunFlag())
 		{
-			state = PlayerState::PLAYER_STATE_RUN;
-		}
-		else if (_owner->GetRunFlag())
-		{
-			state = PlayerState::PLAYER_STATE_WALK;
+			state = PlayerState::PLAYER_STATE_RUN_START;
 		}
 	}
 	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
@@ -66,7 +62,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//“ü—Í‚ª‚ ‚é‚©
-		if (Math::Abs(axis.x) > 0.1f || Math::Abs(axis.y) > 0.1f)
+		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
 		{
 
 			_owner->SetInputFlag(true);

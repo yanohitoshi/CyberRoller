@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
+
 class PlayerObjectStateRunTurn :
     public PlayerObjectStateBase
 {
@@ -41,5 +42,6 @@ public:
 private:
 
 	float move;
+
 };
 

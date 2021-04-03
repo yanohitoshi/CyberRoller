@@ -46,6 +46,6 @@ private:
 	float move;
 	int jumpFrameCount;
 	bool animChangeFlag;
-	SkeletalMeshComponent* skeletalMeshComponent;
+
 };
 

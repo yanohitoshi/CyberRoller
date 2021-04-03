@@ -2,6 +2,7 @@
 #include "PlayerObject.h"
 
 class PlayerObject;
+class SkeletalMeshComponent;
 
 enum class PlayerState
 {
@@ -83,7 +84,7 @@ public:
 
 protected:
 
-	//PlayerObject* owner;
+	SkeletalMeshComponent* skeletalMeshComponent;
 	PlayerState state;
 	Vector3 velocity;
 

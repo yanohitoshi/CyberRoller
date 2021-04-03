@@ -42,5 +42,6 @@ private:
 
 	bool isContinue;
 	bool isInput;
+
 };
 

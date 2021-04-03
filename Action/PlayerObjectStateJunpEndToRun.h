@@ -1,5 +1,8 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
+
+class SkeletalMeshComponent;
+
 class PlayerObjectStateJunpEndToRun :
     public PlayerObjectStateBase
 {
@@ -40,6 +43,8 @@ public:
 
 private:
 
+	float move;
 	bool endFlag;
+
 };
 
