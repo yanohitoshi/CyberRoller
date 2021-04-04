@@ -10,8 +10,6 @@ enum class PlayerState
 	PLAYER_STATE_IDLE = 0,
 	// 一定以上入力がなかった際の待機モーション
 	PLAYER_STATE_IDLE_DANCE,
-	// ジャンプ終了
-	PLAYER_STATE_WALK,
 	// 走る
 	PLAYER_STATE_RUN,
 	// 走り状態開始
@@ -87,6 +85,6 @@ protected:
 	SkeletalMeshComponent* skeletalMeshComponent;
 	PlayerState state;
 	Vector3 velocity;
-
+	float inputDeadSpace;
 };
 

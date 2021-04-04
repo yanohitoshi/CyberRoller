@@ -69,7 +69,7 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//入力があるか
-		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
@@ -124,4 +124,5 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 		move = _owner->GetFirstMovePower();
 	}
 
+	inputDeadSpace = _owner->GetDeadSpace();
 }

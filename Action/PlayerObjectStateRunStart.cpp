@@ -25,6 +25,11 @@ PlayerState PlayerObjectStateRunStart::Update(PlayerObject* _owner, float _delta
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	if (!_owner->GetInputFlag())
+	{
+		state = PlayerState::PLAYER_STATE_RUN_STOP;
+	}
+
 	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -62,7 +67,7 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//“ü—Í‚ª‚ ‚é‚©
-		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 
@@ -73,9 +78,9 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1600.0f)
+			if (move >= 1200.0f)
 			{
-				move = 1600.0f;
+				move = 1200.0f;
 			}
 
 			velocity.x = _owner->GetCharaForwardVec().x * move;
@@ -122,4 +127,6 @@ void PlayerObjectStateRunStart::Enter(PlayerObject* _owner, float _deltaTime)
 	{
 		move = _owner->GetFirstMovePower();
 	}
+
+	inputDeadSpace = _owner->GetDeadSpace();
 }

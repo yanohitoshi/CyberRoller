@@ -104,6 +104,7 @@ public:
 	Vector3 GetVelocity() { return velocity; }
 	Vector3 GetRespownPos() { return respownPos; }
 
+	const float GetDeadSpace() { return DeadSpace; }
 	const float GetFirstMovePower() { return FirstMovePower; }
 	const float GetMovePower() { return movePower; }
 	float GetMoveSpeed() { return moveSpeed; }
@@ -180,6 +181,8 @@ private:
 	//Ø‚è‘Ö‚í‚Á‚½‚©‚ğ”»’f‚·‚é‚½‚ß‚Ì•Ï”
 	int tmpAnimState;
 	//-----------------------------------------//
+
+	const float DeadSpace;
 
 	//‘¬“x‚Ì’è”
 	const float movePower;

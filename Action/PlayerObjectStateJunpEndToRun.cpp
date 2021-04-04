@@ -37,6 +37,8 @@ PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _d
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	_owner->SetMoveSpeed(move);
+
 	return state;
 }
 
@@ -56,7 +58,7 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//“ü—Í‚ª‚ ‚é‚©
-		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 
@@ -87,9 +89,6 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 				_owner->SetRotateVec(rotatioin);
 
 			}
-
-			//_owner->SetMoveSpeed(move);
-
 		}
 		else
 		{
@@ -106,9 +105,6 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 			//isJumping = true;
 			_owner->SetIsJumping(true);
 		}
-
-		_owner->SetMoveSpeed(move);
-
 	}
 }
 
@@ -119,6 +115,11 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
-	//velocity = _owner->GetVelocity();
+	move = _owner->GetMoveSpeed();
+	velocity = _owner->GetVelocity();
+	velocity.z = 0.0f;
+	inputDeadSpace = _owner->GetDeadSpace();
 	endFlag = false;
+
+
 }

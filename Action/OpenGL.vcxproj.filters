@@ -321,9 +321,6 @@
     <ClCompile Include="TitleSceneUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObjectStateWalk.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObjectStateJumpEndToIdle.cpp">
       <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
     </ClCompile>
@@ -700,9 +697,6 @@
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateBase.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerObjectStateWalk.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateJumpEndToIdle.h">

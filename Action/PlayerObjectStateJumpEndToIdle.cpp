@@ -62,7 +62,7 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 	Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 	//“ü—Í‚ª‚ ‚é‚©
-	if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 	{
 		_owner->SetInputFlag(true);
 	}
@@ -81,4 +81,6 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
 	endFlag = false;
+
+	inputDeadSpace = _owner->GetDeadSpace();
 }

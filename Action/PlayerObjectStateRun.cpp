@@ -24,13 +24,7 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 
 	if (!_owner->GetInputFlag())
 	{
-		move -= 100.0f;
-		
-		if (move <= 0.0f)
-		{
-			move = 0.0f;
-			state = PlayerState::PLAYER_STATE_RUN_STOP;
-		}
+		state = PlayerState::PLAYER_STATE_RUN_STOP;
 	}
 
 	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
@@ -48,11 +42,8 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
-	//if (isTurn)
-	//{
-	//	state = PlayerState::PLAYER_STATE_RUN_TURN;
-	//}
 
+	_owner->SetMoveSpeed(move);
 	_owner->SetVelocity(velocity);
 
 	return state;
@@ -75,8 +66,10 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 		//ŽÀÛ‚É“®‚©‚µ‚½‚¢Ž²‚ª‚¸‚ê‚Ä‚¢‚é‚Ì‚Å•â³
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
+		printf("x:%f,y:%f\n", axis.x, axis.y);
+
 		//“ü—Í‚ª‚ ‚é‚©
-		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
 
@@ -128,22 +121,6 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 			_owner->SetIsJumping(true);
 		}
 
-		_owner->SetMoveSpeed(move);
-
-//		if (tmpVelocity.x > 0.0f && velocity.x < 0.0f ||
-//			tmpVelocity.x < 0.0f && velocity.x > 0.0f //|| 
-///*			tmpVelocity.y > 0.0f && velocity.y < 0.0f ||
-//			tmpVelocity.y < 0.0f && velocity.y > 0.0f */)
-//		{
-//			isTurn = true;
-//		}
-//		else
-//		{
-//			isTurn = false;
-//		}
-		
-
-
 	}
 
 }
@@ -155,6 +132,5 @@ void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 	state = PlayerState::PLAYER_STATE_RUN;
 	move = _owner->GetMoveSpeed();
 
-	isTurn = false;
-
+	inputDeadSpace = _owner->GetDeadSpace();
 }

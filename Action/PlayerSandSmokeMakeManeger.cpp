@@ -18,8 +18,8 @@ PlayerSandSmokeMakeManeger::~PlayerSandSmokeMakeManeger()
 
 void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 {
-	if (owner->GetVelocity().x != 0 && owner->GetVelocity().z == 0 
-		|| owner->GetVelocity().y != 0 && owner->GetVelocity().z == 0)
+	if (owner->GetVelocity().x != 0.0f && owner->GetVelocity().z == 0.0f || 
+		owner->GetVelocity().y != 0.0f && owner->GetVelocity().z == 0.0f)
 	{
 		particleState = ParticleState::PARTICLE_ACTIVE;
 	}

@@ -15,7 +15,6 @@
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
-#include "PlayerObjectStateWalk.h"
 #include "PlayerObjectStateDead.h"
 #include "PlayerObjectStateJumpEndToIdle.h"
 #include "PlayerObjectStateJunpEndToRun.h"
@@ -41,11 +40,12 @@ bool PlayerObject::chackIsJumping = false;
 
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
-	,playerBox({ Vector3::Zero,Vector3::Zero })
+	, playerBox({ Vector3::Zero,Vector3::Zero })
 	, FirstJumpPower(1200.0f)
-	,moveSpeed(0.0f)
-	,movePower(100.0f)
-	,FirstMovePower(200.0f)
+	, moveSpeed(0.0f)
+	, movePower(80.0f)
+	, FirstMovePower(200.0f)
+	, DeadSpace(0.2f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -129,8 +129,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
 	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Tut_Hip_Hop_Dance.gpanim", true);
-	// 歩きアニメーション（無くすかも）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_WALK)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
 	// 走りアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
 	// 走りだしアニメーション
@@ -138,7 +136,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 走り終わりアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running_Turn.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Change_Direction.gpanim", false);
 	// ジャンプループアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	// ジャンプ開始アニメーション
@@ -184,7 +182,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new PlayerObjectStateIdle);
 	statePools.push_back(new PlayerObjectStateIdlingDance);
-	statePools.push_back(new PlayerObjectStateWalk);
 	statePools.push_back(new PlayerObjectStateRun);
 	statePools.push_back(new PlayerObjectStateRunStart);
 	statePools.push_back(new PlayerObjectStateRunStop);
@@ -301,341 +298,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	{
 		reStartCount = 0;
 	}
-
-	//if (CountDownFont::timeOverFlag == true)
-	//{
-	//	isAvailableInput = false;
-	//	velocity.x = 0.0f;
-	//	velocity.y = 0.0f;
-	//	downFlag = true;
-
-	//	if (downUpFlag == false && downOverFlag == false)
-	//	{
-	//		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-	//			_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
-	//		{
-	//			downUpFlag = true;
-	//		}
-	//		else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-	//			_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
-	//		{
-	//			downOverFlag = true;
-	//		}
-	//	}
-	//}
-
-	//// ステート外部からステート変更があったか？
-	//if (nowState != nextState)
-	//{
-	//	statePools[static_cast<unsigned int>(nextState)]->Enter(this, _keyState);
-	//	nowState = nextState;
-	//	return;
-	//}
-
-
-	//// ステート内部からステート変更あったか？
-	//if (nowState != nextState)
-	//{
-	//	statePools[static_cast<unsigned int>(nextState)]->Enter(this, _keyState);
-	//	nowState = nextState;
-	//}
-
-	////前のフレームと今のフレームを比較するために保存
-	//tmpAnimState = animState;
-
-
-
-	//// クリア状態でなく入力可能状態でタイムオーバーでも死んでもいなければ入力処理を行う
-	//if (clearFlag == false && isAvailableInput == true && 
-	//	CountDownFont::timeOverFlag == false && deadFlag == false)
-	//{
-	//	// コントローラーが接続されていなければ
-	//	if (InputSystem::GetConnectedController() == 0)
-	//	{
-	//		Vector3 dirVec = Vector3(0.0f, 0.0f, 0.0f);
-	//		// Wで前進
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	//		{
-	//			dirVec += forwardVec;
-	//			inputFlag = true;
-	//		}
-	//		// Sで後退
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	//		{
-	//			dirVec -= forwardVec;
-	//			inputFlag = true;
-	//		}
-	//		// Dで右移動
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
-	//		{
-	//			dirVec -= rightVec;
-	//			inputFlag = true;
-	//		}
-	//		// Aで左移動
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
-	//		{
-	//			dirVec += rightVec;
-	//			inputFlag = true;
-	//		}
-
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 &&
-	//			_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_S) == 0 &&
-	//			_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 &&
-	//			_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_D) == 0 )
-	//		{
-	//			inputFlag = false;
-	//		}
-
-	//		// 左右シフトキーどちらか入力で走る
-	//		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_LSHIFT) == 1 ||
-	//			_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_RSHIFT) == 1)
-	//		{
-	//			runFlag = true;
-	//		}
-	//		else
-	//		{
-	//			runFlag = false;
-	//		}
-
-	//		charaForwardVec = dirVec;
-
-	//		//入力があったら速度にキャラクターの方向と動くスピードを掛けたものを代入
-	//		//ここでzに速度を足すとジャンプに影響するのでx,yのみに代入
-	//		//入力がない間は速度を0に
-	//		if (inputFlag == true)
-	//		{
-	//			velocity.x = charaForwardVec.x * moveSpeed;
-	//			velocity.y = charaForwardVec.y * moveSpeed;
-
-	//			if (runFlag == true)
-	//			{
-	//				velocity.x = charaForwardVec.x * moveSpeed * 2.0f;
-	//				velocity.y = charaForwardVec.y * moveSpeed * 2.0f;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			velocity.x = 0.0f;
-	//			velocity.y = 0.0f;
-	//		}
-
-	//		//入力があったらキャラクターを回転（回転する必要がある場合）
-	//		if (inputFlag == true)
-	//		{
-	//			if (tmpCharaForwardVec != charaForwardVec)
-	//			{
-	//				charaForwardVec.Normalize();
-	//				//回転
-	//				rotateVec = Vector3::Lerp(rotateVec, charaForwardVec, 0.2f);
-	//				RotateToNewForward(rotateVec);
-	//			}
-	//		}
-
-	//		// 接地中かつジャンプ中ではない時
-	//		if (onGround == true && jumpFlag == false)
-	//		{
-	//			// SPACEキーもしくはスイッチジャンプフラグがtrueだったら
-	//			if (_keyState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed || switchJumpFlag == true)
-	//			{
-	//				// ジャンプフラグをtrueにしジャンプ使用中かフラグをtrueにする
-	//				jumpFlag = true;
-	//				isJumping = true;
-	//				// ジャンプstartのアニメーションを再生しアニメーションステータスをJUMPSTARTに更新
-	//				skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
-	//				animState = JUMPSTART;
-	//			}
-
-	//		}
-
-	//		// ジャンプキーが離されたらジャンプ使用可能フラグとジャンプ使用中フラグをおろしジャンプパワーを初期値に戻す
-	//		if (_keyState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
-	//		{
-	//			isAvailableJumpKey = false;
-	//			isJumping = false;
-	//			jumpPower = FirstJumpPower;
-	//		}
-
-	//		if (isAvailableJumpKey == true && isJumping == true || switchJumpFlag == true && isAvailableJumpKey == true)
-	//		{
-	//			if (_keyState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Held || switchJumpFlag == true)
-	//			{
-	//				++jumpFrameCount;
-	//				jumpFlag = true;
-	//				velocity.z = jumpPower;
-
-	//				if (jumpFrameCount > 0 && jumpFrameCount < 10 && switchJumpFlag == false)
-	//				{
-	//					jumpPower += 140.0f;
-	//				}
-	//				else if (switchJumpFlag == true && jumpFrameCount < 10)
-	//				{
-	//					jumpPower += 160.0f;
-	//				}
-	//				else
-	//				{
-	//					isAvailableJumpKey = false;
-	//					isJumping = false;
-	//					switchJumpFlag = false;
-	//				}
-	//			}
-	//		}
-	//	}
-	//	
-	//	// コントローラーが接続されていたら
-	//	if (InputSystem::GetConnectedController() == 1)
-	//	{
-	//		//Axisの値をとる32700~-32700
-	//		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-	//		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-
-	//		//アナログスティックのキー入力を取得
-	//		Vector2 Axis = Vector2(0.0f, 0.0f);
-	//		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-	//		//実際に動かしたい軸がずれているので補正
-	//		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-	//		//入力があるか
-	//		if (Math::Abs(axis.x) > 0.0f || Math::Abs(axis.y) > 0.0f)
-	//		{
-	//			// 方向キーの入力値とカメラの向きから、移動方向を決定
-	//			charaForwardVec = forwardVec * axis.x + rightVec * axis.y;
-	//			charaForwardVec.Normalize();
-	//			inputFlag = true;
-	//			//アナログスティックの入力状態で歩きか走りかを判定
-	//			if (ALX >= 28000.0f || ALX <= -28000.0f || ALY >= 28000.0f || ALY <= -28000.0f)
-	//			{
-	//				runFlag = true;
-	//			}
-	//			else 
-	//			{
-	//				runFlag = false; 
-	//			}
-	//		}
-	//		else
-	//		{
-	//			inputFlag = false;
-	//		}
-	//		//入力があったら速度にキャラクターの方向と動くスピードを掛けたものを代入
-	//		//ここでzに速度を足すとジャンプに影響するのでx,yのみに代入
-	//		//入力がない間は速度を0に
-	//		if (inputFlag == true)
-	//		{
-	//			velocity.x = charaForwardVec.x * moveSpeed;
-	//			velocity.y = charaForwardVec.y * moveSpeed;
-
-	//			if (runFlag == true)
-	//			{
-	//				velocity.x = charaForwardVec.x * moveSpeed * 2.0f;
-	//				velocity.y = charaForwardVec.y * moveSpeed * 2.0f;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			velocity.x = 0.0f;
-	//			velocity.y = 0.0f;
-	//		}
-
-	//		//入力があったらキャラクターを回転（回転する必要がある場合）
-	//		if (inputFlag == true)
-	//		{
-	//			if (tmpCharaForwardVec != charaForwardVec)
-	//			{
-	//				charaForwardVec.Normalize();
-	//				//回転
-	//				rotateVec = Vector3::Lerp(rotateVec, charaForwardVec, 0.2f);
-	//				RotateToNewForward(rotateVec);
-	//			}
-	//		}
-
-	//		if (onGround == true && jumpFlag == false)
-	//		{
-	//			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-	//				switchJumpFlag == true)
-	//			{
-	//				jumpFlag = true;
-	//				isJumping = true;
-	//				skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
-	//				animState = JUMPSTART;
-	//			}
-
-	//		}
-
-	//		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Released ||
-	//			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
-	//			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Released ||
-	//			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Released )
-	//		{
-	//			isAvailableJumpKey = false;
-	//			isJumping = false;
-	//			jumpPower = FirstJumpPower;
-	//		}
-
-
-	//		if (isAvailableJumpKey == true && isJumping == true || switchJumpFlag == true && isAvailableJumpKey == true)
-	//		{
-	//			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Held ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Held ||
-	//				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Held ||
-	//				switchJumpFlag == true)
-	//			{
-	//				++jumpFrameCount;
-	//				jumpFlag = true;
-	//				velocity.z = jumpPower;
-
-	//				if (jumpFrameCount > 0 && jumpFrameCount < 12 && switchJumpFlag == false)
-	//				{
-	//					jumpPower += 100.0f;
-	//				}
-	//				else if (switchJumpFlag == true && jumpFrameCount < 14)
-	//				{
-	//					jumpPower += 150.0f;
-	//				}
-	//				else
-	//				{
-	//					isAvailableJumpKey = false;
-	//					isJumping = false;
-	//					switchJumpFlag = false;
-	//				}
-	//			}
-	//		}
-
-	//	}
-
-	//}
-
-
-
-	//if (deadFlag == true)
-	//{
-	//	velocity.x = 0.0f;
-	//	velocity.y = 0.0f;
-	//}
-
-	//if (deadFlag == true && reSpawnFlag == false)
-	//{
-	//	reSpawnFlag = true;
-	//}
-
-	//if (reSpawnFlag == true)
-	//{
-	//	++reSpawnCount;
-	//	if (reSpawnCount >= 120)
-	//	{
-	//		position = respownPos;
-	//		SetPosition(position);
-	//		mainCamera->ReSetYaw();
-	//		reSpawnCount = 0;
-	//		reSpawnFlag = false;
-	//		deadFlag = false;
-	//	}
-	//}
-
 
 
 }

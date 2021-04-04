@@ -12,10 +12,10 @@ PlayerObjectStateIdle::~PlayerObjectStateIdle()
 
 PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
-
-	state = PlayerState::PLAYER_STATE_IDLE;
 	
-	_owner->SetVelocity(velocity);
+	// positionに速度を足してキャラクターを動かす
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+
 
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
@@ -43,7 +43,10 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
+	//_owner->SetVelocity(velocity);
+
 	return state;
+
 }
 
 void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keyState)
@@ -62,7 +65,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
 
 		//入力があるか
-		if (Math::Abs(axis.x) > 0.3f || Math::Abs(axis.y) > 0.3f)
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 
 			_owner->SetInputFlag(true);
@@ -105,6 +108,9 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
 	state = PlayerState::PLAYER_STATE_IDLE;
+
 	_owner->SetMoveSpeed(_owner->GetFirstMovePower());
-	
+	_owner->SetVelocity(Vector3::Zero);
+
+	inputDeadSpace = _owner->GetDeadSpace();
 }
