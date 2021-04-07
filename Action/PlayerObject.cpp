@@ -44,8 +44,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, FirstJumpPower(1200.0f)
 	, moveSpeed(0.0f)
 	, movePower(80.0f)
-	, FirstMovePower(200.0f)
-	, DeadSpace(0.2f)
+	, FirstMovePower(50.0f)
+	, DeadSpace(0.3f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -166,7 +166,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,ColliderComponent::PlayerTag, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
-	//playerBox = { Vector3(-55.0f,-6.5f,0.0f),Vector3(55.0f,6.5f,179.0f) };
+	playerBox = { Vector3(-55.0f,-6.5f,0.0f),Vector3(55.0f,6.5f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
@@ -196,7 +196,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateDownOver);
 	statePools.push_back(new PlayerObjectStateDead);
 	statePools.push_back(new PlayerObjectStateRespown);
-
 
 	nowState = PlayerState::PLAYER_STATE_IDLE;
 	nextState = PlayerState::PLAYER_STATE_IDLE;
@@ -280,10 +279,8 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
-
 	chackJumpFlag = jumpFlag;
 	chackIsJumping = isJumping;
-
 
 	// 一定時間入力が無かったらタイトルに戻る
 	if (inputFlag == false && jumpFlag == false)
@@ -299,145 +296,8 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 		reStartCount = 0;
 	}
 
-
 }
 
-void PlayerObject::AnimationUpdate()
-{
-	// 死亡状態だったら
-	if (deadFlag == true)
-	{
-		if (animState != PLAYER_DEAD && animState != DOWN_LOOP)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[PLAYER_DEAD], 1.0f);
-			animState = PLAYER_DEAD;
-		}
-		else if (!skeltalMeshComponent->IsPlaying() && animState == DOWN)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[DOWN_LOOP], 1.0f);
-			animState = DOWN_LOOP;
-		}
-	}
-
-	//前回の当たり判定処理で下に地面がなかったらジャンプ中へ移行する
-	if (!jumpFlag && !onGround)
-	{
-		if (animState != JUMPLOOP)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[JUMPLOOP], 1.0f);
-			animState = JUMPLOOP;
-		}
-
-		return;
-	}
-	if (isJumping && downFlag == false && deadFlag == false || 
-		jumpFlag == true && downFlag == false && deadFlag == false)
-	{
-		// JUMP開始からJumpLoopへ
-		if (animState == JUMPSTART)
-		{
-			if (!skeltalMeshComponent->IsPlaying())
-			{
-				skeltalMeshComponent->PlayAnimation(animTypes[JUMPLOOP], 1.0f);
-				animState = JUMPLOOP;
-			}
-		}
-		return;
-	}
-
-
-	// 待機アニメ開始
-	if (!inputFlag)
-	{
-		if (animState == JUMPEND)
-		{
-			if (!skeltalMeshComponent->IsPlaying())
-			{
-				skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
-				animState = IDLE;
-			}
-		}
-		else if (animState != IDLE && downFlag == false && deadFlag == false)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
-			animState = IDLE;
-			return;
-		}
-	}
-	else
-	{
-		// ジャンプ終了アニメからのRUN開始
-		if (animState == JUMPEND)
-		{
-			if (!skeltalMeshComponent->IsPlaying())
-			{
-				if (runFlag == true && downFlag == false)
-				{
-					skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
-					animState = RUN;
-				}
-				else if(runFlag == false && downFlag == false)
-				{
-					skeltalMeshComponent->PlayAnimation(animTypes[WALK], 1.0f);
-					animState = WALK;
-				}
-			}
-		}
-
-		// RUNアニメ開始
-		if (animState != WALK && runFlag == false && downFlag == false && deadFlag == false)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[WALK], 1.0f);
-			animState = WALK;
-			return;
-		}
-		else if (animState != RUN && runFlag == true && downFlag == false && deadFlag == false)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
-			animState = RUN;
-			return;
-		}
-
-	}
-
-	// タイムオーバー時のアニメーション遷移
-	if (downFlag == true)
-	{
-		if (animState != DOWN && animState != DOWN_LOOP && downOverFlag == false && downUpFlag == false)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[DOWN], 1.0f);
-			animState = DOWN;
-		}
-		else if (!skeltalMeshComponent->IsPlaying() && animState == DOWN)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[DOWN_LOOP], 1.0f);
-			animState = DOWN_LOOP;
-		}
-
-		if (animState == DOWN_LOOP && downUpFlag == true)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[DOWN_UP], 1.0f);
-			animState = DOWN_UP;
-			if (!skeltalMeshComponent->IsPlaying() && animState == DOWN_UP)
-			{
-				skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
-				animState = IDLE;
-			}
-		}
-		else if (animState == DOWN_LOOP && downOverFlag == true)
-		{
-			skeltalMeshComponent->PlayAnimation(animTypes[DOWN_OVER], 1.0f);
-			animState = DOWN_OVER;
-			if (!skeltalMeshComponent->IsPlaying() && animState == DOWN_OVER)
-			{
-				skeltalMeshComponent->PlayAnimation(animTypes[IDLE], 1.0f);
-				animState = IDLE;
-			}
-		}
-
-	}
-
-}
 
 /*
 @fn めり込み判定と押し戻し

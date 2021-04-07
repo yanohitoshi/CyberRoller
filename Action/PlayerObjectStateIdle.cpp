@@ -43,7 +43,23 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
-	//_owner->SetVelocity(velocity);
+	if (!_owner->GetInputFlag())
+	{
+		++danceCount;
+		if (danceCount >= 1200)
+		{
+			isDanceFlag = true;
+		}
+	}
+	else
+	{
+		danceCount = 0;
+	}
+
+	if (!_owner->GetDeadFlag() && CountDownFont::timeOverFlag == false && isDanceFlag == true)
+	{
+		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
+	}
 
 	return state;
 
@@ -99,8 +115,6 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 			}
 		}
 	}
-
-
 }
 
 void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
@@ -113,4 +127,7 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	_owner->SetVelocity(Vector3::Zero);
 
 	inputDeadSpace = _owner->GetDeadSpace();
+	isDanceFlag = false;
+	danceCount = 0;
+
 }

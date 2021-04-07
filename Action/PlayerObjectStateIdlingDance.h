@@ -38,8 +38,11 @@ public:
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
+	static bool GetIsDancing() { return isDancing; }
+
 private:
 
+	static bool isDancing;
 	float move;
 };
 

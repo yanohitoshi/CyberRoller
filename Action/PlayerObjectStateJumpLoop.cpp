@@ -28,7 +28,7 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		animChangeFlag = false;
 	}
 
-	if (_owner->GetOnGround() == true && _owner->GetInputFlag())
+	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && move >= 600.0f)
 	{
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 	}
@@ -100,6 +100,19 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 			}
 
+		}
+		else
+		{
+			move -= _owner->GetMovePower();
+
+			if (move <= 0.0f)
+			{
+				move = 0.0f;
+			}
+
+			velocity.x = _owner->GetCharaForwardVec().x * move;
+			velocity.y = _owner->GetCharaForwardVec().y * move;
+			_owner->SetInputFlag(false);
 		}
 	}
 

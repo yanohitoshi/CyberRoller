@@ -40,6 +40,8 @@ public:
 
 private:
 
+	bool isDanceFlag;
+	int danceCount;
 
 };
 

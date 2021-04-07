@@ -10,9 +10,10 @@
 #include "FirstStageScene.h"
 #include "FirstStageUI.h"
 #include "CountDownFont.h"
+#include "PlayerObjectStateIdlingDance.h"
 
-const float MainCameraObject::yawSpeed = 0.03f;
-const float MainCameraObject::pitchSpeed = 0.025f;
+const float MainCameraObject::yawSpeed = 0.055f;
+const float MainCameraObject::pitchSpeed = 0.03f;
 
 MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	CameraObjectBase(false,Tag::CAMERA)
@@ -26,7 +27,7 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	tmpMovePos = Vector3(0.0f,0.0f,0.0f);
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-100.0f,-100.0f,-50.0f),Vector3(100.0f,100.0f,50.0f) };
+	AABB aabb = { Vector3(-100.0f,-100.0f,-100.0f),Vector3(100.0f,100.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
 
 	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
@@ -48,73 +49,99 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	if (PlayerObject::GetClearFlag() == false && CountDownFont::timeOverFlag == false)
 	{
-		// 今のフレームで当たっていて前のフレームで当たっていなければ
-		if (hitFlag == true && tmpHitFlag == false)
+		if (PlayerObjectStateIdlingDance::GetIsDancing())
 		{
-			// 当たったポジションがマイナスだったら
-			if (hitPosition.x < 0.0f)
-			{
-				hitPosition.x *= -1.0f;
-			}
-			if (hitPosition.y < 0.0f)
-			{
-				hitPosition.y *= -1.0f;
-			}
+			yaw += 0.01f;
+			tmpMovePos.x = 400 * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
+			tmpMovePos.y = 400 * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
+			tmpMovePos.z = r * sinf(pitch) + height + lerpObjectPos.z;
 
-			// 当たったポジションを比べ小さい方をカメラの回転半径として採用
-			if (hitPosition.x < hitPosition.y)
-			{
-				r = lerpObjectPos.x - hitPosition.x;
-				// 見る対象物から当たった場所を引いて長さを取る
-				// そのまま使うと壁にめり込む可能性があるので少し小さくする
-				r -= 20.f;
-			}
-			else if (hitPosition.x > hitPosition.y)
-			{
-				// 見る対象物から当たった場所を引いて長さを取る
-				r = lerpObjectPos.y - hitPosition.y;
-				// そのまま使うと壁にめり込む可能性があるので少し小さくする
-				r -= 20.f;
-			}
+			position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 7.0f);
+			SetPosition(position);
 
-			// 半径がマイナスになっていたらプラスに変換
-			if (r <= 0.0f)
-			{
-				r *= -1.0f;
-			}
-
+			view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3(0.0f, 0.0f, 1.0f));
+			RENDERER->SetViewMatrix(view);
 		}
 		else
 		{
-			r = 700.0f;
+			// 今のフレームで当たっていて前のフレームで当たっていなければ
+			if (hitFlag == true && tmpHitFlag == false)
+			{
+				// 当たったポジションがマイナスだったら
+				if (hitPosition.x < 0.0f)
+				{
+					hitPosition.x *= -1.0f;
+				}
+				if (hitPosition.y < 0.0f)
+				{
+					hitPosition.y *= -1.0f;
+				}
+
+				// 当たったポジションを比べ小さい方をカメラの回転半径として採用
+				if (hitPosition.x < hitPosition.y)
+				{
+					r = lerpObjectPos.x - hitPosition.x;
+					// 見る対象物から当たった場所を引いて長さを取る
+					// そのまま使うと壁にめり込む可能性があるので少し小さくする
+					r -= 20.f;
+				}
+				else if (hitPosition.x > hitPosition.y)
+				{
+					// 見る対象物から当たった場所を引いて長さを取る
+					r = lerpObjectPos.y - hitPosition.y;
+					// そのまま使うと壁にめり込む可能性があるので少し小さくする
+					r -= 20.f;
+				}
+
+				// 半径がマイナスになっていたらプラスに変換
+				if (r <= 0.0f)
+				{
+					r *= -1.0f;
+				}
+
+			}
+			else
+			{
+				r = 700.0f;
+			}
+
+			if (r >= 700.0f)
+			{
+				r = 700.0f;
+			}
+			else if (r <= 10.0f)
+			{
+				r = 10.0f;
+			}
+
+			if (pitch <= 0.0f && pitch > -30.0f)
+			{
+				r -= 300.0f;
+			}
+			else if (pitch <= -30.0f && pitch >= -60.0f)
+			{
+				r -= 600.0f;
+			}
+
+			tmpMovePos.x = r * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
+			tmpMovePos.y = r * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
+			tmpMovePos.z = r * sinf(pitch) + height + lerpObjectPos.z;
+
+			position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 8.0f);
+			SetPosition(position);
+			Vector3 viewPosition = Vector3(lerpObjectPos.x, lerpObjectPos.y, lerpObjectPos.z + 100.0f);
+			view = Matrix4::CreateLookAt(position, viewPosition, Vector3(0.0f, 0.0f, 1.0f));
+			RENDERER->SetViewMatrix(view);
+
+			forwardVec = lerpObjectPos - position;
+			forwardVec.Normalize();
+			forwardVec.z = 0.0f;
+
+			hitPosition = Vector3::Zero;
+			tmpHitFlag = hitFlag;
+			hitFlag = false;
 		}
 
-		if (r >= 700.0f)
-		{
-			r = 700.0f;
-		}
-		else if (r <= 10.0f)
-		{
-			r = 10.0f;
-		}
-
-		tmpMovePos.x = r * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
-		tmpMovePos.y = r * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
-		tmpMovePos.z = r * sinf(pitch) + height + lerpObjectPos.z;
-
-		position = Vector3::Lerp(position , tmpMovePos, _deltaTime * 6.0f);
-		SetPosition(position);
-		Vector3 viewPosition = Vector3(lerpObjectPos.x, lerpObjectPos.y, lerpObjectPos.z + 100.0f);
-		view = Matrix4::CreateLookAt(position, viewPosition, Vector3(0.0f,0.0f,1.0f));
-		RENDERER->SetViewMatrix(view);
-
-		forwardVec = lerpObjectPos - position;
-		forwardVec.Normalize();
-		forwardVec.z = 0.0f;
-
-		hitPosition = Vector3::Zero;
-		tmpHitFlag = hitFlag;
-		hitFlag = false;
 
 	}
 	else if (PlayerObject::GetClearFlag() == true)
@@ -172,13 +199,13 @@ void MainCameraObject::GameObjectInput(const InputState& _keyState)
 
 	}
 
-	if (pitch > Math::ToRadians(60.0f))
+	if (pitch > Math::ToRadians(80.0f))
 	{
-		pitch = Math::ToRadians(60.0f);
+		pitch = Math::ToRadians(80.0f);
 	}
-	if (pitch < Math::ToRadians(5.0f))
+	if (pitch < Math::ToRadians(-60.0f))
 	{
-		pitch = Math::ToRadians(5.0f);
+		pitch = Math::ToRadians(-60.0f);
 	}
 }
 

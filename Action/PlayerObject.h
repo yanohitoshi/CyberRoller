@@ -69,11 +69,6 @@ public:
 	void GameObjectInput(const InputState& _keyState)override;
 	
 	/*
-	@fn アニメーションの更新処理
-	*/
-	void AnimationUpdate();
-	
-	/*
 	@fn めり込み判定
 	*/
 	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);

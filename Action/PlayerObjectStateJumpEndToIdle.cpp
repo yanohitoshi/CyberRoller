@@ -23,7 +23,7 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetSwitchJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
@@ -50,27 +50,44 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 
 void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-	//Axisの値をとる32700~-32700
-	float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-	float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-	//アナログスティックのキー入力を取得
-	Vector2 Axis = Vector2(0.0f, 0.0f);
-	Axis = _keyState.Controller.GetLAxisLeftVec();
-
-	//実際に動かしたい軸がずれているので補正
-	Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-	//入力があるか
-	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
+	if (_owner->GetIsAvailableInput())
 	{
-		_owner->SetInputFlag(true);
-	}
-	else
-	{
-		_owner->SetInputFlag(false);
-	}
+		//Axisの値をとる32700~-32700
+		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
+		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
 
+		//アナログスティックのキー入力を取得
+		Vector2 Axis = Vector2(0.0f, 0.0f);
+		Axis = _keyState.Controller.GetLAxisLeftVec();
+
+		//実際に動かしたい軸がずれているので補正
+		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
+
+		//入力があるか
+		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
+		{
+			_owner->SetInputFlag(true);
+		}
+		else
+		{
+			_owner->SetInputFlag(false);
+		}
+
+		if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
+		{
+			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
+				_owner->GetSwitchJumpFlag() == true)
+			{
+				//jumpFlag = true;
+				_owner->SetJumpFlag(true);
+				//isJumping = true;
+				_owner->SetIsJumping(true);
+			}
+		}
+	}
 }
 
 void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTime)

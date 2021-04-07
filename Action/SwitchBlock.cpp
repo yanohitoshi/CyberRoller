@@ -40,7 +40,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	// ※同一のoncollisionを呼ぶと1フレームに2度呼ばれ色が変わらないため分けている
 	//playerの足元判定と接しているか用のコンポーネント
 	PlayerFootBoxCollider = new BoxCollider(this, ColliderComponent::FOOT_CHECKTAG, std::bind(&SwitchBlock::PlayerFootOnCollision, this, std::placeholders::_1));
-	AABB footAabb = { Vector3(-55.0f,-55.0f,-40.0f),Vector3(55.0f,55.0f,50.0f) };
+	AABB footAabb = { Vector3(-70.0f,-70.0f,-40.0f),Vector3(70.0f,70.0f,50.0f) };
 	PlayerFootBoxCollider->SetObjectBox(footAabb);
 
 	tmpChangeColorFlag = false;
@@ -93,12 +93,7 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 				onFlag = true;
 
 			}
-			else if (onFlag == true)
-			{
-				onFlag = false;
-			}
 		}
-
 	}
 
 	if (onFlag == true && isAvailableSwitch == true)
