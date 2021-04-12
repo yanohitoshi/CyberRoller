@@ -369,6 +369,9 @@
     <ClCompile Include="PlayerObjectStateRunTurn.cpp">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObjectStateFlinch.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -746,6 +749,9 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateRunTurn.h">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateFlinch.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

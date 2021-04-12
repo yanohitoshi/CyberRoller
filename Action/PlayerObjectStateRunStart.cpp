@@ -74,30 +74,34 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
-			_owner->SetCharaForwardVec(forward);
+
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1200.0f)
+			if (move >= 1600.0f)
 			{
-				move = 1200.0f;
+				move = 1600.0f;
 			}
 
-			velocity.x = _owner->GetCharaForwardVec().x * move;
-			velocity.y = _owner->GetCharaForwardVec().y * move;
+			velocity.x = forward.x * move;
+			velocity.y = forward.y * move;
 
 
-			if (_owner->GetTmpCharaForwardVec() != _owner->GetCharaForwardVec())
+			if (_owner->GetTmpCharaForwardVec() != forward)
 			{
 				Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
 				tmpRotateVec.Normalize();
 
 				//回転
-				Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.2f);
+				Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.01f);
 				_owner->RotateToNewForward(rotatioin);
 				_owner->SetRotateVec(rotatioin);
 
 			}
+
+			_owner->SetCharaForwardVec(forward);
+			_owner->SetMoveSpeed(move);
+
 		}
 		else
 		{

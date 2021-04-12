@@ -46,7 +46,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	if (!_owner->GetInputFlag())
 	{
 		++danceCount;
-		if (danceCount >= 1200)
+		if (danceCount >= 480)
 		{
 			isDanceFlag = true;
 		}

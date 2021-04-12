@@ -29,6 +29,7 @@
 #include "PlayerObjectStateRunStop.h"
 #include "PlayerObjectStateRunTurn.h"
 #include "PlayerObjectStateIdlingDance.h"
+#include "PlayerObjectStateFlinch.h"
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
@@ -45,7 +46,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, moveSpeed(0.0f)
 	, movePower(80.0f)
 	, FirstMovePower(50.0f)
-	, DeadSpace(0.3f)
+	, DeadSpace(0.6f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -137,6 +138,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Change_Direction.gpanim", false);
+	// 走り中壁に当たった際の怯みアニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TO_FLINCH)] = RENDERER->GetAnimation("Assets/Model/robo_model/Receiving_An_Uppercut.gpanim", false);
 	// ジャンプループアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	// ジャンプ開始アニメーション
@@ -166,7 +169,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,ColliderComponent::PlayerTag, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
-	playerBox = { Vector3(-55.0f,-6.5f,0.0f),Vector3(55.0f,6.5f,179.0f) };
+	playerBox = { Vector3(-60.0f,-10.0f,0.0f),Vector3(60.0f,10.0f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
@@ -186,6 +189,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateRunStart);
 	statePools.push_back(new PlayerObjectStateRunStop);
 	statePools.push_back(new PlayerObjectStateRunTurn);
+	statePools.push_back(new PlayerObjectStateFlinch);
 	statePools.push_back(new PlayerObjectStateJumpLoop);
 	statePools.push_back(new PlayerObjectStateJumpStart);
 	statePools.push_back(new PlayerObjectStateJumpEndToIdle);
@@ -350,6 +354,22 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		FixCollision(playerBox, _hitObject.aabb, _hitObject.GetTag());
 	}
 
+	Tag hitTag = _hitObject.GetTag();
+
+	if (hitTag == Tag::WALL || hitTag == Tag::FIRST_MOVE_WALL || hitTag == Tag::SECOND_MOVE_WALL || 
+		hitTag == Tag::TUTORIAL_MOVE_WALL || hitTag == Tag::NEXT_SCENE_MOVE_WALL || hitTag == Tag::CLEAR_SCENE_MOVE_WALL)
+	{
+		if (velocity.x >= 1000.0f || velocity.y >= 1000.0f ||
+			velocity.x <= -1000.0f || velocity.y <= -1000.0f)
+		{
+			isHitWall = true;
+		}
+	}
+	else
+	{
+		isHitWall = false;
+	}
+
 	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND ||
 		_hitObject.GetTag() == Tag::PUSH_BOARD || _hitObject.GetTag() == Tag::PUSH_BOX ||
 		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
@@ -455,7 +475,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		if (jumpFlag == true)
 		{
 			jumpFlag = false;
-			//isJumping = false;
 			isAvailableJumpKey = true;
 			jumpPower = FirstJumpPower;
 		}

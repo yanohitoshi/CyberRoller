@@ -113,7 +113,7 @@ public:
 	bool GetDeadFlag() { return deadFlag; };
 	bool GetRespawnFlag() { return respawnFlag; };
 	bool GetIsAvailableInput() { return isAvailableInput; };
-
+	bool GetIsHitWall() { return isHitWall; };
 
 	const float GetFirstJumpPower() { return FirstJumpPower; }
 	float GetJumpPower() { return jumpPower; }
@@ -138,6 +138,7 @@ public:
 	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
 	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
+	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
 	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
 
 
@@ -252,6 +253,8 @@ private:
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
 
+	// 壁と押し戻しを行ったか
+	bool isHitWall;
 	
 	PlayerState nowState;
 	PlayerState nextState;
