@@ -51,6 +51,7 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	_owner->SetMoveSpeed(move);
 	_owner->SetVelocity(velocity);
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 
 }
@@ -70,8 +71,6 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 
 		//ŽÀÛ‚É“®‚©‚µ‚½‚¢Ž²‚ª‚¸‚ê‚Ä‚¢‚é‚Ì‚Å•â³
 		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		printf("x:%f,y:%f\n", axis.x, axis.y);
 
 		//“ü—Í‚ª‚ ‚é‚©
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
@@ -132,7 +131,7 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 
 void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN));
 	state = PlayerState::PLAYER_STATE_RUN;
 	move = _owner->GetMoveSpeed();

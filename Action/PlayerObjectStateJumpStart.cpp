@@ -49,7 +49,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
-
+	// XV‚³‚ê‚½state‚ğ•Ô‚·
 	return state;
 }
 

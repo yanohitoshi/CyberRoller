@@ -15,6 +15,7 @@ enum class PlayerState;
 /*
 @enum AnimState
 	　プレイヤーのアニメーションの状態
+	  タイトル用
 */
 enum AnimState
 {
@@ -87,22 +88,42 @@ public:
 	static bool GetChackJumpFlag() { return chackJumpFlag; }
 	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
 
+	/*
+	@fn SkeletalMeshComponentをstateに渡す関数
+	@return SkeletalMeshComponent　SkeletalMeshComponentのポインタを返す
+	*/
 	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
+	
+	/*
+	@fn Animationを返す関数
+	@return Animation Animationのポインタを返す
+	*/
 	const Animation* GetAnimation(PlayerState _state);
 
+	//--------------state等でメンバー変数を使用するためのgetter群------------------------------//
+	// 戻り値→Vector3
 	Vector3 GetForwardVec() { return forwardVec; }
 	Vector3 GetRightVec() { return rightVec; }
-
 	Vector3 GetCharaForwardVec() { return charaForwardVec;	}
 	Vector3 GetTmpCharaForwardVec() { return tmpCharaForwardVec; }
 	Vector3 GetRotateVec() { return rotateVec; }
 	Vector3 GetVelocity() { return velocity; }
 	Vector3 GetRespownPos() { return respownPos; }
 
+	// 戻り値→const float
 	const float GetDeadSpace() { return DeadSpace; }
 	const float GetFirstMovePower() { return FirstMovePower; }
 	const float GetMovePower() { return movePower; }
+	const float GetFirstJumpPower() { return FirstJumpPower; }
+
+	// 戻り値→float
 	float GetMoveSpeed() { return moveSpeed; }
+	float GetJumpPower() { return jumpPower; }
+
+	// 戻り値→int
+	int GetTurnDelayCount() { return turnDelayCount; }
+
+	// 戻り値→bool
 	bool GetOnGround() { return onGround; }
 	bool GetJumpFlag() { return jumpFlag; }
 	bool GetIsJumping() { return isJumping; }
@@ -115,18 +136,27 @@ public:
 	bool GetIsAvailableInput() { return isAvailableInput; };
 	bool GetIsHitWall() { return isHitWall; };
 
-	const float GetFirstJumpPower() { return FirstJumpPower; }
-	float GetJumpPower() { return jumpPower; }
+	// 戻り値→int
 	int GetJumpFrameCount() { return jumpFrameCount; }
+
+	// 戻り値→PlayerState
 	PlayerState GetNowState() { return nowState; }
 
+	//--------------state等でメンバー変数を使用するためのsetter群------------------------------//
+	// 引数→Vector3
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
 	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
 	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
 	void SetRespownPos(Vector3 _respownPos) { velocity = _respownPos; }
 
+	// 引数→float
+	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
 
+	// 引数→int
+	void SetTurnDelayCount(bool _turnDelayCount) { turnDelayCount = _turnDelayCount; }
+
+	// 引数→bool
 	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
 	void SetIsJumping(bool _isJumpFlag) { isJumping = _isJumpFlag; }
 	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
@@ -139,11 +169,11 @@ public:
 	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
 	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
-	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
 
-
+	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
 	static const float GetGravity() { return Gravity; }
 
+	// 前方ベクトルを用いてキャラクターを回転させる関数
 	void RotateToNewForward(const Vector3& forward);
 
 
@@ -204,7 +234,8 @@ private:
 	static const float Gravity;
 	//初期ジャンプ力定数
 	const float FirstJumpPower;
-
+	// 振り返りディレイ用カウント変数
+	int turnDelayCount;
 	//ジャンプ力
 	float jumpPower;
 	//ジャンプ中かどうかのフラグ
@@ -256,7 +287,9 @@ private:
 	// 壁と押し戻しを行ったか
 	bool isHitWall;
 	
+	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
+	// 変更された次のプレーヤーのstate状態を保存するための変数
 	PlayerState nextState;
 	// stateプール
 	std::vector<class PlayerObjectStateBase*> statePools;

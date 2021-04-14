@@ -56,7 +56,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	SetScale(scale);
 	SetPosition(_pos);
 
+	// 最初のポジションを保存
 	firstPos = Vector3(position.x, position.y, 5000.0f);
+	// ジャンプパワーを初速にセット
 	jumpPower = FirstJumpPower;
 	//リスポ－ンするまでのカウント初期化
 	respawnCount = 0;
@@ -104,15 +106,14 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//clear判定フラグ
 	clearFlag = false;
 	reStartCount = 0;
-	//アニメーションステータスの初期化
-	animState = IDLE;
-	tmpAnimState = IDLE;
 
 	// ダウン・コンティニュー・deadフラグ初期化
 	downFlag = false;
 	downUpFlag = false;
 	downOverFlag = false;
 	deadFlag = false;
+
+	turnDelayCount = 0;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -201,6 +202,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateDead);
 	statePools.push_back(new PlayerObjectStateRespown);
 
+	// stateを初期化
 	nowState = PlayerState::PLAYER_STATE_IDLE;
 	nextState = PlayerState::PLAYER_STATE_IDLE;
 }
@@ -229,7 +231,9 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	// ステート実行
 	nextState = statePools[static_cast<unsigned int>(nowState)]->Update(this, _deltaTime);
 
+	// プレイヤー以外の影響でポジションが変更された時用
 	position = (position + pushedVelocity * _deltaTime );
+	// ポジションをセット
 	SetPosition(position);
 
 	// ステート内部からステート変更あったか？
@@ -257,6 +261,10 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	onGround = false;
 	pushedVelocity = Vector3::Zero;
 
+	if (nowState == PlayerState::PLAYER_STATE_RUN_START || nowState == PlayerState::PLAYER_STATE_RUN)
+	{
+		++turnDelayCount;
+	}
 
 }
 
@@ -283,6 +291,7 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
+	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
 	chackIsJumping = isJumping;
 

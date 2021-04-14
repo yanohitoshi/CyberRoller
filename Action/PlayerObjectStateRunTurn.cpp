@@ -61,6 +61,7 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 	_owner->SetVelocity(velocity);
 	_owner->SetMoveSpeed(move);
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 
 }
@@ -118,4 +119,5 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 	move = _owner->GetMoveSpeed();
 
 	inputDeadSpace = _owner->GetDeadSpace();
+	_owner->SetTurnDelayCount(0);
 }

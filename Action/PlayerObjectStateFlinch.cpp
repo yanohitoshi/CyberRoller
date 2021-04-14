@@ -11,12 +11,16 @@ PlayerObjectStateFlinch::~PlayerObjectStateFlinch()
 
 PlayerState PlayerObjectStateFlinch::Update(PlayerObject* _owner, float _deltaTime)
 {
+	// アニメーションの再生がされていなかったら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
+		// 壁に当たったフラグをfalseに
 		_owner->SetIsHitWall(false);
+		// stateを7アイドリングに変更
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
+	// 更新されたstateを返す
 	return state;
 }
 

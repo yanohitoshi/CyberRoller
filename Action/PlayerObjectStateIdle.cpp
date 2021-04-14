@@ -46,7 +46,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	if (!_owner->GetInputFlag())
 	{
 		++danceCount;
-		if (danceCount >= 480)
+		if (danceCount >= 600)
 		{
 			isDanceFlag = true;
 		}
@@ -61,6 +61,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 
 }
@@ -119,7 +120,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 
 void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
 	state = PlayerState::PLAYER_STATE_IDLE;
 
@@ -129,5 +130,7 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	inputDeadSpace = _owner->GetDeadSpace();
 	isDanceFlag = false;
 	danceCount = 0;
+
+	_owner->SetTurnDelayCount(0);
 
 }

@@ -15,6 +15,7 @@ PlayerState PlayerObjectStateDownStart::Update(PlayerObject* _owner, float _delt
 		state = PlayerState::PLAYER_STATE_DOWN_LOOP;
 	}
 
+	// XV‚³‚ê‚½state‚ğ•Ô‚·
 	return state;
 }
 

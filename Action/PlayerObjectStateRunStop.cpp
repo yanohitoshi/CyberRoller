@@ -11,6 +11,9 @@ PlayerObjectStateRunStop::~PlayerObjectStateRunStop()
 
 PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaTime)
 {
+
+	++frameCount;
+
 	if (move >= 0.0f)
 	{
 		move -= 75.0f;
@@ -28,7 +31,7 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetInputFlag())
+	if (_owner->GetInputFlag() && _owner->GetTurnDelayCount() >= 30 && frameCount <= 10)
 	{
 		state = PlayerState::PLAYER_STATE_RUN_TURN;
 	}
@@ -40,6 +43,7 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 
 	_owner->SetVelocity(velocity);
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 }
 
@@ -103,4 +107,5 @@ void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 	move = _owner->GetMoveSpeed();
 
 	inputDeadSpace = _owner->GetDeadSpace();
+	frameCount = 0;
 }

@@ -39,6 +39,7 @@ PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _d
 
 	_owner->SetMoveSpeed(move);
 
+	// XV‚³‚ê‚½state‚ğ•Ô‚·
 	return state;
 }
 

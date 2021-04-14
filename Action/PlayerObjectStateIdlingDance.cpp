@@ -49,6 +49,7 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 		isDancing = false;
 	}
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 }
 
@@ -107,7 +108,7 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 
 void PlayerObjectStateIdlingDance::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE_DANCE));
 	state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 

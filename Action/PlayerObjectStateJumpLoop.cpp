@@ -50,6 +50,7 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 	_owner->SetVelocity(velocity);
 	_owner->SetMoveSpeed(move);
 
+	// XV‚³‚ê‚½state‚ğ•Ô‚·
 	return state;
 }
 

@@ -45,6 +45,7 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 
 	_owner->SetVelocity(velocity);
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 }
 
@@ -92,7 +93,7 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 
 void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE));
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 

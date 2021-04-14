@@ -26,6 +26,7 @@ PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_RESPAWN;
 	}
 
+	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
 }
 
@@ -36,7 +37,7 @@ void PlayerObjectStateDead::Input(PlayerObject* _owner, const InputState& _keySt
 
 void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 {
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DEAD));
 	state = PlayerState::PLAYER_STATE_DEAD;
 	velocity = _owner->GetVelocity();

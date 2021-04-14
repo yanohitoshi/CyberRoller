@@ -370,7 +370,7 @@
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateFlinch.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -751,7 +751,7 @@
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateFlinch.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
