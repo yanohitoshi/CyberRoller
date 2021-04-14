@@ -12,7 +12,7 @@ PlayerObjectStateRunStop::~PlayerObjectStateRunStop()
 PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaTime)
 {
 
-	++frameCount;
+	++isTurnCount;
 
 	if (move >= 0.0f)
 	{
@@ -31,7 +31,7 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetInputFlag() && _owner->GetTurnDelayCount() >= 30 && frameCount <= 10)
+	if (_owner->GetInputFlag() && _owner->GetTurnDelayCount() >= 30 && isTurnCount <= 10)
 	{
 		state = PlayerState::PLAYER_STATE_RUN_TURN;
 	}
@@ -89,9 +89,7 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
 				_owner->GetSwitchJumpFlag() == true)
 			{
-				//jumpFlag = true;
 				_owner->SetJumpFlag(true);
-				//isJumping = true;
 				_owner->SetIsJumping(true);
 			}
 		}
@@ -107,5 +105,5 @@ void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 	move = _owner->GetMoveSpeed();
 
 	inputDeadSpace = _owner->GetDeadSpace();
-	frameCount = 0;
+	isTurnCount = 0;
 }

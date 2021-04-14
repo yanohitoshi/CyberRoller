@@ -97,9 +97,7 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
 				_owner->GetSwitchJumpFlag() == true)
 			{
-				//jumpFlag = true;
 				_owner->SetJumpFlag(true);
-				//isJumping = true;
 				_owner->SetIsJumping(true);
 			}
 		}

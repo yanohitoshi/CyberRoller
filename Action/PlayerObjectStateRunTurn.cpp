@@ -103,9 +103,7 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
 		{
-			//jumpFlag = true;
 			_owner->SetJumpFlag(true);
-			//isJumping = true;
 			_owner->SetIsJumping(true);
 		}
 	}

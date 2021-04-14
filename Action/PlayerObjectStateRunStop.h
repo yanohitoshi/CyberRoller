@@ -44,6 +44,6 @@ public:
 private:
 
 	float move;
-	int frameCount;
+	int isTurnCount;
 };
 
