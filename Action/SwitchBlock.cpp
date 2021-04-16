@@ -37,11 +37,11 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	AABB aabb = { Vector3(-50.0f,-50.0f,-40.0f),Vector3(50.0f,50.0f,50.0f) };
 	boxCollider->SetObjectBox(aabb);
 
-	// ※同一のoncollisionを呼ぶと1フレームに2度呼ばれ色が変わらないため分けている
-	//playerの足元判定と接しているか用のコンポーネント
-	PlayerFootBoxCollider = new BoxCollider(this, ColliderComponent::FOOT_CHECKTAG, std::bind(&SwitchBlock::PlayerFootOnCollision, this, std::placeholders::_1));
-	AABB footAabb = { Vector3(-70.0f,-70.0f,-40.0f),Vector3(70.0f,70.0f,50.0f) };
-	PlayerFootBoxCollider->SetObjectBox(footAabb);
+	//// ※同一のoncollisionを呼ぶと1フレームに2度呼ばれ色が変わらないため分けている
+	////playerの足元判定と接しているか用のコンポーネント
+	//PlayerFootBoxCollider = new BoxCollider(this, ColliderComponent::FOOT_CHECKTAG, std::bind(&SwitchBlock::PlayerFootOnCollision, this, std::placeholders::_1));
+	//AABB footAabb = { Vector3(-70.0f,-70.0f,-40.0f),Vector3(70.0f,70.0f,50.0f) };
+	//PlayerFootBoxCollider->SetObjectBox(footAabb);
 
 	tmpChangeColorFlag = false;
 	changeColorFlag = false;
@@ -178,11 +178,6 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject)
 		velocity.y = groundVel.y;
 	}
 
-}
-
-void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject)
-{
-
 	if (_hitObject.GetTag() == Tag::PLAYER)
 	{
 		isOnPlayer = true;
@@ -192,5 +187,11 @@ void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject)
 			pushStop = true;
 		}
 	}
+
+}
+
+void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject)
+{
+
 
 }

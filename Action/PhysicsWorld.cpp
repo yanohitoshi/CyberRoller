@@ -492,7 +492,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		}
 
 
-		for (auto itr : footCheckBoxes)
+		for (auto itr : switchBoxes)
 		{
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
 			if (itr->GetOwner()->GetState() != State::Active)

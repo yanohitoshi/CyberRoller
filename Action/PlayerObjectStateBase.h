@@ -52,7 +52,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateBase() {}
+	PlayerObjectStateBase() {};
 
 	/*
 	@fn デストラクタ
@@ -89,5 +89,10 @@ protected:
 	PlayerState state;
 	Vector3 velocity;
 	float inputDeadSpace;
+	const float MaxMoveSpeed = 1600.0f;
+
+private:
+
+
 };
 

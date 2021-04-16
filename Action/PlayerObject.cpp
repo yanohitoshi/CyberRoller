@@ -44,9 +44,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, playerBox({ Vector3::Zero,Vector3::Zero })
 	, FirstJumpPower(1200.0f)
 	, moveSpeed(0.0f)
-	, movePower(80.0f)
-	, FirstMovePower(50.0f)
-	, DeadSpace(0.6f)
+	, movePower(90.0f)
+	, FirstMovePower(0.0f)
+	, DeadSpace(0.1f)
 {
 
 	//GameObjectメンバ変数の初期化

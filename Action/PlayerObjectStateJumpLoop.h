@@ -46,6 +46,8 @@ private:
 	float move;
 	int jumpFrameCount;
 	bool animChangeFlag;
+	bool isDeadSpaceFlag;
+	bool tmpIsDeadSpaceFlag;
 
 };
 

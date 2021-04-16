@@ -79,10 +79,16 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1600.0f)
+
+			if (move >= MaxMoveSpeed)
 			{
-				move = 1600.0f;
+				move = MaxMoveSpeed;
 			}
+			
+			//if (move >= MaxMoveSpeed)
+			//{
+			//	move = MaxMoveSpeed;
+			//}
 
 			velocity.x = forward.x * move;
 			velocity.y = forward.y * move;

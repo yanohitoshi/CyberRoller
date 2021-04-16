@@ -70,9 +70,9 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1600.0f)
+			if (move >= MaxMoveSpeed)
 			{
-				move = 1600.0f;
+				move = MaxMoveSpeed;
 			}
 
 			velocity.x = forward.x * move;

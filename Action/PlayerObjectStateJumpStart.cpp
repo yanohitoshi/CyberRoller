@@ -81,9 +81,9 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1600.0f)
+			if (move >= MaxMoveSpeed)
 			{
-				move = 1600.0f;
+				move = MaxMoveSpeed;
 			}
 
 			velocity.x = forward.x * move;
@@ -165,6 +165,7 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	state = PlayerState::PLAYER_STATE_JUMPSTART;
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	velocity = _owner->GetVelocity();
+
 	move = _owner->GetMoveSpeed();
 	if (move <= 0.0f)
 	{

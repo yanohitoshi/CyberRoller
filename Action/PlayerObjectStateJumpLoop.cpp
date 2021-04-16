@@ -81,10 +81,11 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 			move += _owner->GetMovePower();
 
-			if (move >= 1600.0f)
+			if (move >= MaxMoveSpeed)
 			{
-				move = 1600.0f;
+				move = MaxMoveSpeed;
 			}
+
 
 			velocity.x = forward.x * move;
 			velocity.y = forward.y * move;
@@ -104,10 +105,12 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 			_owner->SetCharaForwardVec(forward);
 			_owner->SetMoveSpeed(move);
-
+			isDeadSpaceFlag = false;
 		}
 		else
 		{
+
+			isDeadSpaceFlag = true;
 			move -= _owner->GetMovePower();
 
 			if (move <= 0.0f)
@@ -119,6 +122,8 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 			velocity.y = _owner->GetCharaForwardVec().y * move;
 			_owner->SetInputFlag(false);
 		}
+		
+		tmpIsDeadSpaceFlag = isDeadSpaceFlag;
 	}
 
 }
@@ -143,4 +148,5 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	}
 
 	inputDeadSpace = _owner->GetDeadSpace();
+
 }

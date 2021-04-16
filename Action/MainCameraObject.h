@@ -119,7 +119,11 @@ private:
 	static const float pitchSpeed;
 
 	//カメラ回転の半径
-	float r;
+	float radius;
+	// タイムオーバー時の半径
+	float timeOverRadius;
+	// ダンス時状態時の半径
+	float danceRadius;
 
 	//移動先position
 	Vector3 tmpMovePos;

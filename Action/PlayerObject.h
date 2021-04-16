@@ -208,9 +208,10 @@ private:
 	int tmpAnimState;
 	//-----------------------------------------//
 
+	// 入力値のdeadスペース
 	const float DeadSpace;
 
-	//速度の定数
+	//加速度の定数
 	const float movePower;
 	const float FirstMovePower;
 	float moveSpeed;
