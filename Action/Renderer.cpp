@@ -751,7 +751,6 @@ Texture* Renderer::GetTimeRedTexture(int _time)
 void Renderer::DrawShadow()
 {
 
-
 	/* HDRとシャドウマップの処理開始 */
 	hdrRenderer->HdrRecordBegin();
 
@@ -858,10 +857,10 @@ void Renderer::DepthRendering()
 
 
 	//ライト情報
-	LightPos = Vector3(playerPos.x, playerPos.y, playerPos.z + 1000.0f);
+	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + 2000.0f);
 	LightDir = dirLight.direction;
 	LightDir.Normalize();
-	lightProjection = Matrix4::CreateOrtho(3000.0f, 3000.0f, 1.0f, 5000.0f);
+	lightProjection = Matrix4::CreateOrtho(7000.0f, 7000.0f, 1.0f, 10000.0f);
 	lightView = Matrix4::CreateLookAt(LightPos, playerPos, Vector3::UnitX);
 	lightSpeceMatrix = lightView * lightProjection;
 
@@ -878,7 +877,9 @@ void Renderer::DepthRendering()
 
 	for (auto mc : meshComponents)
 	{
-		if (mc->GetVisible())
+		Tag chackTag = mc->GetOwner()->GetTag();
+
+		if (mc->GetVisible() && chackTag != Tag::WALL)
 		{
 			mc->Draw(depthMapShader);
 		}

@@ -27,7 +27,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 	{
 		_owner->SetMoveSpeed(move);
 		_owner->SetVelocity(velocity);
-
+		_owner->SetJumpFrameCount(jumpFrameCount);
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
@@ -79,7 +79,8 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			forward.Normalize();
 
 
-			move += _owner->GetMovePower();
+			move += _owner->GetAirMovePower();
+			move *= 1.0f - jumpFrameCount / 80.0f;
 
 			if (move >= MaxMoveSpeed)
 			{

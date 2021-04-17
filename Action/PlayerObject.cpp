@@ -47,6 +47,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, movePower(90.0f)
 	, FirstMovePower(0.0f)
 	, DeadSpace(0.1f)
+	, airMovePower(60.0f)
 {
 
 	//GameObjectメンバ変数の初期化

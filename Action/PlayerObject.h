@@ -114,6 +114,7 @@ public:
 	const float GetDeadSpace() { return DeadSpace; }
 	const float GetFirstMovePower() { return FirstMovePower; }
 	const float GetMovePower() { return movePower; }
+	const float GetAirMovePower() { return airMovePower; }
 	const float GetFirstJumpPower() { return FirstJumpPower; }
 
 	// 戻り値→float
@@ -213,6 +214,8 @@ private:
 
 	//加速度の定数
 	const float movePower;
+	const float airMovePower;
+
 	const float FirstMovePower;
 	float moveSpeed;
 	//入力があったかどうか判定するためのフラグ

@@ -47,5 +47,7 @@ private:
 	int jumpFrameCount;
 	bool endFlag;
 
+
+
 };
 

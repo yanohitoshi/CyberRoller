@@ -12,6 +12,7 @@ PlayerObjectStateJumpLoop::~PlayerObjectStateJumpLoop()
 
 PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
+	++jumpLoopCount;
 
 	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 
@@ -72,14 +73,23 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		//入力があるか
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
-			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
+			Vector3 tmpForward = _owner->GetCharaForwardVec();
+			_owner->SetTmpCharaForwardVec(tmpForward);
 
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
 
-
-			move += _owner->GetMovePower();
+			move += _owner->GetAirMovePower();
+			
+			if (_owner->GetSwitchJumpFlag())
+			{
+				move *= 1.0f - jumpLoopCount / 880.0f;
+			}
+			else
+			{
+				move *= 1.0f - jumpLoopCount / 560.0f;
+			}
 
 			if (move >= MaxMoveSpeed)
 			{
@@ -89,7 +99,6 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 			velocity.x = forward.x * move;
 			velocity.y = forward.y * move;
-
 
 			if (_owner->GetTmpCharaForwardVec() != forward)
 			{
@@ -105,12 +114,10 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 			_owner->SetCharaForwardVec(forward);
 			_owner->SetMoveSpeed(move);
-			isDeadSpaceFlag = false;
 		}
 		else
 		{
 
-			isDeadSpaceFlag = true;
 			move -= _owner->GetMovePower();
 
 			if (move <= 0.0f)
@@ -123,7 +130,6 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 			_owner->SetInputFlag(false);
 		}
 		
-		tmpIsDeadSpaceFlag = isDeadSpaceFlag;
 	}
 
 }
@@ -133,9 +139,9 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	animChangeFlag = true;
-	jumpFrameCount = _owner->GetJumpFrameCount();
+	jumpLoopCount = 0;
 	velocity = _owner->GetVelocity();
-
+	time = _deltaTime;
 	if (_owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART)
 	{
 		velocity.z = _owner->GetJumpPower();
