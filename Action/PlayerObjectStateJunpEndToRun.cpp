@@ -37,7 +37,7 @@ PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _d
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
-	_owner->SetMoveSpeed(move);
+	_owner->SetMoveSpeed(moveSpeed);
 
 	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
@@ -68,15 +68,15 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 			forward.Normalize();
 
 
-			move += _owner->GetMovePower();
+			moveSpeed += _owner->GetMovePower();
 
-			if (move >= MaxMoveSpeed)
+			if (moveSpeed >= MaxMoveSpeed)
 			{
-				move = MaxMoveSpeed;
+				moveSpeed = MaxMoveSpeed;
 			}
 
-			velocity.x = forward.x * move;
-			velocity.y = forward.y * move;
+			velocity.x = forward.x * moveSpeed;
+			velocity.y = forward.y * moveSpeed;
 
 
 			if (_owner->GetTmpCharaForwardVec() != forward)
@@ -92,18 +92,18 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 			}
 
 			_owner->SetCharaForwardVec(forward);
-			_owner->SetMoveSpeed(move);
+			_owner->SetMoveSpeed(moveSpeed);
 
 		}
 		else
 		{
-			if (move >= 0.0f)
+			if (moveSpeed >= 0.0f)
 			{
-				move -= 75.0f;
+				moveSpeed -= 75.0f;
 			}
 
-			velocity.x = _owner->GetCharaForwardVec().x * move;
-			velocity.y = _owner->GetCharaForwardVec().y * move;
+			velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
+			velocity.y = _owner->GetCharaForwardVec().y * moveSpeed;
 
 			_owner->SetInputFlag(false);
 		}
@@ -126,11 +126,9 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
-	move = _owner->GetMoveSpeed();
+	moveSpeed = _owner->GetMoveSpeed();
 	velocity = _owner->GetVelocity();
 	velocity.z = 0.0f;
 	inputDeadSpace = _owner->GetDeadSpace();
-	endFlag = false;
-
 
 }

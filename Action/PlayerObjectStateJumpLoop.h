@@ -43,9 +43,11 @@ public:
 
 private:
 
-	float move;
+	// ジャンプループが行われている時間を測るカウント変数
 	int jumpLoopCount;
+	// ジャンプスタートのアニメーションが終了するタイミングをずらすためのフラグ
+	// ※見た目上ずらしたかったので作りました
 	bool animChangeFlag;
-	float time;
+
 };
 

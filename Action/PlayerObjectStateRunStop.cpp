@@ -14,19 +14,19 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 
 	++isTurnCount;
 
-	if (move >= 0.0f)
+	if (moveSpeed >= 0.0f)
 	{
-		move -= 75.0f;
+		moveSpeed -= decelerationForce;
 	}
 
-	velocity.x = _owner->GetCharaForwardVec().x * move;
-	velocity.y = _owner->GetCharaForwardVec().y * move;
+	velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
+	velocity.y = _owner->GetCharaForwardVec().y * moveSpeed;
 
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 
-	if (!skeletalMeshComponent->IsPlaying() || move <= 0.0f)
+	if (!skeletalMeshComponent->IsPlaying() || moveSpeed <= 0.0f)
 	{
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
@@ -39,6 +39,11 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
+	}
+
+	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
+	{
+		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
 	_owner->SetVelocity(velocity);
@@ -102,8 +107,9 @@ void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_STOP));
 	state = PlayerState::PLAYER_STATE_RUN_STOP;
-	move = _owner->GetMoveSpeed();
+	moveSpeed = _owner->GetMoveSpeed();
 
 	inputDeadSpace = _owner->GetDeadSpace();
 	isTurnCount = 0;
+	decelerationForce = _owner->GetDecelerationForce();
 }

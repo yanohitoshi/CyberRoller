@@ -40,7 +40,9 @@ public:
 
 private:
 
+	// コンティニューするかどうかのフラグ変数
 	bool isContinue;
+	// ダウンループ中に入力があったかどうかのフラグ変数
 	bool isInput;
 
 };

@@ -1,4 +1,5 @@
 #include "SecondStageScene.h"
+#include "BaseScene.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "InputSystem.h"
@@ -20,7 +21,7 @@ SecondStageScene::SecondStageScene()
 	clearCount = 0;
 	changeCount = 0;
 	startScene = true;
-	continueFlag = false;
+	isContinueFlag = false;
 	endFlag = false;
 	lightDownFlag = true;
 
@@ -38,6 +39,7 @@ SecondStageScene::SecondStageScene()
 
 	// シーンUIを追加
 	new SecondStageUI();
+
 }
 
 SecondStageScene::~SecondStageScene()
@@ -84,7 +86,7 @@ SceneState SecondStageScene::Update(const InputState& state)
 		{
 			lightDownFlag = false;
 			// コンテニュー遷移状態にする
-			continueFlag = true;
+			isContinueFlag = true;
 		}
 
 		// Bボタンが押されたら
@@ -97,14 +99,14 @@ SceneState SecondStageScene::Update(const InputState& state)
 	}
 
 	// コンテニューかゲームオーバーが選択されたら
-	if (continueFlag == true || endFlag == true)
+	if (isContinueFlag == true || endFlag == true)
 	{
 		// 遷移カウント開始
 		++changeCount;
 		if (changeCount >= 90)
 		{
 			// コンテニューだったら明るくゲームオーバーだったら暗くする
-			if (continueFlag == true)
+			if (isContinueFlag == true)
 			{
 				light += Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
@@ -117,9 +119,10 @@ SceneState SecondStageScene::Update(const InputState& state)
 			if (changeCount >= 240)
 			{
 				// コンテニューだったら最初のステージへゲームオーバーだったらリザルト画面へ
-				if (continueFlag == true)
+				if (isContinueFlag == true)
 				{
-					return SceneState::FIRST_SATGE_SCENE;
+					Game::SetContinueFlag(true);
+					return SceneState::SECOND_SATGE_SCENE;
 				}
 				else if (endFlag == true)
 				{

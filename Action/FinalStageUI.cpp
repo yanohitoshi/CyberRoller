@@ -17,7 +17,7 @@ FinalStageUI::FinalStageUI()
 	: GameObject(false, Tag::UI)
 {
 	// カウントダウン
-	new CountDownFont(150);
+	new CountDownFont(250);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

@@ -43,6 +43,7 @@ public:
 
 private:
 
+	// リスポーン状態に入るまでのカウントを測る変数
 	int reSpawnCount;
 };
 

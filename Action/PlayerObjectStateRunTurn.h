@@ -41,8 +41,8 @@ public:
 
 private:
 
-	int turnDelayCount;
-	float move;
+	// Œ¸‘¬—Í
+	float decelerationForce;
 
 };
 

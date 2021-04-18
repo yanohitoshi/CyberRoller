@@ -36,6 +36,4 @@ void PlayerObjectStateFlinch::Enter(PlayerObject* _owner, float _deltaTime)
 
 	_owner->SetMoveSpeed(_owner->GetFirstMovePower());
 	_owner->SetVelocity(Vector3::Zero);
-
-	isEndAnimation = false;
 }

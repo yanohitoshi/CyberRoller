@@ -16,7 +16,7 @@ SecondStageUI::SecondStageUI()
 	: GameObject(false, Tag::UI)
 {
 	// カウントダウン
-	new CountDownFont(90);
+	new CountDownFont(120);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

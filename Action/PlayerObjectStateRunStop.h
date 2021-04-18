@@ -43,7 +43,9 @@ public:
 
 private:
 
-	float move;
+	// U‚è•Ô‚è‚É“ü‚ê‚é‚©‚Ç‚¤‚©‚Ì§ŒÀƒJƒEƒ“ƒg
 	int isTurnCount;
+	// Œ¸‘¬—Í
+	float decelerationForce;
 };
 

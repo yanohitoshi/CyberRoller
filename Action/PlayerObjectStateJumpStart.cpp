@@ -25,7 +25,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 
 	if (endFlag == true)
 	{
-		_owner->SetMoveSpeed(move);
+		_owner->SetMoveSpeed(moveSpeed);
 		_owner->SetVelocity(velocity);
 		_owner->SetJumpFrameCount(jumpFrameCount);
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
@@ -33,7 +33,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 
 	if (_owner->GetOnGround() == true && endFlag == true)
 	{
-		_owner->SetMoveSpeed(move);
+		_owner->SetMoveSpeed(moveSpeed);
 		_owner->SetVelocity(velocity);
 
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
@@ -78,17 +78,28 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
 
+			// 空中用の移動力の定数を足す
+			moveSpeed += _owner->GetAirMovePower();
 
-			move += _owner->GetAirMovePower();
-			move *= 1.0f - jumpFrameCount / 80.0f;
-
-			if (move >= MaxMoveSpeed)
+			// SwitchJumpの場合飛ぶ時間が長いので割合を変更
+			if (_owner->GetSwitchJumpFlag())
 			{
-				move = MaxMoveSpeed;
+				// ループしているフレームカウントを割って一定数ずつ減速をかける
+				moveSpeed *= 1.0f - jumpFrameCount / 160.0f;
+			}
+			else
+			{
+				// ループしているフレームカウントを割って一定数ずつ減速をかける
+				moveSpeed *= 1.0f - jumpFrameCount / 80.0f;
 			}
 
-			velocity.x = forward.x * move;
-			velocity.y = forward.y * move;
+			if (moveSpeed >= MaxMoveSpeed)
+			{
+				moveSpeed = MaxMoveSpeed;
+			}
+
+			velocity.x = forward.x * moveSpeed;
+			velocity.y = forward.y * moveSpeed;
 
 
 			if (_owner->GetTmpCharaForwardVec() != forward)
@@ -104,7 +115,7 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			}
 
 			_owner->SetCharaForwardVec(forward);
-			_owner->SetMoveSpeed(move);
+			_owner->SetMoveSpeed(moveSpeed);
 
 
 			_owner->SetInputFlag(true);
@@ -167,10 +178,11 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	velocity = _owner->GetVelocity();
 
-	move = _owner->GetMoveSpeed();
-	if (move <= 0.0f)
+	moveSpeed = _owner->GetMoveSpeed();
+
+	if (moveSpeed <= 0.0f)
 	{
-		move = _owner->GetFirstMovePower();
+		moveSpeed = _owner->GetFirstMovePower();
 	}
 
 	endFlag = false;

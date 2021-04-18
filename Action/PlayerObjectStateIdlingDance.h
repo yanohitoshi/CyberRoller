@@ -38,11 +38,16 @@ public:
 	*/
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
+	/*
+	@fn isDancingのgetter関数
+	@return	static bool ダンス中かどうかのフラグ変数
+	*/
 	static bool GetIsDancing() { return isDancing; }
 
 private:
 
+	// ダンス状態かどうかを表すフラグ変数
+	// ※カメラ側でも使用したかったのでstaticを使用してます
 	static bool isDancing;
-	float move;
 };
 

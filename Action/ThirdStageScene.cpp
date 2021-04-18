@@ -20,7 +20,7 @@ ThirdStageScene::ThirdStageScene()
 	clearCount = 0;
 	changeCount = 0;
 	startScene = true;
-	continueFlag = false;
+	isContinueFlag = false;
 	endFlag = false;
 	lightDownFlag = true;
 
@@ -86,7 +86,7 @@ SceneState ThirdStageScene::Update(const InputState& state)
 		{
 			// コンテニュー遷移状態にする
 			lightDownFlag = false;
-			continueFlag = true;
+			isContinueFlag = true;
 		}
 		// Bボタンが押されたら
 		if (state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed)
@@ -98,14 +98,14 @@ SceneState ThirdStageScene::Update(const InputState& state)
 	}
 
 	 // コンテニューかゲームオーバーが選択されたら
-	if (continueFlag == true || endFlag == true)
+	if (isContinueFlag == true || endFlag == true)
 	{
 		// 遷移カウント開始
 		++changeCount;
 		if (changeCount >= 90)
 		{
 			// コンテニューだったら明るくゲームオーバーだったら暗くする
-			if (continueFlag == true)
+			if (isContinueFlag == true)
 			{
 				light += Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
@@ -118,9 +118,10 @@ SceneState ThirdStageScene::Update(const InputState& state)
 			if (changeCount >= 360)
 			{
 				// コンテニューだったら最初のステージへゲームオーバーだったらリザルト画面へ
-				if (continueFlag == true)
+				if (isContinueFlag == true)
 				{
-					return SceneState::FIRST_SATGE_SCENE;
+					Game::SetContinueFlag(true);
+					return SceneState::THIRD_SATGE_SCENE;
 				}
 				else if (endFlag == true)
 				{

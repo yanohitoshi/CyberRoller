@@ -40,7 +40,9 @@ public:
 
 private:
 
+	// ダンス状態に切り替えるフラグ変数
 	bool isDanceFlag;
+	// 入力が無い間カウントを数える用のカウント変数
 	int danceCount;
 
 };

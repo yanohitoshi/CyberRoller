@@ -29,7 +29,7 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		animChangeFlag = false;
 	}
 
-	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && move >= 600.0f)
+	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && moveSpeed >= 600.0f)
 	{
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 	}
@@ -49,7 +49,7 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 	}
 
 	_owner->SetVelocity(velocity);
-	_owner->SetMoveSpeed(move);
+	_owner->SetMoveSpeed(moveSpeed);
 
 	// 更新されたstateを返す
 	return state;
@@ -80,25 +80,29 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
 
-			move += _owner->GetAirMovePower();
+			// 空中用の移動力の定数を足す
+			moveSpeed += _owner->GetAirMovePower();
 			
+			// SwitchJumpの場合飛ぶ時間が長いので割合を変更
 			if (_owner->GetSwitchJumpFlag())
 			{
-				move *= 1.0f - jumpLoopCount / 880.0f;
+				// ループしているフレームカウントを割って一定数ずつ減速をかける
+				moveSpeed *= 1.0f - jumpLoopCount / 1320.0f;
 			}
 			else
 			{
-				move *= 1.0f - jumpLoopCount / 560.0f;
+				// ループしているフレームカウントを割って一定数ずつ減速をかける
+				moveSpeed *= 1.0f - jumpLoopCount / 840.0f;
 			}
 
-			if (move >= MaxMoveSpeed)
+			if (moveSpeed >= MaxMoveSpeed)
 			{
-				move = MaxMoveSpeed;
+				moveSpeed = MaxMoveSpeed;
 			}
 
 
-			velocity.x = forward.x * move;
-			velocity.y = forward.y * move;
+			velocity.x = forward.x * moveSpeed;
+			velocity.y = forward.y * moveSpeed;
 
 			if (_owner->GetTmpCharaForwardVec() != forward)
 			{
@@ -113,20 +117,20 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 			}
 
 			_owner->SetCharaForwardVec(forward);
-			_owner->SetMoveSpeed(move);
+			_owner->SetMoveSpeed(moveSpeed);
 		}
 		else
 		{
 
-			move -= _owner->GetMovePower();
+			moveSpeed -= _owner->GetAirMovePower();
 
-			if (move <= 0.0f)
+			if (moveSpeed <= 0.0f)
 			{
-				move = 0.0f;
+				moveSpeed = 0.0f;
 			}
 
-			velocity.x = _owner->GetCharaForwardVec().x * move;
-			velocity.y = _owner->GetCharaForwardVec().y * move;
+			velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
+			velocity.y = _owner->GetCharaForwardVec().y * moveSpeed;
 			_owner->SetInputFlag(false);
 		}
 		
@@ -141,16 +145,16 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	animChangeFlag = true;
 	jumpLoopCount = 0;
 	velocity = _owner->GetVelocity();
-	time = _deltaTime;
 	if (_owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART)
 	{
 		velocity.z = _owner->GetJumpPower();
 	}
 
-	move = _owner->GetMoveSpeed();
-	if (move <= 0.0f)
+	moveSpeed = _owner->GetMoveSpeed();
+
+	if (moveSpeed <= 0.0f)
 	{
-		move = _owner->GetFirstMovePower();
+		moveSpeed = _owner->GetFirstMovePower();
 	}
 
 	inputDeadSpace = _owner->GetDeadSpace();

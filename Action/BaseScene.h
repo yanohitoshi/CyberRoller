@@ -16,7 +16,7 @@ class BaseScene
 {
 public:
 
-	// コンストラクタ（仮想関数）
+	// コンストラクタ
 	BaseScene() {};
 
 	/*
@@ -33,6 +33,7 @@ public:
 	*/
 	virtual SceneState Update(const InputState& state) = 0;
 
+
 protected:
 
 	// ライト用Vector3変数
@@ -44,7 +45,7 @@ protected:
 	// シーンが始まったかどうかフラグ
 	bool startScene;
 	// コンテニューされたかフラグ
-	bool continueFlag;
+	bool isContinueFlag;
 	// 終了フラグ
 	bool endFlag;
 	// ライトを落とすかどうかフラグ
@@ -52,5 +53,9 @@ protected:
 
 	// ライトの強さの最大値
 	const float MAX_LIGHT = 0.8f;
+
+private:
+
+
 };
 

@@ -43,8 +43,6 @@ public:
 
 private:
 
-	float move;
-	bool endFlag;
 
 };
 

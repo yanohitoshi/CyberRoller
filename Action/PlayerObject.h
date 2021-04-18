@@ -101,6 +101,7 @@ public:
 	const Animation* GetAnimation(PlayerState _state);
 
 	//--------------state等でメンバー変数を使用するためのgetter群------------------------------//
+	// ※減らせるかもしれない
 	// 戻り値→Vector3
 	Vector3 GetForwardVec() { return forwardVec; }
 	Vector3 GetRightVec() { return rightVec; }
@@ -116,6 +117,7 @@ public:
 	const float GetMovePower() { return movePower; }
 	const float GetAirMovePower() { return airMovePower; }
 	const float GetFirstJumpPower() { return FirstJumpPower; }
+	const float GetDecelerationForce() { return decelerationForce; }
 
 	// 戻り値→float
 	float GetMoveSpeed() { return moveSpeed; }
@@ -144,6 +146,7 @@ public:
 	PlayerState GetNowState() { return nowState; }
 
 	//--------------state等でメンバー変数を使用するためのsetter群------------------------------//
+	// ※減らせるかもしれない
 	// 引数→Vector3
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
 	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
@@ -215,62 +218,89 @@ private:
 	//加速度の定数
 	const float movePower;
 	const float airMovePower;
-
+	// 減速する力
+	const float decelerationForce;
+	// 初速度
 	const float FirstMovePower;
 	float moveSpeed;
+
 	//入力があったかどうか判定するためのフラグ
 	bool inputFlag = false;
+
 	//右方向ベクトル
 	Vector3 rightVec;
+
 	//キャラクターの前方ベクトル
 	Vector3 charaForwardVec;
+
 	//キャラクターを回転させるか前方ベクトルと比較するためのベクトル
 	Vector3 tmpCharaForwardVec;
+
 	//方向に合わせて回転させるためのベクトル
 	Vector3 rotateVec;
+
+	// 生成されたときのポジションを保存するためのvector3変数
 	Vector3 firstPos;
 	Vector3 startPos;
 	Vector3 respownPos;
 
-	//押されている速度
+	// 他のオブジェクトから押されている時の速度
 	Vector3 pushedVelocity;
+
 	//重力
 	static const float Gravity;
+
 	//初期ジャンプ力定数
 	const float FirstJumpPower;
+
 	// 振り返りディレイ用カウント変数
 	int turnDelayCount;
+
 	//ジャンプ力
 	float jumpPower;
+
 	//ジャンプ中かどうかのフラグ
 	bool isJumping;
+
 	//引き続きジャンプボタンが利用可能かフラグ
 	bool isAvailableJumpKey;
+
 	//ジャンプできるかフラグ
 	bool jumpFlag;
+
 	//ジャンプボタンが押されている間のフレームカウント
 	int jumpFrameCount;
+
 	//ジャンプスイッチを押したかどうか
 	bool switchJumpFlag;
+
 	//接地フラグ
 	bool onGround;
+
 	//走り状態かどうか
 	bool runFlag;
+
 	// 入力が可能かどうか
 	bool isAvailableInput;
+
 	// 入力がない間カウント
 	int reStartCount;
+
 	// ダウン状態かどうか
 	bool downFlag;
+
 	// ダウン時コンティニュー選択でYESが選択されたかどうか
 	bool downUpFlag;
+
 	// ダウン時コンティニュー選択でNOが選択されたかどうか
 	bool downOverFlag;
 
 	// 最終ステージ用のクリアフラグ
 	static bool clearFlag;
+
 	// 最終ステージ以外での次のシーンへ遷移するフラグ
 	static bool nextSceneFlag;
+
 	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
 	static bool reStartFlag;
 
@@ -283,8 +313,10 @@ private:
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
 	int respawnCount;
+
 	// リスポーン用フラグ
 	bool respawnFlag;
+
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
 
@@ -293,8 +325,10 @@ private:
 	
 	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
+
 	// 変更された次のプレーヤーのstate状態を保存するための変数
 	PlayerState nextState;
+
 	// stateプール
 	std::vector<class PlayerObjectStateBase*> statePools;
 

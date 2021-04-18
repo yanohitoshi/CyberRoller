@@ -13,13 +13,13 @@ PlayerObjectStateRunTurn::~PlayerObjectStateRunTurn()
 PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaTime)
 {
 
-	if (move >= 0.0f)
+	if (moveSpeed >= 0.0f)
 	{
-		move -= 80.0f;
+		moveSpeed -= decelerationForce;
 	}
 
-	velocity.x = _owner->GetCharaForwardVec().x * move * -1.0f;
-	velocity.y = _owner->GetCharaForwardVec().y * move * -1.0f;
+	velocity.x = _owner->GetCharaForwardVec().x * moveSpeed * -1.0f;
+	velocity.y = _owner->GetCharaForwardVec().y * moveSpeed * -1.0f;
 
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
@@ -27,9 +27,9 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 	if (!skeletalMeshComponent->IsPlaying())
 	{
 		state = PlayerState::PLAYER_STATE_RUN;
-		if (move <= 200.0f)
+		if (moveSpeed <= 200.0f)
 		{
-			move = 200.0f;
+			moveSpeed = 200.0f;
 		}
 	}
 
@@ -59,7 +59,7 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 	}
 
 	_owner->SetVelocity(velocity);
-	_owner->SetMoveSpeed(move);
+	_owner->SetMoveSpeed(moveSpeed);
 
 	// 更新されたstateを返す
 	return state;
@@ -114,8 +114,10 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_TURN),1.5f);
 	state = PlayerState::PLAYER_STATE_RUN_TURN;
-	move = _owner->GetMoveSpeed();
+	moveSpeed = _owner->GetMoveSpeed();
 
 	inputDeadSpace = _owner->GetDeadSpace();
 	_owner->SetTurnDelayCount(0);
+	decelerationForce = _owner->GetDecelerationForce();
+
 }

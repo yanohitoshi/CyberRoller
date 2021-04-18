@@ -43,11 +43,10 @@ public:
 
 private:
 
-	float move;
+	// ジャンプが行われているフレームを測るカウント変数
 	int jumpFrameCount;
+	// ジャンプが終了したかどうかのフラグ変数
 	bool endFlag;
-
-
 
 };
 

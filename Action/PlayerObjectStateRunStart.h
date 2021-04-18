@@ -41,7 +41,5 @@ public:
 
 private:
 
-	float move;
-
 };
 

@@ -46,7 +46,7 @@ PlayerState PlayerObjectStateRunStart::Update(PlayerObject* _owner, float _delta
 	}
 
 	_owner->SetVelocity(velocity);
-	_owner->SetMoveSpeed(move);
+	_owner->SetMoveSpeed(moveSpeed);
 
 	// XV‚³‚ê‚½state‚ð•Ô‚·
 	return state;
@@ -77,21 +77,16 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 			forward.Normalize();
 
 
-			move += _owner->GetMovePower();
+			moveSpeed += _owner->GetMovePower();
 
 
-			if (move >= MaxMoveSpeed)
+			if (moveSpeed >= MaxMoveSpeed)
 			{
-				move = MaxMoveSpeed;
+				moveSpeed = MaxMoveSpeed;
 			}
 			
-			//if (move >= MaxMoveSpeed)
-			//{
-			//	move = MaxMoveSpeed;
-			//}
-
-			velocity.x = forward.x * move;
-			velocity.y = forward.y * move;
+			velocity.x = forward.x * moveSpeed;
+			velocity.y = forward.y * moveSpeed;
 
 
 			if (_owner->GetTmpCharaForwardVec() != forward)
@@ -107,7 +102,7 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 			}
 
 			_owner->SetCharaForwardVec(forward);
-			_owner->SetMoveSpeed(move);
+			_owner->SetMoveSpeed(moveSpeed);
 
 		}
 		else
@@ -131,10 +126,11 @@ void PlayerObjectStateRunStart::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_START));
 	state = PlayerState::PLAYER_STATE_RUN_START;
-	move = _owner->GetMoveSpeed();
-	if (move <= 0.0f)
+	moveSpeed = _owner->GetMoveSpeed();
+
+	if (moveSpeed <= 0.0f)
 	{
-		move = _owner->GetFirstMovePower();
+		moveSpeed = _owner->GetFirstMovePower();
 	}
 
 	inputDeadSpace = _owner->GetDeadSpace();

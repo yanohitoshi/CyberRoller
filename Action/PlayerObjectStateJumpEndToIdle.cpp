@@ -96,7 +96,6 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
-	endFlag = false;
 
 	inputDeadSpace = _owner->GetDeadSpace();
 }

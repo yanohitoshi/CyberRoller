@@ -16,7 +16,7 @@ ThirdStageUI::ThirdStageUI()
 	: GameObject(false, Tag::UI)
 {
 	// カウントダウン
-	new CountDownFont(120);
+	new CountDownFont(200);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

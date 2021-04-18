@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerObject.h"
 
+// クラスの前方宣言
 class PlayerObject;
 class SkeletalMeshComponent;
 
@@ -85,10 +86,17 @@ public:
 
 protected:
 
+	// 親クラスのポインタを格納するためのSkeletalMeshComponentのポインタ変数
 	SkeletalMeshComponent* skeletalMeshComponent;
+	// stateの遷移を行うための変数
 	PlayerState state;
+	// 速度をポジションに作用する速度を格納するためのVector3変数
 	Vector3 velocity;
+	// 速度を格納するための変数
+	float moveSpeed;
+	// 入力制限の値を格納するための変数
 	float inputDeadSpace;
+	// 移動速度の最高値
 	const float MaxMoveSpeed = 1600.0f;
 
 private:

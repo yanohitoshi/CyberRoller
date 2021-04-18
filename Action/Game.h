@@ -74,6 +74,9 @@ public:
 	*/
 	friend void ProcessInputs(const InputState& _state);
 
+	static void SetContinueFlag(bool _continueFlag) { continueFlag = _continueFlag; }
+	static bool GetContinueFlag() { return continueFlag; }
+
 	// シーン遷移が行われるかどうかフラグ
 	static bool isChangeScene;
 
@@ -123,6 +126,9 @@ private:
 
 	//ゲームを続けるかどうか
     bool isRunning;
+
+	// コンテニューされたかフラグ
+	static bool continueFlag;
 
 	// スクリーンの幅
 	float screenWidth;

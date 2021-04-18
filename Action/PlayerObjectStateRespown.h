@@ -41,6 +41,7 @@ public:
 
 private:
 
+	// リスポーンしたかどうかのフラグ変数
 	bool isRespown;
 
 };

@@ -20,7 +20,11 @@
 #include "GameObject.h"
 
 int Game::debug = 0;
+// シーンチェンジを行うかフラグの初期化
 bool Game::isChangeScene = false;
+// ゲーム全体で見るコンティニューされたかどうかの判定フラグの初期化
+bool Game::continueFlag = false;
+
 /*
 @brief  コンストラクタ
 */
@@ -157,6 +161,7 @@ void Game::GameLoop()
 		{
 			ChangeScene(nowSceneState, nowScene);
 			isChangeScene = false;
+			continueFlag = false;
 		}
 	}
 }
@@ -211,12 +216,12 @@ void Game::ProcessInput()
 
 	tmpSceneState = nowScene->Update(state);
 
-	if (isChangeScene == false)
+	if (isChangeScene == false && Game::GetContinueFlag() == false)
 	{
 		ProcessInputs(state);
 	}
 
-	if (tmpSceneState != nowSceneState)
+	if (tmpSceneState != nowSceneState || Game::GetContinueFlag())
 	{
 		nowSceneState = tmpSceneState;
 		isChangeScene = true;

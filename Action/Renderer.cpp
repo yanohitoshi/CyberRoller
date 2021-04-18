@@ -167,7 +167,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
 
-	CreateTimeFontTexture(151,72);
+	CreateTimeFontTexture(251,72);
 
 	return true;
 }
