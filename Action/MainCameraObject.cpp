@@ -30,7 +30,7 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	tmpMovePos = Vector3(0.0f,0.0f,0.0f);
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-100.0f,-100.0f,-100.0f),Vector3(100.0f,100.0f,50.0f) };
+	AABB aabb = { Vector3(-100.0f,-100.0f,-50.0f),Vector3(100.0f,100.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
 
 	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
@@ -86,7 +86,6 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 			{
 				radius *= -1.0f;
 			}
-
 		}
 		else
 		{
@@ -102,14 +101,14 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 			radius = 10.0f;
 		}
 
-		if (pitch <= 0.0f && pitch > -30.0f)
+		if (pitch < 0.0f && pitch > -30.0f)
 		{
 			radius -= 300.0f;
 		}
-		else if (pitch <= -30.0f && pitch >= -60.0f)
-		{
-			radius -= 600.0f;
-		}
+		//else if (pitch <= -30.0f && pitch >= -60.0f)
+		//{
+		//	radius -= 600.0f;
+		//}
 
 		tmpMovePos.x = radius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
 		tmpMovePos.y = radius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
@@ -201,9 +200,9 @@ void MainCameraObject::GameObjectInput(const InputState& _keyState)
 	{
 		pitch = Math::ToRadians(70.0f);
 	}
-	if (pitch < Math::ToRadians(-60.0f))
+	if (pitch < Math::ToRadians(-30.0f))
 	{
-		pitch = Math::ToRadians(-60.0f);
+		pitch = Math::ToRadians(-30.0f);
 	}
 }
 

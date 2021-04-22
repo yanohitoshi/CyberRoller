@@ -38,7 +38,7 @@ public:
 	@fn デストラクタ
 	@brief  objectの削除を行う
 	*/
-	~ParticleEffectBase();
+	virtual ~ParticleEffectBase();
 
 	/*
 	@fn 更新処理関数

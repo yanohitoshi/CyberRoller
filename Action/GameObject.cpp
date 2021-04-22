@@ -215,12 +215,14 @@ std::vector<GameObject*> GameObject::FindGameObject(Tag _tag)
 
 void GameObject::AddGameObject(GameObject* _object)
 {
+	// 途中で追加されたオブジェクトを一度一時追加用配列に追加
 	if (updatingGameObject)
 	{
 		pendingGameObjects.emplace_back(_object);
 	}
 	else
 	{
+		// 途中追加でない場合最初にそれぞれの配列に追加
 		auto gameObjects = gameObjectMap.find(_object->GetTag());
 		if (gameObjects != gameObjectMap.end())
 		{
@@ -237,6 +239,7 @@ void GameObject::AddGameObject(GameObject* _object)
 
 void GameObject::RemoveGameObject(GameObject* _object)
 {
+	// 途中追加用配列に対象のオブジェクトがあった場合削除する
 	auto itr = std::find(pendingGameObjects.begin(), pendingGameObjects.end(), _object);
 	if (itr != pendingGameObjects.end())
 	{
@@ -244,6 +247,7 @@ void GameObject::RemoveGameObject(GameObject* _object)
 		pendingGameObjects.pop_back();
 	}
 
+	// 全体のgameObject配列に対象のオブジェクトがあった場合削除する
 	auto gameObjects = gameObjectMap.find(_object->GetTag())->second;
 	itr = std::find(gameObjects.begin(), gameObjects.end(), _object);
 	if (itr != gameObjects.end())
@@ -256,6 +260,7 @@ void GameObject::RemoveGameObject(GameObject* _object)
 
 void GameObject::RemoveUsedGameObject()
 {
+	// 現在シーン上に作られているオブジェクトを全て削除する
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
 		for (auto gameObject : itr->second)

@@ -283,16 +283,14 @@ void Game::UpdateGame()
 
 void UpdateGameObjects(float _deltaTime)
 {
+	// 
 	GameObject::updatingGameObject = true;
 	
-	//int objectCount = 0;
-
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
 		for (auto gameObject : itr->second)
 		{
 			gameObject->Update(_deltaTime);
-			//++objectCount;
 		}
 	}
 
