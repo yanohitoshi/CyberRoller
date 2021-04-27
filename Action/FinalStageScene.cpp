@@ -100,24 +100,28 @@ SceneState FinalStageScene::Update(const InputState& state)
 	{
 		// 遷移カウント開始
 		++changeCount;
-		if (changeCount >= 90)
+		if (changeCount >= CHOICE_CONTINUE_COUNT)
 		{
 			// コンテニューだったら明るくゲームオーバーだったら暗くする
 			if (isContinueFlag == true)
 			{
+				// ライトアップ
 				light += Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
 			}
 			else if (endFlag == true)
 			{
+				// ライトダウン
 				light -= Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
 			}
-			if (changeCount >= 360)
+			if (changeCount >= CONTINUE_TO_CHANGE_SCENE)
 			{
-				// コンテニューだったら最初のステージへゲームオーバーだったらリザルト画面へ
+				// コンテニューだったらステージ最初へゲームオーバーだったらリザルト画面へ
 				if (isContinueFlag == true)
 				{
+					// コンティニューされたらそのステージから始めるために
+					// コンティニューされたかどうか判定するためのフラグを切り替える
 					Game::SetContinueFlag(true);
 					return SceneState::FINAL_STAGE_SCENE;
 				}

@@ -53,6 +53,12 @@ protected:
 
 	// ライトの強さの最大値
 	const float MAX_LIGHT = 0.8f;
+	// クリアした時のシーンが遷移するまでのカウント
+	const int CLEAR_TO_CHANGE_SCENE = 120;
+	// コンテニュー選択状態に入るまでのカウント
+	const int CHOICE_CONTINUE_COUNT = 90;
+	// コンテニュー選択後、次のシーンに遷移するまでのカウント
+	const int CONTINUE_TO_CHANGE_SCENE = 360;
 
 private:
 

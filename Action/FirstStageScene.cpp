@@ -61,7 +61,7 @@ SceneState FirstStageScene::Update(const InputState& state)
 		RENDERER->SetAmbientLight(light);
 	}
 
-	if (PlayerObject::GetNextSceneFlag() == true && count >= 120)
+	if (PlayerObject::GetNextSceneFlag() == true && count >= CLEAR_TO_CHANGE_SCENE)
 	{
 		return SceneState::SECOND_SATGE_SCENE;
 	}

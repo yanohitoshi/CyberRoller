@@ -69,7 +69,7 @@ SceneState SecondStageScene::Update(const InputState& state)
 	}
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (clearCount >= 120)
+	if (clearCount >= CLEAR_TO_CHANGE_SCENE)
 	{
 		return SceneState::THIRD_SATGE_SCENE;
 	}
@@ -103,24 +103,28 @@ SceneState SecondStageScene::Update(const InputState& state)
 	{
 		// 遷移カウント開始
 		++changeCount;
-		if (changeCount >= 90)
+		if (changeCount >= CHOICE_CONTINUE_COUNT)
 		{
 			// コンテニューだったら明るくゲームオーバーだったら暗くする
 			if (isContinueFlag == true)
 			{
+				// ライトアップ
 				light += Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
 			}
 			else if (endFlag == true)
 			{
+				// ライトダウン
 				light -= Vector3(0.01f, 0.01f, 0.01f);
 				RENDERER->SetAmbientLight(light);
 			}
-			if (changeCount >= 240)
+			if (changeCount >= CONTINUE_TO_CHANGE_SCENE)
 			{
-				// コンテニューだったら最初のステージへゲームオーバーだったらリザルト画面へ
+				// コンテニューだったらステージ最初へゲームオーバーだったらリザルト画面へ
 				if (isContinueFlag == true)
 				{
+					// コンティニューされたらそのステージから始めるために
+					// コンティニューされたかどうか判定するためのフラグを切り替える
 					Game::SetContinueFlag(true);
 					return SceneState::SECOND_SATGE_SCENE;
 				}

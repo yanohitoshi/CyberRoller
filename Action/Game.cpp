@@ -230,10 +230,12 @@ void Game::ProcessInput()
 
 void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 {
-
+	// シーン変更があった際に全ての使用済みオブジェクトを削除
 	GameObject::RemoveUsedGameObject();
+	// シーンのメモリをdelete
 	delete _scene;
 
+	// _stateを参照して必要なシーンを生成
 	switch (_state)
 	{
 	case SceneState::TITLE_SCENE:
@@ -269,6 +271,7 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 */
 void Game::GenerateOutput()
 {
+	// 描画処理
 	RENDERER->Draw();
 }
 
@@ -277,15 +280,18 @@ void Game::GenerateOutput()
 */
 void Game::UpdateGame()
 {
+	// デルタタイムの更新
 	float deltaTime = fps->GetDeltaTime();
+	// GameObjectsの更新処理へ
 	UpdateGameObjects(deltaTime);
 }
 
 void UpdateGameObjects(float _deltaTime)
 {
-	// 
+	// オブジェクトの更新フラグをtrueに
 	GameObject::updatingGameObject = true;
 	
+	// gameObjectMap内に存在する全てのオブジェクトを更新
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
 		for (auto gameObject : itr->second)
@@ -294,9 +300,13 @@ void UpdateGameObjects(float _deltaTime)
 		}
 	}
 
+	// 途中追加されたobjectの更新処理
+	// ※ループ中でgameObjectMapに合流させてしまうと添え字がずれて例外をスローしてしまうので一度別のvector内で更新してその後合流させる
 	for (auto pending : GameObject::pendingGameObjects)
 	{
+		// 更新処理
 		pending->ComputeWorldTransform();
+		// マップに追加
 		auto gameObjects = GameObject::gameObjectMap.find(pending->GetTag());
 		if (gameObjects != GameObject::gameObjectMap.end())
 		{
@@ -308,12 +318,15 @@ void UpdateGameObjects(float _deltaTime)
 			tmpVector.emplace_back(pending);
 			GameObject::gameObjectMap[pending->GetTag()] = tmpVector;
 		}
+		// 使用済み配列をクリア
 		GameObject::pendingGameObjects.clear();
 	}
-
+	// 更新フラグをfalseに
 	GameObject::updatingGameObject = false;
 
+	// 死亡状態のオブジェクト用vectorを作成
 	std::vector<class GameObject*>deadObjects;
+	// gameObjectMapから死んでいるオブジェクトを探して死亡状態のオブジェクト用vectorに追加
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
 		for (auto gameObject : itr->second)
@@ -325,18 +338,22 @@ void UpdateGameObjects(float _deltaTime)
 		}
 	}
 
+	// 探し終わったらdeadObjects内のオブジェクトを削除
 	while (!deadObjects.empty())
 	{
 		deadObjects.pop_back();
 	}
+
+	// 配列をクリア
 	deadObjects.clear();
 }
 
 void ProcessInputs(const InputState& _state)
 {
-	
+	// オブジェクトの更新フラグをtrueに
 	GameObject::updatingGameObject = true;
 
+	// 生存しているオブジェクトの入力状態を更新
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
 		for (auto gameObject : itr->second)
@@ -344,7 +361,7 @@ void ProcessInputs(const InputState& _state)
 			gameObject->ProcessInput(_state);
 		}
 	}
-
+	// 更新フラグをfalseに
 	GameObject::updatingGameObject = false;
 
 }
