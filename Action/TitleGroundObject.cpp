@@ -28,17 +28,25 @@ TitleGroundObject::~TitleGroundObject()
 
 void TitleGroundObject::UpdateGameObject(float _deltaTime)
 {
+	// ポジションに速度を足す
 	position += velocity * _deltaTime;
+	// ポジションを更新
 	SetPosition(position);
+	// 指定位置までオブジェクトが動いていたら
 	if (position.y <= goalPos.y)
 	{
+		// リポジション用フラグをtrueに
 		rePositionFlag = true;
 	}
 
+	// リポジション用フラグがtrueだったら
 	if (rePositionFlag == true)
 	{
+		// ポジションに初期ポジションをセット
 		position = initPos;
+		// ポジションを更新
 		SetPosition(position);
+		// リポジション用フラグをfalseに
 		rePositionFlag = false;
 	}
 	

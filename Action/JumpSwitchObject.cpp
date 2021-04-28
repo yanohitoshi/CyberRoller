@@ -25,8 +25,7 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::JumpSwitchTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
-	//AABB aabb = { Vector3(-0.8f,-0.8f,-0.8f) ,Vector3(0.8f,0.8f,0.8f) };
-	//boxCollider->SetObjectBox(aabb);
+
 }
 
 JumpSwitchObject::~JumpSwitchObject()
@@ -35,14 +34,18 @@ JumpSwitchObject::~JumpSwitchObject()
 
 void JumpSwitchObject::UpdateGameObject(float _deltaTime)
 {
+	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
+	// ポジションを更新
 	SetPosition(position);
 }
 
 void JumpSwitchObject::OnCollision(const GameObject& _hitObject)
 {
+	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)
 	{
+		// 動く床の持つ速度を付与
 		velocity = _hitObject.GetVelocity();
 	}
 }

@@ -53,7 +53,9 @@ private:
 
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
-	// 回転させるときの角度
-	float angle;
+	// 回転する際の角度
+	const float ANGLE;
+	// 移動速度の定数
+	const float MOVE_SPEED;
 };
 

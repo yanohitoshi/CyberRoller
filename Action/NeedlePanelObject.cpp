@@ -35,15 +35,19 @@ void NeedlePanelObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す
 	aabb = boxCollider->GetWorldBox();
+	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
+	// ポジションを更新
 	SetPosition(position);
 
 }
 
 void NeedlePanelObject::OnCollision(const GameObject& _hitObject)
 {
+	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)
 	{
+		// 動く床の速度を付与
 		velocity = _hitObject.GetVelocity();
 	}
 }

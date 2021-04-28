@@ -86,6 +86,7 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 	}
 	else
 	{
+		// その他の場合カラーチェンジフラグをfalseに
 		changeColorFlag = false;
 	}
 

@@ -30,6 +30,7 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::GroundTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
+	// 動く向きごとにPushBoardObjectの引数を変更して付与
 	if (_direction.x == 1.0f)
 	{
 		Vector3 boardSize = Vector3(50.0f, 200.0f, 200.0f);

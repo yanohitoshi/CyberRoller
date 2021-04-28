@@ -11,7 +11,6 @@ PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vec
 	, cutBackSpeed(_cutBackSpeed)
 {
 	//GameObjectメンバ変数の初期化
-	//GameObjectメンバ変数の初期化
 	SetPosition(_p);
 	SetScale(_size);
 	tag = _objectTag;
@@ -42,6 +41,7 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 	//worldboxを渡す
 	aabb = boxCollider->GetWorldBox();
 
+	// 反転するかどうかを判定
 	if (inversionFlag == false)
 	{
 		velocity = direction * moveSpeed;
@@ -90,9 +90,10 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 		}
 	}
 
-
+	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
 
+	// ポジションを更新
 	SetPosition(position);
 
 }

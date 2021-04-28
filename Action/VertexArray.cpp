@@ -123,6 +123,7 @@ VertexArray::VertexArray(const void * verts, unsigned int _numVerts, Layout layo
 
 VertexArray::~VertexArray()
 {
+	// 後片付け
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteBuffers(1, &indexBuffer);
 	glDeleteVertexArrays(1, &vertexArray);

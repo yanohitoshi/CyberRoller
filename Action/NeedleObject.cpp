@@ -28,8 +28,12 @@ NeedleObject::~NeedleObject()
 
 void NeedleObject::UpdateGameObject(float _deltaTime)
 {
+	// ownerの速度を付与
 	velocity = owner->GetVelocity();
 
+	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
+
+	// ポジションを更新
 	SetPosition(position);
 }

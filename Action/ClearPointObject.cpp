@@ -10,6 +10,8 @@
 
 ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
 	: GameObject(false,_objectTag)
+	, ANGLE(10.0f)
+	, MOVE_SPEED(50.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -17,7 +19,6 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
 	SetScale(Vector3(50.0f, 50.0f, 50.0f));
 	tag = _objectTag;
 	state = Active;
-	angle = 0;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
@@ -32,13 +33,8 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 	new GameClearEffectManeger(this);
-	//Z軸を90度回転させる
-	float radian = Math::ToRadians(90);
-	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitZ, radian);
-	Quaternion target = Quaternion::Concatenate(rot, inc);
-	SetRotation(target);
 
+	// 4色のエフェクトを付与
 	new CrystalEffectManager(this, CrystalColor::WHITE);
 	new CrystalEffectManager(this, CrystalColor::RED);
 	new CrystalEffectManager(this, CrystalColor::BLUE);
@@ -56,27 +52,27 @@ void ClearPointObject::UpdateGameObject(float _deltaTime)
 {
 	if (PlayerObject::GetClearFlag() == true)
 	{
-		angle = 10.0f;
-		velocity.z = 50.0f;
+		// 速度を付与
+		velocity.z = MOVE_SPEED;
 
 		//Z軸を10度回転させる
-		float radian = Math::ToRadians(angle);
+		float radian = Math::ToRadians(ANGLE);
 		Quaternion rot = this->GetRotation();
 		Quaternion inc(Vector3::UnitZ, radian);
 		Quaternion target = Quaternion::Concatenate(rot, inc);
 		SetRotation(target);
 
+		// ポジションに速度を足す
 		position += velocity;
+		// ポジションを更新
 		SetPosition(position);
+		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
 
 	}
-
-
 }
 
 void ClearPointObject::OnCollision(const GameObject& _hitObject)
 {
-
 }
 

@@ -36,5 +36,6 @@ WallBlockObject::~WallBlockObject()
 
 void WallBlockObject::UpdateGameObject(float _deltaTime)
 {
+	// ワールドボックスの更新
 	aabb = boxCollider->GetWorldBox();
 }

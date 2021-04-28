@@ -30,13 +30,6 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	boxCollider = new BoxCollider(this, ColliderComponent::MoveGroungTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
-	//// イージング変数
-	//start = 0.0f;
-	//// 移動する時間
-	//totalTime = 1.0f;
-	//elapseTime = 0.0f;
-	//// 到達点
-	//differencePos = 0.0f;
 }
 
 MoveBlockObject::~MoveBlockObject()
@@ -48,6 +41,7 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 	//worldboxを渡す
 	aabb = boxCollider->GetWorldBox();
 
+	// 反転するかどうかフラグを判定しそれに応じて速度を付与
 	if (inversionFlag == false)
 	{
 		velocity = direction * moveSpeed;
@@ -57,6 +51,7 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 		velocity = direction * moveSpeed * -1.0f;
 	}
 
+	// 動く向きのTagごとに反転する条件を見て反転判定
 	if (moveTag == MoveDirectionTag::MOVE_X)
 	{
 		if (position.x >= goalPos.x && direction.x == 1.0f || position.x <= goalPos.x && direction.x == -1.0f)
@@ -95,9 +90,10 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 		}
 	}
 
-
+	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
 
+	// ポジションを更新
 	SetPosition(position);
 
 }

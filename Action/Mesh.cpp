@@ -130,8 +130,10 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		}
 		textures.emplace_back(t);
 
+		// 読み込んだtextureの数が1枚だけだったら
 		if (readTextures.Size() == 1)
 		{
+			// DiffuseMapに設定
 			stageDefTexture[TextureStage::DiffuseMap] = t->GetTextureID();
 		}
 	}
@@ -141,8 +143,11 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	{
 		stageDefTexture[TextureStage::DiffuseMap] = LoadStageTextures(doc, TextureStage::DiffuseMap, "diffusemap");
 	}
+	// ノーマルマップ用textureの場合NormalMapに設定
 	stageDefTexture[TextureStage::NormalMap] = LoadStageTextures(doc, TextureStage::NormalMap, "normalmap");
+	// スペキュラマップ用textureの場合SpecularMapに設定
 	stageDefTexture[TextureStage::SpecularMap] = LoadStageTextures(doc, TextureStage::SpecularMap, "specularmap");
+	// エミッシブマップ用textureの場合EmissiveMapに設定
 	stageDefTexture[TextureStage::EmissiveMap] = LoadStageTextures(doc, TextureStage::EmissiveMap, "emissivemap");
 
 
@@ -173,6 +178,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		//verts.push_back(pos);
 		radius = Math::Max(radius, pos.LengthSq());
 
+		// 読み込んだモデルの最大値最小値の設定
 		if (i == 0)
 		{
 			mBox.InitMinMax(pos);
@@ -257,6 +263,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 */
 void Mesh::Unload()
 {
+	// vertexArrayの解放
 	delete vertexArray;
 	vertexArray = nullptr;
 }
@@ -266,6 +273,7 @@ void Mesh::Unload()
 */
 Texture* Mesh::GetTexture(size_t _index)
 {
+	// _indexで指定されたtextureを返す
 	if (_index < textures.size())
 	{
 		return textures[_index];
@@ -278,26 +286,33 @@ Texture* Mesh::GetTexture(size_t _index)
 
 int Mesh::GetTextureID(TextureStage stage)
 {
+	// ステージごとのtextureを返す
 	return stageDefTexture[stage];
 }
 
 int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, const char* stgString)
 {
+	// texturenameごとのtextureの読み込みを行う
 	std::string noneTexture("none");
 	std::string texName;
 	Texture* t;
 	if (IsExistMember(doc, stgString))
 	{
 		texName = doc[stgString].GetString();
+		// 生成したことのないtextureだったら
 		if (texName != noneTexture)
 		{
+			// texturenameでのtexture読み込み
 			t = RENDERER->GetTexture(texName);
+			// tがnullptrの場合デフォルトを入れる
 			if (t == nullptr)
 			{
 				t = RENDERER->GetTexture("Assets/Default.png");
 			}
+			// IDを返す
 			return t->GetTextureID();
 		}
+
 	}
 	return 0;
 }

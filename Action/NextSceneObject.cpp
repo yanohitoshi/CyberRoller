@@ -10,6 +10,8 @@
 
 NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
+	, ANGLE(15.0f)
+	, MOVE_SPEED(50.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -18,7 +20,6 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
 	firstPos = _pos;
 	tag = _objectTag;
 	state = Active;
-	angle = 0;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
@@ -31,7 +32,7 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
 	boxCollider = new BoxCollider(this, ColliderComponent::ClearPointTag, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-1.0f,-1.0f,-1.0f),Vector3(1.0f,1.0f,3.0f) };
 	boxCollider->SetObjectBox(aabb);
-
+	// 4色のエフェクトを付与
 	new CrystalEffectManager(this,CrystalColor::WHITE);
 	new CrystalEffectManager(this, CrystalColor::RED);
 	new CrystalEffectManager(this, CrystalColor::BLUE);
@@ -47,22 +48,27 @@ void NextSceneObject::UpdateGameObject(float _deltaTime)
 {
 	if (PlayerObject::GetNextSceneFlag() == true)
 	{
-		angle = 15.0f;
-		velocity.z = 50.0f;
+		// 速度付与
+		velocity.z = MOVE_SPEED;
 
 		//Z軸を15度回転させる
-		float radian = Math::ToRadians(angle);
+		float radian = Math::ToRadians(ANGLE);
 		Quaternion rot = this->GetRotation();
 		Quaternion inc(Vector3::UnitZ, radian);
 		Quaternion target = Quaternion::Concatenate(rot, inc);
 		SetRotation(target);
 
+		// ポジションに速度を足す
 		position += velocity;
+		// ポジションを更新
 		SetPosition(position);
+		// 定位置まで届いたら描画カット
 		if (position.z >= firstPos.z + 3000.0f)
 		{
 			meshComponent->SetVisible(false);
 		}
+
+		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
 	}
 

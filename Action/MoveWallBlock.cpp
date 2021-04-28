@@ -24,10 +24,9 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	scale = _size;
 	SetScale(scale);
 	tag = _objectTag;
-
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
+	openFlag = false;
 
-	openFlag = true;
 	SetChackSwitchTag(tag);
 
 	//モデル描画用のコンポーネント
@@ -42,6 +41,7 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	boxCollider = new BoxCollider(this, ColliderComponent::WallTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
+	// 土煙エフェクトの付与
 	new SandSmokeMakeManeger(this);
 
 }
@@ -53,41 +53,61 @@ MoveWallBlock::~MoveWallBlock()
 
 void MoveWallBlock::UpdateGameObject(float _deltaTime)
 {
+	// ワールドボックスの更新
 	aabb = boxCollider->GetWorldBox();
 
+	// 対象のスイッチの状態をチェック
 	ChackSwitch(chackTag, _deltaTime);
-	
+
+	// ポジションの更新
 	SetPosition(position);
 }
 
 void MoveWallBlock::ChackSwitch(Tag& _tag, float _deltaTime)
 {
+	// チェック用可変長配列
 	std::vector<GameObject*> switches;
+	// 対象となるスイッチの可変長配列を探す
 	switches = GameObject::FindGameObject(_tag);
+	// 存在するスイッチとONになっているスイッチを数えるためのカウント初期化
 	int switchCount = 0;
 	int flagCount = 0;
+
+	// 可変長配列内のスイッチをチェック
 	for (auto itr : switches)
 	{
+		// 存在数を数える
 		++switchCount;
+		// スイッチがONの状態だったら
 		if (itr->GetSwitchFlag() == true)
 		{
+			// ONの数を数える
 			++flagCount;
 		}
 	}
 
+	// 存在するスイッチの数とONになっているスイッチの数が同じだったら
 	if (flagCount == switchCount)
 	{
+		// オープンフラグをtrueに
 		openFlag = true;
+	}
+	
+	// オープンフラグがtrueだったら
+	if (openFlag == true)
+	{
+		// 移動速度を付与
+		velocity.z = moveSpeed;
+		// ポジション変更
+		position.z -= velocity.z * _deltaTime;
 
-		if (openFlag == true)
+		// 止まるべき位置に来たら停止
+		if (position.z <= stopPos.z)
 		{
-			velocity.z = moveSpeed;
-			position.z -= velocity.z * _deltaTime;
-			if (position.z <= stopPos.z)
-			{
-				openFlag = false;
-				velocity.z = 0.0f;
-			}
+			// オープンフラグをfalseに
+			openFlag = false;
+			// 速度を0.0fに
+			velocity.z = 0.0f;
 		}
 	}
 
@@ -96,6 +116,7 @@ void MoveWallBlock::ChackSwitch(Tag& _tag, float _deltaTime)
 
 void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
 {
+	// _tagを参照してチェックすべきスイッチをセット
 	switch (_tag)
 	{
 	case(Tag::NEXT_SCENE_MOVE_WALL):

@@ -29,10 +29,15 @@ struct DirectionalLight
 */
 enum class TextureStage
 {
+	// ディフーズマップ
 	DiffuseMap,
+	// ノーマルマップ
 	NormalMap,
+	// スペキュラマップ
 	SpecularMap,
+	// エミッシブマップ
 	EmissiveMap,
+	// シャドウマップ
 	ShadowMap,
 };
 
@@ -123,8 +128,6 @@ public:
 	*/
 	void AddMeshComponent(MeshComponent* _meshComponent);
 
-
-
 	/*
 	@brief  メッシュコンポーネントの削除
 	@param	_meshComponent　削除するMeshComponentクラスのポインタ
@@ -209,7 +212,11 @@ public:
 	@return Projection行列
 	*/
 	Matrix4 GetProjectionMatrix() { return projection; }
-
+	
+	/*
+	@brief  SDL_Rendererを取得する
+	@return SDL_Rendererクラスのポインタ
+	*/
 	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
 	/*
 	@brief	プレイヤーのポジションをセットするsetter
@@ -398,11 +405,11 @@ private:
 	float screenHeight;
 
 	// カメラの視野角
-	float CAMERA_PROJECTION_FOV = 70.0f;
+	const float CAMERA_PROJECTION_FOV;
 	// カメラプロジェクションの近距離
-	float CAMERA_PROJECTION_NEAR = 25.0f;
+	const float CAMERA_PROJECTION_NEAR;
 	// カメラプロジェクションの遠距離
-	float CAMERA_PROJECTION_FAR = 7000.0f;
+	const float CAMERA_PROJECTION_FAR;
 
 	//環境光
 	Vector3 ambientLight;
@@ -442,22 +449,25 @@ private:
 	unsigned int undefineTexID;
 
 	// ライトプロジェクション行列生成用定数
-	// ライトプロジェクションの幅
-	float LIGHT_PROJECTION_WHIDTH;
-	// ライトプロジェクションの高さ
-	float LIGHT_PROJECTION_HIGHT;
-	// ライトプロジェクションの近距離
-	float LIGHT_PROJECTION_NEAR;
-	// ライトプロジェクションの遠距離
-	float LIGHT_PROJECTION_FAR;
+	// ライトプロジェクションの幅の定数
+	const float LIGHT_PROJECTION_WHIDTH;
+	// ライトプロジェクションの高さの定数
+	const float LIGHT_PROJECTION_HIGHT;
+	// ライトプロジェクションの近距離の定数
+	const float LIGHT_PROJECTION_NEAR;
+	// ライトプロジェクションの遠距離の定数
+	const float LIGHT_PROJECTION_FAR;
 
 	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
 	const int MAX_TIME_FONT_TEXTURES = 251;
 	// 制限時間用フォントのサイズ
 	const int TIME_FONT_SIZE = 72;
-	//時間表示用のフォントtexture
+	// 時間表示用のフォントtexture
+	// 白色
 	std::vector<Texture*> timeFontTextures;
+	// 黒色
 	std::vector<Texture*> timeBlackFontTextures;
+	// 赤色
 	std::vector<Texture*> timeRedFontTextures;
 
 
