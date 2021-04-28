@@ -11,6 +11,8 @@ bool CountDownFont::countStartFlag = false;
 
 CountDownFont::CountDownFont(int _time)
 	: GameObject(false,Tag::UI)
+	, ADD_TIME_COUNT(60)
+	, CHANGE_COLOR_COUNT(30)
 {
 	// ポジションをセット
 	SetPosition(Vector3(700.0f, 480.0f, 0.0f));
@@ -41,8 +43,8 @@ void CountDownFont::UpdateGameObject(float _deltaTime)
 	{
 		// フレームカウントを数える
 		frameCount++;
-		// 60になったら
-		if (frameCount >= 60)
+		// カウントが60になったら
+		if (frameCount >= ADD_TIME_COUNT)
 		{
 			// timeを減らす
 			time -= 1;
@@ -51,11 +53,11 @@ void CountDownFont::UpdateGameObject(float _deltaTime)
 	}
 
 	// 30以上の時は白色で描画
-	if (time > 30)
+	if (time > CHANGE_COLOR_COUNT)
 	{
 		sprite->SetTexture(RENDERER->GetTimeTexture(time - 1));
 	}
-	else if (time <= 30 && time >= 1)	// 30以下の時は白色で描画
+	else if (time <= CHANGE_COLOR_COUNT && time >= 1)	// 30以下の時は白色で描画
 	{
 		// 警告フラグをtrueに
 		warningFlag = true;

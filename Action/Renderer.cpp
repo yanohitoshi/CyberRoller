@@ -45,6 +45,14 @@ Renderer::Renderer()
 	, ambientLight(Vector3::Zero)
 	, SHADOW_WIDTH (8192)
 	, SHADOW_HEIGHT(8192)
+	, CAMERA_PROJECTION_FOV(70.0f)
+	, CAMERA_PROJECTION_NEAR(25.0f)
+	, CAMERA_PROJECTION_FAR(7000.0f)
+	, SHIFT_LIGHT_POSITON_Z(2000.0f)
+	, LIGHT_PROJECTION_WHIDTH(7000.0f)
+	, LIGHT_PROJECTION_HIGHT(7000.0f)
+	, LIGHT_PROJECTION_NEAR(1.0f)
+	, LIGHT_PROJECTION_FAR(7000.0f)
 {
 }
 
@@ -167,7 +175,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
 
-	CreateTimeFontTexture(251,72);
+	CreateTimeFontTexture(MAX_TIME_FONT_TEXTURES, TIME_FONT_SIZE);
 
 	return true;
 }
@@ -601,8 +609,8 @@ bool Renderer::LoadShaders()
 
 	// 3Dモデル用ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
-	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-		screenWidth, screenHeight, 25.0f, 7000.0f);
+	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CAMERA_PROJECTION_FOV),
+		screenWidth, screenHeight, CAMERA_PROJECTION_NEAR, CAMERA_PROJECTION_FAR);
 
 	// switch用シェーダーの作成(色変更可能シェーダー)
 	switchShader = new Shader();
@@ -706,23 +714,31 @@ void Renderer::CreateParticleVerts()
 
 void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
 {
+	// フォントの生成
 	Font* font = GetFont("Assets/Config/Fonts/impact.ttf");
+	// 格納する可変長配列をリサイズ
 	timeFontTextures.resize(_value);
 	timeBlackFontTextures.resize(_value);
 	timeRedFontTextures.resize(_value);
 
+	// 最大値を用いてフォントの色ごとにその枚数textureを生成
+	// 白色
 	for (int i = 0; i < _value; i++)
 	{
 		std::string str;
 		str = std::to_string(i);
 		timeFontTextures[i] = font->RenderText(str,Color::White, _fontSize);
 	}
+
+	// 黒色（バックフォント用（文字の影））
 	for (int i = 0; i < _value; i++)
 	{
 		std::string str;
 		str = std::to_string(i);
 		timeBlackFontTextures[i] = font->RenderText(str, Color::Black, _fontSize);
 	}
+
+	// 赤色
 	for (int i = 0; i < _value; i++)
 	{
 		std::string str;
@@ -854,14 +870,18 @@ void Renderer::DrawShadow()
 void Renderer::DepthRendering()
 {
 	/* ここからデプスマップ開始 */
-
-
 	//ライト情報
-	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + 2000.0f);
+	// ライトの位置を決定
+	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + SHIFT_LIGHT_POSITON_Z);
+	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;
+	// 正規化
 	LightDir.Normalize();
-	lightProjection = Matrix4::CreateOrtho(7000.0f, 7000.0f, 1.0f, 10000.0f);
+	// ライト用プロジェクション作成
+	lightProjection = Matrix4::CreateOrtho(LIGHT_PROJECTION_WHIDTH, LIGHT_PROJECTION_HIGHT, LIGHT_PROJECTION_NEAR, LIGHT_PROJECTION_FAR);
+	// ビュー行列の更新
 	lightView = Matrix4::CreateLookAt(LightPos, playerPos, Vector3::UnitX);
+	// ライト空間行列を計算
 	lightSpeceMatrix = lightView * lightProjection;
 
 	// ビューポートを深度マップサイズに設定する
@@ -877,14 +897,15 @@ void Renderer::DepthRendering()
 
 	for (auto mc : meshComponents)
 	{
+		// 壁以外を深度マップに書き込み
+		// ※壁の影を描画すると見た目上見づらかったため
 		Tag chackTag = mc->GetOwner()->GetTag();
-
 		if (mc->GetVisible() && chackTag != Tag::WALL)
 		{
 			mc->Draw(depthMapShader);
 		}
 	}
-
+	// スキニングモデルの描画
 	mSkinnedDepthMapShader->SetActive();
 	mSkinnedDepthMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
 	for (auto sk : mSkeletalMeshes)
@@ -1009,44 +1030,6 @@ void Renderer::DrawParticle()
 	glDepthMask(GL_TRUE);
 }
 
-void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const Matrix4 & proj, float viewPortScale, bool lit)
-{
-	// Set the current frame buffer
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
-	// Set viewport size based on scale
-	glViewport(0, 0,
-		static_cast<int>(screenWidth * viewPortScale),
-		static_cast<int>(screenHeight * viewPortScale)
-	);
-
-	// Clear color buffer/depth buffer
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glDepthMask(GL_TRUE);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Draw mesh components
-	// Enable depth buffering/disable alpha blend
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
-	// Set the mesh shader active
-	//meshShader->SetActive();
-	//// Update view-projection matrix
-	//meshShader->SetMatrixUniform("uViewProj", view * proj);
-	//// Update lighting uniforms
-	//if (lit)
-	//{
-	//	SetLightUniforms(meshShader, view);
-	//}
-	//for (auto mc : meshComponents)
-	//{
-	//	if (mc->GetVisible())
-	//	{
-	//		mc->Draw(meshShader);
-	//	}
-	//}
-
-}
 
 /*
 @brief  光源情報をシェーダーの変数にセットする
@@ -1089,9 +1072,11 @@ void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType)
 
 void Renderer::ChangeTexture(int changeTextureID)
 {
+	// textureIDをバインド
 	glBindTexture(GL_TEXTURE_2D, changeTextureID);
 }
 
+// ワールド空間のカメラ座標を計算
 Vector3 Renderer::CalcCameraPos()
 {
 	// ビュー行列よりワールドでのカメラ位置算出

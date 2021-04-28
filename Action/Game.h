@@ -139,5 +139,9 @@ private:
 	// フルスクリーンモードを使用するかどうかフラグ
 	bool isFullScreen;
 
+	const float FULL_SCREEN_WIDTH;
+	const float FULL_SCREEN_HEIGHT;
+	const float WINDOW_SCREEN_WIDTH;
+	const float WINDOW_SCREEN_HEIGHT;
 };
 

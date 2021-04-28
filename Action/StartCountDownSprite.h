@@ -56,5 +56,7 @@ private:
     // カウントダウン開始するタイミングを見るためのカウント
     int timeStartCount;
 
+    const int CHANGE_COUNT;
+
 };
 

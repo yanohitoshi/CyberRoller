@@ -8,7 +8,6 @@
 
 FirstStageScene::FirstStageScene()
 {
-	//ライトの設定(設定しないと何も映らない)
 	// ライト情報初期化
 	light = Vector3(0.1f, 0.1f, 0.1f);
 	RENDERER->SetAmbientLight(light);
@@ -16,8 +15,9 @@ FirstStageScene::FirstStageScene()
 	dir.direction = Vector3(0.0f, 0.0f, 0.7f);
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);
+
 	// メンバー変数初期化
-	count = 0;
+	clearCount = 0;
 	startScene = true;
 
 	// クリエイター生成
@@ -42,10 +42,12 @@ FirstStageScene::~FirstStageScene()
 
 SceneState FirstStageScene::Update(const InputState& state)
 {
+	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += Vector3(0.01f, 0.01f, 0.01f);
+		light += CHANGE_LIGHT_SPEED;
 		RENDERER->SetAmbientLight(light);
+
 		if (light.x >= MAX_LIGHT)
 		{
 			startScene = false;
@@ -53,23 +55,26 @@ SceneState FirstStageScene::Update(const InputState& state)
 		}
 	}
 
-
+	// ステージクリアしたらクリアカウントを取ってライトを落とす
 	if (PlayerObject::GetNextSceneFlag() == true)
 	{
-		++count;
-		light -= Vector3(0.01f, 0.01f, 0.01f);
+		++clearCount;
+		light -= CHANGE_LIGHT_SPEED;
 		RENDERER->SetAmbientLight(light);
 	}
 
-	if (PlayerObject::GetNextSceneFlag() == true && count >= CLEAR_TO_CHANGE_SCENE)
+	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
+	if (PlayerObject::GetNextSceneFlag() == true && clearCount >= CLEAR_TO_CHANGE_SCENE)
 	{
 		return SceneState::SECOND_SATGE_SCENE;
 	}
 
+	// 一定時間操作がなかったらタイトルへ
 	if (PlayerObject::GetReStartFlag() == true)
 	{
 		return SceneState::TITLE_SCENE;
 	}
 
+	// シーン変更しない場合今のシーンを返す
 	return SceneState::FIRST_SATGE_SCENE;
 }

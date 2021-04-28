@@ -50,6 +50,7 @@ private:
     bool visibleFlag;
     // 描画されているかフラグ
     static bool drawFlag;
-
+    // 描画を切り替えるカウント比較用の定数
+    const int DRAW_COUNT;
 };
 

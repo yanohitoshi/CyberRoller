@@ -35,37 +35,69 @@ enum State
 */
 enum Tag
 {
+	// その他
 	OTHER,
+	// カメラ
 	CAMERA,
+	// プレイヤー
 	PLAYER,
+	// グラウンド
 	GROUND,
+	// 動くグラウンド
 	MOVE_GROUND,
+	// 壁
 	WALL,
+	// 棘
 	NEEDLE,
+	// 棘用パネル
 	NEEDLE_PANEL,
+	// 押し出し板
 	PUSH_BOARD,
+	// 押し出し板のベース
 	PUSH_BOX,
+	// 最初の動く壁
 	FIRST_MOVE_WALL,
+	// 2番目の動く壁
 	SECOND_MOVE_WALL,
+	// 次のシーン前の動く壁
 	NEXT_SCENE_MOVE_WALL,
+	// ゲームクリア前の動く壁
 	CLEAR_SCENE_MOVE_WALL,
+	// チュートリアルでの動く壁
 	TUTORIAL_MOVE_WALL,
+	// チュートリアル用スイッチ
 	TUTORIAL_SWITCH,
+	// 最初の区画のスイッチ
 	FIRST_SWITCH,
+	// 2番目の区画のスイッチ
 	SECOND_SWITCH,
+	// 次のシーンへの遷移前の区画のスイッチ
 	NEXT_SCENE_SWITCH,
+	// ゲームクリア前のスイッチ
 	CLEAR_SCENE_SWITCH,
+	// ジャンプスイッチ
 	JUMP_SWITCH,
+	// スイッチのベースオブジェクト
 	SWITCH_BASE,
+	// 接地判定オブジェクト
 	GROUND_CHECK,
+	// シーン
 	SCENE,
+	// ゲームクリアオブジェクト
 	CLEAR_POINT,
+	// ステージクリアオブジェクト
 	NEXT_SCENE_POINT,
+	// リスポーンポイント
 	RESPOWN_POINT,
+	// チュートリアルクリアポイント
 	TUTORIAL_CLEAR_POINT,
+	// UI
 	UI,
+	// タイトル上のオブジェクト
 	TITLE_OBJECT,
+	// タイトルで自動で動くプレイヤーオブジェクト
 	TITLE_PLAYER,
+	// パーティクル
 	PARTICLE,
 };
 
@@ -74,8 +106,11 @@ enum Tag
 */
 enum MoveDirectionTag
 {
+	// X軸方向
 	MOVE_X,
+	// Y軸方向
 	MOVE_Y,
+	// Z軸方向
 	MOVE_Z
 };
 
@@ -88,6 +123,9 @@ public:
 	@param	オブジェクト判別用tag
 	*/
 	GameObject(bool _reUseGameObject,const Tag _objectTag);
+	/*
+	@brief	デストラクタ
+	*/
 	virtual ~GameObject();
 
 	/*
@@ -152,6 +190,11 @@ public:
 	@param	position
 	*/
 	virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
+
+	/*
+	@brief　ワールド座標の再変換フラグのgetter
+	@return	recomputeWorldTransform
+	*/
 	bool GetRecomputeWorldTransform() { return recomputeWorldTransform; }
 
 	/*
@@ -308,8 +351,13 @@ public:
 	*/
 	const Vector3& GetVelocity() const { return velocity; }
 
+	/*
+	@brief　メインカメラのgetter
+	@return	MainCameraObject*　メインカメラを返す
+	*/
 	static MainCameraObject* GetMainCamera() { return mainCamera;}
 
+	// AABB
 	AABB aabb;
 
 protected:
@@ -364,8 +412,11 @@ private:
 
 	//シーンを跨ぐ際に開放されるオブジェクトかどうか、カメラなどが対象になる
 	bool reUseObject;
+	// 途中追加される際一時的に保存される可変長配列
 	static std::vector<GameObject*> pendingGameObjects;
+	// 全オブジェクトが格納される連想可変長配列
 	static std::unordered_map<Tag, std::vector<GameObject*>> gameObjectMap;
+	// GameObjectの更新フラグ
 	static bool updatingGameObject;
 
 	/*

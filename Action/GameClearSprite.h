@@ -37,5 +37,8 @@ private:
     int frameCount;
     bool visibleFlag;
 
+    // 描画を切り替えるカウント比較用の定数
+    const int DRAW_COUNT;
+
 };
 

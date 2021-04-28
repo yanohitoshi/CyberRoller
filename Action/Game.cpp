@@ -34,6 +34,10 @@ Game::Game()
 	, screenWidth(0.0f)
 	, screenHeight(0.0f)
 	, isFullScreen(true)
+	, FULL_SCREEN_WIDTH(1920.0f)
+	, FULL_SCREEN_HEIGHT(1080.0f)
+	, WINDOW_SCREEN_WIDTH(1080.0f)
+	, WINDOW_SCREEN_HEIGHT(800.0f)
 {
 }
 
@@ -65,15 +69,19 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// フルスクリーンかどうかを判定
+	// フルスクリーンの場合
 	if (isFullScreen == true)
 	{
-		screenWidth = 1920;
-		screenHeight = 1080;
+		// スクリーンサイズをフルスクリーンに初期化
+		screenWidth = FULL_SCREEN_WIDTH;
+		screenHeight = FULL_SCREEN_HEIGHT;
 	}
-	else if (isFullScreen == false)
+	else if (isFullScreen == false) // フルスクリーンでない場合
 	{
-		screenWidth = 1080;
-		screenHeight = 800;
+		// スクリーンサイズを任意のウィンドウサイズに初期化
+		screenWidth = WINDOW_SCREEN_WIDTH;
+		screenHeight = WINDOW_SCREEN_HEIGHT;
 
 	}
 
@@ -119,10 +127,13 @@ bool Game::Initialize()
 	//FPS管理クラスの初期化
 	fps = new FPS();
 
+	// ビュー行列を生成してRendererに渡す
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200,0, 0),Vector3::UnitY);
 	RENDERER->SetViewMatrix(v);
 
+	// 最初のシーンステータスの初期化
 	nowSceneState = TITLE_SCENE;
+	// 最初のシーンを生成
 	nowScene = new TitleScene();
 
 	return true;
@@ -133,6 +144,7 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
+	// 今のシーンを解放
 	delete nowScene;
     //データのアンロード
 	UnloadData();
@@ -151,15 +163,23 @@ void Game::Termination()
 */
 void Game::GameLoop()
 {
+	// isRunningがtrueの間ループ
 	while (isRunning)
 	{
+		// 入力更新
 		ProcessInput();
+		// ゲームのアップデート
 		UpdateGame();
+		// 描画更新
 		GenerateOutput();
+		// デルタタイムの更新
 		fps->Update();
+		// シーン遷移が行われる場合
 		if (isChangeScene == true)
 		{
+			// シーンの変更
 			ChangeScene(nowSceneState, nowScene);
+			// シーン遷移判定に使用するフラグを初期化
 			isChangeScene = false;
 			continueFlag = false;
 		}
@@ -172,9 +192,12 @@ void Game::GameLoop()
 */
 void Game::UnloadData()
 {
+	// Rendererがnullptrじゃなかったら
 	if (RENDERER != nullptr)
 	{
+		// データをアンロード
 		RENDERER->UnloadData();
+		// Rendererの後片付けを行う
 		RENDERER->Shutdown();
 	}
 }
@@ -185,8 +208,10 @@ void Game::UnloadData()
 */
 void Game::ProcessInput()
 {
+	// inputSystemのUpdateの準備をする（SDL_PollEventsの直前に呼ぶ）
 	inputSystem->PrepareForUpdate();
 
+	// SDL_EVENTの生成
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -203,27 +228,36 @@ void Game::ProcessInput()
 		}
 	}
 
+	// 入力状態のアップデート
 	inputSystem->Update();
+	// 入力状態を保存
 	const InputState& state = inputSystem->GetState();
 
+	// エスケープまたはコントローラーのバックボタンが押されたらゲームループから抜ける
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released ||
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_BACK) == Pressed)
 	{
 		isRunning = false;
 	}
 
+	// 次のシーンのステータス状態保存用変数生成
 	SceneState tmpSceneState;
 
+	// シーンのアップデート
 	tmpSceneState = nowScene->Update(state);
 
+	// もしシーン遷移が行われない場合オブジェクトに入力状態を渡して更新
 	if (isChangeScene == false && Game::GetContinueFlag() == false)
 	{
 		ProcessInputs(state);
 	}
 
+	// 今のシーンと次のシーンが違うまたはコンテニューが選択されたら
 	if (tmpSceneState != nowSceneState || Game::GetContinueFlag())
 	{
+		// 今のシーンステータスに次のシーンステータスを入れる
 		nowSceneState = tmpSceneState;
+		// シーン変更フラグをtrueに
 		isChangeScene = true;
 	}
 }
@@ -344,7 +378,7 @@ void UpdateGameObjects(float _deltaTime)
 		deadObjects.pop_back();
 	}
 
-	// 配列をクリア
+	// 死亡状態のオブジェクト用配列をクリア
 	deadObjects.clear();
 }
 

@@ -50,6 +50,7 @@ GameObject::~GameObject()
 	{
 		delete components.back();
 	}
+	// 消されたタイミングでオブジェクトIDの総数を減らす
 	gameObjectId--;
 }
 
@@ -84,6 +85,7 @@ void GameObject::Update(float _deltaTime)
 */
 void GameObject::UpdateComponents(float _deltaTime)
 {
+	// Deadでなかったら更新処理を行う
 	if (state != State::Dead)
 	{	
 		for (auto itr : components)
@@ -129,6 +131,7 @@ void GameObject::GameObjectInput(const InputState & _keyState)
 */
 void GameObject::AddComponent(Component * _component)
 {
+	// 更新を考慮しコンポーネントを配列に追加
 	int order = _component->GetUpdateOder();
 	auto itr = components.begin();
 	for (;
@@ -149,6 +152,7 @@ void GameObject::AddComponent(Component * _component)
 */
 void GameObject::RemoveComponent(Component * _component)
 {
+	// 削除するコンポーネントを探して削除
 	auto itr = std::find(components.begin(), components.end(), _component);
 	if (itr != components.end())
 	{
@@ -175,14 +179,16 @@ void GameObject::ExceptionUpdate()
 */
 void GameObject::ComputeWorldTransform()
 {
+	// ワールド座標を変換する必要がある際更新をかける
 	if (recomputeWorldTransform)
 	{
-
+		// フラグをおろしScale・rotation・positionを更新
 		recomputeWorldTransform = false;
 		worldTransform = Matrix4::CreateScale(scale);
 		worldTransform *= Matrix4::CreateFromQuaternion(rotation);
 		worldTransform *= Matrix4::CreateTranslation(position);
 
+		// コンポーネントによる更新がある場合更新をする
 		for (auto itr : components)
 		{
 			itr->OnUpdateWorldTransform();
@@ -209,6 +215,7 @@ void GameObject::CreateTitleCamera(const Vector3 _pos)
 
 std::vector<GameObject*> GameObject::FindGameObject(Tag _tag)
 {
+	// Mapから必要なオブジェクト配列を探して返す
 	return gameObjectMap.find(_tag)->second;
 }
 

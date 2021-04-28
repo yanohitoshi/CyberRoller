@@ -10,6 +10,7 @@ bool ContinueSprite::continueFlag = true;
 
 ContinueSprite::ContinueSprite()
 	:GameObject(false, Tag::UI)
+	, DRAW_COUNT(60)
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -45,7 +46,7 @@ void ContinueSprite::UpdateGameObject(float _deltaTime)
 void ContinueSprite::GameObjectInput(const InputState& _keyState)
 {
 	// タイムアップ画像の描画が終わってコンテニュー画像描画開始から一定時間たっていたら
-	if (TimeUpSprite::GetDrawFlag() == false && frameCount >= 60)
+	if (TimeUpSprite::GetDrawFlag() == false && frameCount >= DRAW_COUNT)
 	{
 		// Aボタンが押されたら
 		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed )

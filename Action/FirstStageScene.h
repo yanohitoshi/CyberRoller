@@ -33,9 +33,6 @@ public:
 	SceneState Update(const InputState& state)override;
 
 private:
-	// カウント変数
-	int count;
-	// シーンが始まったかフラグ
-	bool startScene;
+
 };
 

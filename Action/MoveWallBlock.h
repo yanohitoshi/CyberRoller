@@ -72,5 +72,8 @@ private:
 	bool openFlag;
 	// チェックするTag保存用
 	Tag chackTag;
+
+	// Y軸ををずらして壁を中心に位置づけるための定数
+	const float SHIFT_POSITION_Y;
 };
 

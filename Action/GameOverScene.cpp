@@ -26,6 +26,6 @@ SceneState GameOverScene::Update(const InputState& state)
 		return SceneState::TITLE_SCENE;
 	}
 
-
+	// シーン変更しない場合今のシーンを返す
 	return SceneState::OVER_SCENE;
 }

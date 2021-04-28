@@ -7,8 +7,8 @@
 #include "CountDownFont.h"
 
 FinalStageScene::FinalStageScene()
+	: FINALCLEAR_TO_CHANGE_SCENE(360)
 {
-	//ライトの設定(設定しないと何も映らない)
 	// ライト情報初期化
 	light = Vector3(0.1f, 0.1f, 0.1f);
 	RENDERER->SetAmbientLight(light);
@@ -16,6 +16,7 @@ FinalStageScene::FinalStageScene()
 	dir.direction = Vector3(0.0f, 0.0f, 1.0f);
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+
 	// メンバー変数初期化
 	clearCount = 0;
 	changeCount = 0;
@@ -50,7 +51,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += Vector3(0.01f, 0.01f, 0.01f);
+		light += CHANGE_LIGHT_SPEED;
 		RENDERER->SetAmbientLight(light);
 		if (light.x >= 0.8f)
 		{
@@ -66,7 +67,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 	}
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (clearCount >= 360)
+	if (clearCount >= FINALCLEAR_TO_CHANGE_SCENE)
 	{
 		return SceneState::RESULT_SCENE;
 	}
@@ -75,7 +76,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 	if (CountDownFont::timeOverFlag == true && lightDownFlag == true)
 	{
 		// ライト固定
-		light = Vector3(0.3f, 0.3f, 0.3f);
+		light = TIMEOVERS_LIGHT;
 		RENDERER->SetAmbientLight(light);
 
 		// Aボタンが押されたら
@@ -106,13 +107,13 @@ SceneState FinalStageScene::Update(const InputState& state)
 			if (isContinueFlag == true)
 			{
 				// ライトアップ
-				light += Vector3(0.01f, 0.01f, 0.01f);
+				light += CHANGE_LIGHT_SPEED;
 				RENDERER->SetAmbientLight(light);
 			}
 			else if (endFlag == true)
 			{
 				// ライトダウン
-				light -= Vector3(0.01f, 0.01f, 0.01f);
+				light -= CHANGE_LIGHT_SPEED;
 				RENDERER->SetAmbientLight(light);
 			}
 			if (changeCount >= CONTINUE_TO_CHANGE_SCENE)
@@ -139,5 +140,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 		return SceneState::TITLE_SCENE;
 	}
 
+	// シーン変更しない場合今のシーンを返す
 	return SceneState::FINAL_STAGE_SCENE;
+
 }

@@ -5,6 +5,7 @@
 
 StartCountDownSprite::StartCountDownSprite()
 	:GameObject(false, PARTICLE)
+	, CHANGE_COUNT(60)
 {
 	// 4種のtextureをロード
 	firstTexure = RENDERER->GetTexture("Assets/sprite/CountDown3.png");
@@ -37,14 +38,14 @@ void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 		// カウント計測
 		++timeStartCount;
 		// カウントが60以下だったら
-		if (timeStartCount >= 60)
+		if (timeStartCount >= CHANGE_COUNT)
 		{
 			// 描画する
 			sprite->SetVisible(true);
 			// フレームカウントを取る
 			frameCount++;
 			// 60フレーム後ごとにtextureを切り替える
-			if (frameCount >= 60)
+			if (frameCount >= CHANGE_COUNT)
 			{
 				time -= 1;
 				frameCount = 0;

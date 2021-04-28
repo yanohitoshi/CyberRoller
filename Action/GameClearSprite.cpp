@@ -5,6 +5,7 @@
 
 GameClearSprite::GameClearSprite()
 	:GameObject(false, Tag::UI)
+	, DRAW_COUNT(120)
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -31,7 +32,7 @@ void GameClearSprite::UpdateGameObject(float _deltaTime)
 		// フレームカウントを数える
 		++frameCount;
 		// 120カウント超えたら描画する
-		if (frameCount >= 120)
+		if (frameCount >= DRAW_COUNT)
 		{
 			sprite->SetVisible(true);
 		}

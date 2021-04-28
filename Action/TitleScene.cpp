@@ -8,11 +8,9 @@
 
 TitleScene::TitleScene()
 {
-	light = Vector3(0.8f, 0.8f, 0.8f);
-
-	//ライトの設定(設定しないと何も映らない)
-	RENDERER->SetAmbientLight(light);
 	// ライト情報初期化
+	light = Vector3(0.8f, 0.8f, 0.8f);
+	RENDERER->SetAmbientLight(light);
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3(1.0f, 0.7f, 1.0f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
@@ -63,6 +61,7 @@ SceneState TitleScene::Update(const InputState& state)
 		return SceneState::FIRST_SATGE_SCENE;
 	}
 
+	// シーン変更しない場合今のシーンを返す
 	return SceneState::TITLE_SCENE;
 }
 

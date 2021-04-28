@@ -5,7 +5,7 @@
 ResultSceneUI::ResultSceneUI()
 	: GameObject(false, UI)
 {
-	// クリア時のsprite
+	// クリア時のspriteUI
 	new ThankYouSprite();
 }
 

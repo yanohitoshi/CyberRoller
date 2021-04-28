@@ -81,4 +81,16 @@ private:
 	// switchの停止位置
 	float stopPoint;
 
+	// 停止ポジションを定めるための定数
+	const float SHIFT_STOP_POSITION;
+	// 上昇速度
+	const float MOVE_UP_SPEED;
+	// 下降速度
+	const float MOVE_DOWN_SPEED;
+	// 全スイッチがONの時の色
+	const Vector3 ALL_CLEAR_COLOR;
+	// スイッチがONの時の色
+	const Vector3 ON_CLEAR;
+	// スイッチがOFFの時の色
+	const Vector3 OFF_CLEAR;
 };

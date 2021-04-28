@@ -63,5 +63,8 @@ private:
     // コンテニューしたかどうかフラグ
     static bool continueFlag;
 
+    // 描画を切り替えるカウント比較用の定数
+    const int DRAW_COUNT;
+
 };
 

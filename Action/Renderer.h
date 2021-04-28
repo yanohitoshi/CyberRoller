@@ -280,24 +280,59 @@ private:
 	*/
 	void CreateParticleVerts();
 
+	/*
+	@brief	時間制限用textureの生成
+	@param	_value　最大値
+	@param _fontSize　フォントサイズ
+	*/
 	void CreateTimeFontTexture(int _value,int _fontSize);
 
+	/*
+	@brief  シャドウマップの本描画関数
+	*/
 	void DrawShadow();
-	void DepthRendering();
-	void DrawBackGround();
-	void DrawParticle();
 
-	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj,
-		float viewPortScale = 1.0f, bool lit = true);
+	/*
+	@brief  デプスマップ焼きこみ描画
+	*/
+	void DepthRendering();
+
+	/*
+	@brief  背景の描画
+	*/
+	void DrawBackGround();
+
+	/*
+	@brief  Particle用の頂点バッファとインデックスバッファの作成
+	*/
+	void DrawParticle();
 
 	/*
 	@brief  光源情報をシェーダーの変数にセットする
 	@param  _shader セットするShaderクラスのポインタ
 	*/
 	void SetLightUniforms(Shader* _shader, const Matrix4& view);
+	
+	/*
+	@brief  画面全体を覆う頂点の定義
+	@param  vao Vertex Buffer Object
+	*/
 	void screenVAOSetting(unsigned int& vao);
+	/*
+	@brief  particleのブレンドモードを変更する
+	@param  blendType　変更するモード
+	*/
 	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType);
+	
+	/*
+	@brief  textureを変更する
+	@param  changeTextureID　変更するtextureのID
+	*/
 	void ChangeTexture(int changeTextureID);
+	
+	/*
+	@brief  ワールド空間のカメラ座標を計算
+	*/
 	Vector3 CalcCameraPos();
 
 	//ファイル名でメッシュを取得するための連想配列
@@ -330,9 +365,7 @@ private:
 	//スプライト
 	Shader* spriteShader;
 	VertexArray* spriteVerts;
-	//メッシュ
-	//Shader* basicShader;
-	//Shader* meshShader;
+	// スイッチ用シェーダー
 	Shader* switchShader;
 	//effect用メッシュ
 	Shader* effectMeshShader;
@@ -363,6 +396,14 @@ private:
 	float screenWidth;
 	//スクリーンの縦幅
 	float screenHeight;
+
+	// カメラの視野角
+	float CAMERA_PROJECTION_FOV = 70.0f;
+	// カメラプロジェクションの近距離
+	float CAMERA_PROJECTION_NEAR = 25.0f;
+	// カメラプロジェクションの遠距離
+	float CAMERA_PROJECTION_FAR = 7000.0f;
+
 	//環境光
 	Vector3 ambientLight;
 	//平行光源
@@ -372,26 +413,48 @@ private:
 	//コンテキスト
 	SDL_GLContext context;
 
-
-	Vector3 lightDir;
+	// プレイヤーの位置保存用
 	Vector3 playerPos;
+
 	//デプスマップ
 	unsigned int depthMapFBO;
+	// シャドウマップの横幅
 	const unsigned int SHADOW_WIDTH;
+	// シャドウマップの縦幅
 	const unsigned int SHADOW_HEIGHT;
+	// デプスマップtextureID
 	unsigned int depthMap;
+	// ライトのポジション
 	Vector3 LightPos;
+	// ライトの向き
 	Vector3 LightDir;
+	// ライトの行列群
+	// プロジェクション、ビュー、ライト空間
 	Matrix4 lightProjection, lightView, lightSpeceMatrix;
+	// カメラの前方向ベクトル
 	Vector3 cameraForwardVec;
+	// ライトビューのポジション
 	Vector3 lightViewPos;
-	Matrix4 lightViewMat;
-	Matrix4 lightProjMat;
+	// ライトの位置をプレイヤーの位置からずらす値（Z軸）
+	const float SHIFT_LIGHT_POSITON_Z;
 	// HDR関連	
 	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
 	unsigned int undefineTexID;
 
+	// ライトプロジェクション行列生成用定数
+	// ライトプロジェクションの幅
+	float LIGHT_PROJECTION_WHIDTH;
+	// ライトプロジェクションの高さ
+	float LIGHT_PROJECTION_HIGHT;
+	// ライトプロジェクションの近距離
+	float LIGHT_PROJECTION_NEAR;
+	// ライトプロジェクションの遠距離
+	float LIGHT_PROJECTION_FAR;
 
+	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
+	const int MAX_TIME_FONT_TEXTURES = 251;
+	// 制限時間用フォントのサイズ
+	const int TIME_FONT_SIZE = 72;
 	//時間表示用のフォントtexture
 	std::vector<Texture*> timeFontTextures;
 	std::vector<Texture*> timeBlackFontTextures;

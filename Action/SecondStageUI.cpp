@@ -14,9 +14,10 @@ bool SecondStageUI::countStartFlag = false;
 
 SecondStageUI::SecondStageUI()
 	: GameObject(false, Tag::UI)
+	, SCENE_TIME(120)
 {
 	// カウントダウン
-	new CountDownFont(120);
+	new CountDownFont(SCENE_TIME);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite
