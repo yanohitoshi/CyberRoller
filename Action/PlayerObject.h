@@ -79,6 +79,30 @@ public:
 	*/
 	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec,const Tag& __pairTag);
 	
+	/*
+	@fn 前方ベクトルを用いてキャラクターを回転させる関数
+	*/
+	void RotateToNewForward(const Vector3& forward);
+
+
+	//----------------------getter群------------------------------//
+	// ※減らせるかもしれない
+
+	/*
+	@fn SkeletalMeshComponentをstateに渡す関数
+	@return SkeletalMeshComponent　SkeletalMeshComponentのポインタを返す
+	*/
+	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
+
+	/*
+	@fn Animationを返す関数
+	@return Animation Animationのポインタを返す
+	*/
+	const Animation* GetAnimation(PlayerState _state);
+
+	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
+	static const float GetGravity() { return Gravity; }
+
 	// シーン遷移時に使うフラグのgetter
 	static bool GetClearFlag() { return clearFlag; }
 	static bool GetNextSceneFlag() { return nextSceneFlag; }
@@ -88,20 +112,6 @@ public:
 	static bool GetChackJumpFlag() { return chackJumpFlag; }
 	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
 
-	/*
-	@fn SkeletalMeshComponentをstateに渡す関数
-	@return SkeletalMeshComponent　SkeletalMeshComponentのポインタを返す
-	*/
-	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
-	
-	/*
-	@fn Animationを返す関数
-	@return Animation Animationのポインタを返す
-	*/
-	const Animation* GetAnimation(PlayerState _state);
-
-	//--------------state等でメンバー変数を使用するためのgetter群------------------------------//
-	// ※減らせるかもしれない
 	// 戻り値→Vector3
 	Vector3 GetForwardVec() { return forwardVec; }
 	Vector3 GetRightVec() { return rightVec; }
@@ -112,12 +122,12 @@ public:
 	Vector3 GetRespownPos() { return respownPos; }
 
 	// 戻り値→const float
-	const float GetDeadSpace() { return DeadSpace; }
-	const float GetFirstMovePower() { return FirstMovePower; }
-	const float GetMovePower() { return movePower; }
-	const float GetAirMovePower() { return airMovePower; }
-	const float GetFirstJumpPower() { return FirstJumpPower; }
-	const float GetDecelerationForce() { return decelerationForce; }
+	const float GetDeadSpace() { return DEAD_SPACE; }
+	const float GetFirstMovePower() { return FIRST_MOVE_POWER; }
+	const float GetMovePower() { return MOVE_POWER; }
+	const float GetAirMovePower() { return AIR_MOVE_POWER; }
+	const float GetFirstJumpPower() { return FIRST_JUMP_POWER; }
+	const float GetDecelerationForce() { return DECELERATION_FORCE; }
 
 	// 戻り値→float
 	float GetMoveSpeed() { return moveSpeed; }
@@ -145,7 +155,7 @@ public:
 	// 戻り値→PlayerState
 	PlayerState GetNowState() { return nowState; }
 
-	//--------------state等でメンバー変数を使用するためのsetter群------------------------------//
+	//---------------------------setter群------------------------------//
 	// ※減らせるかもしれない
 	// 引数→Vector3
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
@@ -174,22 +184,23 @@ public:
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
 	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
 
-	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
-	static const float GetGravity() { return Gravity; }
 
-	// 前方ベクトルを用いてキャラクターを回転させる関数
-	void RotateToNewForward(const Vector3& forward);
 
 
 private:
 
-	//3Dモデルの描画を行うクラス
+	//----------------Component系Class変数--------------------//
+	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
+	// Meshの読み込みを行うクラス
 	Mesh* mesh;
-	//当たり判定を行うクラス
+	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
+	// 球体の当たり判定を行うクラス
 	SphereCollider* groundChackSphereCol;
+	//--------------------------------------------------------//
 
+	//----------------private関数群---------------------------//
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
@@ -202,135 +213,114 @@ private:
 	*/
 	void OnCollisionGround(const GameObject& _hitObject);
 
-	//押し戻しに使うプレイヤーのAABB
-	AABB playerBox;
-	//-----------アニメーション関係------------//
-	std::vector<const Animation*> animTypes;
-	//再生するアニメーションの状態
-	int animState;
-	//切り替わったかを判断するための変数
-	int tmpAnimState;
-	//-----------------------------------------//
-
-	// 入力値のdeadスペース
-	const float DeadSpace;
-
-	//加速度の定数
-	const float movePower;
-	const float airMovePower;
-	// 減速する力
-	const float decelerationForce;
-	// 初速度
-	const float FirstMovePower;
-	float moveSpeed;
-
-	//入力があったかどうか判定するためのフラグ
-	bool inputFlag = false;
-
-	//右方向ベクトル
-	Vector3 rightVec;
-
-	//キャラクターの前方ベクトル
-	Vector3 charaForwardVec;
-
-	//キャラクターを回転させるか前方ベクトルと比較するためのベクトル
-	Vector3 tmpCharaForwardVec;
-
-	//方向に合わせて回転させるためのベクトル
-	Vector3 rotateVec;
-
-	// 生成されたときのポジションを保存するためのvector3変数
-	Vector3 firstPos;
-	Vector3 startPos;
-	Vector3 respownPos;
-
-	// 他のオブジェクトから押されている時の速度
-	Vector3 pushedVelocity;
-
-	//重力
-	static const float Gravity;
-
-	//初期ジャンプ力定数
-	const float FirstJumpPower;
-
-	// 振り返りディレイ用カウント変数
-	int turnDelayCount;
-
-	//ジャンプ力
-	float jumpPower;
-
-	//ジャンプ中かどうかのフラグ
-	bool isJumping;
-
-	//引き続きジャンプボタンが利用可能かフラグ
-	bool isAvailableJumpKey;
-
-	//ジャンプできるかフラグ
-	bool jumpFlag;
-
-	//ジャンプボタンが押されている間のフレームカウント
-	int jumpFrameCount;
-
-	//ジャンプスイッチを押したかどうか
-	bool switchJumpFlag;
-
-	//接地フラグ
-	bool onGround;
-
-	//走り状態かどうか
-	bool runFlag;
-
-	// 入力が可能かどうか
-	bool isAvailableInput;
-
-	// 入力がない間カウント
-	int reStartCount;
-
-	// ダウン状態かどうか
-	bool downFlag;
-
-	// ダウン時コンティニュー選択でYESが選択されたかどうか
-	bool downUpFlag;
-
-	// ダウン時コンティニュー選択でNOが選択されたかどうか
-	bool downOverFlag;
-
+	//--------------------------------------------------------//
+	
+	//--------------------static変数群------------------------//
 	// 最終ステージ用のクリアフラグ
 	static bool clearFlag;
-
 	// 最終ステージ以外での次のシーンへ遷移するフラグ
 	static bool nextSceneFlag;
-
 	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
 	static bool reStartFlag;
-
-
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
 	static bool chackJumpFlag;
 	// isJumpingチェック用（ジャンプ中かどうか）
 	static bool chackIsJumping;
+	//重力
+	static const float Gravity;
+	//--------------------------------------------------------//
+	
+	//------------------------定数群--------------------------//
+	// 入力値のdeadスペース
+	const float DEAD_SPACE;
+	//加速度の定数
+	const float MOVE_POWER;
+	// 空中での加速定数
+	const float AIR_MOVE_POWER;
+	// 減速する力
+	const float DECELERATION_FORCE;
+	// 初速度
+	const float FIRST_MOVE_POWER;
+	//初期ジャンプ力定数
+	const float FIRST_JUMP_POWER;
+	// プレイヤーが落下したかどうかを判定する位置
+	//（※現状ステージに落下がないのでもしすり抜けてしまった場合）
+	const float FALL_POSITION_Z;
+	// 生成されるときのポジションをずらす
+	const float FIRST_POSITION_Z;
+	//--------------------------------------------------------//
+	//--------------------------変数群------------------------//
+	//押し戻しに使うプレイヤーのAABB
+	AABB playerBox;
+	//右方向ベクトル
+	Vector3 rightVec;
+	//キャラクターの前方ベクトル
+	Vector3 charaForwardVec;
+	//キャラクターを回転させるか前方ベクトルと比較するためのベクトル
+	Vector3 tmpCharaForwardVec;
+	//方向に合わせて回転させるためのベクトル
+	Vector3 rotateVec;
+	// 生成されたときのポジションを保存するためのvector3変数
+	Vector3 firstPos;
+	// リスポーンする場所
+	Vector3 respownPos;
+	// 他のオブジェクトから押されている時の速度
+	Vector3 pushedVelocity;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
 	int respawnCount;
+	// 入力がない間カウント
+	int reStartCount;
+	//ジャンプボタンが押されている間のフレームカウント
+	int jumpFrameCount;
+	// 振り返りディレイ用カウント変数
+	int turnDelayCount;
 
+	// 速度
+	float moveSpeed;
+	//ジャンプ力
+	float jumpPower;
+
+	//入力があったかどうか判定するためのフラグ
+	bool inputFlag;
+	//ジャンプ中かどうかのフラグ
+	bool isJumping;
+	//引き続きジャンプボタンが利用可能かフラグ
+	bool isAvailableJumpKey;
+	//ジャンプできるかフラグ
+	bool jumpFlag;
+	//ジャンプスイッチを押したかどうか
+	bool switchJumpFlag;
+	//接地フラグ
+	bool onGround;
+	//走り状態かどうか
+	bool runFlag;
+	// 入力が可能かどうか
+	bool isAvailableInput;
+	// ダウン状態かどうか
+	bool downFlag;
+	// ダウン時コンティニュー選択でYESが選択されたかどうか
+	bool downUpFlag;
+	// ダウン時コンティニュー選択でNOが選択されたかどうか
+	bool downOverFlag;
 	// リスポーン用フラグ
 	bool respawnFlag;
-
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
-
 	// 壁と押し戻しを行ったか
 	bool isHitWall;
 	
 	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
-
 	// 変更された次のプレーヤーのstate状態を保存するための変数
 	PlayerState nextState;
 
+	//----------------------可変長配列群----------------------//
+	// Animationプール
+	std::vector<const Animation*> animTypes;
 	// stateプール
 	std::vector<class PlayerObjectStateBase*> statePools;
-
+	//--------------------------------------------------------//
 };
 

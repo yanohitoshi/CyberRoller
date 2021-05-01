@@ -42,13 +42,14 @@ bool PlayerObject::chackIsJumping = false;
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, playerBox({ Vector3::Zero,Vector3::Zero })
-	, FirstJumpPower(1200.0f)
-	//, moveSpeed(0.0f)
-	, movePower(90.0f)
-	, FirstMovePower(0.0f)
-	, DeadSpace(0.1f)
-	, airMovePower(60.0f)
-	, decelerationForce(80.0f)
+	, FIRST_JUMP_POWER(1200.0f)
+	, MOVE_POWER(90.0f)
+	, FIRST_MOVE_POWER(0.0f)
+	, AIR_MOVE_POWER(60.0f)
+	, DECELERATION_FORCE(80.0f)
+	, DEAD_SPACE(0.1f)
+	, FALL_POSITION_Z(-500.0f)
+	, FIRST_POSITION_Z(5000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -59,9 +60,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	SetPosition(_pos);
 
 	// 最初のポジションを保存
-	firstPos = Vector3(position.x, position.y, 5000.0f);
+	firstPos = Vector3(position.x, position.y, FIRST_POSITION_Z);
 	// ジャンプパワーを初速にセット
-	jumpPower = FirstJumpPower;
+	jumpPower = FIRST_JUMP_POWER;
 	//リスポ－ンするまでのカウント初期化
 	respawnCount = 0;
 	//リスポ－ンflag初期化
@@ -246,7 +247,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	}
 
 	//カメラにplayerのpositionを渡す
-	if (clearFlag == false && nextSceneFlag == false && position.z >= -500.0f)
+	if (clearFlag == false && nextSceneFlag == false && position.z >= FALL_POSITION_Z)
 	{
 		mainCamera->SetLerpObjectPos(position);
 	}
@@ -331,6 +332,7 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _
 		playerCalcCollisionFixVec(myAABB, pairAABB, ment, _pairTag);
 		SetPosition(position + ment);
 	}
+
 }
 
 void PlayerObject::RotateToNewForward(const Vector3& forward)
@@ -487,7 +489,7 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		{
 			jumpFlag = false;
 			isAvailableJumpKey = true;
-			jumpPower = FirstJumpPower;
+			jumpPower = FIRST_JUMP_POWER;
 		}
 
 		switchJumpFlag = false;
@@ -500,7 +502,7 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		if (switchJumpFlag == false)
 		{
 			jumpFrameCount = 0;
-			jumpPower = FirstJumpPower;
+			jumpPower = FIRST_JUMP_POWER;
 			switchJumpFlag = true;
 
 		}
