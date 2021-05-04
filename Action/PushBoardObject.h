@@ -60,8 +60,8 @@ private:
 	//”½“]ƒtƒ‰ƒO
 	bool inversionFlag;
 	//ˆÚ“®‘¬“x
-	const float moveSpeed;
-	const float cutBackSpeed;
+	const float MoveSpeed;
+	const float CutBackSpeed;
 	//ˆÚ“®•ûŒü
 	Vector3 direction;
 	// ‚Ç‚Ì•ûŒü‚É“®‚­‚©‚ğ”»’è‚·‚é‚½‚ß‚ÌTag•Ï”

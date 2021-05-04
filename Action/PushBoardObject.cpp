@@ -7,8 +7,8 @@
 
 PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed ,MoveDirectionTag _moveTag) :
 	GameObject(false, _objectTag)
-	, moveSpeed (_speed)
-	, cutBackSpeed(_cutBackSpeed)
+	, MoveSpeed(_speed)
+	, CutBackSpeed(_cutBackSpeed)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	SetPosition(_p);
@@ -44,11 +44,11 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 	// ”½“]‚·‚é‚©‚Ç‚¤‚©‚ğ”»’è
 	if (inversionFlag == false)
 	{
-		velocity = direction * moveSpeed;
+		velocity = direction * MoveSpeed;
 	}
 	else if (inversionFlag == true)
 	{
-		velocity = direction * (moveSpeed * cutBackSpeed) * -1.0f;
+		velocity = direction * (MoveSpeed * CutBackSpeed) * -1.0f;
 	}
 	//‘OŒãˆÚ“®—p”»’è
 	if (moveTag == MoveDirectionTag::MOVE_X)

@@ -3,10 +3,10 @@
 SandSmokeParticle::SandSmokeParticle(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 25, "Assets/Effect/Particle_Soft.png")
 {
-	mScale = 16.0f;
-	mAlpha = 1.0f;
-	particleComponent->SetScale(mScale);
-	particleComponent->SetAlpha(mAlpha);
+	scale = 16.0f;
+	alpha = 1.0f;
+	particleComponent->SetScale(scale);
+	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
 }
 
@@ -20,10 +20,10 @@ void SandSmokeParticle::UpdateGameObject(float _deltaTime)
 	
 	if (lifeCount >= 0)
 	{
-		mScale += 5.0f;
-		mAlpha -= 0.05f;
-		particleComponent->SetScale(mScale);
-		particleComponent->SetAlpha(mAlpha);
+		scale += 5.0f;
+		alpha -= 0.05f;
+		particleComponent->SetScale(scale);
+		particleComponent->SetAlpha(alpha);
 		position += velocity * _deltaTime;
 		SetPosition(position);
 	}

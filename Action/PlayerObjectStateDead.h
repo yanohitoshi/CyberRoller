@@ -44,6 +44,8 @@ public:
 private:
 
 	// リスポーン状態に入るまでのカウントを測る変数
-	int reSpawnCount;
+	int respawnCount;
+	// リスポーン状態に入る時間
+	const int respawnTime;
 };
 

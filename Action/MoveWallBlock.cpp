@@ -16,10 +16,10 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	: GameObject(false, _objectTag)
 	, moveSpeed(_speed)
 	, stopPos(_stopPos)
-	, SHIFT_POSITION_Y(200.0f)
+	, ShiftPositionY(200.0f)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
-	position = Vector3(_p.x , _p.y - SHIFT_POSITION_Y, _p.z);
+	position = Vector3(_p.x , _p.y - ShiftPositionY, _p.z);
 	SetPosition(position);
 	scale = _size;
 	SetScale(scale);

@@ -44,6 +44,7 @@ private:
 	bool isDanceFlag;
 	// 入力が無い間カウントを数える用のカウント変数
 	int danceCount;
-
+	// ダンスを開始する時間
+	const int DanceStartTime;
 };
 

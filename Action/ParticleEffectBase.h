@@ -68,4 +68,13 @@ protected:
 	// particleの状態管理変数
 	ParticleState particleState;
 
+
+	// 親のGameObject保存用変数
+	GameObject* owner;
+	// 透過度
+	float alpha;
+	// 拡縮度
+	float scale;
+	// 速度
+	float speed;
 };

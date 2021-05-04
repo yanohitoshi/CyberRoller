@@ -2,6 +2,7 @@
 #include "SkeletalMeshComponent.h"
 
 PlayerObjectStateDead::PlayerObjectStateDead()
+	: respawnTime(120)
 {
 }
 
@@ -13,8 +14,8 @@ PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime
 {
 	if (_owner->GetRespawnFlag() == false)
 	{
-		++reSpawnCount;
-		if (reSpawnCount >= 120)
+		++respawnCount;
+		if (respawnCount >= respawnTime)
 		{
 			_owner->SetRespawnFlag(true);
 			_owner->SetPosition(_owner->GetRespownPos());
@@ -43,6 +44,6 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 	velocity = _owner->GetVelocity();
 	velocity.x = 0.0f;
 	velocity.y = 0.0f;
-	reSpawnCount = 0;
+	respawnCount = 0;
 	_owner->SetIsAvailableInput(false);
 }

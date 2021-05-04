@@ -15,12 +15,12 @@
 
 SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
-	, MOVE_UP_SPEED(150.0f)
-	, MOVE_DOWN_SPEED(-250.0f)
-	, SHIFT_STOP_POSITION(40.0f)
-	, ALL_CLEAR_COLOR(Vector3(1.0f, 1.0f, 0.5f))
-	, ON_CLEAR(Vector3(0.1f, 0.1f, 1.0f))
-	, OFF_CLEAR(Vector3(1.0f, 0.1f, 0.1f))
+	, MoveUpSpeed(150.0f)
+	, MoveDownSpeed(-250.0f)
+	, ShiftStopPosition(40.0f)
+	, AllClearColer(Vector3(1.0f, 1.0f, 0.5f))
+	, OnColor(Vector3(0.1f, 0.1f, 1.0f))
+	, OffColor(Vector3(1.0f, 0.1f, 0.1f))
 {
 	//GameObjectメンバ変数の初期化
 	position = _owner->GetPosition();
@@ -29,7 +29,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	tag = _objectTag;
 	velocity = Vector3::Zero;
 	initPosition = position;
-	stopPoint = position.z - SHIFT_STOP_POSITION;
+	stopPoint = position.z - ShiftStopPosition;
 	//モデル描画用のコンポーネント
 	meshComponent = new ChangeColorMeshComponent(this,false,true);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
@@ -108,17 +108,17 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 	if (onFlag == true && isAvailableSwitch == true)
 	{
 		// ONの時
-		meshComponent->SetColor(ON_CLEAR);
+		meshComponent->SetColor(OnColor);
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{
 		// OFFの時
-		meshComponent->SetColor(OFF_CLEAR);
+		meshComponent->SetColor(OffColor);
 	}
 	else if (isAvailableSwitch == false)
 	{
 		// 区画の全てのスイッチが押されている時
-		meshComponent->SetColor(ALL_CLEAR_COLOR);
+		meshComponent->SetColor(AllClearColer);
 	}
 	
 	// スイッチの可動処理
@@ -129,7 +129,7 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 		if (position.z < initPosition.z)
 		{
 			// 上昇する速度を持たせる
-			velocity.z = MOVE_UP_SPEED;
+			velocity.z = MoveUpSpeed;
 		}
 		else if (position.z >= initPosition.z) // 初期ポジションまで到達していたら
 		{
@@ -143,7 +143,7 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 		if (pushStop == false)
 		{
 			// 下降の速度を持たせる
-			velocity.z = MOVE_DOWN_SPEED;
+			velocity.z = MoveDownSpeed;
 		}
 		else if (pushStop == true) // 停止フラグがtrueだったら
 		{

@@ -42,14 +42,14 @@ bool PlayerObject::chackIsJumping = false;
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, playerBox({ Vector3::Zero,Vector3::Zero })
-	, FIRST_JUMP_POWER(1200.0f)
-	, MOVE_POWER(90.0f)
-	, FIRST_MOVE_POWER(0.0f)
-	, AIR_MOVE_POWER(60.0f)
-	, DECELERATION_FORCE(80.0f)
-	, DEAD_SPACE(0.1f)
-	, FALL_POSITION_Z(-500.0f)
-	, FIRST_POSITION_Z(5000.0f)
+	, FirstJumpPower(1200.0f)
+	, MovePower(90.0f)
+	, FirstMovePower(0.0f)
+	, AirMovePower(60.0f)
+	, DecelerationForce(80.0f)
+	, DeadSpace(0.1f)
+	, FallPpsitionZ(-500.0f)
+	, FirstPositionZ(5000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -60,9 +60,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	SetPosition(_pos);
 
 	// 最初のポジションを保存
-	firstPos = Vector3(position.x, position.y, FIRST_POSITION_Z);
+	firstPos = Vector3(position.x, position.y, FirstPositionZ);
 	// ジャンプパワーを初速にセット
-	jumpPower = FIRST_JUMP_POWER;
+	jumpPower = FirstJumpPower;
 	//リスポ－ンするまでのカウント初期化
 	respawnCount = 0;
 	//リスポ－ンflag初期化
@@ -247,7 +247,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	}
 
 	//カメラにplayerのpositionを渡す
-	if (clearFlag == false && nextSceneFlag == false && position.z >= FALL_POSITION_Z)
+	if (clearFlag == false && nextSceneFlag == false && position.z >= FallPpsitionZ)
 	{
 		mainCamera->SetLerpObjectPos(position);
 	}
@@ -489,7 +489,7 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		{
 			jumpFlag = false;
 			isAvailableJumpKey = true;
-			jumpPower = FIRST_JUMP_POWER;
+			jumpPower = FirstJumpPower;
 		}
 
 		switchJumpFlag = false;
@@ -502,7 +502,7 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		if (switchJumpFlag == false)
 		{
 			jumpFrameCount = 0;
-			jumpPower = FIRST_JUMP_POWER;
+			jumpPower = FirstJumpPower;
 			switchJumpFlag = true;
 
 		}

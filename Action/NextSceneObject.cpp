@@ -10,8 +10,8 @@
 
 NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
-	, ANGLE(15.0f)
-	, MOVE_SPEED(50.0f)
+	, Angle(15.0f)
+	, MoveSpeed(50.0f)
 {
 
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
@@ -49,10 +49,10 @@ void NextSceneObject::UpdateGameObject(float _deltaTime)
 	if (PlayerObject::GetNextSceneFlag() == true)
 	{
 		// ‘¬“x•t—^
-		velocity.z = MOVE_SPEED;
+		velocity.z = MoveSpeed;
 
 		//ZŽ²‚ð15“x‰ñ“]‚³‚¹‚é
-		float radian = Math::ToRadians(ANGLE);
+		float radian = Math::ToRadians(Angle);
 		Quaternion rot = this->GetRotation();
 		Quaternion inc(Vector3::UnitZ, radian);
 		Quaternion target = Quaternion::Concatenate(rot, inc);

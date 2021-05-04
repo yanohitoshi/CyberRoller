@@ -3,6 +3,7 @@
 #include "CountDownFont.h"
 
 PlayerObjectStateIdle::PlayerObjectStateIdle()
+	: DanceStartTime(600)
 {
 }
 
@@ -46,7 +47,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	if (!_owner->GetInputFlag())
 	{
 		++danceCount;
-		if (danceCount >= 600)
+		if (danceCount >= DanceStartTime)
 		{
 			isDanceFlag = true;
 		}

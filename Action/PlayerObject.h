@@ -122,12 +122,12 @@ public:
 	Vector3 GetRespownPos() { return respownPos; }
 
 	// 戻り値→const float
-	const float GetDeadSpace() { return DEAD_SPACE; }
-	const float GetFirstMovePower() { return FIRST_MOVE_POWER; }
-	const float GetMovePower() { return MOVE_POWER; }
-	const float GetAirMovePower() { return AIR_MOVE_POWER; }
-	const float GetFirstJumpPower() { return FIRST_JUMP_POWER; }
-	const float GetDecelerationForce() { return DECELERATION_FORCE; }
+	const float GetDeadSpace() { return DeadSpace; }
+	const float GetFirstMovePower() { return FirstMovePower; }
+	const float GetMovePower() { return MovePower; }
+	const float GetAirMovePower() { return AirMovePower; }
+	const float GetFirstJumpPower() { return FirstJumpPower; }
+	const float GetDecelerationForce() { return DecelerationForce; }
 
 	// 戻り値→float
 	float GetMoveSpeed() { return moveSpeed; }
@@ -233,22 +233,22 @@ private:
 	
 	//------------------------定数群--------------------------//
 	// 入力値のdeadスペース
-	const float DEAD_SPACE;
+	const float DeadSpace;
 	//加速度の定数
-	const float MOVE_POWER;
+	const float MovePower;
 	// 空中での加速定数
-	const float AIR_MOVE_POWER;
+	const float AirMovePower;
 	// 減速する力
-	const float DECELERATION_FORCE;
+	const float DecelerationForce;
 	// 初速度
-	const float FIRST_MOVE_POWER;
+	const float FirstMovePower;
 	//初期ジャンプ力定数
-	const float FIRST_JUMP_POWER;
+	const float FirstJumpPower;
 	// プレイヤーが落下したかどうかを判定する位置
 	//（※現状ステージに落下がないのでもしすり抜けてしまった場合）
-	const float FALL_POSITION_Z;
+	const float FallPpsitionZ;
 	// 生成されるときのポジションをずらす
-	const float FIRST_POSITION_Z;
+	const float FirstPositionZ;
 	//--------------------------------------------------------//
 	//--------------------------変数群------------------------//
 	//押し戻しに使うプレイヤーのAABB

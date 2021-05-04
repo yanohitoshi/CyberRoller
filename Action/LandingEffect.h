@@ -35,12 +35,5 @@ public:
 
 private:
     
-    // e‚ÌGameObject•Û‘¶—p•Ï”
-    GameObject* owner;
-    // Šg‘åk¬•Ï”
-    float mScale;
-    // “§–¾“x•Ï”
-    float mAlpha;
-
 };
 

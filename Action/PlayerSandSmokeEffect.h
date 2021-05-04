@@ -36,12 +36,6 @@ public:
 
 private:
     
-    // 親のGameObject保存用変数
-    GameObject* owner;
-    // 拡大縮小変数
-    float mScale;
-    // 透明度変数
-    float mAlpha;
     // 走り状態か確認用フラグ
     bool runFlag;
 

@@ -10,8 +10,8 @@
 
 ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
 	: GameObject(false,_objectTag)
-	, ANGLE(10.0f)
-	, MOVE_SPEED(50.0f)
+	, Angle(10.0f)
+	, MoveSpeed(50.0f)
 {
 
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
@@ -53,10 +53,10 @@ void ClearPointObject::UpdateGameObject(float _deltaTime)
 	if (PlayerObject::GetClearFlag() == true)
 	{
 		// ‘¬“x‚ð•t—^
-		velocity.z = MOVE_SPEED;
+		velocity.z = MoveSpeed;
 
 		//ZŽ²‚ð10“x‰ñ“]‚³‚¹‚é
-		float radian = Math::ToRadians(ANGLE);
+		float radian = Math::ToRadians(Angle);
 		Quaternion rot = this->GetRotation();
 		Quaternion inc(Vector3::UnitZ, radian);
 		Quaternion target = Quaternion::Concatenate(rot, inc);

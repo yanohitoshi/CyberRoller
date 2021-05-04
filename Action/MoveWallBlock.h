@@ -74,6 +74,6 @@ private:
 	Tag chackTag;
 
 	// Y²‚ğ‚ğ‚¸‚ç‚µ‚Ä•Ç‚ğ’†S‚ÉˆÊ’u‚Ã‚¯‚é‚½‚ß‚Ì’è”
-	const float SHIFT_POSITION_Y;
+	const float ShiftPositionY;
 };
 

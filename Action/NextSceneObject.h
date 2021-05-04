@@ -56,9 +56,9 @@ private:
 	// 生成されたときのポジションを保存するよう
 	Vector3 firstPos;
 	// 回転する際の角度
-	const float ANGLE;
+	const float Angle;
 	// 移動速度の定数
-	const float MOVE_SPEED;
+	const float MoveSpeed;
 
 };
 
