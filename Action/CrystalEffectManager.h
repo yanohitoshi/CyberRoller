@@ -59,13 +59,22 @@ private:
     int frameCount;
     // effectを発生させるタイミングを測るカウント変数
     int activeFrameCount;
-    // 移動方向を反転させるかフラグ変数
-    bool revers;
     // 回転の半径変数
-    float r;
+    const float Radius;
     // 回転で用いるヨーの角度変数
     float yaw;
     // 回転速度
-    const float yawSpeed = 0.06f;
+    const float YawSpeed;
+    // Z軸のポジションをずらす値
+    const float ShiftPositionZ;
+    // Z軸のみに適応させる補正値
+    const float SecondCorrectionValue;
+    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    const float CorrectionRandValue;
+    // ランダムの範囲の割合
+    const int RandValue;
+    // デルタタイムにかける補正
+    const float DeltaTimeCorrectionValue;
+
 };
 

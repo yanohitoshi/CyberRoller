@@ -219,12 +219,6 @@
     <ClCompile Include="CrystalEffectManager.cpp">
       <Filter>GameObjects\Effect\CrystalEffect</Filter>
     </ClCompile>
-    <ClCompile Include="JumpParticleEffect.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpParticleEffectManeger.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
     <ClCompile Include="LandingEffect.cpp">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClCompile>
@@ -596,12 +590,6 @@
     </ClInclude>
     <ClInclude Include="CrystalEffectManager.h">
       <Filter>GameObjects\Effect\CrystalEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpParticleEffect.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpParticleEffectManeger.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClInclude>
     <ClInclude Include="LandingEffect.h">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>

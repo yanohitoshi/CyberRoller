@@ -175,8 +175,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="GameClearSprite.cpp" />
     <ClCompile Include="GameOverSprite.cpp" />
     <ClCompile Include="HDRRenderer.cpp" />
-    <ClCompile Include="JumpParticleEffect.cpp" />
-    <ClCompile Include="JumpParticleEffectManeger.cpp" />
     <ClCompile Include="LandingEffect.cpp" />
     <ClCompile Include="LandingEffectManeger.cpp" />
     <ClCompile Include="MoveBlockObject.cpp" />
@@ -321,8 +319,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="GameClearSprite.h" />
     <ClInclude Include="GameOverSprite.h" />
     <ClInclude Include="HDRRenderer.h" />
-    <ClInclude Include="JumpParticleEffect.h" />
-    <ClInclude Include="JumpParticleEffectManeger.h" />
     <ClInclude Include="LandingEffect.h" />
     <ClInclude Include="LandingEffectManeger.h" />
     <ClInclude Include="MoveBlockObject.h" />

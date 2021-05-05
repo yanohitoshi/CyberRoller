@@ -43,6 +43,7 @@ private:
     float tmpVelZ;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
-
+    // 1度に生成するエフェクトの数
+    const int MaxEffects;
 };
 

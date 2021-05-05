@@ -45,6 +45,10 @@ private:
     int frameCount;
     // 生成した数を数えてずらす方向を決めるためのカウント
     int generateCount;
+    // ownerの速度が一定以上の場合に生成するための定数
+    const float GenerateSpeedValue;
+    // 足元から出ているように見せるためにずらす値
+    const float ShiftPositionValue;
 
 };
 

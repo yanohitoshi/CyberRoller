@@ -34,7 +34,11 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
-    
+
+    // 毎フレーム足すscale値 
+    const float AddScale;
+    // 毎フレーム引くalpha値
+    const float SubAlpha;
 
 };
 

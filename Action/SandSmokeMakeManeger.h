@@ -43,5 +43,32 @@ private:
     int frameCount;
     // 親となる動く壁のサイズを見てどれくらいの幅でeffectを出すか決める用の変数
     Vector3 ownerSize;
+
+    // ポジションXをずらす値
+    const float ShiftPositionX;
+    // 大きい壁の時のポジションYをずらす値
+    const float MaxShiftPositionY;
+    // 大きい壁の時のポジションYをずらす値
+    const float MinShiftPositionY;
+    // 大きい壁のサイズ
+    const float BigWallSize;
+    // 小さい壁のサイズ
+    const float SmallWallSize;
+    // ランダムの範囲の割合X
+    const int RandValueX;
+    // 大きい壁のランダムの範囲の割合Y
+    const int BigRandValueY;
+    // 小さい壁ランダムの範囲の割合Y
+    const int SmallRandValueY;
+    // ランダムの範囲の割合Z
+    const int RandValueZ;
+    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    const float CorrectionRandValue;
+    // 生成する頻度（フレームで比較）
+    const int GenerateFrequency;
+    // 大きい壁の場合の1度に生成するエフェクトの数
+    const int SmallWallMaxEffect;
+    // 小さい壁の場合の1度に生成するエフェクトの数
+    const int BigWallMaxEffect;
 };
 

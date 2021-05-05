@@ -10,7 +10,6 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "PlayerSandSmokeMakeManeger.h"
-#include "JumpParticleEffectManeger.h"
 #include "LandingEffectManeger.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"

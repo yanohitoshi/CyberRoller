@@ -3,7 +3,7 @@
 #include "CountDownFont.h"
 
 PlayerObjectStateIdle::PlayerObjectStateIdle()
-	: DanceStartTime(600)
+	: DanceStartTime(1800)
 {
 }
 

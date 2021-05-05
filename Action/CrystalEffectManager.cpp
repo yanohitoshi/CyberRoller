@@ -4,31 +4,43 @@
 
 CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor)
 	:GameObject(false, Tag::PARTICLE)
+	, ShiftPositionZ(100.0f)
+	, Radius(150.0f)
+	, YawSpeed(0.06f)
+	, SecondCorrectionValue(2.0f)
+	, CorrectionRandValue(10.0f)
+	, RandValue(100)
+	, DeltaTimeCorrectionValue(10.0f)
 {
+	// メンバー変数の初期化	
 	crystalColor = _crystalColor;
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = owner->GetPosition();
-	position.z -= 100.0f;
+	position.z -= ShiftPositionZ;
 	frameCount = 0;
 	activeFrameCount = 0;
-	revers = false;
 	tmpMovePos = Vector3::Zero;
-	r = 150.0f;
+
+	// 色ごとにマネージャークラスを生成するためそれぞれに場合分けし初期化
 	if (crystalColor == CrystalColor::WHITE)
 	{
+		// 初期角度を設定
 		yaw = Math::ToRadians(0);
 	}
 	else if (crystalColor == CrystalColor::RED)
 	{
+		// 初期角度を設定
 		yaw = Math::ToRadians(90);
 	}
 	else if (crystalColor == CrystalColor::BLUE)
 	{
+		// 初期角度を設定
 		yaw = Math::ToRadians(180);
 	}
 	else if (crystalColor == CrystalColor::GREEN)
 	{
+		// 初期角度を設定
 		yaw = Math::ToRadians(270);
 	}
 }
@@ -39,34 +51,50 @@ CrystalEffectManager::~CrystalEffectManager()
 
 void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 {
-	yaw += yawSpeed;
+	// 回転速度を追加
+	yaw += YawSpeed;
 
-	tmpMovePos.x = r * cosf(yaw) + owner->GetPosition().x;
-	tmpMovePos.y = r * sinf(yaw) + owner->GetPosition().y;
-	tmpMovePos.z = owner->GetPosition().z - 100.0f;
-	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 10.0f);
+	// 回転角でxとyポジションを設定
+	tmpMovePos.x = Radius * cosf(yaw) + owner->GetPosition().x;
+	tmpMovePos.y = Radius * sinf(yaw) + owner->GetPosition().y;
+	// z軸は固定
+	tmpMovePos.z = owner->GetPosition().z - ShiftPositionZ;
+	// 計算したポジションと今のポジションで線形保管を取りポジションに代入
+	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaTimeCorrectionValue);
+	// ポジションを更新
 	SetPosition(position);
 
+	// アクティブを制御するカウントを数える
 	++activeFrameCount;
 
+	// activeFrameCountが8以上になったら
 	if (activeFrameCount  >= 8)
 	{
+		// particleStateを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
+		// activeFrameCountを初期化
 		activeFrameCount = 0;
 	}
 	else
 	{
+		// particleStateを無効化
 		particleState = ParticleState::PARTICLE_DISABLE;
 	}
 
+	// パーティクルの状態を見て
 	switch (particleState)
 	{
+		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
 		break;
+
+		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
+		// 速度を一時保存する変数
 		Vector3 vel;
-		Vector3 randV((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f + 2.0f);
+		// 速度用のランダムな値を生成
+		Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
 		velocity = randV * 0.1f;
 		//発生位置を設定
 		vel = velocity;
@@ -74,19 +102,9 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 		vel = vel + randV;
 		vel.x = 0.0f;
 		vel.y = 0.0f;
-		if (revers)
-		{
-			vel.x *= -1.0f;
-			vel.y *= -1.0f;
-			revers = false;
-		}
-		else
-		{
-			revers = true;
-		}
 
-
-		Vector3 randPos((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f + 2.0f);
+		// ポジション用のランダムな値を取る
+		Vector3 randPos((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
 		Vector3 pos = randPos * 0.1f;
 		pos = pos + position;
 

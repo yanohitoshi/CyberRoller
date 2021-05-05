@@ -41,9 +41,22 @@ private:
     ParticleState particleState;
     // フレームカウント用変数
     int frameCount;
-    // 1度だけ生成する用の生成フラグ変数
+    // 生成したループの回数をカウントする用の生成カウント変数
     int generateCount;
-    // 発生させたparticleの数を数える変数
-    int particleCount;
+    // 生成を開始する高さ
+    const float GenerateHeight;
+    // ランダムの値を補正する値
+    const float SecondCorrectionValue;
+    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    const float CorrectionRandValue;
+    // ランダムの範囲の割合
+    const int RandValue;
+    // 1度に生成するエフェクトの数
+    const int MaxEffects;
+    // 一回のエフェクトアクティブで生成ループを回す回数
+    const int MaxGenerateCount;
+    // 生成する頻度（フレームで比較）
+    const int GenerateFrequency;
+
 };
 

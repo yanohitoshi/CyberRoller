@@ -45,6 +45,15 @@ private:
     bool tmpChackOnFlag;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
+    // ランダムの範囲の割合
+    const int RandValue;
+    // Z軸のみに適応させる補正値
+    const float SecondCorrectionValue;
+    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    const float CorrectionRandValue;
+    // 1度に生成するエフェクトの数
+    const int MaxEffects;
+
 
 };
 

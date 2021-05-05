@@ -5,12 +5,12 @@
 FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, _velocity, 210, "Assets/Effect/Particle_Soft.png")
 {
-	mScale = 2.0f;
-	mAlpha = 0.1f;
+	scale = 2.0f;
+	alpha = 0.1f;
 	inFlag = true;
 	speed = 200.0f;
-	particleComponent->SetScale(mScale);
-	particleComponent->SetAlpha(mAlpha);
+	particleComponent->SetScale(scale);
+	particleComponent->SetAlpha(alpha);
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 
 	if (_crystalColor == CrystalColor::WHITE)
@@ -43,25 +43,25 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 	{
 		if (inFlag == true)
 		{
-			mAlpha += 0.05f;
-			if (mAlpha >= 0.9f)
+			alpha += 0.05f;
+			if (alpha >= 0.9f)
 			{
 				inFlag = false;
 			}
 		}
 
-		mScale += 2.0f;
+		scale += 2.0f;
 
-		particleComponent->SetScale(mScale);
-		particleComponent->SetAlpha(mAlpha);
+		particleComponent->SetScale(scale);
+		particleComponent->SetAlpha(alpha);
 
 		position += velocity * speed * _deltaTime;
 		SetPosition(position);
 	}
 	else if (lifeCount <= 190)
 	{
-		mScale += 5.0f;
-		mAlpha -= 0.001f;
+		scale += 5.0f;
+		alpha -= 0.001f;
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 		if (speed >= 40.0f)
@@ -72,8 +72,8 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 				speed = 40.0f;
 			}
 		}
-		particleComponent->SetAlpha(mAlpha);
-		particleComponent->SetScale(mScale);
+		particleComponent->SetAlpha(alpha);
+		particleComponent->SetScale(scale);
 
 		position += velocity * speed * _deltaTime;
 		SetPosition(position);
