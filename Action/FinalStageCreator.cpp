@@ -190,8 +190,13 @@ PlayerObject* FinalStageCreator::CreatePlayer()
 		}
 	}
 
-	GameObject::CreateMainCamera(pos);
-	return new PlayerObject(pos, false, Tag::PLAYER);
+	// 一度ポインタ変数に格納
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+	// カメラを生成
+	GameObject::CreateMainCamera(pos, playerObject);
+
+	// ポインタを返す
+	return playerObject;
 }
 
 void FinalStageCreator::CreateStage()
@@ -592,7 +597,7 @@ void FinalStageCreator::CreateStage()
 				new BoxObject(layer17Pos, blockSize, Tag::GROUND);
 				break;
 				case(20):
-				new ClearPointObject(Vector3(layer17Pos.x, layer17Pos.y, layer17Pos.z), Tag::CLEAR_POINT);
+				new ClearPointObject(Vector3(layer17Pos.x, layer17Pos.y, layer17Pos.z), Tag::CLEAR_POINT,playerObject);
 				break;
 			}
 

@@ -15,7 +15,7 @@
 const float MainCameraObject::yawSpeed = 0.055f;
 const float MainCameraObject::pitchSpeed = 0.03f;
 
-MainCameraObject::MainCameraObject(const Vector3 _pos) :
+MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject) :
 	CameraObjectBase(false,Tag::CAMERA)
 {
 	SetPosition(_pos);
@@ -33,9 +33,8 @@ MainCameraObject::MainCameraObject(const Vector3 _pos) :
 	AABB aabb = { Vector3(-100.0f,-100.0f,-50.0f),Vector3(100.0f,100.0f,50.0f) };
 	boxcollider->SetObjectBox(aabb);
 
-	//lineSegmentCollider = new LineSegmentCollider(this,ColliderComponent::CameraTag, GetOnCollisionFunc());
-	//LineSegment line = { Vector3(0.0f,0.0f,0.0f),Vector3(0.0f,0.0f,0.0f) };
-	//lineSegmentCollider->SetObjectLineSegment(line);
+	playerObject = _playerObject;
+
 	lerpObjectPos = Vector3::Zero;
 	hitPosition = Vector3::Zero;
 
@@ -50,7 +49,7 @@ MainCameraObject::~MainCameraObject()
 
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
-	if (PlayerObject::GetClearFlag() == false && CountDownFont::timeOverFlag == false && !PlayerObjectStateIdlingDance::GetIsDancing())
+	if (playerObject->GetClearFlag() == false && CountDownFont::timeOverFlag == false && !PlayerObjectStateIdlingDance::GetIsDancing())
 	{
 		// 今のフレームで当たっていて前のフレームで当たっていなければ
 		if (hitFlag == true && tmpHitFlag == false)
@@ -128,7 +127,7 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		tmpHitFlag = hitFlag;
 		hitFlag = false;
 	}
-	else if (PlayerObject::GetClearFlag() == true)
+	else if (playerObject->GetClearFlag() == true)
 	{
 		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3(0.0f, 0.0f, 1.0f));
 		RENDERER->SetViewMatrix(view);
@@ -168,7 +167,7 @@ void MainCameraObject::GameObjectInput(const InputState& _keyState)
 	Vector2 rightAxis = Vector2(0.0f, 0.0f);
 	rightAxis = _keyState.Controller.GetLAxisRightVec();
 
-	if (PlayerObject::GetClearFlag() == false)
+	if (playerObject->GetClearFlag() == false)
 	{
 		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_RIGHT) == 1 ||
 			rightAxis.x > 0)

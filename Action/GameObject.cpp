@@ -203,9 +203,9 @@ void GameObject::FixCollision(const AABB & myAABB, const AABB & pairAABB, const 
 	SetPosition(GetPosition() + (ment));
 }
 
-void GameObject::CreateMainCamera(const Vector3 _pos)
+void GameObject::CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObject)
 {
-	mainCamera = new MainCameraObject(_pos);
+	mainCamera = new MainCameraObject(_pos,_playerObject);
 }
 
 void GameObject::CreateTitleCamera(const Vector3 _pos)

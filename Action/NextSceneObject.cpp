@@ -8,7 +8,7 @@
 #include "CrystalEffectManager.h"
 
 
-NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
+NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject)
 	: GameObject(false, _objectTag)
 	, Angle(15.0f)
 	, MoveSpeed(50.0f)
@@ -28,10 +28,14 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag)
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
+
+	playerObject = _playerObject;
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::ClearPointTag, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-1.0f,-1.0f,-1.0f),Vector3(1.0f,1.0f,3.0f) };
 	boxCollider->SetObjectBox(aabb);
+
 	// 4色のエフェクトを付与
 	new CrystalEffectManager(this,CrystalColor::WHITE);
 	new CrystalEffectManager(this, CrystalColor::RED);
@@ -46,7 +50,7 @@ NextSceneObject::~NextSceneObject()
 
 void NextSceneObject::UpdateGameObject(float _deltaTime)
 {
-	if (PlayerObject::GetNextSceneFlag() == true)
+	if (playerObject->GetNextSceneFlag() == true)
 	{
 		// 速度付与
 		velocity.z = MoveSpeed;

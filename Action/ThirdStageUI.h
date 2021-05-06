@@ -17,7 +17,7 @@ public:
     @fn コンストラクタ
     @brief  objectの生成を行う
     */
-    ThirdStageUI();
+    ThirdStageUI(PlayerObject* _playerObject);
     
     /*
     @fn デストラクタ

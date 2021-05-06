@@ -4,8 +4,9 @@
 
 ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, const float& _scale)
 	: GameObject(false,Tag::PARTICLE)
-	 ,lifeCount(_lifeCount)
+	, lifeCount(_lifeCount)
 {
+	// メンバー変数の初期化
 	velocity = _velocity;
 	SetPosition(_pos);
 	particleComponent = new ParticleComponent(this);
@@ -20,12 +21,15 @@ ParticleEffectBase::~ParticleEffectBase()
 
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)
 {
+	// オブジェクトの更新
 	UpdateParticleObject(_deltaTime);
+	// ポジションの更新
 	SetPosition(position + velocity);
 }
 
 void ParticleEffectBase::UpdateParticleObject(float _deltaTime)
 {
+	// カウントダウンする
 	LifeCountDown();
 }
 

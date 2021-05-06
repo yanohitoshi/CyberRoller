@@ -7,12 +7,13 @@
 #include "TimeUpSprite.h"
 #include "ContinueSprite.h"
 #include "GameOverSprite.h"
+#include "PlayerObject.h"
 
 // Ã“Iƒƒ“ƒo[‰Šú‰»
 bool SecondStageUI::timeOverFlag = false;
 bool SecondStageUI::countStartFlag = false;
 
-SecondStageUI::SecondStageUI()
+SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
 	, SCENE_TIME(120)
 {

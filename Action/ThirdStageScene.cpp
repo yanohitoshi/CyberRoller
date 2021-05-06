@@ -30,15 +30,15 @@ ThirdStageScene::ThirdStageScene()
 	//ステージ情報ファイルを開く
 	if (!thirdStageCreator->OpenFile())
 	{
-		//ステージを生成する(エネミーの初期位置情報も同時に)
+		//プレイヤーの生成
+		playerObject = thirdStageCreator->CreatePlayer();
+		//ステージを生成する
 		thirdStageCreator->CreateStage();
 
-		//プレイヤーの生成
-		thirdStageCreator->CreatePlayer();
 	}
 
 	// シーンUIを追加
-	new ThirdStageUI();
+	new ThirdStageUI(playerObject);
 
 }
 
@@ -61,7 +61,7 @@ SceneState ThirdStageScene::Update(const InputState& state)
 	}
 
 	// ステージクリアしたらクリアカウントを取ってライトを落とす
-	if (PlayerObject::GetNextSceneFlag() == true)
+	if (playerObject->GetNextSceneFlag() == true)
 	{
 		++clearCount;
 		light -= CHANGE_LIGHT_SPEED;
@@ -69,7 +69,7 @@ SceneState ThirdStageScene::Update(const InputState& state)
 	}
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (PlayerObject::GetNextSceneFlag() == true && clearCount >= CLEAR_TO_CHANGE_SCENE)
+	if (playerObject->GetNextSceneFlag() == true && clearCount >= CLEAR_TO_CHANGE_SCENE)
 	{
 		return SceneState::FINAL_STAGE_SCENE;
 	}
@@ -136,7 +136,7 @@ SceneState ThirdStageScene::Update(const InputState& state)
 	}
 
 	// 一定時間操作がなかったらタイトルへ
-	if (PlayerObject::GetReStartFlag() == true)
+	if (playerObject->GetReStartFlag() == true)
 	{
 		return SceneState::TITLE_SCENE;
 	}

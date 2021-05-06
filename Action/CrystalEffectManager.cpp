@@ -11,6 +11,7 @@ CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _cry
 	, CorrectionRandValue(10.0f)
 	, RandValue(100)
 	, DeltaTimeCorrectionValue(10.0f)
+	, LastCorrection(0.1f)
 {
 	// メンバー変数の初期化	
 	crystalColor = _crystalColor;
@@ -93,21 +94,19 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 
 		// 速度を一時保存する変数
 		Vector3 vel;
-		// 速度用のランダムな値を生成
-		Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
-		velocity = randV * 0.1f;
-		//発生位置を設定
-		vel = velocity;
-		//ランダムな値を渡す
-		vel = vel + randV;
-		vel.x = 0.0f;
-		vel.y = 0.0f;
+		// 速度用のランダムな値を生成※x軸とy軸の速度は0.0fに固定
+		Vector3 randV(0.0f,0.0f, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
+		// 値が大きすぎるので最後の補正をかけて速度に代入
+		velocity = randV * LastCorrection;
+		//速度を設定
+		vel = velocity + randV;
 
 		// ポジション用のランダムな値を取る
 		Vector3 randPos((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
-		Vector3 pos = randPos * 0.1f;
+		// 値が大きすぎるので最後の補正をかける
+		Vector3 pos = randPos * LastCorrection;
+		//ランダムな値を渡す
 		pos = pos + position;
-
 
 		//particleを生成
 		new CrystalDefaultEffect(pos, vel,crystalColor);

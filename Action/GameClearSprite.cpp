@@ -3,10 +3,13 @@
 #include "SpriteComponent.h"
 #include "PlayerObject.h"
 
-GameClearSprite::GameClearSprite()
+GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	:GameObject(false, Tag::UI)
 	, DRAW_COUNT(120)
 {
+
+	playerObject = _playerObject;
+
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
@@ -27,7 +30,7 @@ GameClearSprite::~GameClearSprite()
 void GameClearSprite::UpdateGameObject(float _deltaTime)
 {
 	// クリア状態になったら
-	if (PlayerObject::GetClearFlag() == true)
+	if (playerObject->GetClearFlag() == true)
 	{
 		// フレームカウントを数える
 		++frameCount;

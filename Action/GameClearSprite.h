@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class SpriteComponent;
+class PlayerObject;
 
 /*
 @file GameClearSprite.h
@@ -16,7 +17,7 @@ class GameClearSprite :
 {
 public:
 
-    GameClearSprite();
+    GameClearSprite(PlayerObject* _playerObject);
     
     /*
     @fn デストラクタ
@@ -34,6 +35,7 @@ public:
 private:
 
     SpriteComponent* sprite;
+    PlayerObject* playerObject;
     int frameCount;
     bool visibleFlag;
 

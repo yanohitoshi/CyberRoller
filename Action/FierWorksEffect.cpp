@@ -4,15 +4,26 @@
 
 FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, _velocity, 210, "Assets/Effect/Particle_Soft.png")
+	, FadeInAddScale(2.0f)
+	, FadeOutAddScale(5.0f)
+	, MaxAlpha(0.9f)
+	, AddAlpha(0.05f)
+	, SubAlpha(0.001f)
+	, SubSpeed(1.0f)
+	, VelocityAtFadeOut(40.0f)
+	, ChangeFadeOutTime(190)
 {
+	// メンバー変数の初期化
 	scale = 2.0f;
 	alpha = 0.1f;
-	inFlag = true;
 	speed = 200.0f;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
+	// 最初はフェードイン状態に初期化
+	inFlag = true;
 
+	// マネージャークラスの色情報を参照して色を設定
 	if (_crystalColor == CrystalColor::WHITE)
 	{
 		particleComponent->SetColor(Vector3(0.9f, 0.9f, 0.9f));
@@ -37,50 +48,80 @@ FierWorksEffect::~FierWorksEffect()
 
 void FierWorksEffect::UpdateGameObject(float _deltaTime)
 {
+	// 生存時間のカウントダウン
 	ParticleEffectBase::LifeCountDown();
 
-	if (lifeCount > 190)
+	// ライフカウントがフェードイン・アウトの切り替えタイミングに到達していなかったら
+	if (lifeCount > ChangeFadeOutTime)
 	{
+		// フェードイン状態だったら
 		if (inFlag == true)
 		{
-			alpha += 0.05f;
-			if (alpha >= 0.9f)
+			// alpha値に定数を足す
+			alpha += AddAlpha;
+
+			// alpha値が最大値に到達したら
+			if (alpha >= MaxAlpha)
 			{
+				// フェードインフラグをfalseに
 				inFlag = false;
 			}
 		}
 
-		scale += 2.0f;
+		// 定数を足して拡大
+		scale += FadeInAddScale;
 
+		// scale値をセット
 		particleComponent->SetScale(scale);
+		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 
+		// ポジションに速度を追加
 		position += velocity * speed * _deltaTime;
+		// ポジションを更新
 		SetPosition(position);
+
 	}
-	else if (lifeCount <= 190)
+	else if (lifeCount <= ChangeFadeOutTime) // 切り替える値に到達していたら
 	{
-		scale += 5.0f;
-		alpha -= 0.001f;
+		// フェードアウト用定数を足して拡大
+		scale += FadeOutAddScale;
+		// 定数を引いて透過
+		alpha -= SubAlpha;
+
+		// x,y軸を0.0fに固定
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
-		if (speed >= 40.0f)
+
+		// 速度が定数より大きかったらだったら
+		if (speed > VelocityAtFadeOut)
 		{
-			speed -= 1.0f;
-			if (speed <= 40.0f)
+			// 減速
+			speed -= SubSpeed;
+
+			// 速度が定数以下だったら
+			if (speed <= VelocityAtFadeOut)
 			{
-				speed = 40.0f;
+				// 定数を代入
+				speed = VelocityAtFadeOut;
 			}
 		}
+
+		// scale値をセット
 		particleComponent->SetAlpha(alpha);
+		// alpha値をセット
 		particleComponent->SetScale(scale);
 
+		// ポジションに速度を追加
 		position += velocity * speed * _deltaTime;
+		// ポジションを更新
 		SetPosition(position);
 	}
 
+	// ライフカウントが0以下になったら
 	if (lifeCount <= 0)
 	{
+		// ステータスをdeadに変更
 		state = State::Dead;
 	}
 }

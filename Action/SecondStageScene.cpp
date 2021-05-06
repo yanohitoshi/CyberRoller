@@ -31,14 +31,14 @@ SecondStageScene::SecondStageScene()
 	//ステージ情報ファイルを開く
 	if (!secondStageCreator->OpenFile())
 	{
-		//ステージを生成する(エネミーの初期位置情報も同時に)
-		secondStageCreator->CreateStage();
 		//プレイヤーの生成
-		secondStageCreator->CreatePlayer();
+		playerObject = secondStageCreator->CreatePlayer();
+		//ステージを生成する
+		secondStageCreator->CreateStage();
 	}
 
 	// シーンUIを追加
-	new SecondStageUI();
+	new SecondStageUI(playerObject);
 
 }
 
@@ -61,7 +61,7 @@ SceneState SecondStageScene::Update(const InputState& state)
 	}
 
 	// ステージクリアしたらクリアカウントを取ってライトを落とす
-	if (PlayerObject::GetNextSceneFlag() == true)
+	if (playerObject->GetNextSceneFlag() == true)
 	{
 		++clearCount;
 		light -= CHANGE_LIGHT_SPEED;
@@ -137,7 +137,7 @@ SceneState SecondStageScene::Update(const InputState& state)
 	}
 
 	// 一定時間操作がなかったらタイトルへ
-	if (PlayerObject::GetReStartFlag() == true)
+	if (playerObject->GetReStartFlag() == true)
 	{
 		return SceneState::TITLE_SCENE;
 	}

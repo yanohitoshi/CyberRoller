@@ -32,7 +32,7 @@ public:
 	@param _spriteFileName 画像へのアドレス
 	@param _scale 画像の拡大サイズ(デフォルトの値は10)
 	*/
-	ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, const float& _scale = 10);
+	ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName,const float& _scale = 16.0f);
 	
 	/*
 	@fn デストラクタ
@@ -77,4 +77,5 @@ protected:
 	float scale;
 	// 速度
 	float speed;
+
 };

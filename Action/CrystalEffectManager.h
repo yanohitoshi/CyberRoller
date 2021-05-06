@@ -69,8 +69,10 @@ private:
     const float ShiftPositionZ;
     // Z軸のみに適応させる補正値
     const float SecondCorrectionValue;
-    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    // ランダムな値を生成する際にかける補正
     const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
     // ランダムの範囲の割合
     const int RandValue;
     // デルタタイムにかける補正

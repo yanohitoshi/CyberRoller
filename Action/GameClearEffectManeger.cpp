@@ -10,6 +10,7 @@ GameClearEffectManeger::GameClearEffectManeger(GameObject* _owner)
 	, MaxGenerateCount(8)
 	, GenerateHeight(5500.0f)
 	, GenerateFrequency(15)
+	, LastCorrection(0.1f)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -24,12 +25,15 @@ GameClearEffectManeger::~GameClearEffectManeger()
 
 void GameClearEffectManeger::UpdateGameObject(float _deltaTime)
 {
+	// ownerの速度を見てZ軸上で動いていてかつownerの高さが一定値以上になったらACTIVEにする
 	if (owner->GetVelocity().z != 0 && owner->GetPosition().z >= GenerateHeight)
 	{
+		// particleを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
 	}
 	else
 	{
+		// particleを無効化
 		particleState = ParticleState::PARTICLE_DISABLE;
 	}
 
@@ -56,8 +60,8 @@ void GameClearEffectManeger::UpdateGameObject(float _deltaTime)
 			{
 				// ランダムな値を生成
 				Vector3 randV((rand() % RandValue) / CorrectionRandValue - SecondCorrectionValue, (rand() % RandValue) / CorrectionRandValue - SecondCorrectionValue,0);
-
-				velocity = randV * 0.1f;
+				// 値が大きすぎるので最後の補正をかけて速度に代入
+				velocity = randV * LastCorrection;
 				//発生位置を設定
 				Vector3 vel = velocity;
 				//ランダムな値を渡す

@@ -39,5 +39,15 @@ private:
     
     // フェードインフラグ変数
     bool inFlag;
+
+    // alpha値の最大値
+    const float MaxAlphaValue;
+
+    // 毎フレーム足すscale値 
+    const float AddScale;
+    // 毎フレーム足すAlpha値
+    const float AddAlpha;
+    // 毎フレーム引くAlpha値
+    const float SubAlpha;
 };
 

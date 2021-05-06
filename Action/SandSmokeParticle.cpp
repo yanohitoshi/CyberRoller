@@ -23,7 +23,7 @@ void SandSmokeParticle::UpdateGameObject(float _deltaTime)
 	// 生存時間のカウントダウン
 	ParticleEffectBase::LifeCountDown();
 	
-	// lifeCountが0以上の時
+	// ライフカウントが0以上になったら
 	if (lifeCount >= 0)
 	{
 		// 定数を足して拡大

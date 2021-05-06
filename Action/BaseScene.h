@@ -7,6 +7,7 @@
 // クラスの前方宣言
 struct InputState;
 enum SceneState;
+class PlayerObject;
 
 /*
 @file BaseScene.h
@@ -42,6 +43,9 @@ public:
 
 
 protected:
+
+	// ステージクリエイターからプレイヤーのポインタをもらうための変数
+	PlayerObject* playerObject;
 
 	// ライト用Vector3変数
 	Vector3 light;

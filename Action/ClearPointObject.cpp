@@ -8,7 +8,7 @@
 #include "GameClearEffectManeger.h"
 #include "CrystalEffectManager.h"
 
-ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
+ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject)
 	: GameObject(false,_objectTag)
 	, Angle(10.0f)
 	, MoveSpeed(50.0f)
@@ -32,6 +32,8 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag)
 	boxCollider = new BoxCollider(this, ColliderComponent::ClearPointTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
+	playerObject = _playerObject;
+
 	new GameClearEffectManeger(this);
 
 	// 4色のエフェクトを付与
@@ -50,7 +52,7 @@ ClearPointObject::~ClearPointObject()
 
 void ClearPointObject::UpdateGameObject(float _deltaTime)
 {
-	if (PlayerObject::GetClearFlag() == true)
+	if (playerObject->GetClearFlag() == true)
 	{
 		// 速度を付与
 		velocity.z = MoveSpeed;

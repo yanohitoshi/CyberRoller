@@ -16,7 +16,7 @@ class Component;
 struct InputState;
 class ColliderComponent;
 class MainCameraObject;
-
+class PlayerObject;
 /*
 @brief	ゲームオブジェクトの状態
 */
@@ -321,7 +321,7 @@ public:
 	/*
 	@fn 静的なmainCameraを生成する
 	*/
-	static void CreateMainCamera(const Vector3 _pos);
+	static void CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObject);
 
 	/*
 	@fn 静的なtitleCameraを生成する

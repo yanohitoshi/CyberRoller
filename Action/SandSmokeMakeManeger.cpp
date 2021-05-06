@@ -17,6 +17,8 @@ SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	, GenerateFrequency(3)
 	, SmallWallMaxEffect(10)
 	, BigWallMaxEffect(20)
+	, LastCorrection(0.1f)
+	, LowestVelValue(Vector3(-2.0f,0.0f,1.0f))
 {
 	// メンバー変数の初期化
 	owner = _owner;
@@ -83,12 +85,12 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 					Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % SmallRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
 
 					// ランダムで出た値に補正をかける
-					velocity = randV * 0.1f;
+					velocity = randV * LastCorrection;
 
-					// 速度の最低値を設定
-					velocity.x = -2.0f;
-					velocity.z = 1.0f;
-					velocity.y = 0.0f;
+					// ランダムの値に速度の最低値を追加
+					velocity.x += LowestVelValue.x;
+					velocity.y += LowestVelValue.y;
+					velocity.z += LowestVelValue.z;
 
 					//発生位置を設定
 					Vector3 pos = position;
@@ -113,11 +115,13 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 					// ランダムな値を生成
 					Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % BigRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
 					
-					// ランダムで出た値に補正をかける
-					velocity = randV * 0.1f;
-					// 速度の最低値を設定
-					velocity.x = -2.0f;
-					velocity.z = 1.0f;
+					// 値が大きすぎるので最後の補正をかけて速度に代入
+					velocity = randV * LastCorrection;
+
+					// ランダムの値に速度の最低値を追加
+					velocity.x += LowestVelValue.x;
+					velocity.y += LowestVelValue.y;
+					velocity.z += LowestVelValue.z;
 
 					//発生位置を設定
 					Vector3 pos = position;
@@ -130,6 +134,7 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 			}
 
 		}
+
 		break;
 	}
 

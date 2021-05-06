@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "SDL_TTF.h"
 
+class PlayerObject;
+
 /*
 @file FirstStageUI.h
 @brief FirstStage‚ÌUI•\¦‚ğs‚¤
@@ -33,6 +35,8 @@ public:
     void UpdateGameObject(float _deltaTime)override;
     
 private:
+
+    PlayerObject* playerObject;
 
 };
 

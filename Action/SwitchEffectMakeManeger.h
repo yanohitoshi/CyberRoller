@@ -49,8 +49,10 @@ private:
     const int RandValue;
     // Z軸のみに適応させる補正値
     const float SecondCorrectionValue;
-    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    // ランダムな値を生成する際にかける補正
     const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
     // 1度に生成するエフェクトの数
     const int MaxEffects;
 

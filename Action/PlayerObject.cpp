@@ -32,9 +32,6 @@
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
-bool PlayerObject::clearFlag = false;
-bool PlayerObject::nextSceneFlag = false;
-bool PlayerObject::reStartFlag = false;
 bool PlayerObject::chackJumpFlag = false;
 bool PlayerObject::chackIsJumping = false;
 
@@ -68,6 +65,10 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	respawnFlag = false;
 	// リスポ－ンflag位置初期化
 	respownPos = _pos;
+
+	clearFlag = false;
+	nextSceneFlag = false;
+	reStartFlag = false;
 
 	// 前方ベクトル初期化
 	forwardVec = Vector3(0.0f, 0.0f, 0.0f);

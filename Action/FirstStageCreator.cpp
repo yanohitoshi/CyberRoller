@@ -97,9 +97,12 @@ PlayerObject* FirstStageCreator::CreatePlayer()
 			}
 		}
 	}
+
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+
 	//1600.-4400
-	GameObject::CreateMainCamera(pos);
-	return new PlayerObject(pos, false, Tag::PLAYER);
+	GameObject::CreateMainCamera(pos, playerObject);
+	return playerObject;
 }
 
 void FirstStageCreator::CreateStage()
@@ -193,7 +196,7 @@ void FirstStageCreator::CreateStage()
 				new SwitchBaseObject(layer5SwitchPos, switchBaseSize, Tag::GROUND, Tag::TUTORIAL_SWITCH);
 				break;
 			case(20):
-				new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT);
+				new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT, playerObject);
 				break;
 			case(41):
 				new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + 200.0f, layer5Pos.z - 100.0f), moveWallSize, Tag::TUTORIAL_MOVE_WALL, 300.0f,

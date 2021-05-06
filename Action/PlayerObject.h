@@ -103,10 +103,6 @@ public:
 	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
 	static const float GetGravity() { return Gravity; }
 
-	// シーン遷移時に使うフラグのgetter
-	static bool GetClearFlag() { return clearFlag; }
-	static bool GetNextSceneFlag() { return nextSceneFlag; }
-	static bool GetReStartFlag() { return reStartFlag; }
 
 	// 着地effect側で使用するフラグ用のgetter
 	static bool GetChackJumpFlag() { return chackJumpFlag; }
@@ -148,6 +144,10 @@ public:
 	bool GetRespawnFlag() { return respawnFlag; };
 	bool GetIsAvailableInput() { return isAvailableInput; };
 	bool GetIsHitWall() { return isHitWall; };
+	// シーン遷移時に使うフラグのgetter
+	bool GetClearFlag() { return clearFlag; }
+	bool GetNextSceneFlag() { return nextSceneFlag; }
+	bool GetReStartFlag() { return reStartFlag; }
 
 	// 戻り値→int
 	int GetJumpFrameCount() { return jumpFrameCount; }
@@ -217,11 +217,11 @@ private:
 	
 	//--------------------static変数群------------------------//
 	// 最終ステージ用のクリアフラグ
-	static bool clearFlag;
+	bool clearFlag;
 	// 最終ステージ以外での次のシーンへ遷移するフラグ
-	static bool nextSceneFlag;
+	bool nextSceneFlag;
 	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
-	static bool reStartFlag;
+	bool reStartFlag;
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
 	static bool chackJumpFlag;

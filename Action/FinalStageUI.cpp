@@ -8,12 +8,13 @@
 #include "ContinueSprite.h"
 #include "GameOverSprite.h"
 #include "GameClearSprite.h"
+#include "PlayerObject.h"
 
 // Ã“Iƒƒ“ƒo[‰Šú‰»
 bool FinalStageUI::timeOverFlag = false;
 bool FinalStageUI::countStartFlag = false;
 
-FinalStageUI::FinalStageUI()
+FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
 	, SCENE_TIME(250)
 {
@@ -28,7 +29,7 @@ FinalStageUI::FinalStageUI()
 	// GameOver‚Ìsprite
 	new GameOverSprite();
 	// GameClear‚Ìsprite
-	new GameClearSprite();
+	new GameClearSprite(_playerObject);
 
 }
 

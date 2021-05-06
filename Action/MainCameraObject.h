@@ -23,7 +23,7 @@ public:
 	@brief	コンストラクタ
 	@param	ポジション
 	*/
-	MainCameraObject(const Vector3 _pos);
+	MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject);
 
 	/*
 	@fn デストラクタ
@@ -94,6 +94,8 @@ public:
 	Vector3 lerpObjectPos;
 
 private:
+
+	PlayerObject* playerObject;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

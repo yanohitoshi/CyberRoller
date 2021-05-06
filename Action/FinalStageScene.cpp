@@ -31,14 +31,14 @@ FinalStageScene::FinalStageScene()
 	//ステージ情報ファイルを開く
 	if (!finalStageCreator->OpenFile())
 	{
-		//ステージを生成する(エネミーの初期位置情報も同時に)
-		finalStageCreator->CreateStage();
 		//プレイヤーの生成
-		finalStageCreator->CreatePlayer();
+		playerObject = finalStageCreator->CreatePlayer();
+		//ステージを生成する
+		finalStageCreator->CreateStage();
 	}
 
 	// シーンUIを追加
-	new FinalStageUI();
+	new FinalStageUI(playerObject);
 
 }
 
@@ -61,7 +61,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 	}
 
 	// クリア状態になったらカウント開始
-	if (PlayerObject::GetClearFlag() == true)
+	if (playerObject->GetClearFlag() == true)
 	{
 		++clearCount;
 	}
@@ -135,7 +135,7 @@ SceneState FinalStageScene::Update(const InputState& state)
 	}
 
 	// 一定時間操作がなかったらタイトルへ
-	if (PlayerObject::GetReStartFlag() == true)
+	if (playerObject->GetReStartFlag() == true)
 	{
 		return SceneState::TITLE_SCENE;
 	}

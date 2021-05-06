@@ -40,7 +40,7 @@ void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 	{
 		// 無効状態だったら生成カウントを0にしてbreak
 	case (PARTICLE_DISABLE):
-
+		// 初期化
 		generateCount = 0;
 		break;
 
@@ -64,53 +64,49 @@ void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 			// カウントが2の倍数の時は
 			if (generateCount % 2 == 0)
 			{
+				// 一度positionを保存
+				effectPosition = position;
 				// エフェクトのポジションをずらし足から出ているように見せる
-				if (owner->GetVelocity().x > 1.0)
+				if (owner->GetVelocity().x > 1.0f)
 				{
-					effectPosition = position;
 					effectPosition.y += ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().x < -1.0)
+				else if (owner->GetVelocity().x < -1.0f)
 				{
-					effectPosition = position;
 					effectPosition.y -= ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().y > 1.0)
+				else if (owner->GetVelocity().y > 1.0f)
 				{
-					effectPosition = position;
 					effectPosition.x += ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().y < -1.0)
+				else if (owner->GetVelocity().y < -1.0f)
 				{
-					effectPosition = position;
 					effectPosition.x -= ShiftPositionValue;
 				}
 
 			}
 			else
 			{
+				// 一度positionを保存
+				effectPosition = position;
+
 				// エフェクトのポジションをずらし足から出ているように見せる
-				if (owner->GetVelocity().x > 1.0)
+				if (owner->GetVelocity().x > 1.0f)
 				{
-					effectPosition = position;
 					effectPosition.y -= ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().x < -1.0)
+				else if (owner->GetVelocity().x < -1.0f)
 				{
-					effectPosition = position;
 					effectPosition.y += ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().y > 1.0)
+				else if (owner->GetVelocity().y > 1.0f)
 				{
-					effectPosition = position;
 					effectPosition.x -= ShiftPositionValue;
 				}
-				else if (owner->GetVelocity().y < -1.0)
+				else if (owner->GetVelocity().y < -1.0f)
 				{
-					effectPosition = position;
 					effectPosition.x += ShiftPositionValue;
 				}
-
 			}
 
 			// オーナーの速度をもらう
@@ -118,7 +114,7 @@ void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 			// 正規化
 			vel.Normalize();
 			// 速度を逆向きにする
-			vel = vel * -1.0;
+			vel = vel * -1.0f;
 			// particleを生成
 			new PlayerSandSmokeEffect(effectPosition, vel,true);
 		}

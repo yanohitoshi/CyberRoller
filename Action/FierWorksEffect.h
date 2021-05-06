@@ -40,5 +40,23 @@ private:
     // フェードインフラグ
     bool inFlag;
 
+    // 速度に減速をかける際の定数
+    const float SubSpeed;
+    // フェードイン中の毎フレーム足すscale値 
+    const float FadeInAddScale;
+    // フェードアウト中の毎フレーム足すscale値 
+    const float FadeOutAddScale;
+    // 毎フレーム足すAlpha値
+    const float AddAlpha;
+    // 毎フレーム引くAlpha値
+    const float SubAlpha;
+    // Alpha値の最大値
+    const float MaxAlpha;
+    // フェードアウトするときの速度の定数
+    const float VelocityAtFadeOut;
+
+    // フェードアウトに切り替えるタイミング定数
+    const int ChangeFadeOutTime;
+
 };
 

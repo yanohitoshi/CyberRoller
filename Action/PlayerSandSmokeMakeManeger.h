@@ -43,7 +43,7 @@ private:
     Vector3 effectPosition;
     // フレームカウント用変数
     int frameCount;
-    // 生成した数を数えてずらす方向を決めるためのカウント
+    // 生成した数を数えるためのカウント
     int generateCount;
     // ownerの速度が一定以上の場合に生成するための定数
     const float GenerateSpeedValue;

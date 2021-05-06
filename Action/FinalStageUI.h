@@ -16,7 +16,7 @@ public:
     @fn コンストラクタ
     @brief  objectの生成を行う
     */
-    FinalStageUI();
+    FinalStageUI(PlayerObject* _playerObject);
     
     /*
     @fn デストラクタ

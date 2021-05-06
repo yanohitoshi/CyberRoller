@@ -152,8 +152,10 @@ PlayerObject* SecondStageCreator::CreatePlayer()
 		}
 	}
 
-	GameObject::CreateMainCamera(pos);
-	return new PlayerObject(pos, false, Tag::PLAYER);
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+	GameObject::CreateMainCamera(pos, playerObject);
+
+	return playerObject;
 }
 
 void SecondStageCreator::CreateStage()
@@ -378,7 +380,7 @@ void SecondStageCreator::CreateStage()
 			switch (layer12)
 			{
 			case(20):
-				new NextSceneObject(Vector3(layer12Pos.x, layer12Pos.y, layer12Pos.z), Tag::NEXT_SCENE_POINT);
+				new NextSceneObject(Vector3(layer12Pos.x, layer12Pos.y, layer12Pos.z), Tag::NEXT_SCENE_POINT, playerObject);
 				break;
 			}
 		}

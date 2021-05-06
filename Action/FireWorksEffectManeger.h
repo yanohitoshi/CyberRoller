@@ -46,8 +46,10 @@ private:
     bool generateFlag;
     // 発生させたparticleの数を数える変数
     int particleCount;
-    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
+    // ランダムな値を生成する際にかける補正
     const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
     // ランダムの範囲の割合
     const int RandValue;
     // 1度に生成するエフェクトの数

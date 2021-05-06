@@ -6,6 +6,9 @@
 #include "RapidJsonHelper.h"
 #include <vector>
 
+// 前置宣言
+class PlayerObject;
+
 /*
 @file StageCreatorBase.h
 @brief ステージ生成classの基底クラス
@@ -40,6 +43,8 @@ protected:
 
 	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& layer, std::string& layerName);
 
+	// プレイヤーを見たいclassにプレイヤーのポインタを渡すための変数
+	PlayerObject* playerObject;
 
 };
 

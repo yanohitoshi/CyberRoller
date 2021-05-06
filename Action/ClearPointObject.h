@@ -8,6 +8,7 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+class PlayerObject;
 
 /*
 @file ClearPointObject.h
@@ -23,7 +24,7 @@ public:
 	@param	ポジション
 	@param	オブジェクト判別用tag
 	*/
-	ClearPointObject(const Vector3& _pos, const Tag& _objectTag);
+	ClearPointObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject);
 
 	/*
 	@fn デストラクタ
@@ -50,6 +51,8 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+
+	PlayerObject* playerObject;
 
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;

@@ -3,14 +3,21 @@
 
 CrystalDefaultEffect::CrystalDefaultEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, _velocity, 100, "Assets/Effect/Particle_Soft.png")
+	, AddScale(2.0f)
+	, AddAlpha(0.005f)
+	, SubAlpha(0.002f)
+	, MaxAlphaValue(0.6f)
 {
+	// メンバー変数の初期化
 	scale = 0.0f;
 	alpha = 0.0f;
+	speed = 20.0f;
 	inFlag = true;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 
+	// マネージャークラスから受け取った色情報を参照して色の設定
 	if (_crystalColor == CrystalColor::WHITE)
 	{
 		particleComponent->SetColor(Vector3(0.9f, 0.9f, 0.9f));
@@ -35,30 +42,45 @@ CrystalDefaultEffect::~CrystalDefaultEffect()
 
 void CrystalDefaultEffect::UpdateGameObject(float _deltaTime)
 {
+	// 生存時間のカウントダウン
 	ParticleEffectBase::LifeCountDown();
 
+	// ライフカウントが0以上になったら
 	if (lifeCount > 0)
 	{
+		// フェードインフラグがtrueだったら
 		if (inFlag == true)
 		{
-			alpha += 0.005f;
-			if (alpha >= 0.6f)
+			// alpha値に定数を足す
+			alpha += AddAlpha;
+			// alpha値の最大定数に到達したら
+			if (alpha >= MaxAlphaValue)
 			{
+				// フェードインフラグをfalseに
 				inFlag = false;
 			}
 		}
 
+		// 定数を足して拡大
+		scale += AddScale;
+		// 定数を引いて透過
+		alpha -= SubAlpha;
 
-		scale += 2.0f;
-		alpha -= 0.002f;
+		// scale値をセット
 		particleComponent->SetScale(scale);
+		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
-		position += velocity * 20.0 * _deltaTime;
-		SetPosition(position);
-	}
 
+		// ポジションに速度を追加
+		position += velocity * speed * _deltaTime;
+		// ポジションを更新
+		SetPosition(position);
+
+	}
+	// ライフカウントが0以下になったら
 	if (lifeCount <= 0)
 	{
+		// ステータスをdeadに変更
 		state = State::Dead;
 	}
 }

@@ -7,6 +7,7 @@ SwitchEffectMakeManeger::SwitchEffectMakeManeger(GameObject* _owner)
 	, CorrectionRandValue(10.0f)
 	, RandValue(100)
 	, MaxEffects(15)
+	, LastCorrection(0.1f)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -53,9 +54,13 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 			{
 				// ランダムな値を生成
 				Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue)/ CorrectionRandValue + SecondCorrectionValue);
-				velocity = randV * 0.1f;
-				//発生位置を設定
+				
+				// 値が大きすぎるので最後の補正をかけて速度に代入
+				velocity = randV * LastCorrection;
+
+				// 速度を一時保存
 				Vector3 vel = velocity;
+
 				//ランダムな値を渡す
 				vel = vel + randV;
 

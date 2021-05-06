@@ -5,6 +5,7 @@ FireWorksEffectManeger::FireWorksEffectManeger(GameObject* _owner)
 	, CorrectionRandValue(10.0f)
 	, RandValue(100)
 	, MaxEffects(24)
+	, LastCorrection(0.1f)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -52,7 +53,8 @@ void FireWorksEffectManeger::UpdateGameObject(float _deltaTime)
 
 				// ランダムな値を生成
 				Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
-				velocity = randV * 0.1f;
+				// 値が大きすぎるので最後の補正をかけて速度に代入
+				velocity = randV * LastCorrection;
 
 				//発生位置を設定
 				Vector3 vel = velocity;

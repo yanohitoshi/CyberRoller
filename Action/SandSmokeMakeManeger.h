@@ -44,6 +44,9 @@ private:
     // 親となる動く壁のサイズを見てどれくらいの幅でeffectを出すか決める用の変数
     Vector3 ownerSize;
 
+    // 速度の最低値
+    const Vector3 LowestVelValue;
+
     // ポジションXをずらす値
     const float ShiftPositionX;
     // 大きい壁の時のポジションYをずらす値
@@ -54,6 +57,11 @@ private:
     const float BigWallSize;
     // 小さい壁のサイズ
     const float SmallWallSize;
+    // ランダムな値を生成する際にかける補正
+    const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
+
     // ランダムの範囲の割合X
     const int RandValueX;
     // 大きい壁のランダムの範囲の割合Y
@@ -62,8 +70,6 @@ private:
     const int SmallRandValueY;
     // ランダムの範囲の割合Z
     const int RandValueZ;
-    // そのまま扱うと値が大きくなりすぎるので補正をかけるための値
-    const float CorrectionRandValue;
     // 生成する頻度（フレームで比較）
     const int GenerateFrequency;
     // 大きい壁の場合の1度に生成するエフェクトの数
