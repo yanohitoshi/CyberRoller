@@ -41,6 +41,12 @@ public:
 
 private:
 
+    // タイトル用プレイヤーのポジションを利用して生成するので位置をずらすための定数
+    const float ShiftPosition;
+
+    // 少し先を注視するようにしたいのでZ軸をずらす定数
+    const float ShiftGazePoint;
+
     // 見る場所のターゲットVector3
     Vector3 target;
 

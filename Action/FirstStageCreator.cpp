@@ -35,6 +35,9 @@ FirstStageCreator::~FirstStageCreator()
 	layer4StageData.clear();
 	layer5StageData.clear();
 	playerData.clear();
+
+	// プレイヤーのポインタの後片付け
+	delete playerObject;
 }
 
 bool FirstStageCreator::OpenFile()

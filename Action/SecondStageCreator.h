@@ -57,8 +57,6 @@ private:
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
 
-	std::vector<std::vector<int>> spawnPointData;
-
 	//player‚Ìƒf[ƒ^
 	std::vector<std::vector<int>> playerData;
 

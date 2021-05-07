@@ -42,8 +42,9 @@ SecondStageCreator::~SecondStageCreator()
 	layer11StageData.clear();
 
 	playerData.clear();
-	spawnPointData.clear();
 
+	// プレイヤーのポインタの後片付け
+	delete playerObject;
 }
 
 

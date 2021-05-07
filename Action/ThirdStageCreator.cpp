@@ -47,6 +47,9 @@ ThirdStageCreator::~ThirdStageCreator()
 	layer15StageData.clear();
 
 	playerData.clear();
+
+	// プレイヤーのポインタの後片付け
+	delete playerObject;
 }
 
 

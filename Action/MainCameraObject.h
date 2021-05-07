@@ -7,8 +7,6 @@
 #include "PlayerObject.h"
 
 // クラスの前方宣言
-class LineSegmentCollider;
-class SphereCollider;
 class BoxCollider;
 
 /*
@@ -90,12 +88,11 @@ public:
 	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
 	*/
 	void ReSetYaw() { yaw = Math::ToRadians(180); }
+
 	//追従先のオブジェクト座標
 	Vector3 lerpObjectPos;
 
 private:
-
-	PlayerObject* playerObject;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -103,48 +100,83 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+	// AABBの初期化時の最大値定数
+	const Vector3 AabbInitMax;
+	// AABBの初期化時の最小値定数
+	const Vector3 AabbInitMin;
+
+	// カメラのヨーの移動速度
+	const float YawSpeed;
+	// カメラのピッチの移動速度
+	const float PitchSpeed;
+	// 自動回転する際の移動速度
+	const float AutomaticMoveSpeed;
+
+	// カメラの高さの最大値
+	const float MaxPitch;
+	// カメラの高さの最小値
+	const float MinPitch;
+
+	// カメラ半径の最大値
+	const float MaxRadius;
+	// カメラ半径の中間点の値
+	const float MediumRadius;
+	// カメラ半径の最小値
+	const float MinRadius;
+	// タイムオーバー時の半径
+	const float TimeOverRadius;
+	// ダンス時状態時の半径
+	const float DanceRadius;
+	// 見る対象物から当たった場所を引いて長さを取る際の補正定数
+	const float CorrectionBackRadius;
+
+	// 線形保管時にデルタタイムをかけるとき用の補正定数
+	const float DeltaCorrection;
+
+	// 少し先を注視するようにしたいのでZ軸をずらす定数
+	const float ShiftGazePoint;
+
+	// プレイヤーのポインタを保持するための変数
+	PlayerObject* playerObject;
+
 	//親オブジェクトとの差
 	Vector3 offsetPos;
-	//追従先のオブジェクトを所持しているか
-	bool hasParentObject;
-	Vector3 cameraFront = Vector3(0.0f, 0.0f, -1.0f);
-	Vector3 cameraUp = Vector3(0.0f, 1.0f, 0.0f);
-	Vector3 direction;
-	Vector3 vel;
-	//カメラの高さ
-	float height;
-	//カメラ回転計算用のヨーとピッチ
-	float yaw;
-	float pitch;
-	//カメラの移動速度
-	static const float yawSpeed;
-	static const float pitchSpeed;
-
-	//カメラ回転の半径
-	float radius;
-	// タイムオーバー時の半径
-	float timeOverRadius;
-	// ダンス時状態時の半径
-	float danceRadius;
 
 	//移動先position
 	Vector3 tmpMovePos;
 	Vector3 tmpPosition;
 
-	// 当たり判定を行うクラス(AABB/線分/球体※線分未実装)
+	// 押し戻しを行う相手と当たった位置を保存するVector3変数
+	Vector3 hitPosition;
+
+	// 当たり判定を行うクラス(AABB/球体)
 	BoxCollider* boxcollider;
-	LineSegmentCollider* lineSegmentCollider;
-	SphereCollider* sphereCollider;
 
 	// view行列
 	Matrix4 view;
 
-	// 押し戻しを行う相手と当たった位置を保存するVector3変数
-	Vector3 hitPosition;
+	//追従先のオブジェクトを所持しているか
+	bool hasParentObject;
 
 	// 押し戻しを行う相手と当たったかを判定するフラグ
 	bool hitFlag;
+
 	// 前のフレームで押し戻しを行う相手と当たったかを判定するフラグ
 	bool tmpHitFlag;
+
+	//カメラの高さ
+	float height;
+
+	//カメラ回転計算用のヨーとピッチ
+	float yaw;
+	float pitch;
+
+	//カメラ回転の半径
+	float radius;
+
+
+
+
+
 };
 

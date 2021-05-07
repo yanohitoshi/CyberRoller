@@ -51,6 +51,9 @@ FinalStageCreator::~FinalStageCreator()
 
 	//プレイヤーのマップデータ削除
 	playerData.clear();
+
+	// プレイヤーのポインタの後片付け
+	delete playerObject;
 }
 
 
@@ -197,6 +200,7 @@ PlayerObject* FinalStageCreator::CreatePlayer()
 
 	// ポインタを返す
 	return playerObject;
+
 }
 
 void FinalStageCreator::CreateStage()

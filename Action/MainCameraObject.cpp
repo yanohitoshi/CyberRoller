@@ -12,34 +12,46 @@
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdlingDance.h"
 
-const float MainCameraObject::yawSpeed = 0.055f;
-const float MainCameraObject::pitchSpeed = 0.03f;
 
-MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject) :
-	CameraObjectBase(false,Tag::CAMERA)
+MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject) 
+	: CameraObjectBase(false,Tag::CAMERA)
+	, YawSpeed(0.055f)
+	, PitchSpeed(0.03f)
+	, MaxPitch(70.0f)
+	, MinPitch(-30.0f)
+	, MaxRadius(700.0f)
+	, MinRadius(10.0f)
+	, DanceRadius(500.0f)
+	, TimeOverRadius(400.0f)
+	, MediumRadius(300.0f)
+	, DeltaCorrection(8.0f)
+	, AutomaticMoveSpeed(0.01f)
+	, ShiftGazePoint(100.0f)
+	, CorrectionBackRadius(20.f)
+	, AabbInitMax(Vector3(100.0f, 100.0f, 50.0f))
+	, AabbInitMin(Vector3(-100.0f, -100.0f, -50.0f))
 {
+	// メンバー変数の初期化
 	SetPosition(_pos);
-	float PI = Math::Pi;
 	yaw = Math::ToRadians(180);
 	pitch = Math::ToRadians(30);
-	radius = 700.0f;
-	timeOverRadius = 400.0f;
-	danceRadius = 500.0f;
-
+	radius = MaxRadius;
 	height = 0.0f;
-	tmpMovePos = Vector3(0.0f,0.0f,0.0f);
-	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
-	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-100.0f,-100.0f,-50.0f),Vector3(100.0f,100.0f,50.0f) };
-	boxcollider->SetObjectBox(aabb);
-
-	playerObject = _playerObject;
-
+	forwardVec = Vector3::UnitX;
+	tmpMovePos = Vector3::Zero;
 	lerpObjectPos = Vector3::Zero;
 	hitPosition = Vector3::Zero;
-
 	hitFlag = false;
 	tmpHitFlag = false;
+
+	//当たり判定用のコンポーネントの追加と初期化
+	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
+	AABB aabb = { AabbInitMin,AabbInitMax };
+	boxcollider->SetObjectBox(aabb);
+
+	// プレイヤーのポインタを保存
+	playerObject = _playerObject;
+
 }
 
 
@@ -49,16 +61,19 @@ MainCameraObject::~MainCameraObject()
 
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
+	// プレイヤーがクリア状態でなくかつタイムオーバーでもなく踊ってもいなかったら
 	if (playerObject->GetClearFlag() == false && CountDownFont::timeOverFlag == false && !PlayerObjectStateIdlingDance::GetIsDancing())
 	{
 		// 今のフレームで当たっていて前のフレームで当たっていなければ
 		if (hitFlag == true && tmpHitFlag == false)
 		{
-			// 当たったポジションがマイナスだったら
+			// 当たったポジションxがマイナスだったら
 			if (hitPosition.x < 0.0f)
 			{
 				hitPosition.x *= -1.0f;
 			}
+
+			// 当たったポジションyがマイナスだったら
 			if (hitPosition.y < 0.0f)
 			{
 				hitPosition.y *= -1.0f;
@@ -67,17 +82,17 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 			// 当たったポジションを比べ小さい方をカメラの回転半径として採用
 			if (hitPosition.x < hitPosition.y)
 			{
-				radius = lerpObjectPos.x - hitPosition.x;
 				// 見る対象物から当たった場所を引いて長さを取る
+				radius = lerpObjectPos.x - hitPosition.x;
 				// そのまま使うと壁にめり込む可能性があるので少し小さくする
-				radius -= 20.f;
+				radius -= CorrectionBackRadius;
 			}
 			else if (hitPosition.x > hitPosition.y)
 			{
 				// 見る対象物から当たった場所を引いて長さを取る
 				radius = lerpObjectPos.y - hitPosition.y;
 				// そのまま使うと壁にめり込む可能性があるので少し小さくする
-				radius -= 20.f;
+				radius -= CorrectionBackRadius;
 			}
 
 			// 半径がマイナスになっていたらプラスに変換
@@ -88,75 +103,107 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		}
 		else
 		{
-			radius = 700.0f;
+			// 半径を定数化
+			radius = MaxRadius;
 		}
 
-		if (radius >= 700.0f)
+		// 半径が最大値を超えていたら
+		if (radius >= MaxRadius)
 		{
-			radius = 700.0f;
+			// 最大値を代入
+			radius = MaxRadius;
 		}
-		else if (radius <= 10.0f)
+		else if (radius <= MinRadius) // 半径が最小値を下回っていたらいたら
 		{
-			radius = 10.0f;
+			// 最小値を代入
+			radius = MinRadius;
 		}
 
-		if (pitch < 0.0f && pitch > -30.0f)
+		// カメラの高さが0.0f以下でかつ最小値より高かったら
+		if (pitch < 0.0f && pitch > MinPitch)
 		{
-			radius -= 300.0f;
+			// 半径を小さくして追跡するオブジェクトに近づける
+			radius -= MediumRadius;
 		}
-		//else if (pitch <= -30.0f && pitch >= -60.0f)
-		//{
-		//	radius -= 600.0f;
-		//}
 
+		// 回転角と半径を用いて仮のポジションを設定
 		tmpMovePos.x = radius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
 		tmpMovePos.y = radius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
 		tmpMovePos.z = radius * sinf(pitch) + height + lerpObjectPos.z;
 
-		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 9.0f);
+		// 仮のポジションと現在のポジションで線形補間
+		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
+
+		// 線形補間したポジションをセット
 		SetPosition(position);
-		Vector3 viewPosition = Vector3(lerpObjectPos.x, lerpObjectPos.y, lerpObjectPos.z + 100.0f);
-		view = Matrix4::CreateLookAt(position, viewPosition, Vector3(0.0f, 0.0f, 1.0f));
+
+		// 追従するオブジェクトのポジションを代入
+		Vector3 viewPosition = Vector3(lerpObjectPos.x, lerpObjectPos.y, lerpObjectPos.z + ShiftGazePoint);
+		// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
+		view = Matrix4::CreateLookAt(position, viewPosition, Vector3::UnitZ);
+		// 更新したview行列をセット
 		RENDERER->SetViewMatrix(view);
 
+		// プレイヤー側に渡す前方ベクトルを生成
 		forwardVec = lerpObjectPos - position;
+		// 正規化
 		forwardVec.Normalize();
+		// Z軸を固定
 		forwardVec.z = 0.0f;
 
-		hitPosition = Vector3::Zero;
+		// 当たり判定を行うオブジェクトと当たったポジションを保存
 		tmpHitFlag = hitFlag;
+		// 当たり判定を行う際に利用する変数の初期化
+		hitPosition = Vector3::Zero;
 		hitFlag = false;
+
 	}
-	else if (playerObject->GetClearFlag() == true)
+	else if (playerObject->GetClearFlag() == true) // 最終ステージをクリアしていたら
 	{
-		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3(0.0f, 0.0f, 1.0f));
+		// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
+		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
+		// view行列をセット
 		RENDERER->SetViewMatrix(view);
 	}
-	else if (CountDownFont::timeOverFlag == true)
+	else if (CountDownFont::timeOverFlag == true) // タイムオーバーになったら
 	{
-		yaw += 0.01f;
-		tmpMovePos.x = timeOverRadius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
-		tmpMovePos.y = timeOverRadius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
+		// 回転角を自動更新
+		yaw += AutomaticMoveSpeed;
+
+		// ポジションの更新をタイムオーバー用の半径で行う
+		tmpMovePos.x = TimeOverRadius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
+		tmpMovePos.y = TimeOverRadius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
 		tmpMovePos.z = radius * sinf(pitch) + height + lerpObjectPos.z;
 
-		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 7.0f);
+		// 仮のポジションと現在のポジションで線形補間
+		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
+		// 線形補間したポジションをセット
 		SetPosition(position);
 
-		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3(0.0f, 0.0f, 1.0f));
+		// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
+		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
+		// 更新したview行列をセット
 		RENDERER->SetViewMatrix(view);
 
 	}
 	else if (PlayerObjectStateIdlingDance::GetIsDancing() && CountDownFont::timeOverFlag == false)
 	{
-		yaw += 0.01f;
-		tmpMovePos.x = danceRadius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
-		tmpMovePos.y = danceRadius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
+		// 回転角を自動更新
+		yaw += AutomaticMoveSpeed;
+
+		// ポジションの更新をプレイヤーが踊っている時用の半径で行う
+		tmpMovePos.x = DanceRadius * cosf(pitch) * cosf(yaw) + lerpObjectPos.x;
+		tmpMovePos.y = DanceRadius * cosf(pitch) * sinf(yaw) + lerpObjectPos.y;
 		tmpMovePos.z = radius * sinf(pitch) + height + lerpObjectPos.z;
 
-		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * 7.0f);
+		// 仮のポジションと現在のポジションで線形補間
+		position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
+		// 線形補間したポジションをセット
 		SetPosition(position);
 
-		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3(0.0f, 0.0f, 1.0f));
+		// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
+		view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
+		// 更新したview行列をセット
 		RENDERER->SetViewMatrix(view);
 	}
 
@@ -164,44 +211,49 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 
 void MainCameraObject::GameObjectInput(const InputState& _keyState)
 {
+	// 右スティックの角度を保存するベクトル変数
 	Vector2 rightAxis = Vector2(0.0f, 0.0f);
 	rightAxis = _keyState.Controller.GetLAxisRightVec();
 
+	// クリア状態じゃ無かったら
 	if (playerObject->GetClearFlag() == false)
 	{
+		// キーボード入力と右スティックのX軸の角度を見て速度分を追加
 		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_RIGHT) == 1 ||
-			rightAxis.x > 0)
+			rightAxis.x > 0.0f)
 		{
-			yaw += yawSpeed;
+			yaw += YawSpeed;
 		}
-
 		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_LEFT) == 1 ||
-			rightAxis.x < 0)
+			rightAxis.x < 0.0f)
 		{
-			yaw -= yawSpeed;
+			yaw -= YawSpeed;
 		}
-
+		// キーボード入力と右スティックのY軸の角度を見て速度分を追加
 		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_UP) == 1 ||
-			rightAxis.y < 0)
+			rightAxis.y < 0.0f)
 		{
-			pitch -= pitchSpeed;
+			pitch -= PitchSpeed;
 		}
-
 		if (_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_DOWN) == 1 ||
-			rightAxis.y > 0)
+			rightAxis.y > 0.0f)
 		{
-			pitch += pitchSpeed;
+			pitch += PitchSpeed;
 		}
 
 	}
 
-	if (pitch > Math::ToRadians(70.0f))
+	// ピッチが最大値を超えていたら
+	if (pitch > Math::ToRadians(MaxPitch))
 	{
-		pitch = Math::ToRadians(70.0f);
+		// 最大値を代入
+		pitch = Math::ToRadians(MaxPitch);
 	}
-	if (pitch < Math::ToRadians(-30.0f))
+	// ピッチが最小値を下回っていたら
+	if (pitch < Math::ToRadians(MinPitch))
 	{
-		pitch = Math::ToRadians(-30.0f);
+		// 最小値を代入
+		pitch = Math::ToRadians(MinPitch);
 	}
 }
 
@@ -220,35 +272,42 @@ void MainCameraObject::SetViewMatrixLerpObject(const Vector3 & _offset, const Ve
 
 void MainCameraObject::OnCollision(const GameObject& _hitObject)
 {	
+	// ヒットした際にヒットフラグがfalseだったら
 	if (hitFlag == false)
 	{
+		// ヒットフラグをtrueに
 		hitFlag = true;
+		// 当たったオブジェクトのポジションを保存 
 		hitPosition = _hitObject.GetPosition();
 	}
 
+	// 押し戻し用にワールドBoxを保存
 	AABB myAabb = boxcollider->GetWorldBox();
+	// 押し戻し関数を呼び出す
 	FixCollision(myAabb, _hitObject.aabb, _hitObject.GetTag());
 
 }
 
 void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag)
 {
+	// 当たった相手が地面・壁・各区画の動く壁だったら押し戻しを行う
 	if (_pairTag == Tag::GROUND || _pairTag == Tag::WALL || _pairTag == Tag::FIRST_MOVE_WALL ||
 		_pairTag == Tag::SECOND_MOVE_WALL || _pairTag == Tag::NEXT_SCENE_MOVE_WALL||
 		_pairTag == Tag::CLEAR_SCENE_MOVE_WALL || _pairTag == Tag::TUTORIAL_MOVE_WALL)
 	{
-		Vector3 ment = Vector3(0, 0, 0);
+		// 速度補正ベクトル変数
+		Vector3 ment = Vector3::Zero;
+		// 押し戻し計算
 		calcCollisionFixVec(myAABB, pairAABB, ment);
+		// ポジションを更新
 		SetPosition(position + ment);
-
-
 	}
 
 }
 
 void MainCameraObject::calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
-	_calcFixVec = Vector3(0, 0, 0);
+	_calcFixVec = Vector3::Zero;
 
 	float dx1 = _fixedBox.min.x - _movableBox.max.x;
 	float dx2 = _fixedBox.max.x - _movableBox.min.x;
