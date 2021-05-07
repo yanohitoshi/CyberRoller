@@ -48,11 +48,12 @@ Renderer::Renderer()
 	, CAMERA_PROJECTION_FOV(70.0f)
 	, CAMERA_PROJECTION_NEAR(25.0f)
 	, CAMERA_PROJECTION_FAR(7000.0f)
-	, SHIFT_LIGHT_POSITON_Z(2000.0f)
+	, SHIFT_LIGHT_POSITON_Z(3000.0f)
 	, LIGHT_PROJECTION_WHIDTH(7000.0f)
 	, LIGHT_PROJECTION_HIGHT(7000.0f)
 	, LIGHT_PROJECTION_NEAR(1.0f)
-	, LIGHT_PROJECTION_FAR(7000.0f)
+	, LIGHT_PROJECTION_FAR(15000.0f)
+	, SHIFT_LIGHT_POSITON_X(500.0f)
 {
 }
 
@@ -872,7 +873,7 @@ void Renderer::DepthRendering()
 	/* ここからデプスマップ開始 */
 	//ライト情報
 	// ライトの位置を決定
-	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + SHIFT_LIGHT_POSITON_Z);
+	LightPos = Vector3(playerPos.x - SHIFT_LIGHT_POSITON_X, playerPos.y , playerPos.z + SHIFT_LIGHT_POSITON_Z);
 	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;
 	// 正規化

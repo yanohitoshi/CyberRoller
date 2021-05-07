@@ -57,7 +57,7 @@ private:
 	//移動間隔カウント
 	int intervalCount;
 	//移動速度
-	const float moveSpeed;
+	const float MoveSpeed;
 	//移動方向
 	Vector3 direction;
 

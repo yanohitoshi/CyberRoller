@@ -41,6 +41,10 @@ private:
 	Mesh* mesh;
 	MeshComponent* meshComponent;
 
+	// 速度ベクトルの初期化定数
+	const Vector3 InitVelocity;
+	// 目標ポジションと初期ポジションを設定する際にポジションをずらす用定数
+	const float ShiftGoalAndInitPosition;
 	// playerのポジションを保存する用の変数
 	Vector3 targetPos;
 	// 目標ポジション変数

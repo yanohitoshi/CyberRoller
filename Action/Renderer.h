@@ -444,6 +444,7 @@ private:
 	Vector3 lightViewPos;
 	// ライトの位置をプレイヤーの位置からずらす値（Z軸）
 	const float SHIFT_LIGHT_POSITON_Z;
+	const float SHIFT_LIGHT_POSITON_X;
 	// HDR関連	
 	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
 	unsigned int undefineTexID;

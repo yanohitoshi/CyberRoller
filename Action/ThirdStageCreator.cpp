@@ -48,8 +48,6 @@ ThirdStageCreator::~ThirdStageCreator()
 
 	playerData.clear();
 
-	// プレイヤーのポインタの後片付け
-	delete playerObject;
 }
 
 

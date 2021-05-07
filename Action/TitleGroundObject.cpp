@@ -7,6 +7,8 @@
 TitleGroundObject::TitleGroundObject(const Vector3& _p, const Vector3& _size, const Vector3& _playerPos, const Tag& _objectTag) :
 	BoxObject(_p ,_size , _objectTag)
 	, targetPos(_playerPos)
+	, InitVelocity(Vector3(0.0f, -400.0f, 0.0f))
+	, ShiftGoalAndInitPosition(1000.0f)
 {
 	//GameObjectメンバ変数の初期化
 	SetPosition(_p);
@@ -14,9 +16,9 @@ TitleGroundObject::TitleGroundObject(const Vector3& _p, const Vector3& _size, co
 	tag = _objectTag;
 	state = Active;
 	rePositionFlag = false;
-	goalPos = Vector3(position.x, position.y - 1000.0f, position.z);
-	initPos = Vector3(position.x, position.y + 1000.0f, position.z);
-	velocity = Vector3(0.0f, -400.0f, 0.0f);
+	goalPos = Vector3(position.x, position.y - ShiftGoalAndInitPosition, position.z);
+	initPos = Vector3(position.x, position.y + ShiftGoalAndInitPosition, position.z);
+	velocity = InitVelocity;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 

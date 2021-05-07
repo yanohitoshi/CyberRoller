@@ -7,7 +7,7 @@
 
 MoveNeedleObject::MoveNeedleObject(GameObject* _owner, const Vector3& _offset, const Vector3& _size, const Tag& _objectTag, const float& _speed):
 	NeedleObject(_owner,_offset,_size,_objectTag)
-	, moveSpeed(_speed)
+	, MoveSpeed(_speed)
 {
 	//GameObjectメンバ変数の初期化
 	position = _owner->GetPosition() + _offset;
@@ -38,12 +38,12 @@ void MoveNeedleObject::UpdateGameObject(float _deltaTime)
 	//反転フラグがfalseならそのままの速度を代入
 	if (inversionFlag == false)
 	{
-		velocity = direction * moveSpeed;
+		velocity = direction * MoveSpeed;
 	}
 	//反転フラグがtrueなら速度に-1をかけて代入
 	else if (inversionFlag == true)
 	{
-		velocity = direction * (moveSpeed * 0.3f) * -1.0f;
+		velocity = direction * (MoveSpeed * 0.3f) * -1.0f;
 	}
 
 	if (position.z >= goalPos.z)

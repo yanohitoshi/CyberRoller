@@ -52,8 +52,6 @@ FinalStageCreator::~FinalStageCreator()
 	//プレイヤーのマップデータ削除
 	playerData.clear();
 
-	// プレイヤーのポインタの後片付け
-	delete playerObject;
 }
 
 
@@ -214,10 +212,10 @@ void FinalStageCreator::CreateStage()
 		{
 			const unsigned int layer1 = layer1StageData[(int)iy][(int)ix];
 			Vector3 layer1Pos = Vector3(offset * ix, -offset * iy, 0);
-			Vector3 blockSize = Vector3(200, 200, 100);
+			Vector3 blockSize = Vector3(200.0f, 200.0f, 100.0f);
 			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
-			Vector3 jumpSwitchSize = Vector3(200, 200, 3);
-			Vector3 needlePanelSize = Vector3(200, 200, 3);
+			Vector3 jumpSwitchSize = Vector3(200.0f, 200.0f, 3.0f);
+			Vector3 needlePanelSize = Vector3(200.0f, 200.0f, 3.0f);
 			Vector3 wallBlockSizeNum1 = Vector3(600.0f, 200.0f, 3000.0f);
 			Vector3 wallBlockSizeNum2 = Vector3(200.0f, 600.0f, 3000.0f);
 			Vector3 moveWallSize = Vector3(20, 1600, 1000);
