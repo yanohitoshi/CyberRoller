@@ -23,17 +23,20 @@ Shader::~Shader()
 */
 bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
 {
+	// シェーダーのコンパイル確認
 	if (!CompileShader(_vertName,GL_VERTEX_SHADER,vertexShader) ||
 		!CompileShader(_fragName,GL_FRAGMENT_SHADER, fragShader))
 	{
 		return false;
 	}
 
+	// シェーダープログラム作成
 	shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram,vertexShader);
 	glAttachShader(shaderProgram, fragShader);
 	glLinkProgram(shaderProgram);
 
+	// シェーダーのリンク状態確認
 	if (!IsVaildProgram())
 	{
 		return false;
@@ -47,6 +50,7 @@ bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
 */
 void Shader::Unload()
 {
+	// 後処理
 	glDeleteProgram(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragShader);

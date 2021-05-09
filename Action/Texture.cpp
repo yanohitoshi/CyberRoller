@@ -96,13 +96,13 @@ void Texture::CreateFromSurface(SDL_Surface * _surface)
 	width = _surface->w;
 	height = _surface->h;
 
-	// Generate a GL texture
+	// GLtextureの生成
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA,
 		GL_UNSIGNED_BYTE, _surface->pixels);
 
-	// Use linear filtering
+	// 線形フィルタリングを使用
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }

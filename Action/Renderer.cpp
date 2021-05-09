@@ -36,24 +36,26 @@ Renderer::Renderer()
 	, depthMapShader(nullptr)
 	, switchShader(nullptr)
 	, shadowMapShader(nullptr)
-	, mSkinnedDepthMapShader(nullptr)
-	, mSkinnedShadowMapShader(nullptr)
+	, skinnedDepthMapShader(nullptr)
+	, skinnedShadowMapShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
 	, screenHeight(0)
 	, ambientLight(Vector3::Zero)
-	, SHADOW_WIDTH (8192)
-	, SHADOW_HEIGHT(8192)
-	, CAMERA_PROJECTION_FOV(70.0f)
-	, CAMERA_PROJECTION_NEAR(25.0f)
-	, CAMERA_PROJECTION_FAR(7000.0f)
-	, SHIFT_LIGHT_POSITON_Z(3000.0f)
-	, LIGHT_PROJECTION_WHIDTH(7000.0f)
-	, LIGHT_PROJECTION_HIGHT(7000.0f)
-	, LIGHT_PROJECTION_NEAR(1.0f)
-	, LIGHT_PROJECTION_FAR(15000.0f)
-	, SHIFT_LIGHT_POSITON_X(500.0f)
+	, ShadowWidth (8192)
+	, ShadowHeight(8192)
+	, CameraProjectionFov(70.0f)
+	, CameraProjectionNear(25.0f)
+	, CameraProjectionFar(7000.0f)
+	, LightProjectionWhidth(7000.0f)
+	, LightProjectionHight(7000.0f)
+	, LightProjectionNear(1.0f)
+	, LightProjectionFar(15000.0f)
+	, ShiftLightPositionZ(3000.0f)
+	, ShiftLightPositionX(500.0f)
+	, MaxTimeFontTextures(251)
+	, TimeFontSize(72)
 {
 }
 
@@ -66,6 +68,7 @@ Renderer::~Renderer()
 */
 void Renderer::CreateInstance()
 {
+	// 作られていなかったら生成
 	if (renderer == nullptr)
 	{
 		renderer = new Renderer();
@@ -77,6 +80,7 @@ void Renderer::CreateInstance()
 */
 void Renderer::DeleteInstance()
 {
+	// 削除されていなかったら削除
 	if (renderer != nullptr)
 	{
 		delete renderer;
@@ -90,6 +94,7 @@ void Renderer::DeleteInstance()
 */
 bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScreen)
 {
+	// スクリーンサイズ初期化
 	screenWidth = _screenWidth;
 	screenHeight = _screenHeight;
 
@@ -111,7 +116,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	//ウィンドウの作成
-
 	window = SDL_CreateWindow("OpenGL Game", 1, 1,
 		static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
 
@@ -176,7 +180,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
 
-	CreateTimeFontTexture(MAX_TIME_FONT_TEXTURES, TIME_FONT_SIZE);
+	CreateTimeFontTexture(MaxTimeFontTextures, TimeFontSize);
 
 	return true;
 }
@@ -205,11 +209,11 @@ void Renderer::Shutdown()
 	shadowMapShader->Unload();
 	delete shadowMapShader;
 
-	mSkinnedDepthMapShader->Unload();
-	delete mSkinnedDepthMapShader;
+	skinnedDepthMapShader->Unload();
+	delete skinnedDepthMapShader;
 
-	mSkinnedShadowMapShader->Unload();
-	delete mSkinnedShadowMapShader;
+	skinnedShadowMapShader->Unload();
+	delete skinnedShadowMapShader;
 
 	//コンテキストとwindowの後片付け
 	SDL_GL_DeleteContext(context);
@@ -235,20 +239,20 @@ void Renderer::UnloadData()
 		i.second->Unload();
 		delete i.second;
 	}
-	// Unload skeletons
-	for (auto s : mSkeletons)
+	// スケルトンの解放
+	for (auto s : skeletons)
 	{
 		delete s.second;
 	}
-	// Unload animations
-	for (auto a : mAnims)
+	// アニメーションの解放
+	for (auto a : anims)
 	{
 		delete a.second;
 	}
 
 	meshes.clear();
-	mSkeletons.clear();
-	mAnims.clear();
+	skeletons.clear();
+	anims.clear();
 }
 
 /*
@@ -305,13 +309,17 @@ void Renderer::Draw()
 */
 void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 {
-	// 今あるスプライトから挿入する場所の検索
-	// (DrawOrderが小さい順番に描画するため)
-
+	// 背景かどうかを取得
 	bool isBackGround = _spriteComponent->GetIsBackGround();
+	// 描画順を取得
 	int myDrawOrder = _spriteComponent->GetDrawOrder();
+
+	// 背景じゃなかったら通常のコンテナに格納
 	if (isBackGround == false)
 	{
+		// 描画順に沿って追加
+		// 今あるスプライトから挿入する場所の検索
+		// (DrawOrderが小さい順番に描画するため)
 		auto iter = sprites.begin();
 		for (;
 			iter != sprites.end();
@@ -327,8 +335,12 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 		sprites.insert(iter, _spriteComponent);
 	}
 
+	// 背景だったら背景用ののコンテナに格納
 	if (isBackGround == true)
 	{
+		// 描画順に沿って追加
+		// 今あるスプライトから挿入する場所の検索
+		// (DrawOrderが小さい順番に描画するため)
 		auto iter = backGroundSprites.begin();
 		for (;
 			iter != backGroundSprites.end();
@@ -351,15 +363,21 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 */
 void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 {
+	// 背景かどうかを取得
 	bool isBackGround = _spriteComponent->GetIsBackGround();
+
+	// 背景じゃなかったら
 	if (isBackGround == false)
 	{
+		// 通常コンテナから探して削除
 		auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
 		sprites.erase(iter);
 	}
 
+	// 背景だったら
 	if (isBackGround == true)
 	{
+		// 背景コンテナから探して削除
 		auto iter = std::find(backGroundSprites.begin(), backGroundSprites.end(), _spriteComponent);
 		backGroundSprites.erase(iter);
 	}
@@ -373,7 +391,11 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 */
 void Renderer::AddParticle(ParticleComponent * _particleComponent)
 {
+	// 描画順を取得
 	int myDrawOrder = _particleComponent->GetDrawOrder();
+	// 描画順に沿って追加
+	// 今あるパーティクルから挿入する場所の検索
+	// (DrawOrderが小さい順番に描画するため)
 	auto iter = particles.begin();
 	for (;
 		iter != particles.end();
@@ -384,6 +406,7 @@ void Renderer::AddParticle(ParticleComponent * _particleComponent)
 			break;
 		}
 	}
+	// 検索した場所のiterの場所に挿入
 	particles.insert(iter, _particleComponent);
 }
 
@@ -393,6 +416,7 @@ void Renderer::AddParticle(ParticleComponent * _particleComponent)
 */
 void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
 {
+	// パーティクルコンテナから探して削除
 	auto iter = std::find(particles.begin(), particles.end(), _particleComponent);
 	particles.erase(iter);
 }
@@ -406,15 +430,18 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 	//メッシュデータにスケルトンデータがあれば
 	if (_meshComponent->GetIsSkeltal())
 	{
+		// スキニングモデルとして生成
 		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
-		mSkeletalMeshes.emplace_back(sk);
+		skeletalMeshes.emplace_back(sk);
 	}
-	else if(_meshComponent->GetIsColorChange() == true)
+	else if(_meshComponent->GetIsColorChange() == true) // 途中で色の変更をおこなうメッシュだったら
 	{
+		// 色変更適用シェーダーを用いるモデルとして格納
 		colorChangeMeshComponents.emplace_back(_meshComponent);
 	}
 	else
 	{
+		// 通常モデルコンテナに格納
 		meshComponents.emplace_back(_meshComponent);
 	}
 }
@@ -426,19 +453,23 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 */
 void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 {
+	//メッシュデータにスケルトンデータがあれば
 	if (_meshComponent->GetIsSkeltal())
 	{
+		// スキニングモデルコンテナから探して削除
 		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
-		auto iter = std::find(mSkeletalMeshes.begin(), mSkeletalMeshes.end(), sk);
-		mSkeletalMeshes.erase(iter);
+		auto iter = std::find(skeletalMeshes.begin(), skeletalMeshes.end(), sk);
+		skeletalMeshes.erase(iter);
 	}
-	else if (_meshComponent->GetIsColorChange())
+	else if (_meshComponent->GetIsColorChange()) // 途中で色の変更をおこなうメッシュだったら
 	{
+		// 色変更適用コンテナから削除
 		auto iter = std::find(colorChangeMeshComponents.begin(), colorChangeMeshComponents.end(), _meshComponent);
 		colorChangeMeshComponents.erase(iter);
 	}
 	else
 	{
+		// 通常コンテナから削除
 		auto iter = std::find(meshComponents.begin(), meshComponents.end(), _meshComponent);
 		meshComponents.erase(iter);
 	}
@@ -449,20 +480,21 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 @param _fileName モデルへのアドレス
 @return スケルトンモデルの取得
 */
-const Skeleton * Renderer::GetSkeleton(const char * fileName)
+const Skeleton * Renderer::GetSkeleton(const char * _fileName)
 {
-	std::string file(fileName);
-	auto iter = mSkeletons.find(file);
-	if (iter != mSkeletons.end())
+	//すでに作成されてないか調べる
+	std::string file(_fileName);
+	auto iter = skeletons.find(file);
+	if (iter != skeletons.end())
 	{
 		return iter->second;
 	}
-	else
+	else 	//作成済みでない場合、新しくスケルトンを作成
 	{
 		Skeleton* sk = new Skeleton();
 		if (sk->Load(file))
 		{
-			mSkeletons.emplace(file, sk);
+			skeletons.emplace(file, sk);
 		}
 		else
 		{
@@ -477,19 +509,20 @@ const Skeleton * Renderer::GetSkeleton(const char * fileName)
 @param _fileName アニメーションへのアドレス
 @return スケルトンアニメーションの取得
 */
-const Animation * Renderer::GetAnimation(const char * fileName, bool _loop)
+const Animation * Renderer::GetAnimation(const char * _fileName, bool _loop)
 {
-	auto iter = mAnims.find(fileName);
-	if (iter != mAnims.end())
+	//すでに作成されてないか調べる
+	auto iter = anims.find(_fileName);
+	if (iter != anims.end())
 	{
 		return iter->second;
 	}
-	else
+	else 	//作成済みでない場合、新しくアニメーションを作成
 	{
 		Animation* anim = new Animation();
-		if (anim->Load(fileName,_loop))
+		if (anim->Load(_fileName,_loop))
 		{
-			mAnims.emplace(fileName, anim);
+			anims.emplace(_fileName, anim);
 		}
 		else
 		{
@@ -541,7 +574,7 @@ Font* Renderer::GetFont(const std::string& _fileName)
 	{
 		font = itr->second;
 	}
-	//作成済みでない場合、新しくテクスチャを作成
+	//作成済みでない場合、新しくフォントを作成
 	else
 	{
 		font = new Font();
@@ -610,8 +643,8 @@ bool Renderer::LoadShaders()
 
 	// 3Dモデル用ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
-	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CAMERA_PROJECTION_FOV),
-		screenWidth, screenHeight, CAMERA_PROJECTION_NEAR, CAMERA_PROJECTION_FAR);
+	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
+		screenWidth, screenHeight, CameraProjectionNear, CameraProjectionFar);
 
 	// switch用シェーダーの作成(色変更可能シェーダー)
 	switchShader = new Shader();
@@ -635,7 +668,7 @@ bool Renderer::LoadShaders()
 	glGenTextures(1, &depthMap);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-		SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		ShadowWidth, ShadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -661,14 +694,14 @@ bool Renderer::LoadShaders()
 	}
 
 	// デプスマップ焼き用シェーダ (アニメーションあり)
-	mSkinnedDepthMapShader = new Shader();
-	if (!mSkinnedDepthMapShader->Load("Shaders/SkinnedDepth.vert", "Shaders/depthmap.frag"))
+	skinnedDepthMapShader = new Shader();
+	if (!skinnedDepthMapShader->Load("Shaders/SkinnedDepth.vert", "Shaders/depthmap.frag"))
 	{
 		printf("シェーダー読み込み失敗depth\n");
 	}
 	// シャドウを適用した描画用シェーダ作成 (アニメーションあり)
-	mSkinnedShadowMapShader = new Shader();
-	if (!mSkinnedShadowMapShader->Load("Shaders/SkinnedShadow.vert", "Shaders/SkinnedShadow.frag"))
+	skinnedShadowMapShader = new Shader();
+	if (!skinnedShadowMapShader->Load("Shaders/SkinnedShadow.vert", "Shaders/SkinnedShadow.frag"))
 	{
 		printf("シェーダー読み込み失敗shadow\n");
 	}
@@ -769,6 +802,7 @@ void Renderer::DrawShadow()
 {
 
 	/* HDRとシャドウマップの処理開始 */
+	// HDRレコーディング開始
 	hdrRenderer->HdrRecordBegin();
 
 	// 背景描画
@@ -806,31 +840,30 @@ void Renderer::DrawShadow()
 	}
 
 	//シャドウマップshaderをアクティブ(skinnend)
-	mSkinnedShadowMapShader->SetActive();
+	skinnedShadowMapShader->SetActive();
 	// ライトのカメラ情報
-	mSkinnedShadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
+	skinnedShadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
 	// アンビエントライト
-	mSkinnedShadowMapShader->SetVectorUniform("uAmbientLight", ambientLight);
+	skinnedShadowMapShader->SetVectorUniform("uAmbientLight", ambientLight);
 	// ディレクショナルライト
-	mSkinnedShadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	mSkinnedShadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	mSkinnedShadowMapShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	skinnedShadowMapShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
 
-	mSkinnedShadowMapShader->SetMatrixUniform("uViewProj", view * projection);
+	skinnedShadowMapShader->SetMatrixUniform("uViewProj", view * projection);
 	// デプスマップをセット（スキニング用）
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
-	mSkinnedShadowMapShader->SetIntUniform("depthMap", 4);
-	mSkinnedShadowMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
+	skinnedShadowMapShader->SetIntUniform("depthMap", 4);
+	skinnedShadowMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
 
-	for (auto sk : mSkeletalMeshes)
+	for (auto sk : skeletalMeshes)
 	{
 		if (sk->GetVisible())
 		{
-			sk->Draw(mSkinnedShadowMapShader);
+			sk->Draw(skinnedShadowMapShader);
 		}
 	}
-	/*  シャドウマップ描画終了 */
 
 	switchShader->SetActive();
 	switchShader->SetMatrixUniform("uViewProj", view* projection);
@@ -854,7 +887,7 @@ void Renderer::DrawShadow()
 		}
 	}
 
-
+	// HDRレコーデイング終了
 	hdrRenderer->HdrRecordEnd();
 
 	/* HDR Bloom の作成と合成 */
@@ -873,29 +906,31 @@ void Renderer::DepthRendering()
 	/* ここからデプスマップ開始 */
 	//ライト情報
 	// ライトの位置を決定
-	LightPos = Vector3(playerPos.x - SHIFT_LIGHT_POSITON_X, playerPos.y , playerPos.z + SHIFT_LIGHT_POSITON_Z);
+	LightPos = Vector3(playerPos.x - ShiftLightPositionX, playerPos.y , playerPos.z + ShiftLightPositionZ);
 	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;
 	// 正規化
 	LightDir.Normalize();
 	// ライト用プロジェクション作成
-	lightProjection = Matrix4::CreateOrtho(LIGHT_PROJECTION_WHIDTH, LIGHT_PROJECTION_HIGHT, LIGHT_PROJECTION_NEAR, LIGHT_PROJECTION_FAR);
+	lightProjection = Matrix4::CreateOrtho(LightProjectionWhidth, LightProjectionHight, LightProjectionNear, LightProjectionFar);
 	// ビュー行列の更新
 	lightView = Matrix4::CreateLookAt(LightPos, playerPos, Vector3::UnitX);
 	// ライト空間行列を計算
 	lightSpeceMatrix = lightView * lightProjection;
 
 	// ビューポートを深度マップサイズに設定する
-	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glViewport(0, 0, ShadowWidth, ShadowHeight);
 	// シャドウフレームバッファをバインド
 	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// デプスマップ焼き用シェーダを有効化し、必要な値をシェーダにセット・シャドウをつけたいオブジェクトを描画する
+	// メッシュモデルシェーダーアクティブ
 	depthMapShader->SetActive();
 	depthMapShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 
+	// メッシュモデルの描画
 	for (auto mc : meshComponents)
 	{
 		// 壁以外を深度マップに書き込み
@@ -906,14 +941,17 @@ void Renderer::DepthRendering()
 			mc->Draw(depthMapShader);
 		}
 	}
+
+	// スキニングモデルシェーダーアクティブ
+	skinnedDepthMapShader->SetActive();
+	skinnedDepthMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
+
 	// スキニングモデルの描画
-	mSkinnedDepthMapShader->SetActive();
-	mSkinnedDepthMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
-	for (auto sk : mSkeletalMeshes)
+	for (auto sk : skeletalMeshes)
 	{
 		if (sk->GetVisible())
 		{
-			sk->Draw(mSkinnedDepthMapShader);
+			sk->Draw(skinnedDepthMapShader);
 		}
 	}
 
@@ -943,6 +981,7 @@ void Renderer::DrawBackGround()
 	spriteVerts->SetActive();
 	glActiveTexture(GL_TEXTURE0);
 	spriteShader->SetIntUniform("uTexture", 0);
+
 	// すべてのスプライトの描画
 	for (auto sprite : backGroundSprites)
 	{
@@ -959,13 +998,15 @@ void Renderer::DrawBackGround()
 
 void Renderer::DrawParticle()
 {
-	
+	// particleのコンテナをソート
 	std::sort(particles.begin(), particles.end(), std::greater<ParticleComponent*>());
 
+	// particleが0だったらスキップ
 	if (particles.size() == 0)
 	{
 		return;
 	}
+
 	// ブレンドモード初期状態取得
 	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
 	auto itr = particles.begin();
@@ -992,25 +1033,32 @@ void Renderer::DrawParticle()
 	// すべてのパーティクルを描画
 	glActiveTexture(GL_TEXTURE0);
 	particleShader->SetIntUniform("uTexture", 0);
+
+	// ブレンドモードの変更
 	ChangeBlendMode(blendType);
-	
+	// textureの変更
 	ChangeTexture(nowTexture);
 
+	// particleを描画
 	for (auto particle : particles)
 	{
+		// 描画する状態だったら
 		if (particle->GetVisible())
 		{
 			//ブレンドモード変更が必要なら変更する
 			blendType = particle->GetBlendType();
 			blendType = particle->GetBlendType();
+
 			if (blendType != prevType)
 			{
 				glActiveTexture(GL_TEXTURE0);
 				particleShader->SetIntUniform("uTexture", 0);
 				ChangeBlendMode(blendType);
 			}
+
 			// テクスチャ変更が必要なら変更する
 			nowTexture = particle->GetTextureID();
+
 			if (nowTexture != prevTexture)
 			{
 				glActiveTexture(GL_TEXTURE0);
@@ -1053,9 +1101,10 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 		dirLight.specColor);
 }
 
-void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType)
+void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
 {
-	switch (blendType)
+	// PARTICLE_BLEND_ENUMのタイプを参照
+	switch (_blendType)
 	{
 	case ParticleComponent::PARTICLE_BLEND_ENUM_ADD:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成

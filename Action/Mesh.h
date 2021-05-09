@@ -94,17 +94,21 @@ public:
 
 private:
 
+	// テクスチャステージに割り当てられたテクスチャ
+	std::unordered_map<TextureStage, int> stageDefTexture;
+
     //このメッシュに使うテクスチャのポインタの可変長コンテナ
     std::vector<Texture*> textures;
 
 	//このメッシュに使う頂点データ
 	std::vector<Vector3> verts;
 
+    //このメッシュに使うシェーダーの名前
+    std::string shaderName;
+
 	//クラスのポインタ
     VertexArray* vertexArray;
 
-    //このメッシュに使うシェーダーの名前
-    std::string shaderName;
 
     //オブジェクト空間での境界球の半径
     float radius;
@@ -114,9 +118,6 @@ private:
 	
 	// 自己発行強度
 	float luminance;
-	
-	// テクスチャステージに割り当てられたテクスチャ
-	std::unordered_map<TextureStage, int> stageDefTexture;
 
 	// AABB変数
 	AABB mBox;

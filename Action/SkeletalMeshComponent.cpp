@@ -135,7 +135,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 {
 	// メッシュテクスチャセット
 	int texID, stageCount = 0;
-	texID = mesh->GetTextureID(TextureStage::DiffuseMap); // ディフューズ
+	texID = mesh->GetTextureID(TextureStage::DIFFUSE_MAP); // ディフューズ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -143,7 +143,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 		stageCount++;
 	}
 
-	texID = mesh->GetTextureID(TextureStage::NormalMap); // 法線マップ
+	texID = mesh->GetTextureID(TextureStage::NORMAL_MAP); // 法線マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -151,7 +151,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 		stageCount++;
 	}
 
-	texID = mesh->GetTextureID(TextureStage::SpecularMap); // スペキュラーマップ
+	texID = mesh->GetTextureID(TextureStage::SPECULAR_MAP); // スペキュラーマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -159,7 +159,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 		stageCount++;
 	}
 
-	texID = mesh->GetTextureID(TextureStage::EmissiveMap); // 自己放射マップ
+	texID = mesh->GetTextureID(TextureStage::EMISSIVE_MAP); // 自己放射マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);

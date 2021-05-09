@@ -13,6 +13,7 @@ HDRRenderer::HDRRenderer(int fboWidth, int fboHeight, int bloomLevel)
 	, bufferWidth(fboWidth)
 	, bufferHeight(fboHeight)
 	, bloomBufferLevel(bloomLevel)
+	, sampleCount(15)
 {
 	// HDR バッファとBlur用バッファを作成
 	InitHDRBuffers();

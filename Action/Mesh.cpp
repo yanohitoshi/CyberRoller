@@ -30,10 +30,10 @@ Mesh::Mesh()
 	, luminance(1.0f)
 	, mBox(Vector3::Infinity, Vector3::NegInfinity)
 {
-	stageDefTexture.emplace(TextureStage::DiffuseMap, 0);
-	stageDefTexture.emplace(TextureStage::NormalMap, 0);
-	stageDefTexture.emplace(TextureStage::SpecularMap, 0);
-	stageDefTexture.emplace(TextureStage::EmissiveMap, 0);
+	stageDefTexture.emplace(TextureStage::DIFFUSE_MAP, 0);
+	stageDefTexture.emplace(TextureStage::NORMAL_MAP, 0);
+	stageDefTexture.emplace(TextureStage::SPECULAR_MAP, 0);
+	stageDefTexture.emplace(TextureStage::EMISSIVE_MAP, 0);
 
 }
 
@@ -134,21 +134,21 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		if (readTextures.Size() == 1)
 		{
 			// DiffuseMapに設定
-			stageDefTexture[TextureStage::DiffuseMap] = t->GetTextureID();
+			stageDefTexture[TextureStage::DIFFUSE_MAP] = t->GetTextureID();
 		}
 	}
 
 	// テクスチャ読み込み(新ファイル形式)
 	if (IsExistMember(doc, "diffusemap"))
 	{
-		stageDefTexture[TextureStage::DiffuseMap] = LoadStageTextures(doc, TextureStage::DiffuseMap, "diffusemap");
+		stageDefTexture[TextureStage::DIFFUSE_MAP] = LoadStageTextures(doc, TextureStage::DIFFUSE_MAP, "diffusemap");
 	}
 	// ノーマルマップ用textureの場合NormalMapに設定
-	stageDefTexture[TextureStage::NormalMap] = LoadStageTextures(doc, TextureStage::NormalMap, "normalmap");
+	stageDefTexture[TextureStage::NORMAL_MAP] = LoadStageTextures(doc, TextureStage::NORMAL_MAP, "normalmap");
 	// スペキュラマップ用textureの場合SpecularMapに設定
-	stageDefTexture[TextureStage::SpecularMap] = LoadStageTextures(doc, TextureStage::SpecularMap, "specularmap");
+	stageDefTexture[TextureStage::SPECULAR_MAP] = LoadStageTextures(doc, TextureStage::SPECULAR_MAP, "specularmap");
 	// エミッシブマップ用textureの場合EmissiveMapに設定
-	stageDefTexture[TextureStage::EmissiveMap] = LoadStageTextures(doc, TextureStage::EmissiveMap, "emissivemap");
+	stageDefTexture[TextureStage::EMISSIVE_MAP] = LoadStageTextures(doc, TextureStage::EMISSIVE_MAP, "emissivemap");
 
 
 	// 頂点配列データをロード

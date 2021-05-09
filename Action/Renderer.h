@@ -30,15 +30,15 @@ struct DirectionalLight
 enum class TextureStage
 {
 	// ディフーズマップ
-	DiffuseMap,
+	DIFFUSE_MAP,
 	// ノーマルマップ
-	NormalMap,
+	NORMAL_MAP,
 	// スペキュラマップ
-	SpecularMap,
+	SPECULAR_MAP,
 	// エミッシブマップ
-	EmissiveMap,
+	EMISSIVE_MAP,
 	// シャドウマップ
-	ShadowMap,
+	SHADOW_MAP
 };
 
 // クラスの前方宣言
@@ -152,12 +152,12 @@ public:
 	@param _fileName モデルへのアドレス
 	@return スケルトンモデルの取得
 	*/
-	const class Skeleton* GetSkeleton(const char* fileName);                       
+	const class Skeleton* GetSkeleton(const char* _fileName);                       
 	/*
 	@param _fileName アニメーションへのアドレス
 	@return スケルトンアニメーションの取得
 	*/
-	const class Animation* GetAnimation(const char* fileName, bool _loop);
+	const class Animation* GetAnimation(const char* _fileName, bool _loop);
 
 	/*
 	@brief  メッシュの取得
@@ -253,16 +253,10 @@ public:
 
 
 private:
+
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
 	~Renderer();
-
-	friend class Shadow;
-
-	// スケルトンデータ
-	std::unordered_map<std::string, class Skeleton*> mSkeletons;
-	// アニメーションデータ
-	std::unordered_map<std::string, class Animation*> mAnims;    
 
 	//自分のインスタンス
 	static Renderer* renderer;
@@ -329,7 +323,7 @@ private:
 	@brief  particleのブレンドモードを変更する
 	@param  blendType　変更するモード
 	*/
-	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType);
+	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType);
 	
 	/*
 	@brief  textureを変更する
@@ -341,6 +335,11 @@ private:
 	@brief  ワールド空間のカメラ座標を計算
 	*/
 	Vector3 CalcCameraPos();
+
+	// スケルトンデータ
+	std::unordered_map<std::string, class Skeleton*> skeletons;
+	// アニメーションデータ
+	std::unordered_map<std::string, class Animation*> anims;    
 
 	//ファイル名でメッシュを取得するための連想配列
 	std::unordered_map<std::string, Mesh*> meshes;
@@ -359,32 +358,42 @@ private:
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
 	// スケルトンメッシュの描画に使われる
-	std::vector<class SkeletalMeshComponent*>mSkeletalMeshes;   
+	std::vector<class SkeletalMeshComponent*>skeletalMeshes;   
 	// 色を変えるメッシュの描画に使われる
-	std::vector<class ChangeColorMeshComponent*>mChangeColorMeshes;
+	std::vector<class ChangeColorMeshComponent*>changeColorMeshes;
 
-	// Map for fonts
+	// フォントマップ
 	std::unordered_map<std::string, class Font*> fonts;
 
+	// 時間表示用のフォントtexture
+	// 白色
+	std::vector<Texture*> timeFontTextures;
+	// 黒色
+	std::vector<Texture*> timeBlackFontTextures;
+	// 赤色
+	std::vector<Texture*> timeRedFontTextures;
 
 
 	//クラスのポインタ
 	//スプライト
 	Shader* spriteShader;
 	VertexArray* spriteVerts;
+
 	// スイッチ用シェーダー
 	Shader* switchShader;
-	//effect用メッシュ
-	Shader* effectMeshShader;
+
 	//スキンメッシュ
 	Shader*  mSkinnedShader;  
+
 	//shadowマップ関連シェーダー
 	//shadow用（メッシュ）
 	Shader* depthMapShader;
 	Shader* shadowMapShader;
+
 	//shadow用（スキンメッシュ）
-	Shader* mSkinnedDepthMapShader;
-	Shader* mSkinnedShadowMapShader;
+	Shader* skinnedDepthMapShader;
+	Shader* skinnedShadowMapShader;
+
 	//デバック用シェーダー
 	Shader* debugShader;
 
@@ -393,23 +402,6 @@ private:
 	// パーティクル用頂点定義
 	VertexArray* particleVertex;   
 
-	//ビュー行列
-	Matrix4 view;
-	//射影行列
-	Matrix4 projection;
-	//ビルボード行列
-	Matrix4 mBillboardMat;
-	//スクリーンの横幅
-	float screenWidth;
-	//スクリーンの縦幅
-	float screenHeight;
-
-	// カメラの視野角
-	const float CAMERA_PROJECTION_FOV;
-	// カメラプロジェクションの近距離
-	const float CAMERA_PROJECTION_NEAR;
-	// カメラプロジェクションの遠距離
-	const float CAMERA_PROJECTION_FAR;
 
 	//環境光
 	Vector3 ambientLight;
@@ -420,56 +412,71 @@ private:
 	//コンテキスト
 	SDL_GLContext context;
 
-	// プレイヤーの位置保存用
-	Vector3 playerPos;
+	// カメラの視野角
+	const float CameraProjectionFov;
+	// カメラプロジェクションの近距離
+	const float CameraProjectionNear;
+	// カメラプロジェクションの遠距離
+	const float CameraProjectionFar;
 
+	// シャドウマップの横幅
+	const unsigned int ShadowWidth;
+	// シャドウマップの縦幅
+	const unsigned int ShadowHeight;
+
+	// ライトの位置のZ軸をプレイヤーの位置からずらす値
+	const float ShiftLightPositionZ;
+	// ライトの位置のX軸をプレイヤーの位置からずらす値
+	const float ShiftLightPositionX;
+
+	// ライトプロジェクション行列生成用定数
+	// ライトプロジェクションの幅の定数
+	const float LightProjectionWhidth;
+	// ライトプロジェクションの高さの定数
+	const float LightProjectionHight;
+	// ライトプロジェクションの近距離の定数
+	const float LightProjectionNear;
+	// ライトプロジェクションの遠距離の定数
+	const float LightProjectionFar;
+	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
+	const int MaxTimeFontTextures;
+	// 制限時間用フォントのサイズ
+	const int TimeFontSize;
+
+	//スクリーンの横幅
+	float screenWidth;
+	//スクリーンの縦幅
+	float screenHeight;
+
+	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
+	unsigned int undefineTexID;
 	//デプスマップ
 	unsigned int depthMapFBO;
-	// シャドウマップの横幅
-	const unsigned int SHADOW_WIDTH;
-	// シャドウマップの縦幅
-	const unsigned int SHADOW_HEIGHT;
 	// デプスマップtextureID
 	unsigned int depthMap;
+
+	// プレイヤーの位置保存用
+	Vector3 playerPos;
 	// ライトのポジション
 	Vector3 LightPos;
 	// ライトの向き
 	Vector3 LightDir;
-	// ライトの行列群
-	// プロジェクション、ビュー、ライト空間
-	Matrix4 lightProjection, lightView, lightSpeceMatrix;
 	// カメラの前方向ベクトル
 	Vector3 cameraForwardVec;
 	// ライトビューのポジション
 	Vector3 lightViewPos;
-	// ライトの位置をプレイヤーの位置からずらす値（Z軸）
-	const float SHIFT_LIGHT_POSITON_Z;
-	const float SHIFT_LIGHT_POSITON_X;
-	// HDR関連	
-	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
-	unsigned int undefineTexID;
 
-	// ライトプロジェクション行列生成用定数
-	// ライトプロジェクションの幅の定数
-	const float LIGHT_PROJECTION_WHIDTH;
-	// ライトプロジェクションの高さの定数
-	const float LIGHT_PROJECTION_HIGHT;
-	// ライトプロジェクションの近距離の定数
-	const float LIGHT_PROJECTION_NEAR;
-	// ライトプロジェクションの遠距離の定数
-	const float LIGHT_PROJECTION_FAR;
+	// ライトの行列群
+	// プロジェクション、ビュー、ライト空間
+	Matrix4 lightProjection;
+	Matrix4 lightView;
+	Matrix4 lightSpeceMatrix;
 
-	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
-	const int MAX_TIME_FONT_TEXTURES = 251;
-	// 制限時間用フォントのサイズ
-	const int TIME_FONT_SIZE = 72;
-	// 時間表示用のフォントtexture
-	// 白色
-	std::vector<Texture*> timeFontTextures;
-	// 黒色
-	std::vector<Texture*> timeBlackFontTextures;
-	// 赤色
-	std::vector<Texture*> timeRedFontTextures;
-
+	//ビュー行列
+	Matrix4 view;
+	//射影行列
+	Matrix4 projection;
+	//ビルボード行列
+	Matrix4 billboardMat;
 
 };

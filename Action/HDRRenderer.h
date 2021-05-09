@@ -119,12 +119,14 @@ private:
 	// 浮動小数点ColorBuffer
 	unsigned int hdrColorBuffers[2];
 
+	// ガウスぼかしのサンプリング点
+	const int sampleCount;
+
 	// ブラー用のフレームバッファオブジェクト
 	std::vector<unsigned int> blurFBOs;
 	// ブラー結果のテクスチャID
 	std::vector<unsigned int> blurBufferTexs;
-	// ガウスぼかしのサンプリング点
-	const int sampleCount = 15;
+
 	// サンプリング点の座標(u,v) & w:重み
 	Vector3 offset[15];
 
