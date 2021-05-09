@@ -46,6 +46,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, DeadSpace(0.1f)
 	, FallPpsitionZ(-500.0f)
 	, FirstPositionZ(5000.0f)
+	, RestartTime(10000)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -252,8 +253,10 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		mainCamera->SetLerpObjectPos(position);
 	}
 
+	// リスポーンフラグがtrueだったら
 	if (respawnFlag == true)
 	{
+		// カメラを初期にリセット
 		mainCamera->ReSetYaw();
 	}
 
@@ -264,8 +267,11 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	onGround = false;
 	pushedVelocity = Vector3::Zero;
 
+	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
+	// 連続で切り替えしアニメーションに入らないように抑制をかけるため
 	if (nowState == PlayerState::PLAYER_STATE_RUN_START || nowState == PlayerState::PLAYER_STATE_RUN)
 	{
+		// カウントを数える
 		++turnDelayCount;
 	}
 
@@ -302,13 +308,14 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	if (inputFlag == false && jumpFlag == false)
 	{
 		++reStartCount;
-		if (reStartCount >= 10000)
+		if (reStartCount >= RestartTime)
 		{
 			reStartFlag = true;
 		}
 	}
 	else
 	{
+		// 入力があったらリスタートカウントを初期化
 		reStartCount = 0;
 	}
 
@@ -558,6 +565,7 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 
 const Animation* PlayerObject::GetAnimation(PlayerState _state)
 {
+	// _state番目のアニメーションを返す
 	return animTypes[static_cast<unsigned int>(_state)];
 }
 

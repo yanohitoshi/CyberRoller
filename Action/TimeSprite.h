@@ -36,8 +36,10 @@ private:
 
     // スプライトComponent
     SpriteComponent* sprite;
+
     // texture
     Texture* tex;
+
     // フレームカウント変数
     int frameCount;
 };

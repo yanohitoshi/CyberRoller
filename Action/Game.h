@@ -21,13 +21,21 @@ class BaseScene;
 */
 enum SceneState
 {
+	// タイトルシーン
 	TITLE_SCENE,
+	// 第一ステージシーン
 	FIRST_SATGE_SCENE,
+	// 第二ステージシーン
 	SECOND_SATGE_SCENE,
+	// 第三ステージシーン
 	THIRD_SATGE_SCENE,
+	// 最終ステージシーン
 	FINAL_STAGE_SCENE,
+	// クリアシーン
 	CLEAR_SCENE,
+	// ゲームオーバーシーン
 	OVER_SCENE,
+	// リザルトステージシーン
 	RESULT_SCENE
 };
 
@@ -74,7 +82,15 @@ public:
 	*/
 	friend void ProcessInputs(const InputState& _state);
 
+	/*
+	@brief  continueFlagのsetter
+	@param  _continueFlag コンティニューされたかどうか
+	*/
 	static void SetContinueFlag(bool _continueFlag) { continueFlag = _continueFlag; }
+	/*
+	@brief  continueFlagのgetter
+	@return コンティニューされたかどうかフラグ
+	*/
 	static bool GetContinueFlag() { return continueFlag; }
 
 	// シーン遷移が行われるかどうかフラグ
@@ -139,9 +155,13 @@ private:
 	// フルスクリーンモードを使用するかどうかフラグ
 	bool isFullScreen;
 
-	const float FULL_SCREEN_WIDTH;
-	const float FULL_SCREEN_HEIGHT;
-	const float WINDOW_SCREEN_WIDTH;
-	const float WINDOW_SCREEN_HEIGHT;
+	// フルスクリーンモードの時のスクリーンの横幅定数
+	const float FullScreenWidth;
+	// フルスクリーンモードの時のスクリーンの縦幅定数
+	const float FullScreenHeight;
+	// ウィンドウモードの時のスクリーンの横幅定数
+	const float WindowScreenWidth;
+	// ウィンドウモードの時のスクリーンの横幅定数
+	const float WindowScreenHeight;
 };
 

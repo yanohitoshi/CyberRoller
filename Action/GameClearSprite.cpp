@@ -5,7 +5,7 @@
 
 GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	:GameObject(false, Tag::UI)
-	, DRAW_COUNT(120)
+	, DrawCount(120)
 {
 
 	playerObject = _playerObject;
@@ -35,7 +35,7 @@ void GameClearSprite::UpdateGameObject(float _deltaTime)
 		// フレームカウントを数える
 		++frameCount;
 		// 120カウント超えたら描画する
-		if (frameCount >= DRAW_COUNT)
+		if (frameCount >= DrawCount)
 		{
 			sprite->SetVisible(true);
 		}

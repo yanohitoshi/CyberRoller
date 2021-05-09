@@ -36,8 +36,6 @@ public:
     
 private:
 
-    PlayerObject* playerObject;
-
 };
 
 

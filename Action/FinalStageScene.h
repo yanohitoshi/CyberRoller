@@ -36,7 +36,7 @@ private:
 
 	// クリアした時のシーンが遷移するまでのカウント
 	// 最終ステージのみ演出が長いので別で定義
-	const int FINALCLEAR_TO_CHANGE_SCENE;
+	const int FinalClearToChangeScene;
 
 };
 

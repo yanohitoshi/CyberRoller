@@ -49,14 +49,15 @@ private:
     bool texChangeFlag;
     // 描画フラグ
     bool drawSpriteFlag;
+
+    // textureを切り替えるタイミング判定用の定数カウント
+    const int ChangeCount;
+
     // フレームカウント
     int frameCount;
     // 表示時間
     int time;
     // カウントダウン開始するタイミングを見るためのカウント
     int timeStartCount;
-
-    const int CHANGE_COUNT;
-
 };
 

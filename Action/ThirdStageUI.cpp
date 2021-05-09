@@ -14,10 +14,10 @@ bool ThirdStageUI::countStartFlag = false;
 
 ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
-	, SCENE_TIME(200)
+	, SceneTime(200)
 {
 	// カウントダウン
-	new CountDownFont(SCENE_TIME);
+	new CountDownFont(SceneTime);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

@@ -12,26 +12,7 @@ class BoxCollider;
 class Mesh;
 class SphereCollider;
 enum class PlayerState;
-/*
-@enum AnimState
-	　プレイヤーのアニメーションの状態
-	  タイトル用
-*/
-enum AnimState
-{
-	IDLE,
-	WALK,
-	RUN,
-	JUMPLOOP,
-	JUMPSTART,
-	JUMPEND,
-	DOWN,
-	DOWN_LOOP,
-	DOWN_UP,
-	DOWN_OVER,
-	PLAYER_DEAD,
-	ITEMNUM
-};
+
 
 /*
 @file PlayerObject.h
@@ -232,6 +213,8 @@ private:
 	//--------------------------------------------------------//
 	
 	//------------------------定数群--------------------------//
+	// リスタートをかける時間
+	const int RestartTime;
 	// 入力値のdeadスペース
 	const float DeadSpace;
 	//加速度の定数

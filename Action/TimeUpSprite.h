@@ -46,11 +46,14 @@ private:
     SpriteComponent* sprite;
     // フレームカウント
     int frameCount;
+
+    // 描画を切り替えるカウント比較用の定数
+    const int DrawCount;
+
     // 1度だけ描画するためのフラグ
     bool visibleFlag;
+
     // 描画されているかフラグ
     static bool drawFlag;
-    // 描画を切り替えるカウント比較用の定数
-    const int DRAW_COUNT;
 };
 

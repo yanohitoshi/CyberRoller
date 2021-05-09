@@ -40,6 +40,6 @@ public:
 private:
 
     // ƒV[ƒ“‚ÌŠÔ§ŒÀ‚Ì’l
-    const int SCENE_TIME;
+    const int SceneTime;
 };
 

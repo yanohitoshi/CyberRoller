@@ -39,8 +39,10 @@ SceneState ClearScene::Update(const InputState& state)
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
 		leftTrigger == 1 || rightTrigger == 1)
 	{
+		// 次のシーンを返す
 		return SceneState::TITLE_SCENE;
 	}
+	// 今のシーンを返す
 	return SceneState::CLEAR_SCENE;
 }
 

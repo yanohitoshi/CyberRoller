@@ -6,7 +6,7 @@
 
 CountDownBackFont::CountDownBackFont(int _time)
 	: GameObject(false, Tag::UI)
-	, ADD_TIME_COUNT(60)
+	, AddTimeCount(60)
 {
 	// ポジションをセット
 	SetPosition(Vector3(695.0f, 480.0f, 0.0f));
@@ -30,7 +30,7 @@ void CountDownBackFont::UpdateGameObject(float _deltaTime)
 		// フレームカウントを数える
 		frameCount++;
 		// 60になったら
-		if (frameCount >= ADD_TIME_COUNT)
+		if (frameCount >= AddTimeCount)
 		{
 			// timeを減らす
 			time -= 1;

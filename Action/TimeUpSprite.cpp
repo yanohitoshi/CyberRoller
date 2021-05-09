@@ -7,7 +7,7 @@ bool TimeUpSprite::drawFlag = true;
 
 TimeUpSprite::TimeUpSprite()
 	:GameObject(false, Tag::UI)
-	, DRAW_COUNT(120)
+	, DrawCount(120)
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -39,7 +39,7 @@ void TimeUpSprite::UpdateGameObject(float _deltaTime)
 		// 描画する
 		sprite->SetVisible(true);
 		// フレームカウントが120を超えたら
-		if (frameCount >= DRAW_COUNT)
+		if (frameCount >= DrawCount)
 		{
 			//　1度だけ描画フラグをfalseに
 			visibleFlag = false;

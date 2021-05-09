@@ -5,7 +5,7 @@
 
 GameOverSprite::GameOverSprite()
 	:GameObject(false, Tag::UI)
-	, DRAW_COUNT(60)
+	, DrawCount(60)
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -32,7 +32,7 @@ void GameOverSprite::UpdateGameObject(float _deltaTime)
 		// フレームカウントを数える
 		++frameCount;
 		// カウントが60になったら描画する
-		if (frameCount >= DRAW_COUNT)
+		if (frameCount >= DrawCount)
 		{
 			sprite->SetVisible(true);
 		}

@@ -51,9 +51,9 @@ SceneState SecondStageScene::Update(const InputState& state)
 	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += CHANGE_LIGHT_SPEED;
+		light += ChangeLightSpeed;
 		RENDERER->SetAmbientLight(light);
-		if (light.x >= MAX_LIGHT)
+		if (light.x >= MaxLight)
 		{
 			startScene = false;
 			RENDERER->SetAmbientLight(light);
@@ -64,12 +64,12 @@ SceneState SecondStageScene::Update(const InputState& state)
 	if (playerObject->GetNextSceneFlag() == true)
 	{
 		++clearCount;
-		light -= CHANGE_LIGHT_SPEED;
+		light -= ChangeLightSpeed;
 		RENDERER->SetAmbientLight(light);
 	}
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (clearCount >= CLEAR_TO_CHANGE_SCENE)
+	if (clearCount >= ClearToChangeScene)
 	{
 		return SceneState::THIRD_SATGE_SCENE;
 	}
@@ -78,7 +78,7 @@ SceneState SecondStageScene::Update(const InputState& state)
 	if (CountDownFont::timeOverFlag == true && lightDownFlag == true)
 	{
 		// ライト固定
-		light = TIMEOVERS_LIGHT;
+		light = TimeoversLight;
 		RENDERER->SetAmbientLight(light);
 
 		// Aボタンが押されたら
@@ -103,22 +103,22 @@ SceneState SecondStageScene::Update(const InputState& state)
 	{
 		// 遷移カウント開始
 		++changeCount;
-		if (changeCount >= CHOICE_CONTINUE_COUNT)
+		if (changeCount >= ChoiceContinueCount)
 		{
 			// コンテニューだったら明るくゲームオーバーだったら暗くする
 			if (isContinueFlag == true)
 			{
 				// ライトアップ
-				light += CHANGE_LIGHT_SPEED;
+				light += ChangeLightSpeed;
 				RENDERER->SetAmbientLight(light);
 			}
 			else if (endFlag == true)
 			{
 				// ライトダウン
-				light -= CHANGE_LIGHT_SPEED;
+				light -= ChangeLightSpeed;
 				RENDERER->SetAmbientLight(light);
 			}
-			if (changeCount >= CONTINUE_TO_CHANGE_SCENE)
+			if (changeCount >= ContinueToChangeScene)
 			{
 				// コンテニューだったらステージ最初へゲームオーバーだったらリザルト画面へ
 				if (isContinueFlag == true)

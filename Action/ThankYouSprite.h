@@ -35,8 +35,10 @@ private:
 
     // スプライトComponent
     SpriteComponent* sprite;
+
     // フレームカウント
     int frameCount;
+
     // 描画するかどうかフラグ
     bool visibleFlag;
 

@@ -45,10 +45,10 @@ SceneState FirstStageScene::Update(const InputState& state)
 	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += CHANGE_LIGHT_SPEED;
+		light += ChangeLightSpeed;
 		RENDERER->SetAmbientLight(light);
 
-		if (light.x >= MAX_LIGHT)
+		if (light.x >= MaxLight)
 		{
 			startScene = false;
 			RENDERER->SetAmbientLight(light);
@@ -59,12 +59,12 @@ SceneState FirstStageScene::Update(const InputState& state)
 	if (playerObject->GetNextSceneFlag() == true)
 	{
 		++clearCount;
-		light -= CHANGE_LIGHT_SPEED;
+		light -= ChangeLightSpeed;
 		RENDERER->SetAmbientLight(light);
 	}
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (playerObject->GetNextSceneFlag() == true && clearCount >= CLEAR_TO_CHANGE_SCENE)
+	if (playerObject->GetNextSceneFlag() == true && clearCount >= ClearToChangeScene)
 	{
 		return SceneState::SECOND_SATGE_SCENE;
 	}

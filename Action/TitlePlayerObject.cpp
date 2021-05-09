@@ -7,6 +7,11 @@
 TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, Gravity (400.0f)
+	, MaxFallSpeed(-200.0f)
+	, JumpDelayTime(120)
+	, JumpSpeed(15.0f)
+	, JumpLimitTime(13)
+	, OnGroundCoordinate(100.0f)
 {
 	// ポジションをセット
 	SetPosition(_pos);
@@ -18,19 +23,13 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/robo_model/SK_Rob.gpskel"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
-	animTypes.resize(AnimState::ITEMNUM);
+	animTypes.resize(TitleAnimState::ITEMNUM);
 	//アニメーションを読み込み
 	animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
-	animTypes[WALK] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Walk.gpanim", true);
 	animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
 	animTypes[JUMPLOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	animTypes[JUMPSTART] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
 	animTypes[JUMPEND] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
-	animTypes[DOWN] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
-	animTypes[DOWN_LOOP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
-	animTypes[DOWN_UP] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
-	animTypes[DOWN_OVER] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
-	animTypes[PLAYER_DEAD] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
 
 	//anim変数を速度0.5fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
@@ -54,62 +53,88 @@ TitlePlayerObject::~TitlePlayerObject()
 
 void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 {
+	// Rendererにポジションを送る
 	RENDERER->SetPlayerPositon(position);
+
+	// アニメーション状態の更新
 	AnimationUpdate();
 
 
 	//ジャンプ中もしくは落下中の時重力をかける（一定数以上かかったら止めて定数にする）
 	if (onGround == false )
 	{
+		// 重力を掛ける
 		velocity.z -= Gravity * _deltaTime;
-		if (velocity.z <= -200.0f)
+
+		// 落下速度が規定値を超えていたら
+		if (velocity.z <= MaxFallSpeed)
 		{
-			velocity.z = -200.0f;
+			// 落下速度を規定値に固定する
+			velocity.z = MaxFallSpeed;
 		}
 	}
 
-
+	// 接地状態でかつジャンプ中で無かったら
 	if (onGround == true && jumpFlag == false)
 	{
+		// ジャンプする間隔を数える
 		++jumpDelayCount;
-		if (jumpDelayCount >= 120)
+		// 時間が来たらジャンプさせジャンプ開始アニメーションを再生
+		if (jumpDelayCount >= JumpDelayTime)
 		{
+			// ジャンプフラグをtrueに
 			jumpFlag = true;
+			// アニメーション再生
 			skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
+			// ステータスをJUMPSTARTに変更
 			animState = JUMPSTART;
+			// カウントリセット
 			jumpDelayCount = 0;
 		}
-
 	}
 
+	// ジャンプ中だったら
 	if(jumpFlag == true)
 	{
+		// ジャンプ力を追加
 		velocity.z = jumpPower;
+		// ジャンプ中のカウントを数える
 		++jumpFrameCount;
 
-		if (jumpFrameCount > 0 && jumpFrameCount < 13 )
+		// ジャンプ中のカウントが規定値以下だったら
+		if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
 		{
-			jumpPower += 15.0f;
+			// さらにジャンプ力を追加
+			jumpPower += JumpSpeed;
 		}
-		else
+		else // ジャンプ中のカウントが規定値以上だったら
 		{
+			// ジャンプ力を初期に戻す
 			jumpPower = firstJumpPower;
+			// カウントリセット
 			jumpFrameCount = 0;
+			// ジャンプフラグをfalseに
 			jumpFlag = false;
 		}
 	}
 
-
+	// ポジションに速度を追加
 	position = position + velocity * _deltaTime;
+	// ポジションを更新
 	SetPosition(position);
 
-	if (position.z <= 100.0f)
+	// 当たり判定で設置を取っていないので座標で判定
+	// 座標が規定値以下だったら
+	if (position.z <= OnGroundCoordinate)
 	{
+		// 接地状態にする
 		onGround = true;
+		// Z軸の速度を0に初期化
 		velocity.z = 0.0f;
 	}
-	else
+	else 	// 座標が規定値以上だったら
 	{
+		// 接地フラグをfalseに
 		onGround = false;
 	}
 
@@ -117,19 +142,27 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 
 void TitlePlayerObject::AnimationUpdate()
 {
+	// 接地中で無かったら
 	if (onGround == false)
 	{
+		// アニメーションの再生が終わっていたら
 		if (!skeltalMeshComponent->IsPlaying())
 		{
+			// ジャンプループアニメーションの再生を開始
 			skeltalMeshComponent->PlayAnimation(animTypes[JUMPLOOP], 1.0f);
+			// ステータスをJUMPLOOPに変更
 			animState = JUMPLOOP;
 		}
+
 		return;
 	}
 
+	// 接地中でなくアニメーションステータスがRUNで無かったら
 	if (jumpFlag == false && animState != RUN)
 	{
+		// ランアニメーションの再生を開始
 		skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
+		// ステータスをRUNに変更
 		animState = RUN;
 		return;
 	}

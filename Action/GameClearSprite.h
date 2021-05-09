@@ -34,13 +34,20 @@ public:
 
 private:
 
+    // spriteComponentのポインタ変数
     SpriteComponent* sprite;
+
+    // playerobjectのポインタを格納するためのポインタ変数
     PlayerObject* playerObject;
-    int frameCount;
+    
+    // 描画するかどうかフラグ
     bool visibleFlag;
 
+    // フレームをカウントする変数
+    int frameCount;
     // 描画を切り替えるカウント比較用の定数
-    const int DRAW_COUNT;
+    const int DrawCount;
+
 
 };
 

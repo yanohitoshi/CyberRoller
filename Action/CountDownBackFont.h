@@ -47,6 +47,6 @@ private:
     int time;
 
     // 時間を1進めるタイミングを比較する定数
-    const int ADD_TIME_COUNT;
+    const int AddTimeCount;
 };
 

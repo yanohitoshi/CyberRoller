@@ -9,6 +9,27 @@ class SkeletalMeshComponent;
 class Animation;
 
 /*
+@enum AnimState
+    　プレイヤーのアニメーションの状態
+      タイトル用
+*/
+enum TitleAnimState
+{
+    IDLE,
+    WALK,
+    RUN,
+    JUMPLOOP,
+    JUMPSTART,
+    JUMPEND,
+    DOWN,
+    DOWN_LOOP,
+    DOWN_UP,
+    DOWN_OVER,
+    PLAYER_DEAD,
+    ITEMNUM
+};
+
+/*
 @file TitlePlayerObject.h
 @brief タイトルシーン中でのプレイヤー
        ただアニメーションを再生するだけのクラス
@@ -68,6 +89,21 @@ private:
     float firstJumpPower;
     // ジャンプする時間用カウント
     float jumpFrameCount;
+
+    // 落下速度の最大値
+    const float MaxFallSpeed;
+
+    // ジャンプを続けるフレームカウント定数
+    const float JumpLimitTime;
+
+    // ジャンプする間隔の時間定数
+    const int JumpDelayTime;
+
+    // ジャンプ加速度定数
+    const float JumpSpeed;
+
+    // 接地判定を取る座標値定数
+    const float OnGroundCoordinate;
 
 };
 

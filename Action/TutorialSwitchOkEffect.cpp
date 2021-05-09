@@ -2,11 +2,12 @@
 
 TutorialSwitchOkEffect::TutorialSwitchOkEffect(const Vector3& _pos, GameObject* _owner)
 	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/touch_OK.png", 1.0f)
+	, InitScale(128.0f)
 {
 	// ParticleComponent‰Šú‰»
 	particleComponent->SetOffSet(Vector3(0.0f, 0.0f, 0.0f));
 	particleComponent->SetVisible(false);
-	particleComponent->SetScale(128);
+	particleComponent->SetScale(InitScale);
 	// •Ï”‰Šú‰»
 	owner = _owner;
 }

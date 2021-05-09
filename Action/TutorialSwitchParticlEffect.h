@@ -35,7 +35,8 @@ public:
 
 private:
 
-    // 親となるGameObject型のポインタ
-    GameObject* owner;
+    // 拡大縮小値の初期化定数
+    const float InitScale;
+
 };
 

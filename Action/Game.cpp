@@ -34,10 +34,10 @@ Game::Game()
 	, screenWidth(0.0f)
 	, screenHeight(0.0f)
 	, isFullScreen(true)
-	, FULL_SCREEN_WIDTH(1920.0f)
-	, FULL_SCREEN_HEIGHT(1080.0f)
-	, WINDOW_SCREEN_WIDTH(1080.0f)
-	, WINDOW_SCREEN_HEIGHT(800.0f)
+	, FullScreenWidth(1920.0f)
+	, FullScreenHeight(1080.0f)
+	, WindowScreenWidth(1080.0f)
+	, WindowScreenHeight(800.0f)
 {
 }
 
@@ -74,14 +74,14 @@ bool Game::Initialize()
 	if (isFullScreen == true)
 	{
 		// スクリーンサイズをフルスクリーンに初期化
-		screenWidth = FULL_SCREEN_WIDTH;
-		screenHeight = FULL_SCREEN_HEIGHT;
+		screenWidth = FullScreenWidth;
+		screenHeight = FullScreenHeight;
 	}
 	else if (isFullScreen == false) // フルスクリーンでない場合
 	{
 		// スクリーンサイズを任意のウィンドウサイズに初期化
-		screenWidth = WINDOW_SCREEN_WIDTH;
-		screenHeight = WINDOW_SCREEN_HEIGHT;
+		screenWidth = WindowScreenWidth;
+		screenHeight = WindowScreenHeight;
 
 	}
 

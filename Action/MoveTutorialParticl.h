@@ -33,5 +33,9 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+    // Šg‘åk¬’l‚Ì‰Šú‰»’è”
+    const float InitScale;
+
 };
 

@@ -19,12 +19,12 @@ public:
 
 	// コンストラクタ
 	BaseScene() 
-	: MAX_LIGHT(0.8f),
-	  CLEAR_TO_CHANGE_SCENE(120),
-	  CHOICE_CONTINUE_COUNT(90),
-	  CONTINUE_TO_CHANGE_SCENE(360),
-	  TIMEOVERS_LIGHT(Vector3(0.3f, 0.3f, 0.3f)),
-	  CHANGE_LIGHT_SPEED(Vector3(0.01f, 0.01f, 0.01f))
+	: MaxLight(0.8f)
+	, ClearToChangeScene(120)
+	, ChoiceContinueCount(90)
+	, ContinueToChangeScene(360)
+	, TimeoversLight(Vector3(0.3f, 0.3f, 0.3f))
+	, ChangeLightSpeed(Vector3(0.01f, 0.01f, 0.01f))
 	{};
 
 	/*
@@ -63,17 +63,17 @@ protected:
 	bool lightDownFlag;
 
 	// ライトの強さの最大値
-	const float MAX_LIGHT;
+	const float MaxLight;
 	// クリアした時のシーンが遷移するまでのカウント
-	const int CLEAR_TO_CHANGE_SCENE;
+	const int ClearToChangeScene;
 	// コンテニュー選択状態に入るまでのカウント
-	const int CHOICE_CONTINUE_COUNT;
+	const int ChoiceContinueCount;
 	// コンテニュー選択後、次のシーンに遷移するまでのカウント
-	const int CONTINUE_TO_CHANGE_SCENE;
+	const int ContinueToChangeScene;
 	// タイムオーバー時のライトの明るさ
-	const Vector3 TIMEOVERS_LIGHT;
+	const Vector3 TimeoversLight;
 	// ライトアップ・ダウン時の変更速度
-	const Vector3 CHANGE_LIGHT_SPEED;
+	const Vector3 ChangeLightSpeed;
 
 private:
 

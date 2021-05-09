@@ -34,5 +34,8 @@ public:
 
 private:
 
+    // Šg‘åk¬’l‚Ì‰Šú‰»’è”
+    const float InitScale;
+
 };
 

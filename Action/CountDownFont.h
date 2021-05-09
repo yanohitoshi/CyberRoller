@@ -54,7 +54,7 @@ private:
     bool warningFlag;
 
     // 時間を1進めるタイミングを比較する定数
-    const int ADD_TIME_COUNT;
+    const int AddTimeCount;
     // 時間制限の色を変更するタイミングを比較する定数
-    const int CHANGE_COLOR_COUNT;
+    const int ChangeColorCount;
 };
