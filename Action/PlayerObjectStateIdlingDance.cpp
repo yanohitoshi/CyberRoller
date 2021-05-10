@@ -25,11 +25,8 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 	}
 	else if (_owner->GetInputFlag())
 	{
-		if (_owner->GetRunFlag())
-		{
-			state = PlayerState::PLAYER_STATE_RUN_START;
-			isDancing = false;
-		}
+		state = PlayerState::PLAYER_STATE_RUN_START;
+		isDancing = false;
 	}
 	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
@@ -72,17 +69,7 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 		//入力があるか
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
-
 			_owner->SetInputFlag(true);
-			//アナログスティックの入力状態で歩きか走りかを判定
-			if (ALX >= 28000.0f || ALX <= -28000.0f || ALY >= 28000.0f || ALY <= -28000.0f)
-			{
-				_owner->SetRunFlag(true);
-			}
-			else
-			{
-				_owner->SetRunFlag(false);
-			}
 		}
 		else
 		{
@@ -106,8 +93,11 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 
 void PlayerObjectStateIdlingDance::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE_DANCE));
+	// stateをダンス状態にして保存
 	state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 
 	isDancing = true;

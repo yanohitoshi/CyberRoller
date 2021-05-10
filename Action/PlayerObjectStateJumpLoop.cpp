@@ -3,6 +3,7 @@
 #include "CountDownFont.h"
 
 PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
+	: MaxFallSpeed(-2000.0f)
 {
 }
 
@@ -16,9 +17,9 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 
 	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 
-	if (velocity.z <= -2000.0f)
+	if (velocity.z <= MaxFallSpeed)
 	{
-		velocity.z = -2000.0f;
+		velocity.z = MaxFallSpeed;
 	}
 
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
@@ -140,11 +141,15 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// stateをジャンプループ状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	animChangeFlag = true;
 	jumpLoopCount = 0;
 	velocity = _owner->GetVelocity();
+
+	// 見た目上スムーズに遷移させるために前のステータスがジャンプ開始だったらジャンプ力をもらう
 	if (_owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART)
 	{
 		velocity.z = _owner->GetJumpPower();

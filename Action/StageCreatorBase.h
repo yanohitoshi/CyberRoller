@@ -9,6 +9,10 @@
 // 前置宣言
 class PlayerObject;
 
+
+// 生成クラスごとの生成関数を作ってネストが深くなるのを回避するコードを考える
+// ファクトリーパターン参考に
+
 /*
 @file StageCreatorBase.h
 @brief ステージ生成classの基底クラス

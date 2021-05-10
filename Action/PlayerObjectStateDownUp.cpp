@@ -1,5 +1,6 @@
 #include "PlayerObjectStateDownUp.h"
 #include "SkeletalMeshComponent.h"
+
 PlayerObjectStateDownUp::PlayerObjectStateDownUp()
 {
 }
@@ -21,7 +22,10 @@ void PlayerObjectStateDownUp::Input(PlayerObject* _owner, const InputState& _key
 
 void PlayerObjectStateDownUp::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DOWN_UP));
+	// stateをコンティニュー状態にして保存
 	state = PlayerState::PLAYER_STATE_DOWN_UP;
 }

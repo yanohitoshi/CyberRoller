@@ -30,8 +30,11 @@ void PlayerObjectStateFlinch::Input(PlayerObject* _owner, const InputState& _key
 
 void PlayerObjectStateFlinch::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_TO_FLINCH));
+	// stateを怯み状態にして保存
 	state = PlayerState::PLAYER_STATE_RUN_TO_FLINCH;
 
 	_owner->SetMoveSpeed(_owner->GetFirstMovePower());

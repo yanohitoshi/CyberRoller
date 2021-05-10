@@ -20,7 +20,7 @@
 ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 {
-	offset = 400;
+	offset = 400.0f;
 }
 
 /*

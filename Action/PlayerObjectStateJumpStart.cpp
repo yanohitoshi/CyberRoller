@@ -125,7 +125,7 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			_owner->SetInputFlag(false);
 		}
 
-		if (_owner->GetIsAvailableJumpKey() == true && _owner->GetIsJumping() == true || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
+		if (_owner->GetIsAvailableJumpKey() == true  || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
 		{
 
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
@@ -172,8 +172,11 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 
 void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPSTART),0.6f);
+	// stateをジャンプ開始状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPSTART;
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	velocity = _owner->GetVelocity();

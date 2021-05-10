@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
+
 class PlayerObjectStateDownLoop :
     public PlayerObjectStateBase
 {

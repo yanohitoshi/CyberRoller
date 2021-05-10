@@ -121,8 +121,11 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 
 void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN));
+	// stateを着地ローリング状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());

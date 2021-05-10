@@ -49,5 +49,7 @@ private:
 	// Å¶å©ÇΩñ⁄è„Ç∏ÇÁÇµÇΩÇ©Ç¡ÇΩÇÃÇ≈çÏÇËÇ‹ÇµÇΩ
 	bool animChangeFlag;
 
+
+	const float MaxFallSpeed;
 };
 

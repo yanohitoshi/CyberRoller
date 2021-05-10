@@ -129,8 +129,11 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 
 void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN));
+	// stateを走り状態にして保存
 	state = PlayerState::PLAYER_STATE_RUN;
 
 	moveSpeed = _owner->GetMoveSpeed();

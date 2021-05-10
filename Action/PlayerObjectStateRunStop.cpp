@@ -104,8 +104,11 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 
 void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_STOP));
+	// stateを走り終わり状態にして保存
 	state = PlayerState::PLAYER_STATE_RUN_STOP;
 	moveSpeed = _owner->GetMoveSpeed();
 

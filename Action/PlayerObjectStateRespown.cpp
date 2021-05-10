@@ -11,11 +11,13 @@ PlayerObjectStateRespown::~PlayerObjectStateRespown()
 
 PlayerState PlayerObjectStateRespown::Update(PlayerObject* _owner, float _deltaTime)
 {
-	//// リスポーン演出入れてもいいかも
 
+	// ownerのリスポーンフラグをfalseにセット
 	_owner->SetRespawnFlag(false);
+	// ownerを入力可能状態にセット
 	_owner->SetIsAvailableInput(true);
 
+	// ステータスをアイドリング状態に変更する
 	state = PlayerState::PLAYER_STATE_IDLE;
 
 	// 更新されたstateを返す
@@ -28,9 +30,11 @@ void PlayerObjectStateRespown::Input(PlayerObject* _owner, const InputState& _ke
 
 void PlayerObjectStateRespown::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
+	// stateをリスポーン状態にして保存
 	state = PlayerState::PLAYER_STATE_RESPAWN;
-	velocity = _owner->GetVelocity();
 
 }

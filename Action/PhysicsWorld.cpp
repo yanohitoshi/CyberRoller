@@ -542,24 +542,6 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 		return;
 	}
 
-	//for (auto itr : wallBoxes)
-	//{
-	//	float a;
-	//	Vector3 b;
-	//	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	//	if (itr->GetOwner()->GetState() != State::Active)
-	//	{
-	//		continue;
-	//	}
-	//		bool hit = Intersect(_line->GetWorldLineSegment(), itr->GetWorldBox(),a,b);
-	//	if (hit)
-	//	{
-	//		onCollisionFunc func = collisionFunction.at(_line);
-	//		func(*(itr->GetOwner()));
-	//		func = collisionFunction.at(itr);
-	//		func(*(_line->GetOwner()));
-	//	}
-	//}
 	float t;
 	Vector3 colPos = Vector3::Zero;
 
@@ -857,9 +839,6 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 	}
 
 
-	//spheres.emplace_back(_sphere);
-	////コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
@@ -886,13 +865,6 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
-	//auto iter = std::find(spheres.begin(), spheres.end(), _sphere);
-	//if (iter != spheres.end())
-	//{
-	//	std::iter_swap(iter, spheres.end() - 1);
-	//	spheres.pop_back();
-	//}
- //   collisionFunction.erase(_sphere);
 }
 
 void PhysicsWorld::AddLineSegment(LineSegmentCollider* _line, onCollisionFunc _func)
