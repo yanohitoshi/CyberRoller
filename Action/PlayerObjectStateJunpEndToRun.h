@@ -43,6 +43,8 @@ public:
 
 private:
 
+	// Œ¸‘¬—Í
+	const float DecelerationForce;
 
 };
 

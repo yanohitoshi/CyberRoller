@@ -182,6 +182,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="NeedleObject.cpp" />
     <ClCompile Include="NeedlePanelObject.cpp" />
     <ClCompile Include="NextSceneObject.cpp" />
+    <ClCompile Include="PlayerObjectStateBase.cpp" />
     <ClCompile Include="PlayerObjectStateDead.cpp" />
     <ClCompile Include="PlayerObjectStateDownLoop.cpp" />
     <ClCompile Include="PlayerObjectStateDownOver.cpp" />

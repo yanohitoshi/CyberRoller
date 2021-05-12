@@ -34,19 +34,6 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
-	// 死亡フラグがtrueだったら
-	if (_owner->GetDeadFlag())
-	{
-		// ステータスをジャンプ開始状態に変更
-		state = PlayerState::PLAYER_STATE_DEAD;
-	}
-
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::timeOverFlag == true)
-	{
-		// ステータスをコンティニュー選択スタート状態に変更
-		state = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
 
 	// 入力がなかったら
 	if (!_owner->GetInputFlag())
@@ -74,6 +61,20 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
+	// 死亡フラグが立っていたら
+	if (_owner->GetDeadFlag())
+	{
+		// ステータスをジャンプ開始状態に変更
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::timeOverFlag == true)
+	{
+		// ステータスをコンティニュー選択スタート状態に変更
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
+	}
+
 	// 更新されたstateを返す
 	return state;
 
@@ -83,39 +84,8 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 {
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		//入力があるか
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			_owner->SetInputFlag(true);
-		}
-		else
-		{
-			_owner->SetInputFlag(false);
-		}
-
-		if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
-		{
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-				_owner->GetSwitchJumpFlag() == true)
-			{
-				_owner->SetJumpFlag(true);
-				_owner->SetIsJumping(true);
-			}
-		}
+		// state変更の可能性のある入力のチェック
+		ChackInput(_owner, _keyState);
 	}
 }
 

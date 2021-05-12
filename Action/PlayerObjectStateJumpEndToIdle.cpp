@@ -13,36 +13,44 @@ PlayerObjectStateJumpEndToIdle::~PlayerObjectStateJumpEndToIdle()
 PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
 
-	// positionに速度を足してキャラクターを動かす
+	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	SkeletalMeshComponent* skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
-
+	// アニメーションの再生が終わっていたら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
+		// ステータスを待機状態にする
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
 	{
+		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
+	// 移動入力があれば
 	if (_owner->GetInputFlag())
 	{
+		// ステータスを走り出し状態にする
 		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
 
+	// 死亡フラグが立っていたら
 	if (_owner->GetDeadFlag())
 	{
+		// ステータスを死亡状態にする
 		state = PlayerState::PLAYER_STATE_DEAD;
 	}
 
+	// タイムオーバーフラグがtrueだったら
 	if (CountDownFont::timeOverFlag == true)
 	{
+		// ステータスをコンティニュー選択開始状態にする
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
+	// ownerに速度をセット
 	_owner->SetVelocity(velocity);
 
 	// 更新されたstateを返す
@@ -53,49 +61,23 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 {
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		//入力があるか
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			_owner->SetInputFlag(true);
-		}
-		else
-		{
-			_owner->SetInputFlag(false);
-		}
-
-		if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
-		{
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-				_owner->GetSwitchJumpFlag() == true)
-			{
-				_owner->SetJumpFlag(true);
-				_owner->SetIsJumping(true);
-			}
-		}
+		// state変更の可能性のある入力のチェック
+		ChackInput(_owner, _keyState);
 	}
 }
 
 void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {
+	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
+	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE));
+	// stateを待機状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 
+	// ジャンプ力をセットする
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
 
+	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
 }

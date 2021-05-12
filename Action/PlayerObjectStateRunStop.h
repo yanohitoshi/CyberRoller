@@ -47,5 +47,9 @@ private:
 	int isTurnCount;
 	// 減速力
 	float decelerationForce;
+	// 前回の行われたターンから間隔を空けるための規定値
+	const int TurnDelayValue;
+	// ターンに入れるカウントの規定値
+	const int TurnValue;
 };
 

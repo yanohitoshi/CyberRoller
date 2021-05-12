@@ -49,7 +49,15 @@ private:
 	// ※見た目上ずらしたかったので作りました
 	bool animChangeFlag;
 
-
+	// 落下速度の規定値
 	const float MaxFallSpeed;
+
+	// 着地後回転モーションを含めるか判定する速度定数
+	const float TurnValue;
+
+	// ジャンプ中に移動速度を徐々に減らすための計算に使う補正値
+	const float JumpCorrection;
+	// スイッチジャンプ中に移動速度を徐々に減らすための計算に使う補正値
+	const float SwitchJumpCorrection;
 };
 

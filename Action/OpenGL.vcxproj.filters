@@ -366,6 +366,9 @@
     <ClCompile Include="PlayerObjectStateFlinch.cpp">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObjectStateBase.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">

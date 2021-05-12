@@ -1,7 +1,9 @@
 #include "PlayerObjectStateJunpEndToRun.h"
 #include "SkeletalMeshComponent.h"
+#include "CountDownFont.h"
 
 PlayerObjectStateJunpEndToRun::PlayerObjectStateJunpEndToRun()
+	: DecelerationForce(75.0f)
 {
 }
 
@@ -12,31 +14,52 @@ PlayerObjectStateJunpEndToRun::~PlayerObjectStateJunpEndToRun()
 PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _deltaTime)
 {
 
-	// positionに速度を足してキャラクターを動かす
+	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
+	// アニメーションの再生が終わっていたら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
+		// 移動入力があったら
 		if (_owner->GetInputFlag())
 		{
+			// ステータスを走り出し状態にする
 			state = PlayerState::PLAYER_STATE_RUN_START;
 		}
 		else
 		{
+			// ステータスを待機状態にする
 			state = PlayerState::PLAYER_STATE_IDLE;
 		}
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
 	{
+		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
+	// ジャンプフラグがfalseかつ接地状態でも無ければ
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
+		// ステータスをジャンプループ状態にする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	// 死亡フラグが立っていたら
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::timeOverFlag == true)
+	{
+		// ステータスをコンティニュー選択開始状態にする
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
+	}
+
+	// ownerの変数を更新
 	_owner->SetMoveSpeed(moveSpeed);
 
 	// 更新されたstateを返す
@@ -99,7 +122,7 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 		{
 			if (moveSpeed >= 0.0f)
 			{
-				moveSpeed -= 75.0f;
+				moveSpeed -= DecelerationForce;
 			}
 
 			velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
@@ -128,10 +151,16 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	// stateを着地ローリング状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
-	_owner->SetJumpPower(_owner->GetFirstJumpPower());
+	// ownerの移動速度をもらう
 	moveSpeed = _owner->GetMoveSpeed();
+	// ownerの移動ベクトルをもらう
 	velocity = _owner->GetVelocity();
+	// 着地状態なのでZ軸は0に固定
 	velocity.z = 0.0f;
+	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
+
+	// ownerのジャンプ力をリセット
+	_owner->SetJumpPower(_owner->GetFirstJumpPower());
 
 }

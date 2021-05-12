@@ -14,40 +14,50 @@ PlayerObjectStateRun::~PlayerObjectStateRun()
 PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 {
 
-	// positionに速度を足してキャラクターを動かす
+	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
+	// ジャンプフラグがfalseかつ接地状態でも無ければ
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
+		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	// 移動入力が無ければ
 	if (!_owner->GetInputFlag())
 	{
+		// ステータスを走り終わりにする
 		state = PlayerState::PLAYER_STATE_RUN_STOP;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
 	{
+		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 	
+	// 走りながら壁に当たったら
 	if (_owner->GetIsHitWall())
 	{
+		// ステータスを怯み状態にする
 		state = PlayerState::PLAYER_STATE_RUN_TO_FLINCH;
 	}
 
+	// 死亡フラグが立っていたら
 	if (_owner->GetDeadFlag())
 	{
 		state = PlayerState::PLAYER_STATE_DEAD;
 	}
 
+	// タイムオーバーフラグがtrueだったら
 	if (CountDownFont::timeOverFlag == true)
 	{
+		// ステータスをコンティニュー選択開始状態にする
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
-
+	// ownerの変数を更新
 	_owner->SetMoveSpeed(moveSpeed);
 	_owner->SetVelocity(velocity);
 
@@ -61,68 +71,8 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		//入力があるか
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
-
-			// 方向キーの入力値とカメラの向きから、移動方向を決定
-			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
-			forward.Normalize();
-
-
-			moveSpeed += _owner->GetMovePower();
-
-			if (moveSpeed >= MaxMoveSpeed)
-			{
-				moveSpeed = MaxMoveSpeed;
-			}
-
-			velocity.x = forward.x * moveSpeed;
-			velocity.y = forward.y * moveSpeed;
-
-
-			if (_owner->GetTmpCharaForwardVec() != forward)
-			{
-				Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
-				tmpRotateVec.Normalize();
-
-				//回転
-				Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.01f);
-				_owner->RotateToNewForward(rotatioin);
-				_owner->SetRotateVec(rotatioin);
-
-			}
-
-			_owner->SetCharaForwardVec(forward);
-			_owner->SetMoveSpeed(moveSpeed);
-
-		}
-		else
-		{
-			_owner->SetInputFlag(false);
-		}
-
-		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
-		{
-			_owner->SetJumpFlag(true);
-			_owner->SetIsJumping(true);
-		}
-
+		// 移動入力処理
+		GroundMove(_owner,_keyState);
 	}
 
 }
@@ -136,7 +86,9 @@ void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 	// stateを走り状態にして保存
 	state = PlayerState::PLAYER_STATE_RUN;
 
+	// ownerの速度変数をもらう
 	moveSpeed = _owner->GetMoveSpeed();
 
+	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
 }

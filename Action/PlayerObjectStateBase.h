@@ -84,6 +84,12 @@ public:
 	*/
 	virtual void Enter(PlayerObject* _owner, float _deltaTime) {};
 
+	void GroundMove(PlayerObject* _owner, const InputState& _keyState);
+
+	void ChackInput(PlayerObject* _owner, const InputState& _keyState);
+
+	Vector3 ChackControllerAxis(const InputState& _keyState);
+
 protected:
 
 	// 親クラスのポインタを格納するためのSkeletalMeshComponentのポインタ変数

@@ -1,7 +1,10 @@
 #include "PlayerObjectStateRunStop.h"
 #include "SkeletalMeshComponent.h"
+#include "CountDownFont.h"
 
 PlayerObjectStateRunStop::PlayerObjectStateRunStop()
+	: TurnDelayValue(30)
+	, TurnValue(10)
 {
 }
 
@@ -11,41 +14,64 @@ PlayerObjectStateRunStop::~PlayerObjectStateRunStop()
 
 PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaTime)
 {
-
+	// ターン有効カウントを数える
 	++isTurnCount;
 
+	// 移動速度が0.0f以上だったら
 	if (moveSpeed >= 0.0f)
 	{
+		// 減速させる
 		moveSpeed -= decelerationForce;
 	}
 
+	// ownerの方向ベクトルに移動速度を掛けて移動ベクトルを更新
 	velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
 	velocity.y = _owner->GetCharaForwardVec().y * moveSpeed;
 
-	// positionに速度を足してキャラクターを動かす
+	// 移動ベクトルにデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-
+	// アニメーションの再生が終わっているもしくは移動速度が0.0f以下になっていたら
 	if (!skeletalMeshComponent->IsPlaying() || moveSpeed <= 0.0f)
 	{
+		// ステータスを待機状態にする
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetInputFlag() && _owner->GetTurnDelayCount() >= 30 && isTurnCount <= 10)
+	// 移動入力があってターンする間隔のカウントが規定値以上でターンに入れるカウントも規定値以上だったら
+	if (_owner->GetInputFlag() && _owner->GetTurnDelayCount() >= TurnDelayValue && isTurnCount <= TurnValue)
 	{
+		// ステータスをターン状態にする
 		state = PlayerState::PLAYER_STATE_RUN_TURN;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
+	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
 	{
+		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
+	// ジャンプフラグがfalseで接地状態でも無ければ
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
+		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	// 死亡フラグが立っていたら
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::timeOverFlag == true)
+	{
+		// ステータスをコンティニュー選択開始状態にする
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
+	}
+
+	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
 
 	// 更新されたstateを返す
@@ -56,48 +82,8 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 {
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		//入力があるか
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			_owner->SetInputFlag(true);
-			//アナログスティックの入力状態で走り状態か判定
-			if (ALX >= 28000.0f || ALX <= -28000.0f || ALY >= 28000.0f || ALY <= -28000.0f)
-			{
-				_owner->SetRunFlag(true);
-			}
-			else
-			{
-				_owner->SetRunFlag(false);
-			}
-		}
-		else
-		{
-			_owner->SetInputFlag(false);
-		}
-
-		if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
-		{
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-				_owner->GetSwitchJumpFlag() == true)
-			{
-				_owner->SetJumpFlag(true);
-				_owner->SetIsJumping(true);
-			}
-		}
+		// state変更の可能性のある入力のチェック
+		ChackInput(_owner, _keyState);
 	}
 
 }
@@ -110,9 +96,12 @@ void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_STOP));
 	// stateを走り終わり状態にして保存
 	state = PlayerState::PLAYER_STATE_RUN_STOP;
+	// ownerの移動速度をもらう
 	moveSpeed = _owner->GetMoveSpeed();
-
-	inputDeadSpace = _owner->GetDeadSpace();
+	// ターンに可能カウントを初期化
 	isTurnCount = 0;
+	// 減速力をもらう
 	decelerationForce = _owner->GetDecelerationForce();
+	// 入力が入らない値をもらう
+	inputDeadSpace = _owner->GetDeadSpace();
 }

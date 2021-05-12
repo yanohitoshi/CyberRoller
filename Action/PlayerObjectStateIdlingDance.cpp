@@ -17,32 +17,44 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-
+	// ジャンプ状態でなく接地状態でも無ければ
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
+		// ステータスをジャンプループ状態にする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
+		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
-	else if (_owner->GetInputFlag())
+	else if (_owner->GetInputFlag()) // 移動入力があれば
 	{
+		// ステータスを走り出し状態にする
 		state = PlayerState::PLAYER_STATE_RUN_START;
+		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
-	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
+	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系のフラグがtrueになっていたら
 	{
+		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
+		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
 
+	// 死亡フラグが立っていたら
 	if (_owner->GetDeadFlag())
 	{
+		// ステータスを死亡状態開始にする
 		state = PlayerState::PLAYER_STATE_DEAD;
+		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
 
+	// タイムオーバーになったら
 	if (CountDownFont::timeOverFlag == true)
 	{
+		// ステータスをコンティニュー選択開始状態にする
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
+		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
 
@@ -55,39 +67,8 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
-
-		//入力があるか
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			_owner->SetInputFlag(true);
-		}
-		else
-		{
-			_owner->SetInputFlag(false);
-		}
-
-		if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
-		{
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-				_owner->GetSwitchJumpFlag() == true)
-			{
-				_owner->SetJumpFlag(true);
-				_owner->SetIsJumping(true);
-			}
-		}
+		// state変更の可能性のある入力のチェック
+		ChackInput(_owner, _keyState);
 	}
 }
 

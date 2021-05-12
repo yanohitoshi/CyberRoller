@@ -1,5 +1,6 @@
 #include "PlayerObjectStateFlinch.h"
 #include "SkeletalMeshComponent.h"
+#include "CountDownFont.h"
 
 PlayerObjectStateFlinch::PlayerObjectStateFlinch()
 {
@@ -16,8 +17,21 @@ PlayerState PlayerObjectStateFlinch::Update(PlayerObject* _owner, float _deltaTi
 	{
 		// 壁に当たったフラグをfalseに
 		_owner->SetIsHitWall(false);
-		// stateを7アイドリングに変更
+		// stateをアイドリングに変更
 		state = PlayerState::PLAYER_STATE_IDLE;
+	}
+
+	// 死亡フラグが立っていたら
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::timeOverFlag == true)
+	{
+		// ステータスをコンティニュー選択開始状態にする
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 
 	// 更新されたstateを返す
