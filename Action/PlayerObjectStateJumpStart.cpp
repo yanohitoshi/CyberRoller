@@ -69,25 +69,17 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 
 void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
 		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
+		Vector3 axis = ChackControllerAxis(_keyState);
 
-		////入力があるか
+		//入力があるか
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
-			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
-
+			// 前のフレームのキャラクターの前方ベクトルを保存
+			Vector3 tmpForward = _owner->GetCharaForwardVec();
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
 			forward.Normalize();
@@ -115,20 +107,8 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			velocity.x = forward.x * moveSpeed;
 			velocity.y = forward.y * moveSpeed;
 
+			RotationProcess(_owner, forward, tmpForward);
 
-			if (_owner->GetTmpCharaForwardVec() != forward)
-			{
-				Vector3 tmpRotateVec = _owner->GetCharaForwardVec();
-				tmpRotateVec.Normalize();
-
-				//回転
-				Vector3 rotatioin = Vector3::Lerp(forward, tmpRotateVec, 0.01f);
-				_owner->RotateToNewForward(rotatioin);
-				_owner->SetRotateVec(rotatioin);
-
-			}
-
-			_owner->SetCharaForwardVec(forward);
 			_owner->SetMoveSpeed(moveSpeed);
 
 
@@ -139,7 +119,7 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			_owner->SetInputFlag(false);
 		}
 
-		if (_owner->GetIsAvailableJumpKey() == true  || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
+		if (_owner->GetIsAvailableJumpKey() == true && _owner->GetJumpFlag() == true || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
 		{
 
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
@@ -149,7 +129,6 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 				_owner->GetIsAvailableJumpKey() == true)
 			{
 				++jumpFrameCount;
-				_owner->SetJumpFlag(true);
 				float jumpPower = _owner->GetJumpPower();
 				velocity.z = jumpPower;
 
@@ -157,27 +136,28 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 				{
 					_owner->SetJumpPower(jumpPower + 100.0f);
 				}
-				else if (_owner->GetSwitchJumpFlag() == true && 16 > jumpFrameCount)
+				else if (_owner->GetSwitchJumpFlag() == true && 24 > jumpFrameCount)
 				{
 					_owner->SetJumpPower(jumpPower + 100.0f);
 				}
 				else
 				{
 					_owner->SetIsAvailableJumpKey(false);
-					_owner->SetIsJumping(false);
+					_owner->SetJumpFlag(false);
 					endFlag = true;
 				}
 
 			}
 		}
 
+		// ジャンプを割り当てられているコントローラーのボタンが離されたら
 		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Released ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Released ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Released)
 		{
 			_owner->SetIsAvailableJumpKey(false);
-			_owner->SetIsJumping(false);
+			_owner->SetJumpFlag(false);
 			_owner->SetJumpPower(_owner->GetFirstJumpPower());
 			endFlag = true;
 		}
@@ -192,19 +172,14 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPSTART),0.6f);
 	// stateをジャンプ開始状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPSTART;
+
+	_owner->SetJumpFlag(true);
 	// ジャンプフレームカウントをもらう
 	jumpFrameCount = _owner->GetJumpFrameCount();
 	// ownerの速度ベクトルをもらう
 	velocity = _owner->GetVelocity();
 	// ownerの速度をもらう
 	moveSpeed = _owner->GetMoveSpeed();
-
-	// もし速度が0.0f以下だったら
-	if (moveSpeed <= 0.0f)
-	{
-		// 初速度をもらう
-		moveSpeed = _owner->GetFirstMovePower();
-	}
 
 	// state終了フラグを初期化
 	endFlag = false;

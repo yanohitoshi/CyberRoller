@@ -75,8 +75,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	forwardVec = Vector3(0.0f, 0.0f, 0.0f);
 	// キャラクターの前方ベクトル初期化
 	charaForwardVec = Vector3(1.0f, 0.0f, 0.0f);
-	// 前フレームでのキャラクターの前方ベクトル保存用ベクトル初期化
-	tmpCharaForwardVec = Vector3(0.0f, 0.0f, 0.0f);
+	//// 前フレームでのキャラクターの前方ベクトル保存用ベクトル初期化
+	//tmpCharaForwardVec = Vector3(0.0f, 0.0f, 0.0f);
 	// 右方向ベクトル初期化
 	rightVec = Vector3(0.0f,0.0f,0.0f);
 	// 回転ベクトル初期化
@@ -97,8 +97,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	// ジャンプフラグ初期化
 	jumpFlag = false;
-	// ジャンプ中かどうかフラグ初期化
-	isJumping = false;
+	//// ジャンプ中かどうかフラグ初期化
+	//isJumping = false;
 	// ジャンプが利用可能かフラグ初期化
 	isAvailableJumpKey = false;
 	// ジャンプ中のフレームをカウントする用のカウント初期化
@@ -302,7 +302,7 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
-	chackIsJumping = isJumping;
+	//chackIsJumping = isJumping;
 
 	// 一定時間入力が無かったらタイトルに戻る
 	if (inputFlag == false && jumpFlag == false)
@@ -485,19 +485,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
 	{
 		onGround = true;
-
-		if (jumpFlag == false && onGround == true)
-		{
-			velocity.z = 0.0f;
-			jumpFrameCount = 0;
-		}
-
-		if (jumpFlag == true)
-		{
-			jumpFlag = false;
-			isAvailableJumpKey = true;
-			jumpPower = FirstJumpPower;
-		}
 
 		switchJumpFlag = false;
 

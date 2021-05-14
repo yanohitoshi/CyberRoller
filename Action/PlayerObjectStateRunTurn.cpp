@@ -53,8 +53,8 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
-
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
+	// ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
+	if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -84,43 +84,37 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 
 void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
-		//Axisの値をとる32700~-32700
-		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-		float ALY = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
-
-		//アナログスティックのキー入力を取得
-		Vector2 Axis = Vector2(0.0f, 0.0f);
-		Axis = _keyState.Controller.GetLAxisLeftVec();
-
-		//実際に動かしたい軸がずれているので補正
-		Vector3 axis = Vector3(Axis.y * -1.0f, Axis.x * -1.0f, 0.0f);
+		// コントローラのアナログスティックの入力情報を計算する
+		Vector3 axis = ChackControllerAxis(_keyState);
 
 		//入力があるか
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
-			_owner->SetTmpCharaForwardVec(_owner->GetCharaForwardVec());
-
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
 			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
+			// ベクトルの正規化
 			forward.Normalize();
+			// 前方ベクトルの更新
 			_owner->SetCharaForwardVec(forward);
-
+			// 入力フラグをtrueに
+			_owner->SetInputFlag(true);
 		}
 		else
 		{
+			// 入力フラグをfalseに
 			_owner->SetInputFlag(false);
 		}
 
+		// ジャンプを割り当てられているコントローラーのボタンが離されたら
 		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
 		{
 			_owner->SetJumpFlag(true);
-			_owner->SetIsJumping(true);
 		}
 	}
 }

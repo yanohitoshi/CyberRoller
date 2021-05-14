@@ -45,7 +45,8 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_RUN_TURN;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
+	// ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
+	if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -80,6 +81,7 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 
 void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _keyState)
 {
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック

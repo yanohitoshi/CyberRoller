@@ -23,7 +23,8 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
-	if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
+	// ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
+	if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -59,6 +60,7 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 
 void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
@@ -77,7 +79,10 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 
 	// ジャンプ力をセットする
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
-
+	// 着地状態になったのでジャンプ利用可能フラグをtrueにセット
+	_owner->SetIsAvailableJumpKey(true);
+	// ジャンプフラグをfalseにセット
+	_owner->SetJumpFlag(false);
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
 }

@@ -50,7 +50,6 @@ void PlayerObjectStateFlinch::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_RUN_TO_FLINCH));
 	// state‚ð‹¯‚Ýó‘Ô‚É‚µ‚Ä•Û‘¶
 	state = PlayerState::PLAYER_STATE_RUN_TO_FLINCH;
-
-	_owner->SetMoveSpeed(_owner->GetFirstMovePower());
+	// ˆÚ“®ƒxƒNƒgƒ‹‚ð0.0f‚ÉÝ’è
 	_owner->SetVelocity(Vector3::Zero);
 }

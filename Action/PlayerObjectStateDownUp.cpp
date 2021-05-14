@@ -11,7 +11,6 @@ PlayerObjectStateDownUp::~PlayerObjectStateDownUp()
 
 PlayerState PlayerObjectStateDownUp::Update(PlayerObject* _owner, float _deltaTime)
 {
-
 	// XV‚³‚ê‚½state‚ğ•Ô‚·
     return state;
 }

@@ -45,9 +45,6 @@
     <ClCompile Include="PhysicsWorld.cpp">
       <Filter>Components\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObject.cpp">
-      <Filter>GameObjects\PlayerObjects</Filter>
-    </ClCompile>
     <ClCompile Include="RapidJsonHelper.cpp">
       <Filter>RapidJson</Filter>
     </ClCompile>
@@ -365,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="PlayerObjectStateFlinch.cpp">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>GameObjects\PlayerObjects</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateBase.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>

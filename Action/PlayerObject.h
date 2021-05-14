@@ -93,7 +93,6 @@ public:
 	Vector3 GetForwardVec() { return forwardVec; }
 	Vector3 GetRightVec() { return rightVec; }
 	Vector3 GetCharaForwardVec() { return charaForwardVec;	}
-	Vector3 GetTmpCharaForwardVec() { return tmpCharaForwardVec; }
 	Vector3 GetRotateVec() { return rotateVec; }
 	Vector3 GetVelocity() { return velocity; }
 	Vector3 GetRespownPos() { return respownPos; }
@@ -116,7 +115,6 @@ public:
 	// 戻り値→bool
 	bool GetOnGround() { return onGround; }
 	bool GetJumpFlag() { return jumpFlag; }
-	bool GetIsJumping() { return isJumping; }
 	bool GetSwitchJumpFlag() { return switchJumpFlag; }
 	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
 	bool GetInputFlag() { return inputFlag; }
@@ -140,8 +138,6 @@ public:
 	// ※減らせるかもしれない
 	// 引数→Vector3
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
-	void SetTmpCharaForwardVec(Vector3 _tmpCharaForwardVec) { charaForwardVec = _tmpCharaForwardVec; }
-	void SetRotateVec(Vector3 _rotateVec) { charaForwardVec = _rotateVec; }
 	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
 	void SetRespownPos(Vector3 _respownPos) { velocity = _respownPos; }
 
@@ -153,7 +149,6 @@ public:
 
 	// 引数→bool
 	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
-	void SetIsJumping(bool _isJumpFlag) { isJumping = _isJumpFlag; }
 	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
 	void SetIsAvailableJumpKey(bool _isAvailableJumpKey) { isAvailableJumpKey = _isAvailableJumpKey; }
 	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
@@ -240,8 +235,6 @@ private:
 	Vector3 rightVec;
 	//キャラクターの前方ベクトル
 	Vector3 charaForwardVec;
-	//キャラクターを回転させるか前方ベクトルと比較するためのベクトル
-	Vector3 tmpCharaForwardVec;
 	//方向に合わせて回転させるためのベクトル
 	Vector3 rotateVec;
 	// 生成されたときのポジションを保存するためのvector3変数
@@ -267,8 +260,6 @@ private:
 
 	//入力があったかどうか判定するためのフラグ
 	bool inputFlag;
-	//ジャンプ中かどうかのフラグ
-	bool isJumping;
 	//引き続きジャンプボタンが利用可能かフラグ
 	bool isAvailableJumpKey;
 	//ジャンプできるかフラグ

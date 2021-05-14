@@ -28,7 +28,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		// ステータスを走り出し状態に変更
 		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
-	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
+	else if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
 	{
 		// ステータスをジャンプ開始状態に変更
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -82,6 +82,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 
 void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック

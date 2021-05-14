@@ -88,6 +88,8 @@ public:
 
 	void ChackInput(PlayerObject* _owner, const InputState& _keyState);
 
+	void RotationProcess(PlayerObject* _owner,Vector3 _forward,Vector3 _tmpForward);
+
 	Vector3 ChackControllerAxis(const InputState& _keyState);
 
 protected:

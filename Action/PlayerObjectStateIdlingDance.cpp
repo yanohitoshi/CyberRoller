@@ -32,7 +32,7 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 		// 空中でダンスしないようにダンスフラグをfalseに変更
 		isDancing = false;
 	}
-	else if (_owner->GetIsJumping() || _owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系のフラグがtrueになっていたら
+	else if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
 	{
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
@@ -64,7 +64,7 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 
 void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-
+	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
