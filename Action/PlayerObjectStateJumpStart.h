@@ -53,5 +53,11 @@ private:
 	const float JumpCorrection;
 	// スイッチジャンプ中に移動速度を徐々に減らすための計算に使う補正値
 	const float SwitchJumpCorrection;
+	// ジャンプ力の加速度
+	const float JumpAccelPower;
+	// ジャンプボタン利用可能タイム
+	const int JumpTime;
+	// スイッチジャンプ利用可能タイム
+	const int SwitchJumpTime;
 };
 

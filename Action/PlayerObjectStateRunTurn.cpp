@@ -90,7 +90,7 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 		// コントローラのアナログスティックの入力情報を計算する
 		Vector3 axis = ChackControllerAxis(_keyState);
 
-		//入力があるか
+		// 取得した数値を見てデッドスペース外だったら入力処理を行う
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
@@ -108,12 +108,14 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 			_owner->SetInputFlag(false);
 		}
 
-		// ジャンプを割り当てられているコントローラーのボタンが離されたら
+		// ジャンプを割り当てられているコントローラーのボタンが押されたらもしくはジャンプスイッチが押されたら
 		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
+			_owner->GetSwitchJumpFlag() == true)
 		{
+			// ジャンプフラグをtrueにセット
 			_owner->SetJumpFlag(true);
 		}
 	}

@@ -6,6 +6,9 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	: MaxFallSpeed(-2000.0f)
 	, JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
+	, JumpTime(8)
+	, SwitchJumpTime(24)
+	, JumpAccelPower(100.0f)
 {
 }
 
@@ -75,7 +78,7 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 		//実際に動かしたい軸がずれているので補正
 		Vector3 axis = ChackControllerAxis(_keyState);
 
-		//入力があるか
+		// 取得した数値を見てデッドスペース外だったら入力処理を行う
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			// 前のフレームのキャラクターの前方ベクトルを保存
@@ -99,52 +102,72 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 				moveSpeed *= 1.0f - jumpFrameCount / JumpCorrection;
 			}
 
+			// 移動速度が最大値を超えていたら
 			if (moveSpeed >= MaxMoveSpeed)
 			{
+				// 移動速度を最大値に固
 				moveSpeed = MaxMoveSpeed;
 			}
 
+			// 移動ベクトルに速度をかける
 			velocity.x = forward.x * moveSpeed;
 			velocity.y = forward.y * moveSpeed;
 
+			// 回転処理
 			RotationProcess(_owner, forward, tmpForward);
 
+			// 移動速度をownerの移動速度変数に保存
 			_owner->SetMoveSpeed(moveSpeed);
 
-
+			// 移動入力フラグをtrueにセット
 			_owner->SetInputFlag(true);
 		}
 		else
 		{
+			// 移動入力フラグをfalseにセット
 			_owner->SetInputFlag(false);
 		}
 
+		// ジャンプボタン利用可能フラグがtrueかつジャンプフラグがtrueまたはスイッチジャンプフラグがtrueかつジャンプボタン利用可能フラグがtrueの時
 		if (_owner->GetIsAvailableJumpKey() == true && _owner->GetJumpFlag() == true || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
 		{
-
+			// ジャンプ入力ボタンが押され続けている時またはジャンプボタン利用可能フラグがtrueの時
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Held ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Held ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Held ||
 				_owner->GetIsAvailableJumpKey() == true)
 			{
+
+				// ジャンプしている時間をフレームでカウント
 				++jumpFrameCount;
+
+				// ジャンプ力の仮変数を作り前フレームでのジャンプ力をもらう
 				float jumpPower = _owner->GetJumpPower();
+
+				// Z軸にジャンプ力を代入
 				velocity.z = jumpPower;
 
-				if (8 > jumpFrameCount && _owner->GetSwitchJumpFlag() == false)
+				// スイッチジャンプではなくてかつジャンプ利用可能な時間内だったら
+				if (JumpTime > jumpFrameCount && _owner->GetSwitchJumpFlag() == false)
 				{
-					_owner->SetJumpPower(jumpPower + 100.0f);
+					// ジャンプ力に定数値を足してジャンプ力をownerのジャンプ力変数にセット
+					_owner->SetJumpPower(jumpPower + JumpAccelPower);
 				}
-				else if (_owner->GetSwitchJumpFlag() == true && 24 > jumpFrameCount)
+				else if (_owner->GetSwitchJumpFlag() == true && SwitchJumpTime > jumpFrameCount) // スイッチジャンプでかつジャンプ利用可能な時間内だったら
 				{
-					_owner->SetJumpPower(jumpPower + 100.0f);
+					// ジャンプ力に定数値を足してジャンプ力をownerのジャンプ力変数にセット
+					_owner->SetJumpPower(jumpPower + JumpAccelPower);
 				}
-				else
+				else // ジャンプ利用時間を経過していたら
 				{
+					// ジャンプボタン利用可能状態フラグをfalseにセット
 					_owner->SetIsAvailableJumpKey(false);
-					_owner->SetJumpFlag(false);
+					// ステータス終了フラグをtrueにセット
 					endFlag = true;
+
+					//// ジャンプフラグをfalseにセット
+					//_owner->SetJumpFlag(false);
 				}
 
 			}
@@ -156,10 +179,15 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Released ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Released)
 		{
+			// ジャンプボタン利用可能状態フラグをfalseにセット
 			_owner->SetIsAvailableJumpKey(false);
-			_owner->SetJumpFlag(false);
-			_owner->SetJumpPower(_owner->GetFirstJumpPower());
+			// ステータス終了フラグをtrueにセット
 			endFlag = true;
+
+			//// ジャンプフラグをfalseにセット
+			//_owner->SetJumpFlag(false);
+			//// ジャンプパワーを初期値に再セット
+			//_owner->SetJumpPower(_owner->GetFirstJumpPower());
 		}
 	}
 }

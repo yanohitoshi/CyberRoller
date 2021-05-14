@@ -75,7 +75,6 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 		// ˆÚ“®“ü—Íˆ—
 		GroundMove(_owner,_keyState);
 	}
-
 }
 
 void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)

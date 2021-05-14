@@ -42,11 +42,12 @@ void PlayerObjectStateBase::GroundMove(PlayerObject* _owner, const InputState& _
 		_owner->SetInputFlag(false);
 	}
 
-	// ジャンプを割り当てられているコントローラーのボタンが押されたら
+	// ジャンプを割り当てられているコントローラーのボタンが押されたらもしくはジャンプスイッチが押されたら
 	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
+		_owner->GetSwitchJumpFlag() == true)
 	{
 		// ジャンプフラグをtrueにセット
 		_owner->SetJumpFlag(true);
@@ -63,24 +64,26 @@ void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _
 	// 取得した数値を見てデッドスペース外だったら入力処理を行う
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 	{
-		// 
+		// 移動入力フラグをtrueにセット
 		_owner->SetInputFlag(true);
 	}
 	else
 	{
+		// 移動入力フラグをfalseにセット
 		_owner->SetInputFlag(false);
 	}
 
 	// 接地中でジャンプ中でもなければ
 	if (_owner->GetOnGround() == true && _owner->GetJumpFlag() == false)
 	{
-		// ジャンプを割り当てられているコントローラーのボタンが離されたら
+		// ジャンプを割り当てられているコントローラーのボタンが押されたらもしくはジャンプスイッチが押されたら
 		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
 			_owner->GetSwitchJumpFlag() == true)
 		{
+			// ジャンプフラグをtrueにセット
 			_owner->SetJumpFlag(true);
 		}
 	}

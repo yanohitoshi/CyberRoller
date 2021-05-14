@@ -80,6 +80,6 @@ void PlayerObjectStateIdlingDance::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE_DANCE));
 	// stateをダンス状態にして保存
 	state = PlayerState::PLAYER_STATE_IDLE_DANCE;
-
+	// ダンスフラグをtrueにセット
 	isDancing = true;
 }

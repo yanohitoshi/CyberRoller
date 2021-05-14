@@ -82,7 +82,7 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 		//実際に動かしたい軸がずれているので補正
 		Vector3 axis = ChackControllerAxis(_keyState);
 
-		//入力があるか
+		// 取得した数値を見てデッドスペース外だったら入力処理を行う
 		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 		{
 			// 前のフレームのキャラクターの前方ベクトルを保存
@@ -107,32 +107,40 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 				moveSpeed *= 1.0f - jumpLoopCount / JumpCorrection;
 			}
 
+			// 移動速度が最大速度を超えていたら
 			if (moveSpeed >= MaxMoveSpeed)
 			{
+				// 最低速度に固定する
 				moveSpeed = MaxMoveSpeed;
 			}
 
-
+			// X軸とY軸に前方ベクトルに速度をかけて速度付きベクトルを作る
 			velocity.x = forward.x * moveSpeed;
 			velocity.y = forward.y * moveSpeed;
 
-
+			// 回転処理
 			RotationProcess(_owner,forward, tmpForward);
 
+			// ownerの速度変数を更新
 			_owner->SetMoveSpeed(moveSpeed);
 		}
-		else
+		else // 取得した数値を見てデッドスペース内だったら減速処理を行う
 		{
-
+			//　移動速度から空中用減速値を引く
 			moveSpeed -= _owner->GetAirMovePower();
 
+			// 移動速度が0.0f以下になったら
 			if (moveSpeed <= 0.0f)
 			{
+				// マイナスにならないように0.0fに固定
 				moveSpeed = 0.0f;
 			}
 
+			// ownerの方向ベクトルに移動速度を掛けて移動ベクトルを更新
 			velocity.x = _owner->GetCharaForwardVec().x * moveSpeed;
 			velocity.y = _owner->GetCharaForwardVec().y * moveSpeed;
+
+			// 移動入力フラグをfalseにセット
 			_owner->SetInputFlag(false);
 		}
 		
