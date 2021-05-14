@@ -18,8 +18,19 @@
 
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
+	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
+	, SwitchBaseSize(Vector3(2.0f, 2.0f, 1.0f))
+	, NeedlePanelSize(Vector3(200.0f, 200.0f, 3.0f))
+	, JumpSwitchSize(Vector3(200.0f, 200.0f, 3.0f))
+	, PortraitWallBlockSize(Vector3(600.0f, 200.0f, 2400.0f))
+	, LandscapeWallBlockSize(Vector3(200.0f, 600.0f, 2400.0f))
+	, MoveWallSize(Vector3(20.0f, 1000.0f, 1000.0f))
+	, RespawnBox({ Vector3(-10.0f,-1000.0f,-1000.0f),Vector3(10.0f,1000.0f,1000.0f) })
+	, ShiftMoveWallY(200.0f)
+	, ShiftMoveWallZ(100.0f)
+	, MoveWallSpeed(300.0f)
+	, Offset(400.0f)
 {
-	offset = 400.0f;
 }
 
 /*
@@ -28,7 +39,7 @@ FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag
 
 FirstStageCreator::~FirstStageCreator()
 {
-	//マップデータの削除
+	//マップデータの後始末
 	layer1StageData.clear();
 	layer2StageData.clear();
 	layer3StageData.clear();
@@ -46,26 +57,32 @@ bool FirstStageCreator::OpenFile()
 		printf("do'nt have Layer/layer1\n");
 		return true;
 	}
+
+	// データ配列のサイズXとYを保存
 	sizeX = layer1StageData[0].size();
 	sizeY = layer1StageData.size();
+
 	// ステージデータ読み込み (layer2) 
 	if (!readTiledJson(layer2StageData, "Assets/Config/firstStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
+
 	// ステージデータ読み込み (layer3) 
 	if (!readTiledJson(layer3StageData, "Assets/Config/firstStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
+
 	// ステージデータ読み込み (layer4) 
 	if (!readTiledJson(layer4StageData, "Assets/Config/firstStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
+
 	// ステージデータ読み込み (layer5) 
 	if (!readTiledJson(layer5StageData, "Assets/Config/firstStageMap.json", "layer5"))
 	{
@@ -85,125 +102,179 @@ bool FirstStageCreator::OpenFile()
 
 PlayerObject* FirstStageCreator::CreatePlayer()
 {
-	//playerクラスに初期位置を渡すための変数
+	//playerクラスに初期位置を渡すための変数生成
 	Vector3 pos = Vector3(0, 0, 0);
 
+	// プレイヤーの位置情報検索
 	for (float iy = 0; iy < sizeY; iy++)
 	{
 		for (float ix = 0; ix < sizeX; ix++)
 		{
+			// プレイヤーデータ内にプレイヤー生成情報があれば
 			if (playerData[(int)iy][(int)ix] == 19)
 			{
-				pos = Vector3(offset * ix, -offset * iy, 500);
+				// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
+				pos = Vector3(Offset * ix, -Offset * iy, 500);
 			}
 		}
 	}
 
+	// プレイヤーオブジェクト生成
 	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
 
-	//1600.-4400
+	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
 	GameObject::CreateMainCamera(pos, playerObject);
+
+	// プレイヤーオブジェクトのポインタを返す
 	return playerObject;
 }
 
 void FirstStageCreator::CreateStage()
 {
 	// ステージデータを見てその情報ごとのclassを生成する
-
 	for (float iy = 0; iy < sizeY; iy++)
 	{
 		for (float ix = 0; ix < sizeX; ix++)
 		{
-			Vector3 blockSize = Vector3(200, 200, 100);
-			Vector3 switchBaseSize = Vector3(2.0f, 2.0f, 1.0f);
-			Vector3 needlePanelSize = Vector3(200, 200, 3);
-			Vector3 jumpSwitchSize = Vector3(200, 200, 3);
-			Vector3 wallBlockSizeNum1 = Vector3(600.0f, 200.0f, 2400.0f);
-			Vector3 wallBlockSizeNum2 = Vector3(200.0f, 600.0f, 2400.0f);
-			AABB respawnBox = { Vector3(-10.0f,-1000.0f,-1000.0f),Vector3(10.0f,1000.0f,1000.0f) };
-
-			const unsigned int layer1 = layer1StageData[(int)iy][(int)ix];
-			Vector3 layer1Pos = Vector3(offset * ix, -offset * iy, 0);
-
-			switch (layer1)
-			{
-			case(79):
-				new BoxObject(layer1Pos, blockSize, Tag::GROUND);
-				break;
-			}
-
-			const unsigned int layer2 = layer2StageData[(int)iy][(int)ix];
-			Vector3 layer2Pos = Vector3(offset * ix, -offset * iy, 200);
-			Vector3 layer2SwitchPos = Vector3(offset * ix, -offset * iy, 100);
-
-			switch (layer2)
-			{
-			case(78):
-				new BoxObject(layer2Pos, blockSize, Tag::GROUND);
-				break;
-			case(40):
-				new JumpSwitchObject(layer2SwitchPos, jumpSwitchSize, Tag::JUMP_SWITCH);
-				break;
-			case(16):
-				new NeedlePanelObject(layer2SwitchPos, needlePanelSize, Tag::NEEDLE_PANEL);
-				break;
-			}
-
-			const unsigned int layer3 = layer3StageData[(int)iy][(int)ix];
-			Vector3 layer3Pos = Vector3(offset * ix, -offset * iy, 400);
-			Vector3 layer3SwitchPos = Vector3(offset * ix, -offset * iy, 300);
-
-			switch (layer3)
-			{
-			case(77):
-				new BoxObject(layer3Pos, blockSize, Tag::GROUND);
-				break;
-			case(1):
-				new WallBlockObject(layer3Pos, wallBlockSizeNum1, Tag::WALL);
-				break;
-			case(2):
-				new WallBlockObject(layer3Pos, wallBlockSizeNum2, Tag::WALL);
-				break;
-			}
-
-			const unsigned int layer4 = layer4StageData[(int)iy][(int)ix];
-			Vector3 layer4Pos = Vector3(offset * ix, -offset * iy, 600);
-			Vector3 layer4WallPos = Vector3(offset * ix, -offset * iy, 850);
-			Vector3 layer4SwitchPos = Vector3(offset * ix, -offset * iy, 500);
-			Vector3 layer4BaseSwitchPos = Vector3(offset * ix, -offset * iy, 700);
-
-			switch (layer4)
-			{
-			case(76):
-				new BoxObject(layer4Pos, blockSize, Tag::GROUND);
-				break;
-			case(3):
-				new RespawnPoint(layer4Pos, respawnBox, Tag::RESPOWN_POINT);
-				break;
-
-			}
-
-			const unsigned int layer5 = layer5StageData[(int)iy][(int)ix];
-			Vector3 layer5Pos = Vector3(offset * ix, -offset * iy, 800);
-			Vector3 layer5SwitchPos = Vector3(offset * ix, -offset * iy, 700);
-			Vector3 moveWallSize = Vector3(20, 1000, 1000);
-
-			switch (layer5)
-			{
-			case(75):
-				new BoxObject(layer5Pos, blockSize, Tag::GROUND);
-				break;
-			case(21):
-				new SwitchBaseObject(layer5SwitchPos, switchBaseSize, Tag::GROUND, Tag::TUTORIAL_SWITCH);
-				break;
-			case(20):
-				new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT, playerObject);
-				break;
-			case(41):
-				new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + 200.0f, layer5Pos.z - 100.0f), moveWallSize, Tag::TUTORIAL_MOVE_WALL, 300.0f,
-					Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - moveWallSize.z));
-				break;
-			}
+			// Layer1内を検索
+			CreateLayer1(ix, iy);
+			// Layer2内を検索
+			CreateLayer2(ix, iy);
+			// Layer3内を検索
+			CreateLayer3(ix, iy);
+			// Layer4内を検索
+			CreateLayer4(ix, iy);
+			// Layer5内を検索
+			CreateLayer5(ix, iy);
 		}
+	}
+}
+
+void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int layer1 = layer1StageData[(int)_indexY][(int)_indexX];
+	// レイヤー1のマップオブジェクトのポジション
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, 0);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (layer1)
+	{
+	case(LAYER1_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new BoxObject(layer1Pos, BlockSize, Tag::GROUND);
+		break;
+	}
+
+}
+
+void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int layer2 = layer2StageData[(int)_indexY][(int)_indexX];
+	// レイヤー2のマップオブジェクトのポジション
+	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, 200);
+	// レイヤー2のスイッチ系マップオブジェクトのポジション
+	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 100);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (layer2)
+	{
+	case(LAYER2_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new BoxObject(layer2Pos, BlockSize, Tag::GROUND);
+		break;
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer2SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+	}
+
+}
+
+void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int layer3 = layer3StageData[(int)_indexY][(int)_indexX];
+	// レイヤー3のマップオブジェクトのポジション
+	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, 400.0f);
+	// レイヤー3のスイッチ系マップオブジェクトのポジション
+	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 300.0f);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (layer3)
+	{
+	case(LAYER3_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
+		break;
+	case(PORTRAIT_WALL_PARTS):
+		// 縦長壁オブジェクトの生成
+		new WallBlockObject(layer3Pos, PortraitWallBlockSize, Tag::WALL);
+		break;
+	case(LANDSCAPE_WALL_PARTS):
+		// 横長壁オブジェクトの生成
+		new WallBlockObject(layer3Pos, LandscapeWallBlockSize, Tag::WALL);
+		break;
+	}
+
+}
+
+void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int layer4 = layer4StageData[(int)_indexY][(int)_indexX];
+	// レイヤー4のマップオブジェクトのポジション
+	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, 600.0f);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (layer4)
+	{
+	case(LAYER4_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new BoxObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	}
+
+}
+
+void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int layer5 = layer5StageData[(int)_indexY][(int)_indexX];
+	// レイヤー5のマップオブジェクトのポジション
+	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, 800.0f);
+	// レイヤー5のスイッチ系マップオブジェクトのポジション
+	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 700.0f);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (layer5)
+	{
+	case(LAYER5_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new BoxObject(layer5Pos, BlockSize, Tag::GROUND);
+		break;
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::TUTORIAL_SWITCH);
+		break;
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT, playerObject);
+		break;
+	case(FIRST_MOVE_WALL_PARTS):
+		// 第一区画の動く壁オブジェクト生成
+		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), MoveWallSize, Tag::TUTORIAL_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - MoveWallSize.z));
+		break;
 	}
 }

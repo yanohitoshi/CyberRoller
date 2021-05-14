@@ -14,6 +14,7 @@ class FirstStageCreator
 	 : public StageCreatorBase
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@brief  objectの生成を行う
@@ -45,6 +46,46 @@ public:
 
 private:
 
+	/*
+	@fn レイヤー1クリエイター
+	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer1(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー2クリエイター
+	@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer2(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー3クリエイター
+	@brief  レイヤー3のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer3(int _indexX, int _indexY);
+	
+	/*
+	@fn レイヤー4クリエイター
+	@brief  レイヤー4のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer4(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー5クリエイター
+	@brief  レイヤー5のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer5(int _indexX, int _indexY);
+
 	//ファーストステージデータ
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
@@ -55,12 +96,40 @@ private:
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;
 
-	//配置するオブジェクトの間隔X
+	// マップデータの配列サイズX
 	int sizeX;
-	//配置するオブジェクトの間隔Y
+
+	// マップデータの配列サイズY
 	int sizeY;
+
 	//配置するオブジェクトの間隔。サイズ
-	float offset;
+	const float Offset;
+
+	// 動く壁のポジションを少しずらす定数
+	// Y軸は中心のずらすため・Z軸は少し埋まった状態で生成したいため
+	const float ShiftMoveWallY;
+	const float ShiftMoveWallZ;
+
+	// 動く壁の速度定数
+	const float MoveWallSpeed;
+
+	// ブロックオブジェクトのサイズ定数
+	const Vector3 BlockSize;
+	// スイッチオブジェクトのサイズ定数
+	const Vector3 SwitchBaseSize;
+	// ジャンプスイッチオブジェクトのサイズ定数
+	const Vector3 JumpSwitchSize;
+	// ニードルオブジェクトのサイズ定数
+	const Vector3 NeedlePanelSize;
+	// 縦長壁オブジェクトのサイズ定数
+	const Vector3 PortraitWallBlockSize;
+	// 横長壁オブジェクトのサイズ定数
+	const Vector3 LandscapeWallBlockSize;
+	// 動く壁オブジェクトのサイズ定数
+	const Vector3 MoveWallSize;
+
+	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
+	const AABB RespawnBox;
 
 };
 

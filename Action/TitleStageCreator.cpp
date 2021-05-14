@@ -18,8 +18,12 @@
 
 TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
+	, Offset(400.0f)
+	, PlayerNumber(3)
+	, GroundNumber(79)
+	, playerPos(Vector3::Zero)
+	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
 {
-	offset = 400;
 }
 
 /*
@@ -41,6 +45,8 @@ bool TitleStageCreator::OpenFile()
 		printf("do'nt have Layer/Titlebaselayer\n");
 		return true;
 	}
+
+	// データ配列のサイズXとYを保存
 	sizeX = titleMapData[0].size();
 	sizeY = titleMapData.size();
 
@@ -56,46 +62,68 @@ bool TitleStageCreator::OpenFile()
 
 void TitleStageCreator::CreateStage()
 {
+	// 他クラスにプレイヤーのポジションを送るための変数
+	Vector3 sendPlayerPos = Vector3::Zero;
+
+	// プレイヤーのステージデータを見てその情報ごとのclassを生成する
+	// 先にプレイヤーのポジションを確定させてその後そのポジションを他クラスに送りたいので
+	// プレイヤーの位置データを回し切っています
+	for (float iy = 0; iy < sizeY; iy++)
+	{
+		for (float ix = 0; ix < sizeX; ix++)
+		{
+			// プレイヤー生成関数
+			sendPlayerPos = CreatePlayer(ix,iy);
+		}
+	}
+
 	// ステージデータを見てその情報ごとのclassを生成する
-
-	Vector3 cameraPos = Vector3::Zero;
-	Vector3 playerPos = Vector3::Zero;
-
 	for (float iy = 0; iy < sizeY; iy++)
 	{
 		for (float ix = 0; ix < sizeX; ix++)
 		{
-			const unsigned int playerLayer = titlePlayerData[(int)iy][(int)ix];
-			Vector3 objectPos = Vector3(offset * ix, -offset * iy, 100);
-
-			switch (playerLayer)
-			{
-			case(3):
-				new TitlePlayerObject(objectPos, false, Tag::TITLE_PLAYER);
-				cameraPos = objectPos;
-				playerPos = objectPos;
-				break;
-			}
+			// タイトル用マップステージ生成関数
+			CreateTitleMap(ix, iy, sendPlayerPos);
 		}
 	}
 
-	for (float iy = 0; iy < sizeY; iy++)
+	// タイトル用カメラ生成
+	GameObject::CreateTitleCamera(sendPlayerPos);
+
+}
+
+void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerPos)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int baseLayer = titleMapData[(int)_indexY][(int)_indexX];
+	// タイトルステージのマップオブジェクトのポジション
+	Vector3 baseLayerPos = Vector3(Offset * _indexX, -Offset * _indexY, 0.0f);
+
+	// マップデータが生成ナンバーだったら
+	if (baseLayer == GroundNumber)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
-		{
-			const unsigned int baseLayer = titleMapData[(int)iy][(int)ix];
-			Vector3 baseLayerPos = Vector3(offset * ix, -offset * iy, 0);
-			Vector3 blockSize = Vector3(200, 200, 100);
+		// タイトル用オブジェクトの生成
+		new TitleGroundObject(baseLayerPos, BlockSize, _playerPos,Tag::TITLE_OBJECT);
+	}
+}
 
-			switch (baseLayer)
-			{
-			case(79):
-				new TitleGroundObject(baseLayerPos, blockSize, playerPos,Tag::TITLE_OBJECT);
-				break;
-			}
-		}
+Vector3 TitleStageCreator::CreatePlayer(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int playerLayer = titlePlayerData[(int)_indexY][(int)_indexX];
+	// タイトルでのプレイヤーオブジェクトのポジション
+	Vector3 objectPos = Vector3(Offset * _indexX, -Offset * _indexY, 100.0f);
+	
+	// マップデータが生成ナンバーだったら
+	if (playerLayer == PlayerNumber)
+	{
+		// タイトル用プレイヤーの生成
+		new TitlePlayerObject(objectPos, false, Tag::TITLE_PLAYER);
+		// ポジションを保存
+		playerPos = objectPos;
 	}
 
-	GameObject::CreateTitleCamera(cameraPos);
+	// プレイヤーのポジションを返す
+	return playerPos;
 
 }

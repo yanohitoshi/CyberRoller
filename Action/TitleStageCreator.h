@@ -42,16 +42,45 @@ public:
 
 private:
 
+	/*
+	@fn レイヤー1クリエイター
+	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	@param	_playerPos タイトルプレイヤーオブジェクトのポジション
+	*/
+	void CreateTitleMap(int _indexX, int _indexY, Vector3 _playerPos);
+
+	/*
+	@fn レイヤー2クリエイター
+	@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	Vector3 CreatePlayer(int _indexX, int _indexY);
+
 	//タイトル表示用
 	std::vector<std::vector<int>> titleMapData;
 	std::vector<std::vector<int>> titlePlayerData;
 
-	//配置するオブジェクトの間隔X
+	// マップデータの配列サイズX
 	int sizeX;
-	//配置するオブジェクトの間隔Y
+	// マップデータの配列サイズY
 	int sizeY;
-	//配置するオブジェクトの間隔。サイズ
-	float offset;
+
+	// タイトルでのプレイヤー生成ナンバー
+	const int PlayerNumber;
+	// タイトルでのグラウンドオブジェクト生成ナンバー
+	const int GroundNumber;
+
+	// 配置するオブジェクトの間隔
+	const float Offset;
+
+	// ブロックサイズ定数
+	const Vector3 BlockSize;
+
+	// タイトルのプレイヤーのポジション用変数
+	Vector3 playerPos;
 
 };
 
