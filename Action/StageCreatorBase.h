@@ -16,18 +16,35 @@ enum StagePartsName
 	PORTRAIT_WALL_PARTS = 1,
 	// 横長壁パーツ
 	LANDSCAPE_WALL_PARTS = 2,
+
 	// リスポーンポイントパーツ
 	RESPOWN_POINT_PARTS = 3,
+
 	// 棘パネルパーツ
-	NEEDLE_PARTS = 16,
+	NEEDLE_PARTS = 4,
+
 	// ステージクリアオブジェクトパーツ
 	CLEAR_OBJECT_PARTS = 20,
-	// 最初の区画スイッチパーツ
+
+	// 第一区画のスイッチパーツ
 	FIRST_SWITCH_PARTS = 21,
+	// 第二区画のスイッチパーツ
+	SECOND_SWITCH_PARTS = 22,
+	// 第三区画のスイッチパーツ
+	THIRD_SWITCH_PARTS = 23,
+
 	// ジャンプスイッチパーツ
 	JUMP_SWITCH_PARTS = 40,
-	// 最初の区画の動く壁パーツ
+
+	// 第一区画の動く壁パーツ
 	FIRST_MOVE_WALL_PARTS = 41,
+	// 第二区画の動く壁パーツ
+	SECOND_MOVE_WALL_PARTS = 42,
+	// 第三区画の動く壁パーツ
+	THIRD_MOVE_WALL_PARTS = 43,
+
+	// プレイヤー
+	PLAYER_PARTS = 19,
 
 	// レイヤーごとのブロックパーツ名
 	// ※Tiled Map Editorを使用してJSONファイルを制作する際にレイヤー別にブロックのタイルマップの色を変えているため
@@ -73,7 +90,9 @@ public:
 	*/
 	~StageCreatorBase()override;
 
+
 protected:
+
 	/*
 	@fn Jsonファイルを読み込みコンテナ型に格納する
 	@param _mapDate 格納させたいコンテナへのアドレス
@@ -87,6 +106,36 @@ protected:
 
 	// プレイヤーを見たいclassにプレイヤーのポインタを渡すための変数
 	PlayerObject* playerObject;
+
+	// 動く壁のポジションを少しずらす定数
+	// Y軸は中心のずらすため・Z軸は少し埋まった状態で生成したいため
+	const float ShiftMoveWallY;
+	const float ShiftMoveWallZ;
+
+	// 動く壁の速度定数
+	const float MoveWallSpeed;
+
+	//配置するオブジェクトの間隔。サイズ
+	const float Offset;
+
+	// ブロックオブジェクトのサイズ定数
+	const Vector3 BlockSize;
+	// スイッチオブジェクトのサイズ定数
+	const Vector3 SwitchBaseSize;
+	// ジャンプスイッチオブジェクトのサイズ定数
+	const Vector3 JumpSwitchSize;
+	// ニードルオブジェクトのサイズ定数
+	const Vector3 NeedlePanelSize;
+	// 縦長壁オブジェクトのサイズ定数
+	const Vector3 PortraitWallBlockSize;
+	// 横長壁オブジェクトのサイズ定数
+	const Vector3 LandscapeWallBlockSize;
+	// 大きい動く壁オブジェクトのサイズ定数
+	const Vector3 BigMoveWallSize;
+	// 小さい動く壁オブジェクトのサイズ定数
+	const Vector3 SmallMoveWallSize;
+	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
+	const AABB RespawnBox;
 
 };
 

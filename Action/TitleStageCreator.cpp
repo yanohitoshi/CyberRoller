@@ -18,11 +18,9 @@
 
 TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
-	, Offset(400.0f)
 	, PlayerNumber(3)
 	, GroundNumber(79)
 	, playerPos(Vector3::Zero)
-	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
 {
 }
 

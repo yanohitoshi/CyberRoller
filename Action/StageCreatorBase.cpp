@@ -2,6 +2,19 @@
 
 StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
+	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
+	, SwitchBaseSize(Vector3(2.0f, 2.0f, 1.0f))
+	, NeedlePanelSize(Vector3(200.0f, 200.0f, 3.0f))
+	, JumpSwitchSize(Vector3(200.0f, 200.0f, 3.0f))
+	, PortraitWallBlockSize(Vector3(600.0f, 200.0f, 2400.0f))
+	, LandscapeWallBlockSize(Vector3(200.0f, 600.0f, 2400.0f))
+	, BigMoveWallSize(Vector3(20.0f, 1500.0f, 1000.0f))
+	, SmallMoveWallSize(Vector3(20.0f, 1100.0f, 1000.0f))
+	, RespawnBox({ Vector3(-10.0f,-1000.0f,-1000.0f),Vector3(10.0f,1000.0f,1000.0f) })
+	, Offset(400.0f)
+	, ShiftMoveWallY(200.0f)
+	, ShiftMoveWallZ(100.0f)
+	, MoveWallSpeed(300.0f)
 {
 }
 

@@ -7,7 +7,7 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	, JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
 	, JumpTime(8)
-	, SwitchJumpTime(24)
+	, SwitchJumpTime(14)
 	, JumpAccelPower(100.0f)
 {
 }
@@ -129,7 +129,8 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 		}
 
 		// ジャンプボタン利用可能フラグがtrueかつジャンプフラグがtrueまたはスイッチジャンプフラグがtrueかつジャンプボタン利用可能フラグがtrueの時
-		if (_owner->GetIsAvailableJumpKey() == true && _owner->GetJumpFlag() == true || _owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
+		if (_owner->GetIsAvailableJumpKey() == true && _owner->GetJumpFlag() == true || 
+			_owner->GetSwitchJumpFlag() == true && _owner->GetIsAvailableJumpKey() == true)
 		{
 			// ジャンプ入力ボタンが押され続けている時またはジャンプボタン利用可能フラグがtrueの時
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Held ||
@@ -165,11 +166,10 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 					_owner->SetIsAvailableJumpKey(false);
 					// ステータス終了フラグをtrueにセット
 					endFlag = true;
+					// ジャンプフラグをfalseにセット
+					_owner->SetJumpFlag(false);
 
-					//// ジャンプフラグをfalseにセット
-					//_owner->SetJumpFlag(false);
 				}
-
 			}
 		}
 
@@ -184,10 +184,10 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 			// ステータス終了フラグをtrueにセット
 			endFlag = true;
 
-			//// ジャンプフラグをfalseにセット
-			//_owner->SetJumpFlag(false);
-			//// ジャンプパワーを初期値に再セット
-			//_owner->SetJumpPower(_owner->GetFirstJumpPower());
+			// ジャンプフラグをfalseにセット
+			_owner->SetJumpFlag(false);
+			// ジャンプパワーを初期値に再セット
+			_owner->SetJumpPower(_owner->GetFirstJumpPower());
 		}
 	}
 }

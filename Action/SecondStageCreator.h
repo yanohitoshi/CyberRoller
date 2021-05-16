@@ -43,6 +43,102 @@ public:
 
 private:
 
+	/*
+	@fn レイヤー1クリエイター
+	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer1(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー2クリエイター
+	@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer2(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー3クリエイター
+	@brief  レイヤー3のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer3(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー4クリエイター
+	@brief  レイヤー4のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer4(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー5クリエイター
+	@brief  レイヤー5のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer5(int _indexX, int _indexY);
+	/*
+	@fn レイヤー6クリエイター
+	@brief  レイヤー6のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer6(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー7クリエイター
+	@brief  レイヤー7のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer7(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー8クリエイター
+	@brief  レイヤー8のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer8(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー9クリエイター
+	@brief  レイヤー9のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer9(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー10クリエイター
+	@brief  レイヤー10のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer10(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー11クリエイター
+	@brief  レイヤー11のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer11(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー12クリエイター
+	@brief  レイヤー12のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer12(int _indexX, int _indexY);
+
+
 	//第二ステージデータ
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
@@ -64,8 +160,6 @@ private:
 	int sizeX;
 	//配置するオブジェクトの間隔Y
 	int sizeY;
-	//配置するオブジェクトの間隔。サイズ
-	float offset;
 
 };
 

@@ -179,7 +179,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//接地判定用のsphereCollider
 	groundChackSphereCol = new SphereCollider(this, ColliderComponent::GroundCheckTag, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1));
-	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),1.0f };
+	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	groundChackSphereCol->SetObjectSphere(groundChackSphere);
 
 	// 砂ぼこりと着地時のeffectを持たせる
@@ -485,9 +485,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
 	{
 		onGround = true;
-
-		switchJumpFlag = false;
-
 	}
 
 

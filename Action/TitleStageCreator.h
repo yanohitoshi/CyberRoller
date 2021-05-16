@@ -73,12 +73,6 @@ private:
 	// タイトルでのグラウンドオブジェクト生成ナンバー
 	const int GroundNumber;
 
-	// 配置するオブジェクトの間隔
-	const float Offset;
-
-	// ブロックサイズ定数
-	const Vector3 BlockSize;
-
 	// タイトルのプレイヤーのポジション用変数
 	Vector3 playerPos;
 

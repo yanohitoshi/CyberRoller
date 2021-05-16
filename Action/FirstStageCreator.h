@@ -102,34 +102,5 @@ private:
 	// マップデータの配列サイズY
 	int sizeY;
 
-	//配置するオブジェクトの間隔。サイズ
-	const float Offset;
-
-	// 動く壁のポジションを少しずらす定数
-	// Y軸は中心のずらすため・Z軸は少し埋まった状態で生成したいため
-	const float ShiftMoveWallY;
-	const float ShiftMoveWallZ;
-
-	// 動く壁の速度定数
-	const float MoveWallSpeed;
-
-	// ブロックオブジェクトのサイズ定数
-	const Vector3 BlockSize;
-	// スイッチオブジェクトのサイズ定数
-	const Vector3 SwitchBaseSize;
-	// ジャンプスイッチオブジェクトのサイズ定数
-	const Vector3 JumpSwitchSize;
-	// ニードルオブジェクトのサイズ定数
-	const Vector3 NeedlePanelSize;
-	// 縦長壁オブジェクトのサイズ定数
-	const Vector3 PortraitWallBlockSize;
-	// 横長壁オブジェクトのサイズ定数
-	const Vector3 LandscapeWallBlockSize;
-	// 動く壁オブジェクトのサイズ定数
-	const Vector3 MoveWallSize;
-
-	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
-	const AABB RespawnBox;
-
 };
 

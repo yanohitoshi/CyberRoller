@@ -18,18 +18,6 @@
 
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
-	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
-	, SwitchBaseSize(Vector3(2.0f, 2.0f, 1.0f))
-	, NeedlePanelSize(Vector3(200.0f, 200.0f, 3.0f))
-	, JumpSwitchSize(Vector3(200.0f, 200.0f, 3.0f))
-	, PortraitWallBlockSize(Vector3(600.0f, 200.0f, 2400.0f))
-	, LandscapeWallBlockSize(Vector3(200.0f, 600.0f, 2400.0f))
-	, MoveWallSize(Vector3(20.0f, 1000.0f, 1000.0f))
-	, RespawnBox({ Vector3(-10.0f,-1000.0f,-1000.0f),Vector3(10.0f,1000.0f,1000.0f) })
-	, ShiftMoveWallY(200.0f)
-	, ShiftMoveWallZ(100.0f)
-	, MoveWallSpeed(300.0f)
-	, Offset(400.0f)
 {
 }
 
@@ -106,12 +94,12 @@ PlayerObject* FirstStageCreator::CreatePlayer()
 	Vector3 pos = Vector3(0, 0, 0);
 
 	// プレイヤーの位置情報検索
-	for (float iy = 0; iy < sizeY; iy++)
+	for (int iy = 0; iy < sizeY; iy++)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
+		for (int ix = 0; ix < sizeX; ix++)
 		{
 			// プレイヤーデータ内にプレイヤー生成情報があれば
-			if (playerData[(int)iy][(int)ix] == 19)
+			if (playerData[iy][ix] == 19)
 			{
 				// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
 				pos = Vector3(Offset * ix, -Offset * iy, 500);
@@ -132,9 +120,9 @@ PlayerObject* FirstStageCreator::CreatePlayer()
 void FirstStageCreator::CreateStage()
 {
 	// ステージデータを見てその情報ごとのclassを生成する
-	for (float iy = 0; iy < sizeY; iy++)
+	for (int iy = 0; iy < sizeY; iy++)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
+		for (int ix = 0; ix < sizeX; ix++)
 		{
 			// Layer1内を検索
 			CreateLayer1(ix, iy);
@@ -153,9 +141,9 @@ void FirstStageCreator::CreateStage()
 void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer1 = layer1StageData[(int)_indexY][(int)_indexX];
+	const unsigned int layer1 = layer1StageData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, 0);
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, 0.0f);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer1)
@@ -171,11 +159,11 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer2 = layer2StageData[(int)_indexY][(int)_indexX];
+	const unsigned int layer2 = layer2StageData[_indexY][_indexX];
 	// レイヤー2のマップオブジェクトのポジション
-	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, 200);
+	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, 200.0f);
 	// レイヤー2のスイッチ系マップオブジェクトのポジション
-	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 100);
+	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 100.0f);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer2)
@@ -199,7 +187,7 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer3 = layer3StageData[(int)_indexY][(int)_indexX];
+	const unsigned int layer3 = layer3StageData[_indexY][_indexX];
 	// レイヤー3のマップオブジェクトのポジション
 	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, 400.0f);
 	// レイヤー3のスイッチ系マップオブジェクトのポジション
@@ -227,7 +215,7 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer4 = layer4StageData[(int)_indexY][(int)_indexX];
+	const unsigned int layer4 = layer4StageData[_indexY][_indexX];
 	// レイヤー4のマップオブジェクトのポジション
 	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, 600.0f);
 
@@ -250,7 +238,7 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer5 = layer5StageData[(int)_indexY][(int)_indexX];
+	const unsigned int layer5 = layer5StageData[_indexY][_indexX];
 	// レイヤー5のマップオブジェクトのポジション
 	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, 800.0f);
 	// レイヤー5のスイッチ系マップオブジェクトのポジション
@@ -273,8 +261,8 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 	case(FIRST_MOVE_WALL_PARTS):
 		// 第一区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), MoveWallSize, Tag::TUTORIAL_MOVE_WALL, MoveWallSpeed,
-			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - MoveWallSize.z));
+		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::TUTORIAL_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
 		break;
 	}
 }
