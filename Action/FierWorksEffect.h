@@ -36,6 +36,16 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+    
+    /*
+    @fn フェードイン関数
+    */
+    void FadeInProcess();
+
+    /*
+    @fn 速度抑制関数
+    */
+    void ChackSpeedProcess();
 
     // フェードインフラグ
     bool inFlag;

@@ -68,6 +68,8 @@ enum StagePartsName
 
 
 };
+
+
 /*
 @file StageCreatorBase.h
 @brief ステージ生成classの基底クラス
@@ -136,6 +138,18 @@ protected:
 	const Vector3 SmallMoveWallSize;
 	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
 	const AABB RespawnBox;
+
+	// スイッチのポジションは他のオブジェクトと違いずらす必要があるので
+	// そのために用いる定数
+	const float ShiftSwitchPositionZ;
+
+	// レイヤー数の最大値
+	const int MaxLayer;
+
+	// レイヤーごとに割り当てるZ軸の値を格納する配列
+	float ObjectPositionZ[17];
+
+
 
 };
 

@@ -207,9 +207,9 @@ void FinalStageCreator::CreateStage()
 {
 
 	// ステージデータを見てその情報ごとのclassを生成する
-	for (float iy = 0; iy < sizeY; iy++)
+	for (int iy = 0; iy < sizeY; iy++)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
+		for (int ix = 0; ix < sizeX; ix++)
 		{
 			// Layer1内を検索
 			CreateLayer1(ix, iy);
@@ -336,7 +336,7 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer4SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
-	case(11):
+	case(LEFT_MOVE_GROUND_NUMBER_1):
 		new MoveBlockObject(layer4Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1600.0f, 0.0f), Vector3::NegUnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -387,46 +387,46 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(LAYER5_Number_1):
+	case(LEFT_PUSH_BOX_NUMBER_1):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_2):
+	case(LEFT_PUSH_BOX_NUMBER_2):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_3):
+	case(LEFT_PUSH_BOX_NUMBER_3):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_4):
+	case(LEFT_PUSH_BOX_NUMBER_4):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1300.0f, 0.2f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_5):
+	case(RIGHT_PUSH_BOX_NUMBER_1):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_6):
+	case(RIGHT_PUSH_BOX_NUMBER_2):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_7):
+	case(RIGHT_PUSH_BOX_NUMBER_3):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER5_Number_8):
+	case(RIGHT_PUSH_BOX_NUMBER_4):
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1300.0f, 0.2f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(5):
+	case(FRONT_MOVE_GROUND_NUMBER_1):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1400.0f, 0.0f, 0.0f), Vector3::UnitX, 400.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(6):
+	case(BACK_MOVE_GROUND_NUMBER_1):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 400.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(9):
+	case(FRONT_MOVE_GROUND_NUMBER_3):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(10):
+	case(BACK_MOVE_GROUND_NUMBER_2):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(12):
+	case(LEFT_MOVE_GROUND_NUMBER_2):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 700.0f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(13):
+	case(RIGHT_MOVE_GROUND_NUMBER_1):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 700.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -464,16 +464,16 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer6SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(LAYER6_Number_1):
+	case(LEFT_PUSH_BOX_NUMBER_5):
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1000.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER6_Number_2):
+	case(RIGHT_PUSH_BOX_NUMBER_5):
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1000.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER6_Number_3):
+	case(RIGHT_PUSH_BOX_NUMBER_6):
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1200.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(LAYER6_Number_4):
+	case(LEFT_PUSH_BOX_NUMBER_6):
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -507,7 +507,7 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer7SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
-	case(7):
+	case(LEFT_MOVE_GROUND_NUMBER_3):
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -541,7 +541,7 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer8SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(8):
+	case(RIGHT_MOVE_GROUND_NUMBER_2):
 		new MoveBlockObject(layer8Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
 
@@ -709,7 +709,7 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer13SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(LAYER13_Number_1):
+	case(LEFT_PUSH_BOX_NUMBER_7):
 		new PushBoxObject(layer13Pos, BlockSize, Tag::PUSH_BOX, Vector3(-400.0f, 0.0f, 0.0f), Vector3::NegUnitX, 1400.0f, 0.3f, MoveDirectionTag::MOVE_X);
 		break;
 

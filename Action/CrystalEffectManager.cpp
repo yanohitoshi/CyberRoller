@@ -52,18 +52,8 @@ CrystalEffectManager::~CrystalEffectManager()
 
 void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 {
-	// 回転速度を追加
-	yaw += YawSpeed;
 
-	// 回転角でxとyポジションを設定
-	tmpMovePos.x = Radius * cosf(yaw) + owner->GetPosition().x;
-	tmpMovePos.y = Radius * sinf(yaw) + owner->GetPosition().y;
-	// z軸は固定
-	tmpMovePos.z = owner->GetPosition().z - ShiftPositionZ;
-	// 計算したポジションと今のポジションで線形保管を取りポジションに代入
-	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaTimeCorrectionValue);
-	// ポジションを更新
-	SetPosition(position);
+	RotationProcess(_deltaTime);
 
 	// アクティブを制御するカウントを数える
 	++activeFrameCount;
@@ -92,27 +82,49 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		// 速度を一時保存する変数
-		Vector3 vel;
-		// 速度用のランダムな値を生成※x軸とy軸の速度は0.0fに固定
-		Vector3 randV(0.0f,0.0f, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
-		// 値が大きすぎるので最後の補正をかけて速度に代入
-		velocity = randV * LastCorrection;
-		//速度を設定
-		vel = velocity + randV;
-
-		// ポジション用のランダムな値を取る
-		Vector3 randPos((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
-		// 値が大きすぎるので最後の補正をかける
-		Vector3 pos = randPos * LastCorrection;
-		//ランダムな値を渡す
-		pos = pos + position;
-
-		//particleを生成
-		new CrystalDefaultEffect(pos, vel,crystalColor);
+		// エフェクト生成
+		CreateEffect();
 
 		break;
 
 	}
 
+}
+
+void CrystalEffectManager::CreateEffect()
+{
+	// 速度を一時保存する変数
+	Vector3 vel;
+	// 速度用のランダムな値を生成※x軸とy軸の速度は0.0fに固定
+	Vector3 randV(0.0f, 0.0f, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
+	// 値が大きすぎるので最後の補正をかけて速度に代入
+	velocity = randV * LastCorrection;
+	//速度を設定
+	vel = velocity + randV;
+
+	// ポジション用のランダムな値を取る
+	Vector3 randPos((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
+	// 値が大きすぎるので最後の補正をかける
+	Vector3 pos = randPos * LastCorrection;
+	//ランダムな値を渡す
+	pos = pos + position;
+
+	//particleを生成
+	new CrystalDefaultEffect(pos, vel, crystalColor);
+}
+
+void CrystalEffectManager::RotationProcess(float _deltaTime)
+{
+	// 回転速度を追加
+	yaw += YawSpeed;
+
+	// 回転角でxとyポジションを設定
+	tmpMovePos.x = Radius * cosf(yaw) + owner->GetPosition().x;
+	tmpMovePos.y = Radius * sinf(yaw) + owner->GetPosition().y;
+	// z軸は固定
+	tmpMovePos.z = owner->GetPosition().z - ShiftPositionZ;
+	// 計算したポジションと今のポジションで線形保管を取りポジションに代入
+	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaTimeCorrectionValue);
+	// ポジションを更新
+	SetPosition(position);
 }

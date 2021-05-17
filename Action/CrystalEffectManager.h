@@ -47,6 +47,16 @@ public:
 
 private:
 
+    /*
+    @fn エフェクトの生成関数
+    */
+    void CreateEffect();
+    
+    /* 
+    @fn ポジションの回転処理関数
+    */
+    void RotationProcess(float _deltaTime);
+
     // 親のGameObject保存用変数
     GameObject* owner;
     // particleの状態管理用変数

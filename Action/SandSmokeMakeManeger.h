@@ -35,6 +35,16 @@ public:
 
 private:
 
+    /*
+    @fn 大きい壁の場合に使用するエフェクトの生成関数
+    */
+    void CreateBigWallEffect();
+    
+    /*
+    @fn 小さい壁の場合に使用するエフェクトの生成関数
+    */
+    void CreateSmallWallEffect();
+
     // 親のGameObject保存用変数
     GameObject* owner;
     // particleの状態管理用変数
@@ -43,6 +53,9 @@ private:
     int frameCount;
     // 親となる動く壁のサイズを見てどれくらいの幅でeffectを出すか決める用の変数
     Vector3 ownerSize;
+
+    // 大きいサイズの動く壁かどうか
+    bool isBigWall;
 
     // 速度の最低値
     const Vector3 LowestVelValue;

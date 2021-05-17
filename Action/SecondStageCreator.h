@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
+
+
 /*
 @file SecondStageCreator.h
 @brief SecondStageを生成する
@@ -42,6 +44,15 @@ public:
 	void CreateStage();
 
 private:
+
+	// 動く床のナンバー列挙
+	// 現在の仕様上こういった形でしか列挙出来ませんでした。
+	// 改善案模索中です
+	enum SecondStageMoveGroundNumber
+	{
+		SECOND_STAGE_LEFT_MOVE_GROUND = 7,
+		SECOND_STAGE_RIGHT_MOVE_GROUND = 5,
+	};
 
 	/*
 	@fn レイヤー1クリエイター

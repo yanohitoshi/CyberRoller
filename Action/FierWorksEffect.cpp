@@ -54,19 +54,7 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 	// ライフカウントがフェードイン・アウトの切り替えタイミングに到達していなかったら
 	if (lifeCount > ChangeFadeOutTime)
 	{
-		// フェードイン状態だったら
-		if (inFlag == true)
-		{
-			// alpha値に定数を足す
-			alpha += AddAlpha;
-
-			// alpha値が最大値に到達したら
-			if (alpha >= MaxAlpha)
-			{
-				// フェードインフラグをfalseに
-				inFlag = false;
-			}
-		}
+		FadeInProcess();
 
 		// 定数を足して拡大
 		scale += FadeInAddScale;
@@ -93,19 +81,8 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
 
-		// 速度が定数より大きかったらだったら
-		if (speed > VelocityAtFadeOut)
-		{
-			// 減速
-			speed -= SubSpeed;
-
-			// 速度が定数以下だったら
-			if (speed <= VelocityAtFadeOut)
-			{
-				// 定数を代入
-				speed = VelocityAtFadeOut;
-			}
-		}
+		// 速度をチェック
+		ChackSpeedProcess();
 
 		// scale値をセット
 		particleComponent->SetAlpha(alpha);
@@ -124,4 +101,40 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 		// ステータスをdeadに変更
 		state = State::Dead;
 	}
+}
+
+void FierWorksEffect::FadeInProcess()
+{
+	// フェードイン状態だったら
+	if (inFlag == true)
+	{
+		// alpha値に定数を足す
+		alpha += AddAlpha;
+
+		// alpha値が最大値に到達したら
+		if (alpha >= MaxAlpha)
+		{
+			// フェードインフラグをfalseに
+			inFlag = false;
+		}
+	}
+
+}
+
+void FierWorksEffect::ChackSpeedProcess()
+{
+	// 速度が定数より大きかったらだったら
+	if (speed > VelocityAtFadeOut)
+	{
+		// 減速
+		speed -= SubSpeed;
+
+		// 速度が定数以下だったら
+		if (speed <= VelocityAtFadeOut)
+		{
+			// 定数を代入
+			speed = VelocityAtFadeOut;
+		}
+	}
+
 }

@@ -308,7 +308,7 @@ void SecondStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer4SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
 		break;
-	case(5):
+	case(SECOND_STAGE_RIGHT_MOVE_GROUND):
 		new MoveBlockObject(layer4Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1600.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
 		break;
 
@@ -387,10 +387,10 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new MoveWallBlock(Vector3(layer6Pos.x, layer6Pos.y + ShiftMoveWallY, layer6Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::FIRST_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer6Pos.x, layer6Pos.y, layer6Pos.z - SmallMoveWallSize.z));
 		break;
-	case(6):
+	case(SECOND_STAGE_RIGHT_MOVE_GROUND):
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(7):
+	case(SECOND_STAGE_LEFT_MOVE_GROUND):
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 350.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	case(RESPOWN_POINT_PARTS):
@@ -460,9 +460,6 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// 第二区画の動く壁オブジェクト生成
 		new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::NEXT_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - SmallMoveWallSize.z));
-		break;
-	case(7):
-		new MoveBlockObject(layer8Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 0.0f, 800.0f), Vector3::UnitZ, 200.0f, MoveDirectionTag::MOVE_Z);
 		break;
 	}
 }

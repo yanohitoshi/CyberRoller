@@ -46,52 +46,11 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-
 		//particleが発生するフレームの条件式を書く
 		if (generateFlag == true)
 		{
-			for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
-			{
-				// ランダムな値を生成
-				Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue)/ CorrectionRandValue + SecondCorrectionValue);
-				
-				// 値が大きすぎるので最後の補正をかけて速度に代入
-				velocity = randV * LastCorrection;
 
-				// 速度を一時保存
-				Vector3 vel = velocity;
-
-				//ランダムな値を渡す
-				vel = vel + randV;
-
-				// 2・3の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
-				// 2の倍数の時はｘ、3の倍数の時はｙ
-				if (efectCount % 2 == 0)
-				{
-					vel.x *= -1.0f;
-				}
-				else if (efectCount % 3 == 0)
-				{
-					vel.y *= -1.0f;
-				}
-				
-				// いろいろな方向に飛ばしたいため
-				// 4・6の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
-				// 6の倍数の時はｘ、4の倍数の時はｙ
-				if (efectCount % 4 == 0)
-				{
-					vel.y *= -1.0f;
-				}
-				else if (efectCount % 6 == 0)
-				{
-					vel.x *= -1.0f;
-				}
-
-				// ownerのポジションを代入
-				position = owner->GetPosition();
-				//particleを生成
-				new SwitchParticleEffect(position, vel);
-			}
+			CreateEffect();
 
 			// 生成フラグをfalseに
 			generateFlag = false;
@@ -105,6 +64,53 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 	
 	// フラグを保存
 	tmpChackOnFlag = ChackOnFlag;
+
+}
+
+void SwitchEffectMakeManeger::CreateEffect()
+{
+	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
+	{
+		// ランダムな値を生成
+		Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue + SecondCorrectionValue);
+
+		// 値が大きすぎるので最後の補正をかけて速度に代入
+		velocity = randV * LastCorrection;
+
+		// 速度を一時保存
+		Vector3 vel = velocity;
+
+		//ランダムな値を渡す
+		vel = vel + randV;
+
+		// 2・3の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
+		// 2の倍数の時はｘ、3の倍数の時はｙ
+		if (efectCount % 2 == 0)
+		{
+			vel.x *= -1.0f;
+		}
+		else if (efectCount % 3 == 0)
+		{
+			vel.y *= -1.0f;
+		}
+
+		// いろいろな方向に飛ばしたいため
+		// 4・6の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
+		// 6の倍数の時はｘ、4の倍数の時はｙ
+		if (efectCount % 4 == 0)
+		{
+			vel.y *= -1.0f;
+		}
+		else if (efectCount % 6 == 0)
+		{
+			vel.x *= -1.0f;
+		}
+
+		// ownerのポジションを代入
+		position = owner->GetPosition();
+		//particleを生成
+		new SwitchParticleEffect(position, vel);
+	}
 
 }
 

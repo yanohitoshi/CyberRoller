@@ -44,6 +44,27 @@ public:
 
 private:
 
+	// 押し出し板のナンバー列挙
+	// 現在の仕様上こういった形でしか列挙出来ませんでした。
+	// 改善案模索中です
+	enum ThirdStagePushBoxNumber
+	{
+		FRONT_PUSH_BOX = 7,
+	};
+
+	// 動く床のナンバー列挙
+	// 現在の仕様上こういった形でしか列挙出来ませんでした。
+	// 改善案模索中です
+	enum MoveGroundNumber
+	{
+		// レイヤー4のナンバー列挙
+		THIRD_STAGE_FRONT_MOVE_GROUND = 5,
+		THIRD_STAGE_BACK_MOVE_GROUND = 7,
+		// レイヤー5のナンバー列挙
+		THIRD_STAGE_LEFT_MOVE_GROUND = 8,
+		THIRD_STAGE_RIGHT_MOVE_GROUND = 9,
+	};
+
 	/*
 	@fn レイヤー1クリエイター
 	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う

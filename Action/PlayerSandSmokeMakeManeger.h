@@ -34,6 +34,21 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+    
+    /*
+    @fn エフェクトの生成関数
+    */
+    void CreateEffect();
+    
+    /*
+    @fn エフェクトのポジションを右にずらす関数
+    */
+    void ShiftRightEffectPosition();
+
+    /*
+    @fn エフェクトのポジションを左にずらす関数
+    */
+    void ShiftLeftEffectPosition();
 
     // 親のGameObject保存用変数
     GameObject* owner;

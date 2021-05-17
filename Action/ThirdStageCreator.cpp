@@ -359,10 +359,10 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer5SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(5):
+	case(THIRD_STAGE_FRONT_MOVE_GROUND):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 300.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(7):
+	case(THIRD_STAGE_BACK_MOVE_GROUND):
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-800.0f, 0.0f, 0.0f), Vector3::NegUnitX, 300.0f, MoveDirectionTag::MOVE_X);
 		break;
 	case(RESPOWN_POINT_PARTS):
@@ -400,7 +400,7 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer6SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(8):
+	case(THIRD_STAGE_LEFT_MOVE_GROUND):
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -434,7 +434,7 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer7SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(9):
+	case(THIRD_STAGE_RIGHT_MOVE_GROUND):
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -547,9 +547,6 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer10SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
-	case(8):
-		new PushBoxObject(layer10Pos, BlockSize, Tag::PUSH_BOX, Vector3(-400.0f, 0.0f, 0.0f), Vector3::NegUnitX, 1200.0f, 0.3f, MoveDirectionTag::MOVE_X);
-		break;
 	}
 }
 
@@ -573,7 +570,7 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 第二区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
 		break;
-	case(5):
+	case(THIRD_STAGE_BACK_MOVE_GROUND):
 		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		break;
 	}
@@ -611,12 +608,9 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(6):
-		new PushBoxObject(layer12Pos, BlockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1600.0f, 0.5f, MoveDirectionTag::MOVE_X);
-		break;
-	case(5):
-		new MoveBlockObject(layer12Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
-		break;
+	//case(5):
+	//	new MoveBlockObject(layer12Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
+	//	break;
 	}
 }
 
@@ -672,7 +666,7 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new NeedlePanelObject(layer14SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(5):
+	case(THIRD_STAGE_FRONT_MOVE_GROUND):
 		new MoveBlockObject(layer14Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		break;
 	}
@@ -712,7 +706,7 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::NEXT_SCENE_POINT, playerObject);
 		break;
 
-	case(7):
+	case(FRONT_PUSH_BOX):
 		new PushBoxObject(layer15Pos, BlockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1400.0f, 0.5f, MoveDirectionTag::MOVE_X);
 		break;
 	}

@@ -102,7 +102,7 @@ PlayerObject* FirstStageCreator::CreatePlayer()
 			if (playerData[iy][ix] == 19)
 			{
 				// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
-				pos = Vector3(Offset * ix, -Offset * iy, 500);
+				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer1 = layer1StageData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, 0.0f);
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[0]);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer1)
@@ -161,9 +161,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer2 = layer2StageData[_indexY][_indexX];
 	// レイヤー2のマップオブジェクトのポジション
-	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, 200.0f);
+	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[1]);
 	// レイヤー2のスイッチ系マップオブジェクトのポジション
-	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 100.0f);
+	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[1] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer2)
@@ -189,9 +189,9 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer3 = layer3StageData[_indexY][_indexX];
 	// レイヤー3のマップオブジェクトのポジション
-	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, 400.0f);
+	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[2]);
 	// レイヤー3のスイッチ系マップオブジェクトのポジション
-	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 300.0f);
+	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[2] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer3)
@@ -217,7 +217,7 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer4 = layer4StageData[_indexY][_indexX];
 	// レイヤー4のマップオブジェクトのポジション
-	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, 600.0f);
+	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[3]);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer4)
@@ -240,9 +240,9 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer5 = layer5StageData[_indexY][_indexX];
 	// レイヤー5のマップオブジェクトのポジション
-	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, 800.0f);
+	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[4]);
 	// レイヤー5のスイッチ系マップオブジェクトのポジション
-	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, 700.0f);
+	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[4] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer5)

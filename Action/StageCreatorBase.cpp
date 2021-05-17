@@ -15,7 +15,13 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, ShiftMoveWallY(200.0f)
 	, ShiftMoveWallZ(100.0f)
 	, MoveWallSpeed(300.0f)
+	, ShiftSwitchPositionZ(100.0f)
+	, MaxLayer(17)
 {
+	for (int layer = 0; layer < MaxLayer; layer++)
+	{
+		ObjectPositionZ[layer] = layer * 200.0f;
+	}
 }
 
 /*

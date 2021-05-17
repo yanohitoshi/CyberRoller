@@ -25,6 +25,8 @@ SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	position = owner->GetPosition();
 	ownerSize = owner->GetScaleVec();
 	frameCount = 0;
+	isBigWall = false;
+
 	// 中心に設置するために少しずらす
 	position.x -= ShiftPositionX;
 
@@ -38,6 +40,7 @@ SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	if (ownerSize.y == BigWallSize)
 	{
 		position.y -= MaxShiftPositionY;
+		isBigWall = true;
 	}
 }
 
@@ -73,66 +76,13 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 		++frameCount;
 
 		// 小さいサイズの時
-		if (ownerSize.y == SmallWallSize)
+		if (isBigWall)
 		{
-			// 3フレームに一度
-			if (frameCount % GenerateFrequency == 0)
-			{
-				// エフェクトを10個生成
-				for (int efectCount = 0; efectCount < SmallWallMaxEffect; efectCount++)
-				{
-					// ランダムな値を生成
-					Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % SmallRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
-
-					// ランダムで出た値に補正をかける
-					velocity = randV * LastCorrection;
-
-					// ランダムの値に速度の最低値を追加
-					velocity.x += LowestVelValue.x;
-					velocity.y += LowestVelValue.y;
-					velocity.z += LowestVelValue.z;
-
-					//発生位置を設定
-					Vector3 pos = position;
-					//ランダムな値を渡す
-					pos = pos + randV;
-					//particleを生成
-					new SandSmokeParticle(pos, velocity);
-
-				}
-			}
+			CreateBigWallEffect();
 		}
-
-		// 大きいサイズの時
-		if (ownerSize.y == BigWallSize)
+		else
 		{
-			// 3フレームに一度
-			if (frameCount % GenerateFrequency == 0)
-			{
-				// エフェクトを20個生成
-				for (int efectCount = 0; efectCount < BigWallMaxEffect; efectCount++)
-				{
-					// ランダムな値を生成
-					Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % BigRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
-					
-					// 値が大きすぎるので最後の補正をかけて速度に代入
-					velocity = randV * LastCorrection;
-
-					// ランダムの値に速度の最低値を追加
-					velocity.x += LowestVelValue.x;
-					velocity.y += LowestVelValue.y;
-					velocity.z += LowestVelValue.z;
-
-					//発生位置を設定
-					Vector3 pos = position;
-					//ランダムな値を渡す
-					pos = pos + randV;
-					//particleを生成
-					new SandSmokeParticle(pos, velocity);
-
-				}
-			}
-
+			CreateSmallWallEffect();
 		}
 
 		break;
@@ -140,4 +90,66 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 
 
 }
+
+void SandSmokeMakeManeger::CreateBigWallEffect()
+{
+	// 3フレームに一度
+	if (frameCount % GenerateFrequency == 0)
+	{
+		// エフェクトを20個生成
+		for (int efectCount = 0; efectCount < BigWallMaxEffect; efectCount++)
+		{
+			// ランダムな値を生成
+			Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % BigRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
+
+			// 値が大きすぎるので最後の補正をかけて速度に代入
+			velocity = randV * LastCorrection;
+
+			// ランダムの値に速度の最低値を追加
+			velocity.x += LowestVelValue.x;
+			velocity.y += LowestVelValue.y;
+			velocity.z += LowestVelValue.z;
+
+			//発生位置を設定
+			Vector3 pos = position;
+			//ランダムな値を渡す
+			pos = pos + randV;
+			//particleを生成
+			new SandSmokeParticle(pos, velocity);
+
+		}
+	}
+
+}
+
+void SandSmokeMakeManeger::CreateSmallWallEffect()
+{
+	// 3フレームに一度
+	if (frameCount % GenerateFrequency == 0)
+	{
+		// エフェクトを10個生成
+		for (int efectCount = 0; efectCount < SmallWallMaxEffect; efectCount++)
+		{
+			// ランダムな値を生成
+			Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % SmallRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
+
+			// ランダムで出た値に補正をかける
+			velocity = randV * LastCorrection;
+
+			// ランダムの値に速度の最低値を追加
+			velocity.x += LowestVelValue.x;
+			velocity.y += LowestVelValue.y;
+			velocity.z += LowestVelValue.z;
+
+			//発生位置を設定
+			Vector3 pos = position;
+			//ランダムな値を渡す
+			pos = pos + randV;
+			//particleを生成
+			new SandSmokeParticle(pos, velocity);
+
+		}
+	}
+}
+
 

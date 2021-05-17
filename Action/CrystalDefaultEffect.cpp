@@ -48,18 +48,8 @@ void CrystalDefaultEffect::UpdateGameObject(float _deltaTime)
 	// ライフカウントが0以上になったら
 	if (lifeCount > 0)
 	{
-		// フェードインフラグがtrueだったら
-		if (inFlag == true)
-		{
-			// alpha値に定数を足す
-			alpha += AddAlpha;
-			// alpha値の最大定数に到達したら
-			if (alpha >= MaxAlphaValue)
-			{
-				// フェードインフラグをfalseに
-				inFlag = false;
-			}
-		}
+		// フェードイン処理
+		FadeInProcess();
 
 		// 定数を足して拡大
 		scale += AddScale;
@@ -77,10 +67,27 @@ void CrystalDefaultEffect::UpdateGameObject(float _deltaTime)
 		SetPosition(position);
 
 	}
+
 	// ライフカウントが0以下になったら
 	if (lifeCount <= 0)
 	{
 		// ステータスをdeadに変更
 		state = State::Dead;
+	}
+}
+
+void CrystalDefaultEffect::FadeInProcess()
+{
+	// フェードインフラグがtrueだったら
+	if (inFlag == true)
+	{
+		// alpha値に定数を足す
+		alpha += AddAlpha;
+		// alpha値の最大定数に到達したら
+		if (alpha >= MaxAlphaValue)
+		{
+			// フェードインフラグをfalseに
+			inFlag = false;
+		}
 	}
 }

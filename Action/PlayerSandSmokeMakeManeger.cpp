@@ -47,79 +47,101 @@ void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		// ownerのポジションを得る
-		position = owner->GetPosition();
-
-		// フレームカウントを数える
-		++frameCount;
-
-		// 10フレームに1度プレイヤーの移動速度が一定以上だったら
-		if (frameCount % 10 == 0 && owner->GetVelocity().x > GenerateSpeedValue ||
-			frameCount % 10 == 0 && owner->GetVelocity().y > GenerateSpeedValue ||
-			frameCount % 10 == 0 && owner->GetVelocity().x < -GenerateSpeedValue ||
-			frameCount % 10 == 0 && owner->GetVelocity().y < -GenerateSpeedValue )
-		{
-			// 生成した数を数える
-			++generateCount;
-			// カウントが2の倍数の時は
-			if (generateCount % 2 == 0)
-			{
-				// 一度positionを保存
-				effectPosition = position;
-				// エフェクトのポジションをずらし足から出ているように見せる
-				if (owner->GetVelocity().x > 1.0f)
-				{
-					effectPosition.y += ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().x < -1.0f)
-				{
-					effectPosition.y -= ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().y > 1.0f)
-				{
-					effectPosition.x += ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().y < -1.0f)
-				{
-					effectPosition.x -= ShiftPositionValue;
-				}
-
-			}
-			else
-			{
-				// 一度positionを保存
-				effectPosition = position;
-
-				// エフェクトのポジションをずらし足から出ているように見せる
-				if (owner->GetVelocity().x > 1.0f)
-				{
-					effectPosition.y -= ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().x < -1.0f)
-				{
-					effectPosition.y += ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().y > 1.0f)
-				{
-					effectPosition.x -= ShiftPositionValue;
-				}
-				else if (owner->GetVelocity().y < -1.0f)
-				{
-					effectPosition.x += ShiftPositionValue;
-				}
-			}
-
-			// オーナーの速度をもらう
-			Vector3 vel = owner->GetVelocity();
-			// 正規化
-			vel.Normalize();
-			// 速度を逆向きにする
-			vel = vel * -1.0f;
-			// particleを生成
-			new PlayerSandSmokeEffect(effectPosition, vel,true);
-		}
+		CreateEffect();
 
 		break;
 	}
 
+}
+
+void PlayerSandSmokeMakeManeger::CreateEffect()
+{
+	// ownerのポジションを得る
+	position = owner->GetPosition();
+
+	// フレームカウントを数える
+	++frameCount;
+
+	// 10フレームに1度プレイヤーの移動速度が一定以上だったら
+	if (frameCount % 10 == 0 && owner->GetVelocity().x > GenerateSpeedValue ||
+		frameCount % 10 == 0 && owner->GetVelocity().y > GenerateSpeedValue ||
+		frameCount % 10 == 0 && owner->GetVelocity().x < -GenerateSpeedValue||
+		frameCount % 10 == 0 && owner->GetVelocity().y < -GenerateSpeedValue )
+	{
+		// 生成した数を数える
+		++generateCount;
+
+		// カウントが2の倍数の時は右足に
+		if (generateCount % 2 == 0)
+		{
+			ShiftRightEffectPosition();
+		}
+		else
+		{
+			ShiftLeftEffectPosition();
+		}
+
+		// オーナーの速度をもらう
+		Vector3 vel = owner->GetVelocity();
+
+		// 正規化
+		vel.Normalize();
+
+		// 速度を逆向きにする
+		vel = vel * -1.0f;
+
+		// particleを生成
+		new PlayerSandSmokeEffect(effectPosition, vel, true);
+	}
+
+
+}
+
+void PlayerSandSmokeMakeManeger::ShiftRightEffectPosition()
+{
+	// 一度positionを保存
+	effectPosition = position;
+
+	// エフェクトのポジションをずらし足から出ているように見せる
+	if (owner->GetVelocity().x > 1.0f)
+	{
+		effectPosition.y += ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().x < -1.0f)
+	{
+		effectPosition.y -= ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().y > 1.0f)
+	{
+		effectPosition.x += ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().y < -1.0f)
+	{
+		effectPosition.x -= ShiftPositionValue;
+	}
+
+}
+
+void PlayerSandSmokeMakeManeger::ShiftLeftEffectPosition()
+{
+	// 一度positionを保存
+	effectPosition = position;
+
+	// エフェクトのポジションをずらし足から出ているように見せる
+	if (owner->GetVelocity().x > 1.0f)
+	{
+		effectPosition.y -= ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().x < -1.0f)
+	{
+		effectPosition.y += ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().y > 1.0f)
+	{
+		effectPosition.x -= ShiftPositionValue;
+	}
+	else if (owner->GetVelocity().y < -1.0f)
+	{
+		effectPosition.x += ShiftPositionValue;
+	}
 }

@@ -4,22 +4,6 @@
 //-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
-enum FinalStagePushBoxNumber
-{
-	LAYER5_Number_1 = 46,
-	LAYER5_Number_2 = 47,
-	LAYER5_Number_3 = 48,
-	LAYER5_Number_4 = 49,
-	LAYER5_Number_5 = 50,
-	LAYER5_Number_6 = 51,
-	LAYER5_Number_7 = 52,
-	LAYER5_Number_8 = 53,
-	LAYER6_Number_1 = 44,
-	LAYER6_Number_2 = 45,
-	LAYER6_Number_3 = 16,
-	LAYER6_Number_4 = 17,
-	LAYER13_Number_1 = 14,
-};
 
 
 /*
@@ -61,6 +45,55 @@ public:
 	void CreateStage();
 
 private:
+
+	// 押し出し板のナンバー列挙
+	// 現在の仕様上こういった形でしか列挙出来ませんでした。
+	// 改善案模索中です
+	enum FinalStagePushBoxNumber
+	{
+		// 左向きの押し出し板の列挙ナンバー
+		LEFT_PUSH_BOX_NUMBER_1 = 46,
+		LEFT_PUSH_BOX_NUMBER_2 = 47,
+		LEFT_PUSH_BOX_NUMBER_3 = 48,
+		LEFT_PUSH_BOX_NUMBER_4 = 49,
+		LEFT_PUSH_BOX_NUMBER_5 = 44,
+		LEFT_PUSH_BOX_NUMBER_6 = 17,
+		LEFT_PUSH_BOX_NUMBER_7 = 14,
+
+		// 右向きの押し出し板の列挙ナンバー
+		RIGHT_PUSH_BOX_NUMBER_1 = 50,
+		RIGHT_PUSH_BOX_NUMBER_2 = 51,
+		RIGHT_PUSH_BOX_NUMBER_3 = 52,
+		RIGHT_PUSH_BOX_NUMBER_4 = 53,
+		RIGHT_PUSH_BOX_NUMBER_5 = 45,
+		RIGHT_PUSH_BOX_NUMBER_6 = 16,
+
+	};
+
+	// 動く床のナンバー列挙
+	// 現在の仕様上こういった形でしか列挙出来ませんでした。
+	// 改善案模索中です
+	enum FinalStageMoveGroundNumber
+	{
+		// 最初の移動方向が前移動の動く地面の列挙ナンバー
+		FRONT_MOVE_GROUND_NUMBER_1 = 5,
+		FRONT_MOVE_GROUND_NUMBER_3 = 9,
+
+		// 最初の移動方向が後ろ移動の動く地面の列挙ナンバー
+		BACK_MOVE_GROUND_NUMBER_1 = 6,
+		BACK_MOVE_GROUND_NUMBER_2 = 10,
+
+		// 最初の移動方向が左移動の動く地面の列挙ナンバー
+		LEFT_MOVE_GROUND_NUMBER_1 = 11,
+		LEFT_MOVE_GROUND_NUMBER_2 = 12,
+		LEFT_MOVE_GROUND_NUMBER_3 = 7,
+
+		// 最初の移動方向が右移動の動く地面の列挙ナンバー
+		RIGHT_MOVE_GROUND_NUMBER_1 = 13,
+		RIGHT_MOVE_GROUND_NUMBER_2 = 8,
+
+	};
+
 	/*
 	@fn レイヤー1クリエイター
 	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う

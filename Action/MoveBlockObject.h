@@ -45,6 +45,11 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
+	
+	/*
+	@fn 移動状態を確認する関数
+	*/
+	void ChackMoveProcess();
 
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;

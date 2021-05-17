@@ -335,7 +335,7 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _
 		_pairTag == Tag::SECOND_SWITCH || _pairTag == Tag::NEXT_SCENE_SWITCH ||
 		_pairTag == Tag::CLEAR_SCENE_SWITCH)
 	{
-		Vector3 ment = Vector3(0, 0, 0);
+		Vector3 ment = Vector3::Zero;
 		playerCalcCollisionFixVec(myAABB, pairAABB, ment, _pairTag);
 		SetPosition(position + ment);
 	}

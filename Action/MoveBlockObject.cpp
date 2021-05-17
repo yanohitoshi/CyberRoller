@@ -51,6 +51,19 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 		velocity = direction * moveSpeed * -1.0f;
 	}
 
+	// 移動状態確認
+	ChackMoveProcess();
+
+	// ポジションに速度を足す
+	position = position + velocity * _deltaTime;
+
+	// ポジションを更新
+	SetPosition(position);
+
+}
+
+void MoveBlockObject::ChackMoveProcess()
+{
 	// 動く向きのTagごとに反転する条件を見て反転判定
 	if (moveTag == MoveDirectionTag::MOVE_X)
 	{
@@ -77,6 +90,7 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 			inversionFlag = false;
 		}
 	}
+
 	if (moveTag == MoveDirectionTag::MOVE_Z)
 	{
 		if (position.z >= goalPos.z && direction.z == 1.0f || position.z <= goalPos.z && direction.z == -1.0f)
@@ -89,11 +103,5 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 			inversionFlag = false;
 		}
 	}
-
-	// ポジションに速度を足す
-	position = position + velocity * _deltaTime;
-
-	// ポジションを更新
-	SetPosition(position);
 
 }
