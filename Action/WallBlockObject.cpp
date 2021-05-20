@@ -15,6 +15,8 @@ WallBlockObject::WallBlockObject(const Vector3& _p, const Vector3& _size, const 
 	SetPosition(Vector3(_p));
 	SetScale(_size);
 	tag = _objectTag;
+	isPushBackToPlayer = true;
+	isFlinchToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this,false,false);

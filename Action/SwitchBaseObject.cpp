@@ -13,7 +13,8 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	SetPosition(_p);
 	SetScale(_size);
 	tag = _objectTag;
-
+	isPushBackToPlayer = true;
+	isChackGroundToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 

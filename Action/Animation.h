@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
+
 #include "Math.h"
 #include "BoneTransform.h"
 #include <vector>
@@ -14,12 +15,15 @@
 class Animation
 {
 public:
+
 	/*
 	@fn アニメーション読み込み
 	@param アニメーションへのパス
 	*/
-	bool Load(const std::string& fileName,bool _loop);                                          
+	bool Load(const std::string& fileName,bool _loop);
+
 private:
+
 	//アニメーションのためのボーン数
 	size_t mNumBones;
 	//アニメーションのフレーム数
@@ -37,21 +41,26 @@ private:
 	内側のベクトルはフレーム。　　　　　　　
 	mTracks[ボーン][フレーム数]*/
 	std::vector<std::vector<BoneTransform>> mTracks;
+
 public: //ゲッターセッター
+
 	/*
-	 @fn ボーン数
+	@fn ボーン数
 	*/
-	size_t GetNumBones() const { return mNumBones; }                                
+	size_t GetNumBones() const { return mNumBones; }
+
 	/*
-	 @fn フレーム数
+	@fn フレーム数
 	*/
-	size_t GetNumFrames() const { return mNumFrames; }                              
+	size_t GetNumFrames() const { return mNumFrames; }
+
 	/*
-	 @fn アニメーション期間
+	@fn アニメーション期間
 	*/
-	float GetDuration() const { return mDuration; }                               
+	float GetDuration() const { return mDuration; }
+
 	/*
-	 @fn フレーム期間
+	@fn フレーム期間
 	*/
 	float GetFrameDuration() const { return mFrameDuration; }                       
 
@@ -62,4 +71,5 @@ public: //ゲッターセッター
 
 	//ループするアニメーションかどうかのフラグをとる
 	bool IsLoopAnimation() const { return isLoopAnimation; }
+
 };

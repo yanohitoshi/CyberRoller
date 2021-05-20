@@ -16,6 +16,9 @@ class ContinueSprite :
 {
 public:
 
+    /*
+    @brief	コンストラクタ
+    */
     ContinueSprite();
     
     /*

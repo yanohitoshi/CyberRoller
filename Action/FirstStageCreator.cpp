@@ -15,7 +15,6 @@
    @fn コンストラクタ
    @brief block同士の間隔の初期化(offset)
  */
-
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 {
@@ -24,7 +23,6 @@ FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag
 /*
   @fn デストラクタ
  */
-
 FirstStageCreator::~FirstStageCreator()
 {
 	//マップデータの後始末
@@ -88,35 +86,6 @@ bool FirstStageCreator::OpenFile()
 	return false;
 }
 
-PlayerObject* FirstStageCreator::CreatePlayer()
-{
-	//playerクラスに初期位置を渡すための変数生成
-	Vector3 pos = Vector3(0, 0, 0);
-
-	// プレイヤーの位置情報検索
-	for (int iy = 0; iy < sizeY; iy++)
-	{
-		for (int ix = 0; ix < sizeX; ix++)
-		{
-			// プレイヤーデータ内にプレイヤー生成情報があれば
-			if (playerData[iy][ix] == 19)
-			{
-				// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
-				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
-			}
-		}
-	}
-
-	// プレイヤーオブジェクト生成
-	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
-
-	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
-	GameObject::CreateMainCamera(pos, playerObject);
-
-	// プレイヤーオブジェクトのポインタを返す
-	return playerObject;
-}
-
 void FirstStageCreator::CreateStage()
 {
 	// ステージデータを見てその情報ごとのclassを生成する
@@ -137,6 +106,36 @@ void FirstStageCreator::CreateStage()
 		}
 	}
 }
+
+PlayerObject* FirstStageCreator::CreatePlayer()
+{
+	//playerクラスに初期位置を渡すための変数生成
+	Vector3 pos = Vector3(0.0f, 0.0f, 0.0f);
+
+	// プレイヤーの位置情報検索
+	for (int iy = 0; iy < sizeY; iy++)
+	{
+		for (int ix = 0; ix < sizeX; ix++)
+		{
+			// プレイヤーデータ内にプレイヤー生成情報があれば
+			if (playerData[iy][ix] == PLAYER_PARTS)
+			{
+				// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
+				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
+			}
+		}
+	}
+
+	// プレイヤーオブジェクト生成
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+
+	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
+	GameObject::CreateMainCamera(pos, playerObject);
+
+	// プレイヤーオブジェクトのポインタを返す
+	return playerObject;
+}
+
 
 void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 {

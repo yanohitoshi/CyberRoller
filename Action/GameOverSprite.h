@@ -16,6 +16,9 @@ class GameOverSprite :
 {
 public:
 
+    /*
+    @brief	コンストラクタ
+    */
     GameOverSprite();
     
     /*

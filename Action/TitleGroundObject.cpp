@@ -15,7 +15,6 @@ TitleGroundObject::TitleGroundObject(const Vector3& _p, const Vector3& _size, co
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
-	rePositionFlag = false;
 	goalPos = Vector3(position.x, position.y - ShiftGoalAndInitPosition, position.z);
 	initPos = Vector3(position.x, position.y + ShiftGoalAndInitPosition, position.z);
 	velocity = InitVelocity;

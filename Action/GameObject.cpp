@@ -32,8 +32,13 @@ GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	, myObjectId(gameObjectId)
 	, tag(_objectTag)
 	, reUseObject(_reUseGameObject)
-	,aabb({ Vector3::Zero,Vector3::Zero })
+	, aabb({ Vector3::Zero,Vector3::Zero })
+	, isPushBackToPlayer(false)
+	, isSendVelocityToPlayer(false)
+	, isChackGroundToPlayer(false)
+	, isFlinchToPlayer(false)
 {
+
 	//IDÇ…êîílÇ1í«â¡
 	++gameObjectId;
 

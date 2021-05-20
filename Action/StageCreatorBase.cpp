@@ -18,6 +18,7 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, ShiftSwitchPositionZ(100.0f)
 	, MaxLayer(17)
 {
+	// レイヤーのポジションの初期化
 	for (int layer = 0; layer < MaxLayer; layer++)
 	{
 		ObjectPositionZ[layer] = layer * 200.0f;
@@ -25,22 +26,20 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 }
 
 /*
-  @fn デストラクタ
- */
-
+@fn デストラクタ
+*/
 StageCreatorBase::~StageCreatorBase()
 {
 }
 
 /*
-   @fn JSONfileを読み込み(読む)
-   @brief OpenFileで開いたデータを読み込み必要な配列データを取得
-   @param std::vector<std::vector<int>>& _mapData　配列データを受け取るための配列
-   @param const char* _filename どのfileを読むかを指定するためのcharポインタ
-   @param const char* _layername どのlayerを読むかを指定するためのcharポインタ
-   @return true or false (成功か失敗)
- */
-
+@fn JSONfileを読み込み(読む)
+@brief OpenFileで開いたデータを読み込み必要な配列データを取得
+@param std::vector<std::vector<int>>& _mapData　配列データを受け取るための配列
+@param const char* _filename どのfileを読むかを指定するためのcharポインタ
+@param const char* _layername どのlayerを読むかを指定するためのcharポインタ
+@return true or false (成功か失敗)
+*/
 bool StageCreatorBase::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _filename, const char* _layerName)
 {
 	//RapidJsonドキュメントとして開けるか？
@@ -103,6 +102,7 @@ bool StageCreatorBase::readTiledJson(std::vector<std::vector<int>>& _mapData, co
 			_mapData[z][x] = rapidArrayData[z * width + x].GetInt();
 		}
 	}
+
 	return true;
 }
 
@@ -115,7 +115,6 @@ int StageCreatorBase::findLayerIndex(rapidjson::GenericArray<false, rapidjson::V
 	for (i = 0; i < layerSize; i++)
 	{
 		std::string currentLayerName = layer[i]["name"].GetString();
-		//printf("%s\n", currentLayerName.c_str());
 		if (layerNameString == currentLayerName)
 		{
 			break;

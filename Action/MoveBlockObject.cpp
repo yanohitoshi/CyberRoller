@@ -19,6 +19,9 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	moveSpeed = _speed;
 	moveTag = _moveTag;
 	inversionFlag = false;
+	isPushBackToPlayer = true;
+	isSendVelocityToPlayer = true;
+	isChackGroundToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

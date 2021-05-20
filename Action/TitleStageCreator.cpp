@@ -10,12 +10,10 @@
 #include "TitleGroundObject.h"
 
 
-
 /*
    @fn コンストラクタ
    @brief block同士の間隔の初期化(offset)
  */
-
 TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, PlayerNumber(3)
@@ -27,7 +25,6 @@ TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag
 /*
   @fn デストラクタ
  */
-
 TitleStageCreator::~TitleStageCreator()
 {
 	//マップデータの削除

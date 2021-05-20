@@ -20,6 +20,7 @@ PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vec
 	direction = _direction;
 	moveTag = _moveTag;
 	inversionFlag = false;
+	isSendVelocityToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

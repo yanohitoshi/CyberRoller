@@ -17,6 +17,9 @@ class TimeSprite :
 {
 public:
 
+    /*
+    @brief	コンストラクタ
+    */
     TimeSprite();
     
     /*

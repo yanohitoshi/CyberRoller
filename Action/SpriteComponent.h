@@ -24,6 +24,7 @@ public:
 	@param _drawOrder 描画順を決める値(int)
 	*/
     SpriteComponent(GameObject* _owner,bool _isBackGround, int _drawOrder = 100);
+
 	/*
 	@fn デストラクタ
 	@brief  Componentの削除を行う
@@ -37,6 +38,7 @@ public:
     virtual void Draw(Shader* _shader);
 
 protected:
+
 	//クラスのポインタ
     Texture* texture;
 	//描画される順番（数値が少ないほど早く更新される）

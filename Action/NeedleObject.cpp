@@ -15,7 +15,6 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 	tag = _objectTag;
 	state = Active;
 	owner = _owner;
-
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

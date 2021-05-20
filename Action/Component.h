@@ -53,6 +53,7 @@ protected:
 	int updateOrder;
 
 public: //ゲッターセッター
+
 	/*
 	@return 更新順番
 	*/

@@ -16,7 +16,10 @@ class StartCountDownSprite :
     public GameObject
 {
 public:
-
+    
+    /*
+    @brief	コンストラクタ
+    */
     StartCountDownSprite();
 
     /*

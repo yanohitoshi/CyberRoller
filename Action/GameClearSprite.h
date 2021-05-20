@@ -16,7 +16,11 @@ class GameClearSprite :
     public GameObject
 {
 public:
-
+    
+    /*
+    @brief	コンストラクタ
+    @param	_playerObject プレイヤーオブジェクトのポインタ
+    */
     GameClearSprite(PlayerObject* _playerObject);
     
     /*

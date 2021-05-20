@@ -13,6 +13,8 @@ BoxObject::BoxObject(const Vector3& _p, const Vector3& _size, const Tag& _object
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
+	isPushBackToPlayer = true;
+	isChackGroundToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this,false,false);

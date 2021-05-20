@@ -37,6 +37,7 @@ public:
     virtual void Draw(Shader* _shader);
 
 protected:
+
 	//メッシュデータクラスへのポインタ
     Mesh* mesh;
 	//テクスチャサイズ
@@ -51,6 +52,7 @@ protected:
 	virtual void SetTextureToShader(Shader* shader);
 
 public: //ゲッターセッター
+
 	/*
 	@brief　メッシュコンポーネントが使うMeshの設定
 	@param	_mesh 設定するMeshクラスのポインタ
@@ -58,7 +60,7 @@ public: //ゲッターセッター
 	virtual void SetMesh(Mesh* _mesh) { mesh = _mesh; }
 
 	/*
-	 　@return 設定されたMeshクラスのポインタ
+	@return 設定されたMeshクラスのポインタ
 	*/
 	virtual Mesh* GetMesh() { return mesh; }
 
@@ -83,7 +85,6 @@ public: //ゲッターセッター
 	@return スケルトンデータを用いるか
 	*/
 	bool GetIsSkeltal()const { return isSkelton; }
-
 
 	/*
 	@return カラーチェンジを用いるか

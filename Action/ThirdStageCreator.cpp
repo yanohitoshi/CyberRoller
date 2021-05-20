@@ -16,7 +16,6 @@
    @fn コンストラクタ
    @brief block同士の間隔の初期化(Offset)
 */
-
 ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 {
@@ -25,7 +24,6 @@ ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag
 /*
   @fn デストラクタ
 */
-
 ThirdStageCreator::~ThirdStageCreator()
 {
 	//マップデータの削除
@@ -45,11 +43,10 @@ ThirdStageCreator::~ThirdStageCreator()
 	layer14StageData.clear();
 	layer15StageData.clear();
 
+	// プレイヤーのマップデータ削除
 	playerData.clear();
 
 }
-
-
 
 bool ThirdStageCreator::OpenFile()
 {
@@ -158,33 +155,6 @@ bool ThirdStageCreator::OpenFile()
 	return false;
 }
 
-PlayerObject* ThirdStageCreator::CreatePlayer()
-{
-	//playerクラスに初期位置を渡すための変数
-	Vector3 pos = Vector3(0, 0, 0);
-
-	// プレイヤーの位置情報検索
-	for (int iy = 0; iy < sizeY; iy++)
-	{
-		for (int ix = 0; ix < sizeX; ix++)
-		{
-			// プレイヤーデータ内にプレイヤー生成情報があれば
-			if (playerData[(int)iy][(int)ix] == PLAYER_PARTS)
-			{
-				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
-			}
-		}
-	}
-	// プレイヤーオブジェクト生成
-	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
-
-	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
-	GameObject::CreateMainCamera(pos, playerObject);
-
-	// プレイヤーオブジェクトのポインタを返す
-	return playerObject;
-}
-
 void ThirdStageCreator::CreateStage()
 {
 
@@ -227,6 +197,34 @@ void ThirdStageCreator::CreateStage()
 		}
 	}
 }
+
+PlayerObject* ThirdStageCreator::CreatePlayer()
+{
+	//playerクラスに初期位置を渡すための変数
+	Vector3 pos = Vector3(0, 0, 0);
+
+	// プレイヤーの位置情報検索
+	for (int iy = 0; iy < sizeY; iy++)
+	{
+		for (int ix = 0; ix < sizeX; ix++)
+		{
+			// プレイヤーデータ内にプレイヤー生成情報があれば
+			if (playerData[(int)iy][(int)ix] == PLAYER_PARTS)
+			{
+				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
+			}
+		}
+	}
+	// プレイヤーオブジェクト生成
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+
+	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
+	GameObject::CreateMainCamera(pos, playerObject);
+
+	// プレイヤーオブジェクトのポインタを返す
+	return playerObject;
+}
+
 
 void ThirdStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
@@ -608,9 +606,6 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	//case(5):
-	//	new MoveBlockObject(layer12Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
-	//	break;
 	}
 }
 

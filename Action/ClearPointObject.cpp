@@ -20,6 +20,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 	tag = _objectTag;
 	state = Active;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
+
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

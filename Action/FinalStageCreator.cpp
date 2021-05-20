@@ -17,7 +17,6 @@
    @fn コンストラクタ
    @brief block同士の間隔の初期化(Offset)
 */
-
 FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 {
@@ -26,7 +25,6 @@ FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag
 /*
   @fn デストラクタ
 */
-
 FinalStageCreator::~FinalStageCreator()
 {
 	//マップデータの削除
@@ -52,8 +50,6 @@ FinalStageCreator::~FinalStageCreator()
 	playerData.clear();
 
 }
-
-
 
 bool FinalStageCreator::OpenFile()
 {
@@ -174,38 +170,8 @@ bool FinalStageCreator::OpenFile()
 	return false;
 }
 
-PlayerObject* FinalStageCreator::CreatePlayer()
-{
-	//playerクラスに初期位置を渡すための変数
-	Vector3 pos = Vector3(0, 0, 0);
-
-	// プレイヤーの位置情報検索
-	for (int iy = 0; iy < sizeY; iy++)
-	{
-		for (int ix = 0; ix < sizeX; ix++)
-		{
-			// プレイヤーデータ内にプレイヤー生成情報があれば
-			if (playerData[iy][ix] == PLAYER_PARTS)
-			{
-				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
-			}
-		}
-	}
-
-	// プレイヤーオブジェクト生成
-	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
-
-	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
-	GameObject::CreateMainCamera(pos, playerObject);
-
-	// プレイヤーオブジェクトのポインタを返す
-	return playerObject;
-
-}
-
 void FinalStageCreator::CreateStage()
 {
-
 	// ステージデータを見てその情報ごとのclassを生成する
 	for (int iy = 0; iy < sizeY; iy++)
 	{
@@ -247,6 +213,35 @@ void FinalStageCreator::CreateStage()
 			CreateLayer17(ix, iy);
 		}
 	}
+}
+
+PlayerObject* FinalStageCreator::CreatePlayer()
+{
+	//playerクラスに初期位置を渡すための変数
+	Vector3 pos = Vector3(0, 0, 0);
+
+	// プレイヤーの位置情報検索
+	for (int iy = 0; iy < sizeY; iy++)
+	{
+		for (int ix = 0; ix < sizeX; ix++)
+		{
+			// プレイヤーデータ内にプレイヤー生成情報があれば
+			if (playerData[iy][ix] == PLAYER_PARTS)
+			{
+				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
+			}
+		}
+	}
+
+	// プレイヤーオブジェクト生成
+	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+
+	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
+	GameObject::CreateMainCamera(pos, playerObject);
+
+	// プレイヤーオブジェクトのポインタを返す
+	return playerObject;
+
 }
 
 void FinalStageCreator::CreateLayer1(int _indexX, int _indexY)

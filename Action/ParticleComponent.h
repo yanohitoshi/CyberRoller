@@ -13,6 +13,7 @@ class ParticleComponent :
 	public Component
 {
 public:
+
 	//パーティクルに対するブレンドの種類
 	typedef enum PARTICLE_BLEND_ENUM
 	{
@@ -22,8 +23,8 @@ public:
 	}PARTICLE_ENUM;
 
 	/*
-	 @param _offset 親オブジェクトクラスと画像を描画する位置の差
-	 @param _scale 画像の描画サイズ
+	@param _offset 親オブジェクトクラスと画像を描画する位置の差
+	@param _scale 画像の描画サイズ
 	*/
 	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
 	
@@ -46,6 +47,7 @@ public:
 	bool operator > (const ParticleComponent& rhs) const;
 
 private:
+
 	//親オブジェクトクラスと画像を描画する位置の差
 	Vector3 offset;
 	//画像に乗算する色
@@ -70,38 +72,47 @@ private:
 	bool reverce;
 
 public: //ゲッターセッター
+
 	/*
 	@return テクスチャID
 	*/
 	int GetTextureID() { return textureID; }
+
 	/*
 	@param _texId テクスチャID
 	*/
 	void SetTextureID(int _texId) { textureID = _texId; }
+
 	/*
 	@return ブレンドタイプ
 	*/
 	PARTICLE_ENUM GetBlendType() { return blendType; }
+
 	/*
 	@param _color 画像に乗算する色
 	*/
 	void SetColor(const Vector3& _color) { color = _color; }
+
 	/*
 	@param _alfa 透明度0~1
 	*/
 	void SetAlpha(float _alpha) { alpha = _alpha; }
+
 	/*
 	@param サイズ
 	*/
 	void SetScale(float _scale) { scale = _scale; }
+
 	/*
 	@param _mat ビルボード行列
 	*/
 	void SetBillboardMat(const Matrix4& _mat) {	staticBillboardMat = _mat;	}
+
 	/*
 	@param _brendType カメラのワールド座標
 	*/
 	void SetBlendMode(PARTICLE_ENUM _blendType){blendType = _blendType;	}
+	
 	/*
 	@brief　描画をするかどうかを設定
 	@param	true : 描画する , false : 描画しない

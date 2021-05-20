@@ -14,7 +14,6 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
-
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

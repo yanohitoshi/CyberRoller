@@ -47,6 +47,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, FallPpsitionZ(-500.0f)
 	, FirstPositionZ(5000.0f)
 	, RestartTime(10000)
+	, FlinchSpeed(1000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -62,30 +63,21 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	jumpPower = FirstJumpPower;
 	//リスポ－ンするまでのカウント初期化
 	respawnCount = 0;
-	//リスポ－ンflag初期化
-	respawnFlag = false;
 	// リスポ－ンflag位置初期化
 	respownPos = _pos;
 
+	// フラグ初期化
+	respawnFlag = false;
 	clearFlag = false;
 	nextSceneFlag = false;
 	reStartFlag = false;
-
-	// 前方ベクトル初期化
-	forwardVec = Vector3(0.0f, 0.0f, 0.0f);
-	// キャラクターの前方ベクトル初期化
-	charaForwardVec = Vector3(1.0f, 0.0f, 0.0f);
-	//// 前フレームでのキャラクターの前方ベクトル保存用ベクトル初期化
-	//tmpCharaForwardVec = Vector3(0.0f, 0.0f, 0.0f);
-	// 右方向ベクトル初期化
-	rightVec = Vector3(0.0f,0.0f,0.0f);
-	// 回転ベクトル初期化
-	rotateVec = Vector3(0.1f, 0.0f, 0.0f);
-	// 回転ベクトルNormalize
-	rotateVec.Normalize();
-	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
-	pushedVelocity = Vector3::Zero;
-
+	// ダウン・コンティニュー・deadフラグ初期化
+	downFlag = false;
+	downUpFlag = false;
+	downOverFlag = false;
+	deadFlag = false;
+	//clear判定フラグ
+	clearFlag = false;
 	// 接地フラグ初期化
 	onGround = false;
 	// 入力フラグ初期化
@@ -97,26 +89,30 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	// ジャンプフラグ初期化
 	jumpFlag = false;
-	//// ジャンプ中かどうかフラグ初期化
-	//isJumping = false;
 	// ジャンプが利用可能かフラグ初期化
 	isAvailableJumpKey = false;
+
+	// 前方ベクトル初期化
+	forwardVec = Vector3(0.0f, 0.0f, 0.0f);
+	// キャラクターの前方ベクトル初期化
+	charaForwardVec = Vector3(1.0f, 0.0f, 0.0f);
+	// 右方向ベクトル初期化
+	rightVec = Vector3(0.0f,0.0f,0.0f);
+	// 回転ベクトル初期化
+	rotateVec = Vector3(0.1f, 0.0f, 0.0f);
+	// 回転ベクトルNormalize
+	rotateVec.Normalize();
+	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
+	pushedVelocity = Vector3::Zero;
+
 	// ジャンプ中のフレームをカウントする用のカウント初期化
 	jumpFrameCount = 0;
 
 	// ジャンプswitch用フラグ初期化
 	switchJumpFlag = false;
 
-	//clear判定フラグ
-	clearFlag = false;
+	// カウント初期化
 	reStartCount = 0;
-
-	// ダウン・コンティニュー・deadフラグ初期化
-	downFlag = false;
-	downUpFlag = false;
-	downOverFlag = false;
-	deadFlag = false;
-
 	turnDelayCount = 0;
 
 	//モデル描画用のコンポーネント
@@ -171,6 +167,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = skeltalMeshComponent->GetMesh();
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,ColliderComponent::PlayerTag, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
@@ -302,14 +299,16 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
-	//chackIsJumping = isJumping;
 
 	// 一定時間入力が無かったらタイトルに戻る
 	if (inputFlag == false && jumpFlag == false)
 	{
+		// リスタートカウントを数える
 		++reStartCount;
+		// リスタートカウントが一定数を超えたら
 		if (reStartCount >= RestartTime)
 		{
+			// リスタートフラグをtrueに
 			reStartFlag = true;
 		}
 	}
@@ -325,20 +324,15 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 /*
 @fn めり込み判定と押し戻し
 */
-void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag)
+void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
-	if (_pairTag == Tag::GROUND || _pairTag == Tag::WALL || _pairTag == Tag::FIRST_MOVE_WALL ||
-		_pairTag == Tag::SECOND_MOVE_WALL || _pairTag == Tag::TUTORIAL_MOVE_WALL ||
-		_pairTag == Tag::NEXT_SCENE_MOVE_WALL || _pairTag == Tag::CLEAR_SCENE_MOVE_WALL ||
-		_pairTag == Tag::MOVE_GROUND || _pairTag == Tag::PUSH_BOARD || _pairTag == Tag::PUSH_BOX ||
-		_pairTag == Tag::TUTORIAL_SWITCH || _pairTag == Tag::FIRST_SWITCH ||
-		_pairTag == Tag::SECOND_SWITCH || _pairTag == Tag::NEXT_SCENE_SWITCH ||
-		_pairTag == Tag::CLEAR_SCENE_SWITCH)
-	{
-		Vector3 ment = Vector3::Zero;
-		playerCalcCollisionFixVec(myAABB, pairAABB, ment, _pairTag);
-		SetPosition(position + ment);
-	}
+
+	// 仮速度変数
+	Vector3 ment = Vector3::Zero;
+	// プレイヤーの押し戻し計算
+	playerCalcCollisionFixVec(myAABB, pairAABB, ment);
+	// 押し戻し計算を考慮しポジションを更新
+	SetPosition(position + ment);
 
 }
 
@@ -366,45 +360,15 @@ void PlayerObject::RotateToNewForward(const Vector3& forward)
 	}
 }
 
-void PlayerObject::OnCollision(const GameObject& _hitObject)
+void PlayerObject::ClearChack(Tag _tag)
 {
-	if (onGround == false)
-	{
-		playerBox = boxCollider->GetWorldBox();
-		FixCollision(playerBox, _hitObject.aabb, _hitObject.GetTag());
-	}
-
-	Tag hitTag = _hitObject.GetTag();
-
-	if (hitTag == Tag::WALL || hitTag == Tag::FIRST_MOVE_WALL || hitTag == Tag::SECOND_MOVE_WALL || 
-		hitTag == Tag::TUTORIAL_MOVE_WALL || hitTag == Tag::NEXT_SCENE_MOVE_WALL || hitTag == Tag::CLEAR_SCENE_MOVE_WALL)
-	{
-		if (velocity.x >= 1000.0f || velocity.y >= 1000.0f ||
-			velocity.x <= -1000.0f || velocity.y <= -1000.0f)
-		{
-			isHitWall = true;
-		}
-	}
-	else
-	{
-		isHitWall = false;
-	}
-
-	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND ||
-		_hitObject.GetTag() == Tag::PUSH_BOARD || _hitObject.GetTag() == Tag::PUSH_BOX ||
-		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
-		_hitObject.GetTag() == Tag::SECOND_SWITCH || _hitObject.GetTag() == Tag::NEXT_SCENE_SWITCH ||
-		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
-	{
-		pushedVelocity = _hitObject.GetVelocity();
-	}
-
-	if (_hitObject.GetTag() == Tag::CLEAR_POINT)
+	if (_tag == Tag::CLEAR_POINT)
 	{
 		std::vector<GameObject*> switches;
 		switches = GameObject::FindGameObject(Tag::CLEAR_SCENE_SWITCH);
 		int switchCount = 0;
 		int flagCount = 0;
+
 		for (auto itr : switches)
 		{
 			++switchCount;
@@ -421,7 +385,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 
 	}
 
-	if (_hitObject.GetTag() == Tag::NEXT_SCENE_POINT)
+	if (_tag == Tag::NEXT_SCENE_POINT)
 	{
 		std::vector<GameObject*> switches;
 		switches = GameObject::FindGameObject(Tag::NEXT_SCENE_SWITCH);
@@ -442,7 +406,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		}
 	}
 
-	if (_hitObject.GetTag() == Tag::TUTORIAL_CLEAR_POINT)
+	if (_tag == Tag::TUTORIAL_CLEAR_POINT)
 	{
 		std::vector<GameObject*> switches;
 		switches = GameObject::FindGameObject(Tag::TUTORIAL_SWITCH);
@@ -462,15 +426,64 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 			nextSceneFlag = true;
 		}
 	}
+}
 
+void PlayerObject::OnCollision(const GameObject& _hitObject)
+{
+	// 空中でかつ押し戻しを行うオブジェクトだったら
+	if (onGround == false && _hitObject.GetisPushBackToPlayer())
+	{
+		// プレイヤーのワールドボックスを取得
+		playerBox = boxCollider->GetWorldBox();
+		// 押し戻し用関数へ渡す
+		FixCollision(playerBox, _hitObject.aabb);
+	}
+	else if (_hitObject.GetTag() == Tag::PUSH_BOARD)
+	{
+		// 押し戻し用関数へ渡す
+		FixCollision(playerBox, _hitObject.aabb);
+	}
+
+	// 当たった際にプレイヤーがひるむオブジェクトだったら
+	if (_hitObject.GetisFlinchToPlayer())
+	{
+		// 一定速度以上だったら
+		if (velocity.x >= FlinchSpeed || velocity.y >= FlinchSpeed ||
+			velocity.x <= -FlinchSpeed || velocity.y <= -FlinchSpeed)
+		{
+			// 壁に当たったフラグをtrueに
+			isHitWall = true;
+		}
+	}
+	else // それ以外だったら
+	{
+		// 壁に当たったフラグをfalseに
+		isHitWall = false;
+	}
+
+	// 当たったオブジェクトがプレイヤーに速度の影響を与えるオブジェクトだったら
+	if (_hitObject.GetisSendVelocityToPlayer())
+	{
+		// そのオブジェクトの速度を保存
+		pushedVelocity = _hitObject.GetVelocity();
+	}
+
+	// ステージをクリアしたかをチェック
+	ClearChack(_hitObject.GetTag());
+
+	// 当たったオブジェクトがリスポーンオブジェクトだったら
 	if (_hitObject.GetTag() == Tag::RESPOWN_POINT)
 	{
+		// リスポーン用変数を初期化
 		respownPos = Vector3::Zero;
+		// 当たったリスポーンオブジェクトのポジションを取得
 		respownPos = _hitObject.GetPosition();
 	}
 
+	// 当たったオブジェクトが棘オブジェクトだったら
 	if (_hitObject.GetTag() == Tag::NEEDLE_PANEL)
 	{
+		// 死亡フラグをtureにセット
 		deadFlag = true;
 	}
 
@@ -478,34 +491,30 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 
 void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 {
-	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND || 
-		_hitObject.GetTag() == Tag::PUSH_BOARD || _hitObject.GetTag() == Tag::PUSH_BOX ||
-		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
-		_hitObject.GetTag() == Tag::SECOND_SWITCH || _hitObject.GetTag() == Tag::NEXT_SCENE_SWITCH ||
-		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
+	// 接地判定を行うオブジェクトだったら
+	if (_hitObject.GetisChackGroundToPlayer())
 	{
+		// 接地フラグをtrueに
 		onGround = true;
+		// オブジェクトの速度をもらう
+		pushedVelocity = _hitObject.GetVelocity();
 	}
 
-
+	// 当たったオブジェクトがジャンプスイッチでかつジャンプフラグがfalseだったら
 	if (_hitObject.GetTag() == Tag::JUMP_SWITCH && jumpFlag == false)
 	{
+		// もし、ジャンプスイッチフラグがfalseだったら
 		if (switchJumpFlag == false)
 		{
+			// フレームカウントを初期化
 			jumpFrameCount = 0;
+			// ジャンプ力を初期値にセット
 			jumpPower = FirstJumpPower;
+			// ジャンプスイッチフラグをtrueに
 			switchJumpFlag = true;
-
 		}
 	}
 
-	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::MOVE_GROUND ||
-		_hitObject.GetTag() == Tag::TUTORIAL_SWITCH || _hitObject.GetTag() == Tag::FIRST_SWITCH ||
-		_hitObject.GetTag() == Tag::SECOND_SWITCH || _hitObject.GetTag() == Tag::NEXT_SCENE_SWITCH ||
-		_hitObject.GetTag() == Tag::CLEAR_SCENE_SWITCH)
-	{
-		pushedVelocity = _hitObject.GetVelocity();
-	}
 }
 
 
@@ -515,10 +524,12 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 @param _fixedBox 移動しない物体
 //@param _calcFixVec 移動物体の補正差分ベクトル
 */
-void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec,const Tag& __pairTag)
+void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
-	_calcFixVec = Vector3(0, 0, 0);
+	// 速度ベクトル初期化
+	_calcFixVec = Vector3::Zero;
 
+	// Boxを利用して判定を取る用の変数計算
 	float dx1 = _fixedBox.min.x - _movableBox.max.x;
 	float dx2 = _fixedBox.max.x - _movableBox.min.x;
 	float dy1 = _fixedBox.min.y - _movableBox.max.y;
@@ -534,14 +545,17 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 	// x, y, zのうち最も差が小さい軸で位置を調整
 	if (Math::Abs(dx) <= Math::Abs(dy) && Math::Abs(dx) <= Math::Abs(dz))
 	{
+		// xだったらx軸方向に押し戻し
 		_calcFixVec.x = dx;
 	}
 	else if (Math::Abs(dy) <= Math::Abs(dx) && Math::Abs(dy) <= Math::Abs(dz))
 	{
+		// yだったらx軸方向に押し戻し
 		_calcFixVec.y = dy;
 	}
 	else
 	{
+		// zだったらx軸方向に押し戻し
 		_calcFixVec.z = dz;
 	}
 

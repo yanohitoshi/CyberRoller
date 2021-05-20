@@ -30,6 +30,9 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	velocity = Vector3::Zero;
 	initPosition = position;
 	stopPoint = position.z - ShiftStopPosition;
+	isPushBackToPlayer = true;
+	isSendVelocityToPlayer = true;
+	isChackGroundToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new ChangeColorMeshComponent(this,false,true);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

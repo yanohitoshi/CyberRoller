@@ -15,7 +15,10 @@ class ThankYouSprite :
     public GameObject
 {
 public:
-
+    
+    /*
+    @brief	コンストラクタ
+    */
     ThankYouSprite();
     
     /*

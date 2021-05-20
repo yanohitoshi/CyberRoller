@@ -21,22 +21,24 @@ public:
 	@param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
 	*/
 	BoxCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
-	/**
+
+	/*
 	@brief	デストラクタ
 	*/
 	virtual ~BoxCollider();
 	
-	/**
+	/*
 	@brief	Transformのワールド変換
 	*/
 	void OnUpdateWorldTransform() override;
 
-	/**
+	/*
 	@brief	Transformのワールド変換
-			押し戻しが行われた直後にObjectのworldBoxを更新（行われなくても呼ばれる）
+	押し戻しが行われた直後にObjectのworldBoxを更新（行われなくても呼ばれる）
 	*/
 	void refreshWorldTransform();
-	/**
+
+	/*
 	@brief	当たり判定に使うAABBの設定
 	@param	オブジェクトの大きさに合わせたAABBの構造体
 	*/

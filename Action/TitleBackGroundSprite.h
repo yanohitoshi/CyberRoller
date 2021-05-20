@@ -35,6 +35,7 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
     // 背景用スプライトComponent
     SpriteComponent* sprite;
 

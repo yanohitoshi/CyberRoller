@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
-
-
 /*
 @file SecondStageCreator.h
 @brief SecondStage‚ğ¶¬‚·‚é

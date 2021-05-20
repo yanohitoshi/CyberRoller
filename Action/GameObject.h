@@ -327,6 +327,30 @@ public:
 	@fn 静的なtitleCameraを生成する
 	*/
 	static void CreateTitleCamera(const Vector3 _pos);
+	
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisFlinchToPlayer() const { return isFlinchToPlayer; }
+
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisPushBackToPlayer() const { return isPushBackToPlayer; }
+	
+	/*
+	@brief　プレイヤーに速度を送るオブジェクトかどうかフラグのgetter
+	@return	isSendVelocityToPlayer
+	*/
+	bool GetisSendVelocityToPlayer() const { return isSendVelocityToPlayer; }
+	
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isChackGroundToPlayer
+	*/
+	bool GetisChackGroundToPlayer() const { return isChackGroundToPlayer; }
 
 	/*
 	@brief　スイッチ用フラグのgetter
@@ -392,6 +416,18 @@ protected:
 
 	//switch用フラグ
 	bool onFlag;
+
+	// プレイヤーと押し戻しを行うオブジェクトかどうか
+	bool isPushBackToPlayer;
+
+	// 速度がプレイヤーに関与するかどうか
+	bool isSendVelocityToPlayer;
+
+	// プレイヤーと接地判定を行うかどうか
+	bool isChackGroundToPlayer;
+
+	// プレイヤーが当たった際に怯みが入るオブジェクトか
+	bool isFlinchToPlayer;
 
 	//アタッチされているコンポーネント
 	std::vector<class Component*>components;

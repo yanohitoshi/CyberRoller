@@ -8,6 +8,7 @@ RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _obje
 	position = _p;
 	// ポジションをセット
 	SetPosition(position);
+
 	// リスポーンポイントとなるかどうかフラグの初期化
 	reSpownFlag = false;
 

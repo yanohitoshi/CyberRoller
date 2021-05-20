@@ -53,12 +53,12 @@ public:
 	/*
 	@fn めり込み判定
 	*/
-	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
+	void FixCollision(AABB& myAABB, const AABB& pairAABB);
 	
 	/*
 	@fn 押し戻し処理
 	*/
-	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec,const Tag& __pairTag);
+	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec);
 	
 	/*
 	@fn 前方ベクトルを用いてキャラクターを回転させる関数
@@ -123,6 +123,7 @@ public:
 	bool GetRespawnFlag() { return respawnFlag; };
 	bool GetIsAvailableInput() { return isAvailableInput; };
 	bool GetIsHitWall() { return isHitWall; };
+
 	// シーン遷移時に使うフラグのgetter
 	bool GetClearFlag() { return clearFlag; }
 	bool GetNextSceneFlag() { return nextSceneFlag; }
@@ -164,6 +165,11 @@ public:
 
 
 private:
+
+	/*
+	@fn クリアしている状態かをチェックする関数
+	*/
+	void ClearChack(Tag _tag);
 
 	//----------------Component系Class変数--------------------//
 	// 3Dモデルの描画を行うクラス
@@ -227,6 +233,9 @@ private:
 	const float FallPpsitionZ;
 	// 生成されるときのポジションをずらす
 	const float FirstPositionZ;
+	// ひるむ速度定数
+	const float FlinchSpeed;
+
 	//--------------------------------------------------------//
 	//--------------------------変数群------------------------//
 	//押し戻しに使うプレイヤーのAABB
