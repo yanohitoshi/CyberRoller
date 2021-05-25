@@ -12,16 +12,18 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, SmallMoveWallSize(Vector3(20.0f, 1100.0f, 1000.0f))
 	, RespawnBox({ Vector3(-10.0f,-1000.0f,-1000.0f),Vector3(10.0f,1000.0f,1000.0f) })
 	, Offset(400.0f)
+	, OffsetZ(200.0f)
 	, ShiftMoveWallY(200.0f)
 	, ShiftMoveWallZ(100.0f)
 	, MoveWallSpeed(300.0f)
 	, ShiftSwitchPositionZ(100.0f)
 	, MaxLayer(17)
 {
-	// レイヤーのポジションの初期化
+	// レイヤーのZ軸ポジションの初期化
 	for (int layer = 0; layer < MaxLayer; layer++)
 	{
-		ObjectPositionZ[layer] = layer * 200.0f;
+		// ブロック系のオブジェクトの高さの間隔は200.0fなのでそれに準じてレイヤーの最大数で初期化
+		objectPositionZ[layer] = layer * OffsetZ;
 	}
 }
 

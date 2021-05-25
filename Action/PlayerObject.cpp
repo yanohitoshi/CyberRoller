@@ -211,9 +211,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 PlayerObject::~PlayerObject()
 {
 	// 静的フラグの初期化
-	clearFlag = false;
-	nextSceneFlag = false;
-	reStartFlag = false;
 	chackJumpFlag = false;
 	chackIsJumping = false;
 }

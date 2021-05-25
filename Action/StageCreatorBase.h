@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "RapidJsonHelper.h"
 #include <vector>
-
+#include <unordered_map>
 // 前置宣言
 class PlayerObject;
 
@@ -69,6 +69,26 @@ enum StagePartsName
 
 };
 
+enum LayerNameTag
+{
+	LAYER1,
+	LAYER2,
+	LAYER3,
+	LAYER4,
+	LAYER5,
+	LAYER6,
+	LAYER7,
+	LAYER8,
+	LAYER9,
+	LAYER10,
+	LAYER11,
+	LAYER12,
+	LAYER13,
+	LAYER14,
+	LAYER15,
+	LAYER16,
+	LAYER17,
+};
 
 /*
 @file StageCreatorBase.h
@@ -117,8 +137,10 @@ protected:
 	// 動く壁の速度定数
 	const float MoveWallSpeed;
 
-	//配置するオブジェクトの間隔。サイズ
+	//X・Y軸のオブジェクトの間隔。
 	const float Offset;
+	// Z軸のオブジェクトの間隔
+	const float OffsetZ;
 
 	// ブロックオブジェクトのサイズ定数
 	const Vector3 BlockSize;
@@ -146,10 +168,8 @@ protected:
 	// レイヤー数の最大値
 	const int MaxLayer;
 
-	// レイヤーごとに割り当てるZ軸の値を格納する配列
-	float ObjectPositionZ[17];
-
-
+	// レイヤーごとに割り当てるオブジェクトのZ軸の値を格納する配列
+	float objectPositionZ[17];
 
 };
 

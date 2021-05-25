@@ -17,6 +17,7 @@
  */
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
+	, MaxLayerNumber(5)
 {
 }
 
@@ -142,7 +143,7 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer1 = layer1StageData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[0]);
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer1)
@@ -160,9 +161,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer2 = layer2StageData[_indexY][_indexX];
 	// レイヤー2のマップオブジェクトのポジション
-	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[1]);
+	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[1]);
 	// レイヤー2のスイッチ系マップオブジェクトのポジション
-	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[1] - ShiftSwitchPositionZ);
+	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[1] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer2)
@@ -171,10 +172,12 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new BoxObject(layer2Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(JUMP_SWITCH_PARTS):
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer2SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
+
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
@@ -188,9 +191,9 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer3 = layer3StageData[_indexY][_indexX];
 	// レイヤー3のマップオブジェクトのポジション
-	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[2]);
+	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[2]);
 	// レイヤー3のスイッチ系マップオブジェクトのポジション
-	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[2] - ShiftSwitchPositionZ);
+	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[2] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer3)
@@ -199,10 +202,12 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(PORTRAIT_WALL_PARTS):
 		// 縦長壁オブジェクトの生成
 		new WallBlockObject(layer3Pos, PortraitWallBlockSize, Tag::WALL);
 		break;
+
 	case(LANDSCAPE_WALL_PARTS):
 		// 横長壁オブジェクトの生成
 		new WallBlockObject(layer3Pos, LandscapeWallBlockSize, Tag::WALL);
@@ -216,7 +221,7 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer4 = layer4StageData[_indexY][_indexX];
 	// レイヤー4のマップオブジェクトのポジション
-	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[3]);
+	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[3]);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer4)
@@ -225,11 +230,11 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new BoxObject(layer4Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-
 	}
 
 }
@@ -239,9 +244,9 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int layer5 = layer5StageData[_indexY][_indexX];
 	// レイヤー5のマップオブジェクトのポジション
-	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[4]);
+	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[4]);
 	// レイヤー5のスイッチ系マップオブジェクトのポジション
-	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, ObjectPositionZ[4] - ShiftSwitchPositionZ);
+	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[4] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer5)
@@ -250,14 +255,17 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new BoxObject(layer5Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::TUTORIAL_SWITCH);
 		break;
+
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT, playerObject);
 		break;
+
 	case(FIRST_MOVE_WALL_PARTS):
 		// 第一区画の動く壁オブジェクト生成
 		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::TUTORIAL_MOVE_WALL, MoveWallSpeed,

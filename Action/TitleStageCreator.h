@@ -73,6 +73,10 @@ private:
 	// タイトルでのグラウンドオブジェクト生成ナンバー
 	const int GroundNumber;
 
+	// タイトルシーンでのプレイヤーのZ軸生成ポジション定数
+	const float TitlePlayerPositionZ;
+	// タイトルシーンでのブロックのZ軸生成ポジション定数
+	const float TitleBlockPositionZ;
 	// タイトルのプレイヤーのポジション用変数
 	Vector3 playerPos;
 

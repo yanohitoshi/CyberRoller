@@ -44,6 +44,7 @@ public:
 	*/
 	void CreateStage();
 
+
 private:
 
 	/*
@@ -85,6 +86,9 @@ private:
 	@param	_indexY 検索するマップデータの添え字Y
 	*/
 	void CreateLayer5(int _indexX, int _indexY);
+
+	// 第一ステージのレイヤーの最大定数
+	const int MaxLayerNumber;
 
 	//ファーストステージデータ
 	std::vector<std::vector<int>> layer1StageData;

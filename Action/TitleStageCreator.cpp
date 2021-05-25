@@ -19,6 +19,8 @@ TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag
 	, PlayerNumber(3)
 	, GroundNumber(79)
 	, playerPos(Vector3::Zero)
+	, TitlePlayerPositionZ(100.0f)
+	, TitleBlockPositionZ(0.0f)
 {
 }
 
@@ -34,6 +36,7 @@ TitleStageCreator::~TitleStageCreator()
 
 bool TitleStageCreator::OpenFile()
 {
+
 	// ステージデータ読み込み (baseLayer)
 	if (!readTiledJson(titleMapData, "Assets/Config/TitleMap.json", "baselayer"))
 	{
@@ -45,7 +48,7 @@ bool TitleStageCreator::OpenFile()
 	sizeX = titleMapData[0].size();
 	sizeY = titleMapData.size();
 
-	// ステージデータ読み込み (baseLayer)
+	// ステージデータ読み込み (player)
 	if (!readTiledJson(titlePlayerData, "Assets/Config/TitleMap.json", "player"))
 	{
 		printf("do'nt have Layer/Titleplayer\n");
@@ -92,7 +95,7 @@ void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerP
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int baseLayer = titleMapData[(int)_indexY][(int)_indexX];
 	// タイトルステージのマップオブジェクトのポジション
-	Vector3 baseLayerPos = Vector3(Offset * _indexX, -Offset * _indexY, 0.0f);
+	Vector3 baseLayerPos = Vector3(Offset * _indexX, -Offset * _indexY, TitleBlockPositionZ);
 
 	// マップデータが生成ナンバーだったら
 	if (baseLayer == GroundNumber)
@@ -107,7 +110,7 @@ Vector3 TitleStageCreator::CreatePlayer(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int playerLayer = titlePlayerData[(int)_indexY][(int)_indexX];
 	// タイトルでのプレイヤーオブジェクトのポジション
-	Vector3 objectPos = Vector3(Offset * _indexX, -Offset * _indexY, 100.0f);
+	Vector3 objectPos = Vector3(Offset * _indexX, -Offset * _indexY, TitlePlayerPositionZ);
 	
 	// マップデータが生成ナンバーだったら
 	if (playerLayer == PlayerNumber)

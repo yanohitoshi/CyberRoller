@@ -147,6 +147,8 @@ private:
 	*/
 	void CreateLayer12(int _indexX, int _indexY);
 
+	// 第二ステージのレイヤーの最大定数
+	const int MaxLayerNumber;
 
 	//第二ステージデータ
 	std::vector<std::vector<int>> layer1StageData;
