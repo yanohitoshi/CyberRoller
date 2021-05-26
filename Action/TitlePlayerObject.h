@@ -63,6 +63,32 @@ public:
 private:
 
     /*
+    @fn 回転処理関数
+    */
+    void RotationProcess();
+
+    /*
+    @fn 重力処理関数
+    @param	_deltaTime 前のフレームでかかった時間
+    */
+    void GravityProcess(float _deltaTime);
+
+    /*
+    @fn ジャンプディレイ処理関数
+    */
+    void JumpDelayProcess();
+
+    /*
+    @fn ジャンプ処理関数
+    */
+    void JumpProcess();
+
+    /*
+    @fn 接地判定処理関数
+    */
+    void IsGroundingProcess();
+
+    /*
     @fn アニメーションの更新処理
     */
     void AnimationUpdate();
@@ -104,6 +130,9 @@ private:
 
     // 接地判定を取る座標値定数
     const float OnGroundCoordinate;
+
+    // 回転角定数
+    const float RotationAngle;
 
 };
 

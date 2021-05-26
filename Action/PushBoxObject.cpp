@@ -14,6 +14,8 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
+	isPushBackToPlayer = true;
+	isChackGroundToPlayer = true;
 
 	// PushBoardとPushBoxの間隔
 	float offsetX = 210.0f;
@@ -22,30 +24,37 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
+
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/groundModel/box.gpmesh"));
+
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::GroundTag, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
+
 	// 動く向きごとにPushBoardObjectの引数を変更して付与
 	if (_direction.x == 1.0f)
 	{
 		Vector3 boardSize = Vector3(50.0f, 200.0f, 200.0f);
 		new PushBoardObject(this,Vector3(_p.x + offsetX, _p.y, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed,_moveTag);
 	}
+
 	if (_direction.x == -1.0f)
 	{
 		Vector3 boardSize = Vector3(50.0f, 200.0f, 200.0f);
 		new PushBoardObject(this, Vector3(_p.x - offsetX, _p.y, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed, _moveTag);
 	}
+
 	if (_direction.y == 1.0f)
 	{
 		Vector3 boardSize = Vector3(200.0f, 50.0f, 200.0f);
 		new PushBoardObject(this, Vector3(_p.x, _p.y + offsetY, _p.z + offsetZ), boardSize, PUSH_BOARD, _distance, _direction, _speed, _cutBackSpeed, _moveTag);
 	}
+
 	if (_direction.y == -1.0f)
 	{
 		Vector3 boardSize = Vector3(200.0f, 50.0f, 200.0f);

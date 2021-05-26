@@ -49,6 +49,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;
 	MeshComponent* meshComponent;
+
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 

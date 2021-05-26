@@ -510,20 +510,10 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 
 	case(LEFT_PUSH_BOX_NUMBER_5):
 		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1000.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		break;
-
-	case(RIGHT_PUSH_BOX_NUMBER_5):
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1000.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		break;
-
-	case(RIGHT_PUSH_BOX_NUMBER_6):
-		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1200.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
-
-	case(LEFT_PUSH_BOX_NUMBER_6):
+		
+	case(RIGHT_PUSH_BOX_NUMBER_5):
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
@@ -785,11 +775,6 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer13SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-		break;
-
-	case(LEFT_PUSH_BOX_NUMBER_7):
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer13Pos, BlockSize, Tag::PUSH_BOX, Vector3(-400.0f, 0.0f, 0.0f), Vector3::NegUnitX, 1400.0f, 0.3f, MoveDirectionTag::MOVE_X);
 		break;
 	}
 }

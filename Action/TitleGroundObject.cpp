@@ -33,6 +33,7 @@ void TitleGroundObject::UpdateGameObject(float _deltaTime)
 	position += velocity * _deltaTime;
 	// ポジションを更新
 	SetPosition(position);
+
 	// 指定位置までオブジェクトが動いていたら
 	if (position.y <= goalPos.y)
 	{

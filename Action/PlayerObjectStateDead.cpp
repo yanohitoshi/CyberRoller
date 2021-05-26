@@ -15,19 +15,10 @@ PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime
 	// リスポーンに移行するフラグがfalseだったら
 	if (_owner->GetRespawnFlag() == false)
 	{
-		// リスポーンするまでの時間をカウントする
-		++respawnCount;
-		// カウントが定数値に到達したら
-		if (respawnCount >= respawnTime)
-		{
-			// リスポーンに移行するフラグをfalseに 
-			_owner->SetRespawnFlag(true);
-			// ownerにリスポーンするポジションを渡す
-			_owner->SetPosition(_owner->GetRespownPos());
-			// 死亡状態フラグをfalseに
-			_owner->SetDeadFlag(false);
-		}
+		// 復帰までのカウント処理
+		ToRespawnCountProcess(_owner);
 	}
+
 	if (_owner->GetRespawnFlag()) 	// リスポーンに移行するフラグがtrueだったら
 	{
 		// ステータスをリスポーンに変更する
@@ -61,4 +52,20 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 	// 入力可能フラグをfalseにセット
 	_owner->SetIsAvailableInput(false);
 
+}
+
+void PlayerObjectStateDead::ToRespawnCountProcess(PlayerObject* _owner)
+{
+	// リスポーンするまでの時間をカウントする
+	++respawnCount;
+	// カウントが定数値に到達したら
+	if (respawnCount >= respawnTime)
+	{
+		// リスポーンに移行するフラグをfalseに 
+		_owner->SetRespawnFlag(true);
+		// ownerにリスポーンするポジションを渡す
+		_owner->SetPosition(_owner->GetRespownPos());
+		// 死亡状態フラグをfalseに
+		_owner->SetDeadFlag(false);
+	}
 }

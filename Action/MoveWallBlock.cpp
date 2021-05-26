@@ -58,13 +58,36 @@ void MoveWallBlock::UpdateGameObject(float _deltaTime)
 	aabb = boxCollider->GetWorldBox();
 
 	// 対象のスイッチの状態をチェック
-	ChackSwitch(chackTag, _deltaTime);
+	ChackSwitch(chackTag);
+
+	// オープンフラグがtrueだったら
+	if (openFlag == true)
+	{
+		OpenWall(_deltaTime);
+	}
 
 	// ポジションの更新
 	SetPosition(position);
 }
 
-void MoveWallBlock::ChackSwitch(Tag& _tag, float _deltaTime)
+void MoveWallBlock::OpenWall(float _deltaTime)
+{
+	// 移動速度を付与
+	velocity.z = moveSpeed;
+	// ポジション変更
+	position.z -= velocity.z * _deltaTime;
+
+	// 止まるべき位置に来たら停止
+	if (position.z <= stopPos.z)
+	{
+		// オープンフラグをfalseに
+		openFlag = false;
+		// 速度を0.0fに
+		velocity.z = 0.0f;
+	}
+}
+
+void MoveWallBlock::ChackSwitch(Tag& _tag)
 {
 	// チェック用可変長配列
 	std::vector<GameObject*> switches;
@@ -93,47 +116,37 @@ void MoveWallBlock::ChackSwitch(Tag& _tag, float _deltaTime)
 		// オープンフラグをtrueに
 		openFlag = true;
 	}
-	
-	// オープンフラグがtrueだったら
-	if (openFlag == true)
-	{
-		// 移動速度を付与
-		velocity.z = moveSpeed;
-		// ポジション変更
-		position.z -= velocity.z * _deltaTime;
-
-		// 止まるべき位置に来たら停止
-		if (position.z <= stopPos.z)
-		{
-			// オープンフラグをfalseに
-			openFlag = false;
-			// 速度を0.0fに
-			velocity.z = 0.0f;
-		}
-	}
-
-
 }
 
 void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
 {
-	// _tagを参照してチェックすべきスイッチをセット
+
+	// なんの壁なのかを参照してチェックすべきスイッチをセット
 	switch (_tag)
 	{
-	case(Tag::NEXT_SCENE_MOVE_WALL):
-		chackTag = Tag::NEXT_SCENE_SWITCH;
-		break;
+		// チュートリアル用の壁だったら
 	case(Tag::TUTORIAL_MOVE_WALL):
 		chackTag = Tag::TUTORIAL_SWITCH;
 		break;
+
+		// 第一区画の壁だったら
 	case(Tag::FIRST_MOVE_WALL):
 		chackTag = Tag::FIRST_SWITCH;
 		break;
+
+		// 第二区画の壁だったら
 	case(Tag::SECOND_MOVE_WALL):
 		chackTag = Tag::SECOND_SWITCH;
 		break;
+
+		// ゲームクリア前の壁だったら
 	case(Tag::CLEAR_SCENE_MOVE_WALL):
 		chackTag = Tag::CLEAR_SCENE_SWITCH;
+		break;
+
+		// 次のシーンへ遷移前の壁だったら
+	case(Tag::NEXT_SCENE_MOVE_WALL):
+		chackTag = Tag::NEXT_SCENE_SWITCH;
 		break;
 
 	}

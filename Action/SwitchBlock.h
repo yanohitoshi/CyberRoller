@@ -40,8 +40,26 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
-	// 区画ごとに分かれたswitchがすべて押されたかどうかチェックする関数
-	void ChackOnFlag(Tag& _Tag);
+
+	/*
+	@fn 可動処理関数	
+	*/
+	void MovableProcess();
+	
+	/*
+	@fn 色変更処理
+	*/
+	void ColorChangeProcess();
+	
+	/*
+	@fn 色セット処理
+	*/
+	void SetColorProcess();
+
+	/*
+	@fn タグごとのスイッチの状態チェック関数
+	@param _Tag チェックするスイッチのTag
+	*/	void ChackOnFlag(Tag& _Tag);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

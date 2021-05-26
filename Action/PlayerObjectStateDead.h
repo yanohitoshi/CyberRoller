@@ -43,6 +43,11 @@ public:
 
 private:
 
+	/*
+	@fn 復帰遷移カウント処理関数
+	*/
+	void ToRespawnCountProcess(PlayerObject* _owner);
+
 	// リスポーン状態に入るまでのカウントを測る変数
 	int respawnCount;
 

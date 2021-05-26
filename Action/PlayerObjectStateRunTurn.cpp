@@ -87,37 +87,8 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 	// 入力可能状態かを見る
 	if (_owner->GetIsAvailableInput())
 	{
-		// コントローラのアナログスティックの入力情報を計算する
-		Vector3 axis = ChackControllerAxis(_keyState);
-
-		// 取得した数値を見てデッドスペース外だったら入力処理を行う
-		if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
-		{
-			// 方向キーの入力値とカメラの向きから、移動方向を決定
-			Vector3 forward = _owner->GetForwardVec() * axis.x + _owner->GetRightVec() * axis.y;
-			// ベクトルの正規化
-			forward.Normalize();
-			// 前方ベクトルの更新
-			_owner->SetCharaForwardVec(forward);
-			// 入力フラグをtrueに
-			_owner->SetInputFlag(true);
-		}
-		else
-		{
-			// 入力フラグをfalseに
-			_owner->SetInputFlag(false);
-		}
-
-		// ジャンプを割り当てられているコントローラーのボタンが押されたらもしくはジャンプスイッチが押されたら
-		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
-			_owner->GetSwitchJumpFlag() == true)
-		{
-			// ジャンプフラグをtrueにセット
-			_owner->SetJumpFlag(true);
-		}
+		// 入力情報チェック処理
+		ChackInputProcess(_owner, _keyState);
 	}
 }
 
@@ -138,4 +109,57 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 	// ownerのターン間隔速度を初期化
 	_owner->SetTurnDelayCount(0);
 
+}
+
+void PlayerObjectStateRunTurn::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
+{
+	// コントローラのアナログスティックの入力情報を計算する
+	Vector3 axis = ChackControllerAxis(_keyState);
+
+	// 取得した数値を見てデッドスペース外だったら入力処理を行う
+	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
+	{
+		// 入力がある場合の処理
+		InputMovableProcess(_owner,axis);
+	}
+	else
+	{
+		// 入力がない場合の処理
+		UninputMovableProcess(_owner);
+	}
+
+	// ジャンプを割り当てられているコントローラーのボタンが押されたらもしくはジャンプスイッチが押されたら
+	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
+		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
+		_owner->GetSwitchJumpFlag() == true)
+	{
+		// ジャンプ準備
+		JumpTransitionProcess(_owner);
+	}
+}
+
+void PlayerObjectStateRunTurn::InputMovableProcess(PlayerObject* _owner, Vector3 _axis)
+{
+	// 方向キーの入力値とカメラの向きから、移動方向を決定
+	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
+	// ベクトルの正規化
+	forward.Normalize();
+	// 前方ベクトルの更新
+	_owner->SetCharaForwardVec(forward);
+	// 入力フラグをtrueに
+	_owner->SetInputFlag(true);
+}
+
+void PlayerObjectStateRunTurn::UninputMovableProcess(PlayerObject* _owner)
+{
+	// 入力フラグをfalseに
+	_owner->SetInputFlag(false);
+}
+
+void PlayerObjectStateRunTurn::JumpTransitionProcess(PlayerObject* _owner)
+{
+	// ジャンプフラグをtrueにセット
+	_owner->SetJumpFlag(true);
 }

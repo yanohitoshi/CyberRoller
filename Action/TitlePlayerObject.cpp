@@ -12,15 +12,19 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	, JumpSpeed(15.0f)
 	, JumpLimitTime(13)
 	, OnGroundCoordinate(100.0f)
+	, RotationAngle(90.0f)
 {
+
 	// ポジションをセット
 	SetPosition(_pos);
+
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
 	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/robo_model/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
 	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/robo_model/SK_Rob.gpskel"));
+
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
 	animTypes.resize(TitleAnimState::ITEMNUM);
@@ -33,16 +37,12 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 
 	//anim変数を速度0.5fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
+
 	// メンバー変数初期化
 	firstJumpPower = 40.0f;
 	jumpPower = firstJumpPower;
 
-	//Z軸を90度回転させる
-	float radian = Math::ToRadians(90);
-	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitZ, radian);
-	Quaternion target = Quaternion::Concatenate(rot, inc);
-	SetRotation(target);
+	RotationProcess();
 
 }
 
@@ -63,59 +63,19 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 	//ジャンプ中もしくは落下中の時重力をかける（一定数以上かかったら止めて定数にする）
 	if (onGround == false )
 	{
-		// 重力を掛ける
-		velocity.z -= Gravity * _deltaTime;
-
-		// 落下速度が規定値を超えていたら
-		if (velocity.z <= MaxFallSpeed)
-		{
-			// 落下速度を規定値に固定する
-			velocity.z = MaxFallSpeed;
-		}
+		GravityProcess(_deltaTime);
 	}
 
 	// 接地状態でかつジャンプ中で無かったら
 	if (onGround == true && jumpFlag == false)
 	{
-		// ジャンプする間隔を数える
-		++jumpDelayCount;
-		// 時間が来たらジャンプさせジャンプ開始アニメーションを再生
-		if (jumpDelayCount >= JumpDelayTime)
-		{
-			// ジャンプフラグをtrueに
-			jumpFlag = true;
-			// アニメーション再生
-			skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
-			// ステータスをJUMPSTARTに変更
-			animState = JUMPSTART;
-			// カウントリセット
-			jumpDelayCount = 0;
-		}
+		JumpDelayProcess();
 	}
 
 	// ジャンプ中だったら
 	if(jumpFlag == true)
 	{
-		// ジャンプ力を追加
-		velocity.z = jumpPower;
-		// ジャンプ中のカウントを数える
-		++jumpFrameCount;
-
-		// ジャンプ中のカウントが規定値以下だったら
-		if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
-		{
-			// さらにジャンプ力を追加
-			jumpPower += JumpSpeed;
-		}
-		else // ジャンプ中のカウントが規定値以上だったら
-		{
-			// ジャンプ力を初期に戻す
-			jumpPower = firstJumpPower;
-			// カウントリセット
-			jumpFrameCount = 0;
-			// ジャンプフラグをfalseに
-			jumpFlag = false;
-		}
+		JumpProcess();
 	}
 
 	// ポジションに速度を追加
@@ -123,6 +83,80 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 	// ポジションを更新
 	SetPosition(position);
 
+	// 接地判定処理
+	IsGroundingProcess();
+
+}
+
+void TitlePlayerObject::RotationProcess()
+{
+	//Z軸を90度回転させる
+	float radian = Math::ToRadians(RotationAngle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
+}
+
+void TitlePlayerObject::GravityProcess(float _deltaTime)
+{
+	// 重力を掛ける
+	velocity.z -= Gravity * _deltaTime;
+
+	// 落下速度が規定値を超えていたら
+	if (velocity.z <= MaxFallSpeed)
+	{
+		// 落下速度を規定値に固定する
+		velocity.z = MaxFallSpeed;
+	}
+}
+
+void TitlePlayerObject::JumpDelayProcess()
+{
+	// ジャンプする間隔を数える
+	++jumpDelayCount;
+
+	// 時間が来たらジャンプさせジャンプ開始アニメーションを再生
+	if (jumpDelayCount >= JumpDelayTime)
+	{
+		// ジャンプフラグをtrueに
+		jumpFlag = true;
+		// アニメーション再生
+		skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
+		// ステータスをJUMPSTARTに変更
+		animState = JUMPSTART;
+		// カウントリセット
+		jumpDelayCount = 0;
+	}
+}
+
+void TitlePlayerObject::JumpProcess()
+{
+	// ジャンプ力を追加
+	velocity.z = jumpPower;
+
+	// ジャンプ中のカウントを数える
+	++jumpFrameCount;
+
+	// ジャンプ中のカウントが規定値以下だったら
+	if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
+	{
+		// さらにジャンプ力を追加
+		jumpPower += JumpSpeed;
+	}
+	else // ジャンプ中のカウントが規定値以上だったら
+	{
+		// ジャンプ力を初期に戻す
+		jumpPower = firstJumpPower;
+		// カウントリセット
+		jumpFrameCount = 0;
+		// ジャンプフラグをfalseに
+		jumpFlag = false;
+	}
+}
+
+void TitlePlayerObject::IsGroundingProcess()
+{
 	// 当たり判定で設置を取っていないので座標で判定
 	// 座標が規定値以下だったら
 	if (position.z <= OnGroundCoordinate)
@@ -137,7 +171,6 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 		// 接地フラグをfalseに
 		onGround = false;
 	}
-
 }
 
 void TitlePlayerObject::AnimationUpdate()
@@ -166,6 +199,5 @@ void TitlePlayerObject::AnimationUpdate()
 		animState = RUN;
 		return;
 	}
-
 
 }

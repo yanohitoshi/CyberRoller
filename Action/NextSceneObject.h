@@ -43,6 +43,16 @@ public:
 private:
 	
 	/*
+	@fn ‰ñ“]ˆ—ŠÖ”
+	*/
+	void RotationProcess();
+
+	/*
+	@fn ‰Â“®ˆ—ŠÖ”
+	*/
+	void MovableProcess();
+
+	/*
 	@fn “–‚½‚è”»’è‚ªs‚í‚êHit‚µ‚½Û‚ÉŒÄ‚Î‚ê‚éŠÖ”
 	@param	“–‚½‚Á‚½GameObject
 	*/

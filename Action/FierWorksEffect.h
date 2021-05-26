@@ -68,5 +68,10 @@ private:
     // フェードアウトに切り替えるタイミング定数
     const int ChangeFadeOutTime;
 
+    const Vector3 WhiteValue;
+    const Vector3 RedValue;
+    const Vector3 BlueValue;
+    const Vector3 GreenValue;
+
 };
 

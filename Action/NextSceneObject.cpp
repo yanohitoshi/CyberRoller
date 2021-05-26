@@ -55,28 +55,43 @@ void NextSceneObject::UpdateGameObject(float _deltaTime)
 	{
 		// 速度付与
 		velocity.z = MoveSpeed;
+		
+		// 回転処理
+		RotationProcess();
 
-		//Z軸を15度回転させる
-		float radian = Math::ToRadians(Angle);
-		Quaternion rot = this->GetRotation();
-		Quaternion inc(Vector3::UnitZ, radian);
-		Quaternion target = Quaternion::Concatenate(rot, inc);
-		SetRotation(target);
-
-		// ポジションに速度を足す
-		position += velocity;
-		// ポジションを更新
-		SetPosition(position);
-		// 定位置まで届いたら描画カット
-		if (position.z >= firstPos.z + 3000.0f)
-		{
-			meshComponent->SetVisible(false);
-		}
+		// 可動処理
+		MovableProcess();
 
 		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
 	}
 
+
+}
+
+void NextSceneObject::RotationProcess()
+{
+	//Z軸を15度回転させる
+	float radian = Math::ToRadians(Angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
+
+}
+
+void NextSceneObject::MovableProcess()
+{
+	// ポジションに速度を足す
+	position += velocity;
+	// ポジションを更新
+	SetPosition(position);
+
+	// 定位置まで届いたら描画カット
+	if (position.z >= firstPos.z + 3000.0f)
+	{
+		meshComponent->SetVisible(false);
+	}
 
 }
 

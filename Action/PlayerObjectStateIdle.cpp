@@ -17,42 +17,8 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	// ジャンプフラグがfalseでかつ接地していなかったら
-	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
-	{
-		// 落下状態なのでステータスをジャンプループに変更
-		state = PlayerState::PLAYER_STATE_JUMPLOOP;
-	}
-	else if (_owner->GetInputFlag()) // 入力フラグがtrueだったら
-	{
-		// ステータスを走り出し状態に変更
-		state = PlayerState::PLAYER_STATE_RUN_START;
-	}
-	else if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
-	{
-		// ステータスをジャンプ開始状態に変更
-		state = PlayerState::PLAYER_STATE_JUMPSTART;
-	}
-
-
-	// 入力がなかったら
-	if (!_owner->GetInputFlag())
-	{
-		// ダンス以降までのカウントを数える
-		++danceCount;
-
-		// カウントが規定値を超えたら
-		if (danceCount >= DanceStartTime)
-		{
-			// ダンス開始フラグをtrueに
-			isDanceFlag = true;
-		}
-	}
-	else
-	{
-		// 入力があったらダンスカウントを初期化
-		danceCount = 0;
-	}
+	// 移動系入力確認
+	ChackMovableInputProcess(_owner);
 
 	// 死亡フラグがfalseでかつタイムオーバー状態でもなくダンス開始フラグがtrueだったら
 	if (!_owner->GetDeadFlag() && CountDownFont::timeOverFlag == false && isDanceFlag == true)
@@ -116,4 +82,49 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	// 切り返しを行える時間をゼロ初期化
 	_owner->SetTurnDelayCount(0);
 
+}
+
+void PlayerObjectStateIdle::ChackMovableInputProcess(PlayerObject* _owner)
+{
+
+	// ジャンプフラグがfalseでかつ接地していなかったら
+	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
+	{
+		// 落下状態なのでステータスをジャンプループに変更
+		state = PlayerState::PLAYER_STATE_JUMPLOOP;
+	}
+	else if (_owner->GetInputFlag()) // 入力フラグがtrueだったら
+	{
+		// ステータスを走り出し状態に変更
+		state = PlayerState::PLAYER_STATE_RUN_START;
+	}
+	else if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプ系フラグがtrueだったら
+	{
+		// ステータスをジャンプ開始状態に変更
+		state = PlayerState::PLAYER_STATE_JUMPSTART;
+	}
+
+	// 入力がなかったら
+	if (!_owner->GetInputFlag())
+	{
+		DanceCountProcess();
+	}
+	else
+	{
+		// 入力があったらダンスカウントを初期化
+		danceCount = 0;
+	}
+}
+
+void PlayerObjectStateIdle::DanceCountProcess()
+{
+	// ダンス以降までのカウントを数える
+	++danceCount;
+
+	// カウントが規定値を超えたら
+	if (danceCount >= DanceStartTime)
+	{
+		// ダンス開始フラグをtrueに
+		isDanceFlag = true;
+	}
 }

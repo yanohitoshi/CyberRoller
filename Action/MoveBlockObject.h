@@ -47,9 +47,29 @@ public:
 private:
 	
 	/*
-	@fn 移動状態を確認する関数
+	@fn 可動処理関数
 	*/
-	void ChackMoveProcess();
+	void MovableProcess();
+
+	/*
+	@fn 反転チェック処理関数
+	*/
+	void ChackInversionProcess();
+
+	/*
+	@fn X軸反転チェック処理関数
+	*/
+	void ChackAxisX();
+
+	/*
+	@fn Y軸反転チェック処理関数
+	*/
+	void ChackAxisY();
+
+	/*
+	@fn Z軸反転チェック処理関数
+	*/
+	void ChackAxisZ();
 
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;

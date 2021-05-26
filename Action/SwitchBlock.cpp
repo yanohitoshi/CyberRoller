@@ -78,52 +78,25 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 
 	// スイッチの状態を確認
 	ChackOnFlag(tag);
+	// 色変更処理
+	ColorChangeProcess();
+	// 可動処理
+	MovableProcess();
 
-	// 前のフレームで色の変換が起きたかフラグを保存
-	tmpChangeColorFlag = changeColorFlag;
+	// ポジションに速度を足す
+	position = position + velocity * _deltaTime;
+	// ポジションを更新
+	SetPosition(position);
 
-	// ポジションが色を変更する位置よりも低くプレイヤーが乗っていたら色変更フラグをtrueに
-	if (position.z <= stopPoint && isOnPlayer == true)
-	{
-		changeColorFlag = true;
-	}
-	else
-	{
-		// その他の場合カラーチェンジフラグをfalseに
-		changeColorFlag = false;
-	}
+	// 当たり判定系フラグを初期化
+	isOnPlayer = false;
+	isHitPlayer = false;
 
-	 // 前のフレームで色が変更されていなかったら
-	if (changeColorFlag == true && tmpChangeColorFlag == false)
-	{
-		// スイッチの利用が可能状態だったら
-		if (isAvailableSwitch == true)
-		{
-			// スイッチがOFFだったら
-			if (onFlag == false)
-			{
-				onFlag = true;
-			}
-		}
-	}
+}
 
-	// スイッチの状態を見て色を変更
-	if (onFlag == true && isAvailableSwitch == true)
-	{
-		// ONの時
-		meshComponent->SetColor(OnColor);
-	}
-	else if (onFlag == false && isAvailableSwitch == true)
-	{
-		// OFFの時
-		meshComponent->SetColor(OffColor);
-	}
-	else if (isAvailableSwitch == false)
-	{
-		// 区画の全てのスイッチが押されている時
-		meshComponent->SetColor(AllClearColer);
-	}
-	
+
+void SwitchBlock::MovableProcess()
+{
 	// スイッチの可動処理
 	// プレイヤーが乗っていなくてかつ当たっていなかったら
 	if (isOnPlayer == false && isHitPlayer == false)
@@ -154,18 +127,60 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 			velocity.z = 0.0f;
 		}
 	}
-
-	// ポジションに速度を足す
-	position = position + velocity * _deltaTime;
-	// ポジションを更新
-	SetPosition(position);
-
-	// 当たり判定系フラグを初期化
-	isOnPlayer = false;
-	isHitPlayer = false;
-
 }
 
+void SwitchBlock::ColorChangeProcess()
+{
+	// 前のフレームで色の変換が起きたかフラグを保存
+	tmpChangeColorFlag = changeColorFlag;
+
+	// ポジションが色を変更する位置よりも低くプレイヤーが乗っていたら色変更フラグをtrueに
+	if (position.z <= stopPoint && isOnPlayer == true)
+	{
+		changeColorFlag = true;
+	}
+	else
+	{
+		// その他の場合カラーチェンジフラグをfalseに
+		changeColorFlag = false;
+	}
+
+	// 前のフレームで色が変更されていなかったら
+	if (changeColorFlag == true && tmpChangeColorFlag == false)
+	{
+		// スイッチの利用が可能状態だったら
+		if (isAvailableSwitch == true)
+		{
+			// スイッチがOFFだったら
+			if (onFlag == false)
+			{
+				onFlag = true;
+			}
+		}
+	}
+
+	SetColorProcess();
+}
+
+void SwitchBlock::SetColorProcess()
+{
+	// スイッチの状態を見て色を変更
+	if (onFlag == true && isAvailableSwitch == true)
+	{
+		// ONの時
+		meshComponent->SetColor(OnColor);
+	}
+	else if (onFlag == false && isAvailableSwitch == true)
+	{
+		// OFFの時
+		meshComponent->SetColor(OffColor);
+	}
+	else if (isAvailableSwitch == false)
+	{
+		// 区画の全てのスイッチが押されている時
+		meshComponent->SetColor(AllClearColer);
+	}
+}
 
 void SwitchBlock::ChackOnFlag(Tag& _Tag)
 {

@@ -43,11 +43,18 @@ public:
 private:
 	
 	/*
+	@fn 壁を開く関数
+	@brief	壁を開く処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
+	void OpenWall(float _deltaTime);
+
+	/*
 	@fn スイッチの状態を確認する関数
 	@param	どの種類のobjectか判定する用のTag
 	@param	フレームレート固定用deltaTime
 	*/
-	void ChackSwitch(Tag& _tag, float _deltaTime);
+	void ChackSwitch(Tag& _tag);
 	
 	/*
 	@fn どの壁がどのスイッチを確認するかセットする関数

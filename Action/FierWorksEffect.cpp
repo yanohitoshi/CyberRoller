@@ -12,6 +12,10 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	, SubSpeed(1.0f)
 	, VelocityAtFadeOut(40.0f)
 	, ChangeFadeOutTime(190)
+	, WhiteValue(Vector3(0.9f, 0.9f, 0.9f))
+	, RedValue(Vector3(1.0f, 0.5f, 0.5f))
+	, BlueValue(Vector3(0.5f, 0.5f, 1.0f))
+	, GreenValue(Vector3(0.5f, 1.0f, 0.5f))
 {
 	// メンバー変数の初期化
 	scale = 2.0f;
@@ -26,19 +30,19 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	// マネージャークラスの色情報を参照して色を設定
 	if (_crystalColor == CrystalColor::WHITE)
 	{
-		particleComponent->SetColor(Vector3(0.9f, 0.9f, 0.9f));
+		particleComponent->SetColor(WhiteValue);
 	}
 	else if (_crystalColor == CrystalColor::RED)
 	{
-		particleComponent->SetColor(Vector3(1.0f, 0.5f, 0.5f));
+		particleComponent->SetColor(RedValue);
 	}
 	else if (_crystalColor == CrystalColor::BLUE)
 	{
-		particleComponent->SetColor(Vector3(0.5f, 0.5f, 1.0f));
+		particleComponent->SetColor(BlueValue);
 	}
 	else if (_crystalColor == CrystalColor::GREEN)
 	{
-		particleComponent->SetColor(Vector3(0.5f, 1.0f, 0.5f));
+		particleComponent->SetColor(GreenValue);
 	}
 }
 

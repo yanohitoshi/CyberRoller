@@ -380,6 +380,7 @@ void PlayerObject::ClearChack(Tag _tag)
 			clearFlag = true;
 		}
 
+		return;
 	}
 
 	if (_tag == Tag::NEXT_SCENE_POINT)
@@ -401,6 +402,8 @@ void PlayerObject::ClearChack(Tag _tag)
 		{
 			nextSceneFlag = true;
 		}
+
+		return;
 	}
 
 	if (_tag == Tag::TUTORIAL_CLEAR_POINT)
@@ -422,6 +425,7 @@ void PlayerObject::ClearChack(Tag _tag)
 		{
 			nextSceneFlag = true;
 		}
+		return;
 	}
 }
 

@@ -49,10 +49,8 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
-	BoxCollider* boxCollider;
-	// 当たり判定を行うクラス
 	Mesh* mesh;
-
-
+	// 当たり判定を行うクラス
+	BoxCollider* boxCollider;
 };
 

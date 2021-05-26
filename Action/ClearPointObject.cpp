@@ -58,21 +58,34 @@ void ClearPointObject::UpdateGameObject(float _deltaTime)
 		// 速度を付与
 		velocity.z = MoveSpeed;
 
-		//Z軸を10度回転させる
-		float radian = Math::ToRadians(Angle);
-		Quaternion rot = this->GetRotation();
-		Quaternion inc(Vector3::UnitZ, radian);
-		Quaternion target = Quaternion::Concatenate(rot, inc);
-		SetRotation(target);
+		// 回転処理
+		RotationProcess();
 
-		// ポジションに速度を足す
-		position += velocity;
-		// ポジションを更新
-		SetPosition(position);
+		// 可動処理
+		MovableProcess();
+
 		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
 
 	}
+}
+
+void ClearPointObject::RotationProcess()
+{
+	//Z軸を10度回転させる
+	float radian = Math::ToRadians(Angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
+}
+
+void ClearPointObject::MovableProcess()
+{
+	// ポジションに速度を足す
+	position += velocity;
+	// ポジションを更新
+	SetPosition(position);
 }
 
 void ClearPointObject::OnCollision(const GameObject& _hitObject)

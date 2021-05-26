@@ -41,6 +41,11 @@ public:
 
 private:
 
+	/*
+	@fn コンティニュー確認処理関数
+	*/
+	void ChackContinueProcess();
+
 	// コンティニューするかどうかのフラグ変数
 	bool isContinue;
 	// ダウンループ中に入力があったかどうかのフラグ変数

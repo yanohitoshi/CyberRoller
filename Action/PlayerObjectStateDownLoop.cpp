@@ -13,17 +13,8 @@ PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _delta
 	// 入力フラグがtrueになった時
 	if (isInput)
 	{
-		// コンティニューフラグがtrueだったら
-		if (isContinue)
-		{
-			// コンティニューが選択された状態に変更
-			state = PlayerState::PLAYER_STATE_DOWN_UP;
-		}
-		else // コンティニューされていなかったら
-		{
-			// ゲームオーバー状態に変更
-			state = PlayerState::PLAYER_STATE_DOWN_OVER;
-		}
+		// 入力状態を見てコンティニュー状態を確認
+		ChackContinueProcess();
 	}
 
 	// 更新されたstateを返す
@@ -63,4 +54,19 @@ void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	isContinue = false;
 	// 入力があったかどうかフラグを初期化
 	isInput = false;
+}
+
+void PlayerObjectStateDownLoop::ChackContinueProcess()
+{
+	// コンティニューフラグがtrueだったら
+	if (isContinue)
+	{
+		// コンティニューが選択された状態に変更
+		state = PlayerState::PLAYER_STATE_DOWN_UP;
+	}
+	else // コンティニューされていなかったら
+	{
+		// ゲームオーバー状態に変更
+		state = PlayerState::PLAYER_STATE_DOWN_OVER;
+	}
 }

@@ -39,7 +39,13 @@ public:
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
 private:
+	
+	/*
+	@fn 入力チェック処理関数
+	*/
+	void ChackMovableInputProcess(PlayerObject* _owner);
 
+	void DanceCountProcess();
 	// ダンス状態に切り替えるフラグ変数
 	bool isDanceFlag;
 	// 入力が無い間カウントを数える用のカウント変数
