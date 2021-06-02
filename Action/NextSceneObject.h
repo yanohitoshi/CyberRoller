@@ -72,6 +72,8 @@ private:
 	const float Angle;
 	// 移動速度の定数
 	const float MoveSpeed;
+	// 描画終了ポジション計算用定数
+	const float CalculationDrawEndPosition;
 
 };
 

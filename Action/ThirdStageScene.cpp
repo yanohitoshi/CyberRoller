@@ -66,7 +66,7 @@ SceneState ThirdStageScene::Update(const InputState& _inputState)
 	}
 
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら
-	if (CountDownFont::timeOverFlag == true && lightDownFlag == true)
+	if (CountDownFont::GetTimeOverFlag() == true && lightDownFlag == true)
 	{
 		// コンティニュー選択処理
 		ContinueSelectProcess(_inputState);

@@ -25,7 +25,7 @@ CountDownBackFont::~CountDownBackFont()
 void CountDownBackFont::UpdateGameObject(float _deltaTime)
 {
 	// ゲームスタートしたらカウント開始
-	if (CountDownFont::countStartFlag == true)
+	if (CountDownFont::GetCountStartFlag() == true)
 	{
 		// フレームカウントを数える
 		frameCount++;

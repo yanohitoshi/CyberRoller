@@ -10,9 +10,6 @@
 #include "GameClearSprite.h"
 #include "PlayerObject.h"
 
-// 静的メンバー初期化
-bool FinalStageUI::timeOverFlag = false;
-bool FinalStageUI::countStartFlag = false;
 
 FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
@@ -35,9 +32,6 @@ FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 
 FinalStageUI::~FinalStageUI()
 {
-	// 静的メンバー初期化
-	timeOverFlag = false;
-	countStartFlag = false;
 }
 
 void FinalStageUI::UpdateGameObject(float _deltaTime)

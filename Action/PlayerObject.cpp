@@ -277,11 +277,11 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 {
 
 	// スタート時のカウントダウンが終わったら入力可能状態にする
-	if (CountDownFont::countStartFlag == true)
+	if (CountDownFont::GetCountStartFlag() == true)
 	{
 		isAvailableInput = true;
 	}
-	else if (CountDownFont::countStartFlag == false || CountDownFont::timeOverFlag == true)
+	else if (CountDownFont::GetCountStartFlag() == false || CountDownFont::GetTimeOverFlag() == true)
 	{
 		// カウントダウンが終わっていないまたはタイムオーバーになったら入力を切る
 		isAvailableInput = false;

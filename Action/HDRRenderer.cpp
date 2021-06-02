@@ -357,10 +357,12 @@ void HDRRenderer::CalcGaussBlurParam(int w, int h, Vector2 dir, float deviation)
 		offset[i].z = GaussianDistribution(dir * float(nextpos), deviation);
 		total_weight += offset[i].z * 2.0f;
 	}
+
 	for (auto i = 0; i < 8; ++i)
 	{
 		offset[i].z /= total_weight;
 	}
+
 	for (auto i = 8; i < 15; ++i)
 	{
 		offset[i].x = -offset[i - 7].x;

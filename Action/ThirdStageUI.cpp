@@ -8,9 +8,6 @@
 #include "ContinueSprite.h"
 #include "GameOverSprite.h"
 #include "PlayerObject.h"
-// 静的メンバー初期化
-bool ThirdStageUI::timeOverFlag = false;
-bool ThirdStageUI::countStartFlag = false;
 
 ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
@@ -31,9 +28,6 @@ ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
 
 ThirdStageUI::~ThirdStageUI()
 {
-	// 静的メンバー初期化
-	timeOverFlag = false;
-	countStartFlag = false;
 }
 
 void ThirdStageUI::UpdateGameObject(float _deltaTime)

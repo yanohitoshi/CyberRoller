@@ -12,6 +12,7 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	: GameObject(false, _objectTag)
 	, Angle(15.0f)
 	, MoveSpeed(20.0f)
+	, CalculationDrawEndPosition(3000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -88,7 +89,7 @@ void NextSceneObject::MovableProcess()
 	SetPosition(position);
 
 	// 定位置まで届いたら描画カット
-	if (position.z >= firstPos.z + 3000.0f)
+	if (position.z >= firstPos.z + CalculationDrawEndPosition)
 	{
 		meshComponent->SetVisible(false);
 	}

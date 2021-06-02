@@ -21,7 +21,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	ChackMovableInputProcess(_owner);
 
 	// 死亡フラグがfalseでかつタイムオーバー状態でもなくダンス開始フラグがtrueだったら
-	if (!_owner->GetDeadFlag() && CountDownFont::timeOverFlag == false && isDanceFlag == true)
+	if (!_owner->GetDeadFlag() && CountDownFont::GetTimeOverFlag() == false && isDanceFlag == true)
 	{
 		// ステータスをダンス状態に変更
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
@@ -35,7 +35,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	}
 
 	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::timeOverFlag == true)
+	if (CountDownFont::GetTimeOverFlag() == true)
 	{
 		// ステータスをコンティニュー選択スタート状態に変更
 		state = PlayerState::PLAYER_STATE_DOWNSTART;

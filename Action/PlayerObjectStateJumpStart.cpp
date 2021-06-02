@@ -59,7 +59,7 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 	}
 
 	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::timeOverFlag == true)
+	if (CountDownFont::GetTimeOverFlag() == true)
 	{
 		// ステータスをコンティニュー選択開始状態にする
 		state = PlayerState::PLAYER_STATE_DOWNSTART;

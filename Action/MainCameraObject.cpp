@@ -62,7 +62,7 @@ MainCameraObject::~MainCameraObject()
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	// プレイヤーがクリア状態でなくかつタイムオーバーでもなく踊ってもいなかったら
-	if (playerObject->GetClearFlag() == false && CountDownFont::timeOverFlag == false && !PlayerObjectStateIdlingDance::GetIsDancing())
+	if (playerObject->GetClearFlag() == false && CountDownFont::GetTimeOverFlag() == false && !PlayerObjectStateIdlingDance::GetIsDancing())
 	{
 		// ゲームプレイ中の移動計算処理
 		InGameMovableProcess(_deltaTime);
@@ -72,12 +72,12 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 		// クリア状態の処理
 		GameClearProcess(_deltaTime);
 	}
-	else if (CountDownFont::timeOverFlag == true) // タイムオーバーになったら
+	else if (CountDownFont::GetTimeOverFlag() == true) // タイムオーバーになったら
 	{
 		// ゲームオーバー時の処理
 		GameOverProcess(_deltaTime);
 	}
-	else if (PlayerObjectStateIdlingDance::GetIsDancing() && CountDownFont::timeOverFlag == false)
+	else if (PlayerObjectStateIdlingDance::GetIsDancing() && CountDownFont::GetTimeOverFlag() == false)
 	{
 		// 一定時間入力がなくプレイヤーが踊っている時の処理
 		PlayerInDanceProcess(_deltaTime);

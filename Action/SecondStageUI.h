@@ -31,12 +31,6 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
 
-    // タイムオーバー判定用フラグ
-    static bool timeOverFlag;
-
-    // カウントスタート判定用フラグ
-    static bool countStartFlag;
-
 private:
 
     // シーンの時間制限の値

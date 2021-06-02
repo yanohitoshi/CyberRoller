@@ -32,7 +32,7 @@ TimeUpSprite::~TimeUpSprite()
 void TimeUpSprite::UpdateGameObject(float _deltaTime)
 {
 	// タイムオーバーかつ1度だけ描画フラグがtrueだったら
-	if (CountDownFont::timeOverFlag == true && visibleFlag == true)
+	if (CountDownFont::GetTimeOverFlag() == true && visibleFlag == true)
 	{
 		// フレームカウント計測
 		++frameCount;

@@ -39,10 +39,17 @@ public:
     
     bool GetWarningFlag() { return warningFlag; }
 
-    static bool timeOverFlag;
-    static bool countStartFlag;
+    static void SetTimeOverFlag(bool _timeOverFlag) { timeOverFlag = _timeOverFlag; }
+    static void SetCountStartFlag(bool _countStartFlag) { countStartFlag = _countStartFlag; }
+
+    static bool GetTimeOverFlag() { return timeOverFlag; }
+    static bool GetCountStartFlag() { return countStartFlag; }
 
 private:
+
+
+    static bool timeOverFlag;
+    static bool countStartFlag;
 
     // SpriteComponentïœêî
     SpriteComponent* sprite;

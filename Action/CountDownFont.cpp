@@ -63,6 +63,7 @@ void CountDownFont::UpdateGameObject(float _deltaTime)
 		warningFlag = true;
 		sprite->SetTexture(RENDERER->GetTimeRedTexture(time - 1));
 	}
+
 	// textureを先に作ってvector配列に格納している都合上0を描画するときnullにアクセスしてしまうのを回避
 	if (time == 0)
 	{

@@ -79,7 +79,7 @@ void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 			{
 				sprite->SetVisible(false);
 				drawSpriteFlag = false;
-				CountDownFont::countStartFlag = true;
+				CountDownFont::SetCountStartFlag(true);
 				state = State::Dead;
 			}
 		}

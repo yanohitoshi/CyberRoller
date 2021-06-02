@@ -8,21 +8,22 @@
 
 FirstStageUI::FirstStageUI()
 	: GameObject(false, Tag::UI)
+	, JumpTutorialPosition(Vector3(3700.0f, -1000.0f, 700.0f))
+	, MoveTutorialPosition(Vector3(3700.0f, -2200.0f, 700.0f))
 {
 	// ジャンプチュートリアル用Particl
-	new JumpTutorialParticl(Vector3(3700.0f, -1000.0f, 700.0f));
+	new JumpTutorialParticl(JumpTutorialPosition);
 	// 移動チュートリアル用Particl
-	new MoveTutorialParticl(Vector3(3700.0f, -2200.0f, 700.0f));
+	new MoveTutorialParticl(MoveTutorialPosition);
 
 	// プレイヤーを動かすことができるようにするためのフラグ
-	CountDownFont::countStartFlag = true;
-
+	CountDownFont::SetCountStartFlag(true);
 }
 
 FirstStageUI::~FirstStageUI()
 {
 	// プレイヤーを動かすことができるようにするためのフラグの初期化
-	CountDownFont::countStartFlag = false;
+	CountDownFont::SetCountStartFlag(false);
 }
 
 void FirstStageUI::UpdateGameObject(float _deltaTime)

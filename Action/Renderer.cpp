@@ -177,9 +177,11 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	//　HDRrendererの生成
 	hdrRenderer = new HDRRenderer(screenWidth, screenHeight,4);
 
+	// カリングのモード設定
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
 
+	// カウントダウンタイム用texture生成
 	CreateTimeFontTexture(MaxTimeFontTextures, TimeFontSize);
 
 	return true;

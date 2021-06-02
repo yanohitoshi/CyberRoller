@@ -24,7 +24,7 @@ TimeSprite::~TimeSprite()
 void TimeSprite::UpdateGameObject(float _deltaTime)
 {
 	// タイムオーバーになったら描画を切る
-	if (CountDownFont::timeOverFlag == true)
+	if (CountDownFont::GetTimeOverFlag() == true)
 	{
 		sprite->SetVisible(false);
 	}
