@@ -43,7 +43,7 @@ void FireWorksEffectManeger::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		CreateEffect();
+		ActiveEffectProcess();
 
 		break;
 
@@ -51,7 +51,7 @@ void FireWorksEffectManeger::UpdateGameObject(float _deltaTime)
 
 }
 
-void FireWorksEffectManeger::CreateEffect()
+void FireWorksEffectManeger::ActiveEffectProcess()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -59,56 +59,70 @@ void FireWorksEffectManeger::CreateEffect()
 	// 生成フラグがtrueだったら
 	if (generateFlag == true)
 	{
-		for (int efectCount = 0; efectCount < 24; efectCount++)
-		{
-
-			// ランダムな値を生成
-			Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
-			// 値が大きすぎるので最後の補正をかけて速度に代入
-			velocity = randV * LastCorrection;
-
-			//発生位置を設定
-			Vector3 vel = velocity;
-			//ランダムな値を渡す
-			vel = vel + randV;
-			// 下に落としたいのでZ軸はマイナスに
-			vel.z *= -1.0f;
-
-			// いろいろな方向にいろいろな色で飛ばしたいので
-			// 2の倍数の時はｘ軸方向にマイナスを掛けて色を赤に設定
-			if (efectCount % 2 == 0)
-			{
-				vel.x *= -1.0f;
-				crystalColor = CrystalColor::RED;
-			}
-
-			// 4の倍数の時はy軸方向にマイナスを掛けて色を青に設定
-			if (efectCount % 4 == 0)
-			{
-				vel.y *= -1.0f;
-				crystalColor = CrystalColor::BLUE;
-			}
-
-			// 6の倍数の時はy軸方向にマイナスを掛けて色を緑に設定
-			if (efectCount % 6 == 0)
-			{
-				vel.y *= -1.0f;
-				crystalColor = CrystalColor::GREEN;
-			}
-
-			// 8の倍数の時はｘ軸方向にマイナスを掛けて色を白に設定
-			if (efectCount % 8 == 0)
-			{
-				vel.x *= -1.0f;
-				crystalColor = CrystalColor::WHITE;
-			}
-
-			//particleを生成
-			new FierWorksEffect(position, vel, crystalColor);
-		}
+		// エフェクト生産関数
+		GenerateEffectProcess();
 
 		// 生成フラグをfalseに
 		generateFlag = false;
+	}
+
+}
+
+void FireWorksEffectManeger::GenerateEffectProcess()
+{
+	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
+	{
+
+		// ランダムな値を生成
+		Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
+		// 値が大きすぎるので最後の補正をかけて速度に代入
+		velocity = randV * LastCorrection;
+
+		// 速度を一時保存設定
+		Vector3 vel = velocity;
+
+		//ランダムな値を渡す
+		vel = vel + randV;
+		// 下に落としたいのでZ軸はマイナスに
+		vel.z *= -1.0f;
+
+		// エフェクトの色の設定と向きを調整
+		SelectEffectColorProcess(efectCount, vel);
+
+		//particleを生成
+		new FierWorksEffect(position, vel, crystalColor);
+	}
+}
+
+void FireWorksEffectManeger::SelectEffectColorProcess(int _index,Vector3& _velocity)
+{
+	// いろいろな方向にいろいろな色で飛ばしたいので
+	// 2の倍数の時はｘ軸方向にマイナスを掛けて色を赤に設定
+	if (_index % 2 == 0)
+	{
+		_velocity.x *= -1.0f;
+		crystalColor = CrystalColor::RED;
+	}
+
+	// 4の倍数の時はy軸方向にマイナスを掛けて色を青に設定
+	if (_index % 4 == 0)
+	{
+		_velocity.y *= -1.0f;
+		crystalColor = CrystalColor::BLUE;
+	}
+
+	// 6の倍数の時はy軸方向にマイナスを掛けて色を緑に設定
+	if (_index % 6 == 0)
+	{
+		_velocity.y *= -1.0f;
+		crystalColor = CrystalColor::GREEN;
+	}
+
+	// 8の倍数の時はｘ軸方向にマイナスを掛けて色を白に設定
+	if (_index % 8 == 0)
+	{
+		_velocity.x *= -1.0f;
+		crystalColor = CrystalColor::WHITE;
 	}
 
 }

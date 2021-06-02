@@ -11,6 +11,7 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -19,6 +20,7 @@
 ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(15)
+	, LightPointPositionZ(7000.0f)
 {
 }
 
@@ -145,6 +147,13 @@ bool ThirdStageCreator::OpenFile()
 	if (!readTiledJson(layer15StageData, "Assets/Config/thirdStageMap.json", "layer15"))
 	{
 		printf("do'nt have Layer/layer15\n");
+		return true;
+	}
+
+	// ステージデータ読み込み (lightPoint) 
+	if (!readTiledJson(lightPointData, "Assets/Config/secondStageMap.json", "LightPoint"))
+	{
+		printf("do'nt have Layer/LightPoint\n");
 		return true;
 	}
 
@@ -296,7 +305,7 @@ void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer3SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer3SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -359,7 +368,7 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -523,7 +532,7 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer9SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer9SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -578,7 +587,7 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer10SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer10SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -607,7 +616,7 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(THIRD_STAGE_BACK_MOVE_GROUND):
@@ -641,7 +650,7 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer12SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer12SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -704,7 +713,7 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer14SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer14SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(NEEDLE_PARTS):
@@ -738,7 +747,7 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer15SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::NEXT_SCENE_SWITCH);
+		new SwitchBaseObject(layer15SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
 	case(NEEDLE_PARTS):
@@ -748,18 +757,34 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 
 	case(SECOND_MOVE_WALL_PARTS):
 		// 第二区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer15Pos.x, layer15Pos.y + ShiftMoveWallY, layer15Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::NEXT_SCENE_MOVE_WALL, MoveWallSpeed,
+		new MoveWallBlock(Vector3(layer15Pos.x, layer15Pos.y + ShiftMoveWallY, layer15Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z - BigMoveWallSize.z));
 		break;
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::NEXT_SCENE_POINT, playerObject);
+		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::CLEAR_POINT, playerObject);
 		break;
 
 	case(FRONT_PUSH_BOX):
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer15Pos, BlockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1400.0f, 0.5f, MoveDirectionTag::MOVE_X);
+		break;
+	}
+}
+
+void ThirdStageCreator::CreateLightPoint(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
+	// レイヤー6のマップオブジェクトのポジション
+	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (lightPoint)
+	{
+	case(60):
+		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
 		break;
 	}
 }

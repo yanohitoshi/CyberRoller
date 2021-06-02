@@ -136,6 +136,8 @@ bool Game::Initialize()
 	// 最初のシーンを生成
 	nowScene = new TitleScene();
 
+	RENDERER->SetNowSceneState(nowSceneState);
+
 	return true;
 }
 
@@ -259,6 +261,7 @@ void Game::ProcessInput()
 		nowSceneState = tmpSceneState;
 		// シーン変更フラグをtrueに
 		isChangeScene = true;
+		RENDERER->SetNowSceneState(nowSceneState);
 	}
 }
 

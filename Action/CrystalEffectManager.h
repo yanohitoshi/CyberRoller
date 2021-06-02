@@ -48,9 +48,9 @@ public:
 private:
 
     /*
-    @fn エフェクトの生成関数
+    @fn エフェクトがアクティブ時の処理関数
     */
-    void CreateEffect();
+    void ActiveEffectProcess();
     
     /* 
     @fn ポジションの回転処理関数

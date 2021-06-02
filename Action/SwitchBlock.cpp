@@ -13,7 +13,7 @@
 #include <string>
 
 
-SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag)
+SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag,bool _isTutorial)
 	: GameObject(false, _objectTag)
 	, MoveUpSpeed(150.0f)
 	, MoveDownSpeed(-250.0f)
@@ -21,6 +21,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	, AllClearColer(Vector3(1.0f, 1.0f, 0.5f))
 	, OnColor(Vector3(0.1f, 0.1f, 1.0f))
 	, OffColor(Vector3(1.0f, 0.1f, 0.1f))
+	,isTutorialSwitch(_isTutorial)
 {
 	//GameObjectメンバ変数の初期化
 	position = _owner->GetPosition();
@@ -56,7 +57,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	isAvailableSwitch = true;
 
 	// チュートリアル用のスイッチだったらチュートリアル用のパーティクルを付与
-	if (tag == Tag::TUTORIAL_SWITCH)
+	if (isTutorialSwitch)
 	{
 		new TutorialSwitchParticlEffect(Vector3(position.x,position.y,position.z + 250.0f),this);
 		new TutorialSwitchOkEffect(Vector3(position.x, position.y, position.z + 250.0f), this);

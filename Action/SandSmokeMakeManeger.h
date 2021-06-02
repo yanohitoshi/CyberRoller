@@ -36,14 +36,24 @@ public:
 private:
 
     /*
-    @fn 大きい壁の場合に使用するエフェクトの生成関数
+    @fn 大きい壁のエフェクトがアクティブの時の処理関数
     */
-    void CreateBigWallEffect();
+    void ActiveBigWallEffectProcess();
     
     /*
-    @fn 小さい壁の場合に使用するエフェクトの生成関数
+    @fn 大きい壁のエフェクト生産処理関数
     */
-    void CreateSmallWallEffect();
+    void GenerateBigWallEffectProcess();
+
+    /*
+    @fn 小さい壁のエフェクトがアクティブの時の処理関数
+    */
+    void ActiveSmallWallEffectProcess();
+
+    /*
+    @fn 小さい壁のエフェクト生産処理関数
+    */
+    void GenerateSmallWallEffectProcess();
 
     // 親のGameObject保存用変数
     GameObject* owner;

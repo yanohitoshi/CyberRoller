@@ -10,6 +10,19 @@ PlayerObjectStateDownLoop::~PlayerObjectStateDownLoop()
 
 PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
+	// 重力にデルタタイムをかけた値を代入
+	velocity.z -= PlayerObject::GetGravity() * _deltaTime;
+
+	// 落下速度が規定値を超えていたら
+	if (velocity.z <= MaxFallSpeed)
+	{
+		// 規定値に固定
+		velocity.z = MaxFallSpeed;
+	}
+
+	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+
 	// 入力フラグがtrueになった時
 	if (isInput)
 	{
@@ -50,10 +63,13 @@ void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DOWN_LOOP));
 	// stateをダウンループ状態にして保存
 	state = PlayerState::PLAYER_STATE_DOWN_LOOP;
+	// オーナーの持つ速度を取得
+	velocity = _owner->GetVelocity();
 	// コンティニューフラグを初期化
 	isContinue = false;
 	// 入力があったかどうかフラグを初期化
 	isInput = false;
+
 }
 
 void PlayerObjectStateDownLoop::ChackContinueProcess()

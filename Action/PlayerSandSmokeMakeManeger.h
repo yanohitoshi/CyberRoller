@@ -36,10 +36,15 @@ public:
 private:
     
     /*
-    @fn エフェクトの生成関数
+    @fn エフェクトがアクティブ時の処理関数
     */
-    void CreateEffect();
+    void ActiveEffectProcess();
     
+    /*
+    @fn エフェクト生産処理関数
+    */
+    void GenerateEffectProcess();
+
     /*
     @fn エフェクトのポジションを右にずらす関数
     */

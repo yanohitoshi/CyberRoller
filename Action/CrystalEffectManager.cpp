@@ -83,7 +83,7 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクト生成
-		CreateEffect();
+		ActiveEffectProcess();
 
 		break;
 
@@ -91,7 +91,7 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 
 }
 
-void CrystalEffectManager::CreateEffect()
+void CrystalEffectManager::ActiveEffectProcess()
 {
 	// 速度を一時保存する変数
 	Vector3 vel;

@@ -16,6 +16,9 @@ TitleScene::TitleScene()
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
+	// シーンステータス初期化
+	state = SceneState::TITLE_SCENE;
+
 	//ステージを生成するクラスのインスタンス
 	TitleStageCreator* titleStageCreator = new TitleStageCreator(false, Tag::OTHER);
 
@@ -34,34 +37,35 @@ TitleScene::~TitleScene()
 {
 }
 
-SceneState TitleScene::Update(const InputState& state)
+SceneState TitleScene::Update(const InputState& _inputState)
 {
 	// トリガーの情報を変数に入れる
-	float leftTrigger = state.Controller.GetLeftTrigger();
-	float rightTrigger = state.Controller.GetRightTrigger();
+	float leftTrigger = _inputState.Controller.GetLeftTrigger();
+	float rightTrigger = _inputState.Controller.GetRightTrigger();
 
 	// 入力を見てシーン遷移
-	if (state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed || 
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed || 
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed || 
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_GUIDE) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_LEFTSTICK) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_RIGHTSTICK) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_LEFTSHOULDER) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_UP) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
-		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
-		leftTrigger == 1 || rightTrigger == 1)
+	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_GUIDE) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_LEFTSTICK) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_RIGHTSTICK) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_LEFTSHOULDER) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_UP) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
+		leftTrigger == 1.0f || rightTrigger == 1.0f)
 	{
-		return SceneState::FIRST_SATGE_SCENE;
+		state = SceneState::FIRST_SATGE_SCENE;
 	}
 
-	// シーン変更しない場合今のシーンを返す
-	return SceneState::TITLE_SCENE;
+	// 更新後のシーンステータスを返す
+	return state;
+
 }
 

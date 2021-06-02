@@ -41,7 +41,7 @@ void LandingEffectManeger::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		CreateEffect();
+		ActiveEffectProcess();
 
 		// particleState無効に
 		particleState = ParticleState::PARTICLE_DISABLE;
@@ -54,7 +54,7 @@ void LandingEffectManeger::UpdateGameObject(float _deltaTime)
 
 }
 
-void LandingEffectManeger::CreateEffect()
+void LandingEffectManeger::ActiveEffectProcess()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -62,42 +62,54 @@ void LandingEffectManeger::CreateEffect()
 	// 8個生成
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
 	{
-		// 八方向に動かすのでそれぞれに方向ベクトルを渡す
-		if (efectCount == 0)
-		{
-			velocity = Vector3::UnitX;
-
-		}
-		if (efectCount == 1)
-		{
-			velocity = Vector3::UnitY;
-		}
-		if (efectCount == 2)
-		{
-			velocity = Vector3::NegUnitX;
-		}
-		if (efectCount == 3)
-		{
-			velocity = Vector3::NegUnitY;
-		}
-		if (efectCount == 4)
-		{
-			velocity = Vector3::UnitX + Vector3::UnitY;
-		}
-		if (efectCount == 5)
-		{
-			velocity = Vector3::UnitX + Vector3::NegUnitY;
-		}
-		if (efectCount == 6)
-		{
-			velocity = Vector3::NegUnitX + Vector3::UnitY;
-		}
-		if (efectCount == 7)
-		{
-			velocity = Vector3::NegUnitX + Vector3::NegUnitY;
-		}
+		// それぞれのエフェクトの方向を計算する処理
+		CalculatingDirectionProcess(efectCount, velocity);
 
 		//particleを生成
 		new LandingEffect(position, velocity);
+	}
+}
+
+void LandingEffectManeger::CalculatingDirectionProcess(int _index, Vector3& _velocity)
+{
+	// 八方向に動かすのでそれぞれに方向ベクトルを渡す
+	if (_index == 0)
+	{
+		_velocity = Vector3::UnitX;
+	}
+
+	if (_index == 1)
+	{
+		_velocity = Vector3::UnitY;
+	}
+
+	if (_index == 2)
+	{
+		_velocity = Vector3::NegUnitX;
+	}
+
+	if (_index == 3)
+	{
+		_velocity = Vector3::NegUnitY;
+	}
+
+	if (_index == 4)
+	{
+		_velocity = Vector3::UnitX + Vector3::UnitY;
+	}
+
+	if (_index == 5)
+	{
+		_velocity = Vector3::UnitX + Vector3::NegUnitY;
+	}
+
+	if (_index == 6)
+	{
+		_velocity = Vector3::NegUnitX + Vector3::UnitY;
+	}
+
+	if (_index == 7)
+	{
+		_velocity = Vector3::NegUnitX + Vector3::NegUnitY;
 	}
 }

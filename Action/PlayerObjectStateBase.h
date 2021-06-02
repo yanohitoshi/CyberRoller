@@ -53,7 +53,10 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateBase() {};
+	PlayerObjectStateBase()
+		: MaxFallSpeed(-2000.0f)
+		, MaxMoveSpeed(1600.0f)
+	{};
 
 	/*
 	@fn デストラクタ
@@ -105,8 +108,9 @@ protected:
 	// 入力制限の値を格納するための変数
 	float inputDeadSpace;
 	// 移動速度の最高値
-	const float MaxMoveSpeed = 1600.0f;
-
+	const float MaxMoveSpeed;
+	// 最大落下速度の規定値
+	const float MaxFallSpeed;
 private:
 
 	/*

@@ -369,6 +369,12 @@
     <ClCompile Include="PlayerObjectStateBase.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClCompile>
+    <ClCompile Include="LightPositionChangePoint.cpp">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -743,6 +749,9 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateFlinch.h">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="LightPositionChangePoint.h">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

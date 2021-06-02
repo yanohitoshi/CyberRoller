@@ -15,7 +15,7 @@ BoxObject::BoxObject(const Vector3& _p, const Vector3& _size, const Tag& _object
 	state = Active;
 	isPushBackToPlayer = true;
 	isChackGroundToPlayer = true;
-
+	isPushBackToCamera = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this,false,false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット

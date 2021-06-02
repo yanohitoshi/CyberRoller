@@ -160,7 +160,8 @@ protected:
 	const Vector3 SmallMoveWallSize;
 	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
 	const AABB RespawnBox;
-
+	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
+	const AABB LightPointBox;
 	// スイッチのポジションは他のオブジェクトと違いずらす必要があるので
 	// そのために用いる定数
 	const float ShiftSwitchPositionZ;

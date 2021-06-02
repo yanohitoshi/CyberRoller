@@ -23,6 +23,7 @@ ThirdStageScene::ThirdStageScene()
 	isContinueFlag = false;
 	endFlag = false;
 	lightDownFlag = true;
+	state = SceneState::THIRD_SATGE_SCENE;
 
 	// クリエイター生成
 	ThirdStageCreator* thirdStageCreator = new ThirdStageCreator(false, Tag::OTHER);
@@ -46,101 +47,51 @@ ThirdStageScene::~ThirdStageScene()
 {
 }
 
-SceneState ThirdStageScene::Update(const InputState& state)
+SceneState ThirdStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += ChangeLightSpeed;
-		RENDERER->SetAmbientLight(light);
-		if (light.x >= MaxLight)
-		{
-			startScene = false;
-			RENDERER->SetAmbientLight(light);
-		}
+		// シーン開始時のライトアップ処理
+		StartSceneLightUpProcess();
 	}
 
-	// ステージクリアしたらクリアカウントを取ってライトを落とす
-	if (playerObject->GetNextSceneFlag() == true)
-	{
-		++clearCount;
-		light -= ChangeLightSpeed;
-		RENDERER->SetAmbientLight(light);
-	}
+	// クリアしたかのチェックとクリアカウントを数える処理関数
+	SceneClearCountProcess(playerObject);
 
-	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (playerObject->GetNextSceneFlag() == true && clearCount >= ClearToChangeScene)
+	// クリアカウントが一定を超えたらシーンを切り替える
+	if (clearCount >= ClearToChangeSceneTime)
 	{
-		return SceneState::FINAL_STAGE_SCENE;
+		state = SceneState::FINAL_STAGE_SCENE;
 	}
 
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら
 	if (CountDownFont::timeOverFlag == true && lightDownFlag == true)
 	{
-		// ライト固定
-		light = TimeoversLight;
-		RENDERER->SetAmbientLight(light);
-
-		// Aボタンが押されたら
-		if (state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
-		{
-			// コンテニュー遷移状態にする
-			lightDownFlag = false;
-			isContinueFlag = true;
-		}
-		// Bボタンが押されたら
-		if (state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed)
-		{
-			// ゲームオーバー状態にする
-			lightDownFlag = false;
-			endFlag = true;
-		}
+		// コンティニュー選択処理
+		ContinueSelectProcess(_inputState);
 	}
 
 	 // コンテニューかゲームオーバーが選択されたら
 	if (isContinueFlag == true || endFlag == true)
 	{
-		// 遷移カウント開始
-		++changeCount;
-		if (changeCount >= ChoiceContinueCount)
-		{
-			// コンテニューだったら明るくゲームオーバーだったら暗くする
-			if (isContinueFlag == true)
-			{
-				// ライトアップ
-				light += ChangeLightSpeed;
-				RENDERER->SetAmbientLight(light);
-			}
-			else if (endFlag == true)
-			{
-				// ライトダウン
-				light -= ChangeLightSpeed;
-				RENDERER->SetAmbientLight(light);
-			}
-			if (changeCount >= ContinueToChangeScene)
-			{
-				// コンテニューだったらステージ最初へゲームオーバーだったらリザルト画面へ
-				if (isContinueFlag == true)
-				{
-					// コンティニューされたらそのステージから始めるために
-					// コンティニューされたかどうか判定するためのフラグを切り替える
-					Game::SetContinueFlag(true);
-					return SceneState::THIRD_SATGE_SCENE;
-				}
-				else if (endFlag == true)
-				{
-					return SceneState::RESULT_SCENE;
-				}
-			}
-		}
+		// コンティニュー選択時のライト遷移処理
+		LightTransitionAtContinue();
+	}
+
+	// コンティニュー選択後のシーン切り替えカウントが一定以上になったら
+	if (changeCount >= ContinueToChangeScene)
+	{
+		// シーンステータス切り替え処理
+		SceneStateChangeAtContinue(SceneState::THIRD_SATGE_SCENE);
 	}
 
 	// 一定時間操作がなかったらタイトルへ
 	if (playerObject->GetReStartFlag() == true)
 	{
-		return SceneState::TITLE_SCENE;
+		state = SceneState::TITLE_SCENE;
 	}
 
-	// シーン変更しない場合今のシーンを返す
-	return SceneState::THIRD_SATGE_SCENE;
+	// 更新後のシーンステータスを返す
+	return state;
 }

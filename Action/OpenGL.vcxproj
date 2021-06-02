@@ -149,6 +149,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
@@ -177,6 +178,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="HDRRenderer.cpp" />
     <ClCompile Include="LandingEffect.cpp" />
     <ClCompile Include="LandingEffectManeger.cpp" />
+    <ClCompile Include="LightPositionChangePoint.cpp" />
     <ClCompile Include="MoveBlockObject.cpp" />
     <ClCompile Include="MoveNeedleObject.cpp" />
     <ClCompile Include="NeedleObject.cpp" />
@@ -322,6 +324,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="HDRRenderer.h" />
     <ClInclude Include="LandingEffect.h" />
     <ClInclude Include="LandingEffectManeger.h" />
+    <ClInclude Include="LightPositionChangePoint.h" />
     <ClInclude Include="MoveBlockObject.h" />
     <ClInclude Include="MoveNeedleObject.h" />
     <ClInclude Include="NeedleObject.h" />

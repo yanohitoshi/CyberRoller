@@ -78,8 +78,6 @@ private:
 	int jumpFrameCount;
 	// ジャンプが終了したかどうかのフラグ変数
 	bool endFlag;
-	// 落下速度の規定値
-	const float MaxFallSpeed;
 	// ジャンプ中に移動速度を徐々に減らすための計算に使う補正値
 	const float JumpCorrection;
 	// スイッチジャンプ中に移動速度を徐々に減らすための計算に使う補正値

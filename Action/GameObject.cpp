@@ -12,8 +12,6 @@ int GameObject::gameObjectId = 0;
 MainCameraObject* GameObject::mainCamera = nullptr;
 TitleCameraObject* GameObject::titleCamera = nullptr;
 
-//PauzingEvent GameObject::pauzingEvent = PauzingEvent::NoneEvent;
-
 std::vector<GameObject*> GameObject::pendingGameObjects;
 std::unordered_map<Tag, std::vector<GameObject*>> GameObject::gameObjectMap;
 bool GameObject::updatingGameObject = false;
@@ -37,6 +35,7 @@ GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	, isSendVelocityToPlayer(false)
 	, isChackGroundToPlayer(false)
 	, isFlinchToPlayer(false)
+	, isPushBackToCamera(false)
 {
 
 	//IDÇ…êîílÇ1í«â¡

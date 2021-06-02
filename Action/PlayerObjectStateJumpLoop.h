@@ -69,9 +69,6 @@ private:
 	// ※見た目上ずらしたかったので作りました
 	bool animChangeFlag;
 
-	// 落下速度の規定値
-	const float MaxFallSpeed;
-
 	// 着地後回転モーションを含めるか判定する速度定数
 	const float TurnValue;
 

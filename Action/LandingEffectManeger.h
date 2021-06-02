@@ -36,9 +36,14 @@ public:
 private:
 
     /*
-    @fn エフェクトの生成関数
+    @fn エフェクトがアクティブ時の処理関数
     */
-    void CreateEffect();
+    void ActiveEffectProcess();
+
+    /*
+    @fn エフェクトを飛ばす方向計算処理関数
+    */
+    void CalculatingDirectionProcess(int _index, Vector3& _velocity);
 
     // 親のGameObject保存用変数
     GameObject* owner;

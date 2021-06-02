@@ -10,6 +10,7 @@
 #include "RespawnPoint.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -18,6 +19,7 @@
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(5)
+	, LightPointPositionZ(3000.0f)
 {
 }
 
@@ -77,6 +79,13 @@ bool FirstStageCreator::OpenFile()
 		return true;
 	}
 
+	// ステージデータ読み込み (LightPoint) 
+	if (!readTiledJson(lightPointData, "Assets/Config/firstStageMap.json", "LightPoint"))
+	{
+		printf("do'nt have Layer/LightPoint\n");
+		return true;
+	}
+
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/firstStageMap.json", "Player"))
 	{
@@ -104,6 +113,7 @@ void FirstStageCreator::CreateStage()
 			CreateLayer4(ix, iy);
 			// Layer5内を検索
 			CreateLayer5(ix, iy);
+			CreateLightPoint(ix, iy);
 		}
 	}
 }
@@ -258,18 +268,37 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::TUTORIAL_SWITCH);
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
 		break;
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::TUTORIAL_CLEAR_POINT, playerObject);
+		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject);
 		break;
 
 	case(FIRST_MOVE_WALL_PARTS):
 		// 第一区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::TUTORIAL_MOVE_WALL, MoveWallSpeed,
+		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
+		break;
+	case(60):
+		new LightPositionChangePoint(layer5Pos, RespawnBox, Tag::LIGHT_CHANGE_POINT);
+		break;
+	}
+}
+
+void FirstStageCreator::CreateLightPoint(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
+	// レイヤー6のマップオブジェクトのポジション
+	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (lightPoint)
+	{
+	case(60):
+		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
 		break;
 	}
 }

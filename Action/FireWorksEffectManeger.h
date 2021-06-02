@@ -36,9 +36,19 @@ public:
 private:
 
     /*
-    @fn エフェクトの生成関数
+    @fn エフェクトがアクティブ時の処理関数
     */
-    void CreateEffect();
+    void ActiveEffectProcess();
+
+    /*
+    @fn エフェクト生産処理関数
+    */
+    void GenerateEffectProcess();
+
+    /*
+    @fn エフェクトの色と向きを設定する関数
+    */
+    void SelectEffectColorProcess(int _index,Vector3& _velocity);
 
     // 親のGameObject保存用変数
     GameObject* owner;

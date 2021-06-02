@@ -251,6 +251,7 @@ public:
 	*/
 	Texture* GetTimeRedTexture(int _time);
 
+	void SetNowSceneState(SceneState _state) { nowState = _state; }
 
 private:
 
@@ -478,5 +479,7 @@ private:
 	Matrix4 projection;
 	//ビルボード行列
 	Matrix4 billboardMat;
+
+	SceneState nowState;
 
 };

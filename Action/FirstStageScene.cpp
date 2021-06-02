@@ -12,7 +12,7 @@ FirstStageScene::FirstStageScene()
 	light = Vector3(0.1f, 0.1f, 0.1f);
 	RENDERER->SetAmbientLight(light);
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, 0.0f, 0.7f);
+	dir.direction = Vector3(0.3f, 0.3f, 0.7f);
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);
 
@@ -40,31 +40,20 @@ FirstStageScene::~FirstStageScene()
 {
 }
 
-SceneState FirstStageScene::Update(const InputState& state)
+SceneState FirstStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする
 	if (startScene == true)
 	{
-		light += ChangeLightSpeed;
-		RENDERER->SetAmbientLight(light);
-
-		if (light.x >= MaxLight)
-		{
-			startScene = false;
-			RENDERER->SetAmbientLight(light);
-		}
+		// シーン開始時のライトアップ処理
+		StartSceneLightUpProcess();
 	}
 
-	// ステージクリアしたらクリアカウントを取ってライトを落とす
-	if (playerObject->GetNextSceneFlag() == true)
-	{
-		++clearCount;
-		light -= ChangeLightSpeed;
-		RENDERER->SetAmbientLight(light);
-	}
+	// クリアしたかのチェックとクリアカウントを数える処理関数
+	SceneClearCountProcess(playerObject);
 
-	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (playerObject->GetNextSceneFlag() == true && clearCount >= ClearToChangeScene)
+	// クリアカウントが一定を超えたらシーンを切り替える
+	if (clearCount >= ClearToChangeSceneTime)
 	{
 		return SceneState::SECOND_SATGE_SCENE;
 	}

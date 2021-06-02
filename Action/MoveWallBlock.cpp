@@ -28,6 +28,7 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	openFlag = false;
 	isPushBackToPlayer = true;
 	isFlinchToPlayer = true;
+	isPushBackToCamera = true;
 	SetChackSwitchTag(tag);
 
 	//モデル描画用のコンポーネント
@@ -124,11 +125,6 @@ void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
 	// なんの壁なのかを参照してチェックすべきスイッチをセット
 	switch (_tag)
 	{
-		// チュートリアル用の壁だったら
-	case(Tag::TUTORIAL_MOVE_WALL):
-		chackTag = Tag::TUTORIAL_SWITCH;
-		break;
-
 		// 第一区画の壁だったら
 	case(Tag::FIRST_MOVE_WALL):
 		chackTag = Tag::FIRST_SWITCH;
@@ -143,12 +139,6 @@ void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
 	case(Tag::CLEAR_SCENE_MOVE_WALL):
 		chackTag = Tag::CLEAR_SCENE_SWITCH;
 		break;
-
-		// 次のシーンへ遷移前の壁だったら
-	case(Tag::NEXT_SCENE_MOVE_WALL):
-		chackTag = Tag::NEXT_SCENE_SWITCH;
-		break;
-
 	}
 }
 

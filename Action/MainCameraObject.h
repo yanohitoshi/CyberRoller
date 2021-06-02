@@ -55,7 +55,7 @@ public:
 	@param 相手のAABB
 	@param ペアとなる相手のTag
 	*/
-	void FixCollision(AABB& myAABB, const AABB& pairAABB, const Tag& _pairTag);
+	void FixCollision(AABB& myAABB, const AABB& pairAABB);
 
 	/*
 	@brief 押し戻し計算を行う
@@ -93,6 +93,24 @@ public:
 	Vector3 lerpObjectPos;
 
 private:
+
+	void InGameMovableProcess(float _deltaTime);
+
+	void CorrectionRadius();
+
+	void CorrectionPitch();
+
+	void CalculationPosition(float _deltaTime);
+
+	void CalculationViewMatrix();
+
+	void GameClearProcess(float _deltaTime);
+
+	void GameOverProcess(float _deltaTime);
+
+	void PlayerInDanceProcess(float _deltaTime);
+
+	void ChackInputProcess(const InputState& _keyState);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

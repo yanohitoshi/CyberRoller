@@ -12,6 +12,7 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -20,6 +21,7 @@
 FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(17)
+	, LightPointPositionZ(7000.0f)
 {
 }
 
@@ -160,6 +162,13 @@ bool FinalStageCreator::OpenFile()
 	if (!readTiledJson(layer17StageData, "Assets/Config/finalStageMap.json", "layer17"))
 	{
 		printf("do'nt have Layer/layer17\n");
+		return true;
+	}
+
+	// ステージデータ読み込み (lightPoint) 
+	if (!readTiledJson(lightPointData, "Assets/Config/secondStageMap.json", "LightPoint"))
+	{
+		printf("do'nt have Layer/LightPoint\n");
 		return true;
 	}
 
@@ -868,6 +877,23 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
 		new ClearPointObject(Vector3(layer17Pos.x, layer17Pos.y, layer17Pos.z), Tag::CLEAR_POINT, playerObject);
+		break;
+	}
+}
+
+
+void FinalStageCreator::CreateLightPoint(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
+	// レイヤー6のマップオブジェクトのポジション
+	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (lightPoint)
+	{
+	case(60):
+		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
 		break;
 	}
 }

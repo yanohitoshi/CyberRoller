@@ -59,20 +59,12 @@ enum Tag
 	FIRST_MOVE_WALL,
 	// 2番目の動く壁
 	SECOND_MOVE_WALL,
-	// 次のシーン前の動く壁
-	NEXT_SCENE_MOVE_WALL,
 	// ゲームクリア前の動く壁
 	CLEAR_SCENE_MOVE_WALL,
-	// チュートリアルでの動く壁
-	TUTORIAL_MOVE_WALL,
-	// チュートリアル用スイッチ
-	TUTORIAL_SWITCH,
 	// 最初の区画のスイッチ
 	FIRST_SWITCH,
 	// 2番目の区画のスイッチ
 	SECOND_SWITCH,
-	// 次のシーンへの遷移前の区画のスイッチ
-	NEXT_SCENE_SWITCH,
 	// ゲームクリア前のスイッチ
 	CLEAR_SCENE_SWITCH,
 	// ジャンプスイッチ
@@ -85,12 +77,10 @@ enum Tag
 	SCENE,
 	// ゲームクリアオブジェクト
 	CLEAR_POINT,
-	// ステージクリアオブジェクト
-	NEXT_SCENE_POINT,
 	// リスポーンポイント
 	RESPOWN_POINT,
-	// チュートリアルクリアポイント
-	TUTORIAL_CLEAR_POINT,
+	// ライトポジション変更ポイント
+	LIGHT_CHANGE_POINT,
 	// UI
 	UI,
 	// タイトル上のオブジェクト
@@ -353,6 +343,12 @@ public:
 	bool GetisChackGroundToPlayer() const { return isChackGroundToPlayer; }
 
 	/*
+	@brief　カメラと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisPushBackToCamera() const { return isPushBackToCamera; }
+
+	/*
 	@brief　スイッチ用フラグのgetter
 	@return	onFlag
 	*/
@@ -428,6 +424,9 @@ protected:
 
 	// プレイヤーが当たった際に怯みが入るオブジェクトか
 	bool isFlinchToPlayer;
+
+	// カメラと押し戻しを行うオブジェクトかどうか
+	bool isPushBackToCamera;
 
 	//アタッチされているコンポーネント
 	std::vector<class Component*>components;

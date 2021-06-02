@@ -47,14 +47,14 @@ void PlayerSandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		CreateEffect();
+		ActiveEffectProcess();
 
 		break;
 	}
 
 }
 
-void PlayerSandSmokeMakeManeger::CreateEffect()
+void PlayerSandSmokeMakeManeger::ActiveEffectProcess()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -68,33 +68,38 @@ void PlayerSandSmokeMakeManeger::CreateEffect()
 		frameCount % 10 == 0 && owner->GetVelocity().x < -GenerateSpeedValue||
 		frameCount % 10 == 0 && owner->GetVelocity().y < -GenerateSpeedValue )
 	{
-		// 生成した数を数える
-		++generateCount;
-
-		// カウントが2の倍数の時は右足に
-		if (generateCount % 2 == 0)
-		{
-			ShiftRightEffectPosition();
-		}
-		else
-		{
-			ShiftLeftEffectPosition();
-		}
-
-		// オーナーの速度をもらう
-		Vector3 vel = owner->GetVelocity();
-
-		// 正規化
-		vel.Normalize();
-
-		// 速度を逆向きにする
-		vel = vel * -1.0f;
-
-		// particleを生成
-		new PlayerSandSmokeEffect(effectPosition, vel, true);
+		GenerateEffectProcess();
 	}
 
 
+}
+
+void PlayerSandSmokeMakeManeger::GenerateEffectProcess()
+{
+	// 生成した数を数える
+	++generateCount;
+
+	// カウントが2の倍数の時は右足に
+	if (generateCount % 2 == 0)
+	{
+		ShiftRightEffectPosition();
+	}
+	else
+	{
+		ShiftLeftEffectPosition();
+	}
+
+	// オーナーの速度をもらう
+	Vector3 vel = owner->GetVelocity();
+
+	// 正規化
+	vel.Normalize();
+
+	// 速度を逆向きにする
+	vel = vel * -1.0f;
+
+	// particleを生成
+	new PlayerSandSmokeEffect(effectPosition, vel, true);
 }
 
 void PlayerSandSmokeMakeManeger::ShiftRightEffectPosition()

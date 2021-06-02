@@ -6,7 +6,7 @@
 #include "SwitchBlock.h"
 #include "Mesh.h"
 
-SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag)
+SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag , bool _isTutorial)
 	: GameObject(false, _objectTag)
 {
 	// ポジション・スケール・Tagの初期化
@@ -31,7 +31,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	boxCollider->SetObjectBox(aabb);
 
 	// スイッチ本体を付与
-	new SwitchBlock(this, Vector3(2.6f,2.6f,2.0f), _switchTag);
+	new SwitchBlock(this, Vector3(2.6f,2.6f,2.0f), _switchTag, _isTutorial);
 }
 
 SwitchBaseObject::~SwitchBaseObject()

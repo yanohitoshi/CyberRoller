@@ -34,6 +34,7 @@
 const float PlayerObject::Gravity = 4500.0f;
 bool PlayerObject::chackJumpFlag = false;
 bool PlayerObject::chackIsJumping = false;
+Vector3 PlayerObject::sendChackPointPosition = Vector3::Zero;
 
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
@@ -48,6 +49,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, FirstPositionZ(5000.0f)
 	, RestartTime(10000)
 	, FlinchSpeed(1000.0f)
+	, ShiftSendPositionZ(3000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -64,8 +66,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//リスポ－ンするまでのカウント初期化
 	respawnCount = 0;
 	// リスポ－ンflag位置初期化
-	respownPos = _pos;
-
+	respownPos = firstPos;
+	sendChackPointPosition = Vector3(firstPos.x,firstPos.y,firstPos.z + ShiftSendPositionZ);
 	// フラグ初期化
 	respawnFlag = false;
 	clearFlag = false;
@@ -359,78 +361,52 @@ void PlayerObject::RotateToNewForward(const Vector3& forward)
 
 void PlayerObject::ClearChack(Tag _tag)
 {
-	if (_tag == Tag::CLEAR_POINT)
+	// フラグ検索用可変長配列を生成
+	std::vector<GameObject*> switches;
+
+	// クリア条件用スイッチを探して格納
+	switches = GameObject::FindGameObject(Tag::CLEAR_SCENE_SWITCH);
+
+	// スイッチの状態確認関数呼び出し
+	SwitchChackProcess(switches);
+
+}
+
+void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
+{
+	// スイッチの総数カウント初期化
+	int switchCount = 0;
+	// ONになっているスイッチ総数カウント初期化
+	int flagCount = 0;
+
+	// スイッチの総数とONになっているスイッチの総数を数える
+	for (auto itr : _chackVector)
 	{
-		std::vector<GameObject*> switches;
-		switches = GameObject::FindGameObject(Tag::CLEAR_SCENE_SWITCH);
-		int switchCount = 0;
-		int flagCount = 0;
+		// スイッチの総数カウント
+		++switchCount;
 
-		for (auto itr : switches)
+		// フラグをチェック
+		if (itr->GetSwitchFlag() == true)
 		{
-			++switchCount;
-			if (itr->GetSwitchFlag() == true)
-			{
-				++flagCount;
-			}
+			// ONになっているスイッチの総数カウント
+			++flagCount;
 		}
-
-		if (flagCount == switchCount)
-		{
-			clearFlag = true;
-		}
-
-		return;
 	}
 
-	if (_tag == Tag::NEXT_SCENE_POINT)
+	// スイッチの総数とONになっているスイッチの総数が一致していたら
+	if (flagCount == switchCount)
 	{
-		std::vector<GameObject*> switches;
-		switches = GameObject::FindGameObject(Tag::NEXT_SCENE_SWITCH);
-		int switchCount = 0;
-		int flagCount = 0;
-		for (auto itr : switches)
-		{
-			++switchCount;
-			if (itr->GetSwitchFlag() == true)
-			{
-				++flagCount;
-			}
-		}
-
-		if (flagCount == switchCount)
-		{
-			nextSceneFlag = true;
-		}
-
-		return;
+		// クリア状態にする
+		clearFlag = true;
 	}
 
-	if (_tag == Tag::TUTORIAL_CLEAR_POINT)
-	{
-		std::vector<GameObject*> switches;
-		switches = GameObject::FindGameObject(Tag::TUTORIAL_SWITCH);
-		int switchCount = 0;
-		int flagCount = 0;
-		for (auto itr : switches)
-		{
-			++switchCount;
-			if (itr->GetSwitchFlag() == true)
-			{
-				++flagCount;
-			}
-		}
-
-		if (flagCount == switchCount)
-		{
-			nextSceneFlag = true;
-		}
-		return;
-	}
 }
 
 void PlayerObject::OnCollision(const GameObject& _hitObject)
 {
+	// Hitしたオブジェクトのタグを取得
+	Tag hitObjectTag = _hitObject.GetTag();
+
 	// 空中でかつ押し戻しを行うオブジェクトだったら
 	if (onGround == false && _hitObject.GetisPushBackToPlayer())
 	{
@@ -439,7 +415,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		// 押し戻し用関数へ渡す
 		FixCollision(playerBox, _hitObject.aabb);
 	}
-	else if (_hitObject.GetTag() == Tag::PUSH_BOARD)
+	else if (hitObjectTag == Tag::PUSH_BOARD)
 	{
 		// 押し戻し用関数へ渡す
 		FixCollision(playerBox, _hitObject.aabb);
@@ -470,10 +446,13 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 	}
 
 	// ステージをクリアしたかをチェック
-	ClearChack(_hitObject.GetTag());
+	if (hitObjectTag == Tag::CLEAR_POINT)
+	{
+		ClearChack(hitObjectTag);
+	}
 
 	// 当たったオブジェクトがリスポーンオブジェクトだったら
-	if (_hitObject.GetTag() == Tag::RESPOWN_POINT)
+	if (hitObjectTag == Tag::RESPOWN_POINT)
 	{
 		// リスポーン用変数を初期化
 		respownPos = Vector3::Zero;
@@ -481,8 +460,13 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		respownPos = _hitObject.GetPosition();
 	}
 
+	if (hitObjectTag == Tag::LIGHT_CHANGE_POINT)
+	{
+		sendChackPointPosition = _hitObject.GetPosition();
+	}
+
 	// 当たったオブジェクトが棘オブジェクトだったら
-	if (_hitObject.GetTag() == Tag::NEEDLE_PANEL)
+	if (hitObjectTag == Tag::NEEDLE_PANEL)
 	{
 		// 死亡フラグをtureにセット
 		deadFlag = true;

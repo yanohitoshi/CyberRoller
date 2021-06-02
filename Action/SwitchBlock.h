@@ -24,7 +24,7 @@ public:
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
 	*/
-	SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag);
+	SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag ,bool _isTutorial = false);
 	
 	/*
 	@fn デストラクタ
@@ -83,10 +83,10 @@ private:
 	BoxCollider* PlayerFootBoxCollider;
 	// メッシュからAABBの最大点最小点を得るときに使う
 	Mesh* mesh;
-	// Switchが利用可能か
-	bool isAvailableSwitch;
 	// Switchの初期ポジション保存用
 	Vector3 initPosition;
+	// Switchが利用可能か
+	bool isAvailableSwitch;
 	// playerがswitchに乗っているかどうか
 	bool isOnPlayer;
 	bool isHitPlayer;
@@ -96,6 +96,10 @@ private:
 	bool changeColorFlag;
 	// 前のフレームで色変更が行われたかどうか
 	bool tmpChangeColorFlag;
+
+	//チュートリアルスイッチかどうか
+	bool isTutorialSwitch;
+
 	// switchの停止位置
 	float stopPoint;
 

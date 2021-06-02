@@ -84,6 +84,8 @@ public:
 	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
 	static const float GetGravity() { return Gravity; }
 
+	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
+	static Vector3 const GetPlayerChackPoint() { return sendChackPointPosition; }
 
 	// 着地effect側で使用するフラグ用のgetter
 	static bool GetChackJumpFlag() { return chackJumpFlag; }
@@ -170,6 +172,12 @@ private:
 	@fn クリアしている状態かをチェックする関数
 	*/
 	void ClearChack(Tag _tag);
+	
+	/*
+	@fn クリアに必要なスイッチをチェックする関数
+	@param	_chackVector チェックするスイッチが格納されている可変長コンテナ
+	*/
+	void SwitchChackProcess(std::vector<GameObject*> _chackVector);
 
 	//----------------Component系Class変数--------------------//
 	// 3Dモデルの描画を行うクラス
@@ -198,6 +206,9 @@ private:
 	//--------------------------------------------------------//
 	
 	//--------------------static変数群------------------------//
+
+	static Vector3 sendChackPointPosition;
+
 	// 最終ステージ用のクリアフラグ
 	bool clearFlag;
 	// 最終ステージ以外での次のシーンへ遷移するフラグ
@@ -235,6 +246,8 @@ private:
 	const float FirstPositionZ;
 	// ひるむ速度定数
 	const float FlinchSpeed;
+
+	const float ShiftSendPositionZ;
 
 	//--------------------------------------------------------//
 	//--------------------------変数群------------------------//

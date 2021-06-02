@@ -3,8 +3,7 @@
 #include "CountDownFont.h"
 
 PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
-	: MaxFallSpeed(-2000.0f)
-	, TurnValue(600.0f)
+	: TurnValue(600.0f)
 	, JumpCorrection(840.0f)
 	, SwitchJumpCorrection(1320.0f)
 {
