@@ -19,6 +19,7 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, ShiftMoveWallZ(100.0f)
 	, MoveWallSpeed(300.0f)
 	, ShiftSwitchPositionZ(100.0f)
+	, PlayerPositionZ(500.0f)
 	, MaxLayer(17)
 {
 	// レイヤーのZ軸ポジションの初期化
@@ -139,7 +140,7 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 		Vector3 pos = Vector3::Zero;
 
 		// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
-		pos = Vector3(Offset * _indexX, -Offset * _indexY, 500.0f);
+		pos = Vector3(Offset * _indexX, -Offset * _indexY, PlayerPositionZ);
 		// プレイヤーオブジェクト生成
 		playerObject = new PlayerObject(pos, false, Tag::PLAYER);
 

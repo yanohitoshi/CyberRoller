@@ -12,7 +12,7 @@ FirstStageScene::FirstStageScene()
 	light = Vector3(0.1f, 0.1f, 0.1f);
 	RENDERER->SetAmbientLight(light);
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.3f, 0.3f, 0.7f);
+	dir.direction = Vector3(0.5f, 0.5f, 0.8f);
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);
 

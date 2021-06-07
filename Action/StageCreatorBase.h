@@ -151,26 +151,39 @@ protected:
 	// Z軸のオブジェクトの間隔
 	const float OffsetZ;
 
+	// プレイヤーの生成されるときのZ軸のポジション定数
+	const float PlayerPositionZ;
+
 	// ブロックオブジェクトのサイズ定数
 	const Vector3 BlockSize;
+
 	// スイッチオブジェクトのサイズ定数
 	const Vector3 SwitchBaseSize;
+
 	// ジャンプスイッチオブジェクトのサイズ定数
 	const Vector3 JumpSwitchSize;
+
 	// ニードルオブジェクトのサイズ定数
 	const Vector3 NeedlePanelSize;
+
 	// 縦長壁オブジェクトのサイズ定数
 	const Vector3 PortraitWallBlockSize;
+
 	// 横長壁オブジェクトのサイズ定数
 	const Vector3 LandscapeWallBlockSize;
+
 	// 大きい動く壁オブジェクトのサイズ定数
 	const Vector3 BigMoveWallSize;
+
 	// 小さい動く壁オブジェクトのサイズ定数
 	const Vector3 SmallMoveWallSize;
+
 	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
 	const AABB RespawnBox;
+
 	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
 	const AABB LightPointBox;
+
 	// スイッチのポジションは他のオブジェクトと違いずらす必要があるので
 	// そのために用いる定数
 	const float ShiftSwitchPositionZ;

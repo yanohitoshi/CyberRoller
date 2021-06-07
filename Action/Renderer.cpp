@@ -53,7 +53,7 @@ Renderer::Renderer()
 	, LightProjectionNear(1.0f)
 	, LightProjectionFar(20000.0f)
 	, ShiftLightPositionZ(3000.0f)
-	, ShiftLightPositionX(500.0f)
+	, ShiftLightPositionX(1000.0f)
 	, MaxTimeFontTextures(251)
 	, TimeFontSize(72)
 {
