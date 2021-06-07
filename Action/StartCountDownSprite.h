@@ -37,6 +37,21 @@ public:
 
 private:
 
+    /*
+    @fn カウントダウン表示時間カウントを数える関数
+    */
+    void ChackCountProcess();
+
+    /*
+    @fn テクスチャの状態を見る関数
+    */
+    void ChackTextureProcess();
+
+    /*
+    @fn テクスチャを切り替える関数
+    */
+    void ChangeTextureProcess();
+
     // スプライトComponent
     SpriteComponent* sprite;
     // texture 1用

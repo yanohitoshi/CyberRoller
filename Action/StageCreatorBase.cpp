@@ -1,4 +1,5 @@
 #include "StageCreatorBase.h"
+#include "PlayerObject.h"
 
 StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
@@ -129,3 +130,25 @@ int StageCreatorBase::findLayerIndex(rapidjson::GenericArray<false, rapidjson::V
 	}
 	return i;
 }
+
+void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
+{
+	// プレイヤーデータ内にプレイヤー生成情報があれば
+	if (_data == PLAYER_PARTS)
+	{
+		Vector3 pos = Vector3::Zero;
+
+		// 配列の添え字とオブジェクトごとの間隔を用いてポジションを設定
+		pos = Vector3(Offset * _indexX, -Offset * _indexY, 500.0f);
+		// プレイヤーオブジェクト生成
+		playerObject = new PlayerObject(pos, false, Tag::PLAYER);
+
+		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
+		GameObject::CreateMainCamera(pos, playerObject);
+
+	}
+
+}
+
+
+

@@ -48,22 +48,27 @@ void ContinueSprite::GameObjectInput(const InputState& _keyState)
 	// タイムアップ画像の描画が終わってコンテニュー画像描画開始から一定時間たっていたら
 	if (TimeUpSprite::GetDrawFlag() == false && frameCount >= DrawCount)
 	{
-		// Aボタンが押されたら
-		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed )
-		{
-			// 描画を切ってコンテニューフラグをtrueに
-			sprite->SetVisible(false);
-			visibleFlag = false;
-			drawFlag = false;
-			continueFlag = true;
-		}
-		else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed) // Bボタンが押されたら
-		{
-			// 描画を切ってコンテニューフラグをfalseに
-			sprite->SetVisible(false);
-			visibleFlag = false;
-			drawFlag = false;
-			continueFlag = false;
-		}
+		ChackKeyProcess(_keyState);
+	}
+}
+
+void ContinueSprite::ChackKeyProcess(const InputState& _keyState)
+{
+	// Aボタンが押されたら
+	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
+	{
+		// 描画を切ってコンテニューフラグをtrueに
+		sprite->SetVisible(false);
+		visibleFlag = false;
+		drawFlag = false;
+		continueFlag = true;
+	}
+	else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed) // Bボタンが押されたら
+	{
+		// 描画を切ってコンテニューフラグをfalseに
+		sprite->SetVisible(false);
+		visibleFlag = false;
+		drawFlag = false;
+		continueFlag = false;
 	}
 }

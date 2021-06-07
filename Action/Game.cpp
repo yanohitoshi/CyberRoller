@@ -96,6 +96,7 @@ bool Game::Initialize()
 	}
 
 	AudioManager::CreateInstance();
+
 	// サウンドの初期化
 	if (!Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG))
 	{
@@ -181,9 +182,6 @@ void Game::GameLoop()
 		{
 			// シーンの変更
 			ChangeScene(nowSceneState, nowScene);
-			// シーン遷移判定に使用するフラグを初期化
-			isChangeScene = false;
-			continueFlag = false;
 		}
 	}
 }
@@ -272,6 +270,10 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 	// シーンのメモリをdelete
 	delete _scene;
 
+	// シーン遷移判定に使用するフラグを初期化
+	isChangeScene = false;
+	continueFlag = false;
+
 	// _stateを参照して必要なシーンを生成
 	switch (_state)
 	{
@@ -345,6 +347,7 @@ void UpdateGameObjects(float _deltaTime)
 		pending->ComputeWorldTransform();
 		// マップに追加
 		auto gameObjects = GameObject::gameObjectMap.find(pending->GetTag());
+
 		if (gameObjects != GameObject::gameObjectMap.end())
 		{
 			gameObjects->second.emplace_back(pending);
@@ -358,11 +361,13 @@ void UpdateGameObjects(float _deltaTime)
 		// 使用済み配列をクリア
 		GameObject::pendingGameObjects.clear();
 	}
+
 	// 更新フラグをfalseに
 	GameObject::updatingGameObject = false;
 
 	// 死亡状態のオブジェクト用vectorを作成
 	std::vector<class GameObject*>deadObjects;
+
 	// gameObjectMapから死んでいるオブジェクトを探して死亡状態のオブジェクト用vectorに追加
 	for (auto itr = GameObject::gameObjectMap.begin(); itr != GameObject::gameObjectMap.end(); ++itr)
 	{
@@ -378,6 +383,7 @@ void UpdateGameObjects(float _deltaTime)
 	// 探し終わったらdeadObjects内のオブジェクトを削除
 	while (!deadObjects.empty())
 	{
+		// 削除
 		deadObjects.pop_back();
 	}
 
@@ -398,6 +404,7 @@ void ProcessInputs(const InputState& _state)
 			gameObject->ProcessInput(_state);
 		}
 	}
+	
 	// 更新フラグをfalseに
 	GameObject::updatingGameObject = false;
 

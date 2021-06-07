@@ -72,7 +72,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	respawnFlag = false;
 	clearFlag = false;
 	nextSceneFlag = false;
-	reStartFlag = false;
+	restartFlag = false;
 	// ダウン・コンティニュー・deadフラグ初期化
 	downFlag = false;
 	downUpFlag = false;
@@ -271,6 +271,9 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		++turnDelayCount;
 	}
 
+	// 一定時間放置によるゲームをリセットするかチェック
+	ChackRestartProcess();
+
 }
 
 void PlayerObject::GameObjectInput(const InputState& _keyState)
@@ -299,23 +302,7 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
 
-	// 一定時間入力が無かったらタイトルに戻る
-	if (inputFlag == false && jumpFlag == false)
-	{
-		// リスタートカウントを数える
-		++reStartCount;
-		// リスタートカウントが一定数を超えたら
-		if (reStartCount >= RestartTime)
-		{
-			// リスタートフラグをtrueに
-			reStartFlag = true;
-		}
-	}
-	else
-	{
-		// 入力があったらリスタートカウントを初期化
-		reStartCount = 0;
-	}
+
 
 }
 
@@ -402,6 +389,18 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 
 }
 
+void PlayerObject::ChackFlinchSpeedProcess()
+{
+	// 一定速度以上だったら
+	if (velocity.x >= FlinchSpeed || velocity.y >= FlinchSpeed ||
+		velocity.x <= -FlinchSpeed || velocity.y <= -FlinchSpeed)
+	{
+		// 壁に当たったフラグをtrueに
+		isHitWall = true;
+	}
+}
+
+
 void PlayerObject::OnCollision(const GameObject& _hitObject)
 {
 	// Hitしたオブジェクトのタグを取得
@@ -424,13 +423,8 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 	// 当たった際にプレイヤーがひるむオブジェクトだったら
 	if (_hitObject.GetisFlinchToPlayer())
 	{
-		// 一定速度以上だったら
-		if (velocity.x >= FlinchSpeed || velocity.y >= FlinchSpeed ||
-			velocity.x <= -FlinchSpeed || velocity.y <= -FlinchSpeed)
-		{
-			// 壁に当たったフラグをtrueに
-			isHitWall = true;
-		}
+		// ひるむ速度かチェックする処理
+		ChackFlinchSpeedProcess();
 	}
 	else // それ以外だったら
 	{
@@ -488,18 +482,45 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 	// 当たったオブジェクトがジャンプスイッチでかつジャンプフラグがfalseだったら
 	if (_hitObject.GetTag() == Tag::JUMP_SWITCH && jumpFlag == false)
 	{
-		// もし、ジャンプスイッチフラグがfalseだったら
-		if (switchJumpFlag == false)
-		{
-			// フレームカウントを初期化
-			jumpFrameCount = 0;
-			// ジャンプ力を初期値にセット
-			jumpPower = FirstJumpPower;
-			// ジャンプスイッチフラグをtrueに
-			switchJumpFlag = true;
-		}
+		// スイッチジャンプアクティブ
+		ActiveSwitchJumpProcess();
 	}
 
+}
+
+void PlayerObject::ActiveSwitchJumpProcess()
+{
+	// もし、ジャンプスイッチフラグがfalseだったら
+	if (switchJumpFlag == false)
+	{
+		// フレームカウントを初期化
+		jumpFrameCount = 0;
+		// ジャンプ力を初期値にセット
+		jumpPower = FirstJumpPower;
+		// ジャンプスイッチフラグをtrueに
+		switchJumpFlag = true;
+	}
+}
+
+void PlayerObject::ChackRestartProcess()
+{
+	// 一定時間入力が無かったらタイトルに戻る
+	if (inputFlag == false && jumpFlag == false)
+	{
+		// リスタートカウントを数える
+		++reStartCount;
+		// リスタートカウントが一定数を超えたら
+		if (reStartCount >= RestartTime)
+		{
+			// リスタートフラグをtrueに
+			restartFlag = true;
+		}
+	}
+	else
+	{
+		// 入力があったらリスタートカウントを初期化
+		reStartCount = 0;
+	}
 }
 
 

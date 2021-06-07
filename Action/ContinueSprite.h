@@ -55,6 +55,8 @@ public:
 
 private:
 
+    void ChackKeyProcess(const InputState& _keyState);
+
     // スプライトComponent
     SpriteComponent* sprite;
 

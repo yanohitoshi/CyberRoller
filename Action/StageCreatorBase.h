@@ -126,6 +126,15 @@ protected:
 
 	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& layer, std::string& layerName);
 
+	/*
+	@fn プレイヤーを生産する関数
+	@brief  プレイヤー用マップデータを用いてプレイヤーを生産する
+	@param	_data マップデータ
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void ProductionPlayer(int _data, int _indexX, int _indexY);
+
 	// プレイヤーを見たいclassにプレイヤーのポインタを渡すための変数
 	PlayerObject* playerObject;
 

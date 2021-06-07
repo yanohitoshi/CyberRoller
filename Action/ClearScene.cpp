@@ -37,7 +37,7 @@ SceneState ClearScene::Update(const InputState& state)
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == Pressed ||
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
-		leftTrigger == 1 || rightTrigger == 1)
+		leftTrigger == 1.0f || rightTrigger == 1.0f)
 	{
 		// éüÇÃÉVÅ[ÉìÇï‘Ç∑
 		return SceneState::TITLE_SCENE;

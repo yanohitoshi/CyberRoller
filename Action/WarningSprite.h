@@ -38,6 +38,27 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+    /*
+    @fn フェードインアウトの状態を見る関数
+    */
+    void ChackFadeInOutProcess();
+    
+    /*
+    @fn フェードインアウト処理関数
+    */
+    void FadeInOutProcess();
+    
+    /*
+    @fn 最後のフェードアウト処理関数
+    */
+    void LastFadeOutProcess();
+    
+    /*
+    @fn フェードインアウトの切り替え処理関数
+    */
+    void ChangeFadeProcess();
+
     // ownerを格納するためのポインタ変数
     CountDownFont* owner;
     // SpriteComponentのポインタ変数
@@ -48,5 +69,13 @@ private:
     float alpha;
     // 何回fadein・outしたかを数えるカウント
     int count;
+
+    // フェードインアウトに用いる値定数
+    const float FadeValue;
+    // フェードインに切り替える規定値定数
+    const float ChangeFadeInValue;
+    // フェードアウトに切り替える規定値定数
+    const float ChangeFadeOutValue;
+
 };
 

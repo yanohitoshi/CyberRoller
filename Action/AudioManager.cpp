@@ -1,3 +1,6 @@
+
+/*–¢ŽÀ‘•‚È‚Ì‚ÅŽg—p‚µ‚Ä‚¢‚Ü‚¹‚ñ*/
+
 #include "AudioManager.h"
 #include "Music.h"
 #include "Sound.h"

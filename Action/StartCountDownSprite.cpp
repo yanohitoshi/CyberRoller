@@ -35,53 +35,76 @@ void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 	// 描画フラグがtrueだったら
 	if (drawSpriteFlag == true)
 	{
-		// カウント計測
-		++timeStartCount;
-		// カウントが60以下だったら
-		if (timeStartCount >= ChangeCount)
+		// カウントダウン表示用カウントを数える
+		ChackCountProcess();
+
+		// テクスチャの状態をチェック
+		ChackTextureProcess();
+	}
+}
+
+void StartCountDownSprite::ChackCountProcess()
+{
+	// カウント計測
+	++timeStartCount;
+	// カウントが60以下だったら
+	if (timeStartCount >= ChangeCount)
+	{
+		// 描画する
+		sprite->SetVisible(true);
+		// フレームカウントを取る
+		frameCount++;
+		// 60フレーム後ごとにtextureを切り替える
+		if (frameCount >= ChangeCount)
 		{
-			// 描画する
-			sprite->SetVisible(true);
-			// フレームカウントを取る
-			frameCount++;
-			// 60フレーム後ごとにtextureを切り替える
-			if (frameCount >= ChangeCount)
-			{
-				time -= 1;
-				frameCount = 0;
-				// texture変更フラグをtrueに
-				texChangeFlag = true;
-			}
+			time -= 1;
+			frameCount = 0;
+			// texture変更フラグをtrueに
+			texChangeFlag = true;
 		}
-		if (texChangeFlag == true) // texture変更フラグがtrueだったら
-		{
-			// time変数を見てそれに応じたtextureをセット
-			if (time == 3)
-			{
-				sprite->SetTexture(secondTexure);
-				texChangeFlag = false;
-			}
-			
-			if (time == 2)
-			{
-				sprite->SetTexture(thirdTexure);
-				texChangeFlag = false;
-			}
-			
-			if (time == 1)
-			{
-				sprite->SetTexture(startTexure);
-				texChangeFlag = false;
-			}
-			
-			// 0になったら描画を切ってstateをDeadに
-			if (time == 0)
-			{
-				sprite->SetVisible(false);
-				drawSpriteFlag = false;
-				CountDownFont::SetCountStartFlag(true);
-				state = State::Dead;
-			}
-		}
+	}
+}
+
+void StartCountDownSprite::ChackTextureProcess()
+{
+	// texture変更フラグがtrueだったら
+	if (texChangeFlag == true)
+	{
+		// 時間ごとのテクスチャに切り替える
+		ChangeTextureProcess();
+	}
+}
+
+void StartCountDownSprite::ChangeTextureProcess()
+{
+	// time変数を見てそれに応じたtextureをセット
+	// 3の時
+	if (time == 3)
+	{
+		sprite->SetTexture(secondTexure);
+		texChangeFlag = false;
+	}
+
+	// 2の時
+	if (time == 2)
+	{
+		sprite->SetTexture(thirdTexure);
+		texChangeFlag = false;
+	}
+
+	// 1の時
+	if (time == 1)
+	{
+		sprite->SetTexture(startTexure);
+		texChangeFlag = false;
+	}
+
+	// 0になったら描画を切ってstateをDeadに
+	if (time == 0)
+	{
+		sprite->SetVisible(false);
+		drawSpriteFlag = false;
+		CountDownFont::SetCountStartFlag(true);
+		state = State::Dead;
 	}
 }

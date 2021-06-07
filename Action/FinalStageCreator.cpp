@@ -230,27 +230,16 @@ void FinalStageCreator::CreateStage()
 
 PlayerObject* FinalStageCreator::CreatePlayer()
 {
-	//playerクラスに初期位置を渡すための変数
-	Vector3 pos = Vector3(0, 0, 0);
 
 	// プレイヤーの位置情報検索
 	for (int iy = 0; iy < sizeY; iy++)
 	{
 		for (int ix = 0; ix < sizeX; ix++)
 		{
-			// プレイヤーデータ内にプレイヤー生成情報があれば
-			if (playerData[iy][ix] == PLAYER_PARTS)
-			{
-				pos = Vector3(Offset * ix, -Offset * iy, 500.0f);
-			}
+			// プレイヤーを生成する処理
+			ProductionPlayer(playerData[iy][ix], ix, iy);
 		}
 	}
-
-	// プレイヤーオブジェクト生成
-	playerObject = new PlayerObject(pos, false, Tag::PLAYER);
-
-	// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
-	GameObject::CreateMainCamera(pos, playerObject);
 
 	// プレイヤーオブジェクトのポインタを返す
 	return playerObject;

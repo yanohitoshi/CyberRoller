@@ -129,7 +129,7 @@ public:
 	// シーン遷移時に使うフラグのgetter
 	bool GetClearFlag() { return clearFlag; }
 	bool GetNextSceneFlag() { return nextSceneFlag; }
-	bool GetReStartFlag() { return reStartFlag; }
+	bool GetReStartFlag() { return restartFlag; }
 
 	// 戻り値→int
 	int GetJumpFrameCount() { return jumpFrameCount; }
@@ -179,6 +179,21 @@ private:
 	*/
 	void SwitchChackProcess(std::vector<GameObject*> _chackVector);
 
+	/*
+	@fn ひるむ可能性のある壁に当たった際にひるむ速度なのかチェックする関数
+	*/
+	void ChackFlinchSpeedProcess();
+
+	/*
+	@fn スイッチジャンプアクティブ関数
+	*/
+	void ActiveSwitchJumpProcess();
+
+	/*
+	@fn リスタートチェック関数
+	*/
+	void ChackRestartProcess();
+
 	//----------------Component系Class変数--------------------//
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
@@ -209,12 +224,7 @@ private:
 
 	static Vector3 sendChackPointPosition;
 
-	// 最終ステージ用のクリアフラグ
-	bool clearFlag;
-	// 最終ステージ以外での次のシーンへ遷移するフラグ
-	bool nextSceneFlag;
-	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
-	bool reStartFlag;
+
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
 	static bool chackJumpFlag;
@@ -280,6 +290,12 @@ private:
 	//ジャンプ力
 	float jumpPower;
 
+	// 最終ステージ用のクリアフラグ
+	bool clearFlag;
+	// 最終ステージ以外での次のシーンへ遷移するフラグ
+	bool nextSceneFlag;
+	// 一定時間以上入力がなかった際にタイトルへ戻るフラグ
+	bool restartFlag;
 	//入力があったかどうか判定するためのフラグ
 	bool inputFlag;
 	//引き続きジャンプボタンが利用可能かフラグ

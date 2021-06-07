@@ -66,9 +66,9 @@ void TitleStageCreator::CreateStage()
 	// プレイヤーのステージデータを見てその情報ごとのclassを生成する
 	// 先にプレイヤーのポジションを確定させてその後そのポジションを他クラスに送りたいので
 	// プレイヤーの位置データを回し切っています
-	for (float iy = 0; iy < sizeY; iy++)
+	for (int iy = 0; iy < sizeY; iy++)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
+		for (int ix = 0; ix < sizeX; ix++)
 		{
 			// プレイヤー生成関数
 			sendPlayerPos = CreatePlayer(ix,iy);
@@ -76,9 +76,9 @@ void TitleStageCreator::CreateStage()
 	}
 
 	// ステージデータを見てその情報ごとのclassを生成する
-	for (float iy = 0; iy < sizeY; iy++)
+	for (int iy = 0; iy < sizeY; iy++)
 	{
-		for (float ix = 0; ix < sizeX; ix++)
+		for (int ix = 0; ix < sizeX; ix++)
 		{
 			// タイトル用マップステージ生成関数
 			CreateTitleMap(ix, iy, sendPlayerPos);
