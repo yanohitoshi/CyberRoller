@@ -33,7 +33,7 @@ PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vec
 	mesh = meshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::MoveGroungTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::MOVE_GROUND_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 }
 

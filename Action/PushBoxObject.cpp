@@ -33,7 +33,7 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	mesh = meshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::GroundTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::GROUND_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 	// 動く向きごとにPushBoardObjectの引数を変更して付与

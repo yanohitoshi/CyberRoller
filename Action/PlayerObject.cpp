@@ -171,13 +171,13 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this,ColliderComponent::PlayerTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this,ColliderComponent::PLAYER_TAG, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
 	playerBox = { Vector3(-60.0f,-10.0f,0.0f),Vector3(60.0f,10.0f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
-	groundChackSphereCol = new SphereCollider(this, ColliderComponent::GroundCheckTag, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1));
+	groundChackSphereCol = new SphereCollider(this, ColliderComponent::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1));
 	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	groundChackSphereCol->SetObjectSphere(groundChackSphere);
 

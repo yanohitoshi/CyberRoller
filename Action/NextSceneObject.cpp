@@ -34,7 +34,7 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	playerObject = _playerObject;
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::ClearPointTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::CLEAR_POINT_TAG, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-1.0f,-1.0f,-1.0f),Vector3(1.0f,1.0f,3.0f) };
 	boxCollider->SetObjectBox(aabb);
 

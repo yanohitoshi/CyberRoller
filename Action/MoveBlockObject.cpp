@@ -31,7 +31,7 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::MoveGroungTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::MOVE_GROUND_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 }

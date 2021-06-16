@@ -30,7 +30,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 	mesh = meshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::ClearPointTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::CLEAR_POINT_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 	playerObject = _playerObject;

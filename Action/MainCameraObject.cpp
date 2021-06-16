@@ -45,7 +45,7 @@ MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObje
 	tmpHitFlag = false;
 
 	//当たり判定用のコンポーネントの追加と初期化
-	boxcollider = new BoxCollider(this, ColliderComponent::CameraTag, GetOnCollisionFunc());
+	boxcollider = new BoxCollider(this, ColliderComponent::CAMERA_TAG, GetOnCollisionFunc());
 	AABB aabb = { AabbInitMin,AabbInitMax };
 	boxcollider->SetObjectBox(aabb);
 

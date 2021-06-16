@@ -13,7 +13,7 @@ RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _obje
 	//reSpownFlag = false;
 
 	// 当たり判定用ボックスコライダー付与
-	boxCollider = new BoxCollider(this,ColliderComponent::ReSpownTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this,ColliderComponent::RESPOWN_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(_box);
 
 }

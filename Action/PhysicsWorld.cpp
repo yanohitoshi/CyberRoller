@@ -10,10 +10,6 @@
 
 PhysicsWorld* PhysicsWorld::physics = nullptr;
 
-PhysicsWorld::PhysicsWorld()
-{
-}
-
 void PhysicsWorld::CreateInstance()
 {
 	if (physics == nullptr)
@@ -31,12 +27,503 @@ void PhysicsWorld::DeleteInstance()
 	}
 }
 
-void PhysicsWorld::HitCheck()
+PhysicsWorld::PhysicsWorld()
 {
-	//SphereAndSphere();
-	// BoxAndBox();
-	// SphereAndBox();
 }
+
+void PhysicsWorld::HitChackBoxPlayerToGround(BoxCollider* _box)
+{
+	for (auto itr : groundBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToMoveGround(BoxCollider* _box)
+{
+	for (auto itr : moveGroundBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToWall(BoxCollider* _box)
+{
+	for (auto itr : wallBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToClearPoint(BoxCollider* _box)
+{
+	for (auto itr : clearPointBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToRespownPoint(BoxCollider* _box)
+{
+	for (auto itr : respownPointBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToNeedlePlane(BoxCollider* _box)
+{
+	for (auto itr : needlePlaneBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToSwitchBase(BoxCollider* _box)
+{
+	for (auto itr : switchBaseBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxPlayerToSwitch(BoxCollider* _box)
+{
+	for (auto itr : switchBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxCameraToGround(BoxCollider* _box)
+{
+	for (auto itr : groundBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxCameraToWall(BoxCollider* _box)
+{
+	for (auto itr : wallBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxMoveGroundToJumpSwitch(BoxCollider* _box)
+{
+	for (auto itr : jumpSwitchBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackBoxMoveGroundToNeedlePlane(BoxCollider* _box)
+{
+	for (auto itr : needlePlaneBoxes)
+	{
+		//自分自身とは当たり判定を行わない
+		if (itr == _box)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+			_box->refreshWorldTransform();
+
+		}
+	}
+}
+
+void PhysicsWorld::HitChackSphereGroundChackToGround(SphereCollider* _sphere)
+{
+	for (auto itr : groundBoxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+			_sphere->refreshWorldTransform();
+		}
+	}
+}
+
+void PhysicsWorld::HitChackSphereGroundChackToMoveGround(SphereCollider* _sphere)
+{
+	for (auto itr : moveGroundBoxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+			_sphere->refreshWorldTransform();
+		}
+	}
+}
+
+void PhysicsWorld::HitChackSphereGroundChackToSwitchBase(SphereCollider* _sphere)
+{
+	for (auto itr : switchBaseBoxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+			_sphere->refreshWorldTransform();
+		}
+	}
+}
+
+void PhysicsWorld::HitChackSphereGroundChackToSwitch(SphereCollider* _sphere)
+{
+	for (auto itr : switchBoxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+		
+		// Hitしていたら
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+			_sphere->refreshWorldTransform();
+		}
+	}
+}
+
+void PhysicsWorld::HitChackSphereGroundChackToJumpSwitch(SphereCollider* _sphere)
+{
+	for (auto itr : jumpSwitchBoxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+
+		// Hitしていたら
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+			_sphere->refreshWorldTransform();
+		}
+	}
+}
+
+
 
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
@@ -46,379 +533,51 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		return;
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::PlayerTag)
+	if (_box->GetBoxTag() == ColliderComponent::PLAYER_TAG)
 	{
-	
-		for (auto itr : groundBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
+		// プレイヤーと地面の判定処理
+		HitChackBoxPlayerToGround(_box);
 		
-			}
-		}
+		// プレイヤーと動く地面の判定処理
+		HitChackBoxPlayerToMoveGround(_box);
 
-		for (auto itr : wallBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// プレイヤーと壁の判定処理
+		HitChackBoxPlayerToWall(_box);
 
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
+		// プレイヤーとクリアポイントの判定処理
+		HitChackBoxPlayerToClearPoint(_box);
 
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
+		// プレイヤーとリスポーンポイントの判定処理
+		HitChackBoxPlayerToRespownPoint(_box);
 
-			}
-		}
+		// プレイヤーと棘配置用床の判定処理
+		HitChackBoxPlayerToNeedlePlane(_box);
 
-		for (auto itr : clearPointBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// プレイヤーとスイッチの土台の判定処理
+		HitChackBoxPlayerToSwitchBase(_box);
 
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-		for (auto itr : respownPointBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-		for (auto itr : needlePlaneBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : moveGroundBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : switchBaseBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : switchBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
+		// プレイヤーとスイッチの判定処理
+		HitChackBoxPlayerToSwitch(_box);
 
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::CameraTag)
+	if (_box->GetBoxTag() == ColliderComponent::CAMERA_TAG)
 	{
-		for (auto itr : groundBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// カメラと地面の判定処理
+		HitChackBoxCameraToGround(_box);
 
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : wallBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
+		// カメラと壁の判定処理
+		HitChackBoxCameraToWall(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::MoveGroungTag)
+	if (_box->GetBoxTag() == ColliderComponent::MOVE_GROUND_TAG)
 	{
-		for (auto itr : switchBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// 動く床とジャンプスイッチの判定処理
+		HitChackBoxMoveGroundToJumpSwitch(_box);
 
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : jumpSwitchBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : needlePlaneBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
-		for (auto itr : switchBaseBoxes)
-		{
-			//自分自身とは当たり判定を行わない
-			if (itr == _box)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_box);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_box->GetOwner()));
-				_box->refreshWorldTransform();
-
-			}
-		}
-
+		// 動く床と棘配置用床の判定処理
+		HitChackBoxMoveGroundToNeedlePlane(_box);
 	}
-
 
 }
 
@@ -430,105 +589,22 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::GroundCheckTag)
+	if (_sphere->GetSphereTag() == ColliderComponent::GROUND_CHECK_TAG)
 	{
-		for (auto itr : groundBoxes)
-		{
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// 接地判定スフィアと地面の当たり判定
+		HitChackSphereGroundChackToGround(_sphere);
 
-			bool hit = Intersect( _sphere->GetWorldSphere(), itr->GetWorldBox());
-			if (hit)
-			{
+		// 接地判定スフィアと動く地面の当たり判定
+		HitChackSphereGroundChackToMoveGround(_sphere);
 
-				onCollisionFunc func = collisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->refreshWorldTransform();
-			}
-		}
+		// 接地判定スフィアとスイッチの土台の当たり判定
+		HitChackSphereGroundChackToSwitchBase(_sphere);
 
-		for (auto itr : moveGroundBoxes)
-		{
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		// 接地判定スフィアとスイッチの当たり判定
+		HitChackSphereGroundChackToSwitch(_sphere);
 
-			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
-			if (hit)
-			{
-
-				onCollisionFunc func = collisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->refreshWorldTransform();
-			}
-		}
-
-		for (auto itr : switchBaseBoxes)
-		{
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
-			if (hit)
-			{
-				onCollisionFunc func = collisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->refreshWorldTransform();
-			}
-		}
-
-
-		for (auto itr : switchBoxes)
-		{
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
-			if (hit)
-			{
-				onCollisionFunc func = collisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->refreshWorldTransform();
-			}
-		}
-
-		for (auto itr : jumpSwitchBoxes)
-		{
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-
-			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
-			if (hit)
-			{
-				onCollisionFunc func = collisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = collisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->refreshWorldTransform();
-			}
-		}
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		HitChackSphereGroundChackToJumpSwitch(_sphere);
 
 	}
 }
@@ -561,18 +637,16 @@ void PhysicsWorld::HitCheck(LineSegmentCollider* _line)
 			func(*(itr->GetOwner()));
 			func = collisionFunction.at(itr);
 			func(*(_line->GetOwner()));
-			printf("t:%f\n", t);
-			printf("colPosx:%fy:%fz:%f\n", colPos.x, colPos.y, colPos.z);
 		}
 	}
-
-
 }
 
 void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 {
+
 	ColliderComponent::PhysicsTag objTag = _box->GetBoxTag();
-	if (objTag == ColliderComponent::PlayerTag)
+
+	if (objTag == ColliderComponent::PLAYER_TAG)
 	{
 		playerBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -580,14 +654,14 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 	}
 
 
-	if (objTag == ColliderComponent::GroundTag)
+	if (objTag == ColliderComponent::GROUND_TAG)
 	{
 		groundBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::MoveGroungTag)
+	if (objTag == ColliderComponent::MOVE_GROUND_TAG)
 	{
 		moveGroundBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -595,28 +669,28 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 	}
 
 
-	if (objTag == ColliderComponent::GroundCheckTag)
+	if (objTag == ColliderComponent::GROUND_CHECK_TAG)
 	{
 		groundCheckBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::WallTag)
+	if (objTag == ColliderComponent::WALL_TAG)
 	{
 		wallBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::SwitchTag)
+	if (objTag == ColliderComponent::SWITCH_TAG)
 	{
 		switchBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::FOOT_CHECKTAG)
+	if (objTag == ColliderComponent::FOOT_CHECK_TAG)
 	{
 		footCheckBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -630,36 +704,35 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 	
-
-	if (objTag == ColliderComponent::JumpSwitchTag)
+	if (objTag == ColliderComponent::JUMP_SWITCH_TAG)
 	{
 		jumpSwitchBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::CameraTag)
+	if (objTag == ColliderComponent::CAMERA_TAG)
 	{
 		cameraBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::ClearPointTag)
+	if (objTag == ColliderComponent::CLEAR_POINT_TAG)
 	{
 		clearPointBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::ReSpownTag)
+	if (objTag == ColliderComponent::RESPOWN_TAG)
 	{
 		respownPointBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 	}
 
-	if (objTag == ColliderComponent::NeedleTag)
+	if (objTag == ColliderComponent::NEEDLE_TAG)
 	{
 		needlePlaneBoxes.emplace_back(_box);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -670,7 +743,8 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
 {
-	if (_box->GetBoxTag() == ColliderComponent::PlayerTag)
+
+	if (_box->GetBoxTag() == ColliderComponent::PLAYER_TAG)
 	{
 		auto iter = std::find(playerBoxes.begin(), playerBoxes.end(), _box);
 		if (iter != playerBoxes.end())
@@ -678,9 +752,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, playerBoxes.end() - 1);
 			playerBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
-	if (_box->GetBoxTag() == ColliderComponent::WallTag)
+
+	if (_box->GetBoxTag() == ColliderComponent::WALL_TAG)
 	{
 		auto iter = std::find(wallBoxes.begin(), wallBoxes.end(), _box);
 		if (iter != wallBoxes.end())
@@ -688,9 +764,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, wallBoxes.end() - 1);
 			wallBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
-	if (_box->GetBoxTag() == ColliderComponent::GroundTag)
+
+	if (_box->GetBoxTag() == ColliderComponent::GROUND_TAG)
 	{
 		auto iter = std::find(groundBoxes.begin(), groundBoxes.end(), _box);
 		if (iter != groundBoxes.end())
@@ -698,9 +776,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, groundBoxes.end() - 1);
 			groundBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
-	if (_box->GetBoxTag() == ColliderComponent::MoveGroungTag)
+
+	if (_box->GetBoxTag() == ColliderComponent::MOVE_GROUND_TAG)
 	{
 		auto iter = std::find(moveGroundBoxes.begin(), moveGroundBoxes.end(), _box);
 		if (iter != moveGroundBoxes.end())
@@ -708,10 +788,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, moveGroundBoxes.end() - 1);
 			moveGroundBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::SwitchTag)
+	if (_box->GetBoxTag() == ColliderComponent::SWITCH_TAG)
 	{
 		auto iter = std::find(switchBoxes.begin(), switchBoxes.end(), _box);
 		if (iter != switchBoxes.end())
@@ -719,10 +800,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, switchBoxes.end() - 1);
 			switchBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::FOOT_CHECKTAG)
+	if (_box->GetBoxTag() == ColliderComponent::FOOT_CHECK_TAG)
 	{
 		auto iter = std::find(footCheckBoxes.begin(), footCheckBoxes.end(), _box);
 		if (iter != footCheckBoxes.end())
@@ -730,6 +812,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, footCheckBoxes.end() - 1);
 			footCheckBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
@@ -742,10 +825,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, switchBaseBoxes.end() - 1);
 			switchBaseBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::JumpSwitchTag)
+	if (_box->GetBoxTag() == ColliderComponent::JUMP_SWITCH_TAG)
 	{
 		auto iter = std::find(jumpSwitchBoxes.begin(), jumpSwitchBoxes.end(), _box);
 		if (iter != jumpSwitchBoxes.end())
@@ -753,10 +837,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, jumpSwitchBoxes.end() - 1);
 			jumpSwitchBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::GroundCheckTag)
+	if (_box->GetBoxTag() == ColliderComponent::GROUND_CHECK_TAG)
 	{
 		auto iter = std::find(groundCheckBoxes.begin(), groundCheckBoxes.end(), _box);
 		if (iter != groundCheckBoxes.end())
@@ -764,9 +849,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, groundCheckBoxes.end() - 1);
 			groundCheckBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
-	if (_box->GetBoxTag() == ColliderComponent::CameraTag)
+
+	if (_box->GetBoxTag() == ColliderComponent::CAMERA_TAG)
 	{
 		auto iter = std::find(cameraBoxes.begin(), cameraBoxes.end(), _box);
 		if (iter != cameraBoxes.end())
@@ -774,10 +861,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, cameraBoxes.end() - 1);
 			cameraBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::ClearPointTag)
+	if (_box->GetBoxTag() == ColliderComponent::CLEAR_POINT_TAG)
 	{
 		auto iter = std::find(clearPointBoxes.begin(), clearPointBoxes.end(), _box);
 		if (iter != clearPointBoxes.end())
@@ -785,10 +873,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, clearPointBoxes.end() - 1);
 			clearPointBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::ReSpownTag)
+	if (_box->GetBoxTag() == ColliderComponent::RESPOWN_TAG)
 	{
 		auto iter = std::find(respownPointBoxes.begin(), respownPointBoxes.end(), _box);
 		if (iter != respownPointBoxes.end())
@@ -796,10 +885,11 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, respownPointBoxes.end() - 1);
 			respownPointBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::NeedleTag)
+	if (_box->GetBoxTag() == ColliderComponent::NEEDLE_TAG)
 	{
 		auto iter = std::find(needlePlaneBoxes.begin(), needlePlaneBoxes.end(), _box);
 		if (iter != needlePlaneBoxes.end())
@@ -807,43 +897,41 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 			std::iter_swap(iter, needlePlaneBoxes.end() - 1);
 			needlePlaneBoxes.pop_back();
 		}
+
 		collisionFunction.erase(_box);
 	}
 
-
-
-	auto iter = std::find(boxes.begin(), boxes.end(), _box);
-	if (iter != boxes.end())
-	{
-		std::iter_swap(iter, boxes.end() - 1);
-		boxes.pop_back();
-	}
-    collisionFunction.erase(_box);
+	//auto iter = std::find(boxes.begin(), boxes.end(), _box);
+	//if (iter != boxes.end())
+	//{
+	//	std::iter_swap(iter, boxes.end() - 1);
+	//	boxes.pop_back();
+	//}
+ //   collisionFunction.erase(_box);
 }
 
 void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
 	ColliderComponent::PhysicsTag objTag = _sphere->GetSphereTag();
-	if (objTag == ColliderComponent::GroundCheckTag)
+
+	if (objTag == ColliderComponent::GROUND_CHECK_TAG)
 	{
 		groundCheckSpheres.emplace_back(_sphere);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 	}
 
-	if (objTag == ColliderComponent::SwitchCheckTag)
+	if (objTag == ColliderComponent::SWITCH_CHECK_TAG)
 	{
 		switchCheckSpheres.emplace_back(_sphere);
 		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 	}
-
-
 }
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 {
-	if (_sphere->GetSphereTag() == ColliderComponent::GroundCheckTag)
+	if (_sphere->GetSphereTag() == ColliderComponent::GROUND_CHECK_TAG)
 	{
 		auto iter = std::find(groundCheckSpheres.begin(), groundCheckSpheres.end(), _sphere);
 		if (iter != groundCheckSpheres.end())
@@ -851,10 +939,11 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 			std::iter_swap(iter, groundCheckSpheres.end() - 1);
 			groundCheckSpheres.pop_back();
 		}
+
 		collisionFunction.erase(_sphere);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::SwitchCheckTag)
+	if (_sphere->GetSphereTag() == ColliderComponent::SWITCH_CHECK_TAG)
 	{
 		auto iter = std::find(switchCheckSpheres.begin(), switchCheckSpheres.end(), _sphere);
 		if (iter != switchCheckSpheres.end())
@@ -862,6 +951,7 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 			std::iter_swap(iter, switchCheckSpheres.end() - 1);
 			switchCheckSpheres.pop_back();
 		}
+
 		collisionFunction.erase(_sphere);
 	}
 
@@ -882,6 +972,7 @@ void PhysicsWorld::RemoveLineSegment(LineSegmentCollider* _line)
 		std::iter_swap(iter, lines.end() - 1);
 		lines.pop_back();
 	}
+
 	collisionFunction.erase(_line);
 }
 
@@ -890,7 +981,6 @@ void PhysicsWorld::AddPlane(PlaneCollider* _plane, onCollisionFunc _func)
 	planes.emplace_back(_plane);
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_plane), _func));
-
 }
 
 void PhysicsWorld::RemovePlane(PlaneCollider* _plane)
@@ -901,7 +991,45 @@ void PhysicsWorld::RemovePlane(PlaneCollider* _plane)
 		std::iter_swap(iter, planes.end() - 1);
 		planes.pop_back();
 	}
+
 	collisionFunction.erase(_plane);
+
+}
+
+/*
+@fn 衝突したことが確定したとき、めり込みを戻す関数
+@param _movableBox 移動物体
+@param _fixedBox 移動しない物体
+@param _calcFixVec 移動物体の補正差分ベクトル
+*/
+void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+{
+	_calcFixVec = Vector3(0, 0, 0);
+	float dx1 = _fixedBox.min.x - _movableBox.max.x;
+	float dx2 = _fixedBox.max.x - _movableBox.min.x;
+	float dy1 = _fixedBox.min.y - _movableBox.max.y;
+	float dy2 = _fixedBox.max.y - _movableBox.min.y;
+	float dz1 = _fixedBox.min.z - _movableBox.max.z;
+	float dz2 = _fixedBox.max.z - _movableBox.min.z;
+
+	// dx, dy, dz には それぞれ1,2のうち絶対値が小さい方をセットする
+	float dx = (Math::Abs(dx1) < Math::Abs(dx2)) ? dx1 : dx2;
+	float dy = (Math::Abs(dy1) < Math::Abs(dy2)) ? dy1 : dy2;
+	float dz = (Math::Abs(dz1) < Math::Abs(dz2)) ? dz1 : dz2;
+
+	// x, y, zのうち最も差が小さい軸で位置を調整
+	if (Math::Abs(dx) <= Math::Abs(dy) && Math::Abs(dx) <= Math::Abs(dz))
+	{
+		_calcFixVec.x = dx;
+	}
+	else if (Math::Abs(dy) <= Math::Abs(dx) && Math::Abs(dy) <= Math::Abs(dz))
+	{
+		_calcFixVec.y = dy;
+	}
+	else
+	{
+		_calcFixVec.z = dz;
+	}
 
 }
 
@@ -989,39 +1117,3 @@ void PhysicsWorld::RemovePlane(PlaneCollider* _plane)
 //	}
 //}
 
-/*
-@fn 衝突したことが確定したとき、めり込みを戻す関数
-@param _movableBox 移動物体
-@param _fixedBox 移動しない物体
-@param _calcFixVec 移動物体の補正差分ベクトル
-*/
-void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
-{
-	_calcFixVec = Vector3(0, 0, 0);
-	float dx1 = _fixedBox.min.x - _movableBox.max.x;
-	float dx2 = _fixedBox.max.x - _movableBox.min.x;
-	float dy1 = _fixedBox.min.y - _movableBox.max.y;
-	float dy2 = _fixedBox.max.y - _movableBox.min.y;
-	float dz1 = _fixedBox.min.z - _movableBox.max.z;
-	float dz2 = _fixedBox.max.z - _movableBox.min.z;
-
-	// dx, dy, dz には それぞれ1,2のうち絶対値が小さい方をセットする
-	float dx = (Math::Abs(dx1) < Math::Abs(dx2)) ? dx1 : dx2;
-	float dy = (Math::Abs(dy1) < Math::Abs(dy2)) ? dy1 : dy2;
-	float dz = (Math::Abs(dz1) < Math::Abs(dz2)) ? dz1 : dz2;
-
-	// x, y, zのうち最も差が小さい軸で位置を調整
-	if (Math::Abs(dx) <= Math::Abs(dy) && Math::Abs(dx) <= Math::Abs(dz))
-	{
-		_calcFixVec.x = dx;
-	}
-	else if (Math::Abs(dy) <= Math::Abs(dx) && Math::Abs(dy) <= Math::Abs(dz))
-	{
-		_calcFixVec.y = dy;
-	}
-	else
-	{
-		_calcFixVec.z = dz;
-	}
-
-}

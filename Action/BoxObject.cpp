@@ -24,7 +24,7 @@ BoxObject::BoxObject(const Vector3& _p, const Vector3& _size, const Tag& _object
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this,ColliderComponent::GroundTag, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this,ColliderComponent::GROUND_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 }

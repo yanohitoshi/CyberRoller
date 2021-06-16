@@ -23,20 +23,20 @@ public:
 	*/
 	enum PhysicsTag
 	{
-		GroundTag,
-		MoveGroungTag,
-		WallTag,
-		PlayerTag,
-		SwitchTag,
+		GROUND_TAG,
+		MOVE_GROUND_TAG,
+		WALL_TAG,
+		PLAYER_TAG,
+		SWITCH_TAG,
 		SWITCH_BASE,
-		JumpSwitchTag,
-		GroundCheckTag,
-		FOOT_CHECKTAG,
-		SwitchCheckTag,
-		CameraTag,
-		ClearPointTag,
-		NeedleTag,
-		ReSpownTag
+		JUMP_SWITCH_TAG,
+		GROUND_CHECK_TAG,
+		FOOT_CHECK_TAG,
+		SWITCH_CHECK_TAG,
+		CAMERA_TAG,
+		CLEAR_POINT_TAG,
+		NEEDLE_TAG,
+		RESPOWN_TAG
 	};
 
     /*
