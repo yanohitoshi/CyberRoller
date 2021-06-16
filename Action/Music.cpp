@@ -3,29 +3,29 @@
 
 #include "Music.h"
 Music::Music()
-	:mMusic(nullptr)
+	:music(nullptr)
 {
 }
 
 Music::~Music()
 {
-	Mix_FreeMusic(mMusic);
+	Mix_FreeMusic(music);
 }
 
 void Music::Play()
 {
-	Mix_PlayMusic(mMusic, -1);
+	Mix_PlayMusic(music, -1);
 }
 
 void Music::FadeInMusic(int fadeInTime)
 {
-	Mix_FadeInMusic(mMusic, -1, fadeInTime);
+	Mix_FadeInMusic(music, -1, fadeInTime);
 }
 
 bool Music::LoadMusic(const std::string& fileName)
 {
-	mMusic = Mix_LoadMUS(fileName.c_str());
-	return mMusic != nullptr;
+	music = Mix_LoadMUS(fileName.c_str());
+	return music != nullptr;
 }
 
 void Music::Stop()

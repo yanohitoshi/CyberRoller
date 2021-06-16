@@ -148,8 +148,8 @@ private:
 
     // ファイルネームをkeyとして持つSoundクラスとMusicクラスの連想可変長配列
     // 読み込んだサウンドやミュージックのデータを保持する
-    std::unordered_map<std::string, class Sound*> mSounds;
-    std::unordered_map<std::string, class Music*> mMusics;
+    std::unordered_map<std::string, class Sound*> sounds;
+    std::unordered_map<std::string, class Music*> musics;
 
 };
 

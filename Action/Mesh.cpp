@@ -28,7 +28,7 @@ Mesh::Mesh()
 	, radius(0.0f)
 	, specPower(100.0f)
 	, luminance(1.0f)
-	, mBox(Vector3::Infinity, Vector3::NegInfinity)
+	, box(Vector3::Infinity, Vector3::NegInfinity)
 {
 	stageDefTexture.emplace(TextureStage::DIFFUSE_MAP, 0);
 	stageDefTexture.emplace(TextureStage::NORMAL_MAP, 0);
@@ -181,9 +181,9 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		// 読み込んだモデルの最大値最小値の設定
 		if (i == 0)
 		{
-			mBox.InitMinMax(pos);
+			box.InitMinMax(pos);
 		}
-		mBox.UpdateMinMax(pos);
+		box.UpdateMinMax(pos);
 
 		// 頂点レイアウトが PosNormTexなら（ボーンが無い）
 		if (layout == VertexArray::PosNormTex)

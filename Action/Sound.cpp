@@ -4,43 +4,43 @@
 #include "Sound.h"
 
 Sound::Sound()
-    :mChunk(nullptr)
-    , mChannel(-1)
+    :chunk(nullptr)
+    , channel(-1)
 {
 }
 
 bool Sound::LoadSound(const std::string& fileName)
 {
-    mChunk = Mix_LoadWAV(fileName.c_str());
-    return mChunk != nullptr;
+    chunk = Mix_LoadWAV(fileName.c_str());
+    return chunk != nullptr;
 }
 
 bool Sound::IsPlaying()
 {
-    return mChannel >= 0 && Mix_Playing(mChannel);
+    return channel >= 0 && Mix_Playing(channel);
 }
 
 
 Sound::~Sound()
 {
-    Mix_FreeChunk(mChunk);//読み取ったサウンドの開放
+    Mix_FreeChunk(chunk);//読み取ったサウンドの開放
 }
 
 void Sound::Play()
 {
-    mChannel = Mix_PlayChannel(-1, mChunk, 0);
+    channel = Mix_PlayChannel(-1, chunk, 0);
 }
 
 void Sound::Stop()
 {
-    if (mChannel == -1)
+    if (channel == -1)
     {
         return;
     }
 
-    if (Mix_Playing(mChannel))
+    if (Mix_Playing(channel))
     {
-        Mix_HaltChannel(mChannel);
+        Mix_HaltChannel(channel);
     }
-    mChannel = -1;
+    channel = -1;
 }

@@ -33,7 +33,7 @@ void SkeletalMeshComponent::Draw(Shader* shader)
 				owner->GetWorldTransform());
 			// 行列パレットをセット    
 			shader->SetMatrixUniforms("uMatrixPalette", &palette.mEntry[0],
-				MAX_SKELETON_BONES);
+				MaxSkeletonBones);
 			//スペキュラー強度をセット
 			shader->SetFloatUniform("uSpecPower", 25);
 

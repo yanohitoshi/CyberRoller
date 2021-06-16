@@ -13,7 +13,7 @@ AudioManager::AudioManager()
 
 AudioManager::~AudioManager()
 {
-    if (mSounds.size() > 0 || mMusics.size() > 0)
+    if (sounds.size() > 0 || musics.size() > 0)
     {
         ShutDown();
     }
@@ -47,9 +47,9 @@ void AudioManager::DeleteInstance()
 Sound* AudioManager::GetSound(const std::string& fileName)
 {
     Sound* sound = nullptr;//サウンドクラスのポインタ(初期化)
-    auto iter = mSounds.find(fileName);//ファイル名の検索
+    auto iter = sounds.find(fileName);//ファイル名の検索
     // サウンドファイル登録されているか？
-    if (iter != mSounds.end())//サウンド検索が成功したのか
+    if (iter != sounds.end())//サウンド検索が成功したのか
     {
         sound = iter->second;//サウンドが見つかった
     }
@@ -59,7 +59,7 @@ Sound* AudioManager::GetSound(const std::string& fileName)
         sound = new Sound();
         if (sound->LoadSound(fileName))
         {
-            mSounds.emplace(fileName, sound);//実質mSounds[fileName] = sound;をしている
+            sounds.emplace(fileName, sound);//実質mSounds[fileName] = sound;をしている
         }
         else
         {
@@ -74,37 +74,37 @@ Sound* AudioManager::GetSound(const std::string& fileName)
 void AudioManager::RemoveSound(const std::string& fileName)
 {
     // サウンドファイルを削除
-    auto iter = mSounds.find(fileName);
-    if (iter != mSounds.end())
+    auto iter = sounds.find(fileName);
+    if (iter != sounds.end())
     {
         printf("release: %s\n", iter->first.c_str());
         delete iter->second;
-        mSounds.erase(iter);
+        sounds.erase(iter);
     }
 }
 
 void AudioManager::PlaySound(const std::string& fileName)
 {
     //サウンド鳴らす
-    mSounds[fileName]->Play();
+    sounds[fileName]->Play();
 }
 
 void AudioManager::StopSound(const std::string& fileName)
 {
-    mSounds[fileName]->Stop();
+    sounds[fileName]->Stop();
 }
 
 bool AudioManager::IsPlayingSound(const std::string& fileName)
 {
-    return mSounds[fileName]->IsPlaying();
+    return sounds[fileName]->IsPlaying();
 }
 
 Music* AudioManager::GetMusic(const std::string& fileName)
 {
     Music* music = nullptr;//初期化
-    auto iter = mMusics.find(fileName);//ファイル名の検索
+    auto iter = musics.find(fileName);//ファイル名の検索
     //ミュージックファイル登録されているか？
-    if (iter != mMusics.end())//ミュージック検索が成功したのか
+    if (iter != musics.end())//ミュージック検索が成功したのか
     {
         music = iter->second;//ミュージックが見つかった
     }
@@ -114,7 +114,7 @@ Music* AudioManager::GetMusic(const std::string& fileName)
         music = new Music();
         if (music->LoadMusic(fileName))
         {
-            mMusics.emplace(fileName, music);
+            musics.emplace(fileName, music);
         }
         else
         {
@@ -129,24 +129,24 @@ Music* AudioManager::GetMusic(const std::string& fileName)
 void AudioManager::RemoveMusic(const std::string& fileName)
 {
     //ミュージックファイルを削除
-    auto iter = mMusics.find(fileName);
-    if (iter != mMusics.end())
+    auto iter = musics.find(fileName);
+    if (iter != musics.end())
     {
         printf("release: %s\n", iter->first.c_str());
         delete iter->second;
-        mMusics.erase(iter);
+        musics.erase(iter);
     }
 }
 
 void AudioManager::PlayFadeInMusic(const std::string& fileName, int fadeInTime)
 {
-    mMusics[fileName]->FadeInMusic(fadeInTime);
+    musics[fileName]->FadeInMusic(fadeInTime);
 }
 
 void AudioManager::PlayMusic(const std::string& fileName)
 {
     //ミュージックを鳴らす
-    mMusics[fileName]->Play();
+    musics[fileName]->Play();
 }
 
 void AudioManager::FadeOutMusic(int fadeOutTime)
@@ -167,17 +167,17 @@ bool AudioManager::IsPlayingMusic()
 void AudioManager::ShutDown()
 {
     //サウンド破棄
-    for (auto i : mSounds)
+    for (auto i : sounds)
     {
         printf("release : %s\n", i.first.c_str());
         delete i.second;
     }
-    mSounds.clear();
+    sounds.clear();
     //ミュージック破棄コードをここに書く
-    for (auto i : mMusics)
+    for (auto i : musics)
     {
         printf("release : %s\n", i.first.c_str());
         delete i.second;
     }
-    mMusics.clear();
+    musics.clear();
 }

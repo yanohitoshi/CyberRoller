@@ -64,38 +64,38 @@
 	}
 
 	// フレーム数、アニメーション時間、ボーン数、フレームあたりの時間を取得
-	mNumFrames = frames.GetUint();
-	mDuration = static_cast<float>(length.GetDouble());
-	mNumBones = bonecount.GetUint();
-	mFrameDuration = mDuration / (mNumFrames - 1);
+	numFrames = frames.GetUint();
+	duration = static_cast<float>(length.GetDouble());
+	numBones = bonecount.GetUint();
+	frameDuration = duration / (numFrames - 1);
 
 	// トラック配列を確保
-	mTracks.resize(mNumBones);
+	tracks.resize(numBones);
 
 	// トラック配列が取得できるか？
-	const rapidjson::Value& tracks = sequence["tracks"];
+	const rapidjson::Value& tmpTracks = sequence["tracks"];
 
-	if (!tracks.IsArray())
+	if (!tmpTracks.IsArray())
 	{
 		SDL_Log("Sequence %s missing a tracks array.", fileName.c_str());
 		return false;
 	}
 
 	// トラック数分ループ
-	for (rapidjson::SizeType i = 0; i < tracks.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < tmpTracks.Size(); i++)
 	{
 		// tracs[i]はオブジェクトか？
-		if (!tracks[i].IsObject())
+		if (!tmpTracks[i].IsObject())
 		{
 			SDL_Log("Animation %s: Track element %d is invalid.", fileName.c_str(), i);
 			return false;
 		}
 
 		// tracks[i]の中の "bone"をuintで読み込み。ボーン番号を取得
-		size_t boneIndex = tracks[i]["bone"].GetUint();
+		size_t boneIndex = tmpTracks[i]["bone"].GetUint();
 		
 		// tracks[i]の中の "transforms"が取得できるか？
-		const rapidjson::Value& transforms = tracks[i]["transforms"];
+		const rapidjson::Value& transforms = tmpTracks[i]["transforms"];
 		if (!transforms.IsArray())
 		{
 			SDL_Log("Animation %s: Track element %d is missing transforms.", fileName.c_str(), i);
@@ -104,7 +104,7 @@
 
 		BoneTransform temp;
 		// transformのサイズとアニメーションフレーム数が不具合ないか？
-		if (transforms.Size() < mNumFrames)
+		if (transforms.Size() < numFrames)
 		{
 			SDL_Log("Animation %s: Track element %d has fewer frames than expected.", fileName.c_str(), i);
 			return false;
@@ -124,18 +124,18 @@
 			}
 
 			// temp.mRotationに　quaternionとしてコピー、
-			temp.mRotation.x = static_cast<float>(rot[0].GetDouble());
-			temp.mRotation.y = static_cast<float>(rot[1].GetDouble());
-			temp.mRotation.z = static_cast<float>(rot[2].GetDouble());
-			temp.mRotation.w = static_cast<float>(rot[3].GetDouble());
+			temp.rotation.x = static_cast<float>(rot[0].GetDouble());
+			temp.rotation.y = static_cast<float>(rot[1].GetDouble());
+			temp.rotation.z = static_cast<float>(rot[2].GetDouble());
+			temp.rotation.w = static_cast<float>(rot[3].GetDouble());
 
 			// temp.mTranslationに平行移動成分としてコピー
-			temp.mTranslation.x = static_cast<float>(trans[0].GetDouble());
-			temp.mTranslation.y = static_cast<float>(trans[1].GetDouble());
-			temp.mTranslation.z = static_cast<float>(trans[2].GetDouble());
+			temp.translation.x = static_cast<float>(trans[0].GetDouble());
+			temp.translation.y = static_cast<float>(trans[1].GetDouble());
+			temp.translation.z = static_cast<float>(trans[2].GetDouble());
 
 			// ボーン番号boneIndexの姿勢データとして、mTracks配列に入れる。
-			mTracks[boneIndex].emplace_back(temp);
+			tracks[boneIndex].emplace_back(temp);
 		}
 	}
 
@@ -145,29 +145,29 @@
 // inTime時刻時点のグローバルポーズ配列の取得
 void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& outPoses, const Skeleton* inSkeleton, float inTime) const
 {
-	if (outPoses.size() != mNumBones)
+	if (outPoses.size() != numBones)
 	{
-		outPoses.resize(mNumBones);
+		outPoses.resize(numBones);
 	}
 
 	// Figure out the current frame index and next frame
 	// (This assumes inTime is bounded by [0, AnimDuration]
 	// 現在のフレームと次のフレームを見つけ出す。
 	// これはinTimeが [0～AnimDuration] の間にいることを前提としています。
-	size_t frame = static_cast<size_t>(inTime / mFrameDuration);
+	size_t frame = static_cast<size_t>(inTime / frameDuration);
 	size_t nextFrame = frame + 1;
 	// Calculate fractional value between frame and next frame
 	// フレームと次のフレームの間の小数値を計算します。
-	float pct = inTime / mFrameDuration - frame;
+	float pct = inTime / frameDuration - frame;
 
 	// Setup the pose for the root
 	// ルートのポーズをセットアップ
-	if (mTracks[0].size() > 0)
+	if (tracks[0].size() > 0)
 	{
 		// Interpolate between the current frame's pose and the next frame
 		// 現在のフレームのポーズと次のフレームの間を補間する
-		BoneTransform interp = BoneTransform::Interpolate(mTracks[0][frame],
-			mTracks[0][nextFrame % mNumFrames], pct);
+		BoneTransform interp = BoneTransform::Interpolate(tracks[0][frame],
+			tracks[0][nextFrame % numFrames], pct);
 		outPoses[0] = interp.ToMatrix();
 	}
 	else
@@ -178,19 +178,19 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& outPoses, const Skelet
 	const std::vector<Skeleton::Bone>& bones = inSkeleton->GetBones();
 	// Now setup the poses for the rest
 	// 残りのポーズを設定します
-	for (size_t bone = 1; bone < mNumBones; bone++)
+	for (size_t bone = 1; bone < numBones; bone++)
 	{
 		Matrix4 localMat; // (Defaults to identity)　（デフォルトは単位行列）
-		if (mTracks[bone].size() > 0)
+		if (tracks[bone].size() > 0)
 		{
 			// [bone][frame]のボーン姿勢と[bone][nextframe]を 小数点以下の pctで補間した姿勢を interpに算出
-			BoneTransform interp = BoneTransform::Interpolate(mTracks[bone][frame],
-				mTracks[bone][nextFrame % mNumFrames], pct);
+			BoneTransform interp = BoneTransform::Interpolate(tracks[bone][frame],
+				tracks[bone][nextFrame % numFrames], pct);
 			// interp を行列に変換して、localMatに変換する
 			localMat = interp.ToMatrix();
 		}
 
 		// 出力ポーズ行列[bone] = ローカルポーズ行列 * 出力ポーズ行列[親bone]
-		outPoses[bone] = localMat * outPoses[bones[bone].mParent];
+		outPoses[bone] = localMat * outPoses[bones[bone].parent];
 	}
 }

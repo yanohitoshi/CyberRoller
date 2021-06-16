@@ -71,7 +71,7 @@ public:
 private:
 
     // âπåπÉfÅ[É^
-    Mix_Music* mMusic;
+    Mix_Music* music;
 
 };
 

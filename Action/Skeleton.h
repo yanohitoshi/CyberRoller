@@ -20,11 +20,11 @@ public:
 	struct Bone
 	{
 		// ローカルバインドポーズ
-		BoneTransform mLocalBindPose;                         
+		BoneTransform localBindPose;                         
 		// ボーン名
-		std::string mName;                                                
+		std::string name;                                                
 		// 親ID
-		int mParent;                                                     
+		int parent;                                                     
 	};
 
 	/*
@@ -44,30 +44,30 @@ protected:
 private:
 
 	//ボーン配列
-	std::vector<Bone> mBones;
+	std::vector<Bone> bones;
 	//それぞれのボーンの逆バインドポーズ行列
-	std::vector<Matrix4> mGlobalInvBindPoses;
+	std::vector<Matrix4> globalInvBindPoses;
 
 public: //ゲッターセッター
 
 	/*
 	@fn ボーン数
 	*/
-	size_t GetNumBones() const { return mBones.size(); }
+	size_t GetNumBones() const { return bones.size(); }
 
 	/*
 	@fn idによるボーン
 	*/
-	const Bone& GetBone(size_t idx) const { return mBones[idx]; }
+	const Bone& GetBone(size_t idx) const { return bones[idx]; }
 
 	/*
 	@fn ボーン配列
 	*/
-	const std::vector<Bone>& GetBones() const { return mBones; }
+	const std::vector<Bone>& GetBones() const { return bones; }
 
 	/*
 	@fn グローバル逆バインド行列配列の取得
 	*/
-	const std::vector<Matrix4>& GetGlobalInvBindPoses() const { return mGlobalInvBindPoses; }
+	const std::vector<Matrix4>& GetGlobalInvBindPoses() const { return globalInvBindPoses; }
 
 };

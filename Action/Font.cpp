@@ -36,14 +36,14 @@ bool Font::Load(const std::string& fileName)
 			SDL_Log("Failed to load font %s in size %d", fileName.c_str(), size);
 			return false;
 		}
-		mFontData.emplace(size, font);
+		fontData.emplace(size, font);
 	}
 	return true;
 }
 
 void Font::Unload()
 {
-	for (auto& font : mFontData)
+	for (auto& font : fontData)
 	{
 		TTF_CloseFont(font.second);
 	}
@@ -64,8 +64,8 @@ Texture* Font::RenderText(const std::string& renderingText,
 	sdlColor.a = 255;
 
 	// フォントデータからポイントサイズを探す
-	auto iter = mFontData.find(pointSize);
-	if (iter != mFontData.end())
+	auto iter = fontData.find(pointSize);
+	if (iter != fontData.end())
 	{
 		TTF_Font* font = iter->second;
 		const std::string& actualText = renderingText;

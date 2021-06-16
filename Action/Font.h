@@ -54,6 +54,6 @@ public:
 private:
 
 	// ポイントサイズのフォントデータへのマップ
-	std::unordered_map<int, TTF_Font*> mFontData;
+	std::unordered_map<int, TTF_Font*> fontData;
 };
 

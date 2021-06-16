@@ -85,7 +85,7 @@ public:
 	/*
 	@return MeshのAABB
 	*/
-	const AABB& GetBox() const { return mBox; }
+	const AABB& GetBox() const { return box; }
 
 	/*
 	@return 頂点データ
@@ -120,6 +120,6 @@ private:
 	float luminance;
 
 	// AABB変数
-	AABB mBox;
+	AABB box;
 
 };

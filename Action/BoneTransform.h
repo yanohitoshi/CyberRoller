@@ -14,9 +14,9 @@ class BoneTransform
 public:
 
 	//‰ñ“]
-	Quaternion mRotation;
+	Quaternion rotation;
 	// ˆÚ“®
-	Vector3 mTranslation;
+	Vector3 translation;
 
 	/*
 	@fn s—ñ‚ğo—Í

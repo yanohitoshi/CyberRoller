@@ -59,10 +59,10 @@ public:
 private:
 
     // サウンドデータ
-    Mix_Chunk* mChunk;
+    Mix_Chunk* chunk;
 
     // 再生チャンネル
-    int mChannel;
+    int channel;
 
 };
 

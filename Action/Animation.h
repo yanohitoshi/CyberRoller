@@ -25,13 +25,13 @@ public:
 private:
 
 	//アニメーションのためのボーン数
-	size_t mNumBones;
+	size_t numBones;
 	//アニメーションのフレーム数
-	size_t mNumFrames;
+	size_t numFrames;
 	//アニメーションの再生時間
-	float mDuration;
+	float duration;
 	//アニメーションのフレーム間の時刻
-	float mFrameDuration;
+	float frameDuration;
 	// ループアニメーションするか？
 	bool isLoopAnimation;
 
@@ -40,29 +40,29 @@ private:
 	外側のベクトルの各インデックスはボーン、
 	内側のベクトルはフレーム。　　　　　　　
 	mTracks[ボーン][フレーム数]*/
-	std::vector<std::vector<BoneTransform>> mTracks;
+	std::vector<std::vector<BoneTransform>> tracks;
 
 public: //ゲッターセッター
 
 	/*
 	@fn ボーン数
 	*/
-	size_t GetNumBones() const { return mNumBones; }
+	size_t GetNumBones() const { return numBones; }
 
 	/*
 	@fn フレーム数
 	*/
-	size_t GetNumFrames() const { return mNumFrames; }
+	size_t GetNumFrames() const { return numFrames; }
 
 	/*
 	@fn アニメーション期間
 	*/
-	float GetDuration() const { return mDuration; }
+	float GetDuration() const { return duration; }
 
 	/*
 	@fn フレーム期間
 	*/
-	float GetFrameDuration() const { return mFrameDuration; }                       
+	float GetFrameDuration() const { return frameDuration; }
 
 	//指定された配列を、アニメーションの指定された時間に、
 	//各ボーンのグローバル（現在の）ポーズマトリックスで埋める。
