@@ -87,29 +87,62 @@ public:
 	/*
 	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
 	*/
-	void ReSetYaw() { yaw = Math::ToRadians(180); }
+	void ResetYaw() { yaw = Math::ToRadians(180); }
 
 	//追従先のオブジェクト座標
 	Vector3 lerpObjectPos;
 
 private:
 
+	/*
+	@brief ゲーム中の移動処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
 	void InGameMovableProcess(float _deltaTime);
-
+	
+	/*
+	@brief 半径補正計算処理
+	*/
 	void CorrectionRadius();
-
+	
+	/*
+	@brief ピッチ補正計算処理
+	*/
 	void CorrectionPitch();
 
+	/*
+	@brief ポジション計算処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
 	void CalculationPosition(float _deltaTime);
 
+	/*
+	@brief ビュー行列計算処理
+	*/
 	void CalculationViewMatrix();
 
+	/*
+	@brief ゲームクリア時の処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
 	void GameClearProcess(float _deltaTime);
 
+	/*
+	@brief ゲームオーバー時の処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
 	void GameOverProcess(float _deltaTime);
-
+	
+	/*
+	@brief プレイヤーがダンス状態の時の処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
 	void PlayerInDanceProcess(float _deltaTime);
-
+	
+	/*
+	@brief 入力チェックとその処理
+	@param	_keyState 入力情報
+	*/
 	void ChackInputProcess(const InputState& _keyState);
 
 	/*
@@ -191,10 +224,6 @@ private:
 
 	//カメラ回転の半径
 	float radius;
-
-
-
-
 
 };
 

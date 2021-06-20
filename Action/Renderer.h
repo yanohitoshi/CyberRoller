@@ -135,123 +135,9 @@ public:
 	void RemoveMeshComponent(MeshComponent* _meshComponent);
 
 	/*
-	@brief  テクスチャの取得
-	@param	_fileName　取得したいテクスチャのファイル名
-	@return Textureクラスのポインタ
-	*/
-	Texture* GetTexture(const std::string& _fileName);
-	   
-	/*
-	@brief  フォントの取得
-	@param	_fileName　取得したいフォントのファイル名
-	@return Fontクラスのポインタ
-	*/
-	Font* GetFont(const std::string& _fileName);
-
-	/*
-	@param _fileName モデルへのアドレス
-	@return スケルトンモデルの取得
-	*/
-	const class Skeleton* GetSkeleton(const char* _fileName);                       
-	/*
-	@param _fileName アニメーションへのアドレス
-	@return スケルトンアニメーションの取得
-	*/
-	const class Animation* GetAnimation(const char* _fileName, bool _loop);
-
-	/*
-	@brief  メッシュの取得
-	@param	_fileName 取得したいメッシュのファイル名
-	@return Meshクラスのポインタ
-	*/
-	Mesh* GetMesh(const std::string& _fileName);
-
-	/*
-	@brief	ビュー行列を設定する
-	@param	_view ビュー行列
-	*/
-	void SetViewMatrix(const Matrix4& _view) { view = _view; }
-
-	/*
-	@brief	環境光を設定する
-	@param	_ambient Vector3（環境光を表す）
-	*/
-	void SetAmbientLight(Vector3& _ambient) { ambientLight = _ambient; }
-
-	/*
-	@brief	平行光源の構造体を取得する
-	@return	DirectionalLight（平行光源の構造体）
-	*/
-	DirectionalLight& GetDirectionalLight() { return dirLight; }
-
-	/*
-	@brief	スクリーンの横幅を取得する
-	@return	スクリーンの横幅
-	*/
-	float GetScreenWidth() const { return screenWidth; }
-
-	/*
-	@brief	スクリーンの縦幅を取得する
-	@return	スクリーンの縦幅
-	*/
-	float GetScreenHeight() const { return screenHeight; }
-
-	/*
-	@brief	View行列のgetter
-	@return View行列
-	*/
-	Matrix4 GetViewMatrix() const { return view; };
-	
-	/*
 	@brief	Particle用頂点データのセット関数
 	*/
 	void SetParticleVertex();
-	
-	/*
-	@brief	Projection行列のgetter
-	@return Projection行列
-	*/
-	Matrix4 GetProjectionMatrix() { return projection; }
-	
-	/*
-	@brief  SDL_Rendererを取得する
-	@return SDL_Rendererクラスのポインタ
-	*/
-	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
-	/*
-	@brief	プレイヤーのポジションをセットするsetter
-	@param	プレイヤーのポジション
-	*/
-	void SetPlayerPositon(Vector3 _pos) { playerPos = _pos; }
-	/*
-	@brief	カメラの前方ベクトルをセットするsetter
-	@param	カメラの前方ベクトル
-	*/
-	void SetCameraForawrd(Vector3 _vec) { cameraForwardVec = _vec; }
-	unsigned int GetUndefineTexID() { return undefineTexID; }
-
-	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeTexture(int _time);
-
-	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeBlackTexture(int _time);
-	
-	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeRedTexture(int _time);
-
-	void SetNowSceneState(SceneState _state) { nowState = _state; }
 
 private:
 
@@ -480,6 +366,126 @@ private:
 	//ビルボード行列
 	Matrix4 billboardMat;
 
-	SceneState nowState;
+
+public://ゲッターセッター
+
+	/*
+	@brief  テクスチャの取得
+	@param	_fileName　取得したいテクスチャのファイル名
+	@return Textureクラスのポインタ
+	*/
+	Texture* GetTexture(const std::string& _fileName);
+
+	/*
+	@brief  フォントの取得
+	@param	_fileName　取得したいフォントのファイル名
+	@return Fontクラスのポインタ
+	*/
+	Font* GetFont(const std::string& _fileName);
+
+	/*
+	@brief  スケルトンモデルの取得
+	@param _fileName モデルへのアドレス
+	@return スケルトンモデルクラスのポインタ
+	*/
+	const class Skeleton* GetSkeleton(const char* _fileName);
+	
+	/*
+	@brief  アニメーションの取得
+	@param _fileName アニメーションへのアドレス
+	@return スケルトンアニメーションクラスのポインタ
+	*/
+	const class Animation* GetAnimation(const char* _fileName, bool _loop);
+
+	/*
+	@brief  メッシュの取得
+	@param	_fileName 取得したいメッシュのファイル名
+	@return Meshクラスのポインタ
+	*/
+	Mesh* GetMesh(const std::string& _fileName);
+
+
+
+	/*
+	@brief	平行光源の構造体を取得する
+	@return	DirectionalLight（平行光源の構造体）
+	*/
+	DirectionalLight& GetDirectionalLight() { return dirLight; }
+
+	/*
+	@brief	スクリーンの横幅を取得する
+	@return	スクリーンの横幅
+	*/
+	float GetScreenWidth() const { return screenWidth; }
+
+	/*
+	@brief	スクリーンの縦幅を取得する
+	@return	スクリーンの縦幅
+	*/
+	float GetScreenHeight() const { return screenHeight; }
+
+	/*
+	@brief	View行列のgetter
+	@return View行列
+	*/
+	Matrix4 GetViewMatrix() const { return view; };
+
+
+	/*
+	@brief	Projection行列のgetter
+	@return Projection行列
+	*/
+	Matrix4 GetProjectionMatrix() { return projection; }
+
+	/*
+	@brief  SDL_Rendererを取得する
+	@return SDL_Rendererクラスのポインタ
+	*/
+	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
+	unsigned int GetUndefineTexID() { return undefineTexID; }
+
+	/*
+	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
+	@param	カウントダウンタイム
+	@return カウントダウンタイムごとのTimeTexture
+	*/
+	Texture* GetTimeTexture(int _time);
+
+	/*
+	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
+	@param	カウントダウンタイム
+	@return カウントダウンタイムごとのTimeTexture
+	*/
+	Texture* GetTimeBlackTexture(int _time);
+
+	/*
+	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
+	@param	カウントダウンタイム
+	@return カウントダウンタイムごとのTimeTexture
+	*/
+	Texture* GetTimeRedTexture(int _time);
+
+	/*
+	@brief	ビュー行列を設定する
+	@param	_view ビュー行列
+	*/
+	void SetViewMatrix(const Matrix4& _view) { view = _view; }
+
+	/*
+	@brief	環境光を設定する
+	@param	_ambient Vector3（環境光を表す）
+	*/
+	void SetAmbientLight(Vector3& _ambient) { ambientLight = _ambient; }
+
+	/*
+	@brief	プレイヤーのポジションをセットするsetter
+	@param	プレイヤーのポジション
+	*/
+	void SetPlayerPositon(Vector3 _pos) { playerPos = _pos; }
+	/*
+	@brief	カメラの前方ベクトルをセットするsetter
+	@param	カメラの前方ベクトル
+	*/
+	void SetCameraForawrd(Vector3 _vec) { cameraForwardVec = _vec; }
 
 };

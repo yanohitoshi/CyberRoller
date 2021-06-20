@@ -44,34 +44,6 @@ public:
 	*/
 	void SetActive();
 
-	/*
-	@brief	行列のUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_matrix 設定する行列
-	*/
-	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
-	void SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count);
-    
-	/*
-    @brief	Vector3のUniform変数を設定する
-    @param	_name 設定するUniform変数名
-    @param	_vector 設定するVector3
-    */
-    void SetVectorUniform(const char* _name, const Vector3& _vector);
-
-    /*
-    @brief	floatのUniform変数を設定する
-    @param	_name 設定するUniform変数名
-    @param	_value 設定するfloat
-    */
-    void SetFloatUniform(const char* _name, const float& _value);
-
-	/*
-	@brief	intのUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_value 設定するfloat
-	*/
-	void SetIntUniform(const char* name, int value);
 
 private:
 	
@@ -102,5 +74,37 @@ private:
 	GLuint vertexShader;
 	GLuint fragShader;
 	GLuint shaderProgram;
+
+public://ゲッターセッター
+
+	/*
+	@brief	行列のUniform変数を設定する
+	@param	_name 設定するUniform変数名
+	@param	_matrix 設定する行列
+	*/
+	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
+	void SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count);
+    
+	/*
+    @brief	Vector3のUniform変数を設定する
+    @param	_name 設定するUniform変数名
+    @param	_vector 設定するVector3
+    */
+    void SetVectorUniform(const char* _name, const Vector3& _vector);
+
+    /*
+    @brief	floatのUniform変数を設定する
+    @param	_name 設定するUniform変数名
+    @param	_value 設定するfloat
+    */
+    void SetFloatUniform(const char* _name, const float& _value);
+
+	/*
+	@brief	intのUniform変数を設定する
+	@param	_name 設定するUniform変数名
+	@param	_value 設定するfloat
+	*/
+	void SetIntUniform(const char* name, int value);
+
 };
 

@@ -34,7 +34,6 @@
 const float PlayerObject::Gravity = 4500.0f;
 bool PlayerObject::chackJumpFlag = false;
 bool PlayerObject::chackIsJumping = false;
-Vector3 PlayerObject::sendChackPointPosition = Vector3::Zero;
 
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
@@ -44,12 +43,11 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, FirstMovePower(0.0f)
 	, AirMovePower(60.0f)
 	, DecelerationForce(80.0f)
-	, DeadSpace(0.1f)
+	, DeadSpace(0.3f)
 	, FallPpsitionZ(-500.0f)
 	, FirstPositionZ(5000.0f)
 	, RestartTime(10000)
 	, FlinchSpeed(1000.0f)
-	, ShiftSendPositionZ(3000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -67,7 +65,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	respawnCount = 0;
 	// リスポ－ンflag位置初期化
 	respownPos = firstPos;
-	sendChackPointPosition = Vector3(firstPos.x,firstPos.y,firstPos.z + ShiftSendPositionZ);
 	// フラグ初期化
 	respawnFlag = false;
 	clearFlag = false;
@@ -253,7 +250,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	if (respawnFlag == true)
 	{
 		// カメラを初期にリセット
-		mainCamera->ReSetYaw();
+		mainCamera->ResetYaw();
 	}
 
 	// RENDERERに現在のポジションを送る
@@ -452,11 +449,6 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		respownPos = Vector3::Zero;
 		// 当たったリスポーンオブジェクトのポジションを取得
 		respownPos = _hitObject.GetPosition();
-	}
-
-	if (hitObjectTag == Tag::LIGHT_CHANGE_POINT)
-	{
-		sendChackPointPosition = _hitObject.GetPosition();
 	}
 
 	// 当たったオブジェクトが棘オブジェクトだったら

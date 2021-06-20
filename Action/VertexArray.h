@@ -32,19 +32,9 @@ public:
 	*/
 	void SetActive();
 
-	/*
-	@brief	インデックスバッファにあるインデックスの数を取得する
-	@return numIndices（インデックスの数）
-	*/
-	unsigned int GetNumIndices() const { return numIndices; }
-
-	/*
-	@brief	頂点バッファにある頂点の数を取得する
-	@return numVerts（頂点の数）
-	*/
-	unsigned int GetNumVerts() const { return numVerts; }
 
 private:
+
 	//頂点バッファにある頂点の数
 	unsigned int numVerts;
 	//インデクスバッファにあるインデックスの数
@@ -55,5 +45,22 @@ private:
 	unsigned int indexBuffer;
 	//頂点配列オブジェクトのOpenGL ID
 	unsigned int vertexArray;
+
+public://ゲッターセッター
+
+	/*
+	@fn numIndicesのgetter関数
+	@brief	インデックスバッファにあるインデックスの数を取得する
+	@return numIndices（インデックスの数）
+	*/
+	unsigned int GetNumIndices() const { return numIndices; }
+
+	/*
+	@fn numVertsのgetter関数
+	@brief	頂点バッファにある頂点の数を取得する
+	@return numVerts（頂点の数）
+	*/
+	unsigned int GetNumVerts() const { return numVerts; }
+
 };
 

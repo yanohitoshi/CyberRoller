@@ -59,7 +59,7 @@ SceneState FirstStageScene::Update(const InputState& _inputState)
 	}
 
 	// ˆê’èŽžŠÔ‘€ì‚ª‚È‚©‚Á‚½‚çƒ^ƒCƒgƒ‹‚Ö
-	if (playerObject->GetReStartFlag() == true)
+	if (playerObject->GetRestartFlag() == true)
 	{
 		return SceneState::TITLE_SCENE;
 	}

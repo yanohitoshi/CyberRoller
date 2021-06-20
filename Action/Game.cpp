@@ -14,8 +14,6 @@
 #include "SecondStageScene.h"
 #include "ThirdStageScene.h"
 #include "FinalStageScene.h"
-#include "GameOverScene.h"
-#include "ClearScene.h"
 #include "ResultScene.h"
 #include "GameObject.h"
 
@@ -63,15 +61,15 @@ bool Game::Initialize()
 
     //入力管理クラスの初期化
 	inputSystem = new InputSystem();
+	// 初期化と成功したか失敗したかのチェック
 	if (!inputSystem->Initialize())
 	{
 		SDL_Log("Failed to initialize input system");
 		return false;
 	}
 
-	// フルスクリーンかどうかを判定
-	// フルスクリーンの場合
-	if (isFullScreen == true)
+	// フルスクリーンかどうかを判定	
+	if (isFullScreen == true) // フルスクリーンの場合
 	{
 		// スクリーンサイズをフルスクリーンに初期化
 		screenWidth = FullScreenWidth;
@@ -87,7 +85,9 @@ bool Game::Initialize()
 
 	//レンダラーの初期化
 	Renderer::CreateInstance();
+
 	//画面作成
+	// 初期化と成功したか失敗したかのチェック
 	if (!RENDERER->Initialize(screenWidth, screenHeight, isFullScreen))
 	{
 		SDL_Log("Failed to initialize renderer");
@@ -95,6 +95,8 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// ※サウンド系統未実装
+	// オーディオ管理クラスの生成
 	AudioManager::CreateInstance();
 
 	// サウンドの初期化
@@ -102,6 +104,7 @@ bool Game::Initialize()
 	{
 		return false;
 	}
+
 	// SDLMixer API初期化　44100:音源の周波数 2:ステレオ 4096:内部バッファサイズ
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 	{
@@ -109,21 +112,23 @@ bool Game::Initialize()
 		Mix_Quit();
 		return false;
 	}
+
 	int decordNum = Mix_GetNumMusicDecoders();
+
 	for (int i = 0; i < decordNum; ++i)
 	{
 		printf("MusicDecorder %d : %s\n", i, Mix_GetMusicDecoder(i));
 	}
+
 	int chunkNum = Mix_GetNumChunkDecoders();
+
 	for (int i = 0; i < chunkNum; ++i)
 	{
 		printf("SoundDecorder %d : %s\n", i, Mix_GetChunkDecoder(i));
 	}
 
-
     //当たり判定用クラスの初期化
 	PhysicsWorld::CreateInstance();
-
 
 	//FPS管理クラスの初期化
 	fps = new FPS();
@@ -137,7 +142,8 @@ bool Game::Initialize()
 	// 最初のシーンを生成
 	nowScene = new TitleScene();
 
-	RENDERER->SetNowSceneState(nowSceneState);
+	//// 現在のシーンのステータスをレンダラーに渡す
+	//RENDERER->SetNowSceneState(nowSceneState);
 
 	return true;
 }
@@ -230,6 +236,7 @@ void Game::ProcessInput()
 
 	// 入力状態のアップデート
 	inputSystem->Update();
+
 	// 入力状態を保存
 	const InputState& state = inputSystem->GetState();
 
@@ -257,9 +264,11 @@ void Game::ProcessInput()
 	{
 		// 今のシーンステータスに次のシーンステータスを入れる
 		nowSceneState = tmpSceneState;
+
 		// シーン変更フラグをtrueに
 		isChangeScene = true;
-		RENDERER->SetNowSceneState(nowSceneState);
+		//// 現在のシーンのステータスをレンダラーに渡す
+		//RENDERER->SetNowSceneState(nowSceneState);
 	}
 }
 
@@ -292,16 +301,9 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 	case SceneState::FINAL_STAGE_SCENE:
 		nowScene = new FinalStageScene();
 		break;
-	case SceneState::CLEAR_SCENE:
-		nowScene = new ClearScene();
-		break;
-	case SceneState::OVER_SCENE:
-		nowScene = new GameOverScene();
-		break;
 	case SceneState::RESULT_SCENE:
 		nowScene = new ResultScene();
 		break;
-
 	}
 }
 
@@ -321,6 +323,7 @@ void Game::UpdateGame()
 {
 	// デルタタイムの更新
 	float deltaTime = fps->GetDeltaTime();
+
 	// GameObjectsの更新処理へ
 	UpdateGameObjects(deltaTime);
 }
@@ -335,6 +338,7 @@ void UpdateGameObjects(float _deltaTime)
 	{
 		for (auto gameObject : itr->second)
 		{
+			// objectの更新処理呼び出し
 			gameObject->Update(_deltaTime);
 		}
 	}
@@ -344,20 +348,23 @@ void UpdateGameObjects(float _deltaTime)
 	for (auto pending : GameObject::pendingGameObjects)
 	{
 		// 更新処理
+		// WorldTransformを更新
 		pending->ComputeWorldTransform();
-		// マップに追加
-		auto gameObjects = GameObject::gameObjectMap.find(pending->GetTag());
 
+		// マップに追加
+		// 追加されるオブジェクトと同じ種類のオブジェクト可変長コンテナがすでにあるかどうかTagを用いて判定
+		auto gameObjects = GameObject::gameObjectMap.find(pending->GetTag());
 		if (gameObjects != GameObject::gameObjectMap.end())
 		{
 			gameObjects->second.emplace_back(pending);
 		}
-		else
+		else  
 		{
 			std::vector<GameObject*> tmpVector;
 			tmpVector.emplace_back(pending);
 			GameObject::gameObjectMap[pending->GetTag()] = tmpVector;
 		}
+
 		// 使用済み配列をクリア
 		GameObject::pendingGameObjects.clear();
 	}
@@ -373,8 +380,10 @@ void UpdateGameObjects(float _deltaTime)
 	{
 		for (auto gameObject : itr->second)
 		{
+			// ステータスがDeadだったら
 			if (gameObject->GetState() == State::Dead )
 			{
+				// Dead状態オブジェクト用可変長コンテナに格納
 				deadObjects.emplace_back(gameObject);
 			}
 		}
@@ -401,6 +410,7 @@ void ProcessInputs(const InputState& _state)
 	{
 		for (auto gameObject : itr->second)
 		{
+			// objectの入力処理呼び出し
 			gameObject->ProcessInput(_state);
 		}
 	}

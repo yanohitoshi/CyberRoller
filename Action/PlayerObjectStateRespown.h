@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateRespown.h
+@brief リスポーン状態を管理
+*/
 class PlayerObjectStateRespown :
     public PlayerObjectStateBase
 {
@@ -41,8 +48,6 @@ public:
 
 private:
 
-	//// リスポーンしたかどうかのフラグ変数
-	//bool isRespown;
 
 };
 

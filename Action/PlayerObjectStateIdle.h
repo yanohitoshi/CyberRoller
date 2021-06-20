@@ -1,5 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
+
+/*
+@file PlayerObjectStateIdle.h
+@brief アイドリング状態を管理
+*/
 class PlayerObjectStateIdle :
     public PlayerObjectStateBase
 {

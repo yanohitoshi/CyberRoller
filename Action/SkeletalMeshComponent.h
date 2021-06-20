@@ -35,6 +35,9 @@ public:
 	*/
 	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
 
+	//再生中かどうか
+	bool IsPlaying();
+
 protected:
 	/*
 	@fn 行列パレットの計算
@@ -66,7 +69,5 @@ public://ゲッターセッター
 	*/
 	void SetColor(const Vector3& _color) { color = _color; }
 
-	//再生中かどうか
-	bool IsPlaying();
 
 };

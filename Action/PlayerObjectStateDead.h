@@ -1,8 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
-class PlayerObject;
-
+/*
+@file PlayerObjectStateDead.h
+@brief 死亡状態を管理
+*/
 class PlayerObjectStateDead :
     public PlayerObjectStateBase
 {

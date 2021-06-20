@@ -37,18 +37,12 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
     
-    bool GetWarningFlag() { return warningFlag; }
-
-    static void SetTimeOverFlag(bool _timeOverFlag) { timeOverFlag = _timeOverFlag; }
-    static void SetCountStartFlag(bool _countStartFlag) { countStartFlag = _countStartFlag; }
-
-    static bool GetTimeOverFlag() { return timeOverFlag; }
-    static bool GetCountStartFlag() { return countStartFlag; }
 
 private:
 
-
+    // 時間切れになったかどうかのフラグ変数
     static bool timeOverFlag;
+    // カウントを開始するかのフラグ変数
     static bool countStartFlag;
 
     // SpriteComponent変数
@@ -64,4 +58,42 @@ private:
     const int AddTimeCount;
     // 時間制限の色を変更するタイミングを比較する定数
     const int ChangeColorCount;
+
+public://ゲッターセッター
+
+    /*
+    @fn timeOverFlagのsetter関数
+    @brief	timeOverFlagに値をセット
+    @param	_timeOverFlag 時間切れになったかどうかのフラグ
+    */
+    static void SetTimeOverFlag(bool _timeOverFlag) { timeOverFlag = _timeOverFlag; }
+
+    /*
+    @fn countStartFlagのsetter関数
+    @brief	countStartFlagに値をセット
+    @param	_countStartFlag カウントを開始するかのフラグ
+    */
+    static void SetCountStartFlag(bool _countStartFlag) { countStartFlag = _countStartFlag; }
+
+    /*
+    @fn timeOverFlagのgetter関数
+    @brief	timeOverFlagを取得
+    @return	時間切れになったかどうかのフラグ
+    */
+    static bool GetTimeOverFlag() { return timeOverFlag; }
+
+    /*
+    @fn countStartFlagのgetter関数
+    @brief	countStartFlagを取得
+    @return	カウントを開始するかのフラグ
+    */
+    static bool GetCountStartFlag() { return countStartFlag; }
+
+    /*
+    @fn warningFlagのgetter関数
+    @brief	warningFlagを取得
+    @return	WarningSpriteClassを起動するかどうかフラグ
+    */
+    bool GetWarningFlag() { return warningFlag; }
+
 };

@@ -10,7 +10,7 @@
 #include "NeedlePanelObject.h"
 #include "MoveBlockObject.h"
 #include "SwitchBaseObject.h"
-#include "LightPositionChangePoint.h"
+//#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -136,13 +136,6 @@ bool SecondStageCreator::OpenFile()
 		return true;
 	}
 
-	// ステージデータ読み込み (lightPoint) 
-	if (!readTiledJson(lightPointData, "Assets/Config/secondStageMap.json", "LightPoint"))
-	{
-		printf("do'nt have Layer/LightPoint\n");
-		return true;
-	}
-
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/secondStageMap.json", "Player"))
 	{
@@ -187,8 +180,6 @@ void SecondStageCreator::CreateStage()
 			CreateLayer11(ix, iy);
 			// Layer12内を検索
 			CreateLayer12(ix, iy);
-
-			CreateLightPoint(ix, iy);
 		}
 	}
 
@@ -445,9 +436,6 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer7Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(60):
-		new LightPositionChangePoint(layer7Pos, RespawnBox, Tag::LIGHT_CHANGE_POINT);
-		break;
 	}
 }
 
@@ -500,9 +488,6 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new BoxObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
-	case(60):
-		new LightPositionChangePoint(layer9Pos, RespawnBox, Tag::LIGHT_CHANGE_POINT);
-		break;
 	}
 }
 
@@ -553,24 +538,6 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(Vector3(layer12Pos.x, layer12Pos.y, layer12Pos.z), Tag::CLEAR_POINT, playerObject);
 		break;
-	case(60):
-		new LightPositionChangePoint(layer12Pos, RespawnBox, Tag::LIGHT_CHANGE_POINT);
-		break;
 	}
 }
 
-void SecondStageCreator::CreateLightPoint(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
-	// レイヤー6のマップオブジェクトのポジション
-	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
-
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (lightPoint)
-	{
-	case(60):
-		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
-		break;
-	}
-}

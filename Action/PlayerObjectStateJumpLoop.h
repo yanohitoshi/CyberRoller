@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+// クラスの前方宣言
 class SkeletalMeshComponent;
 
+/*
+@file PlayerObjectStateJumpLoop.h
+@brief ジャンプループ状態を管理
+*/
 class PlayerObjectStateJumpLoop :
     public PlayerObjectStateBase
 {

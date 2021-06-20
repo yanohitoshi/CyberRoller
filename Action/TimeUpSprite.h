@@ -34,12 +34,6 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
 
-    /*
-    @brief	描画されているかフラグのgetter
-    @return	bool 描画されているかフラグ
-    */
-
-    static bool GetDrawFlag() { return drawFlag; }
 private:
 
     // スプライトComponent
@@ -55,5 +49,15 @@ private:
 
     // 描画されているかフラグ
     static bool drawFlag;
+
+public://ゲッターセッター
+
+    /*
+    @fn drawFlagのgetter関数
+    @brief	drawFlagを取得
+    @return	bool 描画されているかフラグ
+    */
+    static bool GetDrawFlag() { return drawFlag; }
+
 };
 

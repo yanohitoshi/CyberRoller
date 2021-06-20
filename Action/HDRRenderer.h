@@ -59,18 +59,6 @@ public:
 	*/
 	void CopyDepthToScreen();
 
-	/*
-	@fn ColorTexureIDのgetter
-	@return unsigned int hdrColorBuffers[0]
-	*/
-	unsigned int GetColorTexID() { return hdrColorBuffers[0]; }
-	
-	/*
-	@fn ColorTexureIDのgetter
-	@return unsigned int hdrColorBuffers[1]
-	*/
-	unsigned int GetHDRTexID() { return hdrColorBuffers[1]; }
-
 private:
 	
 	/*
@@ -130,5 +118,18 @@ private:
 	// サンプリング点の座標(u,v) & w:重み
 	Vector3 offset[15];
 
+public://ゲッターセッター
+	
+	/*
+	@fn ColorTexureIDのgetter関数
+	@return unsigned int hdrColorBuffers[0]
+	*/
+	unsigned int GetColorTexID() { return hdrColorBuffers[0]; }
+
+	/*
+	@fn ColorTexureIDのgetter関数
+	@return unsigned int hdrColorBuffers[1]
+	*/
+	unsigned int GetHDRTexID() { return hdrColorBuffers[1]; }
 };
 

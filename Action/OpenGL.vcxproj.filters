@@ -99,12 +99,6 @@
     <ClCompile Include="Font.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleEffectBase.cpp">
       <Filter>GameObjects\Effect</Filter>
     </ClCompile>
@@ -270,9 +264,6 @@
     <ClCompile Include="TitleGroundObject.cpp">
       <Filter>GameObjects\StageObjects\GroundObject</Filter>
     </ClCompile>
-    <ClCompile Include="MoveNeedleObject.cpp">
-      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
-    </ClCompile>
     <ClCompile Include="NeedleObject.cpp">
       <Filter>GameObjects\StageObjects\NeedleObject</Filter>
     </ClCompile>
@@ -368,9 +359,6 @@
     </ClCompile>
     <ClCompile Include="PlayerObjectStateBase.cpp">
       <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClCompile>
-    <ClCompile Include="LightPositionChangePoint.cpp">
-      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
     </ClCompile>
     <ClCompile Include="BaseScene.cpp">
       <Filter>Scene</Filter>
@@ -482,12 +470,6 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEffectBase.h">
       <Filter>GameObjects\Effect</Filter>
@@ -654,9 +636,6 @@
     <ClInclude Include="TitleGroundObject.h">
       <Filter>GameObjects\StageObjects\GroundObject</Filter>
     </ClInclude>
-    <ClInclude Include="MoveNeedleObject.h">
-      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
-    </ClInclude>
     <ClInclude Include="NeedleObject.h">
       <Filter>GameObjects\StageObjects\NeedleObject</Filter>
     </ClInclude>
@@ -749,9 +728,6 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateFlinch.h">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
-    </ClInclude>
-    <ClInclude Include="LightPositionChangePoint.h">
-      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,17 @@ public:
 	virtual void OnUpdateWorldTransform() override;
 	void refreshWorldTransform();
 
+
+private:
+
+	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
+	Sphere objectSphere;
+
+	//当たり判定するときに使う球（中心をワールド座標の中心にする）
+	Sphere worldSphere;
+
+public: // ゲッターセッター
+
 	/**
 	@brief	当たり判定に使うSphereの設定
 	@param	オブジェクトの大きさに合わせたSphereの構造体
@@ -47,14 +58,6 @@ public:
 
 	//AABBのタグをとる
 	PhysicsTag GetSphereTag() const { return mTag; }
-
-private:
-
-	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
-	Sphere objectSphere;
-
-	//当たり判定するときに使う球（中心をワールド座標の中心にする）
-	Sphere worldSphere;
 
 };
 

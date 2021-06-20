@@ -36,10 +36,11 @@ private:
 	bool isLoopAnimation;
 
 	/*
-	トラック上の各フレームの変換情報。
-	外側のベクトルの各インデックスはボーン、
-	内側のベクトルはフレーム。　　　　　　　
-	mTracks[ボーン][フレーム数]*/
+	 トラック上の各フレームの変換情報。
+	 外側のベクトルの各インデックスはボーン、
+	 内側のベクトルはフレーム。　　　　　　　
+	 mTracks[ボーン][フレーム数]
+	*/
 	std::vector<std::vector<BoneTransform>> tracks;
 
 public: //ゲッターセッター

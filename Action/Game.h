@@ -31,11 +31,7 @@ enum SceneState
 	THIRD_SATGE_SCENE,
 	// 最終ステージシーン
 	FINAL_STAGE_SCENE,
-	// クリアシーン
-	CLEAR_SCENE,
-	// ゲームオーバーシーン
-	OVER_SCENE,
-	// リザルトステージシーン
+	// リザルトシーン
 	RESULT_SCENE
 };
 
@@ -82,16 +78,6 @@ public:
 	*/
 	friend void ProcessInputs(const InputState& _state);
 
-	/*
-	@brief  continueFlagのsetter
-	@param  _continueFlag コンティニューされたかどうか
-	*/
-	static void SetContinueFlag(bool _continueFlag) { continueFlag = _continueFlag; }
-	/*
-	@brief  continueFlagのgetter
-	@return コンティニューされたかどうかフラグ
-	*/
-	static bool GetContinueFlag() { return continueFlag; }
 
 	// シーン遷移が行われるかどうかフラグ
 	static bool isChangeScene;
@@ -163,5 +149,22 @@ private:
 	const float WindowScreenWidth;
 	// ウィンドウモードの時のスクリーンの横幅定数
 	const float WindowScreenHeight;
+
+public:
+
+	/*
+	@fn continueFlagのsetter関数
+	@brief  continueFlagに値をセット
+	@param  _continueFlag コンティニューされたかどうか
+	*/
+	static void SetContinueFlag(bool _continueFlag) { continueFlag = _continueFlag; }
+
+	/*
+	@fn continueFlagのgetter関数
+	@brief  continueFlagを取得
+	@return コンティニューされたかどうかフラグ
+	*/
+	static bool GetContinueFlag() { return continueFlag; }
+
 };
 

@@ -34,6 +34,38 @@ public:
 	*/
 	void OnUpdateWorldTransform() override;
 
+
+private:
+
+	//オブジェクトに設定する用の線分（中心をオブジェクトの中心にする）
+	LineSegment objectLineSegment;
+
+	//当たり判定するときに使う線分（中心をワールド座標の中心にする）
+	LineSegment worldLineSegment;
+
+	// 値
+	float value;
+
+	// 当たった場所
+	float contactPoint;
+
+	// 前方ベクトル
+	Vector3 forwardVec;
+
+	// hitした間隔
+	float interval;
+
+	// 衝突した場所
+	Vector3 hitPoint;
+
+	// 衝突した場所
+	Vector3 point;
+
+	// 使用するカメラのポインタ
+	MainCameraObject* mainCamera;
+
+public: // ゲッターセッター
+
 	/*
 	@brief	当たり判定に使う線分の設定
 	@param	オブジェクトの大きさに合わせた線分の構造体
@@ -87,36 +119,6 @@ public:
 	@return 当たった場所の情報(Vector3)
 	*/
 	Vector3 GetHitPointVector()const { return hitPoint; }
-
-private:
-
-	//オブジェクトに設定する用の線分（中心をオブジェクトの中心にする）
-	LineSegment objectLineSegment;
-
-	//当たり判定するときに使う線分（中心をワールド座標の中心にする）
-	LineSegment worldLineSegment;
-
-	// 値
-	float value;
-
-	// 当たった場所
-	float contactPoint;
-
-	// 前方ベクトル
-	Vector3 forwardVec;
-
-	// hitした間隔
-	float interval;
-
-	// 衝突した場所
-	Vector3 hitPoint;
-
-	// 衝突した場所
-	Vector3 point;
-
-	// 使用するカメラのポインタ
-	MainCameraObject* mainCamera;
-
 
 };
 

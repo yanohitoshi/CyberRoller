@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateRunTurn.h
+@brief 走り状態からの切り替えしを管理
+*/
 class PlayerObjectStateRunTurn :
     public PlayerObjectStateBase
 {

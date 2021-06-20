@@ -79,8 +79,6 @@ enum Tag
 	CLEAR_POINT,
 	// リスポーンポイント
 	RESPOWN_POINT,
-	// ライトポジション変更ポイント
-	LIGHT_CHANGE_POINT,
 	// UI
 	UI,
 	// タイトル上のオブジェクト
@@ -170,129 +168,6 @@ public:
 	void ComputeWorldTransform();
 
 	/*
-	@brief　オブジェクトのポジションを取得する
-	@return	position
-	*/
-	const Vector3& GetPosition() const { return position; }
-
-	/*
-	@brief　オブジェクトのポジションを設定する
-	@param	position
-	*/
-	virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
-
-	/*
-	@brief　ワールド座標の再変換フラグのgetter
-	@return	recomputeWorldTransform
-	*/
-	bool GetRecomputeWorldTransform() { return recomputeWorldTransform; }
-
-	/*
-	@brief　オブジェクトのスケールを取得する
-	@return	scale
-	*/
-	Vector3 GetScaleFloat() const { return scale; }
-
-	/*
-	@brief　オブジェクトのスケールを設定する(x.y.zの比率が同じとき)
-	@param	scale float型
-	*/
-	void SetScale(float _scale) { scale.x = _scale; scale.y = _scale; scale.z = _scale; recomputeWorldTransform = true; }
-	
-	/*
-	@brief　オブジェクトのスケールを設定する(x.y.zの比率が違うとき)
-	@param	scale Vector3型
-	*/
-	void SetScale(Vector3 _scale) { scale.x = _scale.x; scale.y = _scale.y; scale.z = _scale.z; recomputeWorldTransform = true; }
-	
-	/*
-	@brief　オブジェクトのスケールを取得(x.y.zの比率が同じとき)
-	@return	scale Vector3型
-	*/
-	float GetScale() { return scale.x; }
-	
-	/*
-	@brief　オブジェクトのスケールを取得する(x.y.zの比率が違うとき)
-	@return	scale Vector3型
-	*/
-	Vector3 GetScaleVec() {return scale;}
-	/*
-	@brief　オブジェクトのクォータニオンを取得する
-	@return	rotation（Quaternion型）
-	*/
-	const Quaternion& GetRotation() const { return rotation; }
-
-	/*
-	@brief　オブジェクトのクォータニオンを設定する
-	@param	rotation（Quaternion型）
-	*/
-	virtual void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
-
-	/*
-	@brief　オブジェクトの状態を取得する
-	@return	state
-	*/
-	State GetState() const { return state; }
-
-	/*
-	@brief　オブジェクトの状態を設定する
-	@param	state
-	*/
-	virtual void SetState(State _state) { state = _state; }
-
-	/*
-	@brief　オブジェクトのワールド行列を取得する
-	@return	worldTransform
-	*/
-	const Matrix4& GetWorldTransform() const { return worldTransform; }
-
-	/*
-	@brief　オブジェクトの前方を表すベクトルを取得する
-	@param	forward(Vector3型)
-	*/
-	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
-
-	/*
-	@brief　オブジェクトの右を表すベクトルを取得する
-	@param	right(Vector3型)
-	*/
-	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, rotation); }
-
-	/*
-	@brief　オブジェクトの上を表すベクトルを取得する
-	@param	up(Vector3型)
-	*/
-	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, rotation); }
-
-	/*
-	@fn Tagのgetter関数
-	@brief オブジェクトを識別するTagを取得
-	@return Tag オブジェクトを識別するTag
-	*/
-	Tag GetTag() const { return tag; }
-	
-	/*
-	@fn myObjectId変数のgetter関数
-	@brief それぞれのオブジェクトが持つIDの取得
-	@return int myObjectId それぞれのオブジェクトが持つID
-	*/
-	int GetObjectId() { return myObjectId; };
-
-	/*
-	@fn gameObjectId変数のgetter関数
-	@brief 全オブジェクト総数を確認するためのトータルIDの取得
-	@return int gameObjectId オブジェクトが生成されるたびに1増えるID
-	*/
-	static int GetTotalObjectId() { return gameObjectId; };
-
-	/*
-	@fn reUseObject変数のgetter関数
-	@brief シーンをまたいで利用するかどうかフラグの取得
-	@return bool reUseObject シーンをまたいで利用するかどうかフラグ
-	*/
-	bool GetReUseGameObject() { return reUseObject; }
-
-	/*
 	@fn 押し戻し関数(仮想関数)
 	@brief 押し戻しを行う
 	@param myAABB 自分のAABB
@@ -317,42 +192,6 @@ public:
 	@fn 静的なtitleCameraを生成する
 	*/
 	static void CreateTitleCamera(const Vector3 _pos);
-	
-	/*
-	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
-	@return	isPushBackToPlayer
-	*/
-	bool GetisFlinchToPlayer() const { return isFlinchToPlayer; }
-
-	/*
-	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
-	@return	isPushBackToPlayer
-	*/
-	bool GetisPushBackToPlayer() const { return isPushBackToPlayer; }
-	
-	/*
-	@brief　プレイヤーに速度を送るオブジェクトかどうかフラグのgetter
-	@return	isSendVelocityToPlayer
-	*/
-	bool GetisSendVelocityToPlayer() const { return isSendVelocityToPlayer; }
-	
-	/*
-	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
-	@return	isChackGroundToPlayer
-	*/
-	bool GetisChackGroundToPlayer() const { return isChackGroundToPlayer; }
-
-	/*
-	@brief　カメラと押し戻し判定を行うかフラグのgetter
-	@return	isPushBackToPlayer
-	*/
-	bool GetisPushBackToCamera() const { return isPushBackToCamera; }
-
-	/*
-	@brief　スイッチ用フラグのgetter
-	@return	onFlag
-	*/
-	bool GetSwitchFlag() { return onFlag; }
 
 	/*
 	@brief　tagを使用してGameObjectを探すための関数
@@ -364,18 +203,6 @@ public:
 	@brief　使用した全てのGameObjectの削除
 	*/
 	static 	void RemoveUsedGameObject();
-
-	/*
-	@brief　Velocityのgettta関数
-	@param	velocity(Vector3型)
-	*/
-	const Vector3& GetVelocity() const { return velocity; }
-
-	/*
-	@brief　メインカメラのgetter
-	@return	MainCameraObject*　メインカメラを返す
-	*/
-	static MainCameraObject* GetMainCamera() { return mainCamera;}
 
 	// AABB
 	AABB aabb;
@@ -463,6 +290,179 @@ private:
 	@brief  ゲームオブジェクトの入力処理
 	*/
 	friend void ProcessInputs(const InputState & _state);
+	
+public://ゲッターセッター
+
+	/*
+	@brief　オブジェクトのポジションを取得する
+	@return	position
+	*/
+	const Vector3& GetPosition() const { return position; }
+
+	/*
+	@brief　オブジェクトのポジションを設定する
+	@param	position
+	*/
+	virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
+
+	/*
+	@brief　ワールド座標の再変換フラグのgetter
+	@return	recomputeWorldTransform
+	*/
+	bool GetRecomputeWorldTransform() { return recomputeWorldTransform; }
+
+	/*
+	@brief　オブジェクトのスケールを取得する
+	@return	scale
+	*/
+	Vector3 GetScaleFloat() const { return scale; }
+
+	/*
+	@brief　オブジェクトのスケールを設定する(x.y.zの比率が同じとき)
+	@param	scale float型
+	*/
+	void SetScale(float _scale) { scale.x = _scale; scale.y = _scale; scale.z = _scale; recomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトのスケールを設定する(x.y.zの比率が違うとき)
+	@param	scale Vector3型
+	*/
+	void SetScale(Vector3 _scale) { scale.x = _scale.x; scale.y = _scale.y; scale.z = _scale.z; recomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトのスケールを取得(x.y.zの比率が同じとき)
+	@return	scale Vector3型
+	*/
+	float GetScale() { return scale.x; }
+
+	/*
+	@brief　オブジェクトのスケールを取得する(x.y.zの比率が違うとき)
+	@return	scale Vector3型
+	*/
+	Vector3 GetScaleVec() { return scale; }
+	/*
+	@brief　オブジェクトのクォータニオンを取得する
+	@return	rotation（Quaternion型）
+	*/
+	const Quaternion& GetRotation() const { return rotation; }
+
+	/*
+	@brief　オブジェクトのクォータニオンを設定する
+	@param	rotation（Quaternion型）
+	*/
+	virtual void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトの状態を取得する
+	@return	state
+	*/
+	State GetState() const { return state; }
+
+	/*
+	@brief　オブジェクトの状態を設定する
+	@param	state
+	*/
+	virtual void SetState(State _state) { state = _state; }
+
+	/*
+	@brief　オブジェクトのワールド行列を取得する
+	@return	worldTransform
+	*/
+	const Matrix4& GetWorldTransform() const { return worldTransform; }
+
+	/*
+	@brief　オブジェクトの前方を表すベクトルを取得する
+	@param	forward(Vector3型)
+	*/
+	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
+
+	/*
+	@brief　オブジェクトの右を表すベクトルを取得する
+	@param	right(Vector3型)
+	*/
+	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, rotation); }
+
+	/*
+	@brief　オブジェクトの上を表すベクトルを取得する
+	@param	up(Vector3型)
+	*/
+	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, rotation); }
+
+	/*
+	@fn Tagのgetter関数
+	@brief オブジェクトを識別するTagを取得
+	@return Tag オブジェクトを識別するTag
+	*/
+	Tag GetTag() const { return tag; }
+
+	/*
+	@fn myObjectId変数のgetter関数
+	@brief それぞれのオブジェクトが持つIDの取得
+	@return int myObjectId それぞれのオブジェクトが持つID
+	*/
+	int GetObjectId() { return myObjectId; };
+
+	/*
+	@fn gameObjectId変数のgetter関数
+	@brief 全オブジェクト総数を確認するためのトータルIDの取得
+	@return int gameObjectId オブジェクトが生成されるたびに1増えるID
+	*/
+	static int GetTotalObjectId() { return gameObjectId; };
+
+	/*
+	@fn reUseObject変数のgetter関数
+	@brief シーンをまたいで利用するかどうかフラグの取得
+	@return bool reUseObject シーンをまたいで利用するかどうかフラグ
+	*/
+	bool GetReUseGameObject() { return reUseObject; }
+
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisFlinchToPlayer() const { return isFlinchToPlayer; }
+
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisPushBackToPlayer() const { return isPushBackToPlayer; }
+
+	/*
+	@brief　プレイヤーに速度を送るオブジェクトかどうかフラグのgetter
+	@return	isSendVelocityToPlayer
+	*/
+	bool GetisSendVelocityToPlayer() const { return isSendVelocityToPlayer; }
+
+	/*
+	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
+	@return	isChackGroundToPlayer
+	*/
+	bool GetisChackGroundToPlayer() const { return isChackGroundToPlayer; }
+
+	/*
+	@brief　カメラと押し戻し判定を行うかフラグのgetter
+	@return	isPushBackToPlayer
+	*/
+	bool GetisPushBackToCamera() const { return isPushBackToCamera; }
+
+	/*
+	@brief　スイッチ用フラグのgetter
+	@return	onFlag
+	*/
+	bool GetSwitchFlag() { return onFlag; }
+
+	/*
+	@brief　Velocityのgettta関数
+	@param	velocity(Vector3型)
+	*/
+	const Vector3& GetVelocity() const { return velocity; }
+
+	/*
+	@brief　メインカメラのgetter
+	@return	MainCameraObject*　メインカメラを返す
+	*/
+	static MainCameraObject* GetMainCamera() { return mainCamera; }
 
 };
 

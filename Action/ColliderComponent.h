@@ -48,11 +48,6 @@ public:
     */
 	ColliderComponent(GameObject* _owner, PhysicsTag tag, int _updateOrder = 200,int _collisionOrder = 100);
 
-	/**
-	@brief	めり込み動かす際の優先度を示す数値を取得する
-	@return 優先度を示す数値(int)
-	*/
-	int GetCollisionOrder() const { return collisionOrder; }
 
 private:
 
@@ -63,6 +58,14 @@ protected:
 
 	// 当たり判定を行うかどうかの判定用Tag
 	PhysicsTag mTag;
+
+public: // ゲッターセッター
+	
+	/**
+	@brief	めり込み動かす際の優先度を示す数値を取得する
+	@return 優先度を示す数値(int)
+	*/
+	int GetCollisionOrder() const { return collisionOrder; }
 
 };
 

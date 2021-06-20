@@ -9,9 +9,6 @@ RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _obje
 	// ポジションをセット
 	SetPosition(position);
 
-	//// リスポーンポイントとなるかどうかフラグの初期化
-	//reSpownFlag = false;
-
 	// 当たり判定用ボックスコライダー付与
 	boxCollider = new BoxCollider(this,ColliderComponent::RESPOWN_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(_box);

@@ -34,16 +34,19 @@ public:
     */
     void Draw(Shader* _shader)override;
 
+private:
+
+    // 色情報を持つVector3変数
+    Vector3 color;
+
+public:// ゲッターセッター
+
     /*
     @brief  color変数のsetter
     @param  _color 変更したい色のRGB(Vector3)
     */
     void SetColor(const Vector3& _color) { color = _color; }
     
-private:
-
-    // 色情報を持つVector3変数
-    Vector3 color;
 
 };
 

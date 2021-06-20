@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+// クラスの前方宣言
 class SkeletalMeshComponent;
 
+/*
+@file PlayerObjectStateRunStop.h
+@brief 走りから停止を管理
+*/
 class PlayerObjectStateRunStop :
     public PlayerObjectStateBase
 {

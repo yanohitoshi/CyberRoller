@@ -41,20 +41,6 @@ public:
 	*/
 	void SetActive();
 
-	/*
-	@brief	テクスチャの横幅を取得する
-	@return 横幅
-	*/
-	int GetWidth() const { return width; }
-
-	/*
-	@brief	テクスチャの縦幅を取得する
-	@return 縦幅
-	*/
-	int GetHeight() const { return height; }
-
-	int GetTextureID() const { return textureID; }
-
 	static bool LoadDiv(
 		 const std::string& _fileName,const unsigned int _allNum
 		,const unsigned int _widthNum, const unsigned int _heightNum
@@ -63,11 +49,36 @@ public:
 
 private:
 
+	// テクスチャID
 	unsigned int textureID;
 
 	//テクスチャの横幅
 	int width;
 	//テクスチャの縦幅
 	int height;
+
+public://ゲッターセッター
+
+	/*
+	@fn widthのgetter関数
+	@brief	テクスチャの横幅を取得する
+	@return 横幅
+	*/
+	int GetWidth() const { return width; }
+
+	/*
+	@fn heightのgetter関数
+	@brief	テクスチャの縦幅を取得する
+	@return 縦幅
+	*/
+	int GetHeight() const { return height; }
+
+	/*
+	@fn textureIDのgetter関数
+	@brief	テクスチャのIDを取得する
+	@return テクスチャのID
+	*/
+	int GetTextureID() const { return textureID; }
+
 };
 

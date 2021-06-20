@@ -40,17 +40,6 @@ public:
     */
     void GameObjectInput(const InputState& _keyState)override;
 
-    /*
-    @brief	drawFlagを見るためのgetter関数
-    @return	drawFlag
-    */
-    static bool GetDrawFlag() { return drawFlag; }
-    
-    /*
-    @brief	コンテニューしたかどうかフラグを見るためのgetter関数
-    @return	continueFlag
-    */
-    static bool GetContinueFlag() { return continueFlag; }
 
 
 private:
@@ -71,6 +60,22 @@ private:
     const int DrawCount;
     // フレームカウント
     int frameCount;
+
+public://ゲッターセッター
+
+    /*
+    @fn drawFlagのgetter関数
+    @brief	drawFlagを取得
+    @return	描画されているかフラグ
+    */
+    static bool GetDrawFlag() { return drawFlag; }
+    
+    /*
+    @fn continueFlagのgetter関数
+    @brief	continueFlagを取得
+    @return	コンテニューしたかどうかフラグ
+    */
+    static bool GetContinueFlag() { return continueFlag; }
 
 };
 

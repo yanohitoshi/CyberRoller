@@ -1,7 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
-
+/*
+@file PlayerObjectStateDownOver.h
+@brief ダウンオーバー状態を管理
+*/
 class PlayerObjectStateDownOver :
     public PlayerObjectStateBase
 {

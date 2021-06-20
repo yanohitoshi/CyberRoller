@@ -1,5 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
+
+/*
+@file PlayerObjectStateFlinch.h
+@brief 怯み状態を管理
+*/
 class PlayerObjectStateFlinch :
     public PlayerObjectStateBase
 {

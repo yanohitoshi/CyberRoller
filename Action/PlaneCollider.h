@@ -31,6 +31,16 @@ public:
 	*/
 	void OnUpdateWorldTransform() override;
 
+private:
+
+	//オブジェクトに設定する用の平面（中心をオブジェクトの中心にする）
+	Plane objectPlane;
+
+	//当たり判定するときに使う平面（中心をワールド座標の中心にする）
+	Plane worldPlane;
+
+public: // ゲッターセッター
+
 	/**
 	@brief	当たり判定に使う線分の設定
 	@param	オブジェクトの大きさに合わせた線分の構造体
@@ -42,15 +52,6 @@ public:
 	@return 中心をワールド座標に合わせたPlane
 	*/
 	Plane GetWorldPlane() const { return worldPlane; }
-
-
-private:
-
-	//オブジェクトに設定する用の平面（中心をオブジェクトの中心にする）
-	Plane objectPlane;
-
-	//当たり判定するときに使う平面（中心をワールド座標の中心にする）
-	Plane worldPlane;
 
 };
 

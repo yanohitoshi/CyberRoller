@@ -65,8 +65,6 @@ enum StagePartsName
 	LAYER15_BLOCK_PARTS = 65, // レイヤー15
 	LAYER16_BLOCK_PARTS = 64, // レイヤー16
 	LAYER17_BLOCK_PARTS = 63, // レイヤー17
-
-
 };
 
 enum LayerNameTag
@@ -98,6 +96,7 @@ class StageCreatorBase :
     public GameObject
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@brief  objectの生成を行う

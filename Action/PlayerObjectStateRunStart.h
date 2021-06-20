@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateRunStart.h
+@brief 走り始めを管理
+*/
 class PlayerObjectStateRunStart :
     public PlayerObjectStateBase
 {

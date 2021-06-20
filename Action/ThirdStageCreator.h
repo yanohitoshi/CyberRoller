@@ -184,15 +184,6 @@ private:
 	*/
 	void CreateLayer15(int _indexX, int _indexY);
 
-
-	/*
-	@fn ライトポイントクリエイター
-	@brief  ライトポイントのマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLightPoint(int _indexX, int _indexY);
-
 	// 第三ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
 	// ライトのZ軸ポジション
@@ -215,7 +206,6 @@ private:
 	std::vector<std::vector<int>> layer14StageData;
 	std::vector<std::vector<int>> layer15StageData;
 
-	std::vector<std::vector<int>> lightPointData;
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;
 

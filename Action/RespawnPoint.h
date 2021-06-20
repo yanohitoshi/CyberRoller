@@ -46,7 +46,6 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
-	//// リスポーンポイントとなるかどうかフラグ
-	//bool reSpownFlag;
+
 };
 

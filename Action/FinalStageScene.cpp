@@ -90,7 +90,7 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 		SceneStateChangeAtContinue(SceneState::FINAL_STAGE_SCENE);
 	}
 	// ˆê’èŽžŠÔ‘€ì‚ª‚È‚©‚Á‚½‚çƒ^ƒCƒgƒ‹‚Ö
-	if (playerObject->GetReStartFlag() == true)
+	if (playerObject->GetRestartFlag() == true)
 	{
 		state = SceneState::TITLE_SCENE;
 	}

@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+// クラスの前方宣言
 class SkeletalMeshComponent;
 
+/*
+@file PlayerObjectStateJunpEndToRun.h
+@brief ジャンプ終了から走り状態に移行するまでを管理
+*/
 class PlayerObjectStateJunpEndToRun :
     public PlayerObjectStateBase
 {

@@ -10,7 +10,6 @@
 #include "RespawnPoint.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
-#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -79,13 +78,6 @@ bool FirstStageCreator::OpenFile()
 		return true;
 	}
 
-	// ステージデータ読み込み (LightPoint) 
-	if (!readTiledJson(lightPointData, "Assets/Config/firstStageMap.json", "LightPoint"))
-	{
-		printf("do'nt have Layer/LightPoint\n");
-		return true;
-	}
-
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/firstStageMap.json", "Player"))
 	{
@@ -113,7 +105,6 @@ void FirstStageCreator::CreateStage()
 			CreateLayer4(ix, iy);
 			// Layer5内を検索
 			CreateLayer5(ix, iy);
-			CreateLightPoint(ix, iy);
 		}
 	}
 }
@@ -268,24 +259,6 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
 		break;
-	case(60):
-		new LightPositionChangePoint(layer5Pos, RespawnBox, Tag::LIGHT_CHANGE_POINT);
-		break;
 	}
 }
 
-void FirstStageCreator::CreateLightPoint(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
-	// レイヤー6のマップオブジェクトのポジション
-	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
-
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (lightPoint)
-	{
-	case(60):
-		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
-		break;
-	}
-}

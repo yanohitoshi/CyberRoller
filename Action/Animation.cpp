@@ -9,7 +9,8 @@
 /*
 @fn アニメーション読み込み
 @param アニメーションへのパス
-*/bool Animation::Load(const std::string& fileName, bool _loop)
+*/
+bool Animation::Load(const std::string& fileName, bool _loop)
 {
 	isLoopAnimation = _loop;
 

@@ -11,7 +11,7 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
-#include "LightPositionChangePoint.h"
+//#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ
@@ -150,12 +150,6 @@ bool ThirdStageCreator::OpenFile()
 		return true;
 	}
 
-	// ステージデータ読み込み (lightPoint) 
-	if (!readTiledJson(lightPointData, "Assets/Config/secondStageMap.json", "LightPoint"))
-	{
-		printf("do'nt have Layer/LightPoint\n");
-		return true;
-	}
 
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/thirdStageMap.json", "Player"))
@@ -763,18 +757,3 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 	}
 }
 
-void ThirdStageCreator::CreateLightPoint(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int lightPoint = lightPointData[_indexY][_indexX];
-	// レイヤー6のマップオブジェクトのポジション
-	Vector3 lightPos = Vector3(Offset * _indexX, -Offset * _indexY, LightPointPositionZ);
-
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (lightPoint)
-	{
-	case(60):
-		new LightPositionChangePoint(lightPos, LightPointBox, Tag::LIGHT_CHANGE_POINT);
-		break;
-	}
-}

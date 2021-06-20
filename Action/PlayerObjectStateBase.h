@@ -1,10 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObject.h"
 
 // クラスの前方宣言
 class PlayerObject;
 class SkeletalMeshComponent;
 
+/*
+@enum　PlayerState
+プレイヤーのステータス判別用
+*/
 enum class PlayerState
 {
 	// 待機
@@ -46,6 +53,10 @@ enum class PlayerState
 	PLAYER_STATE_NUM,
 };
 
+/*
+@file PlayerObjectStateBase.h
+@brief プレイヤーのステートパターンの基底クラス
+*/
 class PlayerObjectStateBase
 {
 public:
@@ -87,12 +98,32 @@ public:
 	*/
 	virtual void Enter(PlayerObject* _owner, float _deltaTime) {};
 
+	/*
+	@fn 地面移動処理関数
+	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
+	*/
 	void GroundMove(PlayerObject* _owner, const InputState& _keyState);
 
+	/*
+	@fn 入力チェック処理関数
+	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
+	*/
 	void ChackInput(PlayerObject* _owner, const InputState& _keyState);
-
+	
+	/*
+	@fn 回転処理関数
+	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
+	*/
 	void RotationProcess(PlayerObject* _owner,Vector3 _forward,Vector3 _tmpForward);
 
+	/*
+	@fn アナログスティック処理関数
+	@param	_keyState 入力情報
+	@return Vector3 補正後のアナログスティックの入力情報
+	*/
 	Vector3 ChackControllerAxis(const InputState& _keyState);
 
 protected:
@@ -111,6 +142,7 @@ protected:
 	const float MaxMoveSpeed;
 	// 最大落下速度の規定値
 	const float MaxFallSpeed;
+
 private:
 
 	/*

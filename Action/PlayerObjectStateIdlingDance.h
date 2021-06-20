@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateIdlingDance.h
+@brief ダンス状態を管理
+*/
 class PlayerObjectStateIdlingDance :
     public PlayerObjectStateBase
 {

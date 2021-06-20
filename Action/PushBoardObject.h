@@ -86,6 +86,7 @@ private:
 	bool inversionFlag;
 	//ˆÚ“®‘¬“x
 	const float MoveSpeed;
+	// Ü‚è•Ô‚·Û‚Ì‘¬“x
 	const float CutBackSpeed;
 	//ˆÚ“®•ûŒü
 	Vector3 direction;

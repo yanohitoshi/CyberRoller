@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateDownLoop.h
+@brief ダウンループ状態を管理
+*/
 class PlayerObjectStateDownLoop :
     public PlayerObjectStateBase
 {

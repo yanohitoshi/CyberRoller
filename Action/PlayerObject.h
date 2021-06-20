@@ -66,105 +66,6 @@ public:
 	void RotateToNewForward(const Vector3& forward);
 
 
-	//----------------------getter群------------------------------//
-	// ※減らせるかもしれない
-
-	/*
-	@fn SkeletalMeshComponentをstateに渡す関数
-	@return SkeletalMeshComponent　SkeletalMeshComponentのポインタを返す
-	*/
-	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
-
-	/*
-	@fn Animationを返す関数
-	@return Animation Animationのポインタを返す
-	*/
-	const Animation* GetAnimation(PlayerState _state);
-
-	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
-	static const float GetGravity() { return Gravity; }
-
-	// 定数であるグラビティ（重力）を他のCPPで見るためのgetter
-	static Vector3 const GetPlayerChackPoint() { return sendChackPointPosition; }
-
-	// 着地effect側で使用するフラグ用のgetter
-	static bool GetChackJumpFlag() { return chackJumpFlag; }
-	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
-
-	// 戻り値→Vector3
-	Vector3 GetForwardVec() { return forwardVec; }
-	Vector3 GetRightVec() { return rightVec; }
-	Vector3 GetCharaForwardVec() { return charaForwardVec;	}
-	Vector3 GetRotateVec() { return rotateVec; }
-	Vector3 GetVelocity() { return velocity; }
-	Vector3 GetRespownPos() { return respownPos; }
-
-	// 戻り値→const float
-	const float GetDeadSpace() { return DeadSpace; }
-	const float GetFirstMovePower() { return FirstMovePower; }
-	const float GetMovePower() { return MovePower; }
-	const float GetAirMovePower() { return AirMovePower; }
-	const float GetFirstJumpPower() { return FirstJumpPower; }
-	const float GetDecelerationForce() { return DecelerationForce; }
-
-	// 戻り値→float
-	float GetMoveSpeed() { return moveSpeed; }
-	float GetJumpPower() { return jumpPower; }
-
-	// 戻り値→int
-	int GetTurnDelayCount() { return turnDelayCount; }
-
-	// 戻り値→bool
-	bool GetOnGround() { return onGround; }
-	bool GetJumpFlag() { return jumpFlag; }
-	bool GetSwitchJumpFlag() { return switchJumpFlag; }
-	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
-	bool GetInputFlag() { return inputFlag; }
-	bool GetRunFlag() { return runFlag; }
-	bool GetDeadFlag() { return deadFlag; };
-	bool GetRespawnFlag() { return respawnFlag; };
-	bool GetIsAvailableInput() { return isAvailableInput; };
-	bool GetIsHitWall() { return isHitWall; };
-
-	// シーン遷移時に使うフラグのgetter
-	bool GetClearFlag() { return clearFlag; }
-	bool GetNextSceneFlag() { return nextSceneFlag; }
-	bool GetReStartFlag() { return restartFlag; }
-
-	// 戻り値→int
-	int GetJumpFrameCount() { return jumpFrameCount; }
-
-	// 戻り値→PlayerState
-	PlayerState GetNowState() { return nowState; }
-
-	//---------------------------setter群------------------------------//
-	// ※減らせるかもしれない
-	// 引数→Vector3
-	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
-	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
-	void SetRespownPos(Vector3 _respownPos) { velocity = _respownPos; }
-
-	// 引数→float
-	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
-
-	// 引数→int
-	void SetTurnDelayCount(bool _turnDelayCount) { turnDelayCount = _turnDelayCount; }
-
-	// 引数→bool
-	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
-	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
-	void SetIsAvailableJumpKey(bool _isAvailableJumpKey) { isAvailableJumpKey = _isAvailableJumpKey; }
-	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
-	void SetInputFlag(bool _inputFlag) { inputFlag = _inputFlag; }
-	void SetRunFlag(bool _runFlag) { runFlag = _runFlag; }
-	void SetJumpFrameCount(bool _jumpFrameCount) { jumpFrameCount = _jumpFrameCount; }
-	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
-	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
-	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
-	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
-
-
-
 
 private:
 
@@ -194,7 +95,6 @@ private:
 	*/
 	void ChackRestartProcess();
 
-	//----------------Component系Class変数--------------------//
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
 	// Meshの読み込みを行うクラス
@@ -203,9 +103,7 @@ private:
 	BoxCollider* boxCollider;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* groundChackSphereCol;
-	//--------------------------------------------------------//
 
-	//----------------private関数群---------------------------//
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
@@ -218,13 +116,6 @@ private:
 	*/
 	void OnCollisionGround(const GameObject& _hitObject);
 
-	//--------------------------------------------------------//
-	
-	//--------------------static変数群------------------------//
-
-	static Vector3 sendChackPointPosition;
-
-
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
 	static bool chackJumpFlag;
@@ -232,9 +123,7 @@ private:
 	static bool chackIsJumping;
 	//重力
 	static const float Gravity;
-	//--------------------------------------------------------//
-	
-	//------------------------定数群--------------------------//
+
 	// リスタートをかける時間
 	const int RestartTime;
 	// 入力値のdeadスペース
@@ -257,10 +146,6 @@ private:
 	// ひるむ速度定数
 	const float FlinchSpeed;
 
-	const float ShiftSendPositionZ;
-
-	//--------------------------------------------------------//
-	//--------------------------変数群------------------------//
 	//押し戻しに使うプレイヤーのAABB
 	AABB playerBox;
 	//右方向ベクトル
@@ -328,11 +213,319 @@ private:
 	// 変更された次のプレーヤーのstate状態を保存するための変数
 	PlayerState nextState;
 
-	//----------------------可変長配列群----------------------//
 	// Animationプール
 	std::vector<const Animation*> animTypes;
 	// stateプール
 	std::vector<class PlayerObjectStateBase*> statePools;
-	//--------------------------------------------------------//
+	
+public:// ゲッターセッター
+
+	/*
+	@fn skeltalMeshComponentのgetter関数
+	@return SkeletalMeshComponent　SkeletalMeshComponentクラスのポインタを返す
+	*/
+	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
+
+	/*
+	@fn Animationのgetter関数
+	@param _state 現在のプレイヤーのステータス
+	@return Animation Animationクラスのポインタを返す
+	*/
+	const Animation* GetAnimation(PlayerState _state);
+
+	/*
+	@fn 重力のgetter関数
+	@return Gravity 重力定数
+	*/
+	static const float GetGravity() { return Gravity; }
+
+	/*
+	@fn chackJumpFlagのgetter関数
+	@return chackJumpFlagを返す
+	*/
+	static bool GetChackJumpFlag() { return chackJumpFlag; }
+	
+	/*
+	@fn chackIsJumpingのgetter関数
+	@return chackIsJumpingを返す
+	*/
+	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
+
+	/*
+	@fn forwardVecのgetter関数
+	@return forwardVecを返す
+	*/
+	Vector3 GetForwardVec() { return forwardVec; }
+	
+	/*
+	@fn rightVecのgetter関数
+	@return rightVecを返す
+	*/
+	Vector3 GetRightVec() { return rightVec; }
+	
+	/*
+	@fn charaForwardVecのgetter関数
+	@return charaForwardVecを返す
+	*/
+	Vector3 GetCharaForwardVec() { return charaForwardVec; }
+	
+	/*
+	@fn rotateVecのgetter関数
+	@return rotateVecを返す
+	*/
+	Vector3 GetRotateVec() { return rotateVec; }
+	
+	/*
+	@fn velocityのgetter関数
+	@return velocityを返す
+	*/
+	Vector3 GetVelocity() { return velocity; }
+	
+	/*
+	@fn respownPosのgetter関数
+	@return respownPosを返す
+	*/
+	Vector3 GetRespownPos() { return respownPos; }
+
+	/*
+	@fn DeadSpaceのgetter関数
+	@return DeadSpaceを返す
+	*/
+	const float GetDeadSpace() { return DeadSpace; }
+	
+	/*
+	@fn FirstMovePowerのgetter関数
+	@return FirstMovePowerを返す
+	*/
+	const float GetFirstMovePower() { return FirstMovePower; }
+	
+	/*
+	@fn MovePowerのgetter関数
+	@return MovePowerを返す
+	*/
+	const float GetMovePower() { return MovePower; }
+	
+	/*
+	@fn AirMovePowerのgetter関数
+	@return AirMovePowerを返す
+	*/
+	const float GetAirMovePower() { return AirMovePower; }
+	
+	/*
+	@fn FirstJumpPowerのgetter関数
+	@return FirstJumpPowerを返す
+	*/
+	const float GetFirstJumpPower() { return FirstJumpPower; }
+	
+	/*
+	@fn DecelerationForceのgetter関数
+	@return DecelerationForceを返す
+	*/
+	const float GetDecelerationForce() { return DecelerationForce; }
+
+	/*
+	@fn moveSpeedのgetter関数
+	@return moveSpeedを返す
+	*/
+	float GetMoveSpeed() { return moveSpeed; }
+	
+	/*
+	@fn jumpPowerのgetter関数
+	@return jumpPowerを返す
+	*/
+	float GetJumpPower() { return jumpPower; }
+
+	/*
+	@fn turnDelayCountのgetter関数
+	@return turnDelayCountを返す
+	*/	
+	int GetTurnDelayCount() { return turnDelayCount; }
+
+	/*
+	@fn onGroundのgetter関数
+	@return onGroundを返す
+	*/
+	bool GetOnGround() { return onGround; }
+	
+	/*
+	@fn jumpFlagのgetter関数
+	@return jumpFlagを返す
+	*/
+	bool GetJumpFlag() { return jumpFlag; }
+	
+	/*
+	@fn switchJumpFlagのgetter関数
+	@return switchJumpFlagを返す
+	*/
+	bool GetSwitchJumpFlag() { return switchJumpFlag; }
+	
+	/*
+	@fn isAvailableJumpKeyのgetter関数
+	@return isAvailableJumpKeyを返す
+	*/
+	bool GetIsAvailableJumpKey() { return isAvailableJumpKey; }
+	
+	/*
+	@fn inputFlagのgetter関数
+	@return inputFlagを返す
+	*/
+	bool GetInputFlag() { return inputFlag; }
+	
+	/*
+	@fn runFlagのgetter関数
+	@return runFlagを返す
+	*/
+	bool GetRunFlag() { return runFlag; }
+	
+	/*
+	@fn deadFlagのgetter関数
+	@return deadFlagを返す
+	*/
+	bool GetDeadFlag() { return deadFlag; };
+	
+	/*
+	@fn respawnFlagのgetter関数
+	@return respawnFlagを返す
+	*/
+	bool GetRespawnFlag() { return respawnFlag; };
+	
+	/*
+	@fn isAvailableInputのgetter関数
+	@return isAvailableInputを返す
+	*/
+	bool GetIsAvailableInput() { return isAvailableInput; };
+	
+	/*
+	@fn isHitWallのgetter関数
+	@return isHitWallを返す
+	*/
+	bool GetIsHitWall() { return isHitWall; };
+
+	/*
+	@fn clearFlagのgetter関数
+	@return clearFlagを返す
+	*/
+	bool GetClearFlag() { return clearFlag; }
+	
+	/*
+	@fn nextSceneFlagのgetter関数
+	@return nextSceneFlagを返す
+	*/
+	bool GetNextSceneFlag() { return nextSceneFlag; }
+
+	/*
+	@fn restartFlagのgetter関数
+	@return restartFlagを返す
+	*/
+	bool GetRestartFlag() { return restartFlag; }
+
+	/*
+	@fn jumpFrameCountのgetter関数
+	@return jumpFrameCountを返す
+	*/
+	int GetJumpFrameCount() { return jumpFrameCount; }
+
+	/*
+	@fn nowStateのgetter関数
+	@return nowStateを返す
+	*/
+	PlayerState GetNowState() { return nowState; }
+
+	/*
+	@fn charaForwardVecのsetter関数
+	@param	Vector3 _charaForwardVec キャラクターの前方ベクトル
+	*/
+	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
+	
+	/*
+	@fn velocityのsetter関数
+	@param	Vector3 _velocity キャラクターの速度ベクトル
+	*/
+	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
+	
+	/*
+	@fn respownPosのsetter関数
+	@param	Vector3 _respownPos キャラクターのリスポーンするポジション
+	*/
+	void SetRespownPos(Vector3 _respownPos) { respownPos = _respownPos; }
+
+	/*
+	@fn moveSpeedのsetter関数
+	@param	float _moveSpeed キャラクターのスピード
+	*/
+	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
+
+	/*
+	@fn jumpPowerのsetter関数
+	@param	float _jumpPower キャラクターのジャンプ力
+	*/
+	void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
+
+	/*
+	@fn turnDelayCountのsetter関数
+	@param	int _turnDelayCount キャラクターの振り返りディレイカウント
+	*/
+	void SetTurnDelayCount(int _turnDelayCount) { turnDelayCount = _turnDelayCount; }
+
+	/*
+	@fn jumpFlagのsetter関数
+	@param	bool _jumpFlag ジャンプ可能かの状態をセット
+	*/
+	void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
+	
+	/*
+	@fn switchJumpFlagのsetter関数
+	@param	bool _switchJumpFlag スイッチジャンプ状態のセット
+	*/
+	void SetSwitchJumpFlag(bool _switchJumpFlag) { switchJumpFlag = _switchJumpFlag; }
+	
+	/*
+	@fn isAvailableJumpKeyのsetter関数
+	@param	bool _isAvailableJumpKey ジャンプ利用可能かの状態をセット
+	*/
+	void SetIsAvailableJumpKey(bool _isAvailableJumpKey) { isAvailableJumpKey = _isAvailableJumpKey; }
+	
+	/*
+	@fn inputFlagのsetter関数
+	@param	bool _inputFlag 入力されているかをセット
+	*/
+	void SetInputFlag(bool _inputFlag) { inputFlag = _inputFlag; }
+	
+	/*
+	@fn runFlagのsetter関数
+	@param	bool _runFlag 走り状態かどうかをセット
+	*/
+	void SetRunFlag(bool _runFlag) { runFlag = _runFlag; }
+	
+	/*
+	@fn jumpFrameCountのsetter関数
+	@param	bool _jumpFrameCount ジャンプ中のカウントをセット
+	*/
+	void SetJumpFrameCount(bool _jumpFrameCount) { jumpFrameCount = _jumpFrameCount; }
+	
+	/*
+	@fn deadFlagのsetter関数
+	@param	bool _deadFlag 死亡状態かどうかをセット
+	*/
+	void SetDeadFlag(bool _deadFlag) { deadFlag = _deadFlag; }
+	
+	/*
+	@fn respawnFlagのsetter関数
+	@param	bool _respawnFlag リスポーンフラグをセット
+	*/
+	void SetRespawnFlag(bool _respawnFlag) { respawnFlag = _respawnFlag; }
+	
+	/*
+	@fn isAvailableInputのsetter関数
+	@param	bool _isAvailableInput 入力可能かどうかをセット
+	*/
+	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
+	
+	/*
+	@fn isHitWallのsetter関数
+	@param	bool _isHitWall 怯みモーションを行う壁にヒットしたかどうかをセット
+	*/
+	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
+
 };
 

@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateJumpEndToIdle.h
+@brief ジャンプ終了からアイドリングに移行するまでを管理
+*/
 class PlayerObjectStateJumpEndToIdle :
     public PlayerObjectStateBase
 {
