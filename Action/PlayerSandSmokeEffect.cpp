@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerSandSmokeEffect.h"
 
 PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity,bool _run)

@@ -1,4 +1,7 @@
-﻿#include "PhysicsWorld.h"
+﻿//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "PhysicsWorld.h"
 #include <algorithm>
 #include <SDL.h>
 #include "SphereCollider.h"

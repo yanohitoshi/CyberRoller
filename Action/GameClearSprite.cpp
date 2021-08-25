@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameClearSprite.h"
 #include "Renderer.h"
 #include "SpriteComponent.h"
@@ -13,7 +16,7 @@ GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/gameclear2.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/gameclear.png");
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

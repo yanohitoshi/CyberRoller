@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "SandSmokeMakeManeger.h"
 #include "ParticleEffectBase.h"
 #include "SandSmokeParticle.h"

@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "LandingEffect.h"
 
 LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)

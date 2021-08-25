@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ThirdStageCreator.h"
 #include "BoxObject.h"
 #include "SwitchBlock.h"
@@ -11,7 +14,6 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
-//#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ

@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "SecondStageCreator.h"
 #include "BoxObject.h"
 #include "SwitchBlock.h"
@@ -10,7 +13,6 @@
 #include "NeedlePanelObject.h"
 #include "MoveBlockObject.h"
 #include "SwitchBaseObject.h"
-//#include "LightPositionChangePoint.h"
 
 /*
    @fn コンストラクタ

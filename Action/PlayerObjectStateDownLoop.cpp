@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateDownLoop.h"
 #include "SkeletalMeshComponent.h"
 PlayerObjectStateDownLoop::PlayerObjectStateDownLoop()

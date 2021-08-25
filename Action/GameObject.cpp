@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "Game.h"
 #include "Math.h"
 #include "GameObject.h"
@@ -15,7 +18,6 @@ TitleCameraObject* GameObject::titleCamera = nullptr;
 std::vector<GameObject*> GameObject::pendingGameObjects;
 std::unordered_map<Tag, std::vector<GameObject*>> GameObject::gameObjectMap;
 bool GameObject::updatingGameObject = false;
-
 
 /*
 @param	ゲームクラスのポインタ

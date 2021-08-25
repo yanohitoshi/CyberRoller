@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "SandSmokeParticle.h"
 
 SandSmokeParticle::SandSmokeParticle(const Vector3& _pos, const Vector3& _velocity)

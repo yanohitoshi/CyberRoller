@@ -1,4 +1,7 @@
-﻿#include "BoxCollider.h"
+﻿//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "BoxCollider.h"
 #include "Math.h"
 #include "GameObject.h"
 #include "Collision.h"

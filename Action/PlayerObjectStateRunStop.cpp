@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateRunStop.h"
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"

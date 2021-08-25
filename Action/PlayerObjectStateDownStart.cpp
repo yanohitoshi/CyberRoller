@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateDownStart.h"
 #include "SkeletalMeshComponent.h"
 PlayerObjectStateDownStart::PlayerObjectStateDownStart()

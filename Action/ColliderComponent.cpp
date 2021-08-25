@@ -1,4 +1,7 @@
-﻿#include "ColliderComponent.h"
+﻿//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "PhysicsWorld.h"

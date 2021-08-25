@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "FireWorksEffectManeger.h"
 #include "FierWorksEffect.h"
 FireWorksEffectManeger::FireWorksEffectManeger(GameObject* _owner)

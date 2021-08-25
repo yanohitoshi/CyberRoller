@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "SwitchParticleEffect.h"
 
 SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity)

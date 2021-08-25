@@ -1,7 +1,10 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TutorialSwitchParticlEffect.h"
 
 TutorialSwitchParticlEffect::TutorialSwitchParticlEffect(const Vector3& _pos, GameObject* _owner)
-	: ParticleEffectBase(_pos, Vector3::Zero,100, "Assets/switch_tutorial_touch.png", 1.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero,100, "Assets/Particle/switch_tutorial_touch.png", 1.0f)
 	, InitScale(128.0f)
 {
 	// ParticleComponent初期化

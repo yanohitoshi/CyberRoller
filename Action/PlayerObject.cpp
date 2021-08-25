@@ -1,4 +1,7 @@
-﻿#include "PlayerObject.h"
+﻿//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "PlayerObject.h"
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "MainCameraObject.h"

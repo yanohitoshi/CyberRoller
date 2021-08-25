@@ -1,7 +1,10 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "MoveTutorialParticl.h"
 
 MoveTutorialParticl::MoveTutorialParticl(const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/move_tutorial.png", 1.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/move_tutorial.png", 1.0f)
 	, InitScale(512.0f)
 {
 	// ParticleComponent初期化

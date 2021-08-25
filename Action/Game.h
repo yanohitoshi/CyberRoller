@@ -82,7 +82,6 @@ public:
 	// シーン遷移が行われるかどうかフラグ
 	static bool isChangeScene;
 
-	static int debug;
 
 private:
 

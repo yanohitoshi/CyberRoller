@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameOverSprite.h"
 #include "Renderer.h"
 #include "SpriteComponent.h"
@@ -10,7 +13,7 @@ GameOverSprite::GameOverSprite()
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/gameover3.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/gameover.png");
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);
