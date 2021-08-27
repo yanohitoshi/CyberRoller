@@ -194,15 +194,15 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(PORTRAIT_WALL_PARTS):
-		// 縦長壁オブジェクトの生成
-		new WallBlockObject(layer3Pos, PortraitWallBlockSize, Tag::WALL);
-		break;
+	//case(PORTRAIT_WALL_PARTS):
+	//	// 縦長壁オブジェクトの生成
+	//	new WallBlockObject(layer3Pos, PortraitWallBlockSize, Tag::WALL);
+	//	break;
 
-	case(LANDSCAPE_WALL_PARTS):
-		// 横長壁オブジェクトの生成
-		new WallBlockObject(layer3Pos, LandscapeWallBlockSize, Tag::WALL);
-		break;
+	//case(LANDSCAPE_WALL_PARTS):
+	//	// 横長壁オブジェクトの生成
+	//	new WallBlockObject(layer3Pos, LandscapeWallBlockSize, Tag::WALL);
+	//	break;
 	}
 
 }

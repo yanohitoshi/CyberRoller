@@ -139,6 +139,11 @@ public:
 	*/
 	void SetParticleVertex();
 
+	// アクティブスカイボックス
+	void SetActiveSkyBox(class CubeMapComponent* in_skyBox) { activeSkyBox = in_skyBox; }
+	class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
+	class VertexArray* GetCubeMapVerts() { return cubeVerts; }
+
 private:
 
 	//コンストラクタ、デストラクタの隠蔽
@@ -167,6 +172,8 @@ private:
 	@brief  Particle用の頂点バッファとインデックスバッファの作成
 	*/
 	void CreateParticleVerts();
+
+	void CreateCubeVerts();                                                // キューブマップ(スカイボックス用)頂点配列定義
 
 	/*
 	@brief	時間制限用textureの生成
@@ -260,11 +267,15 @@ private:
 	// 赤色
 	std::vector<Texture*> timeRedFontTextures;
 
-
+	// キューブマップ
+	class CubeMapComponent* activeSkyBox; // 有効な(描画する)スカイボックス
 	//クラスのポインタ
 	//スプライト
 	Shader* spriteShader;
 	VertexArray* spriteVerts;
+
+	// スカイボックス用シェーダ
+	Shader* skyboxShader;
 
 	// スイッチ用シェーダー
 	Shader* switchShader;
@@ -287,8 +298,9 @@ private:
 	//パーティクル
 	Shader* particleShader;
 	// パーティクル用頂点定義
-	VertexArray* particleVertex;   
-
+	VertexArray* particleVertex;
+	// キューブ頂点配列
+	VertexArray* cubeVerts;
 
 	//環境光
 	Vector3 ambientLight;

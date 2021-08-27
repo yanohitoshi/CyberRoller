@@ -363,6 +363,12 @@
     <ClCompile Include="BaseScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="CubeMapComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBoxObject.cpp">
+      <Filter>GameObjects\SkyBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -729,6 +735,12 @@
     <ClInclude Include="PlayerObjectStateFlinch.h">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClInclude>
+    <ClInclude Include="CubeMapComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBoxObject.h">
+      <Filter>GameObjects\SkyBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -847,6 +859,9 @@
     </Filter>
     <Filter Include="GameObjects\PlayerObjects\State\RunState">
       <UniqueIdentifier>{2df9d01b-cd9f-48e8-9dda-dae01d1b7c92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\SkyBox">
+      <UniqueIdentifier>{43a69f49-5df3-4bda-b91f-8abe1d102ecf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

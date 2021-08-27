@@ -169,6 +169,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CountDownFont.cpp" />
     <ClCompile Include="CrystalDefaultEffect.cpp" />
     <ClCompile Include="CrystalEffectManager.cpp" />
+    <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="FinalStageCreator.cpp" />
     <ClCompile Include="FinalStageScene.cpp" />
     <ClCompile Include="FinalStageUI.cpp" />
@@ -208,6 +209,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="SecondStageCreator.cpp" />
     <ClCompile Include="SecondStageScene.cpp" />
     <ClCompile Include="SecondStageUI.cpp" />
+    <ClCompile Include="SkyBoxObject.cpp" />
     <ClCompile Include="StageCreatorBase.cpp" />
     <ClCompile Include="StartCountDownSprite.cpp" />
     <ClCompile Include="FierWorksEffect.cpp" />
@@ -311,6 +313,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CountDownFont.h" />
     <ClInclude Include="CrystalDefaultEffect.h" />
     <ClInclude Include="CrystalEffectManager.h" />
+    <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="FinalStageCreator.h" />
     <ClInclude Include="FinalStageScene.h" />
     <ClInclude Include="FinalStageUI.h" />
@@ -350,6 +353,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="SecondStageCreator.h" />
     <ClInclude Include="SecondStageScene.h" />
     <ClInclude Include="SecondStageUI.h" />
+    <ClInclude Include="SkyBoxObject.h" />
     <ClInclude Include="StageCreatorBase.h" />
     <ClInclude Include="StartCountDownSprite.h" />
     <ClInclude Include="FierWorksEffect.h" />

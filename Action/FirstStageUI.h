@@ -41,7 +41,7 @@ private:
     const Vector3 JumpTutorialPosition;
     // 移動チュートリアルを表示する座標定数
     const Vector3 MoveTutorialPosition;
-
+    class SkyBoxObject* skyBox;
 };
 
 

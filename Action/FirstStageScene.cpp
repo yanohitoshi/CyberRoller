@@ -9,6 +9,7 @@
 #include "FirstStageCreator.h"
 
 
+
 FirstStageScene::FirstStageScene()
 {
 	// ƒ‰ƒCƒgî•ñ‰Šú‰»

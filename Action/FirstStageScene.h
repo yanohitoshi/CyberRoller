@@ -33,6 +33,6 @@ public:
 	SceneState Update(const InputState& state)override;
 
 private:
-
+	//class SkyBoxObject* skyBox;
 };
 

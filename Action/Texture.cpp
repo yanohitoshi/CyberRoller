@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "Renderer.h"
+#include <iostream>
 
 Texture::Texture()
 	:textureID(0)
@@ -150,4 +151,79 @@ bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
 	textures.clear();
 
 	return false;
+}
+
+bool Texture::LoadCubeMap(const std::string& in_filePath)
+{
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	SDL_Surface* surface;
+
+	// 各スカイボックス用画像のパス
+	std::string faces[] =
+	{
+		in_filePath + "right.png",
+		in_filePath + "left.png",
+		in_filePath + "top.png",
+		in_filePath + "bottom.png",
+		in_filePath + "front.png",
+		in_filePath + "back.png"
+	};
+
+	for (int i = 0; i < 6; i++)
+	{
+		std::string str;
+		if (i == 0)
+		{
+			str = in_filePath + "right.jpg";
+		}
+		if (i == 1)
+		{
+			str = in_filePath + "left.jpg";
+		}
+		if (i == 2)
+		{
+			str = in_filePath + "top.jpg";
+		}
+		if (i == 3)
+		{
+			str = in_filePath + "bottom.jpg";
+		}
+		if (i == 4)
+		{
+			str = in_filePath + "front.jpg";
+		}
+		if (i == 5)
+		{
+			str = in_filePath + "back.jpg";
+		}
+		surface = IMG_Load(str.c_str());
+
+		// テクスチャ画像の幅、高さを取得
+		width = surface->w;
+		height = surface->h;
+		int channels = surface->format->BytesPerPixel;
+
+		if (surface)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+		}
+		else
+		{
+			std::cout << "CubeMap Texture Load Failed at Path : " << str << std::endl;
+		}
+
+		// SDLサーフェスは不要なので解放しておく
+		SDL_FreeSurface(surface);
+	}
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	return true;
+
 }

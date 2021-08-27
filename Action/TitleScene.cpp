@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "TitleStageCreator.h"
 #include "BoxObject.h"
+#include "SkyBoxObject.h"
 
 TitleScene::TitleScene()
 {
@@ -31,6 +32,8 @@ TitleScene::TitleScene()
 		titleStageCreator->CreateStage();
 	}
 
+	skyBox = new SkyBoxObject(false,Tag::UI);
+	//RENDERER->SetActiveSkyBox(skyBox);
 	// ƒV[ƒ“UI‚ğ’Ç‰Á
 	new TitleSceneUI();
 

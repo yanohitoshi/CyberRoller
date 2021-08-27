@@ -18,6 +18,7 @@
 #include "Skeleton.h"
 #include "Animation.h"
 #include "SkeletalMeshComponent.h"
+#include "CubeMapComponent.h"
 #include "Font.h"
 #include "GameObject.h"
 #include "MainCameraObject.h"
@@ -166,6 +167,8 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	CreateSpriteVerts();
 
 	CreateParticleVerts();
+
+	CreateCubeVerts();
 
 	// SDL_ttfの初期化
 	if (TTF_Init() != 0)
@@ -645,7 +648,6 @@ bool Renderer::LoadShaders()
 	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
 	spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
-
 	// 3Dモデル用ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
@@ -660,6 +662,13 @@ bool Renderer::LoadShaders()
 	switchShader->SetActive();
 	switchShader->SetMatrixUniform("uViewProj", view * projection);
 
+	skyboxShader = new Shader();
+	if (!skyboxShader->Load("Shaders/gBuffer_SkyBox.vert", "Shaders/gBuffer_SkyBox.frag"))
+	{
+		return false;
+	}
+	//skyboxShader->SetActive();
+	//skyboxShader->SetMatrixUniform("uViewProj", view * projection);
 
 	//particleシェーダー
 	particleShader = new Shader();
@@ -751,6 +760,12 @@ void Renderer::CreateParticleVerts()
 	particleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
+void Renderer::CreateCubeVerts()
+{
+	cubeVerts = new VertexArray();
+	cubeVerts->CreateCubeVerts();
+}
+
 void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
 {
 	// フォントの生成
@@ -810,8 +825,25 @@ void Renderer::DrawShadow()
 	// HDRレコーディング開始
 	hdrRenderer->HdrRecordBegin();
 
-	// 背景描画
-	DrawBackGround();
+	// スカイボックス描画
+	if (activeSkyBox != nullptr)
+	{
+		skyboxShader->SetActive();
+		
+		// ゲームの空間に合わせるためのオフセット行列をセット
+		Matrix4 offset = Matrix4::CreateRotationX(Math::ToRadians(90.0f));
+		skyboxShader->SetMatrixUniform("u_offset", offset);
+
+		// Uniformに逆行列をセット
+		Matrix4 InvView = view;
+		InvView.Invert();
+		InvView.Transpose();
+		skyboxShader->SetMatrixUniform("u_invView", InvView);
+		skyboxShader->SetMatrixUniform("u_projection", projection);
+		skyboxShader->SetIntUniform("u_skybox", 0);
+
+		activeSkyBox->Draw(skyboxShader);
+	}
 
 	//シャドウマップshaderをアクティブ
 	shadowMapShader->SetActive();

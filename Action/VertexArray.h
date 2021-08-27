@@ -25,6 +25,7 @@ public:
 	// 頂点配列コンストラクタ 
 	VertexArray(const void* verts, unsigned int numVerts, Layout layout,
 		const unsigned int* indices, unsigned int numIndices);
+	VertexArray();
 	~VertexArray();
 
 	/*
@@ -32,6 +33,8 @@ public:
 	*/
 	void SetActive();
 
+	// スカイボックス用頂点配列オブジェクトの作成
+	void CreateCubeVerts();
 
 private:
 
@@ -45,6 +48,8 @@ private:
 	unsigned int indexBuffer;
 	//頂点配列オブジェクトのOpenGL ID
 	unsigned int vertexArray;
+	//unsigned int m_VAO;                                            // 頂点配列オブジェクトID
+	//unsigned int m_VBO;                                           // 頂点バッファID (OpenGLに登録時に付与される)
 
 public://ゲッターセッター
 

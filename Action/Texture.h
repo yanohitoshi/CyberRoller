@@ -47,6 +47,8 @@ public:
 		,const unsigned int _width, const unsigned int _height
 		,std::vector<Texture*> textures);
 
+	bool LoadCubeMap(const std::string& in_filePath);
+
 private:
 
 	// テクスチャID

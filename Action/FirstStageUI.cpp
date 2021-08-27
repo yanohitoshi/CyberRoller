@@ -7,7 +7,7 @@
 #include "JumpTutorialParticl.h"
 #include "MoveTutorialParticl.h"
 #include "StartCountDownSprite.h"
-
+#include "SkyBoxObject.h"
 
 FirstStageUI::FirstStageUI()
 	: GameObject(false, Tag::UI)
@@ -21,6 +21,8 @@ FirstStageUI::FirstStageUI()
 
 	// プレイヤーを動かすことができるようにするためのフラグ
 	CountDownFont::SetCountStartFlag(true);
+
+	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
 FirstStageUI::~FirstStageUI()
