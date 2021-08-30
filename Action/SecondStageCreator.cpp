@@ -339,16 +339,6 @@ void SecondStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer5SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
-
-	case(PORTRAIT_WALL_PARTS):
-		// 縦長壁オブジェクトの生成
-		new WallBlockObject(layer5Pos, PortraitWallBlockSize, Tag::WALL);
-		break;
-
-	case(LANDSCAPE_WALL_PARTS):
-		// 横長壁オブジェクトの生成
-		new WallBlockObject(layer5Pos, LandscapeWallBlockSize, Tag::WALL);
-		break;
 	}
 }
 

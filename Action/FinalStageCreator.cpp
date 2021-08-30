@@ -667,16 +667,6 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new MoveWallBlock(Vector3(layer10Pos.x, layer10Pos.y + ShiftMoveWallY, layer10Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::SECOND_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer10Pos.x, layer10Pos.y, layer10Pos.z - BigMoveWallSize.z));
 		break;
-
-	case(PORTRAIT_WALL_PARTS):
-		// 縦長壁オブジェクトの生成
-		new WallBlockObject(layer10Pos, PortraitWallBlockSize, Tag::WALL);
-		break;
-
-	case(LANDSCAPE_WALL_PARTS):
-		// 横長壁オブジェクトの生成
-		new WallBlockObject(layer10Pos, LandscapeWallBlockSize, Tag::WALL);
-		break;
 	}
 }
 

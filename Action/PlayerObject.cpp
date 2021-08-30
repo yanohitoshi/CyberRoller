@@ -45,7 +45,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	, MovePower(90.0f)
 	, FirstMovePower(0.0f)
 	, AirMovePower(60.0f)
-	, DecelerationForce(80.0f)
+	, DecelerationForce(100.0f)
 	, DeadSpace(0.3f)
 	, FallPpsitionZ(-500.0f)
 	, FirstPositionZ(5000.0f)
@@ -219,6 +219,10 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
+	if (FallPpsitionZ >= position.z)
+	{
+		nextState = PlayerState::PLAYER_STATE_DEAD;
+	}
 
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)

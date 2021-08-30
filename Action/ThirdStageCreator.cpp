@@ -536,16 +536,6 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-
-		// 縦長壁オブジェクトの生成
-	case(PORTRAIT_WALL_PARTS):
-		new WallBlockObject(layer9Pos, PortraitWallBlockSize, Tag::WALL);
-		break;
-
-	case(LANDSCAPE_WALL_PARTS):
-		// 横長壁オブジェクトの生成
-		new WallBlockObject(layer9Pos, LandscapeWallBlockSize, Tag::WALL);
-		break;
 	}
 }
 
