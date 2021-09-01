@@ -369,6 +369,9 @@
     <ClCompile Include="SkyBoxObject.cpp">
       <Filter>GameObjects\SkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObjectStateFallDead.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -740,6 +743,9 @@
     </ClInclude>
     <ClInclude Include="SkyBoxObject.h">
       <Filter>GameObjects\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateFallDead.h">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

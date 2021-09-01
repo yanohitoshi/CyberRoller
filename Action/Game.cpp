@@ -269,8 +269,6 @@ void Game::ProcessInput()
 
 		// シーン変更フラグをtrueに
 		isChangeScene = true;
-		//// 現在のシーンのステータスをレンダラーに渡す
-		//RENDERER->SetNowSceneState(nowSceneState);
 	}
 }
 

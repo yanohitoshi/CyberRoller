@@ -32,6 +32,7 @@
 #include "PlayerObjectStateRunTurn.h"
 #include "PlayerObjectStateIdlingDance.h"
 #include "PlayerObjectStateFlinch.h"
+#include "PlayerObjectStateFallDead.h"
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
@@ -203,6 +204,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateDownUp);
 	statePools.push_back(new PlayerObjectStateDownOver);
 	statePools.push_back(new PlayerObjectStateDead);
+	statePools.push_back(new PlayerObjectStateFallDead);
 	statePools.push_back(new PlayerObjectStateRespown);
 
 	// stateを初期化
@@ -221,7 +223,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 {
 	if (FallPpsitionZ >= position.z)
 	{
-		nextState = PlayerState::PLAYER_STATE_DEAD;
+		nextState = PlayerState::PLAYER_STATE_FALL_DEAD;
 	}
 
 	// ステート外部からステート変更があったか？
