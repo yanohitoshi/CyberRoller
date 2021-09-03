@@ -1,9 +1,15 @@
 #pragma once
 #include "PlayerObjectStateBase.h"
+
+/*
+@file PlayerObjectStateFallDead.h
+@brief 落下死亡状態を管理
+*/
 class PlayerObjectStateFallDead :
     public PlayerObjectStateBase
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	*/

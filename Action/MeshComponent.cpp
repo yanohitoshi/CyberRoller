@@ -42,20 +42,17 @@ void MeshComponent::Draw(Shader* _shader)
 	{
 		if (mesh)
 		{
-			// Set the world transform
-			_shader->SetMatrixUniform("uWorldTransform",
-				owner->GetWorldTransform());
-			// Set specular power
+			_shader->SetMatrixUniform("uWorldTransform",owner->GetWorldTransform());
+
 			_shader->SetFloatUniform("uSpecPower", mesh->GetSpecPower());
 
 			_shader->SetFloatUniform("uLuminance", mesh->GetLuminace());
 
 			SetTextureToShader(_shader);
 
-			// Set the argMesh's vertex array as active
 			VertexArray* va = mesh->GetVertexArray();
 			va->SetActive();
-			// Draw
+
 			glDrawElements(GL_TRIANGLES, va->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 		}
 	}

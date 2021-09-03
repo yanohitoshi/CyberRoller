@@ -56,7 +56,7 @@ Renderer::Renderer()
 	, LightProjectionHight(20000.0f)
 	, LightProjectionNear(1.0f)
 	, LightProjectionFar(20000.0f)
-	, ShiftLightPositionZ(3000.0f)
+	, ShiftLightPositionZ(2000.0f)
 	, ShiftLightPositionX(1000.0f)
 	, MaxTimeFontTextures(251)
 	, TimeFontSize(72)
@@ -943,7 +943,7 @@ void Renderer::DepthRendering()
 	/* ここからデプスマップ開始 */
 
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
-	LightPos = Vector3(playerPos.x - ShiftLightPositionX, playerPos.y, playerPos.z + ShiftLightPositionZ);
+	LightPos = Vector3(playerPos.x/* - ShiftLightPositionX*/, playerPos.y, playerPos.z + ShiftLightPositionZ);
 
 	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;

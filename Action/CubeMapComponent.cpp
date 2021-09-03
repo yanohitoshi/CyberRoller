@@ -6,7 +6,10 @@
 #include "Renderer.h"
 #include "VertexArray.h"
 
-
+/*
+@fn コンストラクタ
+@param _owner 親クラスのポインタ
+*/
 CubeMapComponent::CubeMapComponent(GameObject* _owner)
 	: Component(_owner)
 	, texture(nullptr)
@@ -15,17 +18,29 @@ CubeMapComponent::CubeMapComponent(GameObject* _owner)
 {
 }
 
+/*
+@fn デストラクタ
+@brief  Componentの削除を行う
+*/
 CubeMapComponent::~CubeMapComponent()
 {
 	delete texture;
 }
 
+/*
+@brief　texture生成処理
+@param	in_filePath 使用するtextureのファイルパス
+*/
 void CubeMapComponent::CreateTexture(const std::string& in_filePath)
 {
 	texture = new Texture();
 	texture->LoadCubeMap(in_filePath);
 }
 
+/*
+@brief　描画処理
+@param	in_shader 使用するシェーダークラスのポインタ
+*/
 void CubeMapComponent::Draw(Shader* in_shader)
 {
 	// 透明にしていなければ

@@ -74,13 +74,6 @@ void SkeletalMeshComponent::Update(float deltaTime)
 				animTime = animation->GetDuration();
 			}
 
-			////  アニメを巻き戻して再生
-			//while (animTime > animation->GetDuration())
-			//{
-			//	animTime -= animation->GetDuration();
-			//}
-
-
 			// 行列パレットの再計算
 			ComputeMatrixPalette();
 		}

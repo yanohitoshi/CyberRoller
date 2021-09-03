@@ -50,13 +50,7 @@ void PlayerObjectStateFallDead::Input(PlayerObject* _owner, const InputState& _k
 void PlayerObjectStateFallDead::Enter(PlayerObject* _owner, float _deltaTime)
 {
 
-	//// ownerからownerのskeletalMeshComponentのポインタをもらう
-	//skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
-
-	//// 再生するアニメーションをもらい再生をかける
-	//skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_DEAD));
-
-	// stateをDEAD状態にして保存
+	// stateをFALL_DEAD状態にして保存
 	state = PlayerState::PLAYER_STATE_FALL_DEAD;
 
 	// リスポーンまでのカウントを初期化
@@ -64,7 +58,6 @@ void PlayerObjectStateFallDead::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力可能フラグをfalseにセット
 	_owner->SetIsAvailableInput(false);
-
 }
 
 void PlayerObjectStateFallDead::ToRespawnCountProcess(PlayerObject* _owner)
