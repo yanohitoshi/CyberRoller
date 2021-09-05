@@ -535,6 +535,11 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new JumpSwitchObject(layer7SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
 
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer7SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
 	case(LEFT_MOVE_GROUND_NUMBER_3):
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 400.0f, MoveDirectionTag::MOVE_Y);
@@ -742,6 +747,16 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer12SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
+
+	case(THIRD_SWITCH_PARTS):
+		// 第三区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer12SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
+		break;
+
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
 	}
 }
 
@@ -760,16 +775,6 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 	case(LAYER13_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new BoxObject(layer13Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(THIRD_SWITCH_PARTS):
-		// 第三区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer13SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-		break;
-
-	case(NEEDLE_PARTS):
-		// 二ードルオブジェクト生成
-		new NeedlePanelObject(layer13SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 	}
 }

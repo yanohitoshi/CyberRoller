@@ -7,10 +7,12 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 #include "SwitchBlock.h"
+#include "ResultSwitchObject.h"
 #include "Mesh.h"
 
 SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag , bool _isTutorial)
 	: GameObject(false, _objectTag)
+	, Angle(90.0f)
 {
 	// ポジション・スケール・Tagの初期化
 	SetPosition(_p);
@@ -22,6 +24,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	meshComponent = new MeshComponent(this, false, false);
 
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/switch_model/S_EnergySwitch.gpmesh"));
+
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
@@ -35,6 +38,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 
 	// スイッチ本体を付与
 	new SwitchBlock(this, Vector3(2.6f,2.6f,2.0f), _switchTag, _isTutorial);
+	
 }
 
 SwitchBaseObject::~SwitchBaseObject()

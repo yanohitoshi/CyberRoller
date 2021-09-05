@@ -94,15 +94,14 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	isAvailableJumpKey = false;
 
 	// 前方ベクトル初期化
-	forwardVec = Vector3(0.0f, 0.0f, 0.0f);
+	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	// キャラクターの前方ベクトル初期化
 	charaForwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	// 右方向ベクトル初期化
-	rightVec = Vector3(0.0f,0.0f,0.0f);
+	rightVec = Vector3(0.0f,1.0f,0.0f);
 	// 回転ベクトル初期化
-	rotateVec = Vector3(0.1f, 0.0f, 0.0f);
-	// 回転ベクトルNormalize
-	rotateVec.Normalize();
+	rotateVec = Vector3(0.0f, 0.0f, 0.0f);
+
 	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
 	pushedVelocity = Vector3::Zero;
 

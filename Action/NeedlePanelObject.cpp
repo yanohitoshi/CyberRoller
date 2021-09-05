@@ -23,7 +23,8 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/groundModel/box.gpmesh"));
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::NEEDLE_TAG, GetOnCollisionFunc());
-	AABB box = { Vector3(-0.5f,-0.5f,-5.0f),Vector3(0.5f,0.5f,5.0f) };
+	//AABB box = { Vector3(-0.5f,-0.5f,-5.0f),Vector3(0.5f,0.5f,5.0f) };
+	AABB box = { Vector3(-0.8f,-0.8f,-1.0f),Vector3(0.8f,0.8f,5.0f) };
 	boxCollider->SetObjectBox(box);
 
 	new NeedleObject(this, Vector3(0.0f, 0.0f, 50.0f), Vector3(2.5f, 2.5f, 2.0f), Tag::NEEDLE);

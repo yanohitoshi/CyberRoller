@@ -39,16 +39,14 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/moveWall_model/moveWallBox.gpmesh"));
 
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
-	mesh = meshComponent->GetMesh();
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::WALL_TAG, GetOnCollisionFunc());
-	boxCollider->SetObjectBox(mesh->GetBox());
+	// 当たり判定のみY軸を大きくしたいので調整
+	AABB aabb = { Vector3(-1.0f,-2.0f,-1.0f),Vector3(1.0f,2.0f,1.0f) };
+	boxCollider->SetObjectBox(aabb);
 
 	// 土煙エフェクトの付与
 	new SandSmokeMakeManeger(this);
-
 }
 
 MoveWallBlock::~MoveWallBlock()

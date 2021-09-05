@@ -17,6 +17,7 @@ struct InputState;
 class ColliderComponent;
 class MainCameraObject;
 class PlayerObject;
+
 /*
 @brief	ゲームオブジェクトの状態
 */
@@ -85,6 +86,8 @@ enum Tag
 	TITLE_OBJECT,
 	// タイトルで自動で動くプレイヤーオブジェクト
 	TITLE_PLAYER,
+	// タイトル上のオブジェクト
+	RESULT_OBJECT,
 	// パーティクル
 	PARTICLE,
 };
@@ -102,6 +105,10 @@ enum MoveDirectionTag
 	MOVE_Z
 };
 
+/*
+@file GameObject.h
+@brief ゲームオブジェクトの基底クラス
+*/
 class GameObject
 {
 public:
@@ -194,6 +201,11 @@ public:
 	static void CreateTitleCamera(const Vector3 _pos);
 
 	/*
+	@fn 静的なtitleCameraを生成する
+	*/
+	static void CreateResultCamera(const Vector3 _pos);
+
+	/*
 	@brief　tagを使用してGameObjectを探すための関数
 	@return	std::vector<GameObject*>を返す
 	*/
@@ -216,6 +228,8 @@ protected:
 	static class MainCameraObject* mainCamera;
 	// タイトル画面で使用するカメラ
 	static class TitleCameraObject* titleCamera;
+	// タイトル画面で使用するカメラ
+	static class ResultCameraObject* resultCamera;
 
 	//ゲームオブジェクトの状態
 	State state;

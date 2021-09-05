@@ -90,12 +90,6 @@
     <ClCompile Include="CameraObjectBase.cpp">
       <Filter>GameObjects\CameraObjects</Filter>
     </ClCompile>
-    <ClCompile Include="TitleCameraObject.cpp">
-      <Filter>GameObjects\CameraObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="TitlePlayerObject.cpp">
-      <Filter>GameObjects\PlayerObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -261,9 +255,6 @@
     <ClCompile Include="SwitchBlock.cpp">
       <Filter>GameObjects\StageObjects\SwitchObject</Filter>
     </ClCompile>
-    <ClCompile Include="TitleGroundObject.cpp">
-      <Filter>GameObjects\StageObjects\GroundObject</Filter>
-    </ClCompile>
     <ClCompile Include="NeedleObject.cpp">
       <Filter>GameObjects\StageObjects\NeedleObject</Filter>
     </ClCompile>
@@ -372,6 +363,27 @@
     <ClCompile Include="PlayerObjectStateFallDead.cpp">
       <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
     </ClCompile>
+    <ClCompile Include="ResultSceneCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSwitchBaseObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSwitchObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultCameraObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCameraObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGroundObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -470,12 +482,6 @@
     </ClInclude>
     <ClInclude Include="CameraObjectBase.h">
       <Filter>GameObjects\CameraObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleCameraObject.h">
-      <Filter>GameObjects\CameraObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="TitlePlayerObject.h">
-      <Filter>GameObjects\PlayerObjects</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Renderer</Filter>
@@ -642,9 +648,6 @@
     <ClInclude Include="SwitchBlock.h">
       <Filter>GameObjects\StageObjects\SwitchObject</Filter>
     </ClInclude>
-    <ClInclude Include="TitleGroundObject.h">
-      <Filter>GameObjects\StageObjects\GroundObject</Filter>
-    </ClInclude>
     <ClInclude Include="NeedleObject.h">
       <Filter>GameObjects\StageObjects\NeedleObject</Filter>
     </ClInclude>
@@ -746,6 +749,27 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateFallDead.h">
       <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSceneCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSwitchBaseObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSwitchObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultCameraObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCameraObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGroundObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -868,6 +892,12 @@
     </Filter>
     <Filter Include="GameObjects\SkyBox">
       <UniqueIdentifier>{43a69f49-5df3-4bda-b91f-8abe1d102ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\ResultObject">
+      <UniqueIdentifier>{68ddba6c-a9d8-4113-a245-e38acd65b243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\TitleObject">
+      <UniqueIdentifier>{cfff7844-fb21-423c-ade7-d5ad5cc52ba3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -9,11 +9,13 @@
 #include "PhysicsWorld.h"
 #include "MainCameraObject.h"
 #include "TitleCameraObject.h"
+#include "ResultCameraObject.h"
 #include "CameraObjectBase.h"
 
 int GameObject::gameObjectId = 0;
 MainCameraObject* GameObject::mainCamera = nullptr;
 TitleCameraObject* GameObject::titleCamera = nullptr;
+ResultCameraObject* GameObject::resultCamera = nullptr;
 
 std::vector<GameObject*> GameObject::pendingGameObjects;
 std::unordered_map<Tag, std::vector<GameObject*>> GameObject::gameObjectMap;
@@ -219,6 +221,11 @@ void GameObject::CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObjec
 void GameObject::CreateTitleCamera(const Vector3 _pos)
 {
 	titleCamera = new TitleCameraObject(_pos);
+}
+
+void GameObject::CreateResultCamera(const Vector3 _pos)
+{
+	resultCamera = new ResultCameraObject(_pos);
 }
 
 std::vector<GameObject*> GameObject::FindGameObject(Tag _tag)

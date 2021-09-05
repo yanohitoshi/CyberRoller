@@ -52,5 +52,8 @@ private:
 	Mesh* mesh;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
+
+	// リザルト用スイッチだった場合に回転させる角度
+	const float Angle;
 };
 

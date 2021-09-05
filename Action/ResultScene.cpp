@@ -2,12 +2,36 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ResultScene.h"
-#include "TitleScene.h"
 #include "InputSystem.h"
 #include "ResultSceneUI.h"
+#include "GameObject.h"
+#include "Renderer.h"
+#include "ResultSceneCreator.h"
+#include "BoxObject.h"
+#include "SkyBoxObject.h"
 
 ResultScene::ResultScene()
 {
+	// ライト情報初期化
+	light = Vector3(0.8f, 0.8f, 0.8f);
+	RENDERER->SetAmbientLight(light);
+	DirectionalLight& dir = RENDERER->GetDirectionalLight();
+	dir.direction = Vector3(0.5f, 0.5f, 0.8f);
+	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
+	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);
+
+	// シーンステータス初期化
+	state = SceneState::RESULT_SCENE;
+
+	//ステージを生成するクラスのインスタンス
+	ResultSceneCreator* resultSceneCreator = new ResultSceneCreator(false, Tag::OTHER);
+
+	//ステージ情報ファイルを開く
+	if (!resultSceneCreator->OpenFile())
+	{
+		resultSceneCreator->CreateStage();
+	}
+
 	// シーンステータス初期化
 	state = SceneState::RESULT_SCENE;
 	// シーンUI追加

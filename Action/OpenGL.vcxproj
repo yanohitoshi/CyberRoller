@@ -205,8 +205,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PushBoardObject.cpp" />
     <ClCompile Include="PushBoxObject.cpp" />
     <ClCompile Include="RespawnPoint.cpp" />
+    <ClCompile Include="ResultCameraObject.cpp" />
     <ClCompile Include="ResultScene.cpp" />
+    <ClCompile Include="ResultSceneCreator.cpp" />
     <ClCompile Include="ResultSceneUI.cpp" />
+    <ClCompile Include="ResultSwitchBaseObject.cpp" />
+    <ClCompile Include="ResultSwitchObject.cpp" />
     <ClCompile Include="SecondStageCreator.cpp" />
     <ClCompile Include="SecondStageScene.cpp" />
     <ClCompile Include="SecondStageUI.cpp" />
@@ -350,8 +354,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PushBoardObject.h" />
     <ClInclude Include="PushBoxObject.h" />
     <ClInclude Include="RespawnPoint.h" />
+    <ClInclude Include="ResultCameraObject.h" />
     <ClInclude Include="ResultScene.h" />
+    <ClInclude Include="ResultSceneCreator.h" />
     <ClInclude Include="ResultSceneUI.h" />
+    <ClInclude Include="ResultSwitchBaseObject.h" />
+    <ClInclude Include="ResultSwitchObject.h" />
     <ClInclude Include="SecondStageCreator.h" />
     <ClInclude Include="SecondStageScene.h" />
     <ClInclude Include="SecondStageUI.h" />
