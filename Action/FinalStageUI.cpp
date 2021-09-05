@@ -12,6 +12,7 @@
 #include "GameOverSprite.h"
 #include "GameClearSprite.h"
 #include "PlayerObject.h"
+#include "SkyBoxObject.h"
 
 
 FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
@@ -31,6 +32,7 @@ FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 	// GameClearŽž‚Ìsprite
 	new GameClearSprite(_playerObject);
 
+	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
 FinalStageUI::~FinalStageUI()

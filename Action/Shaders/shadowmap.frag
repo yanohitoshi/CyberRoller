@@ -60,9 +60,10 @@ void main()
 	vec3 diffuseColor = vec3(Diffuse) * texColor;
 	vec3 ambientColor = uAmbientLight * texColor;
 
-	vec3 result = ( 1.0 - shadow ) * ((diffuseColor + Specular) + ambientColor )* uLuminance;
-	
+	vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular) * uLuminance + ambientColor;
+
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
+
     if(brightness > 1.0)
     {
         HiBrightBuffer = vec4(result, 0.0f) + texture(uEmissiveMap, fragTexCoord) ;
@@ -83,14 +84,9 @@ float ShadowCalculation(vec4 fragPosLightSpace)
     float currentDepth = projCoords.z;
     vec3 normal = normalize(fragNormal);
        vec3 lightDir = normalize(-uDirLight.mDirection);
-    float bias = max( 0.01 * (1.0 - dot(normal, lightDir)), 0.001);
+    float bias = max(0.001 * (1.0 - dot(normal, lightDir)), 0.00125);
     
     float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
-
-    if (dot(normal, lightDir) < 0.01)
-    {
-        shadow = 0.0;
-    }
 
     if(projCoords.z > 1.0)
     {

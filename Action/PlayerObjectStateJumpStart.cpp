@@ -9,8 +9,9 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	: JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
 	, JumpTime(8)
-	, SwitchJumpTime(14)
+	, SwitchJumpTime(10)
 	, JumpAccelPower(100.0f)
+	, SwitchJumpAccelPower(110.0f)
 {
 }
 
@@ -220,7 +221,7 @@ void PlayerObjectStateJumpStart::JumpStartProcess(PlayerObject* _owner)
 	else if (_owner->GetSwitchJumpFlag() == true && SwitchJumpTime > jumpFrameCount) // スイッチジャンプでかつジャンプ利用可能な時間内だったら
 	{
 		// ジャンプ力に定数値を足してジャンプ力をownerのジャンプ力変数にセット
-		_owner->SetJumpPower(jumpPower + JumpAccelPower);
+		_owner->SetJumpPower(jumpPower + SwitchJumpAccelPower);
 	}
 	else // ジャンプ利用時間を経過していたら
 	{

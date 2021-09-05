@@ -92,6 +92,8 @@ private:
 	const float SwitchJumpCorrection;
 	// ジャンプ力の加速度
 	const float JumpAccelPower;
+	// スイッチジャンプ時のジャンプ力の加速度
+	const float SwitchJumpAccelPower;
 	// ジャンプボタン利用可能タイム
 	const int JumpTime;
 	// スイッチジャンプ利用可能タイム

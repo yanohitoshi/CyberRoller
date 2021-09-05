@@ -31,38 +31,24 @@ out     vec4  FragColor         ; // このフラグメントの出力
 
 float ShadowCaluculation(vec4 fragPosLightSpace)
 {
-   //パースペクティブ徐算
+    //パースペクティブ徐算
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
     //  [0,1] の範囲に変換
     projCoords = projCoords * 0.5 + 0.5;
-   //シャドウマップよりライトに最も近いフラグメントの深度値を得る
-   float closestDepth = texture(depthMap,projCoords.xy).r;
-   //現在描画しようとしているフラグメント深度値
-   float crrentDepth = projCoords.z;
-   //シャドウ判定（1.0：シャドウ0.0：シャドウの外）
+    //シャドウマップよりライトに最も近いフラグメントの深度値を得る
+    float closestDepth = texture(depthMap,projCoords.xy).r;
+    //現在描画しようとしているフラグメント深度値
+    float crrentDepth = projCoords.z;
+    //シャドウ判定（1.0：シャドウ0.0：シャドウの外）
     vec3 normal = normalize(fragNormal);
     vec3 lightDir = normalize(-uDirLight.mDirection);
     float bias = max(0.001 * (1.0 - dot(normal, lightDir)), 0.0001);
 
-   //float bias = 0.005;
-   //float shadow = crrentDepth - bias > closestDepth ? 1.0 : 0.0;
     float shadow = crrentDepth - bias > closestDepth ? 1.0 : 0.0;
     if(projCoords.z > 1.0)
     {
         shadow = 0.0;
     }
-
-   //vec2 texelSize = 1.0 / textureSize(depthMap, 0);
-   // for(int x = -1; x <= 1; ++x)
-   // {
-   //     for(int y = -1; y <= 1; ++y)
-   //     {
-   //         float pcfDepth = texture(depthMap, projCoords.xy + vec2(x, y) * texelSize).r; 
-   //         shadow += crrentDepth - bias > pcfDepth ? 1.0 : 0.0;        
-   //     }    
-   // }
-   // shadow /= 9.0;
-
    return shadow;
 }
 
@@ -88,7 +74,7 @@ void main()
 	vec3 diffuseColor = vec3(Diffuse) * texColor;
 	vec3 ambientColor = uAmbientLight * texColor;
 
-	vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular) + ambientColor;
+    vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular) * uLuminance + ambientColor * 0.8f;
 
     FragColor = vec4(result, 1.0);
     

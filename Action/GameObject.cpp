@@ -52,10 +52,12 @@ GameObject::~GameObject()
 {
 	//GameObjectManagerからポインタを削除する
 	RemoveGameObject(this);
+
 	while (!components.empty())
 	{
 		delete components.back();
 	}
+
 	// 消されたタイミングでオブジェクトIDの総数を減らす
 	gameObjectId--;
 }

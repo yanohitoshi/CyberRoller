@@ -34,7 +34,8 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::CLEAR_POINT_TAG, GetOnCollisionFunc());
-	boxCollider->SetObjectBox(mesh->GetBox());
+	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,15.0f) };
+	boxCollider->SetObjectBox(aabb);
 
 	playerObject = _playerObject;
 

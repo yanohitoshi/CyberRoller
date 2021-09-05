@@ -56,8 +56,8 @@ Renderer::Renderer()
 	, LightProjectionHight(20000.0f)
 	, LightProjectionNear(1.0f)
 	, LightProjectionFar(20000.0f)
-	, ShiftLightPositionZ(2000.0f)
-	, ShiftLightPositionX(1000.0f)
+	, ShiftLightPositionZ(7000.0f)
+	, ShiftLightPositionX(500.0f)
 	, MaxTimeFontTextures(251)
 	, TimeFontSize(72)
 {
@@ -825,6 +825,13 @@ void Renderer::DrawShadow()
 	// HDRレコーディング開始
 	hdrRenderer->HdrRecordBegin();
 
+	// シーンがタイトルだったら
+	if (nowSceneState == SceneState::TITLE_SCENE)
+	{
+		// タイトルの背景を描画
+		DrawBackGround();
+	}
+
 	// スカイボックス描画
 	if (activeSkyBox != nullptr)
 	{
@@ -851,6 +858,8 @@ void Renderer::DrawShadow()
 	shadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
 	// アンビエントライト
 	shadowMapShader->SetVectorUniform("uAmbientLight", ambientLight);
+	shadowMapShader->SetFloatUniform("uLuminance", 1.0f);
+
 	// ディレクショナルライト
 	shadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
 	shadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
@@ -886,7 +895,7 @@ void Renderer::DrawShadow()
 	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
 	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
 	skinnedShadowMapShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
-
+	skinnedShadowMapShader->SetFloatUniform("uLuminance", 1.0f);
 	skinnedShadowMapShader->SetMatrixUniform("uViewProj", view * projection);
 	// デプスマップをセット（スキニング用）
 	glActiveTexture(GL_TEXTURE4);
@@ -940,10 +949,9 @@ void Renderer::DrawShadow()
 
 void Renderer::DepthRendering()
 {
-	/* ここからデプスマップ開始 */
 
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
-	LightPos = Vector3(playerPos.x/* - ShiftLightPositionX*/, playerPos.y, playerPos.z + ShiftLightPositionZ);
+	LightPos = Vector3(playerPos.x /*- ShiftLightPositionX*/, playerPos.y /*- 500.0f*/, playerPos.z + ShiftLightPositionZ);
 
 	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;
@@ -952,7 +960,7 @@ void Renderer::DepthRendering()
 	// ライト用プロジェクション作成
 	lightProjection = Matrix4::CreateOrtho(LightProjectionWhidth, LightProjectionHight, LightProjectionNear, LightProjectionFar);
 	// ビュー行列の更新
-	lightView = Matrix4::CreateLookAt(LightPos, playerPos, Vector3::UnitX);
+	lightView = Matrix4::CreateLookAt(LightPos, Vector3(playerPos.x - 10.0f, playerPos.y - 10.0f, playerPos.z), Vector3::UnitX);
 	// ライト空間行列を計算
 	lightSpeceMatrix = lightView * lightProjection;
 
@@ -974,11 +982,19 @@ void Renderer::DepthRendering()
 		// 壁以外を深度マップに書き込み
 		// ※壁の影を描画すると見た目上見づらかったため
 		Tag chackTag = mc->GetOwner()->GetTag();
+
 		if (mc->GetVisible() && chackTag != Tag::WALL)
 		{
 			mc->Draw(depthMapShader);
 		}
 	}
+
+	// ライト用プロジェクション作成
+	lightProjection = Matrix4::CreateOrtho(LightProjectionWhidth, LightProjectionHight, LightProjectionNear, LightProjectionFar);
+	// ビュー行列の更新
+	lightView = Matrix4::CreateLookAt(LightPos, playerPos, Vector3::UnitX);
+	// ライト空間行列を計算
+	lightSpeceMatrix = lightView * lightProjection;
 
 	// スキニングモデルシェーダーアクティブ
 	skinnedDepthMapShader->SetActive();
@@ -997,8 +1013,6 @@ void Renderer::DepthRendering()
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
-
-	/* ここでデプスマップ終了 */
 
 }
 

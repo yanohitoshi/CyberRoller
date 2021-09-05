@@ -11,7 +11,7 @@
 #include "ContinueSprite.h"
 #include "GameOverSprite.h"
 #include "PlayerObject.h"
-
+#include "SkyBoxObject.h"
 
 SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
@@ -27,6 +27,9 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	new ContinueSprite();
 	// GameOverŽž‚Ìsprite
 	new GameOverSprite();
+
+	skyBox = new SkyBoxObject(false, Tag::UI);
+
 }
 
 SecondStageUI::~SecondStageUI()

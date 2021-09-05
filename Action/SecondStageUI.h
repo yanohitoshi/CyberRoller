@@ -35,6 +35,6 @@ private:
 
     // ƒV[ƒ“‚ÌŠÔ§ŒÀ‚Ì’l
     const int SceneTime;
-
+    class SkyBoxObject* skyBox;
 };
 

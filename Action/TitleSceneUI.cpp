@@ -20,7 +20,8 @@ TitleSceneUI::TitleSceneUI()
 	// alpha値を初期化
 	sprite->SetAlpha(1.0f);
 	// タイトルの背景クラスをnew
-	//new TitleBackGroundSprite();
+	new TitleBackGroundSprite();
+
 }
 
 TitleSceneUI::~TitleSceneUI()

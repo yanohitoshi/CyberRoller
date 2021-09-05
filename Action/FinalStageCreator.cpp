@@ -442,24 +442,14 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 400.0f, MoveDirectionTag::MOVE_X);
 		break;
 
-	case(FRONT_MOVE_GROUND_NUMBER_3):
-		// ケースごとに方向の違う動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 800.0f, MoveDirectionTag::MOVE_X);
-		break;
-
-	case(BACK_MOVE_GROUND_NUMBER_2):
-		// ケースごとに方向の違う動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 800.0f, MoveDirectionTag::MOVE_X);
-		break;
-
 	case(LEFT_MOVE_GROUND_NUMBER_2):
 		// ケースごとに方向の違う動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 700.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 600.0f, MoveDirectionTag::MOVE_Y);
 		break;
 
 	case(RIGHT_MOVE_GROUND_NUMBER_1):
 		// ケースごとに方向の違う動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 700.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 600.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
 }
@@ -501,14 +491,14 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new NeedlePanelObject(layer6SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(LEFT_PUSH_BOX_NUMBER_5):
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1200.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+	case(FRONT_MOVE_GROUND_NUMBER_3):
+		// ケースごとに方向の違う動く床を生成
+		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
-		
-	case(RIGHT_PUSH_BOX_NUMBER_5):
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+
+	case(BACK_MOVE_GROUND_NUMBER_2):
+		// ケースごとに方向の違う動く床を生成
+		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
 	}
 }
@@ -549,6 +539,17 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
+
+	case(LEFT_PUSH_BOX_NUMBER_5):
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1200.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_5):
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		break;
+
 	}
 }
 
@@ -667,6 +668,11 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new MoveWallBlock(Vector3(layer10Pos.x, layer10Pos.y + ShiftMoveWallY, layer10Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::SECOND_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer10Pos.x, layer10Pos.y, layer10Pos.z - BigMoveWallSize.z));
 		break;
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer10Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
 	}
 }
 
@@ -701,6 +707,12 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer11SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer11Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
 	}
 }
 

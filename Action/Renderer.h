@@ -55,6 +55,9 @@ class TileMapSpriteComponent;
 class Font;
 class HDRRenderer;
 
+// enumクラスの前置宣言
+enum SceneState;
+
 /*
 @file Renderer.h
 @brief 描画の進行を行うクラス
@@ -144,11 +147,15 @@ public:
 	class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
 	class VertexArray* GetCubeMapVerts() { return cubeVerts; }
 
+	void SetNowSceneState(SceneState _nowSceneState) { nowSceneState = _nowSceneState; }
+
 private:
 
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
 	~Renderer();
+
+	SceneState nowSceneState;
 
 	//自分のインスタンス
 	static Renderer* renderer;

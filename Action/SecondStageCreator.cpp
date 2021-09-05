@@ -513,6 +513,11 @@ void SecondStageCreator::CreateLayer11(int _indexX, int _indexY)
 	case(LAYER11_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new BoxObject(layer11Pos, BlockSize, Tag::GROUND);
+
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new NextSceneObject(layer11Pos, Tag::CLEAR_POINT, playerObject);
+		break;
 	}
 }
 

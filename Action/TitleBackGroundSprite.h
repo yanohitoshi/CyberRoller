@@ -38,6 +38,5 @@ private:
 
     // 背景用スプライトComponent
     SpriteComponent* sprite;
-
 };
 

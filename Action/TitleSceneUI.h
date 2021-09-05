@@ -38,6 +38,5 @@ private:
 
     // タイトル画像表示用sprite
     SpriteComponent* sprite;
-
 };
 

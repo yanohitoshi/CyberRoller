@@ -79,8 +79,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	downUpFlag = false;
 	downOverFlag = false;
 	deadFlag = false;
-	//clear判定フラグ
-	clearFlag = false;
 	// 接地フラグ初期化
 	onGround = false;
 	// 入力フラグ初期化
@@ -307,9 +305,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
-
-
-
 }
 
 

@@ -232,14 +232,14 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer5)
 	{
-	case(LAYER5_BLOCK_PARTS):
-		// ブロックオブジェクト生成
-		new BoxObject(layer5Pos, BlockSize, Tag::GROUND);
-		break;
-
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
 	case(CLEAR_OBJECT_PARTS):

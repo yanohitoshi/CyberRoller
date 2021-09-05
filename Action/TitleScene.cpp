@@ -32,8 +32,6 @@ TitleScene::TitleScene()
 		titleStageCreator->CreateStage();
 	}
 
-	skyBox = new SkyBoxObject(false,Tag::UI);
-	//RENDERER->SetActiveSkyBox(skyBox);
 	// ƒV[ƒ“UI‚ğ’Ç‰Á
 	new TitleSceneUI();
 
