@@ -17,7 +17,7 @@
 
 FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
-	, SceneTime(250)
+	, SceneTime(200)
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);

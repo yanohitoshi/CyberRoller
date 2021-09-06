@@ -328,12 +328,12 @@ void PlayerObject::RotateToNewForward(const Vector3& forward)
 	float dot = Vector3::Dot(Vector3::UnitX, forward);
 	float angle = Math::Acos(dot);
 	// 下向きだった場合
-	if (dot > 0.9999f)
+	if (dot > 0.9f)
 	{
 		SetRotation(Quaternion::Identity);
 	}
 	// 上向きだった場合
-	else if (dot < -0.9999f)
+	else if (dot < -0.9f)
 	{
 		SetRotation(Quaternion(Vector3::UnitZ, Math::Pi));
 	}
