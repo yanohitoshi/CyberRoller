@@ -384,6 +384,15 @@
     <ClCompile Include="TitleGroundObject.cpp">
       <Filter>GameObjects\TitleObject</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyObjectStateBase.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectBase.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -771,6 +780,15 @@
     <ClInclude Include="TitleGroundObject.h">
       <Filter>GameObjects\TitleObject</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyObjectStateBase.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectBase.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -898,6 +916,9 @@
     </Filter>
     <Filter Include="GameObjects\TitleObject">
       <UniqueIdentifier>{cfff7844-fb21-423c-ade7-d5ad5cc52ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects">
+      <UniqueIdentifier>{7e420d48-1aaf-4ed6-acc8-3b2b90ff777b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

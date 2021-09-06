@@ -13,6 +13,7 @@
 #include "RespawnPoint.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "NormalEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -172,6 +173,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+	case(61):
+		new NormalEnemyObject(layer2Pos, Tag::ENEMY);
 		break;
 	}
 

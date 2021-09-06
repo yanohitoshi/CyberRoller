@@ -170,6 +170,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CrystalDefaultEffect.cpp" />
     <ClCompile Include="CrystalEffectManager.cpp" />
     <ClCompile Include="CubeMapComponent.cpp" />
+    <ClCompile Include="EnemyObjectBase.cpp" />
+    <ClCompile Include="EnemyObjectStateBase.cpp" />
     <ClCompile Include="FinalStageCreator.cpp" />
     <ClCompile Include="FinalStageScene.cpp" />
     <ClCompile Include="FinalStageUI.cpp" />
@@ -183,6 +185,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="NeedleObject.cpp" />
     <ClCompile Include="NeedlePanelObject.cpp" />
     <ClCompile Include="NextSceneObject.cpp" />
+    <ClCompile Include="NormalEnemyObject.cpp" />
     <ClCompile Include="PlayerObjectStateBase.cpp" />
     <ClCompile Include="PlayerObjectStateDead.cpp" />
     <ClCompile Include="PlayerObjectStateDownLoop.cpp" />
@@ -319,6 +322,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CrystalDefaultEffect.h" />
     <ClInclude Include="CrystalEffectManager.h" />
     <ClInclude Include="CubeMapComponent.h" />
+    <ClInclude Include="EnemyObjectBase.h" />
+    <ClInclude Include="EnemyObjectStateBase.h" />
     <ClInclude Include="FinalStageCreator.h" />
     <ClInclude Include="FinalStageScene.h" />
     <ClInclude Include="FinalStageUI.h" />
@@ -332,6 +337,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="NeedleObject.h" />
     <ClInclude Include="NeedlePanelObject.h" />
     <ClInclude Include="NextSceneObject.h" />
+    <ClInclude Include="NormalEnemyObject.h" />
     <ClInclude Include="PlayerObjectStateBase.h" />
     <ClInclude Include="PlayerObjectStateDead.h" />
     <ClInclude Include="PlayerObjectStateDownLoop.h" />

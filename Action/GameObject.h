@@ -42,6 +42,8 @@ enum Tag
 	CAMERA,
 	// プレイヤー
 	PLAYER,
+	// エネミー
+	ENEMY,
 	// グラウンド
 	GROUND,
 	// 動くグラウンド
