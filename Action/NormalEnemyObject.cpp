@@ -25,9 +25,9 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	//アニメ―ション用の可変長配列をリサイズ
 	animTypes.resize(static_cast<unsigned int>(EnemyState::ENEMY_STATE_NUM));
 
-	////-----------アニメーションを読み込み-----------------//
-	//// アイドリングアニメーション
-	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
+	//-----------アニメーションを読み込み-----------------//
+	// アイドリングアニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Idle.gpanim", true);
 	//// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
 	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Tut_Hip_Hop_Dance.gpanim", true);
 	//// 走りアニメーション
@@ -40,7 +40,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::PLAYER_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = mesh->GetBox();
 	boxCollider->SetObjectBox(enemyBox);
 

@@ -36,7 +36,8 @@ public:
 		CAMERA_TAG,
 		CLEAR_POINT_TAG,
 		NEEDLE_TAG,
-		RESPOWN_TAG
+		RESPOWN_TAG,
+		NORMAL_ENEMY_TAG
 	};
 
     /*

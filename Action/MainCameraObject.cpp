@@ -7,7 +7,6 @@
 #include "ColliderComponent.h"
 #include "InputSystem.h"
 #include "PlayerObject.h"
-#include "LineSegmentCollider.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "FirstStageScene.h"

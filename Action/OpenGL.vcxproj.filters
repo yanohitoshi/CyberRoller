@@ -57,12 +57,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="LineSegmentCollider.cpp">
-      <Filter>Components\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneCollider.cpp">
-      <Filter>Components\Collider</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -387,10 +381,13 @@
     <ClCompile Include="EnemyObjectStateBase.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
-    <ClCompile Include="NormalEnemyObject.cpp">
+    <ClCompile Include="EnemyObjectBase.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyObjectBase.cpp">
+    <ClCompile Include="EnemyObjectStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObject.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -454,12 +451,6 @@
       <Filter>Components\Collider</Filter>
     </ClInclude>
     <ClInclude Include="SphereCollider.h">
-      <Filter>Components\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="LineSegmentCollider.h">
-      <Filter>Components\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneCollider.h">
       <Filter>Components\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
@@ -789,6 +780,9 @@
     <ClInclude Include="EnemyObjectBase.h">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyObjectStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -919,6 +913,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects">
       <UniqueIdentifier>{7e420d48-1aaf-4ed6-acc8-3b2b90ff777b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\NormalEnemyState">
+      <UniqueIdentifier>{c8314471-9f3e-46e8-b9bd-72a4e4c71ae9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

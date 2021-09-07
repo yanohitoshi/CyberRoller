@@ -54,6 +54,10 @@ public:
 	@param	_box 当たり判定に用いるBoxColliderのポインタ
 	*/
     void HitCheck(BoxCollider* _box);
+
+	void IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*> _checkBoxes);
+
+	void IntersectCheckSphere(SphereCollider* _sphere, std::vector<BoxCollider*> _checkBoxes);
 	
 	/*
 	@fn HitCheck関数(Sphere)
@@ -61,13 +65,6 @@ public:
 	@param	_sphere 当たり判定に用いるSphereColliderのポインタ
 	*/
     void HitCheck(SphereCollider* _sphere);
-
-	/*
-	@fn HitCheck関数(LineSegment)
-	@brief　LineSegmentCollider(LineSegment)の当たり判定を行う
-	@param	_line　当たり判定に用いるLineSegmentColliderのポインタ
-	*/
-	void HitCheck(LineSegmentCollider* _line);
 
 	/*
 	@fn BoxColliderを追加する関数
@@ -99,36 +96,6 @@ public:
 	*/
 	void RemoveSphere(SphereCollider* _sphere);
 	
-	/*
-	@fn LineSegmentColliderを追加する関数
-	@brief　LineSegmentColliderを当たり判定のタグを参照してそれぞれの可変長コンテナに格納を行う
-	@param	_line　追加するLineSegmentColliderのポインタ
-	@param	_func 関数ポインタに紐づけする関数
-	*/
-	void AddLineSegment(LineSegmentCollider* _line, onCollisionFunc _func);
-	
-	/*
-	@fn LineSegmentColliderを削除する関数
-	@brief　使わなくなったLineSegmentColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_line　削除するLineSegmentColliderのポインタ
-	*/
-	void RemoveLineSegment(LineSegmentCollider* _line);
-	
-	/*
-	@fn PlaneColliderを追加する関数
-	@brief　PlaneColliderを当たり判定のタグを参照してそれぞれの可変長コンテナに格納を行う
-	@param	_plane　追加するPlaneColliderのポインタ
-	@param	_func 関数ポインタに紐づけする関数
-	*/
-	void AddPlane(PlaneCollider* _plane, onCollisionFunc _func);
-	
-	/*
-	@fn PlaneColliderを削除する関数
-	@brief　使わなくなったPlaneColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_plane　削除するPlaneColliderのポインタ
-	*/
-	void RemovePlane(PlaneCollider* _plane);
-	
 private:
 
 	//コンストラクタの隠蔽
@@ -136,124 +103,10 @@ private:
 
 	static PhysicsWorld* physics;
 
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerと地面の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToGround(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerと動く地面の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToMoveGround(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerと壁の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToWall(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerとクリアポイントの当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToClearPoint(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerとリスポーンポイントの当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToRespownPoint(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerと棘配置用床の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToNeedlePlane(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerとスイッチの土台の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToSwitchBase(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　playerとスイッチの土台の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxPlayerToSwitch(BoxCollider* _box);
-
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　カメラと地面の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxCameraToGround(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　カメラと動く地面の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxCameraToWall(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　動く床とジャンプスイッチの当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxMoveGroundToJumpSwitch(BoxCollider* _box);
-	
-	/*
-	@fn AABBとAABBの当たり判定
-	@brief　動く床と棘配置用床の当たり判定を行う(BoxCollider)
-	@param	_box 当たり判定に用いるBoxColliderのポインタ
-	*/
-	void HitChackBoxMoveGroundToNeedlePlane(BoxCollider* _box);
-
-	/*
-	@fn SphereとAABBの当たり判定
-	@brief　プレイヤーの接地判定と地面の当たり判定を行う(SphereCollider)
-	@param	_sphere　当たり判定に用いるSphereColliderのポインタ
-	*/
-	void HitChackSphereGroundChackToGround(SphereCollider* _sphere);
-	/*
-	@fn SphereとAABBの当たり判定
-	@brief　プレイヤーの接地判定と動く地面の当たり判定を行う(SphereCollider)
-	@param	_sphere　当たり判定に用いるSphereColliderのポインタ
-	*/
-	void HitChackSphereGroundChackToMoveGround(SphereCollider* _sphere);
-	/*
-	@fn SphereとAABBの当たり判定
-	@brief　プレイヤーの接地判定とスイッチの土台の当たり判定を行う(SphereCollider)
-	@param	_sphere　当たり判定に用いるSphereColliderのポインタ
-	*/
-	void HitChackSphereGroundChackToSwitchBase(SphereCollider* _sphere);
-	/*
-	@fn SphereとAABBの当たり判定
-	@brief　プレイヤーの接地判定とスイッチの当たり判定を行う(SphereCollider)
-	@param	_sphere　当たり判定に用いるSphereColliderのポインタ
-	*/
-	void HitChackSphereGroundChackToSwitch(SphereCollider* _sphere);
-	/*
-	@fn SphereとAABBの当たり判定
-	@brief　プレイヤーの接地判定とジャンプスイッチの当たり判定を行う(SphereCollider)
-	@param	_sphere　当たり判定に用いるSphereColliderのポインタ
-	*/
-	void HitChackSphereGroundChackToJumpSwitch(SphereCollider* _sphere);
-
 	//それぞれのobjectごとのAABBの可変長配列
 	std::vector<BoxCollider*> boxes;
     std::vector<BoxCollider*> playerBoxes;
+	std::vector<BoxCollider*> enemyBoxes;
 	std::vector<BoxCollider*> wallBoxes;
 	std::vector<BoxCollider*> groundBoxes;
 	std::vector<BoxCollider*> moveGroundBoxes;
@@ -271,9 +124,7 @@ private:
 	//それぞれのsphereごとのAABBの可変長配列
 	std::vector<SphereCollider*> groundCheckSpheres;
 	std::vector<SphereCollider*> switchCheckSpheres;
-	//std::vector<SphereCollider*> spheres;
-	std::vector<LineSegmentCollider*> lines;
-	std::vector<PlaneCollider*> planes;
+
 	onCollisionMap collisionFunction;
 
 };

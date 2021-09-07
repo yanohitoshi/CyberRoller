@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnemyObjectBase.h"
+#include "SkeletalMeshComponent.h"
 
 // クラスの前方宣言
 class EnemyObjectBase;
@@ -55,20 +56,6 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	virtual void Enter(EnemyObjectBase* _owner, float _deltaTime) {};
-
-	///*
-	//@fn 地面移動処理関数
-	//@param	_owner 親クラスのポインタ
-	//@param	_keyState 入力情報
-	//*/
-	//void GroundMove(EnemyObject* _owner, const InputState& _keyState);
-
-	///*
-	//@fn 回転処理関数
-	//@param	_owner 親クラスのポインタ
-	//@param	_keyState 入力情報
-	//*/
-	//void RotationProcess(EnemyObject* _owner, Vector3 _forward, Vector3 _tmpForward);
 
 protected:
 
