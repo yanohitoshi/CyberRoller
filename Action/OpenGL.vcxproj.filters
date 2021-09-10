@@ -336,9 +336,6 @@
     <ClCompile Include="PlayerObjectStateRunTurn.cpp">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObjectStateFlinch.cpp">
-      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObject.cpp">
       <Filter>GameObjects\PlayerObjects</Filter>
     </ClCompile>
@@ -389,6 +386,9 @@
     </ClCompile>
     <ClCompile Include="NormalEnemyObject.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateKnockBack.cpp">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -738,9 +738,6 @@
     <ClInclude Include="PlayerObjectStateRunTurn.h">
       <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObjectStateFlinch.h">
-      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
-    </ClInclude>
     <ClInclude Include="CubeMapComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -782,6 +779,9 @@
     </ClInclude>
     <ClInclude Include="EnemyObjectStateIdle.h">
       <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateKnockBack.h">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -916,6 +916,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects\NormalEnemyState">
       <UniqueIdentifier>{c8314471-9f3e-46e8-b9bd-72a4e4c71ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\KnockBackState">
+      <UniqueIdentifier>{082421a8-953b-403b-8e99-73ac2b5e5c94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

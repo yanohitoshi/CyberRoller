@@ -92,7 +92,7 @@ protected:
 	// Animationプール
 	std::vector<const Animation*> animTypes;
 	// stateプール
-	std::vector<class PlayerObjectStateBase*> statePools;
+	std::vector<class EnemyObjectStateBase*> statePools;
 
 private:
 

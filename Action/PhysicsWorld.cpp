@@ -185,181 +185,68 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 
 	ColliderComponent::PhysicsTag objTag = _box->GetBoxTag();
 
+	// Tagに応じたvector配列に格納
 	switch (objTag)
 	{
 	case ColliderComponent::GROUND_TAG:
 		groundBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
 
 	case ColliderComponent::MOVE_GROUND_TAG:
 		moveGroundBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::WALL_TAG:
 		wallBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::PLAYER_TAG:
 		playerBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::SWITCH_TAG:
 		switchBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::SWITCH_BASE:
 		switchBaseBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::JUMP_SWITCH_TAG:
 		jumpSwitchBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::GROUND_CHECK_TAG:
 		groundCheckBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::FOOT_CHECK_TAG:
 		footCheckBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::CAMERA_TAG:
 		cameraBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::CLEAR_POINT_TAG:
 		clearPointBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::NEEDLE_TAG:
 		needlePlaneBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::RESPOWN_TAG:
 		respownPointBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
+
 	case ColliderComponent::NORMAL_ENEMY_TAG:
 		enemyBoxes.emplace_back(_box);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 		break;
 	}
 
-	//if (objTag == ColliderComponent::PLAYER_TAG)
-	//{
-	//	playerBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-
-	//if (objTag == ColliderComponent::GROUND_TAG)
-	//{
-	//	groundBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::MOVE_GROUND_TAG)
-	//{
-	//	moveGroundBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-
-	//if (objTag == ColliderComponent::GROUND_CHECK_TAG)
-	//{
-	//	groundCheckBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::WALL_TAG)
-	//{
-	//	wallBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::SWITCH_TAG)
-	//{
-	//	switchBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::FOOT_CHECK_TAG)
-	//{
-	//	footCheckBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::SWITCH_BASE)
-	//{
-	//	switchBaseBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-	//
-	//if (objTag == ColliderComponent::JUMP_SWITCH_TAG)
-	//{
-	//	jumpSwitchBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::CAMERA_TAG)
-	//{
-	//	cameraBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::CLEAR_POINT_TAG)
-	//{
-	//	clearPointBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::RESPOWN_TAG)
-	//{
-	//	respownPointBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::NEEDLE_TAG)
-	//{
-	//	needlePlaneBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
-	//if (objTag == ColliderComponent::NORMAL_ENEMY_TAG)
-	//{
-	//	enemyBoxes.emplace_back(_box);
-	//	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-	//	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
-	//}
-
+	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
+	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 }
 
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
@@ -547,19 +434,19 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
 	ColliderComponent::PhysicsTag objTag = _sphere->GetSphereTag();
 
-	if (objTag == ColliderComponent::GROUND_CHECK_TAG)
+	// Tagに応じたvector配列に格納
+	switch (objTag)
 	{
+	case ColliderComponent::GROUND_CHECK_TAG:
 		groundCheckSpheres.emplace_back(_sphere);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
+		break;
+	case ColliderComponent::SWITCH_CHECK_TAG:
+		switchCheckSpheres.emplace_back(_sphere);
+		break;
 	}
 
-	if (objTag == ColliderComponent::SWITCH_CHECK_TAG)
-	{
-		switchCheckSpheres.emplace_back(_sphere);
-		//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-		collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
-	}
+	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
+	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)

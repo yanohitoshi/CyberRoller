@@ -31,7 +31,7 @@
 #include "PlayerObjectStateRunStop.h"
 #include "PlayerObjectStateRunTurn.h"
 #include "PlayerObjectStateIdlingDance.h"
-#include "PlayerObjectStateFlinch.h"
+#include "PlayerObjectStateKnockBack.h"
 #include "PlayerObjectStateFallDead.h"
 
 // 定数と静的メンバーの初期化
@@ -101,6 +101,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	rightVec = Vector3(0.0f,1.0f,0.0f);
 	// 回転ベクトル初期化
 	rotateVec = Vector3(0.0f, 0.0f, 0.0f);
+	// 
+	hitEnemyPosition = Vector3::Zero;
 
 	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
 	pushedVelocity = Vector3::Zero;
@@ -139,8 +141,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Change_Direction.gpanim", false);
-	// 走り中壁に当たった際の怯みアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TO_FLINCH)] = RENDERER->GetAnimation("Assets/Model/robo_model/Receiving_An_Uppercut.gpanim", false);
+	// 敵に当たった際のノックバックアニメーション
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_KNOCKBACK)] = RENDERER->GetAnimation("Assets/Model/robo_model/Receiving_An_Uppercut.gpanim", false);
 	// ジャンプループアニメーション
 	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
 	// ジャンプ開始アニメーション
@@ -171,7 +173,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,ColliderComponent::PLAYER_TAG, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
-	playerBox = { Vector3(-60.0f,-10.0f,0.0f),Vector3(60.0f,10.0f,179.0f) };
+	playerBox = { Vector3(-60.0f,-15.0f,0.0f),Vector3(60.0f,15.0f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
@@ -191,7 +193,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateRunStart);
 	statePools.push_back(new PlayerObjectStateRunStop);
 	statePools.push_back(new PlayerObjectStateRunTurn);
-	statePools.push_back(new PlayerObjectStateFlinch);
+	statePools.push_back(new PlayerObjectStateKnockBack);
 	statePools.push_back(new PlayerObjectStateJumpLoop);
 	statePools.push_back(new PlayerObjectStateJumpStart);
 	statePools.push_back(new PlayerObjectStateJumpEndToIdle);
@@ -221,6 +223,11 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	if (FallPpsitionZ >= position.z)
 	{
 		nextState = PlayerState::PLAYER_STATE_FALL_DEAD;
+	}
+
+	if (isHitEnemy)
+	{
+		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
 	// ステート外部からステート変更があったか？
@@ -312,7 +319,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 */
 void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
-
 	// 仮速度変数
 	Vector3 ment = Vector3::Zero;
 	// プレイヤーの押し戻し計算
@@ -389,17 +395,6 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 
 }
 
-void PlayerObject::ChackFlinchSpeedProcess()
-{
-	// 一定速度以上だったら
-	if (velocity.x >= FlinchSpeed || velocity.y >= FlinchSpeed ||
-		velocity.x <= -FlinchSpeed || velocity.y <= -FlinchSpeed)
-	{
-		// 壁に当たったフラグをtrueに
-		isHitWall = true;
-	}
-}
-
 
 void PlayerObject::OnCollision(const GameObject& _hitObject)
 {
@@ -421,15 +416,15 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 	}
 
 	// 当たった際にプレイヤーがひるむオブジェクトだったら
-	if (_hitObject.GetisFlinchToPlayer())
+	if (hitObjectTag == Tag::ENEMY)
 	{
-		// ひるむ速度かチェックする処理
-		ChackFlinchSpeedProcess();
+		isHitEnemy = true;
+		hitEnemyPosition = _hitObject.GetPosition();
 	}
 	else // それ以外だったら
 	{
 		// 壁に当たったフラグをfalseに
-		isHitWall = false;
+		isHitEnemy = false;
 	}
 
 	// 当たったオブジェクトがプレイヤーに速度の影響を与えるオブジェクトだったら

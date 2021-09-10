@@ -81,11 +81,6 @@ private:
 	void SwitchChackProcess(std::vector<GameObject*> _chackVector);
 
 	/*
-	@fn ひるむ可能性のある壁に当たった際にひるむ速度なのかチェックする関数
-	*/
-	void ChackFlinchSpeedProcess();
-
-	/*
 	@fn スイッチジャンプアクティブ関数
 	*/
 	void ActiveSwitchJumpProcess();
@@ -160,6 +155,8 @@ private:
 	Vector3 respownPos;
 	// 他のオブジェクトから押されている時の速度
 	Vector3 pushedVelocity;
+	// 
+	Vector3 hitEnemyPosition;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
 	int respawnCount;
@@ -205,8 +202,8 @@ private:
 	bool respawnFlag;
 	// dead状態かそうじゃないか確認用フラグ
 	bool deadFlag;
-	// 壁と押し戻しを行ったか
-	bool isHitWall;
+	// 敵にヒットしたか
+	bool isHitEnemy;
 	
 	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
@@ -286,6 +283,12 @@ public:// ゲッターセッター
 	@return respownPosを返す
 	*/
 	Vector3 GetRespownPos() { return respownPos; }
+
+	/*
+	@fn respownPosのgetter関数
+	@return respownPosを返す
+	*/
+	Vector3 GetHitEnemyPosition() { return hitEnemyPosition; }
 
 	/*
 	@fn DeadSpaceのgetter関数
@@ -399,7 +402,7 @@ public:// ゲッターセッター
 	@fn isHitWallのgetter関数
 	@return isHitWallを返す
 	*/
-	bool GetIsHitWall() { return isHitWall; };
+	bool GetIsHitEnemy() { return isHitEnemy; };
 
 	/*
 	@fn clearFlagのgetter関数
@@ -525,7 +528,7 @@ public:// ゲッターセッター
 	@fn isHitWallのsetter関数
 	@param	bool _isHitWall 怯みモーションを行う壁にヒットしたかどうかをセット
 	*/
-	void SetIsHitWall(bool _isHitWall) { isHitWall = _isHitWall; }
+	void SetIsHitEnemy(bool _isHitEnemy) { isHitEnemy = _isHitEnemy; }
 
 };
 

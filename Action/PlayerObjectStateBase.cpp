@@ -115,7 +115,6 @@ void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _a
 		forward.Normalize();
 	}
 
-
 	// ˆÚ“®‘¬“x‚É‰Á‘¬“x‚ð‘«‚·
 	moveSpeed += _owner->GetMovePower();
 

@@ -42,10 +42,10 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	}
 	
 	// 走りながら壁に当たったら
-	if (_owner->GetIsHitWall())
+	if (_owner->GetIsHitEnemy())
 	{
 		// ステータスを怯み状態にする
-		state = PlayerState::PLAYER_STATE_RUN_TO_FLINCH;
+		state = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
 	// 死亡フラグが立っていたら

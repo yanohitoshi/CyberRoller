@@ -3,6 +3,7 @@
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
+#include "EnemyObjectStateIdle.h"
 #include "BoxCollider.h"
 
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
@@ -10,9 +11,11 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
-	scale = Vector3(1.0f, 1.0f, 1.0f);
+	scale = Vector3(2.0f, 2.0f, 2.0f);
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	SetScale(scale);
+
+	//isPushBackToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -42,13 +45,20 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = mesh->GetBox();
+	//enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
 
-	//// stateプールの初期化
-	//// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
-	//statePools.push_back(new PlayerObjectStateIdle);
+	// stateプールの初期化
+	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
+	statePools.push_back(new EnemyObjectStateIdle);
 	//statePools.push_back(new PlayerObjectStateIdlingDance);
 	//statePools.push_back(new PlayerObjectStateRun);
+
+	//anim変数を速度1.0fで再生
+	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
+	// stateの初期化
+	nowState = EnemyState::ENEMY_STATE_IDLE;
+	nextState = EnemyState::ENEMY_STATE_IDLE;
 
 }
 
@@ -58,6 +68,24 @@ NormalEnemyObject::~NormalEnemyObject()
 
 void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 {
+
+	// ステート外部からステート変更があったか？
+	if (nowState != nextState)
+	{
+		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		nowState = nextState;
+		return;
+	}
+
+	// ステート実行
+	nextState = statePools[static_cast<unsigned int>(nowState)]->Update(this, _deltaTime);
+
+	// ステート内部からステート変更あったか？
+	if (nowState != nextState)
+	{
+		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		nowState = nextState;
+	}
 }
 
 void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)

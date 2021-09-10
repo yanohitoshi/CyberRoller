@@ -30,7 +30,6 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	openFlag = false;
 	isPushBackToPlayer = true;
-	isFlinchToPlayer = true;
 	isPushBackToCamera = true;
 	SetChackSwitchTag(tag);
 

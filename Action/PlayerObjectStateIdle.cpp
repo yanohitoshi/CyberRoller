@@ -73,6 +73,14 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	// 速度ベクトルを初期化
 	_owner->SetVelocity(Vector3::Zero);
 
+	// ジャンプ力をセットする
+	_owner->SetJumpPower(_owner->GetFirstJumpPower());
+	// 着地状態になったのでジャンプ利用可能フラグをtrueにセット
+	_owner->SetIsAvailableJumpKey(true);
+	// ジャンプフラグをfalseにセット
+	_owner->SetJumpFlag(false);
+	_owner->SetSwitchJumpFlag(false);
+
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
 

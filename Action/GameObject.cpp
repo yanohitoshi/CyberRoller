@@ -38,7 +38,6 @@ GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	, isPushBackToPlayer(false)
 	, isSendVelocityToPlayer(false)
 	, isChackGroundToPlayer(false)
-	, isFlinchToPlayer(false)
 	, isPushBackToCamera(false)
 {
 

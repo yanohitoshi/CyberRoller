@@ -265,9 +265,6 @@ protected:
 	// プレイヤーと接地判定を行うかどうか
 	bool isChackGroundToPlayer;
 
-	// プレイヤーが当たった際に怯みが入るオブジェクトか
-	bool isFlinchToPlayer;
-
 	// カメラと押し戻しを行うオブジェクトかどうか
 	bool isPushBackToCamera;
 
@@ -431,12 +428,6 @@ public://ゲッターセッター
 	@return bool reUseObject シーンをまたいで利用するかどうかフラグ
 	*/
 	bool GetReUseGameObject() { return reUseObject; }
-
-	/*
-	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
-	@return	isPushBackToPlayer
-	*/
-	bool GetisFlinchToPlayer() const { return isFlinchToPlayer; }
 
 	/*
 	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter

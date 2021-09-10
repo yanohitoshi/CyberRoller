@@ -19,7 +19,6 @@ WallBlockObject::WallBlockObject(const Vector3& _p, const Vector3& _size, const 
 	SetScale(_size);
 	tag = _objectTag;
 	isPushBackToPlayer = true;
-	isFlinchToPlayer = true;
 	isPushBackToCamera = true;
 
 	//モデル描画用のコンポーネント
