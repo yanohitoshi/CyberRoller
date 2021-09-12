@@ -390,6 +390,12 @@
     <ClCompile Include="PlayerObjectStateKnockBack.cpp">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpAttack.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -687,9 +693,6 @@
     <ClInclude Include="TitleSceneUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObjectStateBase.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerObjectStateJumpEndToIdle.h">
       <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
     </ClInclude>
@@ -782,6 +785,15 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateKnockBack.h">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateBase.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpAttack.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpAttackEnd.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

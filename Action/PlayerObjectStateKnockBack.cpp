@@ -6,6 +6,7 @@
 #include "CountDownFont.h"
 
 PlayerObjectStateKnockBack::PlayerObjectStateKnockBack()
+	: knockBackFrameCount(0)
 {
 }
 
@@ -15,56 +16,32 @@ PlayerObjectStateKnockBack::~PlayerObjectStateKnockBack()
 
 PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _deltaTime)
 {
+
+	++knockBackFrameCount;
+
 	if (!_owner->GetOnGround())
 	{
 		// 重力にデルタタイムをかけた値を代入
 		velocity.z -= PlayerObject::GetGravity() * _deltaTime;
-		velocity += knockBackDirection * 10.0f;
-		velocity.z += 50.0f;
-
-		// 接地したら
-		if (_owner->GetOnGround())
-		{
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			_owner->SetVelocity(velocity);
-			// 壁に当たったフラグをfalseに
-			_owner->SetIsHitEnemy(false);
-			// stateをアイドリングに変更
-			state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
-		}
 	}
-	else
+
+	velocity += knockBackDirection * 50.0f;
+
+	velocity.z = 0.0f;
+	if (knockBackFrameCount >= 22 )
 	{
-		velocity += knockBackDirection * 25.0f;
-
-		if (!skeletalMeshComponent->IsPlaying())
-		{
-			velocity.x = 0.0f;
-			velocity.y = 0.0f;
-			_owner->SetVelocity(velocity);
-			// 壁に当たったフラグをfalseに
-			_owner->SetIsHitEnemy(false);
-			// stateをアイドリングに変更
-			state = PlayerState::PLAYER_STATE_IDLE;
-		}
-
+		velocity.Zero;
+		_owner->SetVelocity(velocity);
+		// 壁に当たったフラグをfalseに
+		_owner->SetIsHitEnemy(false);
+		// stateをアイドリングに変更
+		state = PlayerState::PLAYER_STATE_IDLE;
 	}
 
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	_owner->SetVelocity(velocity);
 	
-
-	//else if (!skeletalMeshComponent->IsPlaying() && !_owner->GetOnGround())
-	//{
-	//	_owner->SetVelocity(velocity);
-	//	// 壁に当たったフラグをfalseに
-	//	_owner->SetIsHitEnemy(false);
-	//	// stateをアイドリングに変更
-	//	state = PlayerState::PLAYER_STATE_JUMPLOOP;
-	//}
-
 	// 死亡フラグが立っていたら
 	if (_owner->GetDeadFlag())
 	{
@@ -94,18 +71,17 @@ void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_KNOCKBACK));
 	// stateを怯み状態にして保存
 	state = PlayerState::PLAYER_STATE_KNOCKBACK;
-	//// 移動ベクトルを0.0fに設定
-	//_owner->SetVelocity(Vector3::Zero);
+
+	velocity = Vector3::Zero;
+
+	knockBackFrameCount = 0;
 
 	hitEnemyPosition = _owner->GetHitEnemyPosition();
 	knockBackDirection = _owner->GetPosition() - hitEnemyPosition;
-	knockBackDirection.z = 0.0f;
+
 	knockBackDirection.Normalize();
 
-	RotationProcess(_owner, knockBackDirection * -1.0f,_owner->GetCharaForwardVec());
+	RotationProcess(_owner,Vector3(knockBackDirection.x * -1.0f, knockBackDirection.y * -1.0f,0.0f) ,_owner->GetCharaForwardVec());
 
-	if (!_owner->GetOnGround())
-	{
-    	velocity.z = 500.0f;
-	}
+
 }

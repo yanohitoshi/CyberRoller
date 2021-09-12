@@ -141,7 +141,6 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 		// Hitしていたら
 		if (hit)
 		{
-
 			onCollisionFunc func = collisionFunction.at(_sphere);
 			func(*(itr->GetOwner()));
 			func = collisionFunction.at(itr);
@@ -175,6 +174,12 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, jumpSwitchBoxes);
+	}
+
+	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
+	{
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, enemyBoxes);
 	}
 }
 
@@ -443,6 +448,9 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 	case ColliderComponent::SWITCH_CHECK_TAG:
 		switchCheckSpheres.emplace_back(_sphere);
 		break;
+	case ColliderComponent::ATTACK_RANGE_TAG:
+		attackRangeSpheres.emplace_back(_sphere);
+		break;
 	}
 
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -470,6 +478,18 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		{
 			std::iter_swap(iter, switchCheckSpheres.end() - 1);
 			switchCheckSpheres.pop_back();
+		}
+
+		collisionFunction.erase(_sphere);
+	}
+
+	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
+	{
+		auto iter = std::find(attackRangeSpheres.begin(), attackRangeSpheres.end(), _sphere);
+		if (iter != attackRangeSpheres.end())
+		{
+			std::iter_swap(iter, attackRangeSpheres.end() - 1);
+			attackRangeSpheres.pop_back();
 		}
 
 		collisionFunction.erase(_sphere);

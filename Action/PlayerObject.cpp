@@ -22,6 +22,8 @@
 #include "PlayerObjectStateJunpEndToRun.h"
 #include "PlayerObjectStateJumpLoop.h"
 #include "PlayerObjectStateJumpStart.h"
+#include "PlayerObjectStateJumpAttack.h"
+#include "PlayerObjectStateJumpAttackEnd.h"
 #include "PlayerObjectStateDownLoop.h"
 #include "PlayerObjectStateDownOver.h"
 #include "PlayerObjectStateDownStart.h"
@@ -92,7 +94,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	jumpFlag = false;
 	// ジャンプが利用可能かフラグ初期化
 	isAvailableJumpKey = false;
-
+	isJumpAttck = false;
+	isSelectingTargetEnemy = false;
+	isJumpAttackSuccess = false;
 	// 前方ベクトル初期化
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	// キャラクターの前方ベクトル初期化
@@ -103,6 +107,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	rotateVec = Vector3(0.0f, 0.0f, 0.0f);
 	// 
 	hitEnemyPosition = Vector3::Zero;
+	// 
+	attackTargetEnemy = nullptr;
 
 	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
 	pushedVelocity = Vector3::Zero;
@@ -181,6 +187,11 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	groundChackSphereCol->SetObjectSphere(groundChackSphere);
 
+	//接地判定用のsphereCollider
+	jumpAttackSphereCol = new SphereCollider(this, ColliderComponent::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1));
+	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),1000.0f };
+	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
+
 	// 砂ぼこりと着地時のeffectを持たせる
 	new PlayerSandSmokeMakeManeger(this);
 	new LandingEffectManeger(this);
@@ -198,6 +209,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	statePools.push_back(new PlayerObjectStateJumpStart);
 	statePools.push_back(new PlayerObjectStateJumpEndToIdle);
 	statePools.push_back(new PlayerObjectStateJunpEndToRun);
+	statePools.push_back(new PlayerObjectStateJumpAttack);
+	statePools.push_back(new PlayerObjectStateJumpAttackEnd);
 	statePools.push_back(new PlayerObjectStateDownStart);
 	statePools.push_back(new PlayerObjectStateDownLoop);
 	statePools.push_back(new PlayerObjectStateDownUp);
@@ -271,6 +284,8 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	
 	// フレームの最後に接地判定と押されている速度を初期化
 	onGround = false;
+	isSelectingTargetEnemy = false;
+	isHitEnemy = false;
 	pushedVelocity = Vector3::Zero;
 
 	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
@@ -418,13 +433,16 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 	// 当たった際にプレイヤーがひるむオブジェクトだったら
 	if (hitObjectTag == Tag::ENEMY)
 	{
-		isHitEnemy = true;
-		hitEnemyPosition = _hitObject.GetPosition();
-	}
-	else // それ以外だったら
-	{
-		// 壁に当たったフラグをfalseに
-		isHitEnemy = false;
+		if (isJumpAttck)
+		{
+			isJumpAttackSuccess = true;
+			//isJumpAttck = false;
+		}
+		else
+		{
+			isHitEnemy = true;
+			hitEnemyPosition = _hitObject.GetPosition();
+		}
 	}
 
 	// 当たったオブジェクトがプレイヤーに速度の影響を与えるオブジェクトだったら
@@ -474,6 +492,22 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 	{
 		// スイッチジャンプアクティブ
 		ActiveSwitchJumpProcess();
+	}
+
+}
+
+void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
+{
+	isSelectingTargetEnemy = true;
+
+	// 判定内に入った敵オブジェクトのポインタを取得
+	std::vector<GameObject*>targetEnemies = FindGameObject(_hitObject.GetTag());
+	for (auto itr : targetEnemies)
+	{
+		if (itr->GetObjectId() == _hitObject.GetObjectId())
+		{
+			attackTargetEnemy = itr;
+		}
 	}
 
 }

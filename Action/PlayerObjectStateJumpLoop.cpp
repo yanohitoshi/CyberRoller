@@ -43,6 +43,11 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		animChangeFlag = false;
 	}
 
+	if (_owner->GetIsJumpAttck())
+	{
+		state = PlayerState::PLAYER_STATE_JUMP_ATTACK;
+	}
+
 	// 接地フラグがtrueでかつ移動入力がある状態でかつ速度が一定値以上だったら
 	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && moveSpeed >= TurnValue)
 	{
@@ -139,6 +144,16 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 		UninputMovableProcess(_owner);
 	}
 
+	if (_owner->GetIsSelectingTargetEnemy())
+	{
+		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+		{
+			_owner->SetIsJumpAttck(true);
+		}
+	}
 }
 
 void PlayerObjectStateJumpLoop::InputMovableProcess(PlayerObject* _owner, const InputState& _keyState, Vector3 _axis)
@@ -181,6 +196,7 @@ void PlayerObjectStateJumpLoop::InputMovableProcess(PlayerObject* _owner, const 
 
 	// ownerの速度変数を更新
 	_owner->SetMoveSpeed(moveSpeed);
+
 }
 
 void PlayerObjectStateJumpLoop::UninputMovableProcess(PlayerObject* _owner)

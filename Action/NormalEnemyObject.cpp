@@ -44,8 +44,8 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
-	enemyBox = mesh->GetBox();
-	//enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
+	//enemyBox = mesh->GetBox();
+	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
 
 	// stateプールの初期化

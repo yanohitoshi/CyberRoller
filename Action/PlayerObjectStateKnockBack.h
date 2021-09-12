@@ -43,5 +43,7 @@ private:
 
 	Vector3 hitEnemyPosition;
 	Vector3 knockBackDirection;
+
+	int knockBackFrameCount;
 };
 

@@ -423,8 +423,6 @@ public://ゲッターセッター
 	*/
 	Mesh* GetMesh(const std::string& _fileName);
 
-
-
 	/*
 	@brief	平行光源の構造体を取得する
 	@return	DirectionalLight（平行光源の構造体）

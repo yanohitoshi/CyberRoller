@@ -231,7 +231,6 @@ void PlayerObjectStateJumpStart::JumpStartProcess(PlayerObject* _owner)
 		endFlag = true;
 		// ジャンプフラグをfalseにセット
 		_owner->SetJumpFlag(false);
-
 	}
 }
 

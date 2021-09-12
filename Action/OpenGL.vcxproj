@@ -187,6 +187,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="NeedlePanelObject.cpp" />
     <ClCompile Include="NextSceneObject.cpp" />
     <ClCompile Include="NormalEnemyObject.cpp" />
+    <ClCompile Include="PlayerObjectStateJumpAttack.cpp" />
     <ClCompile Include="PlayerObjectStateBase.cpp" />
     <ClCompile Include="PlayerObjectStateDead.cpp" />
     <ClCompile Include="PlayerObjectStateDownLoop.cpp" />
@@ -196,6 +197,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerObjectStateFallDead.cpp" />
     <ClCompile Include="PlayerObjectStateIdle.cpp" />
     <ClCompile Include="PlayerObjectStateIdlingDance.cpp" />
+    <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp" />
     <ClCompile Include="PlayerObjectStateJumpEndToIdle.cpp" />
     <ClCompile Include="PlayerObjectStateJumpLoop.cpp" />
     <ClCompile Include="PlayerObjectStateJumpStart.cpp" />
@@ -335,6 +337,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="NeedlePanelObject.h" />
     <ClInclude Include="NextSceneObject.h" />
     <ClInclude Include="NormalEnemyObject.h" />
+    <ClInclude Include="PlayerObjectStateJumpAttack.h" />
     <ClInclude Include="PlayerObjectStateBase.h" />
     <ClInclude Include="PlayerObjectStateDead.h" />
     <ClInclude Include="PlayerObjectStateDownLoop.h" />
@@ -344,6 +347,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerObjectStateFallDead.h" />
     <ClInclude Include="PlayerObjectStateIdle.h" />
     <ClInclude Include="PlayerObjectStateIdlingDance.h" />
+    <ClInclude Include="PlayerObjectStateJumpAttackEnd.h" />
     <ClInclude Include="PlayerObjectStateJumpEndToIdle.h" />
     <ClInclude Include="PlayerObjectStateJumpLoop.h" />
     <ClInclude Include="PlayerObjectStateJumpStart.h" />

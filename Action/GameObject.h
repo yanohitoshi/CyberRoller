@@ -413,7 +413,7 @@ public://ゲッターセッター
 	@brief それぞれのオブジェクトが持つIDの取得
 	@return int myObjectId それぞれのオブジェクトが持つID
 	*/
-	int GetObjectId() { return myObjectId; };
+	int GetObjectId() const { return myObjectId; };
 
 	/*
 	@fn gameObjectId変数のgetter関数

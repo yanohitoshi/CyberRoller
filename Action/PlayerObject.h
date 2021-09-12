@@ -98,6 +98,8 @@ private:
 	BoxCollider* boxCollider;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* groundChackSphereCol;
+	// 球体の当たり判定を行うクラス
+	SphereCollider* jumpAttackSphereCol;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -110,6 +112,12 @@ private:
 	@param	当たったGameObject
 	*/
 	void OnCollisionGround(const GameObject& _hitObject);
+
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数(ジャンプ攻撃を行うエネミーとの判定を取る)
+	@param	当たったGameObject
+	*/
+	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject);
 
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用
@@ -157,6 +165,8 @@ private:
 	Vector3 pushedVelocity;
 	// 
 	Vector3 hitEnemyPosition;
+	// 
+	GameObject* attackTargetEnemy;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
 	int respawnCount;
@@ -182,6 +192,9 @@ private:
 	bool inputFlag;
 	//引き続きジャンプボタンが利用可能かフラグ
 	bool isAvailableJumpKey;
+	bool isJumpAttck;
+	bool isSelectingTargetEnemy;
+	bool isJumpAttackSuccess;
 	//ジャンプできるかフラグ
 	bool jumpFlag;
 	//ジャンプスイッチを押したかどうか
@@ -285,10 +298,16 @@ public:// ゲッターセッター
 	Vector3 GetRespownPos() { return respownPos; }
 
 	/*
-	@fn respownPosのgetter関数
+	@fn hitEnemyPositionのgetter関数
 	@return respownPosを返す
 	*/
 	Vector3 GetHitEnemyPosition() { return hitEnemyPosition; }
+
+	/*
+	@fn hitEnemyPositionのgetter関数
+	@return respownPosを返す
+	*/
+	GameObject* GetAttackTargetEnemy() { return attackTargetEnemy; }
 
 	/*
 	@fn DeadSpaceのgetter関数
@@ -384,25 +403,43 @@ public:// ゲッターセッター
 	@fn deadFlagのgetter関数
 	@return deadFlagを返す
 	*/
-	bool GetDeadFlag() { return deadFlag; };
+	bool GetDeadFlag() { return deadFlag; }
 	
 	/*
 	@fn respawnFlagのgetter関数
 	@return respawnFlagを返す
 	*/
-	bool GetRespawnFlag() { return respawnFlag; };
+	bool GetRespawnFlag() { return respawnFlag; }
 	
 	/*
 	@fn isAvailableInputのgetter関数
 	@return isAvailableInputを返す
 	*/
-	bool GetIsAvailableInput() { return isAvailableInput; };
+	bool GetIsAvailableInput() { return isAvailableInput; }
 	
+	/*
+	@fn isJumpAttckのgetter関数
+	@return isAvailableInputを返す
+	*/
+	bool GetIsJumpAttck() { return isJumpAttck; }
+	
+	/*
+	@fn isJumpAttckのgetter関数
+	@return isAvailableInputを返す
+	*/
+	bool GetIsSelectingTargetEnemy() { return isSelectingTargetEnemy; }
+	
+	/*
+	@fn isJumpAttackSuccessのgetter関数
+	@return isAvailableInputを返す
+	*/
+	bool GetIsJumpAttackSuccess() { return isJumpAttackSuccess; }
+
 	/*
 	@fn isHitWallのgetter関数
 	@return isHitWallを返す
 	*/
-	bool GetIsHitEnemy() { return isHitEnemy; };
+	bool GetIsHitEnemy() { return isHitEnemy; }
 
 	/*
 	@fn clearFlagのgetter関数
@@ -523,7 +560,24 @@ public:// ゲッターセッター
 	@param	bool _isAvailableInput 入力可能かどうかをセット
 	*/
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
+
+	/*
+	@fn isJumpAttckのsetter関数
+	@param	bool _isAvailableInput 入力可能かどうかをセット
+	*/
+	void SetIsJumpAttck(bool _isJumpAttck) { isJumpAttck = _isJumpAttck; }
 	
+	/*
+	@fn isJumpAttckのsetter関数
+	@param	bool _isAvailableInput 入力可能かどうかをセット
+	*/
+	void SetIsSelectingTargetEnemy(bool _isSelectingTargetEnemy) { isSelectingTargetEnemy = _isSelectingTargetEnemy; }
+	
+	/*
+	@fn isJumpAttackSuccessのsetter関数
+	@param	bool _isAvailableInput 入力可能かどうかをセット
+	*/
+	void SetIsJumpAttackSuccess(bool _isJumpAttackSuccess) { isJumpAttackSuccess = _isJumpAttackSuccess; }
 	/*
 	@fn isHitWallのsetter関数
 	@param	bool _isHitWall 怯みモーションを行う壁にヒットしたかどうかをセット

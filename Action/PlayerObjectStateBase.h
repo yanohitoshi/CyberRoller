@@ -36,6 +36,10 @@ enum class PlayerState
 	PLAYER_STATE_JUMPEND_TO_IDLE,
 	// ジャンプ終了から走り状態へ遷移
 	PLAYER_STATE_JUMPEND_TO_RUN,
+	// ジャンプ攻撃状態	
+	PLAYER_STATE_JUMP_ATTACK,
+	// ジャンプ攻撃終了状態
+	PLAYER_STATE_JUMP_ATTACK_END,
 	// コンテニュー選択状態に入る前の状態
 	PLAYER_STATE_DOWNSTART,
 	// コンテニュー選択状態
