@@ -15,10 +15,8 @@ enum class EnemyState
 {
 	// 待機
 	ENEMY_STATE_IDLE = 0,
-	// 走る
-	ENEMY_STATE_RUN,
-	// 走り状態から振り返り
-	ENEMY_STATE_RUN_TURN,
+	// 死亡
+	ENEMY_STATE_DEAD,
 
 	// 総アニメーション数
 	ENEMY_STATE_NUM,

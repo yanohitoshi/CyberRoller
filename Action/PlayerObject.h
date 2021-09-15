@@ -11,6 +11,7 @@ class Animation;
 class BoxCollider;
 class Mesh;
 class SphereCollider;
+class JumpAttackPlayerObject;
 enum class PlayerState;
 
 
@@ -90,6 +91,13 @@ private:
 	*/
 	void ChackRestartProcess();
 
+	/*
+	@brief	攻撃対象の敵を探す
+	@param	_hitObject ヒットしたオブジェクト
+	@return GameObject* 探し出したオブジェクト
+	*/
+	GameObject* FindTargetEnemy(const GameObject& _hitObject);
+
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
 	// Meshの読み込みを行うクラス
@@ -100,6 +108,10 @@ private:
 	SphereCollider* groundChackSphereCol;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* jumpAttackSphereCol;
+
+	JumpAttackPlayerObject* jumpAttackPlayerObject;
+
+	std::vector<GameObject*> selectEnemy;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -163,9 +175,9 @@ private:
 	Vector3 respownPos;
 	// 他のオブジェクトから押されている時の速度
 	Vector3 pushedVelocity;
-	// 
+	// ジャンプアタック中でないときにヒットした敵のポジション
 	Vector3 hitEnemyPosition;
-	// 
+	// ジャンプ攻撃対象の敵のポインタ
 	GameObject* attackTargetEnemy;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
@@ -192,8 +204,11 @@ private:
 	bool inputFlag;
 	//引き続きジャンプボタンが利用可能かフラグ
 	bool isAvailableJumpKey;
+	// ジャンプアタックフラグ
 	bool isJumpAttck;
+	// ジャンプアタックするエネミーの選択フラグ
 	bool isSelectingTargetEnemy;
+	// ジャンプアタック成功したか
 	bool isJumpAttackSuccess;
 	//ジャンプできるかフラグ
 	bool jumpFlag;

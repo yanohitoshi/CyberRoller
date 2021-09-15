@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyObjectBase.cpp" />
     <ClCompile Include="EnemyObjectStateBase.cpp" />
+    <ClCompile Include="EnemyObjectStateDead.cpp" />
     <ClCompile Include="EnemyObjectStateIdle.cpp" />
     <ClCompile Include="FinalStageCreator.cpp" />
     <ClCompile Include="FinalStageScene.cpp" />
@@ -180,6 +181,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="GameClearSprite.cpp" />
     <ClCompile Include="GameOverSprite.cpp" />
     <ClCompile Include="HDRRenderer.cpp" />
+    <ClCompile Include="JumpAttackPlayerObject.cpp" />
     <ClCompile Include="LandingEffect.cpp" />
     <ClCompile Include="LandingEffectManeger.cpp" />
     <ClCompile Include="MoveBlockObject.cpp" />
@@ -322,6 +324,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyObjectBase.h" />
     <ClInclude Include="EnemyObjectStateBase.h" />
+    <ClInclude Include="EnemyObjectStateDead.h" />
     <ClInclude Include="EnemyObjectStateIdle.h" />
     <ClInclude Include="FinalStageCreator.h" />
     <ClInclude Include="FinalStageScene.h" />
@@ -330,6 +333,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="GameClearSprite.h" />
     <ClInclude Include="GameOverSprite.h" />
     <ClInclude Include="HDRRenderer.h" />
+    <ClInclude Include="JumpAttackPlayerObject.h" />
     <ClInclude Include="LandingEffect.h" />
     <ClInclude Include="LandingEffectManeger.h" />
     <ClInclude Include="MoveBlockObject.h" />

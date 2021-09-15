@@ -390,11 +390,17 @@
     <ClCompile Include="PlayerObjectStateKnockBack.cpp">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClCompile>
+    <ClCompile Include="JumpAttackPlayerObject.cpp">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerObjectStateJumpAttack.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -789,11 +795,17 @@
     <ClInclude Include="PlayerObjectStateBase.h">
       <Filter>GameObjects\PlayerObjects\State</Filter>
     </ClInclude>
+    <ClInclude Include="JumpAttackPlayerObject.h">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerObjectStateJumpAttack.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateJumpAttackEnd.h">
-      <Filter>GameObjects\PlayerObjects\State</Filter>
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -931,6 +943,9 @@
     </Filter>
     <Filter Include="GameObjects\PlayerObjects\State\KnockBackState">
       <UniqueIdentifier>{082421a8-953b-403b-8e99-73ac2b5e5c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\JumpState\JumpAttack">
+      <UniqueIdentifier>{7a83991d-abbb-4237-b6ab-88078fd40518}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

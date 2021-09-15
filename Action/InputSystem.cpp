@@ -249,8 +249,6 @@ void InputSystem::Update()
 	state.Mouse.mousePos.x = static_cast<float>(x) - 1024.0f / 2;
 	state.Mouse.mousePos.y = 768.0f / 2 - static_cast<float>(y);
 
-
-
 	// ƒRƒ“ƒgƒ[ƒ‰‚ª–³‚¢ê‡‚Í early exit‚·‚é
 	if (controller != NULL)
 	{

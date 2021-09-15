@@ -42,6 +42,8 @@ enum Tag
 	CAMERA,
 	// プレイヤー
 	PLAYER,
+	// ジャンプアタック時のプレイヤー
+	JUMPATTACK_PLAYER,
 	// エネミー
 	ENEMY,
 	// グラウンド

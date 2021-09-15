@@ -1,8 +1,9 @@
 #include "PlayerObjectStateJumpAttackEnd.h"
 
 PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd()
-	: SuccessJumpTime(10)
-	, SuccessJumpAccelPower(110.0f)
+	: SuccessJumpTime(6)
+	, SuccessJumpAccelPower(80.0f)
+	, JumpAttackSuccessFirstPower(1500.0f)
 {
 }
 
@@ -72,6 +73,6 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	endFlag = false;
 	jumpFrameCount = 0;
 	// ジャンプ力をセットする
-	_owner->SetJumpPower(_owner->GetFirstJumpPower());
+	_owner->SetJumpPower(JumpAttackSuccessFirstPower);
 
 }

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObject.h"
 #include "SkeletalMeshComponent.h"
+#include "MeshComponent.h"
 #include "Mesh.h"
 #include "MainCameraObject.h"
 #include <string>
@@ -35,6 +36,7 @@
 #include "PlayerObjectStateIdlingDance.h"
 #include "PlayerObjectStateKnockBack.h"
 #include "PlayerObjectStateFallDead.h"
+#include "JumpAttackPlayerObject.h"
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
@@ -187,7 +189,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	groundChackSphereCol->SetObjectSphere(groundChackSphere);
 
-	//接地判定用のsphereCollider
+	//ジャンプ攻撃判定用のsphereCollider
 	jumpAttackSphereCol = new SphereCollider(this, ColliderComponent::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1));
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),1000.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
@@ -222,6 +224,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// stateを初期化
 	nowState = PlayerState::PLAYER_STATE_IDLE;
 	nextState = PlayerState::PLAYER_STATE_IDLE;
+
+	jumpAttackPlayerObject = new JumpAttackPlayerObject(this,Vector3(50.0f, 50.0f, 50.0f), JUMPATTACK_PLAYER);
+
 }
 
 PlayerObject::~PlayerObject()
@@ -326,6 +331,16 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	// 着地エフェクト用の判定フラグを更新
 	chackJumpFlag = jumpFlag;
+
+	if (nowState == PlayerState::PLAYER_STATE_JUMP_ATTACK)
+	{
+		skeltalMeshComponent->SetVisible(false);
+	}
+	else
+	{
+		skeltalMeshComponent->SetVisible(true);
+	}
+
 }
 
 
@@ -436,7 +451,6 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		if (isJumpAttck)
 		{
 			isJumpAttackSuccess = true;
-			//isJumpAttck = false;
 		}
 		else
 		{
@@ -500,16 +514,28 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 {
 	isSelectingTargetEnemy = true;
 
-	// 判定内に入った敵オブジェクトのポインタを取得
-	std::vector<GameObject*>targetEnemies = FindGameObject(_hitObject.GetTag());
-	for (auto itr : targetEnemies)
+	if (attackTargetEnemy != nullptr)
 	{
-		if (itr->GetObjectId() == _hitObject.GetObjectId())
+		// ヒットしたEnemyのポジションと距離を計算
+		Vector3 hitEnemyPosition = _hitObject.GetPosition();
+		Vector3 hitEnemyDistance = hitEnemyPosition - position;
+		hitEnemyDistance.z = 0.0f;
+		
+		// select中のEnemyのポジションと距離を計算
+		Vector3 selectEnemyPosition = attackTargetEnemy->GetPosition();
+		Vector3 selectEnemyDistance = selectEnemyPosition - position;
+		selectEnemyDistance.z = 0.0f;
+		
+		// 距離をベクトルの長さで比較選択している敵よりも新しい敵の方が近かったら更新
+		if (hitEnemyDistance.Length() < selectEnemyDistance.Length())
 		{
-			attackTargetEnemy = itr;
+			attackTargetEnemy = FindTargetEnemy(_hitObject);
 		}
 	}
-
+	else
+	{
+		attackTargetEnemy = FindTargetEnemy(_hitObject);
+	}
 }
 
 void PlayerObject::ActiveSwitchJumpProcess()
@@ -545,6 +571,21 @@ void PlayerObject::ChackRestartProcess()
 		// 入力があったらリスタートカウントを初期化
 		reStartCount = 0;
 	}
+}
+
+GameObject* PlayerObject::FindTargetEnemy(const GameObject& _hitObject)
+{
+	// 判定内に入った敵オブジェクトのポインタを取得
+	std::vector<GameObject*>targetEnemies = FindGameObject(_hitObject.GetTag());
+	GameObject* selectEnemy = nullptr;
+	for (auto itr : targetEnemies)
+	{
+		if (itr->GetObjectId() == _hitObject.GetObjectId())
+		{
+			selectEnemy = itr;
+		}
+	}
+	return selectEnemy;
 }
 
 

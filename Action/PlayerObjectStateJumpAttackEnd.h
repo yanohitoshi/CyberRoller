@@ -48,9 +48,12 @@ private:
 	int jumpFrameCount;
 	// ジャンプが終了したかどうかのフラグ変数
 	bool endFlag;
+
 	// スイッチジャンプ時のジャンプ力の加速度
 	const float SuccessJumpAccelPower;
 	// スイッチジャンプ利用可能タイム
 	const int SuccessJumpTime;
+	// ジャンプアタック成功時の初速
+	const float JumpAttackSuccessFirstPower;
 };
 

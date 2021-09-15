@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateIdle.h"
+#include "EnemyObjectStateDead.h"
 #include "BoxCollider.h"
 
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
@@ -31,8 +32,8 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	//-----------アニメーションを読み込み-----------------//
 	// アイドリングアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Idle.gpanim", true);
-	//// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
-	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Tut_Hip_Hop_Dance.gpanim", true);
+	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Dead.gpanim", true);
 	//// 走りアニメーション
 	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
 	//// 走りだしアニメーション
@@ -51,7 +52,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new EnemyObjectStateIdle);
-	//statePools.push_back(new PlayerObjectStateIdlingDance);
+	statePools.push_back(new EnemyObjectStateDead);
 	//statePools.push_back(new PlayerObjectStateRun);
 
 	//anim変数を速度1.0fで再生
@@ -94,4 +95,8 @@ void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 
 void NormalEnemyObject::OnCollision(const GameObject& _hitObject)
 {
+	if (_hitObject.GetTag() == Tag::PLAYER)
+	{
+
+	}
 }
