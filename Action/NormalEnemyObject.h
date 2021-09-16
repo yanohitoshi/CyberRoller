@@ -40,5 +40,8 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+public:
+
+
 };
 

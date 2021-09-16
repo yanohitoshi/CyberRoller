@@ -61,16 +61,6 @@ protected:
 	*/
 	virtual void OnCollision(const GameObject& _hitObject) {};
 
-	////重力
-	//static const float Gravity;
-
-	////加速度の定数
-	//const float MovePower;
-	//// 減速する力
-	//const float DecelerationForce;
-	//// 初速度
-	//const float FirstMovePower;
-
 	//右方向ベクトル
 	Vector3 rightVec;
 	//キャラクターの前方ベクトル
@@ -83,6 +73,8 @@ protected:
 
 	//接地フラグ
 	bool onGround;
+
+	bool isDeadFlag;
 
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
@@ -113,12 +105,6 @@ public:// ゲッターセッター
 	*/
 	const Animation* GetAnimation(EnemyState _state);
 
-	///*
-	//@fn 重力のgetter関数
-	//@return Gravity 重力定数
-	//*/
-	//static const float GetGravity() { return Gravity; }
-
 	/*
 	@fn forwardVecのgetter関数
 	@return forwardVecを返す
@@ -148,24 +134,6 @@ public:// ゲッターセッター
 	@return velocityを返す
 	*/
 	Vector3 GetVelocity() { return velocity; }
-
-	///*
-	//@fn FirstMovePowerのgetter関数
-	//@return FirstMovePowerを返す
-	//*/
-	//const float GetFirstMovePower() { return FirstMovePower; }
-
-	///*
-	//@fn MovePowerのgetter関数
-	//@return MovePowerを返す
-	//*/
-	//const float GetMovePower() { return MovePower; }
-
-	///*
-	//@fn DecelerationForceのgetter関数
-	//@return DecelerationForceを返す
-	//*/
-	//const float GetDecelerationForce() { return DecelerationForce; }
 
 	/*
 	@fn moveSpeedのgetter関数
@@ -202,5 +170,8 @@ public:// ゲッターセッター
 	@param	float _moveSpeed キャラクターのスピード
 	*/
 	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
+
+	bool GetIsDeadFlag() { return isDeadFlag; }
+	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
 };
 

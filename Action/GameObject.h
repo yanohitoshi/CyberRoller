@@ -27,6 +27,8 @@ enum State
 	Active,
 	//更新が停止している
 	Paused,
+	// 無効化状態
+	Disabling,
 	//オブジェクトの更新が終了(外部からのみActiveに変更可能)
 	Dead
 };
@@ -43,7 +45,7 @@ enum Tag
 	// プレイヤー
 	PLAYER,
 	// ジャンプアタック時のプレイヤー
-	JUMPATTACK_PLAYER,
+	JUMP_ATTACK_PLAYER,
 	// エネミー
 	ENEMY,
 	// グラウンド

@@ -38,7 +38,7 @@ PhysicsWorld::PhysicsWorld()
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_box->GetOwner()->GetState() != State::Active)
+	if (_box->GetOwner()->GetState() == State::Dead)
 	{
 		return;
 	}
@@ -153,7 +153,7 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_sphere->GetOwner()->GetState() != State::Active)
+	if (_sphere->GetOwner()->GetState() == State::Dead)
 	{
 		return;
 	}
@@ -177,6 +177,12 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	}
 
 	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
+	{
+		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, enemyBoxes);
+	}
+
+	if (_sphere->GetSphereTag() == ColliderComponent::JUMP_ATTACK_PLAYER_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, enemyBoxes);
@@ -426,13 +432,6 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	//auto iter = std::find(boxes.begin(), boxes.end(), _box);
-	//if (iter != boxes.end())
-	//{
-	//	std::iter_swap(iter, boxes.end() - 1);
-	//	boxes.pop_back();
-	//}
-	//  collisionFunction.erase(_box);
 }
 
 void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
@@ -450,6 +449,9 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 		break;
 	case ColliderComponent::ATTACK_RANGE_TAG:
 		attackRangeSpheres.emplace_back(_sphere);
+		break;
+	case ColliderComponent::JUMP_ATTACK_PLAYER_TAG:
+		jumpAttackPlayerSpheres.emplace_back(_sphere);
 		break;
 	}
 
@@ -490,6 +492,18 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		{
 			std::iter_swap(iter, attackRangeSpheres.end() - 1);
 			attackRangeSpheres.pop_back();
+		}
+
+		collisionFunction.erase(_sphere);
+	}
+
+	if (_sphere->GetSphereTag() == ColliderComponent::JUMP_ATTACK_PLAYER_TAG)
+	{
+		auto iter = std::find(jumpAttackPlayerSpheres.begin(), jumpAttackPlayerSpheres.end(), _sphere);
+		if (iter != jumpAttackPlayerSpheres.end())
+		{
+			std::iter_swap(iter, jumpAttackPlayerSpheres.end() - 1);
+			jumpAttackPlayerSpheres.pop_back();
 		}
 
 		collisionFunction.erase(_sphere);

@@ -17,7 +17,6 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 
 	if (_owner->GetIsJumpAttackSuccess())
 	{
-
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
 

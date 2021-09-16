@@ -3,6 +3,7 @@
 
 class MeshComponent;
 class PlayerObject;
+class SphereCollider;
 
 class JumpAttackPlayerObject :
     public GameObject
@@ -30,10 +31,17 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
+	/*
+	@fn “–‚½‚è”»’è‚ªs‚í‚êHit‚µ‚½Û‚ÉŒÄ‚Î‚ê‚éŠÖ”
+	@param	“–‚½‚Á‚½GameObject
+	*/
+	void OnCollision(const GameObject& _hitObject)override;
+
 private:
 
     MeshComponent* meshComponent;
 	PlayerObject* ownerObject;
+	SphereCollider* sphereCollider;
 
 };
 

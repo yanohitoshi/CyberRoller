@@ -16,7 +16,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	SetScale(scale);
 
-	//isPushBackToPlayer = true;
+	isDeadFlag = false;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -32,8 +32,8 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	//-----------アニメーションを読み込み-----------------//
 	// アイドリングアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Idle.gpanim", true);
-	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
-	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Dead.gpanim", true);
+	// 死亡時のアニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Dead.gpanim", false);
 	//// 走りアニメーション
 	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
 	//// 走りだしアニメーション
@@ -95,8 +95,11 @@ void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 
 void NormalEnemyObject::OnCollision(const GameObject& _hitObject)
 {
-	if (_hitObject.GetTag() == Tag::PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{
-
+		if (_hitObject.GetState() == State::Active)
+		{
+			isDeadFlag = true;
+		}
 	}
 }

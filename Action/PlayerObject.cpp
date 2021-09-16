@@ -225,7 +225,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	nowState = PlayerState::PLAYER_STATE_IDLE;
 	nextState = PlayerState::PLAYER_STATE_IDLE;
 
-	jumpAttackPlayerObject = new JumpAttackPlayerObject(this,Vector3(50.0f, 50.0f, 50.0f), JUMPATTACK_PLAYER);
+	jumpAttackPlayerObject = new JumpAttackPlayerObject(this,Vector3(50.0f, 50.0f, 50.0f), JUMP_ATTACK_PLAYER);
 
 }
 
@@ -292,6 +292,8 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	isSelectingTargetEnemy = false;
 	isHitEnemy = false;
 	pushedVelocity = Vector3::Zero;
+	attackTargetEnemy = nullptr;
+	//isSelectingTargetEnemy = false;
 
 	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
 	// 連続で切り替えしアニメーションに入らないように抑制をかけるため
@@ -448,11 +450,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 	// 当たった際にプレイヤーがひるむオブジェクトだったら
 	if (hitObjectTag == Tag::ENEMY)
 	{
-		if (isJumpAttck)
-		{
-			isJumpAttackSuccess = true;
-		}
-		else
+		if (!isJumpAttck)
 		{
 			isHitEnemy = true;
 			hitEnemyPosition = _hitObject.GetPosition();
@@ -512,7 +510,12 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 
 void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 {
-	isSelectingTargetEnemy = true;
+	//if (_hitObject.GetState() != State::Active)
+	//{
+	//	attackTargetEnemy = nullptr;
+	//	isSelectingTargetEnemy = false;
+	//	return;
+	//}
 
 	if (attackTargetEnemy != nullptr)
 	{
@@ -536,6 +539,11 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 	{
 		attackTargetEnemy = FindTargetEnemy(_hitObject);
 	}
+
+	isSelectingTargetEnemy = true;
+	//if (attackTargetEnemy != nullptr)
+	//{
+	//}
 }
 
 void PlayerObject::ActiveSwitchJumpProcess()

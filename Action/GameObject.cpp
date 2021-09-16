@@ -70,7 +70,7 @@ GameObject::~GameObject()
 void GameObject::Update(float _deltaTime)
 {
 	//更新状態がアクティブ
-	if (state == Active)
+	if (state != Dead)
 	{
 		//Transformのワールド変換
 		ComputeWorldTransform();
