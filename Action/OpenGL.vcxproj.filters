@@ -381,12 +381,6 @@
     <ClCompile Include="EnemyObjectBase.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyObjectStateIdle.cpp">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalEnemyObject.cpp">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObjectStateKnockBack.cpp">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClCompile>
@@ -399,8 +393,29 @@
     <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp">
       <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyObjectStateDead.cpp">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
+    <ClCompile Include="NormalEnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObjectStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateMoving.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateTurn.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -780,14 +795,8 @@
     <ClInclude Include="EnemyObjectStateBase.h">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
-    <ClInclude Include="NormalEnemyObject.h">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyObjectBase.h">
       <Filter>GameObjects\EnemyObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyObjectStateIdle.h">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObjectStateKnockBack.h">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
@@ -804,8 +813,29 @@
     <ClInclude Include="PlayerObjectStateJumpAttackEnd.h">
       <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyObjectStateDead.h">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyState</Filter>
+    <ClInclude Include="NormalEnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalEnemyObjectStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateMoving.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateTurn.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -938,14 +968,23 @@
     <Filter Include="GameObjects\EnemyObjects">
       <UniqueIdentifier>{7e420d48-1aaf-4ed6-acc8-3b2b90ff777b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\EnemyObjects\NormalEnemyState">
-      <UniqueIdentifier>{c8314471-9f3e-46e8-b9bd-72a4e4c71ae9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\PlayerObjects\State\KnockBackState">
       <UniqueIdentifier>{082421a8-953b-403b-8e99-73ac2b5e5c94}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects\PlayerObjects\State\JumpState\JumpAttack">
       <UniqueIdentifier>{7a83991d-abbb-4237-b6ab-88078fd40518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\MoveEnemyObjectState">
+      <UniqueIdentifier>{3bcd4548-d521-4801-90d4-460362be367a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\NormalEnemyObject">
+      <UniqueIdentifier>{c8314471-9f3e-46e8-b9bd-72a4e4c71ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\NormalEnemyObject\State">
+      <UniqueIdentifier>{525d8a34-ecfb-4ee2-962f-171ca64bef0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\MoveEnemyObjectState\State">
+      <UniqueIdentifier>{175e1006-4c68-4e68-801a-f2feab492a7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

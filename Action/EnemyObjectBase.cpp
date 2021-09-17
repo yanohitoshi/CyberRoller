@@ -8,6 +8,18 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	tag = _objectTag;
 }
 
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance)
+	: GameObject(_reUseGameObject, _objectTag)
+	, enemyBox({ Vector3::Zero,Vector3::Zero })
+	,moveDirection(_moveDir)
+	,moveDistance(_moveDistance)
+	,moveSpeed(_moveSpeed)
+{
+	tag = _objectTag;
+	SetPosition(_pos);
+	firstPosition = _pos;
+}
+
 void EnemyObjectBase::EnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	// 速度ベクトル初期化

@@ -53,7 +53,6 @@ void PlayerObjectStateBase::RotationProcess(PlayerObject* _owner, Vector3 _forwa
 		// 前方ベクトル更新
 		_owner->SetCharaForwardVec(rotatioin);
 	}
-
 }
 
 Vector3 PlayerObjectStateBase::ChackControllerAxis(const InputState& _keyState)

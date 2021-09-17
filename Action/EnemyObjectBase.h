@@ -15,11 +15,24 @@ public:
 
 	/*
 	@fn コンストラクタ
+	@brief 通常のエネミーのコンストラクタ
 	@param	ポジション
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag);
+
+	/*
+	@fn コンストラクタ
+	@brief 移動するエネミーのコンストラクタ
+	@param	ポジション
+	@param	再利用するかフラグ
+	@param	オブジェクト判別用tag
+	@param	移動速度
+	@param	移動方向
+	@param	移動距離
+	*/
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance);
 
 	/*
 	@fn デストラクタ
@@ -52,7 +65,7 @@ protected:
 	Mesh* mesh;
 	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
-
+	// エネミーのAABB構造体
 	AABB enemyBox;
 
 	/*
@@ -68,12 +81,20 @@ protected:
 	//方向に合わせて回転させるためのベクトル
 	Vector3 rotateVec;
 
+	Vector3 firstPosition;
 	// 速度
 	float moveSpeed;
+
+	// 移動方向
+	Vector3 moveDirection;
+
+	// 移動距離
+	float moveDistance;
 
 	//接地フラグ
 	bool onGround;
 
+	// 死んでいるかどうか
 	bool isDeadFlag;
 
 	// 今のプレーヤーのstate状態を保存するための変数
@@ -136,6 +157,24 @@ public:// ゲッターセッター
 	Vector3 GetVelocity() { return velocity; }
 
 	/*
+	@fn moveDirectionのgetter関数
+	@return moveDirectionを返す
+	*/
+	Vector3 GetMoveDirection() { return moveDirection; }
+
+	/*
+	@fn firstPositionのgetter関数
+	@return firstPositionを返す
+	*/
+	Vector3 GetFirstPosition() { return firstPosition; }
+
+	/*
+	@fn moveDistanceのgetter関数
+	@return moveDistanceを返す
+	*/
+	float GetMoveDistance() { return moveDistance; }
+
+	/*
 	@fn moveSpeedのgetter関数
 	@return moveSpeedを返す
 	*/
@@ -166,12 +205,33 @@ public:// ゲッターセッター
 	void SetVelocity(Vector3 _velocity) { velocity = _velocity; }
 
 	/*
+	@fn velocityのsetter関数
+	@param	Vector3 _moveDirection キャラクターの移動方向ベクトル
+	*/
+	void SetMoveDirection(Vector3 _moveDirection) { moveDirection = _moveDirection; }
+
+	/*
+	@fn moveDistanceのsetter関数
+	@param	float moveDistance キャラクターの移動距離
+	*/
+	void SetMoveDistance(float _moveDistance) { moveDistance = _moveDistance; }
+
+	/*
 	@fn moveSpeedのsetter関数
 	@param	float _moveSpeed キャラクターのスピード
 	*/
 	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
 
+	/*
+	@fn isDeadFlagのGettrer関数
+	@return	bool isDeadFlag 死亡状態
+	*/
 	bool GetIsDeadFlag() { return isDeadFlag; }
+
+	/*
+	@fn isDeadFlagのsetter関数
+	@param	bool isDeadFlag 死亡状態
+	*/
 	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
 };
 

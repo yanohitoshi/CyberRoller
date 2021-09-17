@@ -13,11 +13,14 @@ class SkeletalMeshComponent;
 */
 enum class EnemyState
 {
-	// 待機
+	// 待機状態
 	ENEMY_STATE_IDLE = 0,
-	// 死亡
+	// 死亡状態
 	ENEMY_STATE_DEAD,
-
+	// 移動状態
+	ENEMY_STATE_MOVING,
+	// ターン
+	ENEMY_STATE_TURN,
 	// 総アニメーション数
 	ENEMY_STATE_NUM,
 };
@@ -54,6 +57,8 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	virtual void Enter(EnemyObjectBase* _owner, float _deltaTime) {};
+
+	void RotationProcess(EnemyObjectBase* _owner, Vector3 _forward, Vector3 _tmpForward);
 
 protected:
 

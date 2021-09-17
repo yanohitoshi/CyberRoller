@@ -14,6 +14,7 @@
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
 #include "NormalEnemyObject.h"
+#include "MoveEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -175,7 +176,8 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 	case(61):
-		new NormalEnemyObject(layer2Pos, Tag::ENEMY);
+		//new NormalEnemyObject(layer2Pos, Tag::ENEMY);
+		new MoveEnemyObject(layer2Pos, Tag::ENEMY,100.0f,Vector3::UnitY,400.0f);
 		break;
 	}
 

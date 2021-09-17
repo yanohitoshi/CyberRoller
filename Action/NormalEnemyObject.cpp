@@ -3,8 +3,8 @@
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
-#include "EnemyObjectStateIdle.h"
-#include "EnemyObjectStateDead.h"
+#include "NormalEnemyObjectStateIdle.h"
+#include "NormalEnemyObjectStateDead.h"
 #include "BoxCollider.h"
 
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
@@ -14,6 +14,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	state = Active;
 	scale = Vector3(2.0f, 2.0f, 2.0f);
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
+	forwardVec = Vector3::NegUnitX;
 	SetScale(scale);
 
 	isDeadFlag = false;
@@ -34,10 +35,6 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Idle.gpanim", true);
 	// 死亡時のアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/enemy_robo_model/Dron_01_Dead.gpanim", false);
-	//// 走りアニメーション
-	//animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
-	//// 走りだしアニメーション
-	//animTypes[static_cast<unsigned int>(EnemyState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", false);
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
@@ -51,8 +48,8 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
-	statePools.push_back(new EnemyObjectStateIdle);
-	statePools.push_back(new EnemyObjectStateDead);
+	statePools.push_back(new NormalEnemyObjectStateIdle);
+	statePools.push_back(new NormalEnemyObjectStateDead);
 	//statePools.push_back(new PlayerObjectStateRun);
 
 	//anim変数を速度1.0fで再生
