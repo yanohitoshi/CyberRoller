@@ -175,10 +175,6 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(61):
-		//new NormalEnemyObject(layer2Pos, Tag::ENEMY);
-		new MoveEnemyObject(layer2Pos, Tag::ENEMY,100.0f,Vector3::UnitY,400.0f);
-		break;
 	}
 
 }
@@ -257,6 +253,13 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// 第一区画の動く壁オブジェクト生成
 		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
+		break;
+	case(61):
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY);
+		break;
+
+	case(62):
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, 100.0f, Vector3::UnitY, 400.0f);
 		break;
 	}
 }

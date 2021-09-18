@@ -40,7 +40,7 @@ public:
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
 private:
-
+	int unSelectTargetEnemyFrameCount;
 	Vector3 jumpAttackDirection;
 	GameObject* attackTargetEnemy;
 };

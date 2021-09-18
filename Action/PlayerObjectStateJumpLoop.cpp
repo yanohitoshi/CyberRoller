@@ -144,14 +144,17 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 		UninputMovableProcess(_owner);
 	}
 
-	if (_owner->GetIsSelectingTargetEnemy())
+	if (_owner->GetIsAvailableJumpAttck())
 	{
-		if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+		if (_owner->GetIsSelectingTargetEnemy() || !_owner->GetIsJumpAttck() && !_owner->GetIsSelectingTargetEnemy())
 		{
-			_owner->SetIsJumpAttck(true);
+			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+			{
+				_owner->SetIsJumpAttck(true);
+			}
 		}
 	}
 }

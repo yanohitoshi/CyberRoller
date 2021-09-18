@@ -96,6 +96,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	jumpFlag = false;
 	// ジャンプが利用可能かフラグ初期化
 	isAvailableJumpKey = false;
+	isAvailableJumpAttck = false;
 	isJumpAttck = false;
 	isSelectingTargetEnemy = false;
 	isJumpAttackSuccess = false;

@@ -32,8 +32,9 @@ PlayerState PlayerObjectStateJumpAttackEnd::Update(PlayerObject* _owner, float _
 		_owner->SetMoveSpeed(moveSpeed);
 		_owner->SetVelocity(velocity);
 		_owner->SetJumpFrameCount(jumpFrameCount);
-		_owner->SetIsJumpAttck(false);
 		_owner->SetIsJumpAttackSuccess(false);
+		_owner->SetIsJumpAttck(false);
+
 		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
@@ -75,4 +76,8 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	// ジャンプ力をセットする
 	_owner->SetJumpPower(JumpAttackSuccessFirstPower);
 
+	if (_owner->GetIsSelectingTargetEnemy())
+	{
+		_owner->SetIsAvailableJumpAttck(true);
+	}
 }

@@ -204,6 +204,9 @@ private:
 	bool inputFlag;
 	//引き続きジャンプボタンが利用可能かフラグ
 	bool isAvailableJumpKey;
+
+	// ジャンプアタックが利用可能かフラグ
+	bool isAvailableJumpAttck;
 	// ジャンプアタックフラグ
 	bool isJumpAttck;
 	// ジャンプアタックするエネミーの選択フラグ
@@ -433,6 +436,12 @@ public:// ゲッターセッター
 	bool GetIsAvailableInput() { return isAvailableInput; }
 	
 	/*
+	@fn isAvailableJumpAttckのgetter関数
+	@return isAvailableJumpKeyを返す
+	*/
+	bool GetIsAvailableJumpAttck() { return isAvailableJumpAttck; }
+
+	/*
 	@fn isJumpAttckのgetter関数
 	@return isAvailableInputを返す
 	*/
@@ -575,6 +584,12 @@ public:// ゲッターセッター
 	@param	bool _isAvailableInput 入力可能かどうかをセット
 	*/
 	void SetIsAvailableInput(bool _isAvailableInput) { isAvailableInput = _isAvailableInput; }
+
+	/*
+	@fn isAvailableJumpAttckのsetter関数
+	@param	bool _isAvailableJumpAttck 入力可能かどうかをセット
+	*/
+	void SetIsAvailableJumpAttck(bool _isAvailableJumpAttck) { isAvailableJumpAttck = _isAvailableJumpAttck; }
 
 	/*
 	@fn isJumpAttckのsetter関数

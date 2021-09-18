@@ -87,6 +87,8 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 	// ジャンプフラグをfalseにセット
 	_owner->SetJumpFlag(false);
 	_owner->SetSwitchJumpFlag(false);
+	_owner->SetIsJumpAttck(false);
+	_owner->SetIsAvailableJumpAttck(true);
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
 }
