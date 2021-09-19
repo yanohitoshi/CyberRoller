@@ -104,6 +104,7 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	_owner->SetIsAvailableJumpKey(true);
 	// ジャンプフラグをfalseにセット
 	_owner->SetJumpFlag(false);
+	// ジャンプ攻撃系フラグ初期化
 	_owner->SetSwitchJumpFlag(false);
 	_owner->SetIsAvailableJumpAttck(true);
 

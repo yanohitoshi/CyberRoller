@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyObjectBase.cpp" />
     <ClCompile Include="EnemyObjectStateBase.cpp" />
+    <ClCompile Include="JumpAttackTutorialParticl.cpp" />
     <ClCompile Include="MoveEnemyObject.cpp" />
     <ClCompile Include="MoveEnemyObjectStateDead.cpp" />
     <ClCompile Include="MoveEnemyObjectStateIdle.cpp" />
@@ -329,6 +330,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyObjectBase.h" />
     <ClInclude Include="EnemyObjectStateBase.h" />
+    <ClInclude Include="JumpAttackTutorialParticl.h" />
     <ClInclude Include="MoveEnemyObject.h" />
     <ClInclude Include="MoveEnemyObjectStateDead.h" />
     <ClInclude Include="MoveEnemyObjectStateIdle.h" />

@@ -40,6 +40,8 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+	const float Angle;
+
 public:
 
 

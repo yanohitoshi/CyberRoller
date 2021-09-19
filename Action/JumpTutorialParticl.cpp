@@ -19,5 +19,4 @@ JumpTutorialParticl::~JumpTutorialParticl()
 
 void JumpTutorialParticl::UpdateGameObject(float _deltaTime)
 {
-
 }

@@ -9,6 +9,7 @@
 
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	: EnemyObjectBase(_pos, false , _objectTag)
+	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
@@ -42,7 +43,6 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
-	//enemyBox = mesh->GetBox();
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
 
@@ -50,7 +50,6 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new NormalEnemyObjectStateIdle);
 	statePools.push_back(new NormalEnemyObjectStateDead);
-	//statePools.push_back(new PlayerObjectStateRun);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
@@ -58,6 +57,12 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
+	//Z軸を10度回転させる
+	float radian = Math::ToRadians(Angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
 }
 
 NormalEnemyObject::~NormalEnemyObject()
@@ -94,9 +99,6 @@ void NormalEnemyObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{
-		if (_hitObject.GetState() == State::Active)
-		{
-			isDeadFlag = true;
-		}
+		isDeadFlag = true;
 	}
 }

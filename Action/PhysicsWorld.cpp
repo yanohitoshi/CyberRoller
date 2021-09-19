@@ -38,7 +38,7 @@ PhysicsWorld::PhysicsWorld()
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_box->GetOwner()->GetState() == State::Dead)
+	if (_box->GetOwner()->GetState() != State::Active)
 	{
 		return;
 	}
@@ -153,7 +153,7 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_sphere->GetOwner()->GetState() == State::Dead)
+	if (_sphere->GetOwner()->GetState() != State::Active)
 	{
 		return;
 	}

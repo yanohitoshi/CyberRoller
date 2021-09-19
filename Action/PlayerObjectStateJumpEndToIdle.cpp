@@ -82,11 +82,15 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 
 	// ジャンプ力をセットする
 	_owner->SetJumpPower(_owner->GetFirstJumpPower());
+
 	// 着地状態になったのでジャンプ利用可能フラグをtrueにセット
 	_owner->SetIsAvailableJumpKey(true);
+
 	// ジャンプフラグをfalseにセット
 	_owner->SetJumpFlag(false);
 	_owner->SetSwitchJumpFlag(false);
+
+	// ジャンプ攻撃系フラグ初期化
 	_owner->SetIsJumpAttck(false);
 	_owner->SetIsAvailableJumpAttck(true);
 	// 入力が入らない値をもらう

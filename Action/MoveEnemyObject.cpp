@@ -107,9 +107,6 @@ void MoveEnemyObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{
-		if (_hitObject.GetState() == State::Active)
-		{
-			isDeadFlag = true;
-		}
+		isDeadFlag = true;
 	}
 }

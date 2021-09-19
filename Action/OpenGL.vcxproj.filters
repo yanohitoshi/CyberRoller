@@ -417,6 +417,9 @@
     <ClCompile Include="MoveEnemyObjectStateTurn.cpp">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
     </ClCompile>
+    <ClCompile Include="JumpAttackTutorialParticl.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -836,6 +839,9 @@
     </ClInclude>
     <ClInclude Include="MoveEnemyObjectStateTurn.h">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObjectState\State</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackTutorialParticl.h">
+      <Filter>UI\ParticleUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -192,7 +192,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//ジャンプ攻撃判定用のsphereCollider
 	jumpAttackSphereCol = new SphereCollider(this, ColliderComponent::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1));
-	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),1000.0f };
+	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
 	// 砂ぼこりと着地時のeffectを持たせる
@@ -290,11 +290,10 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	
 	// フレームの最後に接地判定と押されている速度を初期化
 	onGround = false;
-	isSelectingTargetEnemy = false;
 	isHitEnemy = false;
 	pushedVelocity = Vector3::Zero;
+	isSelectingTargetEnemy = false;
 	attackTargetEnemy = nullptr;
-	//isSelectingTargetEnemy = false;
 
 	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
 	// 連続で切り替えしアニメーションに入らないように抑制をかけるため
@@ -448,9 +447,10 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		FixCollision(playerBox, _hitObject.aabb);
 	}
 
-	// 当たった際にプレイヤーがひるむオブジェクトだったら
+	// 当たったオブジェクトが敵だったら
 	if (hitObjectTag == Tag::ENEMY)
 	{
+		// ジャンプアタック状態でなかったら
 		if (!isJumpAttck)
 		{
 			isHitEnemy = true;
@@ -511,12 +511,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 
 void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 {
-	//if (_hitObject.GetState() != State::Active)
-	//{
-	//	attackTargetEnemy = nullptr;
-	//	isSelectingTargetEnemy = false;
-	//	return;
-	//}
 
 	if (attackTargetEnemy != nullptr)
 	{
@@ -542,9 +536,12 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 	}
 
 	isSelectingTargetEnemy = true;
-	//if (attackTargetEnemy != nullptr)
+
+	//if (_hitObject.GetState() == State::Active)
 	//{
 	//}
+
+
 }
 
 void PlayerObject::ActiveSwitchJumpProcess()
