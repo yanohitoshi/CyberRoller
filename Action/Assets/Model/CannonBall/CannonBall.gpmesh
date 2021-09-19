@@ -3,14 +3,14 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/CannonBall/CannonBall_DiffuseMap.png"
+		"Assets/Model/CannonBall/Player2.png"
 	],
-	"diffusemap":"Assets/Model/CannonBall/CannonBall_DiffuseMap.png",
-	"nomalmap":"Assets/Model/CannonBall/CannonBall_DiffuseMap.png",
+	"diffusemap":"Assets/Model/CannonBall/Player2.png",
+	"nomalmap":"Assets/Model/CannonBall/Player2.png",
     "specularmap":"none",
-    "emissivemap":"Assets/Model/CannonBall/CannonBall_DiffuseMap.png",
+    "emissivemap":"none",
 	"specularPower":100.0,
-    "luminance":"1.0",
+    "luminance":"0.0",
 	"vertices":[
 		[0.126558,-0.091950,-0.987688,0.141732,-0.094488,-0.984252,0.049988,0.949707],
 		[0.148778,-0.048341,-0.987688,0.165354,-0.047244,-0.984252,0.000000,0.949707],

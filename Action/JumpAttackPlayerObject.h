@@ -43,5 +43,9 @@ private:
 	PlayerObject* ownerObject;
 	SphereCollider* sphereCollider;
 
+	// ‰ñ“]‚·‚éÛ‚ÌŠp“x
+	const float Angle;
+	State tmpState;
+
 };
 

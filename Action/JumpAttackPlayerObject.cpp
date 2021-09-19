@@ -6,12 +6,19 @@
 
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
+	, Angle(90.0f)
 {
 	ownerObject = _ownerObject;
 	position = ownerObject->GetPosition();
 	position.z += 100.0f;
+
+	// 前方ベクトル初期化
+	forwardVec = ownerObject->GetForwardVec();
+
 	SetPosition(position);
 	SetScale(_size);
+	SetState(State::Disabling);
+	tmpState = State::Disabling;
 
 	meshComponent = new MeshComponent(this, false, false);
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/CannonBall/CannonBall.gpmesh"));
@@ -40,6 +47,22 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 		SetState(State::Disabling);
 		meshComponent->SetVisible(false);
 	}
+
+	if (tmpState == State::Disabling && GetState() == State::Active)
+	{
+		if (forwardVec != ownerObject->GetForwardVec())
+		{
+			RotateToNewForward(ownerObject->GetForwardVec());
+			forwardVec = ownerObject->GetForwardVec();
+		}
+	}
+
+	//Z軸を指定角度回転させる
+	float radian = Math::ToRadians(Angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitY, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
 
 	position = ownerObject->GetPosition();
 	position.z += 100.0f;
