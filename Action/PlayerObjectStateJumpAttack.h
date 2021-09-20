@@ -42,6 +42,8 @@ public:
 private:
 	bool isSelectingTargetEnemy;
 	int unSelectTargetEnemyFrameCount;
+	const float AttackSpeed;
+	const int UnSelectTargetAttackTime;
 	Vector3 jumpAttackDirection;
 	GameObject* attackTargetEnemy;
 };

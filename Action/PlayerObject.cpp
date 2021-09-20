@@ -15,6 +15,7 @@
 #include "BoxCollider.h"
 #include "PlayerSandSmokeMakeManager.h"
 #include "LandingEffectManager.h"
+#include "PlayerTransformEffectManager.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
@@ -198,6 +199,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 砂ぼこりと着地時のeffectを持たせる
 	new PlayerSandSmokeMakeManager(this);
 	new LandingEffectManager(this);
+	//new PlayerTransformEffectManager(this);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
@@ -536,12 +538,6 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
 	}
 
 	isSelectingTargetEnemy = true;
-
-	//if (_hitObject.GetState() == State::Active)
-	//{
-	//}
-
-
 }
 
 void PlayerObject::ActiveSwitchJumpProcess()

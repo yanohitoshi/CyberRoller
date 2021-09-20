@@ -423,6 +423,21 @@
     <ClCompile Include="FireWorksEffectManager.cpp">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
     </ClCompile>
+    <ClCompile Include="JumpAttackEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTransformEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTransformEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="AfterimageEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="AfterimageEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -848,6 +863,21 @@
     </ClInclude>
     <ClInclude Include="FireWorksEffectManager.h">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTransformEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTransformEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="AfterimageEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="AfterimageEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

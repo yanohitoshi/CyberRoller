@@ -2,6 +2,8 @@
 #include "SkeletalMeshComponent.h"
 
 PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack()
+	: AttackSpeed(3000.0f)
+	, UnSelectTargetAttackTime(15)
 {
 }
 
@@ -22,11 +24,11 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 	{
 		++unSelectTargetEnemyFrameCount;
 		jumpAttackDirection.z = 0.0f;
-		velocity = jumpAttackDirection * 3000.0f;
+		velocity = jumpAttackDirection * AttackSpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
-	if (_owner->GetIsJumpAttackSuccess() || unSelectTargetEnemyFrameCount > 15)
+	if (_owner->GetIsJumpAttackSuccess() || unSelectTargetEnemyFrameCount > UnSelectTargetAttackTime)
 	{
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}

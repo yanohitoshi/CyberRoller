@@ -147,6 +147,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AfterimageEffect.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BaseScene.cpp" />
@@ -172,6 +173,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyObjectBase.cpp" />
     <ClCompile Include="EnemyObjectStateBase.cpp" />
+    <ClCompile Include="JumpAttackEffect.cpp" />
     <ClCompile Include="JumpAttackEffectManager.cpp" />
     <ClCompile Include="JumpAttackTutorialParticl.cpp" />
     <ClCompile Include="MoveEnemyObject.cpp" />
@@ -217,6 +219,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerObjectStateRunStart.cpp" />
     <ClCompile Include="PlayerObjectStateRunStop.cpp" />
     <ClCompile Include="PlayerObjectStateRunTurn.cpp" />
+    <ClCompile Include="AfterimageEffectManager.cpp" />
+    <ClCompile Include="PlayerTransformEffect.cpp" />
+    <ClCompile Include="PlayerTransformEffectManager.cpp" />
     <ClCompile Include="PushBoardObject.cpp" />
     <ClCompile Include="PushBoxObject.cpp" />
     <ClCompile Include="RespawnPoint.cpp" />
@@ -306,6 +311,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="WarningSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AfterimageEffect.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CountDownBackFont.h" />
     <ClInclude Include="BaseScene.h" />
@@ -331,6 +337,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyObjectBase.h" />
     <ClInclude Include="EnemyObjectStateBase.h" />
+    <ClInclude Include="JumpAttackEffect.h" />
     <ClInclude Include="JumpAttackEffectManager.h" />
     <ClInclude Include="JumpAttackTutorialParticl.h" />
     <ClInclude Include="MoveEnemyObject.h" />
@@ -376,6 +383,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerObjectStateRunStart.h" />
     <ClInclude Include="PlayerObjectStateRunStop.h" />
     <ClInclude Include="PlayerObjectStateRunTurn.h" />
+    <ClInclude Include="AfterimageEffectManager.h" />
+    <ClInclude Include="PlayerTransformEffect.h" />
+    <ClInclude Include="PlayerTransformEffectManager.h" />
     <ClInclude Include="PushBoardObject.h" />
     <ClInclude Include="PushBoxObject.h" />
     <ClInclude Include="RespawnPoint.h" />

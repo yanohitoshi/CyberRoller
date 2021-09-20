@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "SphereCollider.h"
+#include "JumpAttackEffectManager.h"
 
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
@@ -27,6 +28,8 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	sphereCollider = new SphereCollider(this, ColliderComponent::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
+
+	new JumpAttackEffectManager(this);
 }
 
 JumpAttackPlayerObject::~JumpAttackPlayerObject()
