@@ -183,13 +183,7 @@
     <ClCompile Include="FierWorksEffect.cpp">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
     </ClCompile>
-    <ClCompile Include="FireWorksEffectManeger.cpp">
-      <Filter>GameObjects\Effect\ClearEffect</Filter>
-    </ClCompile>
     <ClCompile Include="GameClearEffect.cpp">
-      <Filter>GameObjects\Effect\ClearEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClearEffectManeger.cpp">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
     </ClCompile>
     <ClCompile Include="CrystalDefaultEffect.cpp">
@@ -201,13 +195,7 @@
     <ClCompile Include="LandingEffect.cpp">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClCompile>
-    <ClCompile Include="LandingEffectManeger.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerSandSmokeEffect.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSandSmokeMakeManeger.cpp">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClCompile>
     <ClCompile Include="SandSmokeMakeManeger.cpp">
@@ -420,6 +408,21 @@
     <ClCompile Include="JumpAttackTutorialParticl.cpp">
       <Filter>UI\ParticleUI</Filter>
     </ClCompile>
+    <ClCompile Include="JumpAttackEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeMakeManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearEffectManager.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireWorksEffectManager.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -612,13 +615,7 @@
     <ClInclude Include="FierWorksEffect.h">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
     </ClInclude>
-    <ClInclude Include="FireWorksEffectManeger.h">
-      <Filter>GameObjects\Effect\ClearEffect</Filter>
-    </ClInclude>
     <ClInclude Include="GameClearEffect.h">
-      <Filter>GameObjects\Effect\ClearEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClearEffectManeger.h">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
     </ClInclude>
     <ClInclude Include="CrystalDefaultEffect.h">
@@ -630,13 +627,7 @@
     <ClInclude Include="LandingEffect.h">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClInclude>
-    <ClInclude Include="LandingEffectManeger.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerSandSmokeEffect.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSandSmokeMakeManeger.h">
       <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClInclude>
     <ClInclude Include="SandSmokeMakeManeger.h">
@@ -843,6 +834,21 @@
     <ClInclude Include="JumpAttackTutorialParticl.h">
       <Filter>UI\ParticleUI</Filter>
     </ClInclude>
+    <ClInclude Include="JumpAttackEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeMakeManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearEffectManager.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireWorksEffectManager.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -991,6 +997,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects\MoveEnemyObjectState\State">
       <UniqueIdentifier>{175e1006-4c68-4e68-801a-f2feab492a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\JumpAttack">
+      <UniqueIdentifier>{cb5fd6ab-4db1-4e47-bcc4-aa26bc5017f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

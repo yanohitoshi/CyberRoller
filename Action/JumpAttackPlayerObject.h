@@ -44,7 +44,9 @@ private:
 	SphereCollider* sphereCollider;
 
 	// ‰ñ“]‚·‚éÛ‚ÌŠp“x
-	const float Angle;
+	float rotationAngle;
+	// ‰ñ“]Šp‚É‘«‚µ‘±‚¯‚é’l’è”
+	const float Rotation;
 	State tmpState;
 
 };

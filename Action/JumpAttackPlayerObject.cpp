@@ -6,12 +6,12 @@
 
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
-	, Angle(90.0f)
+	, Rotation(10.0f)
 {
 	ownerObject = _ownerObject;
 	position = ownerObject->GetPosition();
 	position.z += 100.0f;
-
+	rotationAngle = 0.0f;
 	// ‘O•ûƒxƒNƒgƒ‹‰Šú‰»
 	forwardVec = ownerObject->GetForwardVec();
 
@@ -27,7 +27,6 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	sphereCollider = new SphereCollider(this, ColliderComponent::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
-
 }
 
 JumpAttackPlayerObject::~JumpAttackPlayerObject()
@@ -48,21 +47,17 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 		meshComponent->SetVisible(false);
 	}
 
-	if (tmpState == State::Disabling && GetState() == State::Active)
-	{
-		if (forwardVec != ownerObject->GetForwardVec())
-		{
-			RotateToNewForward(ownerObject->GetForwardVec());
-			forwardVec = ownerObject->GetForwardVec();
-		}
-	}
 
-	//ZŽ²‚ðŽw’èŠp“x‰ñ“]‚³‚¹‚é
-	float radian = Math::ToRadians(Angle);
-	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitY, radian);
-	Quaternion target = Quaternion::Concatenate(rot, inc);
-	SetRotation(target);
+	if (state == State::Active)
+	{
+		rotationAngle += Rotation;
+		//ZŽ²‚ðŽw’èŠp“x‰ñ“]‚³‚¹‚é
+		float radian = Math::ToRadians(rotationAngle);
+		Quaternion rot = this->GetRotation();
+		Quaternion inc(Vector3::UnitY, radian);
+		Quaternion target = Quaternion::Concatenate(rot, inc);
+		SetRotation(target);
+	}
 
 	position = ownerObject->GetPosition();
 	position.z += 100.0f;

@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyObjectBase.cpp" />
     <ClCompile Include="EnemyObjectStateBase.cpp" />
+    <ClCompile Include="JumpAttackEffectManager.cpp" />
     <ClCompile Include="JumpAttackTutorialParticl.cpp" />
     <ClCompile Include="MoveEnemyObject.cpp" />
     <ClCompile Include="MoveEnemyObjectStateDead.cpp" />
@@ -189,7 +190,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="HDRRenderer.cpp" />
     <ClCompile Include="JumpAttackPlayerObject.cpp" />
     <ClCompile Include="LandingEffect.cpp" />
-    <ClCompile Include="LandingEffectManeger.cpp" />
+    <ClCompile Include="LandingEffectManager.cpp" />
     <ClCompile Include="MoveBlockObject.cpp" />
     <ClCompile Include="NeedleObject.cpp" />
     <ClCompile Include="NeedlePanelObject.cpp" />
@@ -232,12 +233,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="StageCreatorBase.cpp" />
     <ClCompile Include="StartCountDownSprite.cpp" />
     <ClCompile Include="FierWorksEffect.cpp" />
-    <ClCompile Include="FireWorksEffectManeger.cpp" />
+    <ClCompile Include="FireWorksEffectManager.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameClearEffect.cpp" />
-    <ClCompile Include="GameClearEffectManeger.cpp" />
+    <ClCompile Include="GameClearEffectManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverSceneUI.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -262,7 +263,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClCompile>
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayerSandSmokeEffect.cpp" />
-    <ClCompile Include="PlayerSandSmokeMakeManeger.cpp" />
+    <ClCompile Include="PlayerSandSmokeMakeManager.cpp" />
     <ClCompile Include="FirstStageScene.cpp" />
     <ClCompile Include="FirstStageUI.cpp" />
     <ClCompile Include="RapidJsonHelper.cpp" />
@@ -330,6 +331,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyObjectBase.h" />
     <ClInclude Include="EnemyObjectStateBase.h" />
+    <ClInclude Include="JumpAttackEffectManager.h" />
     <ClInclude Include="JumpAttackTutorialParticl.h" />
     <ClInclude Include="MoveEnemyObject.h" />
     <ClInclude Include="MoveEnemyObjectStateDead.h" />
@@ -347,7 +349,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="HDRRenderer.h" />
     <ClInclude Include="JumpAttackPlayerObject.h" />
     <ClInclude Include="LandingEffect.h" />
-    <ClInclude Include="LandingEffectManeger.h" />
+    <ClInclude Include="LandingEffectManager.h" />
     <ClInclude Include="MoveBlockObject.h" />
     <ClInclude Include="NeedleObject.h" />
     <ClInclude Include="NeedlePanelObject.h" />
@@ -390,12 +392,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="StageCreatorBase.h" />
     <ClInclude Include="StartCountDownSprite.h" />
     <ClInclude Include="FierWorksEffect.h" />
-    <ClInclude Include="FireWorksEffectManeger.h" />
+    <ClInclude Include="FireWorksEffectManager.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameClearEffect.h" />
-    <ClInclude Include="GameClearEffectManeger.h" />
+    <ClInclude Include="GameClearEffectManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverSceneUI.h" />
     <ClInclude Include="InputSystem.h" />
@@ -420,7 +422,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClInclude>
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayerSandSmokeEffect.h" />
-    <ClInclude Include="PlayerSandSmokeMakeManeger.h" />
+    <ClInclude Include="PlayerSandSmokeMakeManager.h" />
     <ClInclude Include="FirstStageScene.h" />
     <ClInclude Include="FirstStageUI.h" />
     <ClInclude Include="RapidJsonHelper.h" />

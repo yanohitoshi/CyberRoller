@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "GameClearEffect.h"
-#include "FireWorksEffectManeger.h"
+#include "FireWorksEffectManager.h"
 
 GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Particle_Soft.png")
@@ -18,7 +18,7 @@ GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
 	speed = 400.0f;
 
 	// 分岐させるエフェクトのマネージャークラスを追加
-	new FireWorksEffectManeger(this);
+	new FireWorksEffectManager(this);
 
 }
 

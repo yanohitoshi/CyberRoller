@@ -8,7 +8,7 @@
 #include "Mesh.h"
 #include "PlayerObject.h"
 #include "MainCameraObject.h"
-#include "GameClearEffectManeger.h"
+#include "GameClearEffectManager.h"
 #include "CrystalEffectManager.h"
 
 ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject)
@@ -39,7 +39,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 
 	playerObject = _playerObject;
 
-	new GameClearEffectManeger(this);
+	new GameClearEffectManager(this);
 
 	// 4色のエフェクトを付与
 	new CrystalEffectManager(this, CrystalColor::WHITE);

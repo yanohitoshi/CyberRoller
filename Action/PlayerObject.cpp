@@ -13,8 +13,8 @@
 #include "InputSystem.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-#include "PlayerSandSmokeMakeManeger.h"
-#include "LandingEffectManeger.h"
+#include "PlayerSandSmokeMakeManager.h"
+#include "LandingEffectManager.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
@@ -196,8 +196,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
 	// 砂ぼこりと着地時のeffectを持たせる
-	new PlayerSandSmokeMakeManeger(this);
-	new LandingEffectManeger(this);
+	new PlayerSandSmokeMakeManager(this);
+	new LandingEffectManager(this);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加

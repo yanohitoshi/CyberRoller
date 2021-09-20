@@ -11,8 +11,9 @@ PlayerObjectStateJumpAttack::~PlayerObjectStateJumpAttack()
 
 PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _deltaTime)
 {
-	if (_owner->GetIsSelectingTargetEnemy() && attackTargetEnemy->GetState() == State::Active)
+	if (isSelectingTargetEnemy && attackTargetEnemy->GetState() == State::Active)
 	{
+
 		Vector3 tmpPosition;
 		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
 		_owner->SetPosition(tmpPosition);
@@ -45,7 +46,9 @@ void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 
 	_owner->SetIsAvailableJumpAttck(false);
 
-	if (_owner->GetIsSelectingTargetEnemy())
+	isSelectingTargetEnemy = _owner->GetIsSelectingTargetEnemy();
+
+	if (isSelectingTargetEnemy)
 	{
 		attackTargetEnemy = _owner->GetAttackTargetEnemy();
 	}
