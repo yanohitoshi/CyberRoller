@@ -432,12 +432,6 @@
     <ClCompile Include="PlayerTransformEffect.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
     </ClCompile>
-    <ClCompile Include="AfterimageEffectManager.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
-    </ClCompile>
-    <ClCompile Include="AfterimageEffect.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -672,9 +666,6 @@
     <ClInclude Include="ClearPointObject.h">
       <Filter>GameObjects\StageObjects\ClearObject</Filter>
     </ClInclude>
-    <ClInclude Include="NextSceneObject.h">
-      <Filter>GameObjects\StageObjects\ClearObject</Filter>
-    </ClInclude>
     <ClInclude Include="JumpSwitchObject.h">
       <Filter>GameObjects\StageObjects\SwitchObject</Filter>
     </ClInclude>
@@ -873,11 +864,8 @@
     <ClInclude Include="PlayerTransformEffect.h">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
     </ClInclude>
-    <ClInclude Include="AfterimageEffectManager.h">
-      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
-    </ClInclude>
-    <ClInclude Include="AfterimageEffect.h">
-      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    <ClInclude Include="NextSceneObject.h">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -667,8 +667,6 @@ bool Renderer::LoadShaders()
 	{
 		return false;
 	}
-	//skyboxShader->SetActive();
-	//skyboxShader->SetMatrixUniform("uViewProj", view * projection);
 
 	//particleシェーダー
 	particleShader = new Shader();
@@ -1075,6 +1073,7 @@ void Renderer::DrawParticle()
 	// シェーダーON
 	particleShader->SetActive();
 	particleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+
 	// 全てのパーティクルのビルボード行列をセット
 	(*itr)->SetBillboardMat(GetBillboardMatrix());
 

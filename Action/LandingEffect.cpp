@@ -4,7 +4,7 @@
 #include "LandingEffect.h"
 
 LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle7.png")
+	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle7.png", true)
 	, AddScale(0.8f)
 	, SubAlpha(0.05f)
 {

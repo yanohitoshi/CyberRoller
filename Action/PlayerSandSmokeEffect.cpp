@@ -4,7 +4,7 @@
 #include "PlayerSandSmokeEffect.h"
 
 PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity,bool _run)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle_Soft.png")
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(5.0f)
 	, SubAlpha(0.05f)
 {

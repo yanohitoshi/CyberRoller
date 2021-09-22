@@ -39,6 +39,8 @@
 #include "PlayerObjectStateFallDead.h"
 #include "JumpAttackPlayerObject.h"
 
+#include "ParticleComponent.h"
+
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
 bool PlayerObject::chackJumpFlag = false;
@@ -199,7 +201,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 砂ぼこりと着地時のeffectを持たせる
 	new PlayerSandSmokeMakeManager(this);
 	new LandingEffectManager(this);
-	//new PlayerTransformEffectManager(this);
+	new PlayerTransformEffectManager(this);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
@@ -307,6 +309,8 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 	// 一定時間放置によるゲームをリセットするかチェック
 	ChackRestartProcess();
+
+	ParticleComponent::SetPlayerRotation(rotation);
 
 }
 

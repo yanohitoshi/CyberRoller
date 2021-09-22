@@ -69,19 +69,25 @@ private:
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
-	//開閉速度
+	// 開閉速度
 	const float moveSpeed;
-	//objectの初期位置を保存する用のvector
+	// objectの初期位置を保存する用のvector
 	Vector3 initPos;
-	//objectの停止位置を保存する用のvector
+	// objectの停止位置を保存する用のvector
 	Vector3 stopPos;
-	//open/close判定用flag
+	// open/close判定用flag
 	bool openFlag;
 	// チェックするTag保存用
 	Tag chackTag;
-
 	// Y軸ををずらして壁を中心に位置づけるための定数
 	const float ShiftPositionY;
 
+public: // getter・setter
+
+	/*
+	@fn openFlagのgetter関数
+	@return	openFlag open/close判定用Flag
+	*/
+	bool GetOpenFlag() { return openFlag; }
 };
 

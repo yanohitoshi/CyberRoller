@@ -26,7 +26,7 @@ public:
 	@param _offset 親オブジェクトクラスと画像を描画する位置の差
 	@param _scale 画像の描画サイズ
 	*/
-	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
+	ParticleComponent(GameObject* _owner, bool _useStaticBillboardMat ,const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
 	
 	/*
 	@fn デストラクタ
@@ -62,6 +62,8 @@ private:
 	PARTICLE_ENUM blendType;
 	//描画を行うか
 	bool visible;
+	// BillboardMatを使用するか
+	bool useStaticBillboardMat;
 	// ビルボード行列
 	static Matrix4 staticBillboardMat; 
 	// カメラのワールド座標
@@ -70,6 +72,8 @@ private:
 	int drawOrder;
 	//反転を行うか
 	bool reverce;
+
+	static Quaternion playerRotation;
 
 public: //ゲッターセッター
 
@@ -144,6 +148,8 @@ public: //ゲッターセッター
 	@param _flag 反転を行うか
 	*/
 	void SetReverce(bool _flag) { reverce = _flag; }
+
+	static void SetPlayerRotation(Quaternion _playerRotation) { playerRotation = _playerRotation; }
 };
 
 /*

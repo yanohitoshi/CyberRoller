@@ -246,12 +246,12 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject);
+		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 
 	case(FIRST_MOVE_WALL_PARTS):
 		// 第一区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
 		break;
 	case(61):

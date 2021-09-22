@@ -4,7 +4,7 @@
 #include "JumpTutorialParticl.h"
 
 JumpTutorialParticl::JumpTutorialParticl(const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/jump_tutorial.png")
+	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/jump_tutorial.png",true)
 	, InitScale(512.0f)
 {
 	// ParticleComponentèâä˙âª

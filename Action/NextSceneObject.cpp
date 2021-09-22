@@ -11,8 +11,10 @@
 #include "CrystalEffectManager.h"
 
 
-NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject)
+NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock)
 	: GameObject(false, _objectTag)
+	, playerObject(_playerObject)
+	, lastMoveWallBlock(_lastMoveWallBlock)
 	, Angle(15.0f)
 	, MoveSpeed(20.0f)
 	, CalculationDrawEndPosition(3000.0f)
@@ -34,18 +36,16 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
 
-	playerObject = _playerObject;
-
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::CLEAR_POINT_TAG, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,15.0f) };
 	boxCollider->SetObjectBox(aabb);
 
 	// 4色のエフェクトを付与
-	new CrystalEffectManager(this,CrystalColor::WHITE);
-	new CrystalEffectManager(this, CrystalColor::RED);
-	new CrystalEffectManager(this, CrystalColor::BLUE);
-	new CrystalEffectManager(this, CrystalColor::GREEN);
+	new CrystalEffectManager(this,CrystalColor::WHITE, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::RED, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::BLUE, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::GREEN, lastMoveWallBlock);
 }
 
 NextSceneObject::~NextSceneObject()

@@ -6,9 +6,10 @@
 #include "RapidJsonHelper.h"
 #include <vector>
 #include <unordered_map>
+
 // 前置宣言
 class PlayerObject;
-
+class MoveWallBlock;
 
 enum StagePartsName
 {
@@ -136,6 +137,10 @@ protected:
 
 	// プレイヤーを見たいclassにプレイヤーのポインタを渡すための変数
 	PlayerObject* playerObject;
+
+	// そのシーンでの最後の動く壁のポインタ
+	// クリアオブジェクトに渡す(エフェクトを発生させるトリガーに使用するため)
+	MoveWallBlock* lastMoveWallBlock;
 
 	// 動く壁のポジションを少しずらす定数
 	// Y軸は中心のずらすため・Z軸は少し埋まった状態で生成したいため

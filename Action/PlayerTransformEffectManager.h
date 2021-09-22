@@ -45,6 +45,8 @@ private:
     ParticleState particleState;
     // 生成するエフェクトのポジション
     Vector3 effectPosition;
+    int frameCount;
+    int effectCount;
     // 一度に生成するエフェクトの最大数
     const int MaxEffects;
     // ランダムの範囲の割合

@@ -74,13 +74,13 @@ void main()
 	vec3 diffuseColor = vec3(Diffuse) * texColor;
 	vec3 ambientColor = uAmbientLight * texColor;
 
-    vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular) * uLuminance + ambientColor * 0.8f;
+    vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular)  + ambientColor * 0.8f;
 
     FragColor = vec4(result, 1.0);
     
     //輝度計算によって高輝度成分のみ、HiBrightBufferに書き込み
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
-    if(brightness > 1.0)
+    if(brightness > 0.8f)
     {
         HiBrightBuffer = vec4(result, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
 

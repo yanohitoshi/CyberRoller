@@ -1,18 +1,16 @@
 #include "JumpAttackEffect.h"
 
 JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle7.png")
-	, AddScale(0.8f)
+	: ParticleEffectBase(_pos, _velocity, 45, "Assets/Effect/Particle7.png", true)
+	, AddScale(1.0f)
 	, SubAlpha(0.05f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	scale = 128.0f;
-	alpha = 0.6f;
-	speed = 2.0f;
+	alpha = 1.0f;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
-	//particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 0.65f));
 }
 

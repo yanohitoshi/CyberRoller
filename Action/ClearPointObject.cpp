@@ -11,8 +11,10 @@
 #include "GameClearEffectManager.h"
 #include "CrystalEffectManager.h"
 
-ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject)
+ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock)
 	: GameObject(false,_objectTag)
+	, playerObject(_playerObject)
+	, lastMoveWallBlock(_lastMoveWallBlock)
 	, Angle(10.0f)
 	, MoveSpeed(50.0f)
 {
@@ -42,17 +44,16 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 	new GameClearEffectManager(this);
 
 	// 4色のエフェクトを付与
-	new CrystalEffectManager(this, CrystalColor::WHITE);
-	new CrystalEffectManager(this, CrystalColor::RED);
-	new CrystalEffectManager(this, CrystalColor::BLUE);
-	new CrystalEffectManager(this, CrystalColor::GREEN);
+	new CrystalEffectManager(this, CrystalColor::WHITE, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::RED, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::BLUE, lastMoveWallBlock);
+	new CrystalEffectManager(this, CrystalColor::GREEN, lastMoveWallBlock);
 
 
 }
 
 ClearPointObject::~ClearPointObject()
 {
-
 }
 
 void ClearPointObject::UpdateGameObject(float _deltaTime)

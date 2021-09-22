@@ -3,9 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "CrystalEffectManager.h"
 #include "CrystalDefaultEffect.h"
+#include "PlayerObject.h"
+#include "MoveWallBlock.h"
 
 
-CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor)
+CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor, MoveWallBlock* _lastMoveWall)
 	:GameObject(false, Tag::PARTICLE)
 	, ShiftPositionZ(100.0f)
 	, Radius(150.0f)
@@ -15,6 +17,7 @@ CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _cry
 	, RandValue(100)
 	, DeltaTimeCorrectionValue(10.0f)
 	, LastCorrection(0.1f)
+	, lastMoveWallBlock(_lastMoveWall)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»	
 	crystalColor = _crystalColor;
@@ -62,7 +65,7 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	++activeFrameCount;
 
 	// activeFrameCount‚ª8ˆÈã‚É‚È‚Á‚½‚ç
-	if (activeFrameCount  >= 8)
+	if (activeFrameCount  >= 8 && lastMoveWallBlock->GetOpenFlag())
 	{
 		// particleState‚ð—LŒø‰»
 		particleState = ParticleState::PARTICLE_ACTIVE;

@@ -460,7 +460,7 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 
 	case(SECOND_MOVE_WALL_PARTS):
 		// 第二区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - SmallMoveWallSize.z));
 		break;
 	}
@@ -516,7 +516,7 @@ void SecondStageCreator::CreateLayer11(int _indexX, int _indexY)
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(layer11Pos, Tag::CLEAR_POINT, playerObject);
+		new NextSceneObject(layer11Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 	}
 }
@@ -533,7 +533,7 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 	{
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer12Pos.x, layer12Pos.y, layer12Pos.z), Tag::CLEAR_POINT, playerObject);
+		new NextSceneObject(Vector3(layer12Pos.x, layer12Pos.y, layer12Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 	}
 }

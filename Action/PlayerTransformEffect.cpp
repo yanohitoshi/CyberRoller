@@ -1,18 +1,20 @@
 #include "PlayerTransformEffect.h"
 
 PlayerTransformEffect::PlayerTransformEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Particle7.png")
-	, AddScale(1.0f)
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle5.png", false)
+	, AddScale(16.0f)
 	, SubAlpha(0.05f)
 {
 	// メンバー変数の初期化
-	scale = 32.0f;
+	scale = 0.0f;
 	alpha = 1.0f;
-	speed = 50.0f;
+	speed = 25.0f;
+	position = _pos;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
-	particleComponent->SetColor(Vector3(1.0f, 0.1f, 0.0f));
+	particleComponent->SetColor(Vector3(1.0f, 1.0f, 1.0f));
+	SetPosition(position);
 }
 
 PlayerTransformEffect::~PlayerTransformEffect()
@@ -27,8 +29,8 @@ void PlayerTransformEffect::UpdateGameObject(float _deltaTime)
 	// ライフカウントが0以上
 	if (lifeCount >= 0)
 	{
-		//// 定数を足して拡大
-		//scale += AddScale;
+		// 定数を足して拡大
+		scale += AddScale;
 		// 定数を引いて透過
 		alpha -= SubAlpha;
 
@@ -37,10 +39,10 @@ void PlayerTransformEffect::UpdateGameObject(float _deltaTime)
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 
-		// ポジションに速度を追加
-		position += velocity * speed;
-		// ポジションを更新
-		SetPosition(position);
+		//// ポジションに速度を追加
+		//position += velocity * speed;
+		//// ポジションを更新
+		//SetPosition(position);
 	}
 
 	// ライフカウントが0以下

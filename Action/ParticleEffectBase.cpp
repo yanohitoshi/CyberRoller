@@ -5,14 +5,14 @@
 #include "Renderer.h"
 #include "Texture.h"
 
-ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, const float& _scale)
+ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, bool _useStaticBillboardMat,const float& _scale)
 	: GameObject(false,Tag::PARTICLE)
 	, lifeCount(_lifeCount)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	velocity = _velocity;
 	SetPosition(_pos);
-	particleComponent = new ParticleComponent(this);
+	particleComponent = new ParticleComponent(this, _useStaticBillboardMat);
 	particleComponent->SetTextureID(RENDERER->GetTexture(_spriteFileName)->GetTextureID());
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 	particleComponent->SetScale(_scale);

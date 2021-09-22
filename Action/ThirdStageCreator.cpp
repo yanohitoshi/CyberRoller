@@ -733,13 +733,13 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 
 	case(SECOND_MOVE_WALL_PARTS):
 		// 第二区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer15Pos.x, layer15Pos.y + ShiftMoveWallY, layer15Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer15Pos.x, layer15Pos.y + ShiftMoveWallY, layer15Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z - BigMoveWallSize.z));
 		break;
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::CLEAR_POINT, playerObject);
+		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 
 	case(FRONT_PUSH_BOX):

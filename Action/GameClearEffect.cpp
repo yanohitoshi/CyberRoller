@@ -5,7 +5,7 @@
 #include "FireWorksEffectManager.h"
 
 GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Particle_Soft.png")
+	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(10.0f)
 	, SubAlpha(0.05f)
 {

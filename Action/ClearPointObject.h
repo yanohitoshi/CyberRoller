@@ -9,6 +9,7 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 class PlayerObject;
+class MoveWallBlock;
 
 /*
 @file ClearPointObject.h
@@ -24,7 +25,7 @@ public:
 	@param	ポジション
 	@param	オブジェクト判別用tag
 	*/
-	ClearPointObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject);
+	ClearPointObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock);
 
 	/*
 	@fn デストラクタ
@@ -62,7 +63,7 @@ private:
 	Mesh* mesh;
 
 	PlayerObject* playerObject;
-
+	MoveWallBlock* lastMoveWallBlock;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// 回転する際の角度

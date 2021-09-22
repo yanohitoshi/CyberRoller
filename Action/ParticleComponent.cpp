@@ -11,11 +11,13 @@ Matrix4 ParticleComponent::staticBillboardMat;
 // カメラのワールド座標
 Vector3 ParticleComponent::staticCameraWorldPos;
 
+Quaternion ParticleComponent::playerRotation;
+
 /*
  @param _offset 親オブジェクトクラスと画像を描画する位置の差
  @param _scale 画像の描画サイズ
 */
-ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset, float _scale, int _updateOrder)
+ParticleComponent::ParticleComponent(GameObject* _owner, bool _useStaticBillboardMat,const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
 	, offset(_offset)
 	, scale(_scale)
@@ -25,8 +27,8 @@ ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset,
 	, drawOrder(_updateOrder)
 	, color(Vector3(1, 1, 1))
 	, reverce(false)
-	,textureID(0)
-
+	, textureID(0)
+	, useStaticBillboardMat(_useStaticBillboardMat)
 {
 	//レンダラーにポインターを送る
 	RENDERER->AddParticle(this);
@@ -54,7 +56,20 @@ void ParticleComponent::Draw(Shader* _shader)
 	matScale = Matrix4::CreateScale(scale);
 	mat = Matrix4::CreateTranslation(owner->GetPosition());
 
-	_shader->SetMatrixUniform("uWorldTransform", matScale * staticBillboardMat * mat);
+	// カメラの方向に向かせるかどうかの比較を取って分岐させる
+	// 向かせない場合はプレイヤーの方向（Rotation）を参照する
+	if (useStaticBillboardMat)
+	{
+		_shader->SetMatrixUniform("uWorldTransform", matScale * staticBillboardMat * mat);
+	}
+	else
+	{
+		// textureの向きを90度回転させる
+		Matrix4 offset = Matrix4::CreateRotationZ(Math::ToRadians(90.0f));
+		// プレイヤーのRotationを参照しparticleの向きを決定する
+		Matrix4 playerMatrix = Matrix4::CreateFromQuaternion(playerRotation);
+		_shader->SetMatrixUniform("uWorldTransform", matScale * playerMatrix * offset * mat);
+	}
 	_shader->SetFloatUniform("uAlpha", alpha);
 	_shader->SetVectorUniform("uColor", color);
 
@@ -92,5 +107,6 @@ Matrix4 GetBillboardMatrix()
 	Matrix4 rot;
 	rot = Matrix4::CreateRotationX(-0.5f * 3.14159f);
 	ret =  rot * ret;
+
 	return Matrix4(ret);
 }

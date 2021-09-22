@@ -4,7 +4,7 @@
 #include "SwitchParticleEffect.h"
 
 SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Star.png")
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Star.png",true)
 	, AddScale(1.0f)
 	, SubAlpha(0.02f)
 {

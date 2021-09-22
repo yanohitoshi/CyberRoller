@@ -9,7 +9,7 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 class PlayerObject;
-
+class MoveWallBlock;
 /*
 @file NextSceneObject.h
 @brief NextSceneObjectの生成と更新を行う
@@ -24,7 +24,7 @@ public:
 	@param	ポジション
 	@param	オブジェクト判別用tag
 	*/
-	NextSceneObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject);
+	NextSceneObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject ,MoveWallBlock* _lastMoveWallBlock);
 
 	/*
 	@fn デストラクタ
@@ -63,7 +63,7 @@ private:
 	Mesh* mesh;
 
 	PlayerObject* playerObject;
-
+	MoveWallBlock* lastMoveWallBlock;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// 生成されたときのポジションを保存するよう

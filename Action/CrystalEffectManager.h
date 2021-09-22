@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+class MoveWallBlock;
+
 /*
 @enum クリスタル用effectの色のTag
 */
@@ -30,7 +32,7 @@ public:
     @param	親クラスのポインタ
     @param	何色か判定用Tag
     */
-    CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor);
+    CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor, MoveWallBlock* _lastMoveWall);
 
     /*
     @fn デストラクタ
@@ -56,6 +58,8 @@ private:
     @fn ポジションの回転処理関数
     */
     void RotationProcess(float _deltaTime);
+
+    MoveWallBlock* lastMoveWallBlock;
 
     // 親のGameObject保存用変数
     GameObject* owner;

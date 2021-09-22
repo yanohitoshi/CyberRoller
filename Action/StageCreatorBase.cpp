@@ -24,6 +24,7 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, ShiftSwitchPositionZ(100.0f)
 	, PlayerPositionZ(500.0f)
 	, MaxLayer(17)
+	, lastMoveWallBlock(nullptr)
 {
 	// レイヤーのZ軸ポジションの初期化
 	for (int layer = 0; layer < MaxLayer; layer++)

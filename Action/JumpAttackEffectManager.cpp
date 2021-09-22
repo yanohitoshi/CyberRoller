@@ -35,6 +35,7 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 	{
 		// 無効状態だったら生成カウントを0にしてbreak
 	case (PARTICLE_DISABLE):
+		frameCount = 0;
 		break;
 
 		// 有効状態だったら
@@ -48,13 +49,21 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 
 void JumpAttackEffectManager::ActiveEffectProcess()
 {
-	// ownerのポジションを得る
-	effectPosition = owner->GetPosition();
 	GenerateEffectProcess();
 }
 
 void JumpAttackEffectManager::GenerateEffectProcess()
 {
+	++frameCount;
+	if (frameCount % 2 == 0)
+	{
+		//// ownerのポジションを得る
+		//effectPosition = owner->GetPosition();
+		//// particleを生成
+		//new JumpAttackEffect(effectPosition, Vector3::Zero);
+	}
+	// ownerのポジションを得る
+	effectPosition = owner->GetPosition();
 	// particleを生成
 	new JumpAttackEffect(effectPosition, Vector3::Zero);
 }

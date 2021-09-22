@@ -4,7 +4,7 @@
 
 PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, MaxEffects(50)
+	, MaxEffects(20)
 	, RandValue(100)
 {
 	// メンバー変数の初期化	
@@ -13,6 +13,8 @@ PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	generateFlag = true;
 	velocity = Vector3::Zero;
 	effectPosition = Vector3::Zero;
+	frameCount = 0;
+	effectCount = 0;
 }
 
 PlayerTransformEffectManager::~PlayerTransformEffectManager()
@@ -52,51 +54,34 @@ void PlayerTransformEffectManager::UpdateGameObject(float _deltaTime)
 
 void PlayerTransformEffectManager::ActiveEffectProcess()
 {
-	// ownerのポジションを得る
-	effectPosition = owner->GetPosition();
 
 	// 生成フラグがtrueだったら
 	if (generateFlag == true)
 	{
-		// エフェクト生産関数
-		GenerateEffectProcess();
+		++frameCount;
+		if (frameCount % 2 == 0)
+		{
+			// エフェクト生産関数
+			GenerateEffectProcess();
+		}
 
-		// 生成フラグをfalseに
-		generateFlag = false;
+		if (effectCount >= 3)
+		{
+			effectCount = 0;
+			frameCount = 0;
+			// 生成フラグをfalseに
+			generateFlag = false;
+		}
 	}
 
 }
 
 void PlayerTransformEffectManager::GenerateEffectProcess()
 {
-
-	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
-	{
-
-		// ランダムな値を生成
-		Vector3 randV((rand() % RandValue) , (rand() % RandValue), (rand() % RandValue));
-		// 値が大きすぎるので最後の補正をかけて速度に代入
-		velocity = randV /** LastCorrection*/;
-		velocity.Normalize();
-
-		//// 速度を一時保存設定
-		//Vector3 vel = velocity;
-
-		////ランダムな値を渡す
-		//vel = vel + randV;
-		//// 下に落としたいのでZ軸はマイナスに
-		//vel.z *= -1.0f;
-
-		if (MaxEffects % 2 == 0)
-		{
-			velocity.x *= -1.0f;
-		}
-		else if (MaxEffects % 3 == 0)
-		{
-			velocity.y *= -1.0f;
-		}
-
-		new PlayerTransformEffect(effectPosition, velocity);
-	}
-
+	
+	// ownerのポジションを得る
+	effectPosition = owner->GetPosition();
+	effectPosition.z += 100.0f;
+	new PlayerTransformEffect(effectPosition, velocity);
+	++effectCount;
 }
