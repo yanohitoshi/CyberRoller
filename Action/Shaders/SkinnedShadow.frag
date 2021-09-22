@@ -80,18 +80,20 @@ void main()
     
     //輝度計算によって高輝度成分のみ、HiBrightBufferに書き込み
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
-    if(brightness > 0.8f)
+    if(brightness > 0.2f)
     {
-        HiBrightBuffer = vec4(result, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
+        HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
 
     }
     else
     {
-        HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
+        HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f); //+ texture(uEmissiveMap, fragTexCoord) * uLuminance;
     }
 
     // HDR成分はそのままHDRバッファへ出力
     HDRBuffer = vec4(result, 0.0);
+
+    //vec4(result, 0.0f) +
 
 }
 

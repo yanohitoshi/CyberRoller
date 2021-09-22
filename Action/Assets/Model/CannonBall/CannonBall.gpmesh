@@ -8,9 +8,9 @@
 	"diffusemap":"Assets/Model/CannonBall/Player2.png",
 	"nomalmap":"Assets/Model/CannonBall/Player2.png",
     "specularmap":"none",
-    "emissivemap":"none",
+    "emissivemap":"Assets/Model/robo_model/MIL_EM_TX.bmp",
 	"specularPower":100.0,
-    "luminance":"0.0",
+    "luminance":"35.0",
 	"vertices":[
 		[0.126558,-0.091950,-0.987688,0.141732,-0.094488,-0.984252,0.049988,0.949707],
 		[0.148778,-0.048341,-0.987688,0.165354,-0.047244,-0.984252,0.000000,0.949707],

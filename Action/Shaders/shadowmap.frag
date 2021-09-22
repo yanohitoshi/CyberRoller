@@ -64,13 +64,13 @@ void main()
 
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
 
-    if(brightness > 1.0)
+    if(brightness > 0.3)
     {
-        HiBrightBuffer = vec4(result, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
+        HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
     }
     else
     {
-        HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
+        HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) ;
     }
     HDRBuffer = vec4(result, 0.0);
 }

@@ -11,7 +11,7 @@ JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
-	particleComponent->SetColor(Vector3(1.0f, 1.0f, 0.65f));
+	particleComponent->SetColor(Vector3(0.3f, 0.3f, 1.0f));
 }
 
 JumpAttackEffect::~JumpAttackEffect()
