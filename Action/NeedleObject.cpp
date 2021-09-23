@@ -21,7 +21,7 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/goods_model/needles.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/needles.gpmesh"));
 }
 
 NeedleObject::~NeedleObject()

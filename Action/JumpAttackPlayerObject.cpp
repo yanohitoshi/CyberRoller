@@ -22,7 +22,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	tmpState = State::Disabling;
 
 	meshComponent = new MeshComponent(this, false, false);
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/CannonBall/CannonBall.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 
 	//Ú’n”»’è—p‚ÌsphereCollider
 	sphereCollider = new SphereCollider(this, ColliderComponent::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());

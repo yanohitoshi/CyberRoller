@@ -28,6 +28,7 @@ CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _cry
 	frameCount = 0;
 	activeFrameCount = 0;
 	tmpMovePos = Vector3::Zero;
+	isEffectActive = false;
 
 	// 色ごとにマネージャークラスを生成するためそれぞれに場合分けし初期化
 	if (crystalColor == CrystalColor::WHITE)
@@ -61,11 +62,16 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 
 	RotationProcess(_deltaTime);
 
+	if (!isEffectActive)
+	{
+		isEffectActive = lastMoveWallBlock->GetOpenFlag();
+	}
+
 	// アクティブを制御するカウントを数える
 	++activeFrameCount;
 
 	// activeFrameCountが8以上になったら
-	if (activeFrameCount  >= 8 && lastMoveWallBlock->GetOpenFlag())
+	if (activeFrameCount  >= 8 && isEffectActive)
 	{
 		// particleStateを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;

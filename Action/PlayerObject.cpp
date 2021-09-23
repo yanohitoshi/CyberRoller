@@ -132,9 +132,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
-	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/robo_model/SK_Rob.gpmesh"));
+	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/PlayerModel/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
-	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/robo_model/SK_Rob.gpskel"));
+	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/Player/PlayerModel/SK_Rob.gpskel"));
 
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
@@ -142,37 +142,37 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//-----------アニメーションを読み込み-----------------//
 	// アイドリングアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Happy_Idle_Anim.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Happy_Idle_Anim.gpanim", true);
 	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Tut_Hip_Hop_Dance.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Tut_Hip_Hop_Dance.gpanim", true);
 	// 走りアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Running.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Running.gpanim", true);
 	// 走りだしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Idle_To_Sprint_2.gpanim", false);
 	// 走り終わりアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Run_To_Stop.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Change_Direction.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Change_Direction.gpanim", false);
 	// 敵に当たった際のノックバックアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_KNOCKBACK)] = RENDERER->GetAnimation("Assets/Model/robo_model/Receiving_An_Uppercut.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_KNOCKBACK)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Receiving_An_Uppercut.gpanim", false);
 	// ジャンプループアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Floating.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Floating.gpanim", true);
 	// ジャンプ開始アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Jump_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Jump_up.gpanim", false);
 	// 次の状態が待機の時の着地アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE)] = RENDERER->GetAnimation("Assets/Model/robo_model/Landing.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Landing.gpanim", false);
 	// 次の状態が走りの時の着地アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)] = RENDERER->GetAnimation("Assets/Model/robo_model/Falling_To_Roll.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Falling_To_Roll.gpanim", false);
 	// タイムオーバー時のアニメーション（start）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Praying_down.gpanim", false);
 	// タイムオーバー時のアニメーション（loop）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_Idle.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Praying_Idle.gpanim", false);
 	// タイムオーバー時のアニメーション（コンティニュー）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/robo_model/Praying_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Praying_up.gpanim", false);
 	// タイムオーバー時のアニメーション（ゲームオーバー）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/robo_model/over_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/over_down.gpanim", false);
 	// 死亡時のアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/robo_model/Stunned.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Stunned.gpanim", false);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)], 1.0f);

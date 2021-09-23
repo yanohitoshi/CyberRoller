@@ -29,7 +29,7 @@ PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vec
 	meshComponent = new MeshComponent(this, false, false);
 
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/groundModel/box.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();

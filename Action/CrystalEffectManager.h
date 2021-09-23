@@ -73,6 +73,8 @@ private:
     int frameCount;
     // effectを発生させるタイミングを測るカウント変数
     int activeFrameCount;
+    // effectを発生させるかどうか
+    bool isEffectActive;
     // 回転の半径変数
     const float Radius;
     // 回転で用いるヨーの角度変数

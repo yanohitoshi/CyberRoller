@@ -20,7 +20,7 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/groundModel/box.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, ColliderComponent::NEEDLE_TAG, GetOnCollisionFunc());
 	//AABB box = { Vector3(-0.5f,-0.5f,-5.0f),Vector3(0.5f,0.5f,5.0f) };
