@@ -14,6 +14,7 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "NormalEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -457,6 +458,9 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 	case(THIRD_STAGE_RIGHT_MOVE_GROUND):
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		break;
+	case(61):
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
+		break;
 	}
 }
 
@@ -666,6 +670,9 @@ void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer13SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+	case(61):
+		new NormalEnemyObject(layer13Pos, Tag::ENEMY);
 		break;
 	}
 }

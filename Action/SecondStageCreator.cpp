@@ -13,6 +13,8 @@
 #include "NeedlePanelObject.h"
 #include "MoveBlockObject.h"
 #include "SwitchBaseObject.h"
+#include "NormalEnemyObject.h"
+#include "MoveEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -246,6 +248,11 @@ void SecondStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
+	case(61):
+		new NormalEnemyObject(layer2Pos, Tag::ENEMY);
+		break;
 	}
 
 }
@@ -427,6 +434,14 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer7Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(62):
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, 200.0f, Vector3::UnitY, 800.0f,MoveEnemyTag::RIGHT_MOVE);
+		break;
+
+	case(63):
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, 200.0f, Vector3::NegUnitY , 800.0f, MoveEnemyTag::LEFT_MOVE);
 		break;
 	}
 }

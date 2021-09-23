@@ -14,16 +14,31 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 
 	Move(_owner, _deltaTime);
 
-
-	if (_owner->GetPosition().y > firstPosition.y + moveDistance && moveDistance > 0.0f)
+	if (_owner->GetMoveEnemyTag() == MoveEnemyTag::RIGHT_MOVE)
 	{
-		state = EnemyState::ENEMY_STATE_TURN;
+		if (_owner->GetPosition().y > firstPosition.y + moveDistance && moveDistance > 0.0f)
+		{
+			state = EnemyState::ENEMY_STATE_TURN;
+		}
+
+		if (_owner->GetPosition().y < firstPosition.y + moveDistance && moveDistance < 0.0f)
+		{
+			state = EnemyState::ENEMY_STATE_TURN;
+		}
+	}
+	else if (_owner->GetMoveEnemyTag() == MoveEnemyTag::LEFT_MOVE)
+	{
+		if (_owner->GetPosition().y < firstPosition.y - moveDistance && moveDistance > 0.0f)
+		{
+			state = EnemyState::ENEMY_STATE_TURN;
+		}
+
+		if (_owner->GetPosition().y > firstPosition.y - moveDistance && moveDistance < 0.0f)
+		{
+			state = EnemyState::ENEMY_STATE_TURN;
+		}
 	}
 
-	if (_owner->GetPosition().y < firstPosition.y + moveDistance && moveDistance < 0.0f)
-	{
-		state = EnemyState::ENEMY_STATE_TURN;
-	}
 
 	if (_owner->GetIsDeadFlag())
 	{

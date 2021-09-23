@@ -40,6 +40,7 @@ public:
 		RESPOWN_TAG,
 		NORMAL_ENEMY_TAG,
 		ATTACK_RANGE_TAG,
+		ENEMY_TRACKING_TAG
 	};
 
     /*

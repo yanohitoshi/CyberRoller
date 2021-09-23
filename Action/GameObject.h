@@ -406,6 +406,12 @@ public://ゲッターセッター
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
 	/*
+	@brief　オブジェクトの上を表すベクトルを取得する
+	@param	up(Vector3型)
+	*/
+	Vector3 GetForwardVec() const { return forwardVec; }
+
+	/*
 	@fn Tagのgetter関数
 	@brief オブジェクトを識別するTagを取得
 	@return Tag オブジェクトを識別するTag

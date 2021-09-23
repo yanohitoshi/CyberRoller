@@ -9,8 +9,8 @@
 #include "MoveEnemyObjectStateTurn.h"
 #include "BoxCollider.h"
 
-MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance)
-	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _moveDir, _moveDistance)
+MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
+	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _moveDir, _moveDistance, _moveEnemyTag)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
@@ -40,8 +40,6 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
 	// ターンアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
-	//// 走りだしアニメーション
-	//animTypes[static_cast<unsigned int>(EnemyState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/robo_model/Idle_To_Sprint_2.gpanim", false);
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();

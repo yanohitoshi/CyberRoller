@@ -302,6 +302,13 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TitleSceneUI.cpp" />
     <ClCompile Include="TitleStageCreator.cpp" />
+    <ClCompile Include="TrackingEnemyObject.cpp" />
+    <ClCompile Include="TrackingEnemyStateDead.cpp" />
+    <ClCompile Include="TrackingEnemyStateIdle.cpp" />
+    <ClCompile Include="TrackingEnemyStateMoving.cpp" />
+    <ClCompile Include="TrackingEnemyStateReposition.cpp" />
+    <ClCompile Include="TrackingEnemyStateTracking.cpp" />
+    <ClCompile Include="TrackingEnemyStateTurn.cpp" />
     <ClCompile Include="TutorialSwitchOkEffect.cpp" />
     <ClCompile Include="TutorialSwitchParticlEffect.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -464,6 +471,13 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TitleSceneUI.h" />
     <ClInclude Include="TitleStageCreator.h" />
+    <ClInclude Include="TrackingEnemyObject.h" />
+    <ClInclude Include="TrackingEnemyStateDead.h" />
+    <ClInclude Include="TrackingEnemyStateIdle.h" />
+    <ClInclude Include="TrackingEnemyStateMoving.h" />
+    <ClInclude Include="TrackingEnemyStateReposition.h" />
+    <ClInclude Include="TrackingEnemyStateTracking.h" />
+    <ClInclude Include="TrackingEnemyStateTurn.h" />
     <ClInclude Include="TutorialSwitchOkEffect.h" />
     <ClInclude Include="TutorialSwitchParticlEffect.h" />
     <ClInclude Include="VertexArray.h" />

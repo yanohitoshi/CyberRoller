@@ -1,6 +1,7 @@
 #pragma once
 #include "EnemyObjectBase.h"
 
+
 class MoveEnemyObject :
     public EnemyObjectBase
 {
@@ -12,7 +13,7 @@ public:
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	*/
-	MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance);
+	MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag);
 
 	/*
 	@fn デストラクタ
@@ -41,6 +42,7 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 
 public:
+
 
 };
 

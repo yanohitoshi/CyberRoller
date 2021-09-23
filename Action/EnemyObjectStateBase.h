@@ -21,6 +21,10 @@ enum class EnemyState
 	ENEMY_STATE_MOVING,
 	// ターン
 	ENEMY_STATE_TURN,
+	// 追跡
+	ENEMY_STATE_TRACKING,
+	// リポジション
+	ENEMY_STATE_REPOSITION,
 	// 総アニメーション数
 	ENEMY_STATE_NUM,
 };

@@ -15,6 +15,7 @@
 #include "SwitchBaseObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
+#include "TrackingEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -175,6 +176,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
+	case(63):
+		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 100.0f, playerObject);
+		break;
 	}
 
 }
@@ -259,7 +263,7 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 
 	case(62):
-		new MoveEnemyObject(layer5Pos, Tag::ENEMY, 100.0f, Vector3::UnitY, 400.0f);
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, 100.0f, Vector3::UnitY, 400.0f,MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
 }

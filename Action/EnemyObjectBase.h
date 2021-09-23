@@ -8,6 +8,14 @@ class BoxCollider;
 class Mesh;
 enum class EnemyState;
 
+enum class MoveEnemyTag
+{
+	NOEN_MOVE,
+	LEFT_MOVE,
+	RIGHT_MOVE,
+};
+
+
 class EnemyObjectBase :
     public GameObject
 {
@@ -32,7 +40,17 @@ public:
 	@param	移動方向
 	@param	移動距離
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance, MoveEnemyTag _moveEnemyTag);
+	/*
+	@fn コンストラクタ
+	@brief 移動するエネミーのコンストラクタ
+	@param	ポジション
+	@param	再利用するかフラグ
+	@param	オブジェクト判別用tag
+	@param	移動速度
+	@param	追跡対象
+	*/
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject);
 
 	/*
 	@fn デストラクタ
@@ -68,6 +86,7 @@ protected:
 	// エネミーのAABB構造体
 	AABB enemyBox;
 
+	GameObject* trackingObject;
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
@@ -97,10 +116,14 @@ protected:
 	// 死んでいるかどうか
 	bool isDeadFlag;
 
+	bool isTracking;
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
 	// 変更された次のプレーヤーのstate状態を保存するための変数
 	EnemyState nextState;
+
+	MoveEnemyTag moveEnemyTag;
+
 
 	// Animationプール
 	std::vector<const Animation*> animTypes;
@@ -119,6 +142,7 @@ public:// ゲッターセッター
 	*/
 	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
 
+	GameObject* GetTrackingObject(){ return trackingObject; }
 	/*
 	@fn Animationのgetter関数
 	@param _state 現在のプレイヤーのステータス
@@ -229,9 +253,18 @@ public:// ゲッターセッター
 	bool GetIsDeadFlag() { return isDeadFlag; }
 
 	/*
+	@fn isDeadFlagのGettrer関数
+	@return	bool isDeadFlag 死亡状態
+	*/
+	bool GetIsTracking() { return isTracking; }
+
+	/*
 	@fn isDeadFlagのsetter関数
 	@param	bool isDeadFlag 死亡状態
 	*/
 	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
+
+	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
+
 };
 

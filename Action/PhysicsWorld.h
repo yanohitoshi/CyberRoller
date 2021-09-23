@@ -126,6 +126,7 @@ private:
 	std::vector<SphereCollider*> switchCheckSpheres;
 	std::vector<SphereCollider*> attackRangeSpheres;
 	std::vector<SphereCollider*> jumpAttackPlayerSpheres;
+	std::vector<SphereCollider*> enemyTrackingSpheres;
 
 	onCollisionMap collisionFunction;
 

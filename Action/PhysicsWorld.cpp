@@ -176,6 +176,12 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		IntersectCheckSphere(_sphere, jumpSwitchBoxes);
 	}
 
+	//if (_sphere->GetSphereTag() == ColliderComponent::ENEMY_TRACKING_TAG)
+	//{
+	//	// 接地判定スフィアとジャンプスイッチの当たり判定
+	//	IntersectCheckSphere(_sphere, playerBoxes);
+	//}
+
 	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
 	{
 		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
@@ -453,6 +459,9 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 	case ColliderComponent::JUMP_ATTACK_PLAYER_TAG:
 		jumpAttackPlayerSpheres.emplace_back(_sphere);
 		break;
+	case ColliderComponent::ENEMY_TRACKING_TAG:
+		enemyTrackingSpheres.emplace_back(_sphere);
+		break;
 	}
 
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -509,6 +518,17 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
+	if (_sphere->GetSphereTag() == ColliderComponent::ENEMY_TRACKING_TAG)
+	{
+		auto iter = std::find(enemyTrackingSpheres.begin(), enemyTrackingSpheres.end(), _sphere);
+		if (iter != enemyTrackingSpheres.end())
+		{
+			std::iter_swap(iter, enemyTrackingSpheres.end() - 1);
+			enemyTrackingSpheres.pop_back();
+		}
+
+		collisionFunction.erase(_sphere);
+	}
 }
 
 

@@ -32,5 +32,6 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
+
 };
 

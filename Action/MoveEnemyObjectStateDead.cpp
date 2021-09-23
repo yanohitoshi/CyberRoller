@@ -11,9 +11,6 @@ MoveEnemyObjectStateDead::~MoveEnemyObjectStateDead()
 
 EnemyState MoveEnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	// positionに速度を足してキャラクターを動かす
-	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-
 	++frameCount;
 
 	if (frameCount >= 300)
