@@ -57,14 +57,14 @@ public:
 	void FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjectTag);
 	
 	/*
-	@fn 押し戻し処理(エネミー以外)
+	@fn 押し戻し処理(x,y,z軸で押し戻し)
 	*/
 	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec);
 
 	/*
-	@fn エネミーとの押し戻し処理
+	@fn 押し戻し処理(x,y軸で押し戻し)
 	*/
-	void playerToEnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
+	void HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 	
 	/*
 	@fn 前方ベクトルを用いてキャラクターを回転させる関数
@@ -499,6 +499,12 @@ public:// ゲッターセッター
 	@return nowStateを返す
 	*/
 	PlayerState GetNowState() { return nowState; }
+
+	/*
+	@fn nextStateのsetter関数
+	@param	PlayerState _nextState プレイヤーの次のステータス
+	*/
+	void SetNextState(PlayerState _nextState) { nextState = _nextState; }
 
 	/*
 	@fn charaForwardVecのsetter関数

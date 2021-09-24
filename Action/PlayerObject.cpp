@@ -360,14 +360,14 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjec
 	// 仮速度変数
 	Vector3 ment = Vector3::Zero;
 
-	if (_hitObjectTag != Tag::ENEMY)
+	if (_hitObjectTag == Tag::ENEMY || _hitObjectTag == Tag::PUSH_BOARD)
 	{
-		// プレイヤーの押し戻し計算
-		playerCalcCollisionFixVec(myAABB, pairAABB, ment);
+		HorizontalPlayerCalcCollisionFixVec(myAABB, pairAABB, ment);
 	}
 	else
 	{
-		playerToEnemyCalcCollisionFixVec(myAABB, pairAABB, ment);
+		// プレイヤーの押し戻し計算
+		playerCalcCollisionFixVec(myAABB, pairAABB, ment);
 	}
 
 	// 押し戻し計算を考慮しポジションを更新
@@ -453,11 +453,6 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	{
 		// プレイヤーのワールドボックスを取得
 		playerBox = boxCollider->GetWorldBox();
-		// 押し戻し用関数へ渡す
-		FixCollision(playerBox, _hitObject.aabb, hitObjectTag);
-	}
-	else if (hitObjectTag == Tag::PUSH_BOARD)
-	{
 		// 押し戻し用関数へ渡す
 		FixCollision(playerBox, _hitObject.aabb, hitObjectTag);
 	}
@@ -647,7 +642,7 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 
 }
 
-void PlayerObject::playerToEnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+void PlayerObject::HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	// 速度ベクトル初期化
 	_calcFixVec = Vector3::Zero;

@@ -69,5 +69,13 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	ownerObject->SetIsJumpAttackSuccess(true);
+	if (_hitObject.GetTag() == Tag::ENEMY)
+	{
+		ownerObject->SetIsJumpAttackSuccess(true);
+	}
+
+	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::PUSH_BOARD)
+	{
+		ownerObject->SetNextState(PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
+	}
 }

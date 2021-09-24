@@ -191,6 +191,8 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, enemyBoxes);
+		IntersectCheckSphere(_sphere, groundBoxes);
+		IntersectCheckSphere(_sphere, moveGroundBoxes);
 	}
 }
 

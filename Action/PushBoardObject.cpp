@@ -24,7 +24,7 @@ PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vec
 	moveTag = _moveTag;
 	inversionFlag = false;
 	isSendVelocityToPlayer = true;
-
+	isPushBackToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 
