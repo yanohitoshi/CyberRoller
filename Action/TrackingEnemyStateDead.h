@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyObjectStateBase.h"
+
 class TrackingEnemyStateDead :
     public EnemyObjectStateBase
 {

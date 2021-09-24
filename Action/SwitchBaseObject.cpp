@@ -30,7 +30,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	mesh = meshComponent->GetMesh();
 
 	// 当たり判定用ボックスコライダーを付与
-	boxCollider = new BoxCollider(this, ColliderComponent::SWITCH_BASE, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::SWITCH_BASE_TAG, GetOnCollisionFunc());
 	// 当たり判定用AABBを作成
 	AABB aabb = { Vector3(-75.0f,-75.0f,-150.0f),Vector3(75.0f,75.0f,40.0f) };
 	// 作成したAABBをセット
@@ -56,7 +56,7 @@ void SwitchBaseObject::UpdateGameObject(float _deltaTime)
 
 }
 
-void SwitchBaseObject::OnCollision(const GameObject& _hitObject)
+void SwitchBaseObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)

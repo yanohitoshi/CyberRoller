@@ -22,7 +22,7 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::NEEDLE_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::NEEDLE_TAG, GetOnCollisionFunc());
 	//AABB box = { Vector3(-0.5f,-0.5f,-5.0f),Vector3(0.5f,0.5f,5.0f) };
 	AABB box = { Vector3(-0.8f,-0.8f,-1.0f),Vector3(0.8f,0.8f,5.0f) };
 	boxCollider->SetObjectBox(box);
@@ -45,7 +45,7 @@ void NeedlePanelObject::UpdateGameObject(float _deltaTime)
 
 }
 
-void NeedlePanelObject::OnCollision(const GameObject& _hitObject)
+void NeedlePanelObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)

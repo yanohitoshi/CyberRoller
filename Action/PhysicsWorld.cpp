@@ -43,7 +43,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		return;
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::PLAYER_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
 		// プレイヤーと地面の判定処理
 		IntersectCheckBox(_box,groundBoxes);
@@ -73,18 +73,18 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		IntersectCheckBox(_box, switchBoxes);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::NORMAL_ENEMY_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::NORMAL_ENEMY_TAG)
 	{
 		IntersectCheckBox(_box, groundBoxes);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::CAMERA_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::CAMERA_TAG)
 	{
 		// カメラと地面の判定処理
 		IntersectCheckBox(_box, groundBoxes);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::MOVE_GROUND_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::MOVE_GROUND_TAG)
 	{
 		// 動く床とジャンプスイッチの判定処理
 		IntersectCheckBox(_box, jumpSwitchBoxes);
@@ -117,11 +117,10 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 		{
 
 			onCollisionFunc func = collisionFunction.at(_box);
-			func(*(itr->GetOwner()));
+			func(*(itr->GetOwner()),(itr->GetBoxTag()));
 			func = collisionFunction.at(itr);
-			func(*(_box->GetOwner()));
+			func(*(_box->GetOwner()),(_box->GetBoxTag()));
 			_box->refreshWorldTransform();
-
 		}
 	}
 }
@@ -142,9 +141,9 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 		if (hit)
 		{
 			onCollisionFunc func = collisionFunction.at(_sphere);
-			func(*(itr->GetOwner()));
+			func(*(itr->GetOwner()),(itr->GetBoxTag()));
 			func = collisionFunction.at(itr);
-			func(*(_sphere->GetOwner()));
+			func(*(_sphere->GetOwner()),(_sphere->GetSphereTag()));
 			_sphere->refreshWorldTransform();
 		}
 	}
@@ -158,7 +157,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::GROUND_CHECK_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::GROUND_CHECK_TAG)
 	{
 		// 接地判定スフィアと地面の当たり判定
 		IntersectCheckSphere(_sphere,groundBoxes);
@@ -176,19 +175,19 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		IntersectCheckSphere(_sphere, jumpSwitchBoxes);
 	}
 
-	//if (_sphere->GetSphereTag() == ColliderComponent::ENEMY_TRACKING_TAG)
-	//{
-	//	// 接地判定スフィアとジャンプスイッチの当たり判定
-	//	IntersectCheckSphere(_sphere, playerBoxes);
-	//}
+	if (_sphere->GetSphereTag() == PhysicsTag::PLAYER_TRACKING_AREA_TAG)
+	{
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, playerBoxes);
+	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
 	{
 		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, enemyBoxes);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::JUMP_ATTACK_PLAYER_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, enemyBoxes);
@@ -200,64 +199,64 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 {
 
-	ColliderComponent::PhysicsTag objTag = _box->GetBoxTag();
+	PhysicsTag objTag = _box->GetBoxTag();
 
 	// Tagに応じたvector配列に格納
 	switch (objTag)
 	{
-	case ColliderComponent::GROUND_TAG:
+	case PhysicsTag::GROUND_TAG:
 		groundBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::MOVE_GROUND_TAG:
+	case PhysicsTag::MOVE_GROUND_TAG:
 		moveGroundBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::WALL_TAG:
+	case PhysicsTag::WALL_TAG:
 		wallBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::PLAYER_TAG:
+	case PhysicsTag::PLAYER_TAG:
 		playerBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::SWITCH_TAG:
+	case PhysicsTag::SWITCH_TAG:
 		switchBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::SWITCH_BASE:
+	case PhysicsTag::SWITCH_BASE_TAG:
 		switchBaseBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::JUMP_SWITCH_TAG:
+	case PhysicsTag::JUMP_SWITCH_TAG:
 		jumpSwitchBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::GROUND_CHECK_TAG:
+	case PhysicsTag::GROUND_CHECK_TAG:
 		groundCheckBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::FOOT_CHECK_TAG:
+	case PhysicsTag::FOOT_CHECK_TAG:
 		footCheckBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::CAMERA_TAG:
+	case PhysicsTag::CAMERA_TAG:
 		cameraBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::CLEAR_POINT_TAG:
+	case PhysicsTag::CLEAR_POINT_TAG:
 		clearPointBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::NEEDLE_TAG:
+	case PhysicsTag::NEEDLE_TAG:
 		needlePlaneBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::RESPOWN_TAG:
+	case PhysicsTag::RESPOWN_TAG:
 		respownPointBoxes.emplace_back(_box);
 		break;
 
-	case ColliderComponent::NORMAL_ENEMY_TAG:
+	case PhysicsTag::NORMAL_ENEMY_TAG:
 		enemyBoxes.emplace_back(_box);
 		break;
 	}
@@ -269,7 +268,7 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
 {
 
-	if (_box->GetBoxTag() == ColliderComponent::PLAYER_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
 		auto iter = std::find(playerBoxes.begin(), playerBoxes.end(), _box);
 		if (iter != playerBoxes.end())
@@ -281,7 +280,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::WALL_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::WALL_TAG)
 	{
 		auto iter = std::find(wallBoxes.begin(), wallBoxes.end(), _box);
 		if (iter != wallBoxes.end())
@@ -293,7 +292,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::GROUND_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::GROUND_TAG)
 	{
 		auto iter = std::find(groundBoxes.begin(), groundBoxes.end(), _box);
 		if (iter != groundBoxes.end())
@@ -305,7 +304,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::MOVE_GROUND_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::MOVE_GROUND_TAG)
 	{
 		auto iter = std::find(moveGroundBoxes.begin(), moveGroundBoxes.end(), _box);
 		if (iter != moveGroundBoxes.end())
@@ -317,7 +316,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::SWITCH_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::SWITCH_TAG)
 	{
 		auto iter = std::find(switchBoxes.begin(), switchBoxes.end(), _box);
 		if (iter != switchBoxes.end())
@@ -329,7 +328,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::FOOT_CHECK_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::FOOT_CHECK_TAG)
 	{
 		auto iter = std::find(footCheckBoxes.begin(), footCheckBoxes.end(), _box);
 		if (iter != footCheckBoxes.end())
@@ -342,7 +341,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 	}
 
 
-	if (_box->GetBoxTag() == ColliderComponent::SWITCH_BASE)
+	if (_box->GetBoxTag() == PhysicsTag::SWITCH_BASE_TAG)
 	{
 		auto iter = std::find(switchBaseBoxes.begin(), switchBaseBoxes.end(), _box);
 		if (iter != switchBaseBoxes.end())
@@ -354,7 +353,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::JUMP_SWITCH_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::JUMP_SWITCH_TAG)
 	{
 		auto iter = std::find(jumpSwitchBoxes.begin(), jumpSwitchBoxes.end(), _box);
 		if (iter != jumpSwitchBoxes.end())
@@ -366,7 +365,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::GROUND_CHECK_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::GROUND_CHECK_TAG)
 	{
 		auto iter = std::find(groundCheckBoxes.begin(), groundCheckBoxes.end(), _box);
 		if (iter != groundCheckBoxes.end())
@@ -378,7 +377,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::CAMERA_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::CAMERA_TAG)
 	{
 		auto iter = std::find(cameraBoxes.begin(), cameraBoxes.end(), _box);
 		if (iter != cameraBoxes.end())
@@ -390,7 +389,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::CLEAR_POINT_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::CLEAR_POINT_TAG)
 	{
 		auto iter = std::find(clearPointBoxes.begin(), clearPointBoxes.end(), _box);
 		if (iter != clearPointBoxes.end())
@@ -402,7 +401,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::RESPOWN_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::RESPOWN_TAG)
 	{
 		auto iter = std::find(respownPointBoxes.begin(), respownPointBoxes.end(), _box);
 		if (iter != respownPointBoxes.end())
@@ -414,7 +413,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::NEEDLE_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::NEEDLE_TAG)
 	{
 		auto iter = std::find(needlePlaneBoxes.begin(), needlePlaneBoxes.end(), _box);
 		if (iter != needlePlaneBoxes.end())
@@ -426,7 +425,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == ColliderComponent::NORMAL_ENEMY_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::NORMAL_ENEMY_TAG)
 	{
 		auto iter = std::find(enemyBoxes.begin(), enemyBoxes.end(), _box);
 		if (iter != enemyBoxes.end())
@@ -442,25 +441,25 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 
 void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
-	ColliderComponent::PhysicsTag objTag = _sphere->GetSphereTag();
+	PhysicsTag objTag = _sphere->GetSphereTag();
 
 	// Tagに応じたvector配列に格納
 	switch (objTag)
 	{
-	case ColliderComponent::GROUND_CHECK_TAG:
+	case PhysicsTag::GROUND_CHECK_TAG:
 		groundCheckSpheres.emplace_back(_sphere);
 		break;
-	case ColliderComponent::SWITCH_CHECK_TAG:
+	case PhysicsTag::SWITCH_CHECK_TAG:
 		switchCheckSpheres.emplace_back(_sphere);
 		break;
-	case ColliderComponent::ATTACK_RANGE_TAG:
+	case PhysicsTag::ATTACK_RANGE_TAG:
 		attackRangeSpheres.emplace_back(_sphere);
 		break;
-	case ColliderComponent::JUMP_ATTACK_PLAYER_TAG:
+	case PhysicsTag::JUMP_ATTACK_PLAYER_TAG:
 		jumpAttackPlayerSpheres.emplace_back(_sphere);
 		break;
-	case ColliderComponent::ENEMY_TRACKING_TAG:
-		enemyTrackingSpheres.emplace_back(_sphere);
+	case PhysicsTag::PLAYER_TRACKING_AREA_TAG:
+		playerTrackingAreaSpheres.emplace_back(_sphere);
 		break;
 	}
 
@@ -470,7 +469,7 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 {
-	if (_sphere->GetSphereTag() == ColliderComponent::GROUND_CHECK_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::GROUND_CHECK_TAG)
 	{
 		auto iter = std::find(groundCheckSpheres.begin(), groundCheckSpheres.end(), _sphere);
 		if (iter != groundCheckSpheres.end())
@@ -482,7 +481,7 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::SWITCH_CHECK_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::SWITCH_CHECK_TAG)
 	{
 		auto iter = std::find(switchCheckSpheres.begin(), switchCheckSpheres.end(), _sphere);
 		if (iter != switchCheckSpheres.end())
@@ -494,7 +493,7 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::ATTACK_RANGE_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
 	{
 		auto iter = std::find(attackRangeSpheres.begin(), attackRangeSpheres.end(), _sphere);
 		if (iter != attackRangeSpheres.end())
@@ -506,7 +505,7 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::JUMP_ATTACK_PLAYER_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
 	{
 		auto iter = std::find(jumpAttackPlayerSpheres.begin(), jumpAttackPlayerSpheres.end(), _sphere);
 		if (iter != jumpAttackPlayerSpheres.end())
@@ -518,13 +517,13 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		collisionFunction.erase(_sphere);
 	}
 
-	if (_sphere->GetSphereTag() == ColliderComponent::ENEMY_TRACKING_TAG)
+	if (_sphere->GetSphereTag() == PhysicsTag::PLAYER_TRACKING_AREA_TAG)
 	{
-		auto iter = std::find(enemyTrackingSpheres.begin(), enemyTrackingSpheres.end(), _sphere);
-		if (iter != enemyTrackingSpheres.end())
+		auto iter = std::find(playerTrackingAreaSpheres.begin(), playerTrackingAreaSpheres.end(), _sphere);
+		if (iter != playerTrackingAreaSpheres.end())
 		{
-			std::iter_swap(iter, enemyTrackingSpheres.end() - 1);
-			enemyTrackingSpheres.pop_back();
+			std::iter_swap(iter, playerTrackingAreaSpheres.end() - 1);
+			playerTrackingAreaSpheres.pop_back();
 		}
 
 		collisionFunction.erase(_sphere);

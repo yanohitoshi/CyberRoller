@@ -25,7 +25,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 
 	//Ú’n”»’è—p‚ÌsphereCollider
-	sphereCollider = new SphereCollider(this, ColliderComponent::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
+	sphereCollider = new SphereCollider(this, PhysicsTag::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
 
@@ -67,7 +67,7 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position);
 }
 
-void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject)
+void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	ownerObject->SetIsJumpAttackSuccess(true);
 }

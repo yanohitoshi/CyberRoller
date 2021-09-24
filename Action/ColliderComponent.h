@@ -9,6 +9,32 @@
 class GameObject;
 
 /*
+@enum  PhysicsTag		PhysicsWorld内でどのObjectなのか判別するタグ
+*/
+
+enum class PhysicsTag
+{
+	GROUND_TAG,
+	MOVE_GROUND_TAG,
+	WALL_TAG,
+	PLAYER_TAG,
+	JUMP_ATTACK_PLAYER_TAG,
+	SWITCH_TAG,
+	SWITCH_BASE_TAG,
+	JUMP_SWITCH_TAG,
+	GROUND_CHECK_TAG,
+	FOOT_CHECK_TAG,
+	SWITCH_CHECK_TAG,
+	CAMERA_TAG,
+	CLEAR_POINT_TAG,
+	NEEDLE_TAG,
+	RESPOWN_TAG,
+	NORMAL_ENEMY_TAG,
+	ATTACK_RANGE_TAG,
+	PLAYER_TRACKING_AREA_TAG
+};
+
+/*
 @file ColliderComponent.h
 @brief ColliderComponent系派生classの基底のクラス
 */
@@ -16,32 +42,6 @@ class ColliderComponent : public Component
 {
 public:
 //===================== publicのメンバ関数 ======================//
-
-	/*
-	 @enum  PhysicsTag
-			PhysicsWorld内でどのObjectなのか判別するタグ
-	*/
-	enum PhysicsTag
-	{
-		GROUND_TAG,
-		MOVE_GROUND_TAG,
-		WALL_TAG,
-		PLAYER_TAG,
-		JUMP_ATTACK_PLAYER_TAG,
-		SWITCH_TAG,
-		SWITCH_BASE,
-		JUMP_SWITCH_TAG,
-		GROUND_CHECK_TAG,
-		FOOT_CHECK_TAG,
-		SWITCH_CHECK_TAG,
-		CAMERA_TAG,
-		CLEAR_POINT_TAG,
-		NEEDLE_TAG,
-		RESPOWN_TAG,
-		NORMAL_ENEMY_TAG,
-		ATTACK_RANGE_TAG,
-		ENEMY_TRACKING_TAG
-	};
 
     /*
 	@brief	コンストラクタ

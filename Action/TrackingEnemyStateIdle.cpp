@@ -10,9 +10,6 @@ TrackingEnemyStateIdle::~TrackingEnemyStateIdle()
 
 EnemyState TrackingEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	// positionに速度を足してキャラクターを動かす
-	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-
 	state = EnemyState::ENEMY_STATE_MOVING;
 
 	if (_owner->GetIsDeadFlag())
@@ -32,4 +29,5 @@ void TrackingEnemyStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_IDLE;
 	_owner->SetState(State::Active);
+	RotationProcess(_owner, Vector3::NegUnitX, _owner->GetCharaForwardVec());
 }

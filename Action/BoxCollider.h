@@ -65,7 +65,7 @@ public: // ゲッターセッター
 	AABB GetWorldBox() const { return worldBox; }
 
 	//タグをセット
-	void SetBoxTag(const ColliderComponent::PhysicsTag& _tag) { mTag = _tag; }
+	void SetBoxTag(const PhysicsTag _tag) { mTag = _tag; }
 
 	//AABBのタグをとる
 	PhysicsTag GetBoxTag() const{ return mTag; }

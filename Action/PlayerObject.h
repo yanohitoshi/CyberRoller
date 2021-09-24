@@ -54,12 +54,17 @@ public:
 	/*
 	@fn めり込み判定
 	*/
-	void FixCollision(AABB& myAABB, const AABB& pairAABB);
+	void FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjectTag);
 	
 	/*
-	@fn 押し戻し処理
+	@fn 押し戻し処理(エネミー以外)
 	*/
 	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec);
+
+	/*
+	@fn エネミーとの押し戻し処理
+	*/
+	void playerToEnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 	
 	/*
 	@fn 前方ベクトルを用いてキャラクターを回転させる関数
@@ -117,19 +122,19 @@ private:
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
 	*/	
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
 	@param	当たったGameObject
 	*/
-	void OnCollisionGround(const GameObject& _hitObject);
+	void OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(ジャンプ攻撃を行うエネミーとの判定を取る)
 	@param	当たったGameObject
 	*/
-	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject);
+	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
 	// 着地effectを発生させる際に使用するフラグ
 	// JumpFlagチェック用

@@ -13,7 +13,7 @@ RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _obje
 	SetPosition(position);
 
 	// 当たり判定用ボックスコライダー付与
-	boxCollider = new BoxCollider(this,ColliderComponent::RESPOWN_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this,PhysicsTag::RESPOWN_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(_box);
 
 }
@@ -26,6 +26,6 @@ void RespawnPoint::UpdateGameObject(float _deltaTime)
 {
 }
 
-void RespawnPoint::OnCollision(const GameObject& _hitObject)
+void RespawnPoint::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 }

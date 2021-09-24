@@ -16,7 +16,7 @@ EnemyState TrackingEnemyStateDead::Update(EnemyObjectBase* _owner, float _deltaT
 	if (frameCount >= 300)
 	{
 		_owner->SetIsDeadFlag(false);
-		state = EnemyState::ENEMY_STATE_IDLE;
+		state = EnemyState::ENEMY_STATE_REPOSITION;
 	}
 
 	return state;

@@ -17,6 +17,7 @@ struct InputState;
 class ColliderComponent;
 class MainCameraObject;
 class PlayerObject;
+enum class PhysicsTag;
 
 /*
 @brief	ゲームオブジェクトの状態
@@ -48,6 +49,8 @@ enum Tag
 	JUMP_ATTACK_PLAYER,
 	// エネミー
 	ENEMY,
+	// プレイヤー追跡エリア
+	PLAYER_TRACKING_AREA,
 	// グラウンド
 	GROUND,
 	// 動くグラウンド
@@ -227,8 +230,8 @@ public:
 
 protected:
 
-	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
-	virtual void OnCollision(const GameObject& _hitObject) {}
+	std::function<void(GameObject&, PhysicsTag)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1, std::placeholders::_2); }
+	virtual void OnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag) {}
 
 	// ゲーム中メインカメラ
 	static class MainCameraObject* mainCamera;

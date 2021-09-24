@@ -115,8 +115,11 @@ protected:
 
 	// 死んでいるかどうか
 	bool isDeadFlag;
-
+	// 追跡相手をとらえているかどうか
 	bool isTracking;
+	// 攻撃モーション中か
+	bool isAttack;
+
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
 	// 変更された次のプレーヤーのstate状態を保存するための変数
@@ -253,6 +256,18 @@ public:// ゲッターセッター
 	bool GetIsDeadFlag() { return isDeadFlag; }
 
 	/*
+	@fn isDeadFlagのsetter関数
+	@param	bool isDeadFlag 死亡状態
+	*/
+	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
+
+	/*
+	@fn charaForwardVecのsetter関数
+	@param	Vector3 _charaForwardVec キャラクターの前方ベクトル
+	*/
+	void SetIsTracking(bool _isTracking) { isTracking = _isTracking; }
+
+	/*
 	@fn isDeadFlagのGettrer関数
 	@return	bool isDeadFlag 死亡状態
 	*/
@@ -262,7 +277,7 @@ public:// ゲッターセッター
 	@fn isDeadFlagのsetter関数
 	@param	bool isDeadFlag 死亡状態
 	*/
-	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
+	void SetIsAttack(bool _isAttack) { isAttack = _isAttack; }
 
 	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
 

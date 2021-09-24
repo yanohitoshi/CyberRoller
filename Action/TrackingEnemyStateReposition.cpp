@@ -10,22 +10,32 @@ TrackingEnemyStateReposition::~TrackingEnemyStateReposition()
 
 EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	//repositionRotationVec = _owner->GetPosition() - firstPosition;
-	//repositionRotationVec.Normalize();
 
 	if (!_owner->GetIsTracking())
 	{
-		velocity = repositionRotationVec * moveSpeed;
-		// positionに速度を足してキャラクターを動かす
-		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+		Vector3 tmpPosition;
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), firstPosition, _deltaTime * 1.0);
+		_owner->SetPosition(tmpPosition);
 	}
 	else
 	{
 		state = EnemyState::ENEMY_STATE_TRACKING;
 	}
 
+	repositionRotationVec = firstPosition - _owner->GetPosition();
+	repositionRotationVec.Normalize();
+	RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
+
+	Vector3 chackReposition = firstPosition - _owner->GetPosition();
+
+	float Length = chackReposition.Length();
+
+	if (Length <= 2.0f)
+	{
+		state = EnemyState::ENEMY_STATE_IDLE;
+	}
+
 	return state;
-	//RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
 }
 
 void TrackingEnemyStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime)
@@ -35,13 +45,14 @@ void TrackingEnemyStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTi
 	// 再生するアニメーションをもらい再生をかける
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// stateを待機状態にして保存
-	state = EnemyState::ENEMY_STATE_TRACKING;
+	state = EnemyState::ENEMY_STATE_REPOSITION;
 	_owner->SetState(State::Active);
 
 	moveSpeed = _owner->GetMoveSpeed();
 	firstPosition = _owner->GetFirstPosition();
-	repositionRotationVec = _owner->GetPosition() - firstPosition;
+	repositionRotationVec = firstPosition - _owner->GetPosition();
 	repositionRotationVec.Normalize();
 
 	RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
+
 }

@@ -9,8 +9,9 @@
 #include "TrackingEnemyStateMoving.h"
 #include "TrackingEnemyStateTurn.h"
 #include "TrackingEnemyStateReposition.h"
+#include "TrackingEnemyStateAttack.h"
 #include "BoxCollider.h"
-#include "SphereCollider.h"
+#include "PlayerTrackingArea.h"
 
 TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
@@ -25,6 +26,8 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 
 	isTracking = false;
 	isDeadFlag = false;
+	isAttack = false;
+	isPushBackToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -44,21 +47,19 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
 	// ターンアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
+	// 攻撃アニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Attack.gpanim", false);
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
 	//enemyBox = mesh->GetBox();
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
 
-	//ジャンプ攻撃判定用のsphereCollider
-	trackingSphereCol = new SphereCollider(this, ColliderComponent::ENEMY_TRACKING_TAG, std::bind(&TrackingEnemyObject::OnCollisionTracking, this, std::placeholders::_1));
-	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
-	trackingSphereCol->SetObjectSphere(jumpAttackSphere);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
@@ -68,12 +69,16 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	statePools.push_back(new TrackingEnemyStateTurn);
 	statePools.push_back(new TrackingEnemyStateTracking);
 	statePools.push_back(new TrackingEnemyStateReposition);
+	statePools.push_back(new TrackingEnemyStateAttack);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
 	// stateの初期化
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
+
+	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this);
+
 }
 
 TrackingEnemyObject::~TrackingEnemyObject()
@@ -82,9 +87,16 @@ TrackingEnemyObject::~TrackingEnemyObject()
 
 void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 {
-	if (isTracking)
+	aabb = boxCollider->GetWorldBox();
+
+	if (isTracking && !isDeadFlag)
 	{
 		nextState = EnemyState::ENEMY_STATE_TRACKING;
+	}
+
+	if (isAttack && !isDeadFlag)
+	{
+		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
 	if (isDeadFlag)
@@ -111,20 +123,23 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	}
 
 	isTracking = false;
+	//isAttack = false;
 }
 
 void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 }
 
-void TrackingEnemyObject::OnCollision(const GameObject& _hitObject)
+void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-}
-
-void TrackingEnemyObject::OnCollisionTracking(const GameObject& _hitObject)
-{
-	if (_hitObject.GetTag() == Tag::PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{
-		isTracking = true;
+		isDeadFlag = true;
 	}
+
+	if (_hitObject.GetTag() == Tag::PLAYER && _physicsTag == PhysicsTag::PLAYER_TAG)
+	{
+		isAttack = true;
+	}
+
 }

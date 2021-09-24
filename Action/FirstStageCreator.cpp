@@ -177,7 +177,7 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 	case(63):
-		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 100.0f, playerObject);
+		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, playerObject);
 		break;
 	}
 

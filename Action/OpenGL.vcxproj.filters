@@ -453,6 +453,12 @@
     <ClCompile Include="TrackingEnemyStateReposition.cpp">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerTrackingArea.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateAttack.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -907,6 +913,12 @@
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
     <ClInclude Include="TrackingEnemyStateReposition.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTrackingArea.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateAttack.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
   </ItemGroup>

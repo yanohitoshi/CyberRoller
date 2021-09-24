@@ -183,18 +183,18 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this,ColliderComponent::PLAYER_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this,PhysicsTag::PLAYER_TAG, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
 	playerBox = { Vector3(-60.0f,-15.0f,0.0f),Vector3(60.0f,15.0f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
-	groundChackSphereCol = new SphereCollider(this, ColliderComponent::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1));
+	groundChackSphereCol = new SphereCollider(this, PhysicsTag::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1,std::placeholders::_2));
 	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	groundChackSphereCol->SetObjectSphere(groundChackSphere);
 
 	//ジャンプ攻撃判定用のsphereCollider
-	jumpAttackSphereCol = new SphereCollider(this, ColliderComponent::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1));
+	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1,std::placeholders::_2));
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
@@ -355,12 +355,21 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 /*
 @fn めり込み判定と押し戻し
 */
-void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
+void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjectTag)
 {
 	// 仮速度変数
 	Vector3 ment = Vector3::Zero;
-	// プレイヤーの押し戻し計算
-	playerCalcCollisionFixVec(myAABB, pairAABB, ment);
+
+	if (_hitObjectTag != Tag::ENEMY)
+	{
+		// プレイヤーの押し戻し計算
+		playerCalcCollisionFixVec(myAABB, pairAABB, ment);
+	}
+	else
+	{
+		playerToEnemyCalcCollisionFixVec(myAABB, pairAABB, ment);
+	}
+
 	// 押し戻し計算を考慮しポジションを更新
 	SetPosition(position + ment);
 
@@ -434,7 +443,7 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 }
 
 
-void PlayerObject::OnCollision(const GameObject& _hitObject)
+void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// Hitしたオブジェクトのタグを取得
 	Tag hitObjectTag = _hitObject.GetTag();
@@ -445,16 +454,16 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 		// プレイヤーのワールドボックスを取得
 		playerBox = boxCollider->GetWorldBox();
 		// 押し戻し用関数へ渡す
-		FixCollision(playerBox, _hitObject.aabb);
+		FixCollision(playerBox, _hitObject.aabb, hitObjectTag);
 	}
 	else if (hitObjectTag == Tag::PUSH_BOARD)
 	{
 		// 押し戻し用関数へ渡す
-		FixCollision(playerBox, _hitObject.aabb);
+		FixCollision(playerBox, _hitObject.aabb, hitObjectTag);
 	}
 
 	// 当たったオブジェクトが敵だったら
-	if (hitObjectTag == Tag::ENEMY)
+	if (hitObjectTag == Tag::ENEMY && _physicsTag == PhysicsTag::NORMAL_ENEMY_TAG)
 	{
 		// ジャンプアタック状態でなかったら
 		if (!isJumpAttck)
@@ -495,7 +504,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject)
 
 }
 
-void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
+void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// 接地判定を行うオブジェクトだったら
 	if (_hitObject.GetisChackGroundToPlayer())
@@ -515,7 +524,7 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject)
 
 }
 
-void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject)
+void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 
 	if (attackTargetEnemy != nullptr)
@@ -636,6 +645,39 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 		_calcFixVec.z = dz;
 	}
 
+}
+
+void PlayerObject::playerToEnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+{
+	// 速度ベクトル初期化
+	_calcFixVec = Vector3::Zero;
+
+	// Boxを利用して判定を取る用の変数計算
+	float dx1 = _fixedBox.min.x - _movableBox.max.x;
+	float dx2 = _fixedBox.max.x - _movableBox.min.x;
+	float dy1 = _fixedBox.min.y - _movableBox.max.y;
+	float dy2 = _fixedBox.max.y - _movableBox.min.y;
+
+	// dx, dy, dz には それぞれ1,2のうち絶対値が小さい方をセットする
+	float dx = (Math::Abs(dx1) < Math::Abs(dx2)) ? dx1 : dx2;
+	float dy = (Math::Abs(dy1) < Math::Abs(dy2)) ? dy1 : dy2;
+
+	// x, y, zのうち最も差が小さい軸で位置を調整
+	if (Math::Abs(dx) <= Math::Abs(dy))
+	{
+		// xだったらx軸方向に押し戻し
+		_calcFixVec.x = dx;
+	}
+	else if (Math::Abs(dy) <= Math::Abs(dx))
+	{
+		// yだったらx軸方向に押し戻し
+		_calcFixVec.y = dy;
+	}
+	//else
+	//{
+	//	// zだったらx軸方向に押し戻し
+	//	_calcFixVec.z = dz;
+	//}
 }
 
 const Animation* PlayerObject::GetAnimation(PlayerState _state)

@@ -20,9 +20,11 @@ class SphereCollider;
 class ColliderComponent;
 class LineSegmentCollider;
 class PlaneCollider;
+enum class PhysicsTag;
 
-typedef std::function<void(GameObject&)> onCollisionFunc;
-typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> onCollisionMap;
+
+typedef std::function<void(GameObject&, PhysicsTag)> onCollisionFunc;
+typedef std::map<ColliderComponent*, std::function<void(GameObject&, PhysicsTag)>> onCollisionMap;
 
 /*
 @file PhysicsWorld.h
@@ -126,7 +128,7 @@ private:
 	std::vector<SphereCollider*> switchCheckSpheres;
 	std::vector<SphereCollider*> attackRangeSpheres;
 	std::vector<SphereCollider*> jumpAttackPlayerSpheres;
-	std::vector<SphereCollider*> enemyTrackingSpheres;
+	std::vector<SphereCollider*> playerTrackingAreaSpheres;
 
 	onCollisionMap collisionFunction;
 

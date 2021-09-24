@@ -46,7 +46,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
 	//押し戻し判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::SWITCH_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::SWITCH_TAG, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-55.0f,-55.0f,-40.0f),Vector3(55.0f,55.0f,55.0f) };
 	boxCollider->SetObjectBox(aabb);
 
@@ -216,7 +216,7 @@ void SwitchBlock::ChackOnFlag(Tag& _Tag)
 
 }
 
-void SwitchBlock::OnCollision(const GameObject& _hitObject)
+void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトがプレイヤーだったら
 	if (_hitObject.GetTag() == Tag::PLAYER)
@@ -246,6 +246,6 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject)
 
 }
 
-void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject)
+void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)
 {
 }

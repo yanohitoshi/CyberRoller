@@ -39,7 +39,7 @@ private:
 	@fn “–‚½‚è”»’è‚ªs‚í‚êHit‚µ‚½Û‚ÉŒÄ‚Î‚ê‚éŠÖ”
 	@param	“–‚½‚Á‚½GameObject
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
 public:
 

@@ -40,16 +40,7 @@ private:
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
-
-	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数(ジャンプ攻撃を行うエネミーとの判定を取る)
-	@param	当たったGameObject
-	*/
-	void OnCollisionTracking(const GameObject& _hitObject);
-
-	// 球体の当たり判定を行うクラス
-	SphereCollider* trackingSphereCol;
+	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
 public:
 

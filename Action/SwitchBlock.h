@@ -66,14 +66,14 @@ private:
 		動く床と接している時にその速度をもらうための
 	@param	当たったGameObject
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)override;
 	
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 		プレイヤーの足元判定とのOnCollision
 	@param	当たったGameObject
 	*/
-	void PlayerFootOnCollision(const GameObject& _hitObject);
+	void PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag);
 
 	// 色変更機能付きMeshComponent
 	ChangeColorMeshComponent* meshComponent;

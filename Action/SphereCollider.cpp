@@ -14,7 +14,7 @@
 @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 @param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
 */
-SphereCollider::SphereCollider(GameObject* _owner, ColliderComponent::PhysicsTag tag, onCollisionFunc _func, int _updateOrder, int _collisionOrder)
+SphereCollider::SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner,tag, _updateOrder, _collisionOrder)
 	, objectSphere({ Vector3::Zero,0.0f })
 	, worldSphere({ Vector3::Zero,0.0f })

@@ -218,6 +218,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerObjectStateRunStart.cpp" />
     <ClCompile Include="PlayerObjectStateRunStop.cpp" />
     <ClCompile Include="PlayerObjectStateRunTurn.cpp" />
+    <ClCompile Include="PlayerTrackingArea.cpp" />
     <ClCompile Include="PlayerTransformEffect.cpp" />
     <ClCompile Include="PlayerTransformEffectManager.cpp" />
     <ClCompile Include="PushBoardObject.cpp" />
@@ -303,6 +304,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TitleSceneUI.cpp" />
     <ClCompile Include="TitleStageCreator.cpp" />
     <ClCompile Include="TrackingEnemyObject.cpp" />
+    <ClCompile Include="TrackingEnemyStateAttack.cpp" />
     <ClCompile Include="TrackingEnemyStateDead.cpp" />
     <ClCompile Include="TrackingEnemyStateIdle.cpp" />
     <ClCompile Include="TrackingEnemyStateMoving.cpp" />
@@ -387,6 +389,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerObjectStateRunStart.h" />
     <ClInclude Include="PlayerObjectStateRunStop.h" />
     <ClInclude Include="PlayerObjectStateRunTurn.h" />
+    <ClInclude Include="PlayerTrackingArea.h" />
     <ClInclude Include="PlayerTransformEffect.h" />
     <ClInclude Include="PlayerTransformEffectManager.h" />
     <ClInclude Include="PushBoardObject.h" />
@@ -472,6 +475,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TitleSceneUI.h" />
     <ClInclude Include="TitleStageCreator.h" />
     <ClInclude Include="TrackingEnemyObject.h" />
+    <ClInclude Include="TrackingEnemyStateAttack.h" />
     <ClInclude Include="TrackingEnemyStateDead.h" />
     <ClInclude Include="TrackingEnemyStateIdle.h" />
     <ClInclude Include="TrackingEnemyStateMoving.h" />

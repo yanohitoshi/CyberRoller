@@ -20,7 +20,7 @@ public:
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 	@param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
 	*/
-	SphereCollider(GameObject* _owner, ColliderComponent::PhysicsTag tag, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
+	SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
 
 	/**
 	@brief	デストラクタ

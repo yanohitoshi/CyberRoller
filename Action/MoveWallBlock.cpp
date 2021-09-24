@@ -39,7 +39,7 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/moveWall_model/moveWallBox.gpmesh"));
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::WALL_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::WALL_TAG, GetOnCollisionFunc());
 	// 当たり判定のみY軸を大きくしたいので調整
 	AABB aabb = { Vector3(-1.0f,-2.0f,-1.0f),Vector3(1.0f,2.0f,1.0f) };
 	boxCollider->SetObjectBox(aabb);

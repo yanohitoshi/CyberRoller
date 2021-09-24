@@ -35,5 +35,6 @@ private:
 
 	GameObject* trackingObject;
 	Vector3 trackingRotationVec;
+	Vector3 firstPosition;
 };
 

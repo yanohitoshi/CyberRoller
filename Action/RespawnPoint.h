@@ -43,7 +43,7 @@ private:
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 

@@ -46,7 +46,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
 	//enemyBox = mesh->GetBox();
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
@@ -101,7 +101,7 @@ void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 }
 
-void MoveEnemyObject::OnCollision(const GameObject& _hitObject)
+void MoveEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{

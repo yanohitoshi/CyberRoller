@@ -47,7 +47,7 @@ MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObje
 	tmpHitFlag = false;
 
 	//当たり判定用のコンポーネントの追加と初期化
-	boxcollider = new BoxCollider(this, ColliderComponent::CAMERA_TAG, GetOnCollisionFunc());
+	boxcollider = new BoxCollider(this, PhysicsTag::CAMERA_TAG, GetOnCollisionFunc());
 	AABB aabb = { AabbInitMin,AabbInitMax };
 	boxcollider->SetObjectBox(aabb);
 
@@ -328,7 +328,7 @@ void MainCameraObject::ChackInputProcess(const InputState& _keyState)
 
 }
 
-void MainCameraObject::OnCollision(const GameObject& _hitObject)
+void MainCameraObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {	
 	// ヒットした際にヒットフラグがfalseだったら
 	if (hitFlag == false)

@@ -13,10 +13,8 @@ EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaT
 	// アニメーションの再生が終わっていたら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
-		_owner->SetMoveDirection(_owner->GetMoveDirection() * -1.0f);
-		_owner->SetMoveDistance(_owner->GetMoveDistance() * -1.0f);
 		// ステータスを待機状態にする
-		state = EnemyState::ENEMY_STATE_MOVING;
+		state = EnemyState::ENEMY_STATE_REPOSITION;
 	}
 
 	if (_owner->GetIsDeadFlag())

@@ -26,7 +26,7 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	mesh = new Mesh();
 	mesh = meshComponent->GetMesh();
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, ColliderComponent::JUMP_SWITCH_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::JUMP_SWITCH_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
 
 }
@@ -43,7 +43,7 @@ void JumpSwitchObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position);
 }
 
-void JumpSwitchObject::OnCollision(const GameObject& _hitObject)
+void JumpSwitchObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)
