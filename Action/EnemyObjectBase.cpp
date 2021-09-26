@@ -1,11 +1,12 @@
 #include "EnemyObjectBase.h"
-
+#include "EnemyDeadEffectManager.h"
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 {
 	SetPosition(_pos);
 	tag = _objectTag;
+	new EnemyDeadEffectManager(this);
 }
 
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
@@ -19,6 +20,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	tag = _objectTag;
 	SetPosition(_pos);
 	firstPosition = _pos;
+	new EnemyDeadEffectManager(this);
 }
 
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject)
@@ -30,6 +32,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	tag = _objectTag;
 	SetPosition(_pos);
 	firstPosition = _pos;
+	new EnemyDeadEffectManager(this);
 }
 
 void EnemyObjectBase::EnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)

@@ -47,10 +47,6 @@ private:
     Vector3 effectPosition;
     int frameCount;
     int effectCount;
-    // 一度に生成するエフェクトの最大数
-    const int MaxEffects;
-    // ランダムの範囲の割合
-    const int RandValue;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
 };

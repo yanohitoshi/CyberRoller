@@ -48,6 +48,7 @@ public:
 
 private:
 
+	GameObject* owner;
 	//親オブジェクトクラスと画像を描画する位置の差
 	Vector3 offset;
 	//画像に乗算する色
@@ -72,8 +73,6 @@ private:
 	int drawOrder;
 	//反転を行うか
 	bool reverce;
-
-	static Quaternion playerRotation;
 
 public: //ゲッターセッター
 
@@ -149,7 +148,6 @@ public: //ゲッターセッター
 	*/
 	void SetReverce(bool _flag) { reverce = _flag; }
 
-	static void SetPlayerRotation(Quaternion _playerRotation) { playerRotation = _playerRotation; }
 };
 
 /*

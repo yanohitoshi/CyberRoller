@@ -310,8 +310,6 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	// 一定時間放置によるゲームをリセットするかチェック
 	ChackRestartProcess();
 
-	ParticleComponent::SetPlayerRotation(rotation);
-
 }
 
 void PlayerObject::GameObjectInput(const InputState& _keyState)

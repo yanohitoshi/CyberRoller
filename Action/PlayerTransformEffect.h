@@ -10,7 +10,7 @@ public:
     @param	ポジション
     @param	移動速度
     */
-    PlayerTransformEffect(const Vector3& _pos, const Vector3& _velocity);
+    PlayerTransformEffect(GameObject* _owner,const Vector3& _pos, const Vector3& _velocity);
 
     /*
     @fn デストラクタ

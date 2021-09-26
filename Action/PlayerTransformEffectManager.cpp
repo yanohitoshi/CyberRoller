@@ -4,8 +4,6 @@
 
 PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, MaxEffects(20)
-	, RandValue(100)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -82,6 +80,6 @@ void PlayerTransformEffectManager::GenerateEffectProcess()
 	// ownerのポジションを得る
 	effectPosition = owner->GetPosition();
 	effectPosition.z += 100.0f;
-	new PlayerTransformEffect(effectPosition, velocity);
+	new PlayerTransformEffect(owner,effectPosition, velocity);
 	++effectCount;
 }

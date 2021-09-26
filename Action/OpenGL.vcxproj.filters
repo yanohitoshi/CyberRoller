@@ -459,6 +459,12 @@
     <ClCompile Include="TrackingEnemyStateAttack.cpp">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyDeadEffectManager.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDeadEffect.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -921,6 +927,12 @@
     <ClInclude Include="TrackingEnemyStateAttack.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyDeadEffectManager.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDeadEffect.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1078,6 +1090,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects\TrackingEnemyObject\State">
       <UniqueIdentifier>{f8f2ee3c-86da-43a8-b4b7-b51d1153baf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\Enemy">
+      <UniqueIdentifier>{021c7306-83e2-43ab-af5e-be79f923bf00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

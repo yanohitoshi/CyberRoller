@@ -39,7 +39,6 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 		}
 	}
 
-
 	return state;
 }
 

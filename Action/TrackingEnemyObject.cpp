@@ -123,7 +123,7 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	}
 
 	isTracking = false;
-	//isAttack = false;
+	forwardVec = charaForwardVec;
 }
 
 void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)

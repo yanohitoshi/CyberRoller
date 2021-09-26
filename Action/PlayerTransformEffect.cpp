@@ -1,11 +1,12 @@
 #include "PlayerTransformEffect.h"
 
-PlayerTransformEffect::PlayerTransformEffect(const Vector3& _pos, const Vector3& _velocity)
+PlayerTransformEffect::PlayerTransformEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle5.png", false)
 	, AddScale(16.0f)
 	, SubAlpha(0.05f)
 {
 	// メンバー変数の初期化
+	owner = _owner;
 	scale = 0.0f;
 	alpha = 1.0f;
 	speed = 25.0f;
@@ -15,6 +16,7 @@ PlayerTransformEffect::PlayerTransformEffect(const Vector3& _pos, const Vector3&
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 	SetPosition(position);
+	SetRotation(owner->GetRotation());
 }
 
 PlayerTransformEffect::~PlayerTransformEffect()
@@ -39,10 +41,7 @@ void PlayerTransformEffect::UpdateGameObject(float _deltaTime)
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 
-		//// ポジションに速度を追加
-		//position += velocity * speed;
-		//// ポジションを更新
-		//SetPosition(position);
+		SetRotation(owner->GetRotation());
 	}
 
 	// ライフカウントが0以下
