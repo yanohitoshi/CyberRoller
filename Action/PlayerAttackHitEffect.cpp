@@ -1,9 +1,9 @@
 #include "PlayerAttackHitEffect.h"
 #include "PlayerAttackHitEffectRipples.h"
 PlayerAttackHitEffect::PlayerAttackHitEffect(GameObject* _owner,const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle04_clear_hard.png", false)
-	, AddScale(16.0f)
-	, SubAlpha(0.01f)
+	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Particle04_clear_hard.png", false)
+	, AddScale(32.0f)
+	, SubAlpha(0.05f)
 {
 
 	new PlayerAttackHitEffectRipples(_owner, _pos, _velocity);

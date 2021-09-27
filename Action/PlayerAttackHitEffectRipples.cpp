@@ -1,9 +1,9 @@
 #include "PlayerAttackHitEffectRipples.h"
 
 PlayerAttackHitEffectRipples::PlayerAttackHitEffectRipples(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle5.png", false)
-	, AddScale(32.0f)
-	, SubAlpha(0.001f)
+	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Shockwave.png", false)
+	, AddScale(128.0f)
+	, SubAlpha(0.01f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	owner = _owner;

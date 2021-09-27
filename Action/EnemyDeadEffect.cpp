@@ -79,4 +79,8 @@ void EnemyDeadEffect::RotateEffect()
 	Quaternion incZ(Vector3::UnitZ, radian);
 	target = Quaternion::Concatenate(rot, incZ);
 	SetRotation(target);
+	Quaternion b = owner->GetRotation();
+
+	Matrix4 myRotateMat = Matrix4::CreateFromQuaternion(owner->GetRotation());
+	Vector3 a = myRotateMat.GetTranslation();
 }

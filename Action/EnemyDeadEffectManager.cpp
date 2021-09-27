@@ -50,12 +50,6 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 
 void EnemyDeadEffectManager::ActiveEffectProcess()
 {
-	//if (generateFlag)
-	//{
-	//	++frameCount;
-	//	GenerateEffectProcess();
-	//	generateFlag = true;
-	//}
 
 	++frameCount;
 	if (frameCount >= 10)
