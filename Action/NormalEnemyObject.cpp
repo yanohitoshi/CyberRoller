@@ -3,6 +3,7 @@
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
+#include "EnemyObjectStateRespawn.h"
 #include "NormalEnemyObjectStateIdle.h"
 #include "NormalEnemyObjectStateDead.h"
 #include "BoxCollider.h"
@@ -50,6 +51,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new NormalEnemyObjectStateIdle);
 	statePools.push_back(new NormalEnemyObjectStateDead);
+	statePools.push_back(new EnemyObjectStateRespawn);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);

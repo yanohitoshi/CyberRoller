@@ -6,6 +6,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 {
 	SetPosition(_pos);
 	tag = _objectTag;
+	firstPosition = _pos;
 	new EnemyDeadEffectManager(this);
 }
 

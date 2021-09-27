@@ -4,6 +4,7 @@
 #include "PlayerObject.h"
 #include "SphereCollider.h"
 #include "JumpAttackEffectManager.h"
+#include "PlayerAttackHitEffectManager.h"
 
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
@@ -30,6 +31,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
 
 	new JumpAttackEffectManager(this);
+	new PlayerAttackHitEffectManager(ownerObject);
 }
 
 JumpAttackPlayerObject::~JumpAttackPlayerObject()

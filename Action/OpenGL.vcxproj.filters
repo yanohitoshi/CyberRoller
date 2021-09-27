@@ -465,6 +465,18 @@
     <ClCompile Include="EnemyDeadEffect.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyObjectStateRespawn.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffectRipples.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -932,6 +944,18 @@
     </ClInclude>
     <ClInclude Include="EnemyDeadEffect.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateRespawn.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffectRipples.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

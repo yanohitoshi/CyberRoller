@@ -3,6 +3,7 @@
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
+#include "EnemyObjectStateRespawn.h"
 #include "MoveEnemyObjectStateIdle.h"
 #include "MoveEnemyObjectStateDead.h"
 #include "MoveEnemyObjectStateMoving.h"
@@ -55,6 +56,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new MoveEnemyObjectStateIdle);
 	statePools.push_back(new MoveEnemyObjectStateDead);
+	statePools.push_back(new EnemyObjectStateRespawn);
 	statePools.push_back(new MoveEnemyObjectStateMoving);
 	statePools.push_back(new MoveEnemyObjectStateTurn);
 

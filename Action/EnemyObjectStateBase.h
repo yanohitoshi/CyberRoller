@@ -17,6 +17,8 @@ enum class EnemyState
 	ENEMY_STATE_IDLE = 0,
 	// 死亡状態
 	ENEMY_STATE_DEAD,
+	// 復帰待機
+	ENEMY_STATE_RESPAWN,
 	// 移動状態
 	ENEMY_STATE_MOVING,
 	// ターン

@@ -10,15 +10,14 @@ NormalEnemyObjectStateDead::~NormalEnemyObjectStateDead()
 
 EnemyState NormalEnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	// positionに速度を足してキャラクターを動かす
-	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+	Vector3 nowScale = _owner->GetScaleVec();
+	nowScale -= Vector3(0.01f, 0.01f, 0.01f);
+	_owner->SetScale(nowScale);
 
-	++frameCount;
-
-	if (frameCount >= 300)
+	if (nowScale.x <= 0.0f)
 	{
-		_owner->SetIsDeadFlag(false);
-		state = EnemyState::ENEMY_STATE_IDLE;
+		skeletalMeshComponent->SetVisible(false);
+		state = EnemyState::ENEMY_STATE_RESPAWN;
 	}
 
 	return state;
@@ -32,6 +31,6 @@ void NormalEnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_DEAD));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_DEAD;
+
 	_owner->SetState(State::Disabling);
-	frameCount = 0;
 }

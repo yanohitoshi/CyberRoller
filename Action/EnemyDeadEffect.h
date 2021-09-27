@@ -30,10 +30,20 @@ public:
 
 private:
 
+    /*
+    @fn 回転処理関数
+    @brief	エフェクトの回転を行う
+    */
+    void RotateEffect();
+
     // 毎フレーム足すscale値 
     const float AddScale;
     // 毎フレーム引くalpha値
     const float SubAlpha;
+    // ランダムな値の範囲
+    const int RandValue;
+
+    const Vector3 EffectColor;
 
 };
 

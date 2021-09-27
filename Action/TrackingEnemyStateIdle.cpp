@@ -1,6 +1,7 @@
 #include "TrackingEnemyStateIdle.h"
 
 TrackingEnemyStateIdle::TrackingEnemyStateIdle()
+	: StayTime(60)
 {
 }
 
@@ -10,7 +11,10 @@ TrackingEnemyStateIdle::~TrackingEnemyStateIdle()
 
 EnemyState TrackingEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	state = EnemyState::ENEMY_STATE_MOVING;
+	if (_owner->GetIsTracking() && !_owner->GetIsDeadFlag())
+	{
+		state = EnemyState::ENEMY_STATE_TRACKING;
+	}
 
 	if (_owner->GetIsDeadFlag())
 	{

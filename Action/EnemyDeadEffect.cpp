@@ -1,57 +1,22 @@
 #include "EnemyDeadEffect.h"
 
 EnemyDeadEffect::EnemyDeadEffect(GameObject* _owner,const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Thunder_Thin.png", false)
-	, AddScale(4.0f)
-	, SubAlpha(0.01f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 15, "Assets/Effect/Thunder_Thin.png", false)
+	, AddScale(10.0f)
+	, SubAlpha(0.05f)
+	, RandValue(361)
+	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
 {
 	// メンバー変数の初期化
-	scale = 64.0f;
+	scale = 32;
 	alpha = 1.0f;
 	position = _pos;
-	position.z += 20.0f;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
-	particleComponent->SetColor(Vector3(0.65f, 0.65f, 1.0f));
+	particleComponent->SetColor(EffectColor);
 	owner = _owner;
 
-	Vector3 forward = owner->GetForwardVec();
-	if (forward.x > 0.0f)
-	{
-		position.x += 50.0f;
-	}
-	else if (forward.x < 0.0f)
-	{
-		position.x -= 50.0f;
-	}
-	else if (forward.y > 0.0f)
-	{
-		position.y += 50.0f;
-	}
-	else if (forward.y < 0.0f)
-	{
-		position.y -= 50.0f;
-	}
-	//Z軸を10度回転させる
-	float radianX = Math::ToRadians((float)(rand() % 361));
-	Quaternion rotX = this->GetRotation();
-	Quaternion incX(Vector3::UnitX, radianX);
-	Quaternion targetX = Quaternion::Concatenate(rotX, incX);
-	SetRotation(targetX);
-
-	//Z軸を10度回転させる
-	float radianY = Math::ToRadians((float)(rand() % 361));
-	Quaternion rotY = this->GetRotation();
-	Quaternion incY(Vector3::UnitY, radianY);
-	Quaternion targetY = Quaternion::Concatenate(rotY, incY);
-	SetRotation(targetY);
-
-	//Z軸を10度回転させる
-	float radianZ = Math::ToRadians((float)(rand() % 361));
-	Quaternion rotZ = this->GetRotation();
-	Quaternion incZ(Vector3::UnitZ, radianZ);
-	Quaternion targetZ = Quaternion::Concatenate(rotZ, incZ);
-	SetRotation(targetZ);
+	RotateEffect();
 }
 
 EnemyDeadEffect::~EnemyDeadEffect()
@@ -86,4 +51,32 @@ void EnemyDeadEffect::UpdateGameObject(float _deltaTime)
 		// ステータスをdeadに変更
 		state = State::Dead;
 	}
+}
+
+void EnemyDeadEffect::RotateEffect()
+{
+	float radian;
+	Quaternion rot;
+	Quaternion target;
+
+	//X軸をランダムな値回転させる
+	radian = Math::ToRadians((float)(rand() % RandValue));
+	rot = this->GetRotation();
+	Quaternion incX(Vector3::UnitX, radian);
+	target = Quaternion::Concatenate(rot, incX);
+	SetRotation(target);
+
+	//Y軸をランダムな値回転させる
+	radian = Math::ToRadians((float)(rand() % RandValue));
+	rot = this->GetRotation();
+	Quaternion incY(Vector3::UnitY, radian);
+	target = Quaternion::Concatenate(rot, incY);
+	SetRotation(target);
+
+	//Z軸をランダムな値回転させる
+	radian = Math::ToRadians((float)(rand() % RandValue));
+	rot = this->GetRotation();
+	Quaternion incZ(Vector3::UnitZ, radian);
+	target = Quaternion::Concatenate(rot, incZ);
+	SetRotation(target);
 }

@@ -3,6 +3,7 @@
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
+#include "EnemyObjectStateRespawn.h"
 #include "TrackingEnemyStateDead.h"
 #include "TrackingEnemyStateIdle.h"
 #include "TrackingEnemyStateTracking.h"
@@ -65,6 +66,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new TrackingEnemyStateIdle);
 	statePools.push_back(new TrackingEnemyStateDead);
+	statePools.push_back(new EnemyObjectStateRespawn);
 	statePools.push_back(new TrackingEnemyStateMoving);
 	statePools.push_back(new TrackingEnemyStateTurn);
 	statePools.push_back(new TrackingEnemyStateTracking);
@@ -88,11 +90,6 @@ TrackingEnemyObject::~TrackingEnemyObject()
 void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	aabb = boxCollider->GetWorldBox();
-
-	if (isTracking && !isDeadFlag)
-	{
-		nextState = EnemyState::ENEMY_STATE_TRACKING;
-	}
 
 	if (isAttack && !isDeadFlag)
 	{

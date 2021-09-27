@@ -33,5 +33,8 @@ public:
 
 private:
 
+	const int StayTime;
+	int frameCount;
+
 };
 

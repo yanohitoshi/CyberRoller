@@ -58,7 +58,7 @@ void EnemyDeadEffectManager::ActiveEffectProcess()
 	//}
 
 	++frameCount;
-	if (frameCount >= 30)
+	if (frameCount >= 10)
 	{
 		GenerateEffectProcess();
 		frameCount = 0;
