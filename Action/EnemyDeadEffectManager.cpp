@@ -4,7 +4,7 @@
 
 EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, MaxEffects(3)
+	, MaxEffects(1)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -52,7 +52,7 @@ void EnemyDeadEffectManager::ActiveEffectProcess()
 {
 
 	++frameCount;
-	if (frameCount >= 10)
+	if (frameCount >= 15)
 	{
 		GenerateEffectProcess();
 		frameCount = 0;

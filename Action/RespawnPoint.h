@@ -47,5 +47,6 @@ private:
 	// “–‚½‚è”»’è‚ğs‚¤ƒNƒ‰ƒX
 	BoxCollider* boxCollider;
 
+	const float CorrectionPositionZ;
 };
 

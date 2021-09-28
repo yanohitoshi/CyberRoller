@@ -68,7 +68,7 @@ void ParticleComponent::Draw(Shader* _shader)
 		// object‚ÌRotation‚ðŽQÆ‚µparticle‚ÌŒü‚«‚ðŒˆ’è‚·‚é
 		Matrix4 objectMatrix = Matrix4::CreateFromQuaternion(owner->GetRotation());
 		_shader->SetMatrixUniform("uWorldTransform", matScale * objectMatrix * offset * mat);
-	}
+		}
 	_shader->SetFloatUniform("uAlpha", alpha);
 	_shader->SetVectorUniform("uColor", color);
 

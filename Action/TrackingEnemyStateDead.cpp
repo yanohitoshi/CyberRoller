@@ -10,11 +10,9 @@ TrackingEnemyStateDead::~TrackingEnemyStateDead()
 
 EnemyState TrackingEnemyStateDead::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	Vector3 nowScale = _owner->GetScaleVec();
-	nowScale -= Vector3(0.01f, 0.01f, 0.01f);
-	_owner->SetScale(nowScale);
+	++frameCount;
 
-	if (nowScale.x <=0.0f)
+	if (frameCount >= 120)
 	{
 		skeletalMeshComponent->SetVisible(false);
 		state = EnemyState::ENEMY_STATE_RESPAWN;
@@ -33,4 +31,5 @@ void TrackingEnemyStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	state = EnemyState::ENEMY_STATE_DEAD;
 
 	_owner->SetState(State::Disabling);
+	frameCount = 0;
 }

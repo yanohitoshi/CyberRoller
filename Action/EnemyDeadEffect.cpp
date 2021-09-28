@@ -1,15 +1,16 @@
 #include "EnemyDeadEffect.h"
 
 EnemyDeadEffect::EnemyDeadEffect(GameObject* _owner,const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 15, "Assets/Effect/Thunder_Thin.png", false)
-	, AddScale(10.0f)
-	, SubAlpha(0.05f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 10, "Assets/Effect/Thunder_Thin.png", false)
+	, AddScale(4.0f)
+	, SubAlpha(0.01f)
 	, RandValue(361)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
 {
 	// メンバー変数の初期化
 	scale = 32;
 	alpha = 1.0f;
+	speed = 1.5f;
 	position = _pos;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
@@ -41,6 +42,8 @@ void EnemyDeadEffect::UpdateGameObject(float _deltaTime)
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 
+		// ポジションに速度を追加
+		position += velocity * speed;
 		// ポジションを更新
 		SetPosition(position);
 	}
@@ -79,8 +82,11 @@ void EnemyDeadEffect::RotateEffect()
 	Quaternion incZ(Vector3::UnitZ, radian);
 	target = Quaternion::Concatenate(rot, incZ);
 	SetRotation(target);
-	Quaternion b = owner->GetRotation();
 
-	Matrix4 myRotateMat = Matrix4::CreateFromQuaternion(owner->GetRotation());
-	Vector3 a = myRotateMat.GetTranslation();
+	Matrix4 mat = Matrix4::CreateFromQuaternion(this->GetRotation());
+	velocity.x += mat.GetXAxis().x;
+	velocity.y += mat.GetYAxis().y;
+	velocity.z += mat.GetZAxis().z;
+	velocity.Normalize();
+
 }

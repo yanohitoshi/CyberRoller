@@ -394,19 +394,19 @@ public://ゲッターセッター
 	@brief　オブジェクトの前方を表すベクトルを取得する
 	@param	forward(Vector3型)
 	*/
-	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
+	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
 
 	/*
 	@brief　オブジェクトの右を表すベクトルを取得する
 	@param	right(Vector3型)
 	*/
-	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, rotation); }
+	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
 	/*
 	@brief　オブジェクトの上を表すベクトルを取得する
 	@param	up(Vector3型)
 	*/
-	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, rotation); }
+	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
 	/*
 	@brief　オブジェクトの上を表すベクトルを取得する

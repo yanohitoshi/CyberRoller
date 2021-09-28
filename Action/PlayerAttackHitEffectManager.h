@@ -38,13 +38,14 @@ private:
     */
     void GenerateEffectProcess();
 
-
     // 親のGameObject保存用変数
     PlayerObject* owner;
     // particleの状態管理用変数
     ParticleState particleState;
     // 生成するエフェクトのポジション
     Vector3 effectPosition;
+
+    const float CorrectionPosition;
     int frameCount;
     int effectCount;
     // 1度だけ生成する用の生成フラグ変数

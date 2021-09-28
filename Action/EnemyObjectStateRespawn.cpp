@@ -33,9 +33,9 @@ void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->SetVisible(true);
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_RESPAWN;
-
+	_owner->SetScale(Vector3::Zero);
 	// 現在のscale値を取得
-	nowScale = _owner->GetScaleVec();
+	nowScale = Vector3::Zero;
 	// 死亡フラグをfalseにセット
 	_owner->SetIsDeadFlag(false);
 	// positionを初期位置に直す

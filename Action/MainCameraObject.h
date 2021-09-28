@@ -87,7 +87,7 @@ public:
 	/*
 	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
 	*/
-	void ResetYaw() { yaw = Math::ToRadians(180); }
+	void ResetCamera() { yaw = Math::ToRadians(180); pitch = Math::ToRadians(30);}
 
 	//追従先のオブジェクト座標
 	Vector3 lerpObjectPos;

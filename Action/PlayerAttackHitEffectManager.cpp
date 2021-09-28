@@ -4,6 +4,7 @@
 
 PlayerAttackHitEffectManager::PlayerAttackHitEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
+	, CorrectionPosition(100.0f)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -63,10 +64,8 @@ void PlayerAttackHitEffectManager::ActiveEffectProcess()
 
 void PlayerAttackHitEffectManager::GenerateEffectProcess()
 {
-	//GameObject* targetObject = owner->GetAttackTargetEnemy();
-	//Vector3 offsetDirection = owner->GetPosition() - targetObject->GetPosition();
-	//offsetDirection.Normalize();
-	// ownerのポジションを得る
-	effectPosition = owner->GetPosition() + owner->GetForwardVec() * 100.0f;
+	// ポジション計算
+	effectPosition = owner->GetPosition() + owner->GetForwardVec() * CorrectionPosition;
+	// エフェクト生成
 	new PlayerAttackHitEffect(owner, effectPosition, velocity);
 }

@@ -286,7 +286,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	if (respawnFlag == true)
 	{
 		// カメラを初期にリセット
-		mainCamera->ResetYaw();
+		mainCamera->ResetCamera();
 	}
 
 	// RENDERERに現在のポジションを送る
@@ -666,11 +666,6 @@ void PlayerObject::HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, 
 		// yだったらx軸方向に押し戻し
 		_calcFixVec.y = dy;
 	}
-	//else
-	//{
-	//	// zだったらx軸方向に押し戻し
-	//	_calcFixVec.z = dz;
-	//}
 }
 
 const Animation* PlayerObject::GetAnimation(PlayerState _state)

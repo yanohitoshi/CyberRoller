@@ -6,9 +6,12 @@
 
 RespawnPoint::RespawnPoint(const Vector3& _p, const AABB& _box, const Tag& _objectTag)
 	: GameObject(false,_objectTag)
+	, CorrectionPositionZ(600.0f)
 {
 	// ポジションの初期化
 	position = _p;
+	// 高さを補正
+	position.z += CorrectionPositionZ;
 	// ポジションをセット
 	SetPosition(position);
 
