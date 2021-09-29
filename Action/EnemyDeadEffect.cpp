@@ -8,7 +8,7 @@ EnemyDeadEffect::EnemyDeadEffect(GameObject* _owner,const Vector3& _pos)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 32;
+	scale = 64;
 	alpha = 1.0f;
 	speed = 1.5f;
 	position = _pos;

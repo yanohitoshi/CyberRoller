@@ -30,11 +30,13 @@ void ParticleEffectBase::UpdateGameObject(float _deltaTime)
 	SetPosition(position + velocity);
 }
 
+
 void ParticleEffectBase::UpdateParticleObject(float _deltaTime)
 {
 	// カウントダウンする
 	LifeCountDown();
 }
+
 
 void ParticleEffectBase::LifeCountDown()
 {

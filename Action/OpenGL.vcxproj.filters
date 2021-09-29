@@ -477,6 +477,9 @@
     <ClCompile Include="PlayerAttackHitEffectRipples.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyExplosionEffect.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -956,6 +959,9 @@
     </ClInclude>
     <ClInclude Include="PlayerAttackHitEffectRipples.h">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyExplosionEffect.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -46,8 +46,18 @@ private:
     ParticleState particleState;
     // 1度に生成するエフェクトの数
     const int MaxEffects;
+    // 1度に生成するエフェクトの数
+    const int MaxExplosionEffects;
     // 1度だけ生成する用の生成フラグ変数
-    bool generateFlag;
+    bool generateExplosionEffectsFlag;
     int frameCount;
+
+    // ランダムな値を生成する際にかける補正
+    const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
+    const int RandValueX;
+    const int RandValueY;
+    const int RandValueZ;
 };
 
