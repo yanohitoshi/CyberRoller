@@ -13,5 +13,4 @@ void EnemyObjectStateBase::RotationProcess(EnemyObjectBase* _owner, Vector3 _for
 		// 前方ベクトル更新
 		_owner->SetCharaForwardVec(rotatioin);
 	}
-
 }

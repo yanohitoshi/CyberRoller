@@ -1,5 +1,5 @@
 #include "EnemyDeadEffectManager.h"
-#include "EnemyDeadEffect.h"
+#include "EnemyElectricShockEffect.h"
 #include "EnemyObjectBase.h"
 #include "EnemyExplosionEffect.h"
 
@@ -71,31 +71,7 @@ void EnemyDeadEffectManager::GenerateEffectProcess()
 
 	if (generateExplosionEffectsFlag && effectFrameCount >= WaitingExplosionTime)
 	{
-		velocity = Vector3::Zero;
-
-		for (int explosionEfectCount = 0; explosionEfectCount < MaxExplosionEffects; explosionEfectCount++)
-		{
-			// ランダムな値を生成
-			Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
-
-			// 値が大きすぎるので最後の補正をかけて速度に代入
-			velocity = randV * LastCorrection;
-			velocity.Normalize();
-
-			if (explosionEfectCount % 2 == 0)
-			{
-				velocity.x *= -1.0f;
-				velocity.z *= -1.0f;
-			}
-
-			if (explosionEfectCount % 3 == 0)
-			{
-				velocity.y *= -1.0f;
-			}
-
-			//エフェクトを生成
-			new EnemyExplosionEffect(owner, position, velocity);
-		}
+		GenerateExplosionEffectProcess();
 
 		generateExplosionEffectsFlag = false;
 	}
@@ -103,7 +79,36 @@ void EnemyDeadEffectManager::GenerateEffectProcess()
 	{
 		velocity = Vector3::UnitZ;
 		//エフェクトを生成
-		new EnemyDeadEffect(owner, position);
+		new EnemyElectricShockEffect(owner, position);
+	}
+}
+
+void EnemyDeadEffectManager::GenerateExplosionEffectProcess()
+{
+	velocity = Vector3::Zero;
+
+	for (int explosionEfectCount = 0; explosionEfectCount < MaxExplosionEffects; explosionEfectCount++)
+	{
+		// ランダムな値を生成
+		Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
+
+		// 値が大きすぎるので最後の補正をかけて速度に代入
+		velocity = randV * LastCorrection;
+		velocity.Normalize();
+
+		if (explosionEfectCount % 2 == 0)
+		{
+			velocity.x *= -1.0f;
+			velocity.z *= -1.0f;
+		}
+
+		if (explosionEfectCount % 3 == 0)
+		{
+			velocity.y *= -1.0f;
+		}
+
+		//エフェクトを生成
+		new EnemyExplosionEffect(owner, position, velocity);
 	}
 }
 

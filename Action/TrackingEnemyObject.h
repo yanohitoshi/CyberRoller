@@ -47,6 +47,9 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
+	// ‰ñ“]Šp“x
+	const float Angle;
+
 public:
 
 };

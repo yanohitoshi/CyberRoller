@@ -8,7 +8,6 @@
 class SkeletalMeshComponent;
 class Animation;
 class BoxCollider;
-class Mesh;
 enum class EnemyState;
 
 /*
@@ -80,17 +79,10 @@ public:
 	*/
 	virtual void FixCollision(AABB& myAABB, const AABB& pairAABB) {};
 
-	/*
-	@fn 押し戻し処理
-	*/
-	void EnemyCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
-
 protected:
 
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
-	// Meshの読み込みを行うクラス
-	Mesh* mesh;
 	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// エネミーのAABB構造体
@@ -116,6 +108,11 @@ protected:
 	Vector3 respawnPosition;
 	// 移動方向
 	Vector3 moveDirection;
+	// AABBの最小値
+	const Vector3 BoxMin;
+	// AABBの最大値
+	const Vector3 BoxMax;
+
 
 	// 初期位置からリスポーンするポジションを計算するための間隔
 	const float respawnPositionOffset;

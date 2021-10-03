@@ -1,6 +1,7 @@
 #include "EnemyObjectStateDead.h"
 
 EnemyObjectStateDead::EnemyObjectStateDead()
+	: RespawnTime(120)
 {
 }
 
@@ -12,7 +13,8 @@ EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTim
 {
 	++frameCount;
 
-	if (frameCount >= 120)
+	// ŽžŠÔ‚ª—ˆ‚½‚çƒŠƒXƒ|[ƒ“
+	if (frameCount >= RespawnTime)
 	{
 		skeletalMeshComponent->SetVisible(false);
 		state = EnemyState::ENEMY_STATE_RESPAWN;

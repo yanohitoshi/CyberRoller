@@ -7,8 +7,6 @@ JumpAttackEffectManager::JumpAttackEffectManager(GameObject* _owner)
 	// メンバー変数の初期化	
 	owner = _owner;
 	position = owner->GetPosition();
-	frameCount = 0;
-	generateCount = 0;
 	effectPosition = Vector3::Zero;
 }
 
@@ -35,7 +33,6 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 	{
 		// 無効状態だったら生成カウントを0にしてbreak
 	case (PARTICLE_DISABLE):
-		frameCount = 0;
 		break;
 
 		// 有効状態だったら
@@ -54,14 +51,6 @@ void JumpAttackEffectManager::ActiveEffectProcess()
 
 void JumpAttackEffectManager::GenerateEffectProcess()
 {
-	++frameCount;
-	if (frameCount % 2 == 0)
-	{
-		//// ownerのポジションを得る
-		//effectPosition = owner->GetPosition();
-		//// particleを生成
-		//new JumpAttackEffect(effectPosition, Vector3::Zero);
-	}
 	// ownerのポジションを得る
 	effectPosition = owner->GetPosition();
 	// particleを生成

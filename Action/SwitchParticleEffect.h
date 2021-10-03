@@ -6,7 +6,7 @@
 
 /*
 @file SwitchParticleEffect.h
-@brief SwitchParticleEffectの生成と更新を行う
+@brief スイッチのエフェクトの更新を行う
 */
 class SwitchParticleEffect :
     public ParticleEffectBase

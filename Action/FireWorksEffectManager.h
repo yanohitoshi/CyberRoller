@@ -8,7 +8,7 @@
 
 /*
 @file FireWorksEffectManeger.h
-@brief FireWorksEffectManegerの生成と更新を行う
+@brief 花火エフェクトの生成を行う
 */
 class FireWorksEffectManager :
     public GameObject

@@ -129,15 +129,8 @@ private:
 	std::vector<SphereCollider*> attackRangeSpheres;
 	std::vector<SphereCollider*> jumpAttackPlayerSpheres;
 	std::vector<SphereCollider*> playerTrackingAreaSpheres;
+	std::vector<SphereCollider*> enemyAttackAreaSpheres;
 
 	onCollisionMap collisionFunction;
 
 };
-
-/*
-@fn 衝突したことが確定したとき、めり込みを戻す関数
-@param _movableBox 移動物体
-@param _fixedBox 移動しない物体
-@param _calcFixVec 移動物体の補正差分ベクトル
-*/
-void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);

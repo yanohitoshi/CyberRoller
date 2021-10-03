@@ -40,7 +40,7 @@ void PlayerTransformEffect::UpdateGameObject(float _deltaTime)
 		particleComponent->SetScale(scale);
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
-
+		// ポジションをセット
 		SetRotation(owner->GetRotation());
 	}
 

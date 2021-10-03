@@ -42,6 +42,7 @@ private:
 
 	// 死亡状態の時間をカウント
 	int frameCount;
-
+	// リスポーンする時間定数
+	const int RespawnTime;
 };
 

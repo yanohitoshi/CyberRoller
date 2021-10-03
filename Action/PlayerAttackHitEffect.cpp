@@ -5,7 +5,7 @@ PlayerAttackHitEffect::PlayerAttackHitEffect(GameObject* _owner,const Vector3& _
 	, AddScale(32.0f)
 	, SubAlpha(0.05f)
 {
-
+	// ヒットエフェクトの外側の波紋を生成
 	new PlayerAttackHitEffectRipples(_owner, _pos, _velocity);
 
 	// メンバー変数の初期化

@@ -7,7 +7,7 @@
 
 /*
 @file JumpAttackEffectManager.h
-@brief JumpAttackEffectの生成を行うクラス
+@brief ジャンプ攻撃中のエフェクトの生成を行うクラス
 */
 class JumpAttackEffectManager :
     public GameObject
@@ -52,10 +52,5 @@ private:
     ParticleState particleState;
     // 生成するエフェクトのポジション
     Vector3 effectPosition;
-    // フレームカウント用変数
-    int frameCount;
-    // 生成した数を数えるためのカウント
-    int generateCount;
-
 };
 

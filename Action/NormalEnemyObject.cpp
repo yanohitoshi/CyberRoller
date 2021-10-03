@@ -38,13 +38,9 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	// 死亡時のアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
 
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
-	mesh = skeltalMeshComponent->GetMesh();
-
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
-	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
+	enemyBox = { BoxMin,BoxMax };
 	boxCollider->SetObjectBox(enemyBox);
 
 	// stateプールの初期化
@@ -59,7 +55,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
-	//Z軸を10度回転させる
+	//Z軸を180度回転させる
 	float radian = Math::ToRadians(Angle);
 	Quaternion rot = this->GetRotation();
 	Quaternion inc(Vector3::UnitZ, radian);

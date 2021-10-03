@@ -13,14 +13,14 @@ PlayerObjectStateJumpAttack::~PlayerObjectStateJumpAttack()
 
 PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _deltaTime)
 {
+	// ターゲットを捉えていてかつターゲットがActiveだったら
 	if (isSelectingTargetEnemy && attackTargetEnemy->GetState() == State::Active)
 	{
-
 		Vector3 tmpPosition;
 		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
 		_owner->SetPosition(tmpPosition);
 	}
-	else
+	else // ターゲットがいない場合のジャンプアタック移動処理
 	{
 		++unSelectTargetEnemyFrameCount;
 		jumpAttackDirection.z = 0.0f;
@@ -28,10 +28,15 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
+	// 攻撃成功またはジャンプアタックの時間が終了していたらステータスを変更
 	if (_owner->GetIsJumpAttackSuccess() || unSelectTargetEnemyFrameCount > UnSelectTargetAttackTime)
 	{
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
+
+	ChackDeadFlag(_owner);
+
+	ChackTimeOverFlag();
 
 	return state;
 }

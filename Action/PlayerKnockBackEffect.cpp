@@ -83,6 +83,7 @@ void PlayerKnockBackEffect::RotateEffect()
 	target = Quaternion::Concatenate(rot, incZ);
 	SetRotation(target);
 
+	// ‰ñ“]’l‚©‚çˆÚ“®•ûŒü‚ðŒvŽZ
 	Matrix4 mat = Matrix4::CreateFromQuaternion(this->GetRotation());
 	velocity.x += mat.GetXAxis().x;
 	velocity.y += mat.GetYAxis().y;

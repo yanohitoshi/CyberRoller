@@ -7,7 +7,7 @@
 
 /*
 @file PlayerTransformEffectManager.h
-@brief PlayerTransformEffectの生成を行うクラス
+@brief プレイヤーのジャンプアタック状態へ変形時のエフェクトの生成を行うクラス
 */
 class PlayerTransformEffectManager :
     public GameObject

@@ -7,7 +7,7 @@
 
 /*
 @file PlayerAttackHitEffectManager.h
-@brief PlayerAttackHitEffectの生成を行うクラス
+@brief プレイヤーがエネミーへの攻撃を成功したときのエフェクトの生成を行うクラス
 */
 class PlayerAttackHitEffectManager :
     public GameObject

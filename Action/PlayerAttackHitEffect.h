@@ -6,7 +6,7 @@
 
 /*
 @file PlayerAttackHitEffect.h
-@brief PlayerAttackHitEffectの更新を行うクラス
+@brief プレイヤーがエネミーへの攻撃を成功したときのエフェクトの更新を行うクラス
 */
 class PlayerAttackHitEffect :
     public ParticleEffectBase

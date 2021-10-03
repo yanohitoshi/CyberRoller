@@ -9,7 +9,7 @@ enum class PlayerState;
 
 /*
 @file PlayerSandSmokeMakeManeger.h
-@brief PlayerSandSmokeMakeManegerの生成を行う
+@brief プレイヤーの土煙(走り)の生成を行う
 */
 class PlayerSandSmokeMakeManager :
     public GameObject

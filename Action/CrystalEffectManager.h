@@ -21,7 +21,7 @@ enum CrystalColor
 
 /*
 @file CrystalEffectManager.h
-@brief CrystalEffectManagerの生成と更新を行う
+@brief クリスタルのエフェクトの生成を行う
 */
 class CrystalEffectManager :
     public GameObject

@@ -42,14 +42,9 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	// ターンアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
 
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
-	mesh = skeltalMeshComponent->GetMesh();
-
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
-	//enemyBox = mesh->GetBox();
-	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
+	enemyBox = { BoxMin,BoxMax };
 	boxCollider->SetObjectBox(enemyBox);
 
 	// stateプールの初期化

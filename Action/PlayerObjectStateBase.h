@@ -72,7 +72,7 @@ public:
 	*/
 	PlayerObjectStateBase()
 		: MaxFallSpeed(-2000.0f)
-		, MaxMoveSpeed(1600.0f)
+		, MaxMoveSpeed(1800.0f)
 	{};
 
 	/*
@@ -119,6 +119,17 @@ public:
 	void ChackInput(PlayerObject* _owner, const InputState& _keyState);
 	
 	/*
+	@fn 死亡状態か確認する関数
+	@param	_owner 親クラスのポインタ
+	*/
+	void ChackDeadFlag(PlayerObject* _owner);
+
+	/*
+	@fn タイムオーバーか確認する関数
+	*/
+	void ChackTimeOverFlag();
+
+	/*
 	@fn 回転処理関数
 	@param	_owner 親クラスのポインタ
 	@param	_keyState 入力情報
@@ -133,6 +144,13 @@ public:
 	Vector3 ChackControllerAxis(const InputState& _keyState);
 
 protected:
+	
+	/*
+	@fn ジャンプ系のステータスの時入力がある場合の処理関数
+	@param	_owner 親クラスのポインタ
+	@param	_axis 補正済みのアナログスティック情報
+	*/
+	void InputJumpMovableProcess(PlayerObject* _owner, Vector3 _axis);
 
 	// 親クラスのポインタを格納するためのSkeletalMeshComponentのポインタ変数
 	SkeletalMeshComponent* skeletalMeshComponent;
@@ -175,6 +193,5 @@ private:
 	@param	_owner 親クラスのポインタ
 	*/
 	void JumpTransitionProcess(PlayerObject* _owner);
-
 };
 

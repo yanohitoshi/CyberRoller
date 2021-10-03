@@ -13,9 +13,13 @@ EnemyObjectStateRespawn::~EnemyObjectStateRespawn()
 
 EnemyState EnemyObjectStateRespawn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
+	// オーナーの今のポジションを取得
 	nowPosition = _owner->GetPosition();
+	// 今のポジションから初期ポジションへ向かう方向ベクトルを作成
 	moveDirection = _owner->GetFirstPosition() - nowPosition;
+	// 正規化
 	moveDirection.Normalize();
+	// 速度を計算ン
 	velocity = moveDirection * RespawnMoveSpeed;
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);

@@ -12,6 +12,7 @@ JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(0.3f, 0.3f, 1.0f));
+	// Particleのブレンドモードをセット
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 }
 

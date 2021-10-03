@@ -10,26 +10,42 @@ TrackingEnemyStateTracking::~TrackingEnemyStateTracking()
 
 EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	Vector3 firstPosToTrackingObject = firstPosition - trackingObject->GetPosition();
-	Vector3 firstPosToOwnerObject = firstPosition - _owner->GetPosition();
+	// 追跡対象から初期ポジションへと向かうベクトルを計算
+	Vector3 trackingObjectToFirstPos = firstPosition - trackingObject->GetPosition();
+	// オーナーのポジションから初期ポジションへと向かうベクトルを計算
+	Vector3 ownerObjectToFirstPos = firstPosition - _owner->GetPosition();
 
-	float firstPosToTrackingObjectLength = firstPosToTrackingObject.LengthSq();
-	float firstPosToOwnerObjectLength = firstPosToOwnerObject.LengthSq();
+	// 追跡対象から初期ポジションへのベクトルの長さ
+	float trackingObjectToFirstPosLength = trackingObjectToFirstPos.LengthSq();
+	// オーナーのポジションから初期ポジションへのベクトルの長さ
+	float ownerObjectToFirstPosLength = ownerObjectToFirstPos.LengthSq();
 
-	if (_owner->GetIsTracking() && !_owner->GetIsOtherEnemyHit())
+	if (_owner->GetIsTracking())
 	{
+		// オーナーから追跡対象へ向かうベクトル
 		trackingRotationVec =  trackingObject->GetPosition() - _owner->GetPosition();
 		trackingRotationVec.z = 0.0f;
-		trackingRotationVec.Normalize();
-		velocity = trackingRotationVec * moveSpeed;
-		// positionに速度を足してキャラクターを動かす
-		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+		float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
 
-		RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
+		if (ownerPosToTrackingObjectLength >= 50.0f)
+		{
+			trackingRotationVec.Normalize();
+			velocity = trackingRotationVec * moveSpeed;
+			// positionに速度を足してキャラクターを動かす
+			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+
+			RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
+		}
+		else
+		{
+			velocity = Vector3::Zero;
+			// positionに速度を足してキャラクターを動かす
+			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+		}
 	}
 	else if (!_owner->GetIsTracking())
 	{
-		if (firstPosToOwnerObjectLength > firstPosToTrackingObjectLength)
+		if (ownerObjectToFirstPosLength > trackingObjectToFirstPosLength)
 		{
 			state = EnemyState::ENEMY_STATE_REPOSITION;
 		}

@@ -7,7 +7,7 @@
 
 /*
 @file PlayerKnockBackEffectManager.h
-@brief PlayerKnockBackEffectの生成を行うクラス
+@brief ノックバックエフェクトの生成を行うクラス
 */
 class PlayerKnockBackEffectManager :
     public GameObject

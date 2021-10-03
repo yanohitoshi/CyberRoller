@@ -13,7 +13,6 @@ LandingEffectManager::LandingEffectManager(PlayerObject* _owner)
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
-	tmpVelZ = 0.0f;
 }
 
 LandingEffectManager::~LandingEffectManager()

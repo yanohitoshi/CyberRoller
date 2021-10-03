@@ -13,9 +13,11 @@
 #include "TrackingEnemyStateAttack.h"
 #include "BoxCollider.h"
 #include "PlayerTrackingArea.h"
+#include "EnemyAttackArea.h"
 
 TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
+	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
@@ -52,14 +54,9 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	// 攻撃アニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Attack.gpanim", false);
 
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
-	mesh = skeltalMeshComponent->GetMesh();
-
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
-	//enemyBox = mesh->GetBox();
-	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
+	enemyBox = { BoxMin,BoxMax };
 	boxCollider->SetObjectBox(enemyBox);
 
 
@@ -81,7 +78,14 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
 	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this, _areaValue);
+	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 
+	//Z軸を180度回転させる
+	float radian = Math::ToRadians(Angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
 }
 
 TrackingEnemyObject::~TrackingEnemyObject()
@@ -90,6 +94,7 @@ TrackingEnemyObject::~TrackingEnemyObject()
 
 void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 {
+	// AABBを更新
 	aabb = boxCollider->GetWorldBox();
 
 	if (isAttack && !isDeadFlag)
@@ -127,23 +132,28 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 
 void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
+	// 仮速度変数
+	Vector3 ment = Vector3::Zero;
+
+	CalcCollisionFixVec(myAABB, pairAABB, ment);
+
+	// 押し戻し計算を考慮しポジションを更新
+	SetPosition(position + ment);
 }
 
 void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	// ジャンプアタックプレイヤーだったら
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
 	{
+		// 死亡フラグをtrueに
 		isDeadFlag = true;
 	}
 
-	if (_hitObject.GetTag() == Tag::PLAYER && _physicsTag == PhysicsTag::PLAYER_TAG)
+	// 他の敵またはグラウンドと当たったら
+	if (_hitObject.GetTag() == Tag::ENEMY || _hitObject.GetTag() == Tag::GROUND)
 	{
-		isAttack = true;
+		// 押し戻し
+		FixCollision(aabb, _hitObject.aabb);
 	}
-
-	if (_hitObject.GetTag() == Tag::ENEMY)
-	{
-		isOtherEnemyHit = true;
-	}
-
 }

@@ -1,4 +1,5 @@
 #include "PlayerObjectStateBase.h"
+#include "CountDownFont.h"
 
 void PlayerObjectStateBase::GroundMove(PlayerObject* _owner, const InputState& _keyState)
 {
@@ -37,6 +38,25 @@ void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _
 			// ジャンプフラグをtrueにセット
 			_owner->SetJumpFlag(true);
 		}
+	}
+}
+
+void PlayerObjectStateBase::ChackDeadFlag(PlayerObject* _owner)
+{
+	// 死亡フラグが立っていたら
+	if (_owner->GetDeadFlag())
+	{
+		state = PlayerState::PLAYER_STATE_DEAD;
+	}
+}
+
+void PlayerObjectStateBase::ChackTimeOverFlag()
+{
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::GetTimeOverFlag() == true)
+	{
+		// ステータスをコンティニュー選択開始状態にする
+		state = PlayerState::PLAYER_STATE_DOWNSTART;
 	}
 }
 
@@ -120,16 +140,69 @@ void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _a
 		moveSpeed = MaxMoveSpeed;
 	}
 
+	Vector2 absAxis = Vector2(fabs(_axis.x), fabs(_axis.y));
+
 	// 移動ベクトルに速度をかける
+	if (absAxis.x > absAxis.y)
+	{
+		moveSpeed *= absAxis.x;
+	}
+	else
+	{
+		moveSpeed *= absAxis.y;
+	}
+
 	velocity.x = forward.x * moveSpeed;
 	velocity.y = forward.y * moveSpeed;
+
 
 	// 回転処理
 	RotationProcess(_owner, forward, tmpForward);
 
 	// ownerの移動速度を更新
 	_owner->SetMoveSpeed(moveSpeed);
+}
 
+void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector3 _axis)
+{
+	// 前のフレームのキャラクターの前方ベクトルを保存
+	Vector3 tmpForward = _owner->GetCharaForwardVec();
+
+	// 方向キーの入力値とカメラの向きから、移動方向を決定
+	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
+	forward.Normalize();
+
+	// 空中用の移動力の定数を足す
+	moveSpeed += _owner->GetAirMovePower();
+
+	// 移動速度が最大速度を超えていたら
+	if (moveSpeed >= MaxMoveSpeed)
+	{
+		// 最高速度に固定する
+		moveSpeed = MaxMoveSpeed;
+	}
+
+	// アナログスティックの入力角度を絶対値化
+	Vector2 absAxis = Vector2(fabs(_axis.x), fabs(_axis.y));
+	// アナログスティックの入力を考慮した移動速度の作成
+	if (absAxis.x > absAxis.y)
+	{
+		moveSpeed *= absAxis.x;
+	}
+	else
+	{
+		moveSpeed *= absAxis.y;
+	}
+
+	// X軸とY軸に前方ベクトルに速度をかけて速度付きベクトルを作る
+	velocity.x = forward.x * moveSpeed;
+	velocity.y = forward.y * moveSpeed;
+
+	// 回転処理
+	RotationProcess(_owner, forward, tmpForward);
+
+	// ownerの速度変数を更新
+	_owner->SetMoveSpeed(moveSpeed);
 }
 
 void PlayerObjectStateBase::UninputMovableProcess(PlayerObject* _owner)

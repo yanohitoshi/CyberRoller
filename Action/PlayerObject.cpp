@@ -51,9 +51,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	: GameObject(_reUseGameObject, _objectTag)
 	, playerBox({ Vector3::Zero,Vector3::Zero })
 	, FirstJumpPower(1200.0f)
-	, MovePower(30.0f)
+	, MovePower(60.0f)
 	, FirstMovePower(20.0f)
-	, AirMovePower(60.0f)
+	, AirMovePower(40.0f)
 	, DecelerationForce(100.0f)
 	, DeadSpace(0.3f)
 	, FallPpsitionZ(-500.0f)
@@ -254,20 +254,6 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
-	// 死亡フラグが立っていたら
-	if (deadFlag)
-	{
-		nextState = PlayerState::PLAYER_STATE_DEAD;
-	}
-
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::GetTimeOverFlag() == true)
-	{
-		// ステータスをコンティニュー選択開始状態にする
-		nextState = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
-
-
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
 	{
@@ -324,7 +310,6 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 	// 一定時間放置によるゲームをリセットするかチェック
 	ChackRestartProcess();
-
 }
 
 void PlayerObject::GameObjectInput(const InputState& _keyState)
@@ -361,7 +346,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	{
 		skeltalMeshComponent->SetVisible(true);
 	}
-
 }
 
 
@@ -385,7 +369,6 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjec
 
 	// 押し戻し計算を考慮しポジションを更新
 	SetPosition(position + ment);
-
 }
 
 void PlayerObject::RotateToNewForward(const Vector3& forward)
@@ -452,7 +435,6 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 		// クリア状態にする
 		clearFlag = true;
 	}
-
 }
 
 
@@ -509,7 +491,6 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 		// 死亡フラグをtureにセット
 		deadFlag = true;
 	}
-
 }
 
 void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag)
@@ -529,7 +510,6 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const Physics
 		// スイッチジャンプアクティブ
 		ActiveSwitchJumpProcess();
 	}
-
 }
 
 void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag)
@@ -652,7 +632,6 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 		// zだったらx軸方向に押し戻し
 		_calcFixVec.z = dz;
 	}
-
 }
 
 void PlayerObject::HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)

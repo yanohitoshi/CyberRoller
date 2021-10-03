@@ -39,7 +39,6 @@ JumpAttackPlayerObject::~JumpAttackPlayerObject()
 
 void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 {
-
 	if (ownerObject->GetNowState() == PlayerState::PLAYER_STATE_JUMP_ATTACK)
 	{
 		SetState(State::Active);
@@ -50,7 +49,6 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 		SetState(State::Disabling);
 		meshComponent->SetVisible(false);
 	}
-
 
 	if (state == State::Active)
 	{
@@ -75,7 +73,8 @@ void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const Phy
 		ownerObject->SetIsJumpAttackSuccess(true);
 	}
 
-	if (_hitObject.GetTag() == Tag::GROUND || _hitObject.GetTag() == Tag::PUSH_BOARD)
+	if (_hitObject.GetTag() == Tag::GROUND && ownerObject->GetIsSelectingTargetEnemy() ||
+		_hitObject.GetTag() == Tag::PUSH_BOARD && ownerObject->GetIsSelectingTargetEnemy())
 	{
 		ownerObject->SetNextState(PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
 	}

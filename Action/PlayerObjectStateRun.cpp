@@ -4,7 +4,6 @@
 #include "PlayerObjectStateRun.h"
 #include "SkeletalMeshComponent.h"
 #include "GameObject.h"
-#include "CountDownFont.h"
 
 PlayerObjectStateRun::PlayerObjectStateRun()
 {
@@ -48,18 +47,9 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 		state = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択開始状態にする
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetMoveSpeed(moveSpeed);

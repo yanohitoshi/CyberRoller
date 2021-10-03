@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "PlayerSandSmokeEffect.h"
 
-PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity,bool _run)
+PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(5.0f)
 	, SubAlpha(0.05f)
@@ -14,7 +14,6 @@ PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3&
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
-	runFlag = _run;
 	speed = 10.0f;
 }
 

@@ -6,7 +6,7 @@
 
 /*
 @file JumpAttackEffect.h
-@brief JumpAttackEffectの更新を行うクラス
+@brief ジャンプ攻撃中のエフェクトの更新を行うクラス
 */
 class JumpAttackEffect :
     public ParticleEffectBase

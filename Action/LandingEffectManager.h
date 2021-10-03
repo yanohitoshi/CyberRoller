@@ -7,7 +7,7 @@
 
 /*
 @file LandingEffectManeger.h
-@brief LandingEffectManegerの生成を行う
+@brief 着地時の土煙の生成を行う
 */
 class LandingEffectManager :
     public GameObject
@@ -51,8 +51,6 @@ private:
     ParticleState particleState;
     // 1度だけ生成する用の生成フラグ変数
     bool generateEffectsFlag;
-    // プレイヤーのZ軸の移動量を保存するための変数
-    float tmpVelZ;
     // 1度に生成するエフェクトの数
     const int MaxEffects;
 };

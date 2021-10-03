@@ -9,7 +9,7 @@ class EnemyObjectBase;
 
 /*
 @file EnemyExplosionEffect.h
-@brief EnemyExplosionEffectの更新を行うクラス
+@brief 爆発エフェクトの更新を行うクラス
 */
 class EnemyExplosionEffect :
     public ParticleEffectBase

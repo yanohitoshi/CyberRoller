@@ -104,7 +104,7 @@ void PlayerSandSmokeMakeManager::GenerateEffectProcess()
 	vel = vel * -1.0f;
 
 	// particleÇê∂ê¨
-	new PlayerSandSmokeEffect(effectPosition, vel, true);
+	new PlayerSandSmokeEffect(effectPosition, vel);
 }
 
 void PlayerSandSmokeMakeManager::ShiftRightEffectPosition()

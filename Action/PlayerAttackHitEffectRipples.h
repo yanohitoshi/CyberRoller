@@ -6,7 +6,7 @@
 
 /*
 @file PlayerAttackHitEffectRipples.h
-@brief PlayerAttackHitEffectRipplesの更新を行うクラス
+@brief ヒットエフェクト(波紋)の更新を行うクラス
 */
 class PlayerAttackHitEffectRipples :
     public ParticleEffectBase

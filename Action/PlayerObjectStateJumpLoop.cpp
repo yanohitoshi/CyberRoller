@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpLoop.h"
 #include "SkeletalMeshComponent.h"
-#include "CountDownFont.h"
 
 PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
 	: TurnValue(600.0f)
@@ -60,18 +59,9 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択開始状態にする
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -124,7 +114,6 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
-
 }
 
 void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
@@ -136,7 +125,7 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 	{
 		// 入力がある場合の処理
-		InputMovableProcess(_owner,_keyState,axis);
+		InputJumpMovableProcess(_owner,axis);
 	}
 	else // 取得した数値を見てデッドスペース内だったら減速処理を行う
 	{
@@ -157,49 +146,6 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 			}
 		}
 	}
-}
-
-void PlayerObjectStateJumpLoop::InputMovableProcess(PlayerObject* _owner, const InputState& _keyState, Vector3 _axis)
-{
-	// 前のフレームのキャラクターの前方ベクトルを保存
-	Vector3 tmpForward = _owner->GetCharaForwardVec();
-
-	// 方向キーの入力値とカメラの向きから、移動方向を決定
-	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
-	forward.Normalize();
-
-	// 空中用の移動力の定数を足す
-	moveSpeed += _owner->GetAirMovePower();
-
-	// SwitchJumpの場合飛ぶ時間が長いので割合を変更
-	if (_owner->GetSwitchJumpFlag())
-	{
-		// ループしているフレームカウントを定数で割って徐々に減速をかける
-		moveSpeed *= 1.0f - jumpLoopCount / SwitchJumpCorrection;
-	}
-	else
-	{
-		// ループしているフレームカウントを定数で割って徐々に減速をかける
-		moveSpeed *= 1.0f - jumpLoopCount / JumpCorrection;
-	}
-
-	// 移動速度が最大速度を超えていたら
-	if (moveSpeed >= MaxMoveSpeed)
-	{
-		// 最低速度に固定する
-		moveSpeed = MaxMoveSpeed;
-	}
-
-	// X軸とY軸に前方ベクトルに速度をかけて速度付きベクトルを作る
-	velocity.x = forward.x * moveSpeed;
-	velocity.y = forward.y * moveSpeed;
-
-	// 回転処理
-	RotationProcess(_owner, forward, tmpForward);
-
-	// ownerの速度変数を更新
-	_owner->SetMoveSpeed(moveSpeed);
-
 }
 
 void PlayerObjectStateJumpLoop::UninputMovableProcess(PlayerObject* _owner)

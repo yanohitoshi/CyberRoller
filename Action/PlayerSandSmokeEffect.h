@@ -6,7 +6,7 @@
 
 /*
 @file PlayerSandSmokeEffect.h
-@brief PlayerSandSmokeEffectの生成と更新を行う
+@brief プレイヤーの土煙(走り)の更新を行う
 */
 class PlayerSandSmokeEffect :
     public ParticleEffectBase
@@ -19,7 +19,7 @@ public:
     @param	移動速度
     @param  走り状態か判定フラグ
     */
-    PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity, bool _run);
+    PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity);
 
     /*
     @fn デストラクタ
@@ -36,8 +36,6 @@ public:
 
 private:
     
-    // 走り状態か確認用フラグ
-    bool runFlag;
     // 毎フレーム足すscale値 
     const float AddScale;
     // 毎フレーム引くalpha値

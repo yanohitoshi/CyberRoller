@@ -30,19 +30,9 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	// ステータスをジャンプ開始状態に変更
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択スタート状態に変更
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// 更新されたstateを返す
 	return state;
@@ -92,7 +82,6 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 切り返しを行える時間をゼロ初期化
 	_owner->SetTurnDelayCount(0);
-
 }
 
 void PlayerObjectStateIdle::ChackMovableInputProcess(PlayerObject* _owner)

@@ -77,6 +77,5 @@ private:
 	float decelerationForce;
 	// ƒ^[ƒ“ó‘Ô‚©‚ç‘–‚èó‘Ô‚É“ü‚éÛ‚ÌÅ’á‘¬“x
 	const float MinimumSpeed;
-
 };
 

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateDownLoop.h"
 #include "SkeletalMeshComponent.h"
+
 PlayerObjectStateDownLoop::PlayerObjectStateDownLoop()
 {
 }
@@ -55,7 +56,6 @@ void PlayerObjectStateDownLoop::Input(PlayerObject* _owner, const InputState& _k
 		// 入力フラグのみをtrueに変更
 		isInput = true;
 	}
-	
 }
 
 void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
@@ -72,7 +72,6 @@ void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	isContinue = false;
 	// 入力があったかどうかフラグを初期化
 	isInput = false;
-
 }
 
 void PlayerObjectStateDownLoop::ChackContinueProcess()

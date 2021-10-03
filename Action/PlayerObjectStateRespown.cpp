@@ -39,5 +39,4 @@ void PlayerObjectStateRespown::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE));
 	// state‚ğƒŠƒXƒ|[ƒ“ó‘Ô‚É‚µ‚Ä•Û‘¶
 	state = PlayerState::PLAYER_STATE_RESPAWN;
-
 }

@@ -18,10 +18,13 @@ PlayerObjectStateKnockBack::~PlayerObjectStateKnockBack()
 
 PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _deltaTime)
 {
-
+	// ノックバックの時間を数える
 	++knockBackFrameCount;
 
+	// 速度を追加
 	velocity += knockBackDirection * KnockBackSpeed;
+
+	// 接地中か判定
 	if (!_owner->GetOnGround())
 	{
 		// 重力をかける
@@ -32,6 +35,7 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 		velocity.z = 0.0f;
 	}
 
+	// ノックバック時間を過ぎたら
 	if (knockBackFrameCount >= KnockBackTime)
 	{
 		velocity.Zero;
@@ -46,6 +50,9 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	_owner->SetVelocity(velocity);
 	
+	ChackDeadFlag(_owner);
+
+	ChackTimeOverFlag();
 
 	// 更新されたstateを返す
 	return state;

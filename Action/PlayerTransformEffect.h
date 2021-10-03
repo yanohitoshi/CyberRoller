@@ -6,7 +6,7 @@
 
 /*
 @file PlayerTransformEffect.h
-@brief PlayerTransformEffectの更新を行うクラス
+@brief プレイヤーのジャンプアタック状態へ変形時のエフェクトの更新を行うクラス
 */
 class PlayerTransformEffect :
     public ParticleEffectBase

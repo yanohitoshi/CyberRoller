@@ -79,6 +79,5 @@ private:
 
 	// Œ¸‘¬—Í
 	const float DecelerationForce;
-
 };
 

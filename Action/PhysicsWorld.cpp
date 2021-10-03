@@ -183,6 +183,12 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		IntersectCheckSphere(_sphere, playerBoxes);
 	}
 
+	if (_sphere->GetSphereTag() == PhysicsTag::ENEMY_ATTACK_AREA_TAG)
+	{
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, playerBoxes);
+	}
+
 	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
 	{
 		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
@@ -453,17 +459,25 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 	case PhysicsTag::GROUND_CHECK_TAG:
 		groundCheckSpheres.emplace_back(_sphere);
 		break;
+
 	case PhysicsTag::SWITCH_CHECK_TAG:
 		switchCheckSpheres.emplace_back(_sphere);
 		break;
+
 	case PhysicsTag::ATTACK_RANGE_TAG:
 		attackRangeSpheres.emplace_back(_sphere);
 		break;
+
 	case PhysicsTag::JUMP_ATTACK_PLAYER_TAG:
 		jumpAttackPlayerSpheres.emplace_back(_sphere);
 		break;
+
 	case PhysicsTag::PLAYER_TRACKING_AREA_TAG:
 		playerTrackingAreaSpheres.emplace_back(_sphere);
+		break;
+
+	case PhysicsTag::ENEMY_ATTACK_AREA_TAG:
+		enemyAttackAreaSpheres.emplace_back(_sphere);
 		break;
 	}
 
@@ -532,44 +546,16 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 
 		collisionFunction.erase(_sphere);
 	}
+
+	if (_sphere->GetSphereTag() == PhysicsTag::ENEMY_ATTACK_AREA_TAG)
+	{
+		auto iter = std::find(enemyAttackAreaSpheres.begin(), enemyAttackAreaSpheres.end(), _sphere);
+		if (iter != enemyAttackAreaSpheres.end())
+		{
+			std::iter_swap(iter, enemyAttackAreaSpheres.end() - 1);
+			enemyAttackAreaSpheres.pop_back();
+		}
+
+		collisionFunction.erase(_sphere);
+	}
 }
-
-
-/*
-@fn 衝突したことが確定したとき、めり込みを戻す関数
-@param _movableBox 移動物体
-@param _fixedBox 移動しない物体
-@param _calcFixVec 移動物体の補正差分ベクトル
-*/
-void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
-{
-	_calcFixVec = Vector3(0, 0, 0);
-	float dx1 = _fixedBox.min.x - _movableBox.max.x;
-	float dx2 = _fixedBox.max.x - _movableBox.min.x;
-	float dy1 = _fixedBox.min.y - _movableBox.max.y;
-	float dy2 = _fixedBox.max.y - _movableBox.min.y;
-	float dz1 = _fixedBox.min.z - _movableBox.max.z;
-	float dz2 = _fixedBox.max.z - _movableBox.min.z;
-
-	// dx, dy, dz には それぞれ1,2のうち絶対値が小さい方をセットする
-	float dx = (Math::Abs(dx1) < Math::Abs(dx2)) ? dx1 : dx2;
-	float dy = (Math::Abs(dy1) < Math::Abs(dy2)) ? dy1 : dy2;
-	float dz = (Math::Abs(dz1) < Math::Abs(dz2)) ? dz1 : dz2;
-
-	// x, y, zのうち最も差が小さい軸で位置を調整
-	if (Math::Abs(dx) <= Math::Abs(dy) && Math::Abs(dx) <= Math::Abs(dz))
-	{
-		_calcFixVec.x = dx;
-	}
-	else if (Math::Abs(dy) <= Math::Abs(dx) && Math::Abs(dy) <= Math::Abs(dz))
-	{
-		_calcFixVec.y = dy;
-	}
-	else
-	{
-		_calcFixVec.z = dz;
-	}
-
-}
-
-

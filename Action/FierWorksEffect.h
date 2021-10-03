@@ -7,7 +7,7 @@
 
 /*
 @file FierWorksEffect.h
-@brief FierWorksEffectの生成と更新を行う
+@brief 花火エフェクトの更新を行う
 */
 class FierWorksEffect :
     public ParticleEffectBase

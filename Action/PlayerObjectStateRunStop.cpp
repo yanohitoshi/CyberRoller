@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateRunStop.h"
 #include "SkeletalMeshComponent.h"
-#include "CountDownFont.h"
 
 PlayerObjectStateRunStop::PlayerObjectStateRunStop()
 	: TurnDelayValue(30)
@@ -62,18 +61,9 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択開始状態にする
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -90,7 +80,6 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 		// state変更の可能性のある入力のチェック
 		ChackInput(_owner, _keyState);
 	}
-
 }
 
 void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)

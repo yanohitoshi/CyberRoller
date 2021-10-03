@@ -7,7 +7,7 @@
 
 /*
 @file GameClearEffectManeger.h
-@brief GameClearEffectManegerの生成と更新を行う
+@brief クリア時のエフェクトの生成を行う
 */
 class GameClearEffectManager :
     public GameObject

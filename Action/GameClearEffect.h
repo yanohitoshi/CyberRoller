@@ -6,7 +6,7 @@
 
 /*
 @file GameClearEffect.h
-@brief GameClearEffectの生成と更新を行う
+@brief クリア時のエフェクトの更新を行う
 */
 class GameClearEffect
 	: public ParticleEffectBase

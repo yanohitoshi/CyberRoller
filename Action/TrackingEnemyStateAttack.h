@@ -37,6 +37,8 @@ public:
 
 private:
 
-	int frameCount;
+	GameObject* trackingObject;
+	Vector3 trackingRotationVec;
+	Vector3 firstPosition;
 };
 

@@ -6,7 +6,7 @@
 
 /*
 @file LandingEffect.h
-@brief LandingEffectの生成と更新を行う
+@brief 着地時の土煙の更新を行う
 */
 class LandingEffect :
     public ParticleEffectBase

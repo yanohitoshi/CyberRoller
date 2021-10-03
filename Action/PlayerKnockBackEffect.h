@@ -6,7 +6,7 @@
 
 /*
 @file PlayerKnockBackEffect.h
-@brief PlayerKnockBackEffectの更新を行うクラス
+@brief ノックバックエフェクトの更新を行うクラス
 */
 class PlayerKnockBackEffect :
     public ParticleEffectBase

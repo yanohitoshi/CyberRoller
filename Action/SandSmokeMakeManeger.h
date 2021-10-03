@@ -7,7 +7,7 @@
 
 /*
 @file SandSmokeMakeManeger.h
-@brief SandSmokeMakeManegerの生成を行う
+@brief 壁用土煙エフェクトの生成を行う
 */
 class SandSmokeMakeManeger :
     public GameObject

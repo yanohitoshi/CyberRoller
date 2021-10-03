@@ -7,7 +7,7 @@
 
 /*
 @file CrystalDefaultEffect.h
-@brief CrystalDefaultEffectの生成と更新を行う
+@brief クリスタルのエフェクトの更新を行う
 */
 class CrystalDefaultEffect :
     public ParticleEffectBase

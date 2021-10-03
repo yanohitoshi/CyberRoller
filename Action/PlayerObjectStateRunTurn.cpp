@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateRunTurn.h"
 #include "SkeletalMeshComponent.h"
-#include "CountDownFont.h"
 
 PlayerObjectStateRunTurn::PlayerObjectStateRunTurn()
 	: MinimumSpeed(200.0f)
@@ -56,6 +55,7 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
+
 	// ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
 	if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
@@ -63,18 +63,9 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択開始状態にする
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -82,7 +73,6 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 
 	// 更新されたstateを返す
 	return state;
-
 }
 
 void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _keyState)
@@ -111,7 +101,6 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 	inputDeadSpace = _owner->GetDeadSpace();
 	// ownerのターン間隔速度を初期化
 	_owner->SetTurnDelayCount(0);
-
 }
 
 void PlayerObjectStateRunTurn::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)

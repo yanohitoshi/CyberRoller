@@ -11,7 +11,8 @@ TrackingEnemyStateIdle::~TrackingEnemyStateIdle()
 
 EnemyState TrackingEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	if (_owner->GetIsTracking() && !_owner->GetIsDeadFlag())
+	++frameCount;
+	if (_owner->GetIsTracking() && !_owner->GetIsDeadFlag() && frameCount > StayTime)
 	{
 		state = EnemyState::ENEMY_STATE_TRACKING;
 	}
@@ -33,5 +34,5 @@ void TrackingEnemyStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// state‚ð‘Ò‹@ó‘Ô‚É‚µ‚Ä•Û‘¶
 	state = EnemyState::ENEMY_STATE_IDLE;
 	_owner->SetState(State::Active);
-	RotationProcess(_owner, Vector3::NegUnitX, _owner->GetCharaForwardVec());
+	frameCount = 0;
 }

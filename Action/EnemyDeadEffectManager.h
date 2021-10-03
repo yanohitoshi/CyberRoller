@@ -10,7 +10,7 @@ class EnemyObjectBase;
 
 /*
 @file EnemyDeadEffectManager.h
-@brief EnemyDeadEffectの生成を行うクラス
+@brief エネミーの死亡時のエフェクトの生成を行うクラス
 */
 class EnemyDeadEffectManager :
     public GameObject
@@ -48,24 +48,33 @@ private:
     */
     void GenerateEffectProcess();
 
+    /*
+    @fn 爆発エフェクト生産処理関数
+    */
+    void GenerateExplosionEffectProcess();
+
     // 親のGameObject保存用変数
     EnemyObjectBase* owner;
+
     // particleの状態管理用変数
     ParticleState particleState;
-    // 1度に生成する爆発エフェクトの数
-    const int MaxExplosionEffects;
-    // 爆発エフェクトが発生するまでの待機時間
-    const int WaitingExplosionTime;
-    // 1度だけ生成する用の生成フラグ変数
-    bool generateExplosionEffectsFlag;
-    // エフェクトが有効化されてからのフレームを測る
-    int effectFrameCount;
+
     // ランダムな値を生成する際にかける補正
     const float CorrectionRandValue;
     // ランダムな値に対して最後にかける補正値
     const float LastCorrection;
+
+    // 1度に生成する爆発エフェクトの数
+    const int MaxExplosionEffects;
+    // 爆発エフェクトが発生するまでの待機時間
+    const int WaitingExplosionTime;
     // ランダムの範囲
     const int RandValue;
+
+    // 1度だけ生成する用の生成フラグ変数
+    bool generateExplosionEffectsFlag;
+    // エフェクトが有効化されてからのフレームを測る
+    int effectFrameCount;
 
 };
 

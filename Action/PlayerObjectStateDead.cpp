@@ -34,7 +34,6 @@ PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime
 
 void PlayerObjectStateDead::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-
 }
 
 void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
@@ -54,7 +53,6 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力可能フラグをfalseにセット
 	_owner->SetIsAvailableInput(false);
-
 }
 
 void PlayerObjectStateDead::ToRespawnCountProcess(PlayerObject* _owner)

@@ -48,9 +48,6 @@ public:
 
 private:
 
-	Vector3 jumpAttackDirection;
-	GameObject* attackTargetEnemy;
-
 	// ジャンプが行われているフレームを測るカウント変数
 	int jumpFrameCount;
 	// ジャンプが終了したかどうかのフラグ変数

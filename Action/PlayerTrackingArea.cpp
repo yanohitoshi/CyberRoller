@@ -20,13 +20,16 @@ PlayerTrackingArea::~PlayerTrackingArea()
 
 void PlayerTrackingArea::UpdateGameObject(float _deltaTime)
 {
+	// ポジションを固定
 	SetPosition(position);
 }
 
 void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	// プレイヤーを見つけたら
 	if (_hitObject.GetTag() == Tag::PLAYER)
 	{
+		// 親クラスを追跡状態にセット
 		ownerEnemy->SetIsTracking(true);
 	}
 }

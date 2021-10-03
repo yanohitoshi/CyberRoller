@@ -58,14 +58,6 @@ private:
 	void ChackInputProcess(PlayerObject* _owner, const InputState& _keyState);
 
 	/*
-	@fn 入力がある場合の処理関数
-	@param	_owner 親クラスのポインタ
-	@param	_keyState 入力情報
-	@param	_axis 補正済みのアナログスティック情報
-	*/
-	void InputMovableProcess(PlayerObject* _owner, const InputState& _keyState, Vector3 _axis);
-
-	/*
 	@fn 入力がない場合の処理関数
 	@param	_owner 親クラスのポインタ
 	*/

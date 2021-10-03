@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpStart.h"
 #include "SkeletalMeshComponent.h"
-#include "CountDownFont.h"
 
 PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	: JumpCorrection(80.0f)
@@ -56,18 +55,9 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
-	//// 死亡フラグが立っていたら
-	//if (_owner->GetDeadFlag())
-	//{
-	//	state = PlayerState::PLAYER_STATE_DEAD;
-	//}
+	ChackDeadFlag(_owner);
 
-	//// タイムオーバーフラグがtrueだったら
-	//if (CountDownFont::GetTimeOverFlag() == true)
-	//{
-	//	// ステータスをコンティニュー選択開始状態にする
-	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
-	//}
+	ChackTimeOverFlag();
 
 	// 更新されたstateを返す
 	return state;
@@ -116,7 +106,7 @@ void PlayerObjectStateJumpStart::ChackInputProcess(PlayerObject* _owner, const I
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
 	{
 		// 入力がある場合の処理
-		InputMovableProcess(_owner, axis);
+		InputJumpMovableProcess(_owner, axis);
 	}
 	else
 	{
@@ -149,50 +139,6 @@ void PlayerObjectStateJumpStart::ChackInputProcess(PlayerObject* _owner, const I
 		JumpEndProcess(_owner);
 	}
 
-}
-
-void PlayerObjectStateJumpStart::InputMovableProcess(PlayerObject* _owner, Vector3 _axis)
-{
-	// 前のフレームのキャラクターの前方ベクトルを保存
-	Vector3 tmpForward = _owner->GetCharaForwardVec();
-	// 方向キーの入力値とカメラの向きから、移動方向を決定
-	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
-	forward.Normalize();
-
-	// 空中用の移動力の定数を足す
-	moveSpeed += _owner->GetAirMovePower();
-
-	// SwitchJumpの場合飛ぶ時間が長いので割合を変更
-	if (_owner->GetSwitchJumpFlag())
-	{
-		// ループしているフレームカウントを定数で割って徐々に減速をかける
-		moveSpeed *= 1.0f - jumpFrameCount / SwitchJumpCorrection;
-	}
-	else
-	{
-		// ループしているフレームカウントを定数で割って徐々に減速をかける
-		moveSpeed *= 1.0f - jumpFrameCount / JumpCorrection;
-	}
-
-	// 移動速度が最大値を超えていたら
-	if (moveSpeed >= MaxMoveSpeed)
-	{
-		// 移動速度を最大値に固
-		moveSpeed = MaxMoveSpeed;
-	}
-
-	// 移動ベクトルに速度をかける
-	velocity.x = forward.x * moveSpeed;
-	velocity.y = forward.y * moveSpeed;
-
-	// 回転処理
-	RotationProcess(_owner, forward, tmpForward);
-
-	// 移動速度をownerの移動速度変数に保存
-	_owner->SetMoveSpeed(moveSpeed);
-
-	// 移動入力フラグをtrueにセット
-	_owner->SetInputFlag(true);
 }
 
 void PlayerObjectStateJumpStart::UninputMovableProcess(PlayerObject* _owner)

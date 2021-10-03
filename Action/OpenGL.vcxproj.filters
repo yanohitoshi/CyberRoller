@@ -441,9 +441,6 @@
     <ClCompile Include="EnemyDeadEffectManager.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyDeadEffect.cpp">
-      <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyObjectStateRespawn.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
@@ -478,6 +475,12 @@
       <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
     </ClCompile>
     <ClCompile Include="EnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyElectricShockEffect.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttackArea.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -915,16 +918,10 @@
     <ClInclude Include="TrackingEnemyStateReposition.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerTrackingArea.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
-    </ClInclude>
     <ClInclude Include="TrackingEnemyStateAttack.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
     <ClInclude Include="EnemyDeadEffectManager.h">
-      <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyDeadEffect.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyObjectStateRespawn.h">
@@ -961,6 +958,15 @@
       <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
     </ClInclude>
     <ClInclude Include="EnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyElectricShockEffect.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTrackingArea.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttackArea.h">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
   </ItemGroup>
