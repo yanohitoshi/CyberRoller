@@ -6,7 +6,7 @@
 
 /*
 @file SandSmokeParticle.h
-@brief SandSmokeParticleの生成と更新を行う
+@brief SandSmokeParticleの生成を行う
 */
 class SandSmokeParticle :
     public ParticleEffectBase

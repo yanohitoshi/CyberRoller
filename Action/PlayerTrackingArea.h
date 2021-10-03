@@ -1,9 +1,14 @@
 #pragma once
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SphereCollider;
 class TrackingEnemyObject;
 
+/*
+@file PlayerTrackingArea.h
+@brief プレイヤーを検知するスフィア判定クラス
+*/
 class PlayerTrackingArea :
     public GameObject
 {
@@ -15,7 +20,7 @@ public:
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
 	*/
-	PlayerTrackingArea(const Tag& _objectTag,TrackingEnemyObject* _ownerEnemy);
+	PlayerTrackingArea(const Tag& _objectTag,TrackingEnemyObject* _ownerEnemy,float _areaValue);
 
 	/*
 	@fn デストラクタ
@@ -40,6 +45,7 @@ private:
 
 	// 当たり判定を行うクラス
 	SphereCollider* sphereCollider;
+	// 親となるクラスのポインタ
 	TrackingEnemyObject* ownerEnemy;
 };
 

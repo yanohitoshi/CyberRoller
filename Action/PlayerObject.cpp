@@ -16,6 +16,7 @@
 #include "PlayerSandSmokeMakeManager.h"
 #include "LandingEffectManager.h"
 #include "PlayerTransformEffectManager.h"
+#include "PlayerKnockBackEffectManager.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
@@ -50,15 +51,14 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	: GameObject(_reUseGameObject, _objectTag)
 	, playerBox({ Vector3::Zero,Vector3::Zero })
 	, FirstJumpPower(1200.0f)
-	, MovePower(90.0f)
-	, FirstMovePower(0.0f)
+	, MovePower(30.0f)
+	, FirstMovePower(20.0f)
 	, AirMovePower(60.0f)
 	, DecelerationForce(100.0f)
 	, DeadSpace(0.3f)
 	, FallPpsitionZ(-500.0f)
-	, FirstPositionZ(5000.0f)
+	, FirstPositionZ(2000.0f)
 	, RestartTime(10000)
-	, FlinchSpeed(1000.0f)
 {
 
 	//GameObjectメンバ変数の初期化
@@ -202,6 +202,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	new PlayerSandSmokeMakeManager(this);
 	new LandingEffectManager(this);
 	new PlayerTransformEffectManager(this);
+	new PlayerKnockBackEffectManager(this);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
@@ -248,10 +249,24 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		nextState = PlayerState::PLAYER_STATE_FALL_DEAD;
 	}
 
-	if (isHitEnemy)
+	if (isHitEnemy && nowState != PlayerState::PLAYER_STATE_DEAD)
 	{
 		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
+
+	// 死亡フラグが立っていたら
+	if (deadFlag)
+	{
+		nextState = PlayerState::PLAYER_STATE_DEAD;
+	}
+
+	// タイムオーバーフラグがtrueだったら
+	if (CountDownFont::GetTimeOverFlag() == true)
+	{
+		// ステータスをコンティニュー選択開始状態にする
+		nextState = PlayerState::PLAYER_STATE_DOWNSTART;
+	}
+
 
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
@@ -456,7 +471,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	}
 
 	// 当たったオブジェクトが敵だったら
-	if (hitObjectTag == Tag::ENEMY && _physicsTag == PhysicsTag::NORMAL_ENEMY_TAG)
+	if (hitObjectTag == Tag::ENEMY && _physicsTag == PhysicsTag::ENEMY_TAG)
 	{
 		// ジャンプアタック状態でなかったら
 		if (!isJumpAttck)

@@ -59,29 +59,26 @@ CrystalEffectManager::~CrystalEffectManager()
 
 void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 {
-
-	RotationProcess(_deltaTime);
-
+	// エフェクトを発生させない状態の時
 	if (!isEffectActive)
 	{
+		// 最後の壁が開いているかのフラグをもらう
 		isEffectActive = lastMoveWallBlock->GetOpenFlag();
 	}
 
-	// アクティブを制御するカウントを数える
-	++activeFrameCount;
 
 	// activeFrameCountが8以上になったら
-	if (activeFrameCount  >= 8 && isEffectActive)
+	if (isEffectActive)
 	{
 		// particleStateを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
-		// activeFrameCountを初期化
-		activeFrameCount = 0;
 	}
 	else
 	{
 		// particleStateを無効化
 		particleState = ParticleState::PARTICLE_DISABLE;
+		// activeFrameCountを初期化
+		activeFrameCount = 0;
 	}
 
 	// パーティクルの状態を見て
@@ -95,15 +92,26 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクト生成
-		ActiveEffectProcess();
-
+		ActiveEffectProcess(_deltaTime);
 		break;
-
 	}
-
 }
 
-void CrystalEffectManager::ActiveEffectProcess()
+void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
+{
+	// 発生場所の回転処理
+	RotationProcess(_deltaTime);
+
+	// アクティブを制御するカウントを数える
+	++activeFrameCount;
+
+	if (activeFrameCount % 8 == 0)
+	{
+		GenerateEffectProcess();
+	}
+}
+
+void CrystalEffectManager::GenerateEffectProcess()
 {
 	// 速度を一時保存する変数
 	Vector3 vel;

@@ -1,8 +1,13 @@
 #pragma once
 #include "EnemyObjectBase.h"
 
+// クラスの前方宣言
 class SphereCollider;
 
+/*
+@file TrackingEnemyObject.h
+@brief 追跡する敵オブジェクトクラス
+*/
 class TrackingEnemyObject :
     public EnemyObjectBase
 {
@@ -14,7 +19,7 @@ public:
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	*/
-	TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,GameObject* _trackingObject);
+	TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,GameObject* _trackingObject, float _areaValue);
 
 	/*
 	@fn デストラクタ

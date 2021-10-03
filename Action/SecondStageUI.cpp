@@ -15,7 +15,7 @@
 
 SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
-	, SceneTime(100)
+	, SceneTime(1000)
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);

@@ -1,9 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 class EnemyObjectBase;
 
+/*
+@file EnemyDeadEffectManager.h
+@brief EnemyDeadEffectの生成を行うクラス
+*/
 class EnemyDeadEffectManager :
     public GameObject
 {
@@ -44,20 +52,20 @@ private:
     EnemyObjectBase* owner;
     // particleの状態管理用変数
     ParticleState particleState;
-    // 1度に生成するエフェクトの数
-    const int MaxEffects;
-    // 1度に生成するエフェクトの数
+    // 1度に生成する爆発エフェクトの数
     const int MaxExplosionEffects;
+    // 爆発エフェクトが発生するまでの待機時間
+    const int WaitingExplosionTime;
     // 1度だけ生成する用の生成フラグ変数
     bool generateExplosionEffectsFlag;
-    int frameCount;
-
+    // エフェクトが有効化されてからのフレームを測る
+    int effectFrameCount;
     // ランダムな値を生成する際にかける補正
     const float CorrectionRandValue;
     // ランダムな値に対して最後にかける補正値
     const float LastCorrection;
-    const int RandValueX;
-    const int RandValueY;
-    const int RandValueZ;
+    // ランダムの範囲
+    const int RandValue;
+
 };
 

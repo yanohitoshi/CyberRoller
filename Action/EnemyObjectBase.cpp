@@ -3,10 +3,13 @@
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
+	, respawnPositionOffset(1600.0f)
 {
 	SetPosition(_pos);
 	tag = _objectTag;
 	firstPosition = _pos;
+	respawnPosition = firstPosition;
+	respawnPosition.z += respawnPositionOffset;
 	new EnemyDeadEffectManager(this);
 }
 
@@ -17,10 +20,13 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	,moveDistance(_moveDistance)
 	,moveSpeed(_moveSpeed)
 	,moveEnemyTag(_moveEnemyTag)
+	, respawnPositionOffset(1600.0f)
 {
 	tag = _objectTag;
 	SetPosition(_pos);
 	firstPosition = _pos;
+	respawnPosition = firstPosition;
+	respawnPosition.z += respawnPositionOffset;
 	new EnemyDeadEffectManager(this);
 }
 
@@ -29,10 +35,13 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 	, moveSpeed(_moveSpeed)
 	, trackingObject(_trackingObject)
+	, respawnPositionOffset(1600.0f)
 {
 	tag = _objectTag;
 	SetPosition(_pos);
 	firstPosition = _pos;
+	respawnPosition = firstPosition;
+	respawnPosition.z += respawnPositionOffset;
 	new EnemyDeadEffectManager(this);
 }
 

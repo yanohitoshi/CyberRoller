@@ -77,6 +77,7 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	endFlag = false;
 	jumpFrameCount = 0;
 
+	// ジャンプ攻撃が成功したかどうか判定
 	if (_owner->GetIsJumpAttackSuccess())
 	{
 		// ジャンプ力をセットする

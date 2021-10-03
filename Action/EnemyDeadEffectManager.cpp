@@ -5,11 +5,9 @@
 
 EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, MaxEffects(1)
-	, MaxExplosionEffects(50)
-	, RandValueX(250)
-	, RandValueY(250)
-	, RandValueZ(250)
+	, WaitingExplosionTime(120)
+	, MaxExplosionEffects(10)
+	, RandValue(250)
 	, CorrectionRandValue(10.0f)
 	, LastCorrection(0.1f)
 {
@@ -18,7 +16,7 @@ EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
 	generateExplosionEffectsFlag = true;
-	frameCount = 0;
+	effectFrameCount = 0;
 }
 
 EnemyDeadEffectManager::~EnemyDeadEffectManager()
@@ -27,7 +25,7 @@ EnemyDeadEffectManager::~EnemyDeadEffectManager()
 
 void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 {
-	// 前のフレームでZ軸の速度が0.0fでなくこのフレームでのZ軸の速度0.0fでかつジャンプフラグがfalseだったら
+	// 死亡状態だったら有効化
 	if (owner->GetIsDeadFlag())
 	{
 		// パーティクルを有効化
@@ -44,6 +42,7 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 	{
 		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
+		effectFrameCount = 0;
 		generateExplosionEffectsFlag = true;
 		break;
 		// 有効状態だったら
@@ -57,12 +56,11 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 
 void EnemyDeadEffectManager::ActiveEffectProcess()
 {
+	++effectFrameCount;
 
-	++frameCount;
-	if (frameCount >= 15)
+	if (effectFrameCount % 15 == 0)
 	{
 		GenerateEffectProcess();
-		frameCount = 0;
 	}
 }
 
@@ -71,20 +69,14 @@ void EnemyDeadEffectManager::GenerateEffectProcess()
 	// ownerのポジションを得る
 	position = owner->GetPosition();
 
-	velocity = Vector3::UnitZ;
-
-	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
+	if (generateExplosionEffectsFlag && effectFrameCount >= WaitingExplosionTime)
 	{
-		//particleを生成
-		new EnemyDeadEffect(owner,position);
-	}
+		velocity = Vector3::Zero;
 
-	if (generateExplosionEffectsFlag)
-	{
 		for (int explosionEfectCount = 0; explosionEfectCount < MaxExplosionEffects; explosionEfectCount++)
 		{
 			// ランダムな値を生成
-			Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % RandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
+			Vector3 randV((rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue, (rand() % RandValue) / CorrectionRandValue);
 
 			// 値が大きすぎるので最後の補正をかけて速度に代入
 			velocity = randV * LastCorrection;
@@ -101,10 +93,17 @@ void EnemyDeadEffectManager::GenerateEffectProcess()
 				velocity.y *= -1.0f;
 			}
 
-			//particleを生成
+			//エフェクトを生成
 			new EnemyExplosionEffect(owner, position, velocity);
 		}
+
 		generateExplosionEffectsFlag = false;
+	}
+	else
+	{
+		velocity = Vector3::UnitZ;
+		//エフェクトを生成
+		new EnemyDeadEffect(owner, position);
 	}
 }
 

@@ -2,8 +2,8 @@
 
 EnemyDeadEffect::EnemyDeadEffect(GameObject* _owner,const Vector3& _pos)
 	: ParticleEffectBase(_pos, Vector3::Zero, 10, "Assets/Effect/Thunder_Thin.png", false)
-	, AddScale(4.0f)
-	, SubAlpha(0.01f)
+	, AddScale(12.0f)
+	, SubAlpha(0.1f)
 	, RandValue(361)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
 {
@@ -16,7 +16,7 @@ EnemyDeadEffect::EnemyDeadEffect(GameObject* _owner,const Vector3& _pos)
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(EffectColor);
 	owner = _owner;
-
+	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 	RotateEffect();
 }
 

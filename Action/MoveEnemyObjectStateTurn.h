@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
+/*
+@file MoveEnemyObjectStateTurn.h
+@brief 移動する敵オブジェクトのターン状態を管理するクラス
+*/
 class MoveEnemyObjectStateTurn :
     public EnemyObjectStateBase
 {

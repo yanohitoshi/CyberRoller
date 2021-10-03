@@ -56,18 +56,18 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
-	// 死亡フラグが立っていたら
-	if (_owner->GetDeadFlag())
-	{
-		state = PlayerState::PLAYER_STATE_DEAD;
-	}
+	//// 死亡フラグが立っていたら
+	//if (_owner->GetDeadFlag())
+	//{
+	//	state = PlayerState::PLAYER_STATE_DEAD;
+	//}
 
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::GetTimeOverFlag() == true)
-	{
-		// ステータスをコンティニュー選択開始状態にする
-		state = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
+	//// タイムオーバーフラグがtrueだったら
+	//if (CountDownFont::GetTimeOverFlag() == true)
+	//{
+	//	// ステータスをコンティニュー選択開始状態にする
+	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
+	//}
 
 	// 更新されたstateを返す
 	return state;

@@ -3,9 +3,9 @@
 //-----------------------------------------------------------------------------
 #include "PlayerSandSmokeMakeManager.h"
 #include "PlayerSandSmokeEffect.h"
+#include "PlayerObject.h"
 
-
-PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(GameObject* _owner)
+PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, GenerateSpeedValue(600.0f)
 	, ShiftPositionValue(30.0f)
@@ -16,6 +16,7 @@ PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(GameObject* _owner)
 	frameCount = 0;
 	generateCount = 0;
 	effectPosition = Vector3::Zero;
+	ownerState = owner->GetNowState();
 }
 
 PlayerSandSmokeMakeManager::~PlayerSandSmokeMakeManager()
@@ -24,10 +25,11 @@ PlayerSandSmokeMakeManager::~PlayerSandSmokeMakeManager()
 
 void PlayerSandSmokeMakeManager::UpdateGameObject(float _deltaTime)
 {
+	ownerState = owner->GetNowState();
+
 	// ownerの速度を参照して有効か無効を判定
 	// 地面に接地中でｘもしくはｙの速度が0でなければ
-	if (owner->GetVelocity().x != 0.0f && owner->GetVelocity().z == 0.0f || 
-		owner->GetVelocity().y != 0.0f && owner->GetVelocity().z == 0.0f)
+	if (ownerState == PlayerState::PLAYER_STATE_RUN || ownerState == PlayerState::PLAYER_STATE_RUN_START)
 	{
 		// particleStateを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;

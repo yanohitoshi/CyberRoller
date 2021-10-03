@@ -12,8 +12,6 @@ PlayerAttackHitEffectManager::PlayerAttackHitEffectManager(PlayerObject* _owner)
 	generateFlag = true;
 	velocity = Vector3::Zero;
 	effectPosition = Vector3::Zero;
-	frameCount = 0;
-	effectCount = 0;
 }
 
 PlayerAttackHitEffectManager::~PlayerAttackHitEffectManager()

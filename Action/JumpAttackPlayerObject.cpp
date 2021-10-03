@@ -20,7 +20,6 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	SetPosition(position);
 	SetScale(_size);
 	SetState(State::Disabling);
-	tmpState = State::Disabling;
 
 	meshComponent = new MeshComponent(this, false, false);
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));

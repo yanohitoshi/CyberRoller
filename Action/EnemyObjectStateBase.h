@@ -1,5 +1,7 @@
 #pragma once
-
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectBase.h"
 #include "SkeletalMeshComponent.h"
 
@@ -8,8 +10,7 @@ class EnemyObjectBase;
 class SkeletalMeshComponent;
 
 /*
-@enum　PlayerState
-プレイヤーのステータス判別用
+@enum　EnemyState 敵オブジェクトのステータス判別用
 */
 enum class EnemyState
 {
@@ -33,6 +34,10 @@ enum class EnemyState
 	ENEMY_STATE_NUM,
 };
 
+/*
+@file EnemyObjectStateBase.h
+@brief 敵オブジェクトのステータスを管理するクラスの基底クラス
+*/
 class EnemyObjectStateBase
 {
 public:
@@ -66,6 +71,12 @@ public:
 	*/
 	virtual void Enter(EnemyObjectBase* _owner, float _deltaTime) {};
 
+	/*
+	@fn 前方ベクトルを用いてキャラクターを回転させる関数
+	@param	_owner 親クラスのポインタ
+	@param	_forward 今のフレームの前方ベクトル
+	@param	_tmpForward 前のフレームの前方ベクトル
+	*/
 	void RotationProcess(EnemyObjectBase* _owner, Vector3 _forward, Vector3 _tmpForward);
 
 protected:

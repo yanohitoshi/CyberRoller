@@ -1,13 +1,19 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
-// classの前置宣言
+// クラスの前方宣言
 class SkeletalMeshComponent;
 class Animation;
 class BoxCollider;
 class Mesh;
 enum class EnemyState;
 
+/*
+@enum  MoveEnemyTag Enemyの移動方向を判別するタグ
+*/
 enum class MoveEnemyTag
 {
 	NOEN_MOVE,
@@ -15,7 +21,10 @@ enum class MoveEnemyTag
 	RIGHT_MOVE,
 };
 
-
+/*
+@file EnemyObjectBase.h
+@brief 敵オブジェクトの基底クラス
+*/
 class EnemyObjectBase :
     public GameObject
 {
@@ -41,6 +50,7 @@ public:
 	@param	移動距離
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance, MoveEnemyTag _moveEnemyTag);
+
 	/*
 	@fn コンストラクタ
 	@brief 移動するエネミーのコンストラクタ
@@ -85,8 +95,9 @@ protected:
 	BoxCollider* boxCollider;
 	// エネミーのAABB構造体
 	AABB enemyBox;
-
+	// 追跡するオブジェクトのポインタ
 	GameObject* trackingObject;
+
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
@@ -99,20 +110,22 @@ protected:
 	Vector3 charaForwardVec;
 	//方向に合わせて回転させるためのベクトル
 	Vector3 rotateVec;
-
+	// 初期位置
 	Vector3 firstPosition;
-	// 速度
-	float moveSpeed;
-
+	// 初期位置
+	Vector3 respawnPosition;
 	// 移動方向
 	Vector3 moveDirection;
 
+	// 初期位置からリスポーンするポジションを計算するための間隔
+	const float respawnPositionOffset;
+	// 速度
+	float moveSpeed;
 	// 移動距離
 	float moveDistance;
 
 	//接地フラグ
 	bool onGround;
-
 	// 死んでいるかどうか
 	bool isDeadFlag;
 	// 追跡相手をとらえているかどうか
@@ -120,13 +133,14 @@ protected:
 	// 攻撃モーション中か
 	bool isAttack;
 
+	bool isOtherEnemyHit;
+
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
 	// 変更された次のプレーヤーのstate状態を保存するための変数
 	EnemyState nextState;
-
+	// 移動する敵のTag
 	MoveEnemyTag moveEnemyTag;
-
 
 	// Animationプール
 	std::vector<const Animation*> animTypes;
@@ -145,7 +159,12 @@ public:// ゲッターセッター
 	*/
 	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
 
+	/*
+	@fn trackingObjectのgetter関数
+	@return trackingObject　追跡するオブジェクトのポインタを返す
+	*/
 	GameObject* GetTrackingObject(){ return trackingObject; }
+
 	/*
 	@fn Animationのgetter関数
 	@param _state 現在のプレイヤーのステータス
@@ -155,13 +174,13 @@ public:// ゲッターセッター
 
 	/*
 	@fn forwardVecのgetter関数
-	@return forwardVecを返す
+	@return Vector3 forwardVec 前方ベクトルを返す
 	*/
 	Vector3 GetForwardVec() { return forwardVec; }
 
 	/*
 	@fn rightVecのgetter関数
-	@return rightVecを返す
+	@return Vector3 rightVec 右方向ベクトルを返す
 	*/
 	Vector3 GetRightVec() { return rightVec; }
 
@@ -173,27 +192,33 @@ public:// ゲッターセッター
 
 	/*
 	@fn rotateVecのgetter関数
-	@return rotateVecを返す
+	@return Vector3 rotateVec 回転値を返す
 	*/
 	Vector3 GetRotateVec() { return rotateVec; }
 
 	/*
 	@fn velocityのgetter関数
-	@return velocityを返す
+	@return Vector3 velocity 速度を返す
 	*/
 	Vector3 GetVelocity() { return velocity; }
 
 	/*
 	@fn moveDirectionのgetter関数
-	@return moveDirectionを返す
+	@return Vector3 moveDirection 移動方向を返す
 	*/
 	Vector3 GetMoveDirection() { return moveDirection; }
 
 	/*
 	@fn firstPositionのgetter関数
-	@return firstPositionを返す
+	@return Vector3 firstPosition 初期ポジションを返す
 	*/
 	Vector3 GetFirstPosition() { return firstPosition; }
+
+	/*
+	@fn respawnPositionのgetter関数
+	@return Vector3 respawnPosition リスポーンする場所を返す
+	*/
+	Vector3 GetRespawnPosition() { return respawnPosition; }
 
 	/*
 	@fn moveDistanceのgetter関数
@@ -214,10 +239,34 @@ public:// ゲッターセッター
 	bool GetOnGround() { return onGround; }
 
 	/*
+	@fn isDeadFlagのGettrer関数
+	@return	bool isDeadFlag 死亡状態を返す
+	*/
+	bool GetIsDeadFlag() { return isDeadFlag; }
+
+	/*
+	@fn isTrackingのGettrer関数
+	@return	bool isTracking 追跡するオブジェクトを捉えているかを返す
+	*/
+	bool GetIsTracking() { return isTracking; }
+
+	/*
+	@fn isOtherEnemyHitのGettrer関数
+	@return	bool isOtherEnemyHit 追跡するオブジェクトを捉えているかを返す
+	*/
+	bool GetIsOtherEnemyHit() { return isOtherEnemyHit; }
+
+	/*
 	@fn nowStateのgetter関数
-	@return nowStateを返す
+	@return EnemyState nowState 現在のステータスを返す
 	*/
 	EnemyState GetNowState() { return nowState; }
+
+	/*
+	@fn moveEnemyTagのgetter関数
+	@return MoveEnemyTag moveEnemyTag 移動方向を指すTagを返す
+	*/
+	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
 
 	/*
 	@fn charaForwardVecのsetter関数
@@ -250,36 +299,21 @@ public:// ゲッターセッター
 	void SetMoveSpeed(float _moveSpeed) { moveSpeed = _moveSpeed; }
 
 	/*
-	@fn isDeadFlagのGettrer関数
-	@return	bool isDeadFlag 死亡状態
-	*/
-	bool GetIsDeadFlag() { return isDeadFlag; }
-
-	/*
 	@fn isDeadFlagのsetter関数
 	@param	bool isDeadFlag 死亡状態
 	*/
 	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
 
 	/*
-	@fn charaForwardVecのsetter関数
-	@param	Vector3 _charaForwardVec キャラクターの前方ベクトル
+	@fn isTrackingのsetter関数
+	@param	bool _isTracking キャラクターの前方ベクトル
 	*/
 	void SetIsTracking(bool _isTracking) { isTracking = _isTracking; }
 
 	/*
-	@fn isDeadFlagのGettrer関数
-	@return	bool isDeadFlag 死亡状態
-	*/
-	bool GetIsTracking() { return isTracking; }
-
-	/*
-	@fn isDeadFlagのsetter関数
-	@param	bool isDeadFlag 死亡状態
+	@fn isAttackのsetter関数
+	@param	bool isAttack 攻撃状態かどうか
 	*/
 	void SetIsAttack(bool _isAttack) { isAttack = _isAttack; }
-
-	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
-
 };
 

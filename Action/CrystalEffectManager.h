@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 class MoveWallBlock;
 
 /*
@@ -52,13 +53,19 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffectProcess(float _deltaTime);
+    
+    /*
+    @fn エフェクト生産処理関数
+    */
+    void GenerateEffectProcess();
     
     /* 
     @fn ポジションの回転処理関数
     */
     void RotationProcess(float _deltaTime);
 
+    // ステージ最後の壁の情報を得るためのポインタ
     MoveWallBlock* lastMoveWallBlock;
 
     // 親のGameObject保存用変数

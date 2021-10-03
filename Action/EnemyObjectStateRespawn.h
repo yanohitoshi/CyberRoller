@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
+/*
+@file EnemyObjectStateRespawn.h
+@brief 敵オブジェクトのリスポーン状態を管理するクラス
+*/
 class EnemyObjectStateRespawn :
     public EnemyObjectStateBase
 {
@@ -32,7 +39,11 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
-
-	Vector3 nowScale;
+	// リスポーン時の移動速度
+	const float RespawnMoveSpeed;
+	// 移動方向
+	Vector3 moveDirection;
+	// 今のポジション
+	Vector3 nowPosition;
 };
 

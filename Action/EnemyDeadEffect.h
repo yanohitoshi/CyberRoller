@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 class EnemyObjectBase;
 
+/*
+@file EnemyDeadEffect.h
+@brief EnemyDeadEffectの更新を行うクラス
+*/
 class EnemyDeadEffect :
     public ParticleEffectBase
 {
@@ -42,7 +50,7 @@ private:
     const float SubAlpha;
     // ランダムな値の範囲
     const int RandValue;
-
+    // エフェクトの色 
     const Vector3 EffectColor;
 
 };

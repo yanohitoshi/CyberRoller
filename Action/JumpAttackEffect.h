@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file JumpAttackEffect.h
+@brief JumpAttackEffectの更新を行うクラス
+*/
 class JumpAttackEffect :
     public ParticleEffectBase
 {

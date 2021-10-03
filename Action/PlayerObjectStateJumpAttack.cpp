@@ -46,10 +46,11 @@ void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 	state = PlayerState::PLAYER_STATE_JUMP_ATTACK;
 	unSelectTargetEnemyFrameCount = 0;
 
+	// 一度ジャンプ攻撃使用不可にセット
 	_owner->SetIsAvailableJumpAttck(false);
 
 	isSelectingTargetEnemy = _owner->GetIsSelectingTargetEnemy();
-
+	// ターゲットを捉えているか判定
 	if (isSelectingTargetEnemy)
 	{
 		attackTargetEnemy = _owner->GetAttackTargetEnemy();

@@ -11,8 +11,6 @@ TrackingEnemyStateAttack::~TrackingEnemyStateAttack()
 EnemyState TrackingEnemyStateAttack::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 
-	//++frameCount;
-
 	// アニメーションの再生が終わっていたら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
@@ -33,6 +31,4 @@ void TrackingEnemyStateAttack::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	state = EnemyState::ENEMY_STATE_ATTACK;
 
 	_owner->SetState(State::Active);
-
-	//frameCount = 0;
 }

@@ -40,7 +40,7 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 		generateFlag = true;
 	}
 	
-	// パーティクルの状態を見て
+	// ステータス状態を見る
 	switch (particleState)
 	{
 		// 無効状態だったらbreak

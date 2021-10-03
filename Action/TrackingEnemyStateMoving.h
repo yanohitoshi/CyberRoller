@@ -1,6 +1,10 @@
 #pragma once
 #include "EnemyObjectStateBase.h"
 
+/*
+@file TrackingEnemyStateMoving.h
+@brief 追跡する敵オブジェクトの移動状態を管理するクラス
+*/
 class TrackingEnemyStateMoving :
     public EnemyObjectStateBase
 {

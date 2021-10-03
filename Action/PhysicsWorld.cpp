@@ -73,9 +73,10 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		IntersectCheckBox(_box, switchBoxes);
 	}
 
-	if (_box->GetBoxTag() == PhysicsTag::NORMAL_ENEMY_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::ENEMY_TAG)
 	{
 		IntersectCheckBox(_box, groundBoxes);
+		IntersectCheckBox(_box, enemyBoxes);
 	}
 
 	if (_box->GetBoxTag() == PhysicsTag::CAMERA_TAG)
@@ -104,6 +105,7 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 		{
 			continue;
 		}
+
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
@@ -258,7 +260,7 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 		respownPointBoxes.emplace_back(_box);
 		break;
 
-	case PhysicsTag::NORMAL_ENEMY_TAG:
+	case PhysicsTag::ENEMY_TAG:
 		enemyBoxes.emplace_back(_box);
 		break;
 	}
@@ -427,7 +429,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		collisionFunction.erase(_box);
 	}
 
-	if (_box->GetBoxTag() == PhysicsTag::NORMAL_ENEMY_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::ENEMY_TAG)
 	{
 		auto iter = std::find(enemyBoxes.begin(), enemyBoxes.end(), _box);
 		if (iter != enemyBoxes.end())

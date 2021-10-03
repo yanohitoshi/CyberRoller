@@ -1,0 +1,69 @@
+#include "PlayerKnockBackEffectManager.h"
+#include "PlayerKnockBackEffect.h"
+#include "PlayerObject.h"
+
+PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
+	: GameObject(false, Tag::PARTICLE)
+	, PositionOffset(150.0f)
+{
+	// メンバー変数の初期化	
+	particleState = ParticleState::PARTICLE_DISABLE;
+	owner = _owner;
+	position = Vector3(0.0f, 0.0f, 0.0f);
+	effectFrameCount = 0;
+}
+
+PlayerKnockBackEffectManager::~PlayerKnockBackEffectManager()
+{
+}
+
+void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
+{
+	// 現在のステータスがノックバック状態だったらエフェクトを有効化
+	if (owner->GetNowState() == PlayerState::PLAYER_STATE_KNOCKBACK)
+	{
+		// パーティクルを有効化
+		particleState = ParticleState::PARTICLE_ACTIVE;
+	}
+	else
+	{
+		// パーティクルを無効化
+		particleState = ParticleState::PARTICLE_DISABLE;
+	}
+
+	// ステータス状態を見る
+	switch (particleState)
+	{
+		// 無効状態だったらbreak
+	case (PARTICLE_DISABLE):
+		effectFrameCount = 0;
+		break;
+		// 有効状態だったら
+	case PARTICLE_ACTIVE:
+
+		// エフェクトの生成
+		ActiveEffectProcess();
+		break;
+	}
+}
+
+void PlayerKnockBackEffectManager::ActiveEffectProcess()
+{
+	++effectFrameCount;
+	if (effectFrameCount % 5 == 0)
+	{
+		GenerateEffectProcess();
+	}
+}
+
+void PlayerKnockBackEffectManager::GenerateEffectProcess()
+{
+	// ownerのポジションを得る
+	position = owner->GetPosition();
+	position.z += PositionOffset;
+	distance = owner->GetVelocity();
+	distance.Normalize();
+	distance *= 30.0f;
+	//particleを生成
+	new PlayerKnockBackEffect(owner, position, distance);
+}

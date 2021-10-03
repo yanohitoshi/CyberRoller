@@ -1,7 +1,14 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+/*
+@file JumpAttackEffectManager.h
+@brief JumpAttackEffectの生成を行うクラス
+*/
 class JumpAttackEffectManager :
     public GameObject
 {

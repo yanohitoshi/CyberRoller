@@ -15,6 +15,7 @@
 #include "SwitchBaseObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
+#include "TrackingEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -477,6 +478,10 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// 第二区画の動く壁オブジェクト生成
 		lastMoveWallBlock = new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - SmallMoveWallSize.z));
+		break;
+
+	case(65):
+		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
 	}
 }

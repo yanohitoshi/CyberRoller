@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 class EnemyObjectBase;
 
+/*
+@file EnemyExplosionEffect.h
+@brief EnemyExplosionEffectの更新を行うクラス
+*/
 class EnemyExplosionEffect :
     public ParticleEffectBase
 {
@@ -34,14 +42,7 @@ private:
     const float AddScale;
     // 毎フレーム引くalpha値
     const float SubAlpha;
-
+    // エフェクトの色
     const Vector3 EffectColor;
-
-    // エフェクト発生させる時間をカウントする
-    int enableCount;
-    // エフェクト発生させる時間
-    const int EnableTime;
-    // 発生したかどうか
-    bool isEnabled;
 };
 

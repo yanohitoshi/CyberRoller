@@ -5,7 +5,7 @@
 #include "LandingEffect.h"
 #include "PlayerObject.h"
 
-LandingEffectManager::LandingEffectManager(GameObject* _owner)
+LandingEffectManager::LandingEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, MaxEffects(8)
 {
@@ -23,7 +23,8 @@ LandingEffectManager::~LandingEffectManager()
 void LandingEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 前のフレームでZ軸の速度が0.0fでなくこのフレームでのZ軸の速度0.0fでかつジャンプフラグがfalseだったら
-	if (owner->GetVelocity().z == 0.0f && tmpVelZ != 0.0f && PlayerObject::GetChackJumpFlag() == false)
+	if (owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPSTART || owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE ||
+		owner->GetNowState() == PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)
 	{
 		// パーティクルを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
@@ -34,42 +35,40 @@ void LandingEffectManager::UpdateGameObject(float _deltaTime)
 		particleState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	// パーティクルの状態を見て
+	// ステータス状態を見る
 	switch (particleState)
 	{
 		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
+		generateEffectsFlag = true;
 		break;
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
 		ActiveEffectProcess();
-
-		// particleState無効に
-		particleState = ParticleState::PARTICLE_DISABLE;
-
 		break;
 	}
-
-	// ownerのZ軸速度を保存
-	tmpVelZ = owner->GetVelocity().z;
-
 }
 
 void LandingEffectManager::ActiveEffectProcess()
 {
-	// ownerのポジションを得る
-	position = owner->GetPosition();
-
-	// 8個生成
-	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
+	if (generateEffectsFlag)
 	{
-		// それぞれのエフェクトの方向を計算する処理
-		CalculatingDirectionProcess(efectCount, velocity);
+		// ownerのポジションを得る
+		position = owner->GetPosition();
 
-		//particleを生成
-		new LandingEffect(position, velocity);
+		// 8個生成
+		for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
+		{
+			// それぞれのエフェクトの方向を計算する処理
+			CalculatingDirectionProcess(efectCount, velocity);
+
+			//particleを生成
+			new LandingEffect(position, velocity);
+		}
+
+		generateEffectsFlag = false;
 	}
 }
 

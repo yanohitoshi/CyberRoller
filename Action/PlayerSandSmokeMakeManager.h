@@ -5,9 +5,11 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+enum class PlayerState;
+
 /*
 @file PlayerSandSmokeMakeManeger.h
-@brief PlayerSandSmokeMakeManegerの生成と更新を行う
+@brief PlayerSandSmokeMakeManegerの生成を行う
 */
 class PlayerSandSmokeMakeManager :
     public GameObject
@@ -18,7 +20,7 @@ public:
     @fn コンストラクタ
     @param	_owner 親クラスのポインタ
     */
-    PlayerSandSmokeMakeManager(GameObject* _owner);
+    PlayerSandSmokeMakeManager(PlayerObject* _owner);
 
     /*
     @fn デストラクタ
@@ -56,7 +58,8 @@ private:
     void ShiftLeftEffectPosition();
 
     // 親のGameObject保存用変数
-    GameObject* owner;
+    PlayerObject* owner;
+    PlayerState ownerState;
     // particleの状態管理用変数
     ParticleState particleState;
     // アニメーションに合わせて土煙の位置をずらす用のポジション変数

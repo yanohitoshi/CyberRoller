@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateKnockBack.h
+@brief ノックバック開始からアイドリング状態に移行するまでを管理
+*/
 class PlayerObjectStateKnockBack :
     public PlayerObjectStateBase
 {
@@ -41,9 +48,15 @@ public:
 
 private:
 
+	// ヒットした敵のポジション
 	Vector3 hitEnemyPosition;
+	// ノックバックする方向
 	Vector3 knockBackDirection;
-
+	// ノックバックの時間を数える
 	int knockBackFrameCount;
+	// ノックバックの速度定数
+	const float KnockBackSpeed;
+	// ノックバックする時間定数
+	const int KnockBackTime;
 };
 

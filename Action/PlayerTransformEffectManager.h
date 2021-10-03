@@ -1,7 +1,14 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+/*
+@file PlayerTransformEffectManager.h
+@brief PlayerTransformEffectの生成を行うクラス
+*/
 class PlayerTransformEffectManager :
     public GameObject
 {
@@ -38,14 +45,15 @@ private:
     */
     void GenerateEffectProcess();
 
-
     // 親のGameObject保存用変数
     PlayerObject* owner;
     // particleの状態管理用変数
     ParticleState particleState;
     // 生成するエフェクトのポジション
     Vector3 effectPosition;
+    // 生成時間を数える
     int frameCount;
+    // エフェクトの数を数える
     int effectCount;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;

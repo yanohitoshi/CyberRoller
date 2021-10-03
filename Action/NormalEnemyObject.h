@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectBase.h"
 
+/*
+@file NormalEnemyObject.h
+@brief 動かない敵オブジェクトクラス
+*/
 class NormalEnemyObject :
     public EnemyObjectBase
 {
@@ -40,6 +47,7 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
+	// 回転角度
 	const float Angle;
 
 public:

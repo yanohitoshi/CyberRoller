@@ -7,6 +7,8 @@
 
 PlayerObjectStateKnockBack::PlayerObjectStateKnockBack()
 	: knockBackFrameCount(0)
+	, KnockBackSpeed(70.0f)
+	, KnockBackTime(22)
 {
 }
 
@@ -19,16 +21,18 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 
 	++knockBackFrameCount;
 
+	velocity += knockBackDirection * KnockBackSpeed;
 	if (!_owner->GetOnGround())
 	{
-		// 重力にデルタタイムをかけた値を代入
+		// 重力をかける
 		velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 	}
+	else
+	{
+		velocity.z = 0.0f;
+	}
 
-	velocity += knockBackDirection * 50.0f;
-
-	velocity.z = 0.0f;
-	if (knockBackFrameCount >= 22 )
+	if (knockBackFrameCount >= KnockBackTime)
 	{
 		velocity.Zero;
 		_owner->SetVelocity(velocity);
@@ -42,18 +46,6 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	_owner->SetVelocity(velocity);
 	
-	// 死亡フラグが立っていたら
-	if (_owner->GetDeadFlag())
-	{
-		state = PlayerState::PLAYER_STATE_DEAD;
-	}
-
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::GetTimeOverFlag() == true)
-	{
-		// ステータスをコンティニュー選択開始状態にする
-		state = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
 
 	// 更新されたstateを返す
 	return state;
@@ -73,15 +65,11 @@ void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 	state = PlayerState::PLAYER_STATE_KNOCKBACK;
 
 	velocity = Vector3::Zero;
-
 	knockBackFrameCount = 0;
 
 	hitEnemyPosition = _owner->GetHitEnemyPosition();
 	knockBackDirection = _owner->GetPosition() - hitEnemyPosition;
-
 	knockBackDirection.Normalize();
 
 	RotationProcess(_owner,Vector3(knockBackDirection.x * -1.0f, knockBackDirection.y * -1.0f,0.0f) ,_owner->GetCharaForwardVec());
-
-
 }

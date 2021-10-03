@@ -1,5 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
+
+/*
+@file PlayerTransformEffect.h
+@brief PlayerTransformEffectの更新を行うクラス
+*/
 class PlayerTransformEffect :
     public ParticleEffectBase
 {

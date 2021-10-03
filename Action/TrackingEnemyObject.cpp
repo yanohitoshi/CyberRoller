@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
-#include "TrackingEnemyStateDead.h"
+#include "EnemyObjectStateDead.h"
 #include "TrackingEnemyStateIdle.h"
 #include "TrackingEnemyStateTracking.h"
 #include "TrackingEnemyStateMoving.h"
@@ -14,7 +14,7 @@
 #include "BoxCollider.h"
 #include "PlayerTrackingArea.h"
 
-TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject)
+TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
 {
 	//GameObjectメンバ変数の初期化
@@ -29,6 +29,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	isDeadFlag = false;
 	isAttack = false;
 	isPushBackToPlayer = true;
+	isOtherEnemyHit = false;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -56,7 +57,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, PhysicsTag::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	//enemyBox = mesh->GetBox();
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
@@ -65,7 +66,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new TrackingEnemyStateIdle);
-	statePools.push_back(new TrackingEnemyStateDead);
+	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
 	statePools.push_back(new TrackingEnemyStateMoving);
 	statePools.push_back(new TrackingEnemyStateTurn);
@@ -79,7 +80,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
-	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this);
+	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this, _areaValue);
 
 }
 
@@ -120,6 +121,7 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	}
 
 	isTracking = false;
+	isOtherEnemyHit = false;
 	forwardVec = charaForwardVec;
 }
 
@@ -137,6 +139,11 @@ void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 	if (_hitObject.GetTag() == Tag::PLAYER && _physicsTag == PhysicsTag::PLAYER_TAG)
 	{
 		isAttack = true;
+	}
+
+	if (_hitObject.GetTag() == Tag::ENEMY)
+	{
+		isOtherEnemyHit = true;
 	}
 
 }

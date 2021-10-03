@@ -144,6 +144,12 @@ bool Game::Initialize()
 	// 最初のシーンを生成
 	nowScene = new TitleScene();
 
+	//// 最初のシーンステータスの初期化
+	//nowSceneState = FINAL_STAGE_SCENE;
+	//// 最初のシーンを生成
+	//nowScene = new FinalStageScene();
+
+
 	// 現在のシーンのステータスをレンダラーに渡す
 	RENDERER->SetNowSceneState(nowSceneState);
 

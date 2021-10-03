@@ -7,7 +7,7 @@
 
 /*
 @file SandSmokeMakeManeger.h
-@brief SandSmokeMakeManegerの生成と更新を行う
+@brief SandSmokeMakeManegerの生成を行う
 */
 class SandSmokeMakeManeger :
     public GameObject

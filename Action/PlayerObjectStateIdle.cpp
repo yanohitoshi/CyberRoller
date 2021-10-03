@@ -30,19 +30,19 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
-	// 死亡フラグが立っていたら
-	if (_owner->GetDeadFlag())
-	{
-		// ステータスをジャンプ開始状態に変更
-		state = PlayerState::PLAYER_STATE_DEAD;
-	}
+	//// 死亡フラグが立っていたら
+	//if (_owner->GetDeadFlag())
+	//{
+	//	// ステータスをジャンプ開始状態に変更
+	//	state = PlayerState::PLAYER_STATE_DEAD;
+	//}
 
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::GetTimeOverFlag() == true)
-	{
-		// ステータスをコンティニュー選択スタート状態に変更
-		state = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
+	//// タイムオーバーフラグがtrueだったら
+	//if (CountDownFont::GetTimeOverFlag() == true)
+	//{
+	//	// ステータスをコンティニュー選択スタート状態に変更
+	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
+	//}
 
 	// 更新されたstateを返す
 	return state;

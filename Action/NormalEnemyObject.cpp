@@ -4,8 +4,8 @@
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
+#include "EnemyObjectStateDead.h"
 #include "NormalEnemyObjectStateIdle.h"
-#include "NormalEnemyObjectStateDead.h"
 #include "BoxCollider.h"
 
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
@@ -43,14 +43,14 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, PhysicsTag::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new NormalEnemyObjectStateIdle);
-	statePools.push_back(new NormalEnemyObjectStateDead);
+	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
 
 	//anim変数を速度1.0fで再生

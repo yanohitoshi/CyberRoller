@@ -65,7 +65,7 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 		particleState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	// パーティクルの状態を見て
+	// ステータス状態を見る
 	switch (particleState)
 	{
 		// 無効状態だったらbreak

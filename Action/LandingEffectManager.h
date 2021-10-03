@@ -7,7 +7,7 @@
 
 /*
 @file LandingEffectManeger.h
-@brief LandingEffectManegerの生成と更新を行う
+@brief LandingEffectManegerの生成を行う
 */
 class LandingEffectManager :
     public GameObject
@@ -18,7 +18,7 @@ public:
     @fn コンストラクタ
     @param	_owner 親クラスのポインタ
     */
-    LandingEffectManager(GameObject* _owner);
+    LandingEffectManager(PlayerObject* _owner);
 
     /*
     @fn デストラクタ
@@ -46,9 +46,11 @@ private:
     void CalculatingDirectionProcess(int _index, Vector3& _velocity);
 
     // 親のGameObject保存用変数
-    GameObject* owner;
+    PlayerObject* owner;
     // particleの状態管理用変数
     ParticleState particleState;
+    // 1度だけ生成する用の生成フラグ変数
+    bool generateEffectsFlag;
     // プレイヤーのZ軸の移動量を保存するための変数
     float tmpVelZ;
     // 1度に生成するエフェクトの数

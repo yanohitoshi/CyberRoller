@@ -16,7 +16,7 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 	float firstPosToTrackingObjectLength = firstPosToTrackingObject.LengthSq();
 	float firstPosToOwnerObjectLength = firstPosToOwnerObject.LengthSq();
 
-	if (_owner->GetIsTracking())
+	if (_owner->GetIsTracking() && !_owner->GetIsOtherEnemyHit())
 	{
 		trackingRotationVec =  trackingObject->GetPosition() - _owner->GetPosition();
 		trackingRotationVec.z = 0.0f;
@@ -37,6 +37,12 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 		{
 			state = EnemyState::ENEMY_STATE_TURN;
 		}
+	}
+	else
+	{
+		velocity = Vector3::Zero;
+		// positionに速度を足してキャラクターを動かす
+		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
 	return state;

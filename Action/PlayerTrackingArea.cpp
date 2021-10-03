@@ -2,7 +2,7 @@
 #include "TrackingEnemyObject.h"
 #include "SphereCollider.h"
 
-PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObject* _ownerEnemy)
+PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObject* _ownerEnemy, float _areaValue)
 	:GameObject(false, _objectTag)
 	, ownerEnemy(_ownerEnemy)
 {
@@ -10,7 +10,7 @@ PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObjec
 
 	//ƒWƒƒƒ“ƒvUŒ‚”»’è—p‚ÌsphereCollider
 	sphereCollider = new SphereCollider(this, PhysicsTag::PLAYER_TRACKING_AREA_TAG, GetOnCollisionFunc());
-	Sphere sphere = { Vector3(0.0f,0.0f,0.0f),1200.0f };
+	Sphere sphere = { Vector3(0.0f,0.0f,0.0f),_areaValue };
 	sphereCollider->SetObjectSphere(sphere);
 }
 
@@ -20,7 +20,7 @@ PlayerTrackingArea::~PlayerTrackingArea()
 
 void PlayerTrackingArea::UpdateGameObject(float _deltaTime)
 {
-	SetPosition(ownerEnemy->GetPosition());
+	SetPosition(position);
 }
 
 void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)

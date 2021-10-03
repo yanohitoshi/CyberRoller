@@ -7,7 +7,7 @@
 
 /*
 @file SwitchEffectMakeManeger.h
-@brief SwitchEffectMakeManegerの生成と更新を行う
+@brief SwitchEffectMakeManegerの生成を行う
 */
 class SwitchEffectMakeManeger :
     public GameObject

@@ -1,6 +1,10 @@
 #pragma once
 #include "EnemyObjectStateBase.h"
 
+/*
+@file TrackingEnemyStateReposition.h
+@brief 追跡する敵オブジェクトの追跡場所から元の位置に戻るまでを管理するクラス
+*/
 class TrackingEnemyStateReposition :
     public EnemyObjectStateBase
 {

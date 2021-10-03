@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
+/*
+@file MoveEnemyObjectStateMoving.h
+@brief 移動する敵オブジェクトの移動状態を管理するクラス
+*/
 class MoveEnemyObjectStateMoving :
     public EnemyObjectStateBase
 {

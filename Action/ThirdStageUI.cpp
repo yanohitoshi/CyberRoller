@@ -15,7 +15,7 @@
 
 ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
-	, SceneTime(150)
+	, SceneTime(1000)
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);

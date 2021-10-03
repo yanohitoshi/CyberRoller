@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file PlayerAttackHitEffect.h
+@brief PlayerAttackHitEffectの更新を行うクラス
+*/
 class PlayerAttackHitEffect :
     public ParticleEffectBase
 {

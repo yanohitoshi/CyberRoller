@@ -20,6 +20,7 @@ PlayerAttackHitEffect::PlayerAttackHitEffect(GameObject* _owner,const Vector3& _
 	particleComponent->SetColor(Vector3(1.0f, 0.8f, 0.4f));
 	SetPosition(position);
 	SetRotation(owner->GetRotation());
+	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 }
 
 PlayerAttackHitEffect::~PlayerAttackHitEffect()

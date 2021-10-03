@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
+/*
+@file NormalEnemyObjectStateIdle.h
+@brief 動かない敵オブジェクトのアイドリング状態を管理するクラス
+*/
 class NormalEnemyObjectStateIdle :
     public EnemyObjectStateBase
 {

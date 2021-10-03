@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 
+/*
+@file PlayerObjectStateJumpAttackEnd.h
+@brief ジャンプ攻撃終了からアイドリングに移行するまでを管理
+*/
 class PlayerObjectStateJumpAttackEnd :
     public PlayerObjectStateBase
 {

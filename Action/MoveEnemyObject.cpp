@@ -5,7 +5,7 @@
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
 #include "MoveEnemyObjectStateIdle.h"
-#include "MoveEnemyObjectStateDead.h"
+#include "EnemyObjectStateDead.h"
 #include "MoveEnemyObjectStateMoving.h"
 #include "MoveEnemyObjectStateTurn.h"
 #include "BoxCollider.h"
@@ -47,7 +47,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	mesh = skeltalMeshComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
-	boxCollider = new BoxCollider(this, PhysicsTag::NORMAL_ENEMY_TAG, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	//enemyBox = mesh->GetBox();
 	enemyBox = { Vector3(-10.0f,-10.0f,-50.0f),Vector3(10.0f,10.0f,10.0f) };
 	boxCollider->SetObjectBox(enemyBox);
@@ -55,7 +55,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
 	statePools.push_back(new MoveEnemyObjectStateIdle);
-	statePools.push_back(new MoveEnemyObjectStateDead);
+	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
 	statePools.push_back(new MoveEnemyObjectStateMoving);
 	statePools.push_back(new MoveEnemyObjectStateTurn);

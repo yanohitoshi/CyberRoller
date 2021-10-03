@@ -1,10 +1,18 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MeshComponent;
 class PlayerObject;
 class SphereCollider;
 
+/*
+@file JumpAttackPlayerObject.h
+@brief ジャンプ攻撃時のプレイヤーオブジェクト
+*/
 class JumpAttackPlayerObject :
     public GameObject
 {
@@ -39,15 +47,16 @@ public:
 
 private:
 
+	// 3Dモデルの描画を行うクラス
     MeshComponent* meshComponent;
+	// 親となるオブジェクトのポインタ
 	PlayerObject* ownerObject;
+	// 球体の当たり判定を行うクラス
 	SphereCollider* sphereCollider;
 
 	// 回転する際の角度
 	float rotationAngle;
 	// 回転角に足し続ける値定数
 	const float Rotation;
-	State tmpState;
-
 };
 

@@ -15,6 +15,8 @@
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
 #include "NormalEnemyObject.h"
+#include "MoveEnemyObject.h"
+#include "TrackingEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -420,6 +422,13 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 	case(THIRD_STAGE_LEFT_MOVE_GROUND):
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		break;
+	case(65):
+		new TrackingEnemyObject(layer6Pos, Tag::ENEMY, 600.0f, playerObject, 1200.0f);
+		break;
+	case(44):
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		break;
 	}
 }
 
@@ -540,6 +549,19 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
+
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer9SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
+	case(65):
+		new TrackingEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, playerObject,1400.0f);
+		break;
+
+	case(61):
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
+		break;
 	}
 }
 
@@ -602,6 +624,12 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 	case(THIRD_STAGE_BACK_MOVE_GROUND):
 		// 動く床を生成
 		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
+		break;
+	case(61):
+		new NormalEnemyObject(layer11Pos, Tag::ENEMY);
+		break;
+	case(62):
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, Vector3::UnitY, 1000.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
 }
@@ -671,9 +699,6 @@ void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer13SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(61):
-		new NormalEnemyObject(layer13Pos, Tag::ENEMY);
-		break;
 	}
 }
 
@@ -708,6 +733,20 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		// 移動床を生成
 		new MoveBlockObject(layer14Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		break;
+
+	case(SECOND_MOVE_WALL_PARTS):
+		// 第二区画の動く壁オブジェクト生成
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer14Pos.x, layer14Pos.y + ShiftMoveWallY, layer14Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer14Pos.x, layer14Pos.y, layer14Pos.z - BigMoveWallSize.z));
+		break;
+
+	case(61):
+		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
+		break;
+
+	case(65):
+		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
 	}
 }
 
@@ -723,35 +762,9 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer15)
 	{
-	case(LAYER15_BLOCK_PARTS):
-		// ブロックオブジェクト生成
-		new BoxObject(layer15Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(SECOND_SWITCH_PARTS):
-		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer15SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-		break;
-
-	case(NEEDLE_PARTS):
-		// 二ードルオブジェクト生成
-		new NeedlePanelObject(layer15SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-		break;
-
-	case(SECOND_MOVE_WALL_PARTS):
-		// 第二区画の動く壁オブジェクト生成
-		lastMoveWallBlock = new MoveWallBlock(Vector3(layer15Pos.x, layer15Pos.y + ShiftMoveWallY, layer15Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
-			Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z - BigMoveWallSize.z));
-		break;
-
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(Vector3(layer15Pos.x, layer15Pos.y, layer15Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
-		break;
-
-	case(FRONT_PUSH_BOX):
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer15Pos, BlockSize, Tag::PUSH_BOX, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 1400.0f, 0.5f, MoveDirectionTag::MOVE_X);
 		break;
 	}
 }

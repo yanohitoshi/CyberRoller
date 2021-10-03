@@ -163,8 +163,6 @@ private:
 	const float FallPpsitionZ;
 	// 生成されるときのポジションをずらす
 	const float FirstPositionZ;
-	// ひるむ速度定数
-	const float FlinchSpeed;
 
 	//押し戻しに使うプレイヤーのAABB
 	AABB playerBox;

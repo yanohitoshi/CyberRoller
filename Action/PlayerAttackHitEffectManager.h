@@ -1,7 +1,14 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+/*
+@file PlayerAttackHitEffectManager.h
+@brief PlayerAttackHitEffectの生成を行うクラス
+*/
 class PlayerAttackHitEffectManager :
     public GameObject
 {
@@ -44,10 +51,8 @@ private:
     ParticleState particleState;
     // 生成するエフェクトのポジション
     Vector3 effectPosition;
-
+    // ポジションを補正する値
     const float CorrectionPosition;
-    int frameCount;
-    int effectCount;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
 };

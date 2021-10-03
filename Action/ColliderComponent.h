@@ -9,9 +9,8 @@
 class GameObject;
 
 /*
-@enum  PhysicsTag		PhysicsWorld内でどのObjectなのか判別するタグ
+@enum  PhysicsTag PhysicsWorld内でどのObjectなのか判別するタグ
 */
-
 enum class PhysicsTag
 {
 	GROUND_TAG,
@@ -29,7 +28,7 @@ enum class PhysicsTag
 	CLEAR_POINT_TAG,
 	NEEDLE_TAG,
 	RESPOWN_TAG,
-	NORMAL_ENEMY_TAG,
+	ENEMY_TAG,
 	ATTACK_RANGE_TAG,
 	PLAYER_TRACKING_AREA_TAG
 };

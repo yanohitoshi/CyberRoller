@@ -40,19 +40,19 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
 
-	// 死亡フラグが立っていたら
-	if (_owner->GetDeadFlag())
-	{
-		// ステータスを死亡状態にする
-		state = PlayerState::PLAYER_STATE_DEAD;
-	}
+	//// 死亡フラグが立っていたら
+	//if (_owner->GetDeadFlag())
+	//{
+	//	// ステータスを死亡状態にする
+	//	state = PlayerState::PLAYER_STATE_DEAD;
+	//}
 
-	// タイムオーバーフラグがtrueだったら
-	if (CountDownFont::GetTimeOverFlag() == true)
-	{
-		// ステータスをコンティニュー選択開始状態にする
-		state = PlayerState::PLAYER_STATE_DOWNSTART;
-	}
+	//// タイムオーバーフラグがtrueだったら
+	//if (CountDownFont::GetTimeOverFlag() == true)
+	//{
+	//	// ステータスをコンティニュー選択開始状態にする
+	//	state = PlayerState::PLAYER_STATE_DOWNSTART;
+	//}
 
 	// ownerに速度をセット
 	_owner->SetVelocity(velocity);

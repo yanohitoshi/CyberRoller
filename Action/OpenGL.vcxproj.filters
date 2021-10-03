@@ -192,12 +192,6 @@
     <ClCompile Include="CrystalEffectManager.cpp">
       <Filter>GameObjects\Effect\CrystalEffect</Filter>
     </ClCompile>
-    <ClCompile Include="LandingEffect.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSandSmokeEffect.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
     <ClCompile Include="SandSmokeMakeManeger.cpp">
       <Filter>GameObjects\Effect\WallEffect</Filter>
     </ClCompile>
@@ -381,9 +375,6 @@
     <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp">
       <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClCompile>
-    <ClCompile Include="NormalEnemyObjectStateDead.cpp">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
-    </ClCompile>
     <ClCompile Include="NormalEnemyObjectStateIdle.cpp">
       <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
     </ClCompile>
@@ -395,12 +386,6 @@
     </ClCompile>
     <ClCompile Include="JumpAttackEffectManager.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSandSmokeMakeManager.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="LandingEffectManager.cpp">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameClearEffectManager.cpp">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
@@ -420,9 +405,6 @@
     <ClCompile Include="MoveEnemyObject.cpp">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObject</Filter>
     </ClCompile>
-    <ClCompile Include="MoveEnemyObjectStateDead.cpp">
-      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
-    </ClCompile>
     <ClCompile Include="MoveEnemyObjectStateIdle.cpp">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
     </ClCompile>
@@ -439,9 +421,6 @@
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClCompile>
     <ClCompile Include="TrackingEnemyStateTracking.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyStateDead.cpp">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClCompile>
     <ClCompile Include="TrackingEnemyStateMoving.cpp">
@@ -479,6 +458,27 @@
     </ClCompile>
     <ClCompile Include="EnemyExplosionEffect.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeMakeManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockBackEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockBackEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -681,12 +681,6 @@
     <ClInclude Include="CrystalEffectManager.h">
       <Filter>GameObjects\Effect\CrystalEffect</Filter>
     </ClInclude>
-    <ClInclude Include="LandingEffect.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSandSmokeEffect.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
     <ClInclude Include="SandSmokeMakeManeger.h">
       <Filter>GameObjects\Effect\WallEffect</Filter>
     </ClInclude>
@@ -861,9 +855,6 @@
     <ClInclude Include="PlayerObjectStateJumpAttackEnd.h">
       <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
     </ClInclude>
-    <ClInclude Include="NormalEnemyObjectStateDead.h">
-      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
-    </ClInclude>
     <ClInclude Include="NormalEnemyObjectStateIdle.h">
       <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
     </ClInclude>
@@ -875,12 +866,6 @@
     </ClInclude>
     <ClInclude Include="JumpAttackEffectManager.h">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSandSmokeMakeManager.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="LandingEffectManager.h">
-      <Filter>GameObjects\Effect\PlayerEffect</Filter>
     </ClInclude>
     <ClInclude Include="GameClearEffectManager.h">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
@@ -903,9 +888,6 @@
     <ClInclude Include="MoveEnemyObject.h">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObject</Filter>
     </ClInclude>
-    <ClInclude Include="MoveEnemyObjectStateDead.h">
-      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
-    </ClInclude>
     <ClInclude Include="MoveEnemyObjectStateIdle.h">
       <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
     </ClInclude>
@@ -922,9 +904,6 @@
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
     <ClInclude Include="TrackingEnemyStateTracking.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyStateDead.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
     <ClInclude Include="TrackingEnemyStateMoving.h">
@@ -962,6 +941,27 @@
     </ClInclude>
     <ClInclude Include="EnemyExplosionEffect.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeMakeManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockBackEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockBackEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1123,6 +1123,15 @@
     </Filter>
     <Filter Include="GameObjects\Effect\Enemy">
       <UniqueIdentifier>{021c7306-83e2-43ab-af5e-be79f923bf00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\Jump">
+      <UniqueIdentifier>{80a67fe0-3714-4bc0-8413-4af7b82d7c69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\Run">
+      <UniqueIdentifier>{b5087da4-3684-4efe-ae04-50b3b2d4d105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\KnockBack">
+      <UniqueIdentifier>{abd46c73-a05f-43c2-b9c3-52380e54bbc5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,7 +1,9 @@
 #include "EnemyObjectStateRespawn.h"
 
 EnemyObjectStateRespawn::EnemyObjectStateRespawn()
-	: nowScale(Vector3::Zero)
+	: moveDirection(Vector3::Zero)
+	, nowPosition(Vector3::Zero)
+	, RespawnMoveSpeed(200.0f)
 {
 }
 
@@ -11,12 +13,17 @@ EnemyObjectStateRespawn::~EnemyObjectStateRespawn()
 
 EnemyState EnemyObjectStateRespawn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	nowScale += Vector3(0.01f, 0.01f, 0.01f);
-	_owner->SetScale(nowScale);
+	nowPosition = _owner->GetPosition();
+	moveDirection = _owner->GetFirstPosition() - nowPosition;
+	moveDirection.Normalize();
+	velocity = moveDirection * RespawnMoveSpeed;
+	// positionに速度を足してキャラクターを動かす
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	if (nowScale.x >= 2.0f)
+	// 現在のポジションが初期ポジション以下になったら
+	// ※上から降りてくるため
+	if (nowPosition.z <= _owner->GetFirstPosition().z)
 	{
-		_owner->SetScale(Vector3(2.0f, 2.0f, 2.0f));
 		state = EnemyState::ENEMY_STATE_IDLE;
 	}
 
@@ -33,11 +40,8 @@ void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->SetVisible(true);
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_RESPAWN;
-	_owner->SetScale(Vector3::Zero);
-	// 現在のscale値を取得
-	nowScale = Vector3::Zero;
 	// 死亡フラグをfalseにセット
 	_owner->SetIsDeadFlag(false);
-	// positionを初期位置に直す
-	_owner->SetPosition(_owner->GetFirstPosition());
+	// positionをリスポーンする場所にセット
+	_owner->SetPosition(_owner->GetRespawnPosition());
 }

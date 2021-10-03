@@ -15,6 +15,9 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "TrackingEnemyObject.h"
+#include "NormalEnemyObject.h"
+#include "MoveEnemyObject.h"
 
 /*
    @fn コンストラクタ
@@ -500,6 +503,10 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
+	case(65):
+		new TrackingEnemyObject(layer6Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
+
 	}
 }
 
@@ -555,6 +562,13 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
 
+	case(65):
+		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
+	case(61):
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
+		break;
+
 	}
 }
 
@@ -594,6 +608,10 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer8Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
+	case(65):
+		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
+
 	}
 }
 
@@ -633,6 +651,24 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer9SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+	case(65):
+		new TrackingEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, playerObject, 800.0f);
+		break;
+
+	case(62):
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
+		break;
+	case(63):
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
+		break;
+	case(61):
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
+		break;
+
 	}
 }
 
@@ -677,7 +713,9 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer10Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-
+	case(65):
+		new TrackingEnemyObject(layer10Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
 	}
 }
 
@@ -718,6 +756,9 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new RespawnPoint(layer11Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
+	case(62):
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, 300.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
+		break;
 	}
 }
 
@@ -757,6 +798,10 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
+	case(61):
+		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
+		break;
+
 	}
 }
 
@@ -827,6 +872,9 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 	case(LAYER15_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new BoxObject(layer15Pos, BlockSize, Tag::GROUND);
+		break;
+	case(61):
+		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
 		break;
 	}
 }

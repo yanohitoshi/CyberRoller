@@ -28,7 +28,7 @@ CountDownFont::CountDownFont(int _time)
 
 	new CountDownBackFont(_time);
 	new TimeSprite();
-	new WarningSprite(this);
+	//new WarningSprite(this);
 
 }
 
