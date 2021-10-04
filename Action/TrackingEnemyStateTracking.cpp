@@ -1,6 +1,7 @@
 #include "TrackingEnemyStateTracking.h"
 
 TrackingEnemyStateTracking::TrackingEnemyStateTracking()
+	:TrackingLengthValue(50.0f)
 {
 }
 
@@ -20,6 +21,7 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 	// オーナーのポジションから初期ポジションへのベクトルの長さ
 	float ownerObjectToFirstPosLength = ownerObjectToFirstPos.LengthSq();
 
+	// 追跡ターゲットがいるとき
 	if (_owner->GetIsTracking())
 	{
 		// オーナーから追跡対象へ向かうベクトル
@@ -27,7 +29,8 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 		trackingRotationVec.z = 0.0f;
 		float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
 
-		if (ownerPosToTrackingObjectLength >= 50.0f)
+		// 規定値まで近づくまで追跡
+		if (ownerPosToTrackingObjectLength >= TrackingLengthValue)
 		{
 			trackingRotationVec.Normalize();
 			velocity = trackingRotationVec * moveSpeed;
@@ -43,8 +46,9 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 		}
 	}
-	else if (!_owner->GetIsTracking())
+	else if (!_owner->GetIsTracking()) // 追跡ターゲットが居なくなったとき
 	{
+		// 向きベクトルの長さから戻る際にターンモーションをはさむか判定
 		if (ownerObjectToFirstPosLength > trackingObjectToFirstPosLength)
 		{
 			state = EnemyState::ENEMY_STATE_REPOSITION;
@@ -74,13 +78,21 @@ void TrackingEnemyStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime
 	state = EnemyState::ENEMY_STATE_TRACKING;
 	_owner->SetState(State::Active);
 
+	// 初期ポジションを得る
 	firstPosition = _owner->GetFirstPosition();
 
+	// 追跡のターゲットとなるオブジェクトを得る
 	trackingObject = _owner->GetTrackingObject();
+	// 移動速度を得る
 	moveSpeed = _owner->GetMoveSpeed();
+
+	// 追跡方向を計算
 	trackingRotationVec = trackingObject->GetPosition() - _owner->GetPosition();
+	// 上下移動はさせないので0で固定
 	trackingRotationVec.z = 0.0f;
+	// 正規化
 	trackingRotationVec.Normalize();
 
+	// 回転処理
 	RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
 }

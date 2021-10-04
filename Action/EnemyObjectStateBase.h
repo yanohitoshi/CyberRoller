@@ -20,6 +20,8 @@ enum class EnemyState
 	ENEMY_STATE_DEAD,
 	// 復帰待機
 	ENEMY_STATE_RESPAWN,
+	// 攻撃
+	ENEMY_STATE_ATTACK,
 	// 移動状態
 	ENEMY_STATE_MOVING,
 	// ターン
@@ -28,8 +30,6 @@ enum class EnemyState
 	ENEMY_STATE_TRACKING,
 	// リポジション
 	ENEMY_STATE_REPOSITION,
-	// 攻撃
-	ENEMY_STATE_ATTACK,
 	// 総アニメーション数
 	ENEMY_STATE_NUM,
 };

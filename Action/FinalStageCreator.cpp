@@ -566,7 +566,7 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
 	case(61):
-		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
 		break;
 
 	}
@@ -660,13 +660,13 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		break;
 
 	case(62):
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
 	case(63):
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
 		break;
 	case(61):
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
 		break;
 
 	}
@@ -757,7 +757,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(62):
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, 300.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, 300.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
 }
@@ -799,7 +799,7 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 	case(61):
-		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer12Pos, Tag::ENEMY, playerObject);
 		break;
 
 	}
@@ -874,7 +874,7 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 		new BoxObject(layer15Pos, BlockSize, Tag::GROUND);
 		break;
 	case(61):
-		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer15Pos, Tag::ENEMY, playerObject);
 		break;
 	}
 }

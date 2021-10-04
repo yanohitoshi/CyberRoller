@@ -1,10 +1,12 @@
 #include "EnemyObjectBase.h"
 #include "EnemyDeadEffectManager.h"
 
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
+	, trackingObject(_trackingObject)
 	, respawnPositionOffset(1600.0f)
+	, Size(Vector3(2.0f,2.0f,2.0f))
 {
 	// メンバー変数初期化
 	SetPosition(_pos);
@@ -12,19 +14,20 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	firstPosition = _pos;
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
-
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
 }
 
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
-	,moveDirection(_moveDir)
-	,moveDistance(_moveDistance)
-	,moveSpeed(_moveSpeed)
-	,moveEnemyTag(_moveEnemyTag)
+	, trackingObject(_trackingObject)
+	, moveDirection(_moveDir)
+	, moveDistance(_moveDistance)
+	, moveSpeed(_moveSpeed)
+	, moveEnemyTag(_moveEnemyTag)
 	, respawnPositionOffset(1600.0f)
+	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {
 	// メンバー変数初期化
 	tag = _objectTag;
@@ -45,6 +48,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, respawnPositionOffset(1600.0f)
 	, BoxMin(Vector3(-10.0f, -10.0f, 0.0f))
 	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {
 	// メンバー変数初期化
 	tag = _objectTag;

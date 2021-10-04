@@ -460,10 +460,6 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 		groundCheckSpheres.emplace_back(_sphere);
 		break;
 
-	case PhysicsTag::SWITCH_CHECK_TAG:
-		switchCheckSpheres.emplace_back(_sphere);
-		break;
-
 	case PhysicsTag::ATTACK_RANGE_TAG:
 		attackRangeSpheres.emplace_back(_sphere);
 		break;
@@ -494,18 +490,6 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		{
 			std::iter_swap(iter, groundCheckSpheres.end() - 1);
 			groundCheckSpheres.pop_back();
-		}
-
-		collisionFunction.erase(_sphere);
-	}
-
-	if (_sphere->GetSphereTag() == PhysicsTag::SWITCH_CHECK_TAG)
-	{
-		auto iter = std::find(switchCheckSpheres.begin(), switchCheckSpheres.end(), _sphere);
-		if (iter != switchCheckSpheres.end())
-		{
-			std::iter_swap(iter, switchCheckSpheres.end() - 1);
-			switchCheckSpheres.pop_back();
 		}
 
 		collisionFunction.erase(_sphere);

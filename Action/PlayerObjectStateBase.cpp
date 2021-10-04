@@ -140,6 +140,7 @@ void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _a
 		moveSpeed = MaxMoveSpeed;
 	}
 
+	// アナログスティックの入力角度を絶対値化
 	Vector2 absAxis = Vector2(fabs(_axis.x), fabs(_axis.y));
 
 	// 移動ベクトルに速度をかける

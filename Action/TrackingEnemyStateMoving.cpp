@@ -10,7 +10,7 @@ TrackingEnemyStateMoving::~TrackingEnemyStateMoving()
 
 EnemyState TrackingEnemyStateMoving::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	return EnemyState();
+	return state;
 }
 
 void TrackingEnemyStateMoving::Enter(EnemyObjectBase* _owner, float _deltaTime)

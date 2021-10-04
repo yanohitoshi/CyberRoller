@@ -1,7 +1,7 @@
 #include "TrackingEnemyStateIdle.h"
 
 TrackingEnemyStateIdle::TrackingEnemyStateIdle()
-	: StayTime(60)
+	: StayTime(120)
 {
 }
 

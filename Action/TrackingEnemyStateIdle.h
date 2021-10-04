@@ -37,7 +37,9 @@ public:
 
 private:
 
+	// ‘Ò‹@ŠÔ
 	const int StayTime;
+	// ŠÔ‚ğŒv‘ª
 	int frameCount;
 
 };

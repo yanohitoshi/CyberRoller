@@ -13,7 +13,7 @@
 #include "TrackingEnemyStateAttack.h"
 #include "BoxCollider.h"
 #include "PlayerTrackingArea.h"
-#include "EnemyAttackArea.h"
+#include "TrackingEnemyAttackArea.h"
 
 TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
@@ -21,7 +21,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
-	scale = Vector3(2.0f, 2.0f, 2.0f);
+	scale = Size;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	forwardVec = Vector3::NegUnitX;
 	charaForwardVec = Vector3::NegUnitX;
@@ -31,7 +31,6 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	isDeadFlag = false;
 	isAttack = false;
 	isPushBackToPlayer = true;
-	isOtherEnemyHit = false;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -65,11 +64,11 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	statePools.push_back(new TrackingEnemyStateIdle);
 	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
+	statePools.push_back(new TrackingEnemyStateAttack);
 	statePools.push_back(new TrackingEnemyStateMoving);
 	statePools.push_back(new TrackingEnemyStateTurn);
 	statePools.push_back(new TrackingEnemyStateTracking);
 	statePools.push_back(new TrackingEnemyStateReposition);
-	statePools.push_back(new TrackingEnemyStateAttack);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
@@ -78,7 +77,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
 	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this, _areaValue);
-	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
+	new TrackingEnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 
 	//Z軸を180度回転させる
 	float radian = Math::ToRadians(Angle);
@@ -126,7 +125,6 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	}
 
 	isTracking = false;
-	isOtherEnemyHit = false;
 	forwardVec = charaForwardVec;
 }
 

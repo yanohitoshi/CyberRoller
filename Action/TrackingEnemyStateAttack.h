@@ -37,8 +37,13 @@ public:
 
 private:
 
+	// 追跡対象のオブジェクトのポインタ
 	GameObject* trackingObject;
+	// 追跡する方向
 	Vector3 trackingRotationVec;
+	// 初期ポジション
 	Vector3 firstPosition;
+	// 攻撃時の移動速度
+	const float AttcakMoveSpeed;
 };
 

@@ -171,10 +171,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CrystalEffectManager.cpp" />
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyAttackArea.cpp" />
+    <ClCompile Include="TrackingEnemyAttackArea.cpp" />
     <ClCompile Include="EnemyElectricShockEffect.cpp" />
     <ClCompile Include="EnemyDeadEffectManager.cpp" />
     <ClCompile Include="EnemyExplosionEffect.cpp" />
     <ClCompile Include="EnemyObjectBase.cpp" />
+    <ClCompile Include="EnemyObjectStateAttack.cpp" />
     <ClCompile Include="EnemyObjectStateBase.cpp" />
     <ClCompile Include="EnemyObjectStateRespawn.cpp" />
     <ClCompile Include="JumpAttackEffect.cpp" />
@@ -350,10 +352,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CrystalEffectManager.h" />
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyAttackArea.h" />
+    <ClInclude Include="TrackingEnemyAttackArea.h" />
     <ClInclude Include="EnemyElectricShockEffect.h" />
     <ClInclude Include="EnemyDeadEffectManager.h" />
     <ClInclude Include="EnemyExplosionEffect.h" />
     <ClInclude Include="EnemyObjectBase.h" />
+    <ClInclude Include="EnemyObjectStateAttack.h" />
     <ClInclude Include="EnemyObjectStateBase.h" />
     <ClInclude Include="EnemyObjectStateRespawn.h" />
     <ClInclude Include="JumpAttackEffect.h" />

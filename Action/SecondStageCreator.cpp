@@ -252,7 +252,7 @@ void SecondStageCreator::CreateLayer2(int _indexX, int _indexY)
 		break;
 
 	case(61):
-		new NormalEnemyObject(layer2Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer2Pos, Tag::ENEMY, playerObject);
 		break;
 	}
 
@@ -438,11 +438,11 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(62):
-		new MoveEnemyObject(layer7Pos, Tag::ENEMY, 200.0f, Vector3::UnitY, 800.0f,MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::UnitY, 800.0f,MoveEnemyTag::RIGHT_MOVE);
 		break;
 
 	case(63):
-		new MoveEnemyObject(layer7Pos, Tag::ENEMY, 200.0f, Vector3::NegUnitY , 800.0f, MoveEnemyTag::LEFT_MOVE);
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::NegUnitY , 800.0f, MoveEnemyTag::LEFT_MOVE);
 		break;
 	}
 }

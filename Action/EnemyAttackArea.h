@@ -1,6 +1,5 @@
 #pragma once
 #include "GameObject.h"
-
 // クラスの前方宣言
 class SphereCollider;
 class EnemyObjectBase;
@@ -43,6 +42,7 @@ private:
 	SphereCollider* sphereCollider;
 	// 親となるクラスのポインタ
 	EnemyObjectBase* ownerEnemy;
+	GameObject* tmpObject;
 	// 攻撃エリアのサイズ
 	const float AttackArea;
 	int disableCount;

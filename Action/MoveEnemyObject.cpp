@@ -4,23 +4,26 @@
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
-#include "MoveEnemyObjectStateIdle.h"
 #include "EnemyObjectStateDead.h"
+#include "EnemyObjectStateAttack.h"
+#include "MoveEnemyObjectStateIdle.h"
 #include "MoveEnemyObjectStateMoving.h"
 #include "MoveEnemyObjectStateTurn.h"
+#include "EnemyAttackArea.h"
 #include "BoxCollider.h"
 
-MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
-	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _moveDir, _moveDistance, _moveEnemyTag)
+MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag,GameObject* _trackingObject , float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
+	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveSpeed, _moveDir, _moveDistance, _moveEnemyTag)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
-	scale = Vector3(2.0f, 2.0f, 2.0f);
+	scale = Size;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	forwardVec = Vector3::NegUnitX;
 	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
 
+	isAttack = false;
 	isDeadFlag = false;
 
 	//モデル描画用のコンポーネント
@@ -41,7 +44,8 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
 	// ターンアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
-
+	// 攻撃アニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Attack.gpanim", false);
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = { BoxMin,BoxMax };
@@ -52,6 +56,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	statePools.push_back(new MoveEnemyObjectStateIdle);
 	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
+	statePools.push_back(new EnemyObjectStateAttack);
 	statePools.push_back(new MoveEnemyObjectStateMoving);
 	statePools.push_back(new MoveEnemyObjectStateTurn);
 
@@ -61,6 +66,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, floa
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
+	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 }
 
 MoveEnemyObject::~MoveEnemyObject()
@@ -69,6 +75,10 @@ MoveEnemyObject::~MoveEnemyObject()
 
 void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 {
+	if (isAttack && !isDeadFlag)
+	{
+		nextState = EnemyState::ENEMY_STATE_ATTACK;
+	}
 
 	if (isDeadFlag)
 	{
@@ -92,6 +102,8 @@ void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
 		nowState = nextState;
 	}
+
+	isAttack = false;
 }
 
 void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)

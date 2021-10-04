@@ -13,24 +13,41 @@ class GameObject;
 */
 enum class PhysicsTag
 {
+	// 地面
 	GROUND_TAG,
+	// 動く地面
 	MOVE_GROUND_TAG,
+	// 壁
 	WALL_TAG,
+	// プレイヤー
 	PLAYER_TAG,
+	// ジャンプ攻撃中のプレイヤー
 	JUMP_ATTACK_PLAYER_TAG,
+	// スイッチ
 	SWITCH_TAG,
+	// スイッチの土台
 	SWITCH_BASE_TAG,
+	// ジャンプスイッチ
 	JUMP_SWITCH_TAG,
+	// 接地判定
 	GROUND_CHECK_TAG,
+	// 足元チェック
 	FOOT_CHECK_TAG,
-	SWITCH_CHECK_TAG,
+	// カメラ
 	CAMERA_TAG,
+	// クリア地点
 	CLEAR_POINT_TAG,
+	// 棘
 	NEEDLE_TAG,
+	// リスポーンポイント
 	RESPOWN_TAG,
+	// 敵
 	ENEMY_TAG,
+	// プレイヤーの攻撃エリア
 	ATTACK_RANGE_TAG,
+	// プレイヤーを敵が追跡するエリア
 	PLAYER_TRACKING_AREA_TAG,
+	// 敵の攻撃判定エリア
 	ENEMY_ATTACK_AREA_TAG
 };
 

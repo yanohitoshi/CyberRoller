@@ -1,4 +1,5 @@
 #include "PlayerTrackingArea.h"
+#include "EnemyObjectStateBase.h"
 #include "TrackingEnemyObject.h"
 #include "SphereCollider.h"
 
@@ -26,6 +27,12 @@ void PlayerTrackingArea::UpdateGameObject(float _deltaTime)
 
 void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	// リスポーン状態だったら返す
+	if (ownerEnemy->GetNowState() == EnemyState::ENEMY_STATE_RESPAWN)
+	{
+		return;
+	}
+
 	// プレイヤーを見つけたら
 	if (_hitObject.GetTag() == Tag::PLAYER)
 	{

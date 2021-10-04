@@ -480,6 +480,12 @@
     <ClCompile Include="EnemyElectricShockEffect.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyObjectStateAttack.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyAttackArea.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClCompile>
     <ClCompile Include="EnemyAttackArea.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
@@ -964,6 +970,12 @@
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="PlayerTrackingArea.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateAttack.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyAttackArea.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttackArea.h">

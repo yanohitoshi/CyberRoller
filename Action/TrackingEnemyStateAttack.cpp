@@ -1,6 +1,7 @@
 #include "TrackingEnemyStateAttack.h"
 
 TrackingEnemyStateAttack::TrackingEnemyStateAttack()
+	: AttcakMoveSpeed(100.0f)
 {
 }
 
@@ -22,10 +23,9 @@ EnemyState TrackingEnemyStateAttack::Update(EnemyObjectBase* _owner, float _delt
 		trackingRotationVec = trackingObject->GetPosition() - _owner->GetPosition();
 		trackingRotationVec.z = 0.0f;
 		trackingRotationVec.Normalize();
-		velocity = trackingRotationVec * moveSpeed;
+		velocity = trackingRotationVec * AttcakMoveSpeed;
 		// positionに速度を足してキャラクターを動かす
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-
 		RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
 	}
 

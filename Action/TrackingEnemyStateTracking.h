@@ -37,8 +37,13 @@ public:
 
 private:
 
+	// 追跡するオブジェクトのポインタ
 	GameObject* trackingObject;
+	// 追跡方向のベクトルの
 	Vector3 trackingRotationVec;
+	// 初期ポジション
 	Vector3 firstPosition;
+	// 追跡でどこまで近づくかの値
+	const float TrackingLengthValue;
 };
 

@@ -10,9 +10,6 @@ NormalEnemyObjectStateIdle::~NormalEnemyObjectStateIdle()
 
 EnemyState NormalEnemyObjectStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	// positionに速度を足してキャラクターを動かす
-	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-
 	if (_owner->GetIsDeadFlag())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;

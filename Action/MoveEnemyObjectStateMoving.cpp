@@ -11,9 +11,10 @@ MoveEnemyObjectStateMoving::~MoveEnemyObjectStateMoving()
 
 EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-
+	// 移動処理
 	Move(_owner, _deltaTime);
 
+	// 移動Tagを判別して振り返る場所に到達しているか判定
 	if (_owner->GetMoveEnemyTag() == MoveEnemyTag::RIGHT_MOVE)
 	{
 		if (_owner->GetPosition().y > firstPosition.y + moveDistance && moveDistance > 0.0f)
@@ -39,7 +40,7 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 		}
 	}
 
-
+	// 死亡していたら
 	if (_owner->GetIsDeadFlag())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
@@ -68,7 +69,6 @@ void MoveEnemyObjectStateMoving::Enter(EnemyObjectBase* _owner, float _deltaTime
 
 void MoveEnemyObjectStateMoving::Move(EnemyObjectBase* _owner, float _deltaTime)
 {
-	
 	velocity = moveDirection * moveSpeed;
 		
 	// positionに速度を足してキャラクターを動かす

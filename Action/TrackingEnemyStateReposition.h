@@ -36,8 +36,11 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
-
+	//初期ポジション
 	Vector3 firstPosition;
+	// 元のポジションに戻る際の方向
 	Vector3 repositionRotationVec;
+	// アイドリングへ移行する規定値
+	const float IdlingLength;
 };
 

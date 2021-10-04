@@ -36,7 +36,7 @@ public:
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject);
 
 	/*
 	@fn コンストラクタ
@@ -48,7 +48,7 @@ public:
 	@param	移動方向
 	@param	移動距離
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance, MoveEnemyTag _moveEnemyTag);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObjectfloat,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance, MoveEnemyTag _moveEnemyTag);
 
 	/*
 	@fn コンストラクタ
@@ -112,6 +112,8 @@ protected:
 	const Vector3 BoxMin;
 	// AABBの最大値
 	const Vector3 BoxMax;
+	// 大きさ
+	const Vector3 Size;
 
 
 	// 初期位置からリスポーンするポジションを計算するための間隔
@@ -129,8 +131,6 @@ protected:
 	bool isTracking;
 	// 攻撃モーション中か
 	bool isAttack;
-
-	bool isOtherEnemyHit;
 
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
@@ -248,12 +248,6 @@ public:// ゲッターセッター
 	bool GetIsTracking() { return isTracking; }
 
 	/*
-	@fn isOtherEnemyHitのGettrer関数
-	@return	bool isOtherEnemyHit 追跡するオブジェクトを捉えているかを返す
-	*/
-	bool GetIsOtherEnemyHit() { return isOtherEnemyHit; }
-
-	/*
 	@fn nowStateのgetter関数
 	@return EnemyState nowState 現在のステータスを返す
 	*/
@@ -264,6 +258,12 @@ public:// ゲッターセッター
 	@return MoveEnemyTag moveEnemyTag 移動方向を指すTagを返す
 	*/
 	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
+
+	/*
+	@fn trackingObjectのgetter関数
+	@param 追跡するオブジェクトのポインタをセット
+	*/
+	void SetTrackingObject(GameObject* _trackingObject) { trackingObject = _trackingObject; }
 
 	/*
 	@fn charaForwardVecのsetter関数

@@ -19,7 +19,7 @@ public:
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	*/
-	NormalEnemyObject(const Vector3& _pos, const Tag _objectTag);
+	NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject);
 
 	/*
 	@fn デストラクタ

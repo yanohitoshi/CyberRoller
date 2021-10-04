@@ -256,11 +256,11 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
 		break;
 	case(61):
-		new NormalEnemyObject(layer5Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
 		break;
 
 	case(62):
-		new MoveEnemyObject(layer5Pos, Tag::ENEMY, 100.0f, Vector3::UnitY, 400.0f,MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, 100.0f, Vector3::UnitY, 400.0f,MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
 }

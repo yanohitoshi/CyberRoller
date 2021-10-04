@@ -5,20 +5,24 @@
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
 #include "EnemyObjectStateDead.h"
+#include "EnemyObjectStateAttack.h"
 #include "NormalEnemyObjectStateIdle.h"
+#include "EnemyAttackArea.h"
 #include "BoxCollider.h"
 
-NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
-	: EnemyObjectBase(_pos, false , _objectTag)
+NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject)
+	: EnemyObjectBase(_pos, false , _objectTag, _trackingObject)
 	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
-	scale = Vector3(2.0f, 2.0f, 2.0f);
+	scale = Size;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	forwardVec = Vector3::NegUnitX;
+	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
 
+	isAttack = false;
 	isDeadFlag = false;
 
 	//モデル描画用のコンポーネント
@@ -37,7 +41,8 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Idle.gpanim", true);
 	// 死亡時のアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
-
+	// 攻撃アニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Attack.gpanim", false);
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = { BoxMin,BoxMax };
@@ -48,12 +53,16 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	statePools.push_back(new NormalEnemyObjectStateIdle);
 	statePools.push_back(new EnemyObjectStateDead);
 	statePools.push_back(new EnemyObjectStateRespawn);
-
+	statePools.push_back(new EnemyObjectStateAttack);
+	
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
+
 	// stateの初期化
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
+
+	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 
 	//Z軸を180度回転させる
 	float radian = Math::ToRadians(Angle);
@@ -69,6 +78,10 @@ NormalEnemyObject::~NormalEnemyObject()
 
 void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 {
+	if (isAttack && !isDeadFlag)
+	{
+		nextState = EnemyState::ENEMY_STATE_ATTACK;
+	}
 
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
@@ -87,6 +100,8 @@ void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
 		nowState = nextState;
 	}
+
+	isAttack = false;
 }
 
 void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)

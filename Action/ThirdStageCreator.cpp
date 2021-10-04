@@ -468,7 +468,7 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	case(61):
-		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
 		break;
 	}
 }
@@ -560,7 +560,7 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 		break;
 
 	case(61):
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
 		break;
 	}
 }
@@ -626,10 +626,10 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		break;
 	case(61):
-		new NormalEnemyObject(layer11Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer11Pos, Tag::ENEMY, playerObject);
 		break;
 	case(62):
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, Vector3::UnitY, 1000.0f, MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::UnitY, 1000.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
 }
@@ -741,7 +741,7 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		break;
 
 	case(61):
-		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
+		new NormalEnemyObject(layer14Pos, Tag::ENEMY, playerObject);
 		break;
 
 	case(65):

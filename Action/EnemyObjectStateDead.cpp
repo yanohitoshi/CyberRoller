@@ -31,7 +31,6 @@ void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_DEAD));
 	// state‚ð‘Ò‹@ó‘Ô‚É‚µ‚Ä•Û‘¶
 	state = EnemyState::ENEMY_STATE_DEAD;
-
 	_owner->SetState(State::Disabling);
 	frameCount = 0;
 }

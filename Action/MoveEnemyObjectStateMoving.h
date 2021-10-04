@@ -40,9 +40,18 @@ public:
 
 private:
 
+	/*
+	@fn 移動処理関数
+	@param	_owner 親クラスのポインタ
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
 	void Move(EnemyObjectBase* _owner, float _deltaTime);
+
+	// 移動方向
 	Vector3 moveDirection;
+	// 移動間隔
 	float moveDistance;
+	// 初期ポジション
 	Vector3 firstPosition;
 
 };

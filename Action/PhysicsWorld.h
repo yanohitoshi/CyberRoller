@@ -125,7 +125,6 @@ private:
 
 	//それぞれのsphereごとのAABBの可変長配列
 	std::vector<SphereCollider*> groundCheckSpheres;
-	std::vector<SphereCollider*> switchCheckSpheres;
 	std::vector<SphereCollider*> attackRangeSpheres;
 	std::vector<SphereCollider*> jumpAttackPlayerSpheres;
 	std::vector<SphereCollider*> playerTrackingAreaSpheres;
