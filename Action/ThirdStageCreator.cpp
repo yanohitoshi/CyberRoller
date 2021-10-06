@@ -14,6 +14,7 @@
 #include "MoveBlockObject.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
+#include "EnemyObjectBase.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "TrackingEnemyObject.h"
@@ -418,13 +419,17 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 
 	case(THIRD_STAGE_FRONT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 300.0f, MoveDirectionTag::MOVE_X);
 		// 動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1200.0f, 0.0f, 0.0f), Vector3::UnitX, 300.0f, MoveDirectionTag::MOVE_X);
+		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(THIRD_STAGE_BACK_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(-800.0f, 0.0f, 0.0f), Vector3::NegUnitX, 300.0f, MoveDirectionTag::MOVE_X);
 		// 動く床を生成
-		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-800.0f, 0.0f, 0.0f), Vector3::NegUnitX, 300.0f, MoveDirectionTag::MOVE_X);
+		new MoveBlockObject(layer5Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -482,7 +487,10 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 		break;
 
 	case(THIRD_STAGE_LEFT_MOVE_GROUND):
-		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 300.0f, MoveDirectionTag::MOVE_Y);
+		// 移動する床を生成
+		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(TRACKING_ENEMY_PARTS):
@@ -490,8 +498,10 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_PUSH_BOX):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		new PushBoxObject(layer6Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 	}
 }
@@ -534,8 +544,10 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(THIRD_STAGE_RIGHT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
 		// 動く床の生成
-		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 300.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer7Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(NORMAL_ENEMY_PARTS):
@@ -726,8 +738,10 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(THIRD_STAGE_BACK_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		// 動く床を生成
-		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
+		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(NORMAL_ENEMY_PARTS):
@@ -736,8 +750,10 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵固有のデータ構造体をセット
+		SetMoveEnemyData(600.0f, Vector3::UnitY, 1000.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵の生成
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::UnitY, 1000.0f, MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 	}
 }
@@ -863,8 +879,10 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		break;
 
 	case(THIRD_STAGE_FRONT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
 		// 移動床を生成
-		new MoveBlockObject(layer14Pos, BlockSize, Tag::MOVE_GROUND, Vector3(1600.0f, 0.0f, 0.0f), Vector3::UnitX, 600.0f, MoveDirectionTag::MOVE_X);
+		new MoveBlockObject(layer14Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(SECOND_MOVE_WALL_PARTS):

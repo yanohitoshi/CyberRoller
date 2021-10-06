@@ -20,6 +20,16 @@ enum class MoveEnemyTag
 	RIGHT_MOVE,
 };
 
+
+struct MoveEnemyData
+{
+	MoveEnemyTag tag;
+	Vector3 direction;
+	float distance;
+	float speed;
+};
+
+
 /*
 @file EnemyObjectBase.h
 @brief 敵オブジェクトの基底クラス
@@ -48,7 +58,7 @@ public:
 	@param	移動方向
 	@param	移動距離
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObjectfloat,float _moveSpeed,const Vector3& _moveDirection, float _moveDistance, MoveEnemyTag _moveEnemyTag);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObjectfloat, MoveEnemyData _moveEnemyData);
 
 	/*
 	@fn コンストラクタ

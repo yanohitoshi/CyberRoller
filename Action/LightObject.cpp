@@ -6,33 +6,35 @@
 
 LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, bool _isRight)
 	: GameObject(false, _objectTag)
+	, ShiftPositionX(195.0f)
+	, ShiftRightPositionY(50.0f)
+	, ShiftLeftPositionY(200.0f)
+	, ShiftPositionZ(110.0f)
 {
 	//GameObjectメンバ変数の初期化
 	position = _p;
-	position.x += 195.0f;
-	position.z -= 110.0f;
+	position.x += ShiftPositionX;
+	position.z -= ShiftPositionZ;
 
+	// 右側に寄せるか左側に寄せるか判定を取りポジションをずらす
 	if (_isRight)
 	{
-		position.y += 50.0f;
+		position.y += ShiftRightPositionY;
 	}
 	else
 	{
-		position.y -= 200.0f;
+		position.y -= ShiftLeftPositionY;
 	}
 
 	SetPosition(position);
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
-	//isPushBackToPlayer = true;
-	//isChackGroundToPlayer = true;
-	//isPushBackToCamera = true;
+
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
-
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/light/PowerCells/SM_PowerCells_Floor.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"));
 }
 
 LightObject::~LightObject()

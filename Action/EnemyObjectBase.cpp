@@ -18,14 +18,14 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	new EnemyDeadEffectManager(this);
 }
 
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 	, trackingObject(_trackingObject)
-	, moveDirection(_moveDir)
-	, moveDistance(_moveDistance)
-	, moveSpeed(_moveSpeed)
-	, moveEnemyTag(_moveEnemyTag)
+	, moveDirection(_moveEnemyData.direction)
+	, moveDistance(_moveEnemyData.distance)
+	, moveSpeed(_moveEnemyData.speed)
+	, moveEnemyTag(_moveEnemyData.tag)
 	, respawnPositionOffset(1600.0f)
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {

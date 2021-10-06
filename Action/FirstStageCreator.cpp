@@ -15,7 +15,7 @@
 #include "SwitchBaseObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
-#include "TrackingEnemyObject.h"
+#include "EnemyObjectBase.h"
 #include "LightObject.h"
 
 /*
@@ -298,8 +298,10 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵固有のデータ構造体をセット
+		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵を生成
-		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, 100.0f, Vector3::UnitY, 400.0f,MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
 	}

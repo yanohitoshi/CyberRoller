@@ -8,8 +8,8 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
-MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag,const Vector3& _distance, const Vector3& _direction, const float& _speed, MoveDirectionTag _moveTag) :
-	GameObject(false, _objectTag)
+MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data)
+	:GameObject(false, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
 	SetPosition(_p);
@@ -17,10 +17,10 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	tag = _objectTag;
 	state = Active;
 	initPos = _p;
-	goalPos = initPos + _distance;
-	direction = _direction;
-	moveSpeed = _speed;
-	moveTag = _moveTag;
+	goalPos = initPos + _data.distance;
+	direction = _data.direction;
+	moveSpeed = _data.speed;
+	moveTag = _data.tag;
 	inversionFlag = false;
 	isPushBackToPlayer = true;
 	isSendVelocityToPlayer = true;
@@ -36,7 +36,6 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::MOVE_GROUND_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
-
 }
 
 MoveBlockObject::~MoveBlockObject()

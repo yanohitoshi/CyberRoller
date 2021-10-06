@@ -40,8 +40,9 @@ public:
 
 private:
 
-	// 3Dモデルの描画を行うクラス
+	// Meshを管理するクラス
 	Mesh* mesh;
+	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 
 	// 当たり判定を行うクラス

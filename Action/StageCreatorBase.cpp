@@ -3,6 +3,9 @@
 //-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 #include "PlayerObject.h"
+#include "MoveBlockObject.h"
+#include "EnemyObjectBase.h"
+#include "PushBoxObject.h"
 
 StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
@@ -154,6 +157,32 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 
 	}
 
+}
+
+void StageCreatorBase::SetMoveBlockData(const Vector3 _distance, const Vector3 _direction, const float _speed, MoveDirectionTag _moveTag)
+{
+	moveBlockData.distance = _distance;
+	moveBlockData.direction = _direction;
+	moveBlockData.speed = _speed;
+	moveBlockData.tag = _moveTag;
+
+}
+
+void StageCreatorBase::SetPushBoxData(const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag)
+{
+	pushBoxData.distance = _distance;
+	pushBoxData.direction = _direction;
+	pushBoxData.speed = _speed;
+	pushBoxData.cutBackSpeed = _cutBackSpeed;
+	pushBoxData.tag = _moveTag;
+}
+
+void StageCreatorBase::SetMoveEnemyData(const float _speed, const Vector3 _direction, const float _distance, MoveEnemyTag _moveTag)
+{
+	moveEnemyData.direction = _direction;
+	moveEnemyData.distance = _distance;
+	moveEnemyData.speed = _speed;
+	moveEnemyData.tag = _moveTag;
 }
 
 

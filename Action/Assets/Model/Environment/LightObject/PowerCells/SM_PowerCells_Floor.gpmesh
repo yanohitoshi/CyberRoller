@@ -3,12 +3,12 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/Environment/light/PowerCells/T_PowerCells_Diff1.png"
+		"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Diff1.png"
 	],
-	"diffusemap":"Assets/Model/Environment/light/PowerCells/T_PowerCells_Diff1.png",
-	"nomalmap":"Assets/Model/Environment/light/PowerCells/T_PowerCells_Norm.png",
-    "specularmap":"Assets/Model/Environment/light/PowerCells/T_PowerCells_Rough.png",
-    "emissivemap":"Assets/Model/Environment/light/PowerCells/T_PowerCells_Emissive.png",
+	"diffusemap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Diff1.png",
+	"nomalmap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Norm.png",
+    "specularmap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Rough.png",
+    "emissivemap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Emissive.png",
 	"specularPower":100.0,
     "luminance":"1.0",
 	"vertices":[

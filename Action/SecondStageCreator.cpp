@@ -13,6 +13,7 @@
 #include "NeedlePanelObject.h"
 #include "MoveBlockObject.h"
 #include "SwitchBaseObject.h"
+#include "EnemyObjectBase.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "TrackingEnemyObject.h"
@@ -341,8 +342,10 @@ void SecondStageCreator::CreateLayer4(int _indexX, int _indexY)
 		break;
 
 	case(SECOND_STAGE_RIGHT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(0.0f, 1600.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
 		// 動く床を生成
-		new MoveBlockObject(layer4Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 1600.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer4Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 	}
 }
@@ -450,13 +453,17 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 		break;
 
 	case(SECOND_STAGE_RIGHT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
 		// 動く床を生成
-		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 200.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(SECOND_STAGE_LEFT_MOVE_GROUND):
+		// 移動する床にのみ使うデータ構造体を作成
+		SetMoveBlockData(Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 350.0f, MoveDirectionTag::MOVE_Y);
 		// 動く床を生成
-		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -800.0f, 0.0f), Vector3::NegUnitY, 350.0f, MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -484,7 +491,7 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(LIGHT_BLOCK_PARTS):
-		// 光付きブロックオブジェクト生成
+		// ライト付きブロックオブジェクト生成
 		new GroundObject(layer7Pos, BlockSize, Tag::GROUND, true);
 		break;
 
@@ -504,13 +511,17 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵固有のデータ構造体をセット
+		SetMoveEnemyData(200.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵の生成
-		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::UnitY, 800.0f,MoveEnemyTag::RIGHT_MOVE);
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵固有のデータ構造体をセット
+		SetMoveEnemyData(200.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
 		// 左右に動く敵の生成
-		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::NegUnitY , 800.0f, MoveEnemyTag::LEFT_MOVE);
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 	}
 }
@@ -533,7 +544,7 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 		break;
 
 	case(LIGHT_BLOCK_PARTS):
-		// 光付きブロックオブジェクト生成
+		// ライト付きブロックオブジェクト生成
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND, true);
 		break;
 
@@ -585,7 +596,7 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 		break;
 
 	case(LIGHT_BLOCK_PARTS):
-		// 光付きブロックオブジェクト生成
+		// ライト付きブロックオブジェクト生成
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
@@ -607,7 +618,7 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 		break;
 
 	case(LIGHT_BLOCK_PARTS):
-		// 光付きブロックオブジェクト生成
+		// ライト付きブロックオブジェクト生成
 		new GroundObject(layer10Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}

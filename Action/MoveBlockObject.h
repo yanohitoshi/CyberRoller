@@ -9,6 +9,14 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+struct MoveBlockData
+{
+	MoveDirectionTag tag;
+	Vector3 direction;
+	Vector3 distance;
+	float speed;
+};
+
 /*
 @file MoveBlockObject.h
 @brief MoveBlockObjectの生成と更新を行う
@@ -24,12 +32,9 @@ public:
 	@param	ポジション
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
-	@param  どれくらいの距離動くのか
-	@param　どの方向に動くのか
-	@param　速度
-	@param　どの方向に動くのか判別するためのタグ
+	@param  動く床に必要なデータ構造体
 	*/
-	MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Vector3& _distance, const Vector3& _direction,const float& _speed,MoveDirectionTag _moveTag);
+	MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data);
 
 	/*
 	@fn デストラクタ

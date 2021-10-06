@@ -6,10 +6,14 @@
 #include "RapidJsonHelper.h"
 #include <vector>
 #include <unordered_map>
+#include "MoveBlockObject.h"
+#include "EnemyObjectBase.h"
+#include "PushBoxObject.h"
 
 // 前置宣言
 class PlayerObject;
 class MoveWallBlock;
+
 
 enum StagePartsName
 {
@@ -147,6 +151,42 @@ protected:
 	@param	_indexY 検索するマップデータの添え字Y
 	*/
 	void ProductionPlayer(int _data, int _indexX, int _indexY);
+
+	/*
+	@fn 動く床のデータ構造体を生成する関数
+	@param  どれくらいの距離動くのか
+	@param　どの方向に動くのか
+	@param　速度
+	@param　どの方向に動くのか判別するためのタグ
+	*/
+	void SetMoveBlockData(const Vector3 _distance, const Vector3 _direction, const float _speed, MoveDirectionTag _moveTag);
+	
+
+	// 動く床クラスにデータを渡すための変数
+	MoveBlockData moveBlockData;
+
+	/*
+	@fn プッシュボードのデータ構造体を生成する関数
+	@param  どれくらいの距離動くのか
+	@param　どの方向に動くのか
+	@param　速度
+	@param　どの方向に動くのか判別するためのタグ
+	*/
+	void SetPushBoxData(const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag);
+	// プッシュボード床クラスにデータを渡すための変数
+	PushBoxData pushBoxData;
+
+	/*
+	@fn 動く敵のデータ構造体を生成する関数
+	@param　速度
+	@param　どの方向に動くのか
+	@param  どれくらいの距離動くのか
+	@param　どの方向に動くのか判別するためのタグ
+	*/
+	void SetMoveEnemyData(const float _speed, const Vector3 _direction, const float _distance, MoveEnemyTag _moveTag);
+	
+	// 動く敵クラスにデータを渡すための変数
+	MoveEnemyData moveEnemyData;
 
 	// プレイヤーを見たいclassにプレイヤーのポインタを渡すための変数
 	PlayerObject* playerObject;

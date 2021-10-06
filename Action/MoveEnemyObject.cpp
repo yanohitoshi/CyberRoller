@@ -12,8 +12,65 @@
 #include "EnemyAttackArea.h"
 #include "BoxCollider.h"
 
-MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag,GameObject* _trackingObject , float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
-	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveSpeed, _moveDir, _moveDistance, _moveEnemyTag)
+//MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag,GameObject* _trackingObject , float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag)
+//	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveSpeed, _moveDir, _moveDistance, _moveEnemyTag)
+//{
+//	//GameObjectメンバ変数の初期化
+//	state = Active;
+//	scale = Size;
+//	velocity = Vector3(0.0f, 0.0f, 0.0f);
+//	forwardVec = Vector3::NegUnitX;
+//	charaForwardVec = Vector3::NegUnitX;
+//	SetScale(scale);
+//
+//	isAttack = false;
+//	isDeadFlag = false;
+//
+//	//モデル描画用のコンポーネント
+//	skeltalMeshComponent = new SkeletalMeshComponent(this);
+//	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
+//	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Enemy/EnemyModel/SK_Dron_01.gpmesh"));
+//	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
+//	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/Enemy/EnemyModel/SK_Dron_01.gpskel"));
+//
+//	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
+//	//アニメ―ション用の可変長配列をリサイズ
+//	animTypes.resize(static_cast<unsigned int>(EnemyState::ENEMY_STATE_NUM));
+//
+//	//-----------アニメーションを読み込み-----------------//
+//	// アイドリングアニメーション
+//	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Idle.gpanim", true);
+//	// 死亡時のアニメーション
+//	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
+//	// ターンアニメーション
+//	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
+//	// 攻撃アニメーション
+//	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Attack.gpanim", false);
+//	//当たり判定用のコンポーネント
+//	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
+//	enemyBox = { BoxMin,BoxMax };
+//	boxCollider->SetObjectBox(enemyBox);
+//
+//	// stateプールの初期化
+//	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
+//	statePools.push_back(new MoveEnemyObjectStateIdle);
+//	statePools.push_back(new EnemyObjectStateDead);
+//	statePools.push_back(new EnemyObjectStateRespawn);
+//	statePools.push_back(new EnemyObjectStateAttack);
+//	statePools.push_back(new MoveEnemyObjectStateMoving);
+//	statePools.push_back(new MoveEnemyObjectStateTurn);
+//
+//	//anim変数を速度1.0fで再生
+//	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
+//	// stateの初期化
+//	nowState = EnemyState::ENEMY_STATE_IDLE;
+//	nextState = EnemyState::ENEMY_STATE_IDLE;
+//
+//	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
+//}
+
+MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
+	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveEnemyData)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
