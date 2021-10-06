@@ -58,7 +58,7 @@ Renderer::Renderer()
 	, LightProjectionFar(20000.0f)
 	, ShiftLightPositionZ(7000.0f)
 	, ShiftLightPositionX(500.0f)
-	, MaxTimeFontTextures(2000)
+	, MaxTimeFontTextures(501)
 	, TimeFontSize(72)
 {
 }

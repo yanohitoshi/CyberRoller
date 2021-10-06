@@ -7,7 +7,6 @@
 #include "GameObject.h"
 #include "Renderer.h"
 #include "TitleStageCreator.h"
-#include "BoxObject.h"
 #include "SkyBoxObject.h"
 
 TitleScene::TitleScene()

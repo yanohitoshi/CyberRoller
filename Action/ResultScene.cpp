@@ -7,7 +7,6 @@
 #include "GameObject.h"
 #include "Renderer.h"
 #include "ResultSceneCreator.h"
-#include "BoxObject.h"
 #include "SkyBoxObject.h"
 
 ResultScene::ResultScene()

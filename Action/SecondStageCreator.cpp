@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "SecondStageCreator.h"
-#include "BoxObject.h"
+#include "GroundObject.h"
 #include "SwitchBlock.h"
 #include "JumpSwitchObject.h"
 #include "WallBlockObject.h"
@@ -16,6 +16,7 @@
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "TrackingEnemyObject.h"
+#include "LightObject.h"
 
 /*
    @fn コンストラクタ
@@ -218,7 +219,12 @@ void SecondStageCreator::CreateLayer1(int _indexX, int _indexY)
 	{
 	case(LAYER1_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer1Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付ブロックオブジェクト生成
+		new GroundObject(layer1Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 
@@ -238,7 +244,22 @@ void SecondStageCreator::CreateLayer2(int _indexX, int _indexY)
 	{
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer2Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -251,7 +272,8 @@ void SecondStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(61):
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
 		new NormalEnemyObject(layer2Pos, Tag::ENEMY, playerObject);
 		break;
 	}
@@ -272,7 +294,12 @@ void SecondStageCreator::CreateLayer3(int _indexX, int _indexY)
 	{
 	case(LAYER3_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -301,7 +328,11 @@ void SecondStageCreator::CreateLayer4(int _indexX, int _indexY)
 	{
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer4Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -330,7 +361,22 @@ void SecondStageCreator::CreateLayer5(int _indexX, int _indexY)
 	{
 	case(LAYER5_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer5Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer5Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer5Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -364,7 +410,22 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 	{
 	case(LAYER6_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer6Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer6Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -419,7 +480,12 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 	{
 	case(LAYER7_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer7Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer7Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer7Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -437,11 +503,13 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new RespawnPoint(layer7Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(62):
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵の生成
 		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::UnitY, 800.0f,MoveEnemyTag::RIGHT_MOVE);
 		break;
 
-	case(63):
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵の生成
 		new MoveEnemyObject(layer7Pos, Tag::ENEMY, playerObject, 200.0f, Vector3::NegUnitY , 800.0f, MoveEnemyTag::LEFT_MOVE);
 		break;
 	}
@@ -461,7 +529,22 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 	{
 	case(LAYER8_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer8Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer8Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -480,7 +563,7 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - SmallMoveWallSize.z));
 		break;
 
-	case(65):
+	case(TRACKING_ENEMY_PARTS):
 		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
 	}
@@ -498,7 +581,12 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 	{
 	case(LAYER9_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer9Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer9Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }
@@ -515,7 +603,12 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 	{
 	case(LAYER10_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer10Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer10Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }
@@ -532,7 +625,17 @@ void SecondStageCreator::CreateLayer11(int _indexX, int _indexY)
 	{
 	case(LAYER11_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer11Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成

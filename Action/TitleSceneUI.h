@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class SpriteComponent;
+class SkyBoxObject;
 
 /*
 @file TitleUI.h
@@ -38,5 +39,6 @@ private:
 
     // タイトル画像表示用sprite
     SpriteComponent* sprite;
+    SkyBoxObject* skyBox;
 };
 

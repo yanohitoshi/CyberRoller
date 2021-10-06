@@ -2,14 +2,14 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "BoxObject.h"
+#include "GroundObject.h"
 
 /*
 @file TitleGroundObject.h
 @brief TitleGroundObjectの生成と更新を行う
 */
 class TitleGroundObject :
-    public BoxObject
+    public GroundObject
 {
 public:
 

@@ -33,6 +33,9 @@ enum StagePartsName
 	SECOND_SWITCH_PARTS = 22,
 	// 第三区画のスイッチパーツ
 	THIRD_SWITCH_PARTS = 23,
+	
+	POWERCELLS_LIGHT_PARTS_RIGHT = 36,
+	POWERCELLS_LIGHT_PARTS_LEFT = 37,
 
 	// ジャンプスイッチパーツ
 	JUMP_SWITCH_PARTS = 40,
@@ -44,11 +47,21 @@ enum StagePartsName
 	// 第三区画の動く壁パーツ
 	THIRD_MOVE_WALL_PARTS = 43,
 
+	// 動かない敵
+	NORMAL_ENEMY_PARTS = 61,
+	// 最初右方向に移動する敵
+	RIGHT_MOVE_ENEMY_PARTS = 62,
+	// 最初左方向に移動する敵
+	LEFT_MOVE_ENEMY_PARTS = 63,
+	// 追跡する敵
+	TRACKING_ENEMY_PARTS = 65,
+
 	// プレイヤー
 	PLAYER_PARTS = 19,
 
 	// レイヤーごとのブロックパーツ名
 	// ※Tiled Map Editorを使用してJSONファイルを制作する際にレイヤー別にブロックのタイルマップの色を変えているため
+	LIGHT_BLOCK_PARTS = 80, // ライト付きblock
 	LAYER1_BLOCK_PARTS = 79, // レイヤー1
 	LAYER2_BLOCK_PARTS = 78, // レイヤー2
 	LAYER3_BLOCK_PARTS = 77, // レイヤー3
@@ -181,6 +194,9 @@ protected:
 
 	// 小さい動く壁オブジェクトのサイズ定数
 	const Vector3 SmallMoveWallSize;
+
+	// 
+	const Vector3 LightObjectSize;
 
 	// リスポーンポイントオブジェクトの当たり判定サイズ（AABB）定数
 	const AABB RespawnBox;

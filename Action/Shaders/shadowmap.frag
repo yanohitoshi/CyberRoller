@@ -62,16 +62,19 @@ void main()
 
 	vec3 result = ( 1.0 - shadow ) * (diffuseColor + Specular)  + ambientColor;
 
-    float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
+    //float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
 
-    if(brightness > 0.3)
-    {
-        HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
-    }
-    else
-    {
-        HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) ;
-    }
+    //if(brightness > 0.3)
+    //{
+    //    HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
+    //}
+    //else
+    //{
+    //    HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) ;
+    //}
+
+    HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
+
     HDRBuffer = vec4(result, 0.0);
 }
 

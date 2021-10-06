@@ -3,12 +3,12 @@
 	"vertexformat":"PosNormSkinTex",
 	"shader":"Skinned",
 	"textures":[
-		"Assets/Model/Enemy/EnemyTexture/SK_Dron_01.bmp"
+		"Assets/Model/Enemy/EnemyTexture/SK_Dron_01.png"
 	],
-	"diffusemap":"Assets/Model/Enemy/EnemyTexture/SK_Dron_01.bmp",
-	"nomalmap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_normal_map.bmp",
-    "specularmap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_metallic.bmp",
-    "emissivemap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_emissive.bmp",
+	"diffusemap":"Assets/Model/Enemy/EnemyTexture/SK_Dron_01.png",
+	"nomalmap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_normal_map.png",
+    "specularmap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_metallic.png",
+    "emissivemap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_emissive.png",
 	"specularPower":100.0,
     "luminance":"30.0",
 	"vertices":[

@@ -153,7 +153,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="GroundObject.cpp" />
     <ClCompile Include="CameraObjectBase.cpp" />
     <ClCompile Include="ChangeColorMeshComponent.cpp" />
     <ClCompile Include="ClearPointObject.cpp" />
@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CrystalEffectManager.cpp" />
     <ClCompile Include="CubeMapComponent.cpp" />
     <ClCompile Include="EnemyAttackArea.cpp" />
+    <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="TrackingEnemyAttackArea.cpp" />
     <ClCompile Include="EnemyElectricShockEffect.cpp" />
     <ClCompile Include="EnemyDeadEffectManager.cpp" />
@@ -334,7 +335,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="GroundObject.h" />
     <ClInclude Include="CameraObjectBase.h" />
     <ClInclude Include="ChangeColorMeshComponent.h" />
     <ClInclude Include="ClearPointObject.h" />
@@ -352,6 +353,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CrystalEffectManager.h" />
     <ClInclude Include="CubeMapComponent.h" />
     <ClInclude Include="EnemyAttackArea.h" />
+    <ClInclude Include="LightObject.h" />
     <ClInclude Include="TrackingEnemyAttackArea.h" />
     <ClInclude Include="EnemyElectricShockEffect.h" />
     <ClInclude Include="EnemyDeadEffectManager.h" />

@@ -35,6 +35,5 @@ public:
 
 private:
 
-	class SkyBoxObject* skyBox;
 };
 

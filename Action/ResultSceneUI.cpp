@@ -3,14 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "ResultSceneUI.h"
 #include "Renderer.h"
-#include "ThankYouSprite.h"
 #include "SkyBoxObject.h"
 
 ResultSceneUI::ResultSceneUI()
 	: GameObject(false, UI)
 {
-	//// ƒNƒŠƒAŽž‚ÌspriteUI
-	//new ThankYouSprite();
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 

@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FirstStageCreator.h"
-#include "BoxObject.h"
+#include "GroundObject.h"
 #include "SwitchBlock.h"
 #include "JumpSwitchObject.h"
 #include "WallBlockObject.h"
@@ -16,6 +16,7 @@
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "TrackingEnemyObject.h"
+#include "LightObject.h"
 
 /*
    @fn コンストラクタ
@@ -144,7 +145,7 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 	{
 	case(LAYER1_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer1Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
 	}
 
@@ -164,7 +165,22 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 	{
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer2Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND,true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND,true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -194,7 +210,12 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 	{
 	case(LAYER3_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 
@@ -212,7 +233,12 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 	{
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer4Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -235,19 +261,14 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (layer5)
 	{
-	case(FIRST_SWITCH_PARTS):
-		// 第一区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, true);
 		break;
 
-	case(RESPOWN_POINT_PARTS):
-		// リスポーンポイントオブジェクト生成
-		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
-		break;
-
-	case(CLEAR_OBJECT_PARTS):
-		// ステージクリアオブジェクト生成
-		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_MOVE_WALL_PARTS):
@@ -255,13 +276,32 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		lastMoveWallBlock = new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
 		break;
-	case(61):
+
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
+		break;
+
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵を生成
 		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
 		break;
 
-	case(62):
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵を生成
 		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, 100.0f, Vector3::UnitY, 400.0f,MoveEnemyTag::RIGHT_MOVE);
 		break;
+
 	}
 }
 

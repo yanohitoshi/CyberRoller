@@ -204,9 +204,6 @@
     <ClCompile Include="SwitchParticleEffect.cpp">
       <Filter>GameObjects\Effect\SwitchEffect</Filter>
     </ClCompile>
-    <ClCompile Include="BoxObject.cpp">
-      <Filter>GameObjects\StageObjects\GroundObject</Filter>
-    </ClCompile>
     <ClCompile Include="MoveBlockObject.cpp">
       <Filter>GameObjects\StageObjects\GroundObject</Filter>
     </ClCompile>
@@ -489,6 +486,12 @@
     <ClCompile Include="EnemyAttackArea.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
+    <ClCompile Include="GroundObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="LightObject.cpp">
+      <Filter>GameObjects\StageObjects\LightObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -701,9 +704,6 @@
     </ClInclude>
     <ClInclude Include="SwitchParticleEffect.h">
       <Filter>GameObjects\Effect\SwitchEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxObject.h">
-      <Filter>GameObjects\StageObjects\GroundObject</Filter>
     </ClInclude>
     <ClInclude Include="MoveBlockObject.h">
       <Filter>GameObjects\StageObjects\GroundObject</Filter>
@@ -981,6 +981,12 @@
     <ClInclude Include="EnemyAttackArea.h">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
+    <ClInclude Include="GroundObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="LightObject.h">
+      <Filter>GameObjects\StageObjects\LightObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1150,6 +1156,9 @@
     </Filter>
     <Filter Include="GameObjects\Effect\PlayerEffect\KnockBack">
       <UniqueIdentifier>{abd46c73-a05f-43c2-b9c3-52380e54bbc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\LightObject">
+      <UniqueIdentifier>{5d245898-d1b0-4c2f-963d-cb0e78cc573f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

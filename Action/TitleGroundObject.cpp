@@ -8,7 +8,7 @@
 #include "Renderer.h"
 
 TitleGroundObject::TitleGroundObject(const Vector3& _p, const Vector3& _size, const Vector3& _playerPos, const Tag& _objectTag) :
-	BoxObject(_p ,_size , _objectTag)
+	GroundObject(_p ,_size , _objectTag)
 	, targetPos(_playerPos)
 	, InitVelocity(Vector3(0.0f, -400.0f, 0.0f))
 	, ShiftGoalAndInitPosition(1000.0f)

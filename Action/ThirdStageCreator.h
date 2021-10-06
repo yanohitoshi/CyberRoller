@@ -50,6 +50,7 @@ private:
 	enum ThirdStagePushBoxNumber
 	{
 		FRONT_PUSH_BOX = 7,
+		RIGHT_PUSH_BOX = 44,
 	};
 
 	// “®‚­°‚Ìƒiƒ“ƒo[—ñ‹“

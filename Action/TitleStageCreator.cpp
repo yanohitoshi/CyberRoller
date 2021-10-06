@@ -2,7 +2,6 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TitleStageCreator.h"
-#include "BoxObject.h"
 #include "SwitchBlock.h"
 #include "JumpSwitchObject.h"
 #include "WallBlockObject.h"

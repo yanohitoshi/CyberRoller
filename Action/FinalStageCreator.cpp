@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FinalStageCreator.h"
-#include "BoxObject.h"
+#include "GroundObject.h"
 #include "SwitchBlock.h"
 #include "JumpSwitchObject.h"
 #include "WallBlockObject.h"
@@ -18,6 +18,7 @@
 #include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
+#include "LightObject.h"
 
 /*
    @fn コンストラクタ
@@ -256,7 +257,12 @@ void FinalStageCreator::CreateLayer1(int _indexX, int _indexY)
 	{
 	case(LAYER1_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer1Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer1Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }
@@ -275,7 +281,22 @@ void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 	{
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer2Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer2Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -304,7 +325,12 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 	{
 	case(LAYER3_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer3Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -328,7 +354,12 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 	{
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer4Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// 光付きブロックオブジェクト生成
+		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -337,6 +368,7 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 		break;
 
 	case(LEFT_MOVE_GROUND_NUMBER_1):
+		// 動く床の生成
 		new MoveBlockObject(layer4Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, -1600.0f, 0.0f), Vector3::NegUnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
 	}
@@ -356,7 +388,22 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 	{
 	case(LAYER5_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer5Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer5Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer5Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -471,7 +518,12 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 	{
 	case(LAYER6_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer6Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer6Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -503,7 +555,9 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer6Pos, BlockSize, Tag::MOVE_GROUND, Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 800.0f, MoveDirectionTag::MOVE_X);
 		break;
-	case(65):
+
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
 		new TrackingEnemyObject(layer6Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
 
@@ -524,7 +578,12 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 	{
 	case(LAYER7_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer7Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer7Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ライト付きブロックオブジェクト生成
+		new GroundObject(layer7Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -562,10 +621,11 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1800.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		break;
 
-	case(65):
+	case(TRACKING_ENEMY_PARTS):
 		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
-	case(61):
+
+	case(NORMAL_ENEMY_PARTS):
 		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
 		break;
 
@@ -586,7 +646,12 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 	{
 	case(LAYER8_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer8Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer8Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -608,10 +673,10 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// ケースごとに方向の違う動く床を生成
 		new MoveBlockObject(layer8Pos, BlockSize, Tag::MOVE_GROUND, Vector3(0.0f, 800.0f, 0.0f), Vector3::UnitY, 400.0f, MoveDirectionTag::MOVE_Y);
 		break;
-	case(65):
+
+	case(TRACKING_ENEMY_PARTS):
 		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
-
 	}
 }
 
@@ -629,7 +694,12 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 	{
 	case(LAYER9_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer9Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer9Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -655,20 +725,32 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(65):
+
+	case(TRACKING_ENEMY_PARTS):
 		new TrackingEnemyObject(layer9Pos, Tag::ENEMY, 600.0f, playerObject, 800.0f);
 		break;
 
-	case(62):
+	case(RIGHT_MOVE_ENEMY_PARTS):
 		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
-	case(63):
+
+	case(LEFT_MOVE_ENEMY_PARTS):
 		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, 600.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
 		break;
-	case(61):
+
+	case(NORMAL_ENEMY_PARTS):
 		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
 		break;
 
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 	}
 }
 
@@ -686,7 +768,12 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 	{
 	case(LAYER10_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer10Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer10Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -709,12 +796,24 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new MoveWallBlock(Vector3(layer10Pos.x, layer10Pos.y + ShiftMoveWallY, layer10Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::SECOND_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer10Pos.x, layer10Pos.y, layer10Pos.z - BigMoveWallSize.z));
 		break;
+
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer10Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(65):
+
+	case(TRACKING_ENEMY_PARTS):
 		new TrackingEnemyObject(layer10Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer10Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer10Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 	}
 }
@@ -733,7 +832,12 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 	{
 	case(LAYER11_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer11Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer11Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -756,7 +860,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new RespawnPoint(layer11Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(62):
+	case(RIGHT_MOVE_ENEMY_PARTS):
 		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, 300.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		break;
 	}
@@ -776,7 +880,12 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 	{
 	case(LAYER12_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer12Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer12Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer12Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -798,7 +907,8 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(61):
+
+	case(NORMAL_ENEMY_PARTS):
 		new NormalEnemyObject(layer12Pos, Tag::ENEMY, playerObject);
 		break;
 
@@ -819,7 +929,12 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 	{
 	case(LAYER13_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer13Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer13Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer13Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }
@@ -838,7 +953,12 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 	{
 	case(LAYER14_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer14Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer14Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer14Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(THIRD_SWITCH_PARTS):
@@ -856,6 +976,16 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		lastMoveWallBlock = new MoveWallBlock(Vector3(layer14Pos.x, layer14Pos.y + ShiftMoveWallY, layer14Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer14Pos.x, layer14Pos.y, layer14Pos.z - BigMoveWallSize.z));
 		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 	}
 }
 
@@ -871,9 +1001,15 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 	{
 	case(LAYER15_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer15Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer15Pos, BlockSize, Tag::GROUND);
 		break;
-	case(61):
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer15Pos, BlockSize, Tag::GROUND, true);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
 		new NormalEnemyObject(layer15Pos, Tag::ENEMY, playerObject);
 		break;
 	}
@@ -891,7 +1027,12 @@ void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 	{
 	case(LAYER16_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer16Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer16Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LIGHT_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer16Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }
@@ -910,12 +1051,22 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 	{
 	case(LAYER17_BLOCK_PARTS):
 		// ブロックオブジェクト生成
-		new BoxObject(layer17Pos, BlockSize, Tag::GROUND);
+		new GroundObject(layer17Pos, BlockSize, Tag::GROUND);
 		break;
 
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
 		new ClearPointObject(Vector3(layer17Pos.x, layer17Pos.y, layer17Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer17Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer17Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 	}
 }
