@@ -13,9 +13,13 @@ class MoveWallBlock;
 */
 enum CrystalColor
 {
+    // 白色
     WHITE,
+    // 赤色
     RED,
+    // 青色
     BLUE,
+    // 緑色
     GREEN,
 };
 

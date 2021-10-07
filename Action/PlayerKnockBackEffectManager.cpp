@@ -5,6 +5,7 @@
 PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, PositionOffset(150.0f)
+	, DistanceOffset(30.0f)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -61,9 +62,12 @@ void PlayerKnockBackEffectManager::GenerateEffectProcess()
 	// ownerのポジションを得る
 	position = owner->GetPosition();
 	position.z += PositionOffset;
+	// オーナーの速度を得る
 	distance = owner->GetVelocity();
+	// 正規化
 	distance.Normalize();
-	distance *= 30.0f;
+	// 速度を正規化したものに定数を掛ける
+	distance *= DistanceOffset;
 	//particleを生成
 	new PlayerKnockBackEffect(owner, position, distance);
 }

@@ -33,6 +33,12 @@ public:
     @param	_deltaTime 前のフレームでかかった時間
     */
     virtual void UpdateGameObject(float _deltaTime = 1.0f);
+
+    /*
+    @fn 入力関数
+    @brief	入力処理を行う
+    @param	_keyState 入力情報
+    */
     virtual void GameObjectInput(const InputState& _keyState);
 
 private:

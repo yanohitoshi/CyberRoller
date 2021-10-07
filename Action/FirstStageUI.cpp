@@ -25,7 +25,7 @@ FirstStageUI::FirstStageUI()
 
 	// プレイヤーを動かすことができるようにするためのフラグ
 	CountDownFont::SetCountStartFlag(true);
-
+	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 

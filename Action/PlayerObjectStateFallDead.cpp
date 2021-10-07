@@ -2,7 +2,7 @@
 #include "SkeletalMeshComponent.h"
 
 PlayerObjectStateFallDead::PlayerObjectStateFallDead()
-	: respawnTime(120)
+	: RespawnTime(120)
 {
 }
 
@@ -65,7 +65,7 @@ void PlayerObjectStateFallDead::ToRespawnCountProcess(PlayerObject* _owner)
 	// リスポーンするまでの時間をカウントする
 	++respawnCount;
 	// カウントが定数値に到達したら
-	if (respawnCount >= respawnTime)
+	if (respawnCount >= RespawnTime)
 	{
 		// リスポーンに移行するフラグをfalseに 
 		_owner->SetRespawnFlag(true);

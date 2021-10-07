@@ -233,12 +233,12 @@ PlayerObject* ThirdStageCreator::CreatePlayer()
 void ThirdStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer1 = layer1StageData[_indexY][_indexX];
+	const unsigned int Layer1 = layer1StageData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
 	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer1)
+	switch (Layer1)
 	{
 	case(LAYER1_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -255,14 +255,14 @@ void ThirdStageCreator::CreateLayer1(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer2(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer2 = layer2StageData[_indexY][_indexX];
+	const unsigned int Layer2 = layer2StageData[_indexY][_indexX];
 	// レイヤー2のマップオブジェクトのポジション
 	Vector3 layer2Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[1]);
 	// レイヤー2のスイッチ系マップオブジェクトのポジション
 	Vector3 layer2SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[1] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer2)
+	switch (Layer2)
 	{
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -296,14 +296,14 @@ void ThirdStageCreator::CreateLayer2(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer3 = layer3StageData[_indexY][_indexX];
+	const unsigned int Layer3 = layer3StageData[_indexY][_indexX];
 	// レイヤー3のマップオブジェクトのポジション
 	Vector3 layer3Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[2]);
 	// レイヤー3のスイッチ系マップオブジェクトのポジション
 	Vector3 layer3SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[2] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer3)
+	switch (Layer3)
 	{
 	case(LAYER3_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -340,14 +340,14 @@ void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer4(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer4 = layer4StageData[_indexY][_indexX];
+	const unsigned int Layer4 = layer4StageData[_indexY][_indexX];
 	// レイヤー4のマップオブジェクトのポジション
 	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[3]);
 	// レイヤー4のスイッチ系マップオブジェクトのポジション
 	Vector3 layer4SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[3] - ShiftSwitchPositionZ);
 	
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer4)
+	switch (Layer4)
 	{
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -369,14 +369,14 @@ void ThirdStageCreator::CreateLayer4(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer5 = layer5StageData[_indexY][_indexX];
+	const unsigned int Layer5 = layer5StageData[_indexY][_indexX];
 	// レイヤー5のマップオブジェクトのポジション
 	Vector3 layer5Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[4]);
 	// レイヤー5のスイッチ系マップオブジェクトのポジション
 	Vector3 layer5SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[4] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer5)
+	switch (Layer5)
 	{
 	case(LAYER5_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -442,14 +442,14 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer6 = layer6StageData[_indexY][_indexX];
+	const unsigned int Layer6 = layer6StageData[_indexY][_indexX];
 	// レイヤー6のマップオブジェクトのポジション
 	Vector3 layer6Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[5]);
 	// レイヤー6のスイッチ系マップオブジェクトのポジション
 	Vector3 layer6SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[5] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer6)
+	switch (Layer6)
 	{
 	case(LAYER6_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -509,14 +509,14 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer7 = layer7StageData[_indexY][_indexX];
+	const unsigned int Layer7 = layer7StageData[_indexY][_indexX];
 	// レイヤー7のマップオブジェクトのポジション
 	Vector3 layer7Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[6]);
 	// レイヤー7のスイッチ系マップオブジェクトのポジション
 	Vector3 layer7SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[6] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer7)
+	switch (Layer7)
 	{
 	case(LAYER7_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -560,14 +560,14 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer8 = layer8StageData[_indexY][_indexX];
+	const unsigned int Layer8 = layer8StageData[_indexY][_indexX];
 	// レイヤー8のマップオブジェクトのポジション
 	Vector3 layer8Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[7]);
 	// レイヤー8のスイッチ系マップオブジェクトのポジション
 	Vector3 layer8SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[7] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer8)
+	switch (Layer8)
 	{
 	case(LAYER8_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -599,14 +599,14 @@ void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer9 = layer9StageData[_indexY][_indexX];
+	const unsigned int Layer9 = layer9StageData[_indexY][_indexX];
 	// レイヤー9のマップオブジェクトのポジション
 	Vector3 layer9Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[8]);
 	// レイヤー9のスイッチ系マップオブジェクトのポジション
 	Vector3 layer9SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[8] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer9)
+	switch (Layer9)
 	{
 	case(LAYER9_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -674,14 +674,14 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer10 = layer10StageData[_indexY][_indexX];
+	const unsigned int Layer10 = layer10StageData[_indexY][_indexX];
 	// レイヤー10のマップオブジェクトのポジション
 	Vector3 layer10Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[9]);
 	// レイヤー10のスイッチ系マップオブジェクトのポジション
 	Vector3 layer10SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[9] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer10)
+	switch (Layer10)
 	{
 	case(LAYER10_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -713,14 +713,14 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer11 = layer11StageData[_indexY][_indexX];
+	const unsigned int Layer11 = layer11StageData[_indexY][_indexX];
 	// レイヤー11のマップオブジェクトのポジション
 	Vector3 layer11Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[10]);
 	// レイヤー11のスイッチ系マップオブジェクトのポジション
 	Vector3 layer11SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[10] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer11)
+	switch (Layer11)
 	{
 	case(LAYER11_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -761,14 +761,14 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer12 = layer12StageData[_indexY][_indexX];
+	const unsigned int Layer12 = layer12StageData[_indexY][_indexX];
 	// レイヤー12のマップオブジェクトのポジション
 	Vector3 layer12Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[11]);
 	// レイヤー12のスイッチ系マップオブジェクトのポジション
 	Vector3 layer12SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[11] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer12)
+	switch (Layer12)
 	{
 	case(LAYER12_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -805,14 +805,14 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer13 = layer13StageData[_indexY][_indexX];
+	const unsigned int Layer13 = layer13StageData[_indexY][_indexX];
 	// レイヤー13のマップオブジェクトのポジション
 	Vector3 layer13Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[12]);
 	// レイヤー13のスイッチ系マップオブジェクトのポジション
 	Vector3 layer13SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[12] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer13)
+	switch (Layer13)
 	{
 	case(LAYER13_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -839,14 +839,14 @@ void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer14 = layer14StageData[_indexY][_indexX];
+	const unsigned int Layer14 = layer14StageData[_indexY][_indexX];
 	// レイヤー14のマップオブジェクトのポジション
 	Vector3 layer14Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[13]);
 	// レイヤー14のスイッチ系マップオブジェクトのポジション
 	Vector3 layer14SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[13] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer14)
+	switch (Layer14)
 	{
 	case(LAYER14_BLOCK_PARTS):
 		// ブロックオブジェクト生成
@@ -906,14 +906,14 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int layer15 = layer15StageData[_indexY][_indexX];
+	const unsigned int Layer15 = layer15StageData[_indexY][_indexX];
 	// レイヤー15のマップオブジェクトのポジション
 	Vector3 layer15Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14]);
 	// レイヤー15のスイッチ系マップオブジェクトのポジション
 	Vector3 layer15SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14] - ShiftSwitchPositionZ);
 
 	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (layer15)
+	switch (Layer15)
 	{
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成

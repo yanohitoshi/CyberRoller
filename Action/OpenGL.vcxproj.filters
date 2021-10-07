@@ -492,6 +492,12 @@
     <ClCompile Include="LightObject.cpp">
       <Filter>GameObjects\StageObjects\LightObject</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDeadEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -987,6 +993,12 @@
     <ClInclude Include="LightObject.h">
       <Filter>GameObjects\StageObjects\LightObject</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerDeadEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1159,6 +1171,9 @@
     </Filter>
     <Filter Include="GameObjects\StageObjects\LightObject">
       <UniqueIdentifier>{5d245898-d1b0-4c2f-963d-cb0e78cc573f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\DeadEffect">
+      <UniqueIdentifier>{bd2561b2-44a2-4af0-b361-9e040db85d3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

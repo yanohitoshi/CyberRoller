@@ -57,6 +57,7 @@ public:
 	*/
     void HitCheck(BoxCollider* _box);
 
+	// @fix
 	void IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*> _checkBoxes);
 
 	void IntersectCheckSphere(SphereCollider* _sphere, std::vector<BoxCollider*> _checkBoxes);

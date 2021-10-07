@@ -49,6 +49,7 @@ protected:
 	//カラーチェンジを用いるか
 	bool isColorChange;
 
+	// @fix
 	virtual void SetTextureToShader(Shader* shader);
 
 public: //ゲッターセッター

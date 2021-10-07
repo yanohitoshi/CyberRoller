@@ -62,6 +62,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, 
 	nowState = EnemyState::ENEMY_STATE_IDLE;
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
+	// UŒ‚ƒGƒŠƒA‚ğ’Ç‰Á
 	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 
 	//Z²‚ğ180“x‰ñ“]‚³‚¹‚é

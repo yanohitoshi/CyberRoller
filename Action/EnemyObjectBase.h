@@ -20,7 +20,10 @@ enum class MoveEnemyTag
 	RIGHT_MOVE,
 };
 
-
+/*
+@struct  MoveEnemyData
+	左右に移動する敵が固有で持つデータ構造体
+*/
 struct MoveEnemyData
 {
 	MoveEnemyTag tag;

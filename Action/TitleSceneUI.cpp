@@ -20,7 +20,7 @@ TitleSceneUI::TitleSceneUI()
 	sprite->SetTexture(tex);
 	// alpha値を初期化
 	sprite->SetAlpha(1.0f);
-
+	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 

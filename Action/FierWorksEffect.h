@@ -68,9 +68,13 @@ private:
     // フェードアウトに切り替えるタイミング定数
     const int ChangeFadeOutTime;
 
+    // 白色の場合の色の値定数
     const Vector3 WhiteValue;
+    // 赤色の場合の色の値定数
     const Vector3 RedValue;
+    // 青色の場合の色の値定数
     const Vector3 BlueValue;
+    // 緑色の場合の色の値定数
     const Vector3 GreenValue;
 
 };

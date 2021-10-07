@@ -95,12 +95,12 @@ void TitleStageCreator::CreateStage()
 void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerPos)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int baseLayer = titleMapData[(int)_indexY][(int)_indexX];
+	const unsigned int BaseLayer = titleMapData[(int)_indexY][(int)_indexX];
 	// タイトルステージのマップオブジェクトのポジション
 	Vector3 baseLayerPos = Vector3(Offset * _indexX, -Offset * _indexY, TitleBlockPositionZ);
 
 	// マップデータが生成ナンバーだったら
-	if (baseLayer == GroundNumber)
+	if (BaseLayer == GroundNumber)
 	{
 		// タイトル用オブジェクトの生成
 		new TitleGroundObject(baseLayerPos, BlockSize, _playerPos,Tag::TITLE_OBJECT);
@@ -110,12 +110,12 @@ void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerP
 Vector3 TitleStageCreator::CreatePlayer(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int playerLayer = titlePlayerData[(int)_indexY][(int)_indexX];
+	const unsigned int PlayerLayer = titlePlayerData[(int)_indexY][(int)_indexX];
 	// タイトルでのプレイヤーオブジェクトのポジション
 	Vector3 objectPos = Vector3(Offset * _indexX, -Offset * _indexY, TitlePlayerPositionZ);
 	
 	// マップデータが生成ナンバーだったら
-	if (playerLayer == PlayerNumber)
+	if (PlayerLayer == PlayerNumber)
 	{
 		// タイトル用プレイヤーの生成
 		new TitlePlayerObject(objectPos, false, Tag::TITLE_PLAYER);

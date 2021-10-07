@@ -12,14 +12,7 @@ class MoveEnemyObject :
     public EnemyObjectBase
 {
 public:
-
-	///*
-	//@fn コンストラクタ
-	//@param	ポジション
-	//@param	再利用するかフラグ
-	//@param	オブジェクト判別用tag
-	//*/
-	//MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject ,float _moveSpeed,const Vector3& _moveDir, float _moveDistance, MoveEnemyTag _moveEnemyTag);
+	
 	/*
 	@fn コンストラクタ
 	@param	ポジション

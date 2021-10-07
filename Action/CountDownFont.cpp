@@ -17,19 +17,18 @@ CountDownFont::CountDownFont(int _time)
 	, AddTimeCount(60)
 	, ChangeColorCount(30)
 {
-	// ポジションをセット
+	// メンバー変数の初期化
 	SetPosition(Vector3(700.0f, 480.0f, 0.0f));
+	time = _time;
+	warningFlag = false;
 	// SpriteComponentの初期化
 	sprite = new SpriteComponent(this,false,110);
 	sprite->SetAlpha(1.0f);
-	// メンバー変数の初期化
-	time = _time;
-	warningFlag = false;
 
+	// カウントダウンフォントの影を作るためのバックフォントを生成
 	new CountDownBackFont(_time);
+	// 時間表示textureクラスを生成
 	new TimeSprite();
-	//new WarningSprite(this);
-
 }
 
 CountDownFont::~CountDownFont()

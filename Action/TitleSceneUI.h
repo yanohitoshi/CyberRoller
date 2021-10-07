@@ -39,6 +39,7 @@ private:
 
     // タイトル画像表示用sprite
     SpriteComponent* sprite;
+    // スカイボックスクラスのポインタ
     SkyBoxObject* skyBox;
 };
 

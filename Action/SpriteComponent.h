@@ -47,11 +47,13 @@ protected:
     int textureWidth;
 	//テクスチャの縦幅
     int textureHeight;
+	// alpha値
+	float alpha;
 	//描画を行うか
 	bool visible;
 
+	// 背景用spriteかどうか
 	bool isBackGround;
-	float alpha;
 
 public://ゲッターセッター
 

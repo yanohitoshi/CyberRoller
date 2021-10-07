@@ -17,7 +17,7 @@
 
 MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, float _speed, Vector3 _stopPos)
 	: GameObject(false, _objectTag)
-	, moveSpeed(_speed)
+	, MoveSpeed(_speed)
 	, stopPos(_stopPos)
 	, ShiftPositionY(200.0f)
 {
@@ -74,7 +74,7 @@ void MoveWallBlock::UpdateGameObject(float _deltaTime)
 void MoveWallBlock::OpenWall(float _deltaTime)
 {
 	// 移動速度を付与
-	velocity.z = moveSpeed;
+	velocity.z = MoveSpeed;
 	// ポジション変更
 	position.z -= velocity.z * _deltaTime;
 

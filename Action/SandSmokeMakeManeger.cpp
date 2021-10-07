@@ -109,6 +109,8 @@ void SandSmokeMakeManeger::ActiveBigWallEffectProcess()
 
 void SandSmokeMakeManeger::GenerateBigWallEffectProcess()
 {
+	// @fix
+
 	// エフェクトを20個生成
 	for (int efectCount = 0; efectCount < BigWallMaxEffect; efectCount++)
 	{
@@ -145,6 +147,8 @@ void SandSmokeMakeManeger::ActiveSmallWallEffectProcess()
 
 void SandSmokeMakeManeger::GenerateSmallWallEffectProcess()
 {
+	// @fix
+
 	// エフェクトを10個生成
 	for (int efectCount = 0; efectCount < SmallWallMaxEffect; efectCount++)
 	{

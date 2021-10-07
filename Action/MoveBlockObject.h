@@ -9,6 +9,10 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+/*
+@struct MoveBlockData
+	移動する床で扱う固有のデータ構造体
+*/
 struct MoveBlockData
 {
 	MoveDirectionTag tag;

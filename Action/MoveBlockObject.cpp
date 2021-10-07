@@ -78,6 +78,8 @@ void MoveBlockObject::MovableProcess()
 
 void MoveBlockObject::ChackInversionProcess()
 {
+	// @fix
+
 	// “®‚­Œü‚«‚ÌTag‚²‚Æ‚É”½“]‚·‚éğŒ‚ğŒ©‚Ä”½“]”»’è
 	if (moveTag == MoveDirectionTag::MOVE_X)
 	{

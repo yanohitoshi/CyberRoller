@@ -17,6 +17,7 @@
 #include "LandingEffectManager.h"
 #include "PlayerTransformEffectManager.h"
 #include "PlayerKnockBackEffectManager.h"
+#include "PlayerDeadEffectManager.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
@@ -198,11 +199,12 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
-	// 砂ぼこりと着地時のeffectを持たせる
+	// プレイヤーに必要なeffectを持たせる
 	new PlayerSandSmokeMakeManager(this);
 	new LandingEffectManager(this);
 	new PlayerTransformEffectManager(this);
 	new PlayerKnockBackEffectManager(this);
+	new PlayerDeadEffectManager(this);
 
 	// stateプールの初期化
 	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加

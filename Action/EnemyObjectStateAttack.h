@@ -33,8 +33,11 @@ public:
 
 private:
 
+	// 追跡対象となるオブジェクトを保存するポインタ変数
 	GameObject* trackingObject;
+	// 追跡用の回転ベクトル
 	Vector3 trackingRotationVec;
+	// 初期ポジション
 	Vector3 firstPosition;
 };
 

@@ -55,8 +55,12 @@ protected:
 	float animTime;                                                       
 	//スケルトンデータに乗算する色
 	Vector3 color;
-	//textureセット用関数
-	void SetTextureToShader(Shader* shader);
+
+	/*
+	@fn textureセット用関数
+	@param _shader セットするシェーダーのポインタ
+	*/
+	void SetTextureToShader(Shader* _shader);
 
 public://ゲッターセッター
 

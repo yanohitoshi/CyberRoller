@@ -57,6 +57,6 @@ private:
 	int respawnCount;
 
 	// ƒŠƒXƒ|[ƒ“ó‘Ô‚É“ü‚éŠÔ
-	const int respawnTime;
+	const int RespawnTime;
 };
 

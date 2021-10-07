@@ -45,6 +45,7 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	firstJumpPower = 40.0f;
 	jumpPower = firstJumpPower;
 
+	// ‰ñ“]ˆ—
 	RotationProcess();
 
 }

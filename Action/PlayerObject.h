@@ -114,8 +114,10 @@ private:
 	// 球体の当たり判定を行うクラス
 	SphereCollider* jumpAttackSphereCol;
 
+	// ジャンプ攻撃中のプレイヤーを持つためのポインタ変数
 	JumpAttackPlayerObject* jumpAttackPlayerObject;
 
+	// @選択している敵を見つけるための可変長配列
 	std::vector<GameObject*> selectEnemy;
 
 	/*

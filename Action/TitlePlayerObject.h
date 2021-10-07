@@ -15,17 +15,17 @@ class Animation;
 */
 enum TitleAnimState
 {
+    // アイドリング状態
     IDLE,
-    WALK,
+    // 走り状態
     RUN,
+    // ジャンプループ
     JUMPLOOP,
+    // ジャンプ開始
     JUMPSTART,
+    // ジャンプ終了
     JUMPEND,
-    DOWN,
-    DOWN_LOOP,
-    DOWN_UP,
-    DOWN_OVER,
-    PLAYER_DEAD,
+    // 総ステータス数
     ITEMNUM
 };
 

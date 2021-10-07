@@ -9,6 +9,10 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+/*
+@struct PushBoxData
+	プッシュボックスで扱う固有のデータ構造体
+*/
 struct PushBoxData
 {
 	MoveDirectionTag tag;

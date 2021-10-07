@@ -127,7 +127,7 @@ bool SkeletalMeshComponent::IsPlaying()
 }
 
 
-void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
+void SkeletalMeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット
 	int texID, stageCount = 0;
@@ -135,7 +135,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uDiffuseMap", stageCount);
+		_shader->SetIntUniform("uDiffuseMap", stageCount);
 		stageCount++;
 	}
 
@@ -143,7 +143,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uNormalMap", stageCount);
+		_shader->SetIntUniform("uNormalMap", stageCount);
 		stageCount++;
 	}
 
@@ -151,7 +151,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uSpecularMap", stageCount);
+		_shader->SetIntUniform("uSpecularMap", stageCount);
 		stageCount++;
 	}
 
@@ -159,7 +159,7 @@ void SkeletalMeshComponent::SetTextureToShader(Shader* shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uEmissiveMap", stageCount);
+		_shader->SetIntUniform("uEmissiveMap", stageCount);
 		stageCount++;
 	}
 }

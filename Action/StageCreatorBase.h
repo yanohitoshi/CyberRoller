@@ -14,7 +14,9 @@
 class PlayerObject;
 class MoveWallBlock;
 
-
+/*
+@enum　ステージを生成するに当たって使用するパーツの名前
+*/
 enum StagePartsName
 {
 	// 縦長壁パーツ
@@ -83,27 +85,6 @@ enum StagePartsName
 	LAYER15_BLOCK_PARTS = 65, // レイヤー15
 	LAYER16_BLOCK_PARTS = 64, // レイヤー16
 	LAYER17_BLOCK_PARTS = 63, // レイヤー17
-};
-
-enum LayerNameTag
-{
-	LAYER1,
-	LAYER2,
-	LAYER3,
-	LAYER4,
-	LAYER5,
-	LAYER6,
-	LAYER7,
-	LAYER8,
-	LAYER9,
-	LAYER10,
-	LAYER11,
-	LAYER12,
-	LAYER13,
-	LAYER14,
-	LAYER15,
-	LAYER16,
-	LAYER17,
 };
 
 /*

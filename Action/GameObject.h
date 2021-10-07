@@ -225,6 +225,8 @@ public:
 	*/
 	static 	void RemoveUsedGameObject();
 
+	// @fix
+
 	// AABB
 	AABB aabb;
 
@@ -253,8 +255,9 @@ protected:
 	Tag tag;
 	//ゲームオブジェクトのID、カウント用
 	static int gameObjectId;
+
 	//このゲームオブジェクトのID
-	const int myObjectId;
+	const int MyObjectId;
 
 	//Transform
 	Vector3 position;
@@ -433,7 +436,7 @@ public://ゲッターセッター
 	@brief それぞれのオブジェクトが持つIDの取得
 	@return int myObjectId それぞれのオブジェクトが持つID
 	*/
-	int GetObjectId() const { return myObjectId; };
+	int GetObjectId() const { return MyObjectId; };
 
 	/*
 	@fn gameObjectId変数のgetter関数

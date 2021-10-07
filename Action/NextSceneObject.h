@@ -62,7 +62,9 @@ private:
 	MeshComponent* meshComponent;
 	Mesh* mesh;
 
+	// プレイヤーのポインタを持つためのポインタ変数
 	PlayerObject* playerObject;
+	// シーン最後の動く壁を持つためのポインタ変数
 	MoveWallBlock* lastMoveWallBlock;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;

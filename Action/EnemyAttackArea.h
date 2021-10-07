@@ -42,7 +42,7 @@ private:
 	SphereCollider* sphereCollider;
 	// 親となるクラスのポインタ
 	EnemyObjectBase* ownerEnemy;
-	GameObject* tmpObject;
+
 	// 攻撃エリアのサイズ
 	const float AttackArea;
 	int disableCount;

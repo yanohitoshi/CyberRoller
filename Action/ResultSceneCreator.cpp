@@ -76,12 +76,12 @@ void ResultSceneCreator::CreateStage()
 void ResultSceneCreator::CreateResultMap(int _indexX, int _indexZ)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int baseLayer = resultMapData[(int)_indexZ][(int)_indexX];
+	const unsigned int BaseLayer = resultMapData[(int)_indexZ][(int)_indexX];
 	// リザルトステージのマップオブジェクトのポジション
 	Vector3 resultBaseLayerPos = Vector3(0.0f, ResultOffset * _indexX, -ResultOffset * _indexZ);
 
 	// マップデータが生成ナンバーだったら
-	if (baseLayer == SwitchNumber)
+	if (BaseLayer == SwitchNumber)
 	{
 		// タイトル用オブジェクトの生成
 		new ResultSwitchBaseObject(resultBaseLayerPos, SwitchBaseSize, Tag::RESULT_OBJECT,Tag::RESULT_OBJECT);
@@ -91,12 +91,12 @@ void ResultSceneCreator::CreateResultMap(int _indexX, int _indexZ)
 void ResultSceneCreator::CreateCamera(int _indexX, int _indexZ)
 {
 	// ステージデータ配列からマップデータをもらう
-	const unsigned int cameraTarget = resultCameraData[(int)_indexZ][(int)_indexX];
+	const unsigned int CameraTarget = resultCameraData[(int)_indexZ][(int)_indexX];
 	// タイトルでのプレイヤーオブジェクトのポジション
 	Vector3 objectPos = Vector3(0.0f, ResultOffset * _indexX, -ResultOffset * _indexZ);
 
 	// マップデータが生成ナンバーだったら
-	if (cameraTarget == CameraNumber)
+	if (CameraTarget == CameraNumber)
 	{
 		new ResultCameraObject(objectPos);
 	}

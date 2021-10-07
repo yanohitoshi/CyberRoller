@@ -133,15 +133,19 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 		UninputMovableProcess(_owner);
 	}
 
+	// ジャンプ攻撃が可能かどうかを判定
 	if (_owner->GetIsAvailableJumpAttck())
 	{
+		// ターゲットを選択しているまたはジャンプアタック中でなくかつターゲットを選択していない時
 		if (_owner->GetIsSelectingTargetEnemy() || !_owner->GetIsJumpAttck() && !_owner->GetIsSelectingTargetEnemy())
 		{
+			// キー入力があれば
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
 			{
+				// ジャンプアタックフラグをtrueにセット
 				_owner->SetIsJumpAttck(true);
 			}
 		}

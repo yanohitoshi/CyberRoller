@@ -16,8 +16,11 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 	// ターゲットを捉えていてかつターゲットがActiveだったら
 	if (isSelectingTargetEnemy && attackTargetEnemy->GetState() == State::Active)
 	{
+		// 仮ポジション変数
 		Vector3 tmpPosition;
+		// 線形補完をとり変数に保存
 		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
+		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 	}
 	else // ターゲットがいない場合のジャンプアタック移動処理

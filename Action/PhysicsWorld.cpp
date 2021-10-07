@@ -211,6 +211,7 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 
 	PhysicsTag objTag = _box->GetBoxTag();
 
+	// @fix
 	// Tagに応じたvector配列に格納
 	switch (objTag)
 	{
@@ -277,7 +278,7 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
 {
-
+	// @fix
 	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
 		auto iter = std::find(playerBoxes.begin(), playerBoxes.end(), _box);

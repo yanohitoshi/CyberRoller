@@ -27,9 +27,8 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	new ContinueSprite();
 	// GameOver時のsprite
 	new GameOverSprite();
-
+	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
-
 }
 
 SecondStageUI::~SecondStageUI()

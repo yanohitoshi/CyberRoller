@@ -41,6 +41,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 
 	playerObject = _playerObject;
 
+	// ゲームをクリアしたときに出すエフェクトを管理するクラスを生成
 	new GameClearEffectManager(this);
 
 	// 4色のエフェクトを付与

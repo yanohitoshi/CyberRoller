@@ -49,8 +49,10 @@ private:
     PlayerObject* owner;
     // particleの状態管理用変数
     ParticleState particleState;
-    // 間隔
+    // エフェクトの位置をプレイヤーの体に合わせるための間隔
     Vector3 distance;
+    // エフェクトの位置をプレイヤーの体に合わせるための間隔を計算するためのオフセット定数
+    const float DistanceOffset;
     // エフェクトを生成する時間を数える
     int effectFrameCount;
     // ポジションをずらすためのオフセット

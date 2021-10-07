@@ -35,6 +35,7 @@ private:
 
     // シーンの時間制限の値
     const int SceneTime;
+    // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 };
 

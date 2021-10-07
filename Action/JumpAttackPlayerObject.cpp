@@ -29,7 +29,9 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
 
+	// ジャンプアタック中のエフェクトを管理するクラスを生成
 	new JumpAttackEffectManager(this);
+	// ヒットエフェクトを管理するクラスを生成
 	new PlayerAttackHitEffectManager(ownerObject);
 }
 

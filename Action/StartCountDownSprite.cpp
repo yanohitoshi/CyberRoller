@@ -80,6 +80,7 @@ void StartCountDownSprite::ChackTextureProcess()
 
 void StartCountDownSprite::ChangeTextureProcess()
 {
+	// @fix
 	// time•Ï”‚ğŒ©‚Ä‚»‚ê‚É‰‚¶‚½texture‚ğƒZƒbƒg
 	// 3‚Ì
 	if (time == 3)

@@ -17,6 +17,7 @@ public:
     @fn コンストラクタ
     @param	ポジション
     @param	移動速度
+    @param	プレイヤーの体に位置を合わせるための間隔
     */
     PlayerKnockBackEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _distance);
 

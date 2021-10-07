@@ -125,6 +125,7 @@ void PlayerObjectStateJumpStart::ChackInputProcess(PlayerObject* _owner, const I
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Held ||
 			_owner->GetIsAvailableJumpKey() == true)
 		{
+			// ジャンプ開始処理
 			JumpStartProcess(_owner);
 		}
 	}

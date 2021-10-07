@@ -47,6 +47,7 @@ private:
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
+	// リスポーンする場所を一定数補正する定数
 	const float CorrectionPositionZ;
 };
 

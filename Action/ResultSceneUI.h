@@ -32,7 +32,7 @@ public:
     void UpdateGameObject(float _deltaTime)override;
 
 private:
-
+    // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 };
 

@@ -1,6 +1,9 @@
 #pragma once
 #include "EnemyObjectStateBase.h"
 
+// 現在のstatePatternの仕様空のクラスを追加しないといけない場合がありそのための空のクラスです。
+// 改善方法模索中です。
+
 /*
 @file TrackingEnemyStateMoving.h
 @brief 追跡する敵オブジェクトの移動状態を管理するクラス

@@ -9,38 +9,6 @@
 #include "BoxCollider.h"
 #include "PushBoxObject.h"
 
-//PushBoardObject::PushBoardObject(GameObject* _owner,const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed ,MoveDirectionTag _moveTag) :
-//	GameObject(false, _objectTag)
-//	, MoveSpeed(_speed)
-//	, CutBackSpeed(_cutBackSpeed)
-//{
-//	//GameObjectメンバ変数の初期化
-//	SetPosition(_p);
-//	SetScale(_size);
-//	tag = _objectTag;
-//	state = Active;
-//	initPos = _p;
-//	goalPos = initPos + _distance;
-//	direction = _direction;
-//	moveTag = _moveTag;
-//	inversionFlag = false;
-//	isSendVelocityToPlayer = true;
-//	isPushBackToPlayer = true;
-//	//モデル描画用のコンポーネント
-//	meshComponent = new MeshComponent(this, false, false);
-//
-//	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-//	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
-//
-//	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-//	mesh = new Mesh();
-//	mesh = meshComponent->GetMesh();
-//
-//	//当たり判定用のコンポーネント
-//	boxCollider = new BoxCollider(this, PhysicsTag::MOVE_GROUND_TAG, GetOnCollisionFunc());
-//	boxCollider->SetObjectBox(mesh->GetBox());
-//}
-
 PushBoardObject::PushBoardObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, PushBoxData _pushBoxData)
 	:GameObject(false, _objectTag)
 	, MoveSpeed(_pushBoxData.speed)
@@ -97,6 +65,8 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 
 void PushBoardObject::ChackInversionProcess()
 {
+	// @fix
+
 	//前後移動用判定
 	if (moveTag == MoveDirectionTag::MOVE_X)
 	{
