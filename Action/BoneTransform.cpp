@@ -3,10 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "BoneTransform.h"
 
-/*
-@fn 行列を出力
-@return 回転と平行移動から、行列を返す
-*/
 Matrix4 BoneTransform::ToMatrix() const
 {
 	// 回転と平行移動から、行列を返す
@@ -16,9 +12,6 @@ Matrix4 BoneTransform::ToMatrix() const
 	return rot * trans;
 }
 
-/*
-@fn ボーン補間
-*/
 BoneTransform BoneTransform::Interpolate(const BoneTransform& a, const BoneTransform& b, float f)
 {
 	BoneTransform retVal;

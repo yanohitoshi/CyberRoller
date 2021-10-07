@@ -28,7 +28,7 @@ BoxCollider::BoxCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _fu
 */
 BoxCollider::~BoxCollider()
 {
-	PHYSICS->RemoveBox(this);
+	PHYSICS->SelectRemoveBoxes(this);
 }
 
 /**

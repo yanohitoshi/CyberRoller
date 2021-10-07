@@ -127,6 +127,7 @@ public:
 	@param	オブジェクト判別用tag
 	*/
 	GameObject(bool _reUseGameObject,const Tag _objectTag);
+
 	/*
 	@brief	デストラクタ
 	*/

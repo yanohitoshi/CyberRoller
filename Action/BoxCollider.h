@@ -13,7 +13,7 @@ class BoxCollider final : public ColliderComponent
 {
 public:
 
-	/**
+	/*
 	@brief	コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
@@ -58,16 +58,22 @@ public: // ゲッターセッター
 	*/
 	void SetObjectBox(const AABB& _box) { objectBox = _box; }
 
-	/**
+	/*
 	@brief	当たり判定時に使うワールド空間でのAABBを取得する
 	@return 中心をワールド座標に合わせたAABBの構造体
 	*/
 	AABB GetWorldBox() const { return worldBox; }
 
-	//タグをセット
+	/*
+	@brief	当たり判定タグをセット
+	@param	_tag 当たり判定の種類を判別するためのタグ
+	*/
 	void SetBoxTag(const PhysicsTag _tag) { mTag = _tag; }
 
-	//AABBのタグをとる
+	/*
+	@brief	当たり判定タグを取得する
+	@return mTag 当たり判定の種類を判別するためのタグ
+	*/
 	PhysicsTag GetBoxTag() const{ return mTag; }
 
 };

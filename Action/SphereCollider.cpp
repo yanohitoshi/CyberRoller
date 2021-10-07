@@ -27,7 +27,7 @@ SphereCollider::SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFu
 */
 SphereCollider::~SphereCollider()
 {
-	PHYSICS->RemoveSphere(this);
+	PHYSICS->SelectRemoveSpheres(this);
 }
 
 /**

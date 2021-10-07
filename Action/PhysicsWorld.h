@@ -24,6 +24,7 @@ enum class PhysicsTag;
 
 
 typedef std::function<void(GameObject&, PhysicsTag)> onCollisionFunc;
+// 関数ポインタを格納するmap
 typedef std::map<ColliderComponent*, std::function<void(GameObject&, PhysicsTag)>> onCollisionMap;
 
 /*
@@ -89,12 +90,20 @@ public:
     void AddBox(BoxCollider* _box, onCollisionFunc _func);
 	
 	/*
+	@fn 削除するBoxColliderが格納されている関数
+	@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+	@param	_box　削除するBoxColliderのポインタ
+	*/
+    void SelectRemoveBoxes(BoxCollider* _box);
+	
+	/*
 	@fn BoxColliderを削除する関数
 	@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_line　削除するBoxColliderのポインタ
+	@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタ
+	@param	_box　削除するBoxColliderのポインタ
 	*/
-    void RemoveBox(BoxCollider* _box);
-	
+	void RemoveBox(std::vector<BoxCollider*> _boxes, BoxCollider* _box);
+
 	/*
 	@fn SphereColliderを追加する関数
 	@brief　SphereColliderを当たり判定のタグを参照してそれぞれの可変長コンテナに格納を行う
@@ -104,11 +113,19 @@ public:
 	void AddSphere(SphereCollider* _sphere, onCollisionFunc _func);
 	
 	/*
-	@fn SphereColliderを削除する関数
+	@fn 削除するSphereColliderが格納されている関数
 	@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
 	@param	_sphere　削除するSphereColliderのポインタ
 	*/
-	void RemoveSphere(SphereCollider* _sphere);
+	void SelectRemoveSpheres(SphereCollider* _box);
+
+	/*
+	@fn SphereColliderを削除する関数
+	@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+	@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタ
+	@param	_sphere　削除するSphereColliderのポインタ
+	*/
+	void RemoveSphere(std::vector<SphereCollider*> _spheres,SphereCollider* _sphere);
 	
 private:
 

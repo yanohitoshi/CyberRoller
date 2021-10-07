@@ -65,12 +65,18 @@ public: //ゲッターセッター
 	*/
 	float GetFrameDuration() const { return frameDuration; }
 
-	//指定された配列を、アニメーションの指定された時間に、
-	//各ボーンのグローバル（現在の）ポーズマトリックスで埋める。
-	//時間は > = 0.0fかつ <= 期間であると予想される
-	void GetGlobalPoseAtTime(std::vector<Matrix4>& outPoses, const class Skeleton* inSkeleton, float inTime) const;
+	/*
+	@fn	inTime時刻時点のグローバルポーズ配列の取得
+	@param	_outPoses outPosesの可変長配列(Matrix4)
+	@param	_inSkeleton スケルトンデータのポインタ
+	@param	_inTime
+	*/
+	void GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
 
-	//ループするアニメーションかどうかのフラグをとる
+	/*
+	@fn	ループするアニメーションかどうかのフラグの取得
+	@return	isLoopAnimation outPosesの可変長配列(Matrix4)
+	*/
 	bool IsLoopAnimation() const { return isLoopAnimation; }
 
 };
