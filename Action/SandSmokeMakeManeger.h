@@ -41,19 +41,17 @@ private:
     void ActiveBigWallEffectProcess();
     
     /*
-    @fn 大きい壁のエフェクト生産処理関数
-    */
-    void GenerateBigWallEffectProcess();
-
-    /*
     @fn 小さい壁のエフェクトがアクティブの時の処理関数
     */
     void ActiveSmallWallEffectProcess();
 
+
     /*
-    @fn 小さい壁のエフェクト生産処理関数
+    @fn 動く壁のエフェクトを生成するの処理
+    @param _maxEffect 最大エフェクト数
+    @param _randYValue Y軸のランダムの値
     */
-    void GenerateSmallWallEffectProcess();
+    void GenerateWallEffectProcess(const int _maxEffect,const int _randYValue);
 
     // 親のGameObject保存用変数
     GameObject* owner;

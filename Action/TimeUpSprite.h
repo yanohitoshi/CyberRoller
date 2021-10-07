@@ -46,7 +46,7 @@ private:
 
     // 1度だけ描画するためのフラグ
     bool visibleFlag;
-    // @fix
+
     // 描画されているかフラグ
     static bool drawFlag;
 

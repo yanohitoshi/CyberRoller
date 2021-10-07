@@ -451,7 +451,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 		// プレイヤーのワールドボックスを取得
 		playerBox = boxCollider->GetWorldBox();
 		// 押し戻し用関数へ渡す
-		FixCollision(playerBox, _hitObject.aabb, hitObjectTag);
+		FixCollision(playerBox, _hitObject.GetAabb(), hitObjectTag);
 	}
 
 	// 当たったオブジェクトが敵だったら

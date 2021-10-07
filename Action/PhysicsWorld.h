@@ -51,15 +51,26 @@ public:
 	static void DeleteInstance();
 
 	/*
-	@fn HitCheck関数(Box)
+	@fn ヒットチェックを行う関数(Box)
 	@brief　BoxCollider(AABB)の当たり判定を行う
 	@param	_box 当たり判定に用いるBoxColliderのポインタ
 	*/
     void HitCheck(BoxCollider* _box);
 
-	// @fix
+	/*
+	@fn 当たり判定を行う関数(Box)
+	@brief　BoxCollider(AABB)の当たり判定を行う
+	@param	_box 当たり判定に用いるBoxColliderのポインタ
+	@param	_checkBoxes 当たり判定を行う相手の可変長配列
+	*/
 	void IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*> _checkBoxes);
 
+	/*
+	@fn 当たり判定を行う関数(Sphere)
+	@brief　SphereCollider(Sphere)の当たり判定を行う
+	@param	_sphere 当たり判定に用いるSphereColliderのポインタ
+	@param	_checkBoxes 当たり判定を行う相手の可変長配列
+	*/
 	void IntersectCheckSphere(SphereCollider* _sphere, std::vector<BoxCollider*> _checkBoxes);
 	
 	/*

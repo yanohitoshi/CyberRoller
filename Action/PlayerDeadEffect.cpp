@@ -56,33 +56,14 @@ void PlayerDeadEffect::UpdateGameObject(float _deltaTime)
 	}
 }
 
-// @fix
 void PlayerDeadEffect::RotateEffect()
 {
-	float radian;
-	Quaternion rot;
-	Quaternion target;
-
-	//XŽ²‚ðƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
-	radian = Math::ToRadians((float)(rand() % RandValue));
-	rot = this->GetRotation();
-	Quaternion incX(Vector3::UnitX, radian);
-	target = Quaternion::Concatenate(rot, incX);
-	SetRotation(target);
-
-	//YŽ²‚ðƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
-	radian = Math::ToRadians((float)(rand() % RandValue));
-	rot = this->GetRotation();
-	Quaternion incY(Vector3::UnitY, radian);
-	target = Quaternion::Concatenate(rot, incY);
-	SetRotation(target);
-
-	//ZŽ²‚ðƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
-	radian = Math::ToRadians((float)(rand() % RandValue));
-	rot = this->GetRotation();
-	Quaternion incZ(Vector3::UnitZ, radian);
-	target = Quaternion::Concatenate(rot, incZ);
-	SetRotation(target);
+	// XŽ²‚ð‰ñ“]
+	Rotation(Vector3::UnitX);
+	// YŽ²‚ð‰ñ“]
+	Rotation(Vector3::UnitY);
+	// ZŽ²‚ð‰ñ“]
+	Rotation(Vector3::UnitZ);
 
 	// ‰ñ“]’l‚©‚çˆÚ“®•ûŒü‚ðŒvŽZ
 	Matrix4 mat = Matrix4::CreateFromQuaternion(this->GetRotation());
@@ -91,4 +72,14 @@ void PlayerDeadEffect::RotateEffect()
 	velocity.z += mat.GetZAxis().z;
 	velocity.Normalize();
 
+}
+
+void PlayerDeadEffect::Rotation(const Vector3 _axis)
+{
+	//XŽ²‚ðƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
+	float radian = Math::ToRadians((float)(rand() % RandValue));
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(_axis, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
 }

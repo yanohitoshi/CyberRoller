@@ -225,10 +225,6 @@ public:
 	*/
 	static 	void RemoveUsedGameObject();
 
-	// @fix
-
-	// AABB
-	AABB aabb;
 
 protected:
 
@@ -266,6 +262,9 @@ protected:
 	Matrix4 worldTransform;
 	Vector3 velocity;
 	Vector3 forwardVec;
+
+	// AABB
+	AABB aabb;
 
 	//ワールド変換の処理を行う必要性があるか
 	bool recomputeWorldTransform;
@@ -430,6 +429,13 @@ public://ゲッターセッター
 	@return Tag オブジェクトを識別するTag
 	*/
 	Tag GetTag() const { return tag; }
+
+	/*
+	@fn aabbのgetter関数
+	@brief オブジェクトのワールド空間でのAABBの取得
+	@return aabb オブジェクトそれぞれでワールド空間でのAABBの値を保存している変数
+	*/
+	AABB GetAabb() const { return aabb; }
 
 	/*
 	@fn myObjectId変数のgetter関数

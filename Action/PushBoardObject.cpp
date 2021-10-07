@@ -65,37 +65,22 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 
 void PushBoardObject::ChackInversionProcess()
 {
-	// @fix
-
-	//前後移動用判定
-	if (moveTag == MoveDirectionTag::MOVE_X)
+	// 動く方向のタグを見て処理を変える
+	switch (moveTag)
 	{
+	case MOVE_X:
 		// X軸の処理
 		ChackAxisX();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
-	}
-
-	//左右移動用判定
-	if (moveTag == MoveDirectionTag::MOVE_Y)
-	{
+		break;
+	case MOVE_Y:
 		// Y軸の処理
 		ChackAxisY();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
-	}
-
-	//上下移動用判定
-	if (moveTag == MoveDirectionTag::MOVE_Z)
-	{
+		break;
+	case MOVE_Z:
 		// Z軸の処理
 		ChackAxisZ();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
+		break;
 	}
-
-
-
 }
 
 void PushBoardObject::MovableProcess()

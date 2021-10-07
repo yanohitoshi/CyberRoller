@@ -152,6 +152,6 @@ void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 	if (_hitObject.GetTag() == Tag::ENEMY || _hitObject.GetTag() == Tag::GROUND)
 	{
 		// ‰Ÿ‚µ–ß‚µ
-		FixCollision(aabb, _hitObject.aabb);
+		FixCollision(aabb, _hitObject.GetAabb());
 	}
 }

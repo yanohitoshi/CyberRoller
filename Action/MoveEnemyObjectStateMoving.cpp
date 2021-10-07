@@ -17,7 +17,6 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 	// ˆÚ“®Tag‚ð”»•Ê‚µ‚ÄU‚è•Ô‚éêŠ‚É“ž’B‚µ‚Ä‚¢‚é‚©”»’è
 	if (_owner->GetMoveEnemyTag() == MoveEnemyTag::RIGHT_MOVE)
 	{
-		// @fix
 		if (_owner->GetPosition().y > firstPosition.y + moveDistance && moveDistance > 0.0f)
 		{
 			state = EnemyState::ENEMY_STATE_TURN;
@@ -30,7 +29,6 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 	}
 	else if (_owner->GetMoveEnemyTag() == MoveEnemyTag::LEFT_MOVE)
 	{
-		// @fix
 		if (_owner->GetPosition().y < firstPosition.y - moveDistance && moveDistance > 0.0f)
 		{
 			state = EnemyState::ENEMY_STATE_TURN;

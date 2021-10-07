@@ -78,31 +78,21 @@ void MoveBlockObject::MovableProcess()
 
 void MoveBlockObject::ChackInversionProcess()
 {
-	// @fix
-
-	// 動く向きのTagごとに反転する条件を見て反転判定
-	if (moveTag == MoveDirectionTag::MOVE_X)
+	// 動く方向のタグを見て処理を変える
+	switch (moveTag)
 	{
+	case MOVE_X:
 		// X軸の処理
 		ChackAxisX();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
-	}
-
-	if (moveTag == MoveDirectionTag::MOVE_Y)
-	{
+		break;
+	case MOVE_Y:
 		// Y軸の処理
 		ChackAxisY();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
-	}
-
-	if (moveTag == MoveDirectionTag::MOVE_Z)
-	{
+		break;
+	case MOVE_Z:
 		// Z軸の処理
 		ChackAxisZ();
-		// 現在の仕様上1つの軸移動しか行わないため返す
-		return;
+		break;
 	}
 }
 

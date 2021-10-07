@@ -8,6 +8,14 @@
 class SpriteComponent;
 class Texture;
 
+enum TimeNum
+{
+    ZERO = 0,
+    ONE = 1,
+    TOW = 2,
+    TREE = 3,
+};
+
 /*
 @file StartCountDownSprite.h
 @brief ゲーム開始用カウントダウンを表示する

@@ -37,10 +37,16 @@ public:
 private:
 
     /*
-    @fn 回転処理関数
+    @fn エフェクトの回転処理関数
     @brief	エフェクトの回転を行う
     */
     void RotateEffect();
+
+    /*
+    @fn 回転計算処理
+    @param _axis 回転軸
+    */
+    void Rotation(const Vector3 _axis);
 
     // 毎フレーム足すscale値 
     const float AddScale;

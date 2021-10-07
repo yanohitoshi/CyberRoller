@@ -6,7 +6,7 @@
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
-// @fix
+// staticƒƒ“ƒo[‚ğ‰Šú‰»
 bool TimeUpSprite::drawFlag = true;
 
 TimeUpSprite::TimeUpSprite()

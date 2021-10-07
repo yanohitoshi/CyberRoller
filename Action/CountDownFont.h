@@ -40,7 +40,6 @@ public:
 
 private:
 
-    // @fix
     // 時間切れになったかどうかのフラグ変数
     static bool timeOverFlag;
     // カウントを開始するかのフラグ変数

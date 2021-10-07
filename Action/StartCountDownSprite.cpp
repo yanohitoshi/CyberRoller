@@ -80,35 +80,26 @@ void StartCountDownSprite::ChackTextureProcess()
 
 void StartCountDownSprite::ChangeTextureProcess()
 {
-	// @fix
 	// time•Ï”‚ðŒ©‚Ä‚»‚ê‚É‰ž‚¶‚½texture‚ðƒZƒbƒg
-	// 3‚ÌŽž
-	if (time == 3)
+	switch (time)
 	{
+	case TimeNum::TREE:
 		sprite->SetTexture(secondTexure);
 		texChangeFlag = false;
-	}
-
-	// 2‚ÌŽž
-	if (time == 2)
-	{
+		break;
+	case TimeNum::TOW:
 		sprite->SetTexture(thirdTexure);
 		texChangeFlag = false;
-	}
-
-	// 1‚ÌŽž
-	if (time == 1)
-	{
+		break;
+	case TimeNum::ONE:
 		sprite->SetTexture(startTexure);
 		texChangeFlag = false;
-	}
-
-	// 0‚É‚È‚Á‚½‚ç•`‰æ‚ðØ‚Á‚Ästate‚ðDead‚É
-	if (time == 0)
-	{
+		break;
+	case TimeNum::ZERO:
 		sprite->SetVisible(false);
 		drawSpriteFlag = false;
 		CountDownFont::SetCountStartFlag(true);
 		state = State::Dead;
+		break;
 	}
 }

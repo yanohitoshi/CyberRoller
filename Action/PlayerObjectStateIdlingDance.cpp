@@ -5,7 +5,7 @@
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
 
-// @fix
+// staticƒƒ“ƒo[‚ğ‰Šú‰»
 bool PlayerObjectStateIdlingDance::isDancing = false;
 
 PlayerObjectStateIdlingDance::PlayerObjectStateIdlingDance()

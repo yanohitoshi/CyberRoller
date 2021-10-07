@@ -345,7 +345,7 @@ void MainCameraObject::OnCollision(const GameObject& _hitObject, const PhysicsTa
 	if (_hitObject.GetisPushBackToCamera())
 	{
 		// ‰Ÿ‚µ–ß‚µŠÖ”‚ğŒÄ‚Ño‚·
-		FixCollision(myAabb, _hitObject.aabb);
+		FixCollision(myAabb, _hitObject.GetAabb());
 	}
 
 }

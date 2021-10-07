@@ -33,7 +33,7 @@ SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	// 中心に設置するために少しずらす
 	position.x -= ShiftPositionX;
 
-	// ownerの大きさを見てそれぞれの数値分ずらして中心に設置（※現状2種なのでこうしてるが改良の余地あり）
+	// ownerの大きさを見てそれぞれの数値分ずらして中心に設置
 	// 小さいサイズの時
 	if (ownerSize.y == SmallWallSize)
 	{
@@ -101,38 +101,9 @@ void SandSmokeMakeManeger::ActiveBigWallEffectProcess()
 	// 3フレームに一度
 	if (frameCount % GenerateFrequency == 0)
 	{
-		// 大きい壁用エフェクト生産処理
-		GenerateBigWallEffectProcess();
+		GenerateWallEffectProcess(BigWallMaxEffect, BigRandValueY);
 	}
 
-}
-
-void SandSmokeMakeManeger::GenerateBigWallEffectProcess()
-{
-	// @fix
-
-	// エフェクトを20個生成
-	for (int efectCount = 0; efectCount < BigWallMaxEffect; efectCount++)
-	{
-		// ランダムな値を生成
-		Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % BigRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
-
-		// 値が大きすぎるので最後の補正をかけて速度に代入
-		velocity = randV * LastCorrection;
-
-		// ランダムの値に速度の最低値を追加
-		velocity.x += LowestVelValue.x;
-		velocity.y += LowestVelValue.y;
-		velocity.z += LowestVelValue.z;
-
-		//発生位置を設定
-		Vector3 pos = position;
-		//ランダムな値を渡す
-		pos = pos + randV;
-		//particleを生成
-		new SandSmokeParticle(pos, velocity);
-
-	}
 }
 
 void SandSmokeMakeManeger::ActiveSmallWallEffectProcess()
@@ -140,20 +111,17 @@ void SandSmokeMakeManeger::ActiveSmallWallEffectProcess()
 	// 3フレームに一度
 	if (frameCount % GenerateFrequency == 0)
 	{
-		// 小さい壁用エフェクト生産処理
-		GenerateSmallWallEffectProcess();
+		GenerateWallEffectProcess(SmallWallMaxEffect, SmallRandValueY);
 	}
 }
 
-void SandSmokeMakeManeger::GenerateSmallWallEffectProcess()
+void SandSmokeMakeManeger::GenerateWallEffectProcess(const int _maxEffect, const int _randYValue)
 {
-	// @fix
-
 	// エフェクトを10個生成
-	for (int efectCount = 0; efectCount < SmallWallMaxEffect; efectCount++)
+	for (int efectCount = 0; efectCount < _maxEffect; efectCount++)
 	{
 		// ランダムな値を生成
-		Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % SmallRandValueY) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
+		Vector3 randV((rand() % RandValueX) / CorrectionRandValue, (rand() % _randYValue) / CorrectionRandValue, (rand() % RandValueZ) / CorrectionRandValue);
 
 		// ランダムで出た値に補正をかける
 		velocity = randV * LastCorrection;
@@ -169,7 +137,6 @@ void SandSmokeMakeManeger::GenerateSmallWallEffectProcess()
 		pos = pos + randV;
 		//particleを生成
 		new SandSmokeParticle(pos, velocity);
-
 	}
 }
 
