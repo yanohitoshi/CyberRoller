@@ -13,7 +13,14 @@ class Texture
 {
 public:
 
+	/*
+	@brief	コンストラクタ
+	*/
     Texture();
+
+	/*
+	@brief	デストラクタ
+	*/
     ~Texture();
 	/*
 	@brief	テクスチャのロード
@@ -21,11 +28,16 @@ public:
 	@return	true : 成功 , false : 失敗
 	*/
 	bool Load(const std::string& _fileName);
+	
 	/*
 	@brief	ロードしたテクスチャの解放
 	*/
 	void Unload();
 
+	/*
+	@brief	Surfaceを元にtextureを作成
+	@param	_surface 元にするSurfaceクラスのポインタ
+	*/
 	void CreateFromSurface(struct SDL_Surface* _surface);
 
 	/*
@@ -47,6 +59,10 @@ public:
 		,const unsigned int _width, const unsigned int _height
 		,std::vector<Texture*> textures);
 
+	/*
+	@brief	キューブマップの読み込み
+	@param	ロードするファイルのパス
+	*/
 	bool LoadCubeMap(const std::string& in_filePath);
 
 private:

@@ -1,9 +1,19 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "LightObject.h"
 #include "Mesh.h"
 #include <string>
 #include "MeshComponent.h"
 #include "Renderer.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param	右側に添わせるかどうか
+*/
 LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, bool _isRight)
 	: GameObject(false, _objectTag)
 	, ShiftPositionX(195.0f)
@@ -37,10 +47,19 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"));
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 LightObject::~LightObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void LightObject::UpdateGameObject(float _deltaTime)
 {
 }

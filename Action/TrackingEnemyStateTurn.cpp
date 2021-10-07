@@ -1,13 +1,28 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyStateTurn.h"
 
+/*
+@fn コンストラクタ
+*/
 TrackingEnemyStateTurn::TrackingEnemyStateTurn()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 TrackingEnemyStateTurn::~TrackingEnemyStateTurn()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// アニメーションの再生が終わっていたら
@@ -25,6 +40,11 @@ EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaT
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void TrackingEnemyStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

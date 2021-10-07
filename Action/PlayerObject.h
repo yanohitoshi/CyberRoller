@@ -48,26 +48,39 @@ public:
 	/*
 	@fn 入力処理
 	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 入力情報
 	*/
 	void GameObjectInput(const InputState& _keyState)override;
 	
 	/*
-	@fn めり込み判定
+	@fn めり込み判定と押し戻し
+	@param	myAABB 自分のAABB
+	@param	pairAABB 当たった相手のAABB
+	@param	_hitObjectTag ヒットしたオブジェクトのタグ
 	*/
 	void FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjectTag);
 	
 	/*
-	@fn 押し戻し処理(x,y,z軸で押し戻し)
+	@fn 押し戻し処理
+	@brief	x,y,z軸で押し戻し処理を行う
+	@param	_movableBox 移動オブジェクトのAABB
+	@param	_fixedBox 当たったオブジェクトのAABB
+	@param	_calcFixVec 速度差分ベクトル
 	*/
-	void playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec);
+	void PlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox,Vector3& _calcFixVec);
 
 	/*
-	@fn 押し戻し処理(x,y軸で押し戻し)
+	@fn 押し戻し処理
+	@brief	x,y軸で押し戻し処理を行う
+	@param	_movableBox 移動オブジェクトのAABB
+	@param	_fixedBox 当たったオブジェクトのAABB
+	@param	_calcFixVec 速度差分ベクトル
 	*/
 	void HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 	
 	/*
-	@fn 前方ベクトルを用いてキャラクターを回転させる関数
+	@brief 前方ベクトルを用いてキャラクターを回転させる関数
+	@param	forward 前方ベクトル
 	*/
 	void RotateToNewForward(const Vector3& forward);
 
@@ -77,6 +90,7 @@ private:
 
 	/*
 	@fn クリアしている状態かをチェックする関数
+	@param	_tag チェックするオブジェクトのタグ
 	*/
 	void ClearChack(Tag _tag);
 	
@@ -87,7 +101,7 @@ private:
 	void SwitchChackProcess(std::vector<GameObject*> _chackVector);
 
 	/*
-	@fn スイッチジャンプアクティブ関数
+	@fn スイッチジャンプを使用可能にする関数
 	*/
 	void ActiveSwitchJumpProcess();
 
@@ -123,26 +137,24 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
-	*/	
+	@param	当たったGameObjectの当たり判定タグ
+	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
 	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
+	@fn 足元判定用当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(ジャンプ攻撃を行うエネミーとの判定を取る)
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
-	// 着地effectを発生させる際に使用するフラグ
-	// JumpFlagチェック用
-	static bool chackJumpFlag;
-	// isJumpingチェック用（ジャンプ中かどうか）
-	static bool chackIsJumping;
 	//重力
 	static const float Gravity;
 
@@ -271,18 +283,6 @@ public:// ゲッターセッター
 	@return Gravity 重力定数
 	*/
 	static const float GetGravity() { return Gravity; }
-
-	/*
-	@fn chackJumpFlagのgetter関数
-	@return chackJumpFlagを返す
-	*/
-	static bool GetChackJumpFlag() { return chackJumpFlag; }
-	
-	/*
-	@fn chackIsJumpingのgetter関数
-	@return chackIsJumpingを返す
-	*/
-	static bool GetChackIsJumpingFlag() { return chackIsJumping; }
 
 	/*
 	@fn forwardVecのgetter関数

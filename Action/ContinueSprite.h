@@ -44,6 +44,10 @@ public:
 
 private:
 
+    /*
+    @brief	入力情報を元に描画を切り替える
+    @param	入力情報
+    */
     void ChackKeyProcess(const InputState& _keyState);
 
     // スプライトComponent

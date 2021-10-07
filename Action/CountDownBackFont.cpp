@@ -7,6 +7,10 @@
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
+/*
+@brief	コンストラクタ
+@param	カウントする時間
+*/
 CountDownBackFont::CountDownBackFont(int _time)
 	: GameObject(false, Tag::UI)
 	, AddTimeCount(60)
@@ -18,13 +22,21 @@ CountDownBackFont::CountDownBackFont(int _time)
 	sprite->SetAlpha(1.0f);
 	// メンバー変数初期化
 	time = _time;
-
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CountDownBackFont::~CountDownBackFont()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CountDownBackFont::UpdateGameObject(float _deltaTime)
 {
 	// ゲームスタートしたらカウント開始
@@ -57,5 +69,4 @@ void CountDownBackFont::UpdateGameObject(float _deltaTime)
 	{
 		sprite->SetVisible(false);
 	}
-
 }

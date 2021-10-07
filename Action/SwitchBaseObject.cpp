@@ -10,6 +10,14 @@
 #include "ResultSwitchObject.h"
 #include "Mesh.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param  どの区画のスイッチなのかを判別させるようのTag
+@param	チュートリアル用Switchかどうかのフラグ
+*/
 SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag , bool _isTutorial)
 	: GameObject(false, _objectTag)
 	, Angle(90.0f)
@@ -41,10 +49,19 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SwitchBaseObject::~SwitchBaseObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SwitchBaseObject::UpdateGameObject(float _deltaTime)
 {
 	// ワールド空間のAABBを更新
@@ -53,9 +70,13 @@ void SwitchBaseObject::UpdateGameObject(float _deltaTime)
 	position = position + velocity * _deltaTime;
 	// ポジションの更新
 	SetPosition(position);
-
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void SwitchBaseObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら

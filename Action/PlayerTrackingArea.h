@@ -16,9 +16,9 @@ public:
 
 	/*
 	@fn コンストラクタ
-	@param	ポジション
-	@param	objectのサイズ
 	@param	オブジェクト判別用tag
+	@param	親となる敵クラスのポインタ
+	@param	エリアの大きさとなる値
 	*/
 	PlayerTrackingArea(const Tag& _objectTag,TrackingEnemyObject* _ownerEnemy,float _areaValue);
 
@@ -40,6 +40,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

@@ -4,14 +4,26 @@
 #include "PlayerObjectStateJumpEndToIdle.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJumpEndToIdle::PlayerObjectStateJumpEndToIdle()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJumpEndToIdle::~PlayerObjectStateJumpEndToIdle()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
 
@@ -50,6 +62,12 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -60,6 +78,11 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

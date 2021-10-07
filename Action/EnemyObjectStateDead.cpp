@@ -1,14 +1,29 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateDead.h"
 
+/*
+@fn コンストラクタ
+*/
 EnemyObjectStateDead::EnemyObjectStateDead()
 	: RespawnTime(120)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 EnemyObjectStateDead::~EnemyObjectStateDead()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
@@ -23,6 +38,11 @@ EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTim
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

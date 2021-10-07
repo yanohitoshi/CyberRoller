@@ -33,12 +33,6 @@ public:
     */
     void UpdateGameObject(float _deltaTime = 1.0f);
     
-    /*
-    @fn 入力を引数で受け取る更新関数
-    @brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
-    */
-    void GameObjectInput(const InputState& _keyState);
-
 private:
 
     // タイトル用プレイヤーのポジションを利用して生成するので位置をずらすための定数

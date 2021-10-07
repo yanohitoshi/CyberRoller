@@ -1,7 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerDeadEffectManager.h"
 #include "PlayerDeadEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 PlayerDeadEffectManager::PlayerDeadEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, PositionOffset(50.0f)
@@ -16,10 +23,19 @@ PlayerDeadEffectManager::PlayerDeadEffectManager(PlayerObject* _owner)
 	effectFrameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerDeadEffectManager::~PlayerDeadEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerDeadEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 現在のステータスが死亡状態だったらエフェクトを有効化
@@ -51,6 +67,9 @@ void PlayerDeadEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void PlayerDeadEffectManager::ActiveEffectProcess()
 {
 	// 発生までの時間を数える
@@ -69,6 +88,9 @@ void PlayerDeadEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void PlayerDeadEffectManager::GenerateEffectProcess()
 {
 	// ownerのポジションを得る

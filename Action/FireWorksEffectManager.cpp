@@ -4,6 +4,10 @@
 #include "FireWorksEffectManager.h"
 #include "FierWorksEffect.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 FireWorksEffectManager::FireWorksEffectManager(GameObject* _owner)
 	:GameObject(false, Tag::PARTICLE)
 	, CorrectionRandValue(10.0f)
@@ -18,10 +22,19 @@ FireWorksEffectManager::FireWorksEffectManager(GameObject* _owner)
 	crystalColor = CrystalColor::WHITE;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 FireWorksEffectManager::~FireWorksEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void FireWorksEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// ownerのステータスがdeadになったら
@@ -55,6 +68,9 @@ void FireWorksEffectManager::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void FireWorksEffectManager::ActiveEffectProcess()
 {
 	// ownerのポジションを得る
@@ -72,6 +88,9 @@ void FireWorksEffectManager::ActiveEffectProcess()
 
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void FireWorksEffectManager::GenerateEffectProcess()
 {
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
@@ -98,6 +117,9 @@ void FireWorksEffectManager::GenerateEffectProcess()
 	}
 }
 
+/*
+@fn エフェクトの色と向きを設定する関数
+*/
 void FireWorksEffectManager::SelectEffectColorProcess(int _index,Vector3& _velocity)
 {
 	// いろいろな方向にいろいろな色で飛ばしたいので

@@ -1,5 +1,11 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpAttackEnd.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd()
 	: SuccessJumpTime(6)
 	, SuccessJumpAccelPower(80.0f)
@@ -7,10 +13,19 @@ PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJumpAttackEnd::~PlayerObjectStateJumpAttackEnd()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJumpAttackEnd::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 重力にデルタタイムをかけた値を代入
@@ -46,6 +61,12 @@ PlayerState PlayerObjectStateJumpAttackEnd::Update(PlayerObject* _owner, float _
     return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpAttackEnd::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	if (_owner->GetIsJumpAttackSuccess())
@@ -71,9 +92,13 @@ void PlayerObjectStateJumpAttackEnd::Input(PlayerObject* _owner, const InputStat
 			endFlag = true;
 		}
 	}
-
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTime)
 {
     // stateをジャンプ攻撃状態にして保存

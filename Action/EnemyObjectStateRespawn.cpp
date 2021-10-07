@@ -1,5 +1,11 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateRespawn.h"
 
+/*
+@fn コンストラクタ
+*/
 EnemyObjectStateRespawn::EnemyObjectStateRespawn()
 	: moveDirection(Vector3::Zero)
 	, nowPosition(Vector3::Zero)
@@ -7,10 +13,19 @@ EnemyObjectStateRespawn::EnemyObjectStateRespawn()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 EnemyObjectStateRespawn::~EnemyObjectStateRespawn()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState EnemyObjectStateRespawn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// オーナーの今のポジションを取得
@@ -34,6 +49,11 @@ EnemyState EnemyObjectStateRespawn::Update(EnemyObjectBase* _owner, float _delta
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

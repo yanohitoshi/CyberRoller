@@ -10,6 +10,10 @@
 #include "SecondStageUI.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 SecondStageScene::SecondStageScene()
 {
 	// ライト情報初期化
@@ -43,13 +47,22 @@ SecondStageScene::SecondStageScene()
 
 	// シーンUIを追加
 	new SecondStageUI(playerObject);
-
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 SecondStageScene::~SecondStageScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState SecondStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする

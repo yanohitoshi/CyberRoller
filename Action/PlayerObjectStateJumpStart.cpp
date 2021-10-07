@@ -4,6 +4,9 @@
 #include "PlayerObjectStateJumpStart.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	: JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
@@ -14,10 +17,19 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJumpStart::~PlayerObjectStateJumpStart()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 重力にデルタタイムをかけた値を代入
@@ -63,6 +75,12 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -73,6 +91,11 @@ void PlayerObjectStateJumpStart::Input(PlayerObject* _owner, const InputState& _
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -97,6 +120,11 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	inputDeadSpace = _owner->GetDeadSpace();
 }
 
+/*
+@fn 入力チェック関数処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpStart::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	//実際に動かしたい軸がずれているので補正
@@ -142,12 +170,20 @@ void PlayerObjectStateJumpStart::ChackInputProcess(PlayerObject* _owner, const I
 
 }
 
+/*
+@fn 入力がない場合の処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJumpStart::UninputMovableProcess(PlayerObject* _owner)
 {
 	// 移動入力フラグをfalseにセット
 	_owner->SetInputFlag(false);
 }
 
+/*
+@fn ジャンプ開始処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJumpStart::JumpStartProcess(PlayerObject* _owner)
 {
 	// ジャンプしている時間をフレームでカウント
@@ -181,6 +217,10 @@ void PlayerObjectStateJumpStart::JumpStartProcess(PlayerObject* _owner)
 	}
 }
 
+/*
+@fn ジャンプ終了準備処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJumpStart::JumpEndProcess(PlayerObject* _owner)
 {
 	// ジャンプボタン利用可能状態フラグをfalseにセット

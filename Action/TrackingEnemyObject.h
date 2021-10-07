@@ -16,8 +16,10 @@ public:
 	/*
 	@fn コンストラクタ
 	@param	ポジション
-	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
+	@param	移動速度
+	@param	追跡するオブジェクトのポインタ
+	@param	追跡エリアの値
 	*/
 	TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed,GameObject* _trackingObject, float _areaValue);
 
@@ -36,6 +38,8 @@ public:
 
 	/*
 	@fn めり込み判定
+	@param	自分のAABB
+	@param	相手のAABB
 	*/
 	void FixCollision(AABB& myAABB, const AABB& pairAABB)override;
 
@@ -44,6 +48,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

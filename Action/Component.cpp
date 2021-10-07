@@ -15,6 +15,10 @@ Component::Component(GameObject* _owner, int _updateOrder)
 	owner->AddComponent(this);
 }
 
+/*
+@fn デストラクタ
+@brief  componentの削除を行う
+*/
 Component::~Component()
 {
 	owner->RemoveComponent(this);

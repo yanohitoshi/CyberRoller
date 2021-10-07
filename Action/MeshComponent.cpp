@@ -58,6 +58,10 @@ void MeshComponent::Draw(Shader* _shader)
 	}
 }
 
+/*
+@brief　使用するtextureをセットする
+@param	_shader 使用するシェーダークラスのポインタ
+*/
 void MeshComponent::SetTextureToShader(Shader* shader)
 {
 	// メッシュテクスチャセット

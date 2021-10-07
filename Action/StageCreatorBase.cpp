@@ -7,6 +7,12 @@
 #include "EnemyObjectBase.h"
 #include "PushBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
+*/
 StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
@@ -40,6 +46,7 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 
 /*
 @fn デストラクタ
+@brief マップデータの削除を行う
 */
 StageCreatorBase::~StageCreatorBase()
 {
@@ -140,6 +147,13 @@ int StageCreatorBase::findLayerIndex(rapidjson::GenericArray<false, rapidjson::V
 	return i;
 }
 
+/*
+@fn プレイヤーを生産する関数
+@brief  プレイヤー用マップデータを用いてプレイヤーを生産する
+@param	_data マップデータ
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 {
 	// プレイヤーデータ内にプレイヤー生成情報があれば
@@ -154,20 +168,31 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 
 		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
 		GameObject::CreateMainCamera(pos, playerObject);
-
 	}
-
 }
 
+/*
+@fn 動く床のデータ構造体を生成する関数
+@param  どれくらいの距離動くのか
+@param　どの方向に動くのか
+@param　速度
+@param　どの方向に動くのか判別するためのタグ
+*/
 void StageCreatorBase::SetMoveBlockData(const Vector3 _distance, const Vector3 _direction, const float _speed, MoveDirectionTag _moveTag)
 {
 	moveBlockData.distance = _distance;
 	moveBlockData.direction = _direction;
 	moveBlockData.speed = _speed;
 	moveBlockData.tag = _moveTag;
-
 }
 
+/*
+@fn プッシュボードのデータ構造体を生成する関数
+@param  どれくらいの距離動くのか
+@param　どの方向に動くのか
+@param　速度
+@param　どの方向に動くのか判別するためのタグ
+*/
 void StageCreatorBase::SetPushBoxData(const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag)
 {
 	pushBoxData.distance = _distance;
@@ -177,6 +202,13 @@ void StageCreatorBase::SetPushBoxData(const Vector3& _distance, const Vector3& _
 	pushBoxData.tag = _moveTag;
 }
 
+/*
+@fn 動く敵のデータ構造体を生成する関数
+@param　速度
+@param　どの方向に動くのか
+@param  どれくらいの距離動くのか
+@param　どの方向に動くのか判別するためのタグ
+*/
 void StageCreatorBase::SetMoveEnemyData(const float _speed, const Vector3 _direction, const float _distance, MoveEnemyTag _moveTag)
 {
 	moveEnemyData.direction = _direction;
@@ -184,6 +216,3 @@ void StageCreatorBase::SetMoveEnemyData(const float _speed, const Vector3 _direc
 	moveEnemyData.speed = _speed;
 	moveEnemyData.tag = _moveTag;
 }
-
-
-

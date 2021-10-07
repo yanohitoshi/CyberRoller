@@ -121,6 +121,7 @@ enum MoveDirectionTag
 class GameObject
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@param	再利用するかどうかのフラグ
@@ -153,12 +154,14 @@ public:
 
 	/*
 	@fn 入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
+	@param	_keyState 入力情報
 	*/
 	void ProcessInput(const InputState& _keyState);
 
 	/*
 	@fn 入力を引数で受け取る更新関数
 	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 入力情報
 	*/
 	virtual void GameObjectInput(const InputState& _keyState);
 
@@ -202,16 +205,20 @@ public:
 
 	/*
 	@fn 静的なmainCameraを生成する
+	@param _pos ポジション
+	@param _playerObject 追従するプレイヤーのポインタ
 	*/
 	static void CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObject);
 
 	/*
 	@fn 静的なtitleCameraを生成する
+	@param _pos ポジション
 	*/
 	static void CreateTitleCamera(const Vector3 _pos);
 
 	/*
 	@fn 静的なtitleCameraを生成する
+	@param _pos ポジション
 	*/
 	static void CreateResultCamera(const Vector3 _pos);
 
@@ -231,6 +238,7 @@ protected:
 
 	std::function<void(GameObject&, PhysicsTag)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1, std::placeholders::_2); }
 	virtual void OnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag) {}
+
 	/*
 	@fn 衝突したことが確定したとき、めり込みを戻す関数
 	@param _movableBox 移動物体
@@ -295,6 +303,7 @@ private:
 	@param	追加するGameObjectのポインタ
 	*/
 	static void AddGameObject(GameObject* _object);
+
 	/*
 	@brief　GameObjectの削除
 	@param	削除するGameObjectのポインタ

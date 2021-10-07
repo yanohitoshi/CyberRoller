@@ -24,6 +24,7 @@ public:
 	@param	オブジェクト判別用tag
 	*/
 	WallBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag);
+
 	/*
 	@fn デストラクタ
 	@brief  objectの削除を行う
@@ -45,5 +46,4 @@ private:
 
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
-
 };

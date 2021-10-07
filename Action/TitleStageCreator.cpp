@@ -11,11 +11,12 @@
 #include "TitlePlayerObject.h"
 #include "TitleGroundObject.h"
 
-
 /*
-   @fn コンストラクタ
-   @brief block同士の間隔の初期化(offset)
- */
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
+*/
 TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, PlayerNumber(3)
@@ -27,8 +28,9 @@ TitleStageCreator::TitleStageCreator(bool _reUseGameObject, const Tag _objectTag
 }
 
 /*
-  @fn デストラクタ
- */
+@fn デストラクタ
+@brief マップデータの削除を行う
+*/
 TitleStageCreator::~TitleStageCreator()
 {
 	//マップデータの削除
@@ -36,6 +38,10 @@ TitleStageCreator::~TitleStageCreator()
 	titlePlayerData.clear();
 }
 
+/*
+@fn ファイルを開く
+@return 成功か否か
+*/
 bool TitleStageCreator::OpenFile()
 {
 
@@ -60,6 +66,9 @@ bool TitleStageCreator::OpenFile()
 	return false;
 }
 
+/*
+@fn ステージを生成する
+*/
 void TitleStageCreator::CreateStage()
 {
 	// 他クラスにプレイヤーのポジションを送るための変数
@@ -89,9 +98,15 @@ void TitleStageCreator::CreateStage()
 
 	// タイトル用カメラ生成
 	GameObject::CreateTitleCamera(sendPlayerPos);
-
 }
 
+/*
+@fn タイトルマップクリエイター
+@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+@param	_playerPos タイトルプレイヤーオブジェクトのポジション
+*/
 void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerPos)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -107,6 +122,12 @@ void TitleStageCreator::CreateTitleMap(int _indexX, int _indexY,Vector3 _playerP
 	}
 }
 
+/*
+@fn プレイヤークリエイター
+@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 Vector3 TitleStageCreator::CreatePlayer(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -125,5 +146,4 @@ Vector3 TitleStageCreator::CreatePlayer(int _indexX, int _indexY)
 
 	// プレイヤーのポジションを返す
 	return playerPos;
-
 }

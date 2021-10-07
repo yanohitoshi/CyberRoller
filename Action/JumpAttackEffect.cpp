@@ -1,5 +1,13 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "JumpAttackEffect.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 45, "Assets/Effect/Particle7.png", true)
 	, AddScale(1.0f)
@@ -16,10 +24,19 @@ JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 JumpAttackEffect::~JumpAttackEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void JumpAttackEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

@@ -1,9 +1,18 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ResultSwitchBaseObject.h"
 #include "MeshComponent.h"
 #include "Renderer.h"
 #include "ResultSwitchObject.h"
 
-ResultSwitchBaseObject::ResultSwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag)
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+*/
+ResultSwitchBaseObject::ResultSwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
 	, Angle(90.0f)
 {
@@ -30,10 +39,19 @@ ResultSwitchBaseObject::ResultSwitchBaseObject(const Vector3& _p, const Vector3&
 	
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ResultSwitchBaseObject::~ResultSwitchBaseObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ResultSwitchBaseObject::UpdateGameObject(float _deltaTime)
 {
 }

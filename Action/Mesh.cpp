@@ -25,7 +25,10 @@ namespace
 	};
 }
 
-
+/*
+@fn コンストラクタ
+@brief Meshクラスの生成
+*/
 Mesh::Mesh()
 	: vertexArray(nullptr)
 	, radius(0.0f)
@@ -40,6 +43,10 @@ Mesh::Mesh()
 
 }
 
+/*
+@fn デストラクタ
+@brief Meshクラスの削除
+*/
 Mesh::~Mesh()
 {
 }
@@ -287,6 +294,10 @@ Texture* Mesh::GetTexture(size_t _index)
 	}
 }
 
+/*
+@brief	textureステージごとのtextureIDのgetter関数
+@return textureステージごとのtextureID
+*/
 int Mesh::GetTextureID(TextureStage stage)
 {
 	// ステージごとのtextureを返す
@@ -319,4 +330,3 @@ int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, con
 	}
 	return 0;
 }
-

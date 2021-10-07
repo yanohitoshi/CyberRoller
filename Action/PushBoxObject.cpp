@@ -9,6 +9,13 @@
 #include "BoxCollider.h"
 #include "PushBoardObject.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param  プッシュボードを更新するのに使用するデータ構造体
+*/
 PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, PushBoxData _pushBoxData)
 	: GameObject(false, _objectTag)
 {
@@ -65,10 +72,19 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	}
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PushBoxObject::~PushBoxObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PushBoxObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す

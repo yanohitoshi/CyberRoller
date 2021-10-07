@@ -5,6 +5,13 @@
 #include "Renderer.h"
 #include "Shader.h"
 
+/*
+@fn コンストラクタ
+@brief  HDRRendererの生成を行う
+@param	fboWidth FBOの幅
+@param	fboHeight FBOの高さ
+@param	bloomLevel ブルームのレベル
+*/
 HDRRenderer::HDRRenderer(int fboWidth, int fboHeight, int bloomLevel)
 	: gaussianBlurShader(nullptr)
 	, downSamplingShader(nullptr)
@@ -44,6 +51,10 @@ HDRRenderer::HDRRenderer(int fboWidth, int fboHeight, int bloomLevel)
 	}
 }
 
+/*
+@fn デストラクタ
+@brief HDRRendererの削除を行う
+*/
 HDRRenderer::~HDRRenderer()
 {
 	// 後処理
@@ -63,6 +74,10 @@ HDRRenderer::~HDRRenderer()
 
 }
 
+/*
+@fn HDRのレコーディング開始関数
+@brief 描画対象をHdrFBOに変更しカラーバッファをクリアする
+*/
 void HDRRenderer::HdrRecordBegin()
 {
 	// 描画対象をHdrFBOに変更( HDRcolor + HDRHighBrightの２枚へ出力)
@@ -74,12 +89,20 @@ void HDRRenderer::HdrRecordBegin()
 
 }
 
+/*
+@fn HDRのレコーディング準備終了関数
+@brief 描画対象をスクリーンに戻す
+*/
 void HDRRenderer::HdrRecordEnd()
 {
 	// 描画対象をスクリーンへ戻す
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+/*
+@fn HiBrightBlur生成関数
+@brief ダウンサンプリングとガウスぼかしを行う
+*/
 void HDRRenderer::HiBrightBlurCreate()
 {
 	glDisable(GL_DEPTH_TEST);
@@ -169,6 +192,10 @@ void HDRRenderer::HiBrightBlurCreate()
 
 }
 
+/*
+@fn トーンマップとブライトブルーの合成関数
+@brief 元画像とBrightBlur画像を合成する
+*/
 void HDRRenderer::HdrTonemapAndBrightBlurCombine()
 {
 	// 元画像とガウスぼかし画像をすべて合成する
@@ -216,6 +243,10 @@ void HDRRenderer::HdrTonemapAndBrightBlurCombine()
 
 }
 
+/*
+@fn 深度情報のコピー関数
+@brief ガウスバッファの深度情報をスクリーンの深度バッファにコピーする
+*/
 void HDRRenderer::CopyDepthToScreen()
 {
 	// gBufferの深度をデフォルトの深度バッファにコピーする
@@ -231,6 +262,10 @@ void HDRRenderer::CopyDepthToScreen()
 
 }
 
+/*
+@fn HDRBufferの初期化関数
+@brief 浮動小数点ColorBufferを初期化する
+*/
 void HDRRenderer::InitHDRBuffers()
 {
 	/////////////////////////////////////////////////
@@ -271,6 +306,10 @@ void HDRRenderer::InitHDRBuffers()
 
 }
 
+/*
+@fn BlurBufferの初期化関数
+@brief blurFBOsとblurBufferTexsを初期化する
+*/
 void HDRRenderer::InitBlurBuffers()
 {
 	int w = bufferWidth;
@@ -308,6 +347,10 @@ void HDRRenderer::InitBlurBuffers()
 	}
 }
 
+/*
+@fn ScreenQuadVAOの初期化関数
+@brief スクリーン全体を描画する四角形を初期化する
+*/
 void HDRRenderer::InitScreenQuadVAO()
 {
 	// 画面全体書く用のVAO作成

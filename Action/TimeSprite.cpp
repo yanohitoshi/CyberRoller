@@ -6,6 +6,9 @@
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
+/*
+@brief	コンストラクタ
+*/
 TimeSprite::TimeSprite()
 	:GameObject(false, Tag::UI)
 {
@@ -20,10 +23,19 @@ TimeSprite::TimeSprite()
 	frameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TimeSprite::~TimeSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TimeSprite::UpdateGameObject(float _deltaTime)
 {
 	// タイムオーバーになったら描画を切る

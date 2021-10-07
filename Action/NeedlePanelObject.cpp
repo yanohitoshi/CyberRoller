@@ -9,6 +9,12 @@
 #include "BoxCollider.h"
 #include "NeedleObject.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+*/
 NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag) :
 	GameObject(false, _objectTag)
 {
@@ -30,10 +36,19 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	new NeedleObject(this, Vector3(0.0f, 0.0f, 50.0f), Vector3(2.5f, 2.5f, 2.0f), Tag::NEEDLE);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 NeedlePanelObject::~NeedlePanelObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void NeedlePanelObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す
@@ -42,9 +57,13 @@ void NeedlePanelObject::UpdateGameObject(float _deltaTime)
 	position = position + velocity * _deltaTime;
 	// ポジションを更新
 	SetPosition(position);
-
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void NeedlePanelObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら

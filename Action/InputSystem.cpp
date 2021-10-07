@@ -19,6 +19,11 @@ bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 	return currState[_keyCode] == 1;
 }
 
+/*
+@brief	指定したキーが押されたタイミングを判定する
+@param	SDL_Scancodeのキーコード
+@return	true : 押された , false : 押されていない
+*/
 bool KeyboardState::GetKeyDownValue(SDL_Scancode _keyCode) const
 {
 	if (prevState[_keyCode] == 0 && currState[_keyCode] == 1)
@@ -142,6 +147,12 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) co
 	}
 }
 
+/*
+@brief スティックの入力を0~32767で返す
+@param iAxis どのスティックのどの値を取得するか
+	   (左スティックのXを取得...SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_LEFTX)
+@return スティックの入力情報
+*/
 float ControllerState::GetAxisValue(const SDL_GameControllerAxis iAxis) const
 {
 	return axisValues[iAxis];

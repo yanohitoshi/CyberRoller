@@ -4,14 +4,26 @@
 #include "PlayerObjectStateRunStart.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateRunStart::PlayerObjectStateRunStart()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateRunStart::~PlayerObjectStateRunStart()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateRunStart::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
@@ -55,6 +67,12 @@ PlayerState PlayerObjectStateRunStart::Update(PlayerObject* _owner, float _delta
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -65,6 +83,11 @@ void PlayerObjectStateRunStart::Input(PlayerObject* _owner, const InputState& _k
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateRunStart::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

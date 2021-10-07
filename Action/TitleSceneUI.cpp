@@ -7,6 +7,10 @@
 #include "TitleBackGroundSprite.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+*/
 TitleSceneUI::TitleSceneUI()
 	: GameObject(false,UI)
 {
@@ -24,10 +28,19 @@ TitleSceneUI::TitleSceneUI()
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TitleSceneUI::~TitleSceneUI()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TitleSceneUI::UpdateGameObject(float _deltaTime)
 {
 }

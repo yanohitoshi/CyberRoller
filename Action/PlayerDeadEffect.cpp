@@ -1,5 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerDeadEffect.h"
 
+/*
+@fn コンストラクタ
+@param	親となるクラスのポインタ
+@param	ポジション
+@param	プレイヤーの体に位置を合わせるための間隔
+*/
 PlayerDeadEffect::PlayerDeadEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _distance)
 	: ParticleEffectBase(_pos, Vector3::Zero, 15, "Assets/Effect/Thunder_Thin.png", false)
 	, AddScale(4.0f)
@@ -20,10 +29,19 @@ PlayerDeadEffect::PlayerDeadEffect(GameObject* _owner, const Vector3& _pos, cons
 	RotateEffect();
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerDeadEffect::~PlayerDeadEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerDeadEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -56,6 +74,10 @@ void PlayerDeadEffect::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトの回転処理関数
+@brief	エフェクトの回転を行う
+*/
 void PlayerDeadEffect::RotateEffect()
 {
 	// X軸を回転
@@ -74,9 +96,13 @@ void PlayerDeadEffect::RotateEffect()
 
 }
 
+/*
+@fn 回転計算処理
+@param _axis 回転軸
+*/
 void PlayerDeadEffect::Rotation(const Vector3 _axis)
 {
-	//X軸をランダムな値回転させる
+	//ランダムな値回転させる
 	float radian = Math::ToRadians((float)(rand() % RandValue));
 	Quaternion rot = this->GetRotation();
 	Quaternion inc(_axis, radian);

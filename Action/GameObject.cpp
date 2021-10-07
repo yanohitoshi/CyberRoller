@@ -22,7 +22,9 @@ std::unordered_map<Tag, std::vector<GameObject*>> GameObject::gameObjectMap;
 bool GameObject::updatingGameObject = false;
 
 /*
-@param	ゲームクラスのポインタ
+@fn コンストラクタ
+@param	再利用するかどうかのフラグ
+@param	オブジェクト判別用tag
 */
 GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	: state(Active)
@@ -104,6 +106,7 @@ void GameObject::UpdateComponents(float _deltaTime)
 	}
 
 }
+
 /*
 @brief	ゲームオブジェクトのアップデート
 @param	最後のフレームを完了するのに要した時間
@@ -114,6 +117,7 @@ void GameObject::UpdateGameObject(float _deltaTime)
 
 /*
 @fn 入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
+@param	_keyState 入力情報
 */
 void GameObject::ProcessInput(const InputState& _keyState)
 {
@@ -129,6 +133,7 @@ void GameObject::ProcessInput(const InputState& _keyState)
 /*
 @fn 入力を引数で受け取る更新関数
 @brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 入力情報
 */
 void GameObject::GameObjectInput(const InputState & _keyState)
 {
@@ -168,6 +173,7 @@ void GameObject::RemoveComponent(Component * _component)
 		components.erase(itr);
 	}
 }
+
 /*
 @fn 現在の仕様上行うことができない処理を外部から強引に行うための関数
 @exsample ゲームオブジェクト全体の更新が停止中に対象のゲームオブジェクトを更新する
@@ -181,7 +187,6 @@ void GameObject::ExceptionUpdate()
 
 	ComputeWorldTransform();
 }
-
 
 /*
 @brief	Transformのワールド変換
@@ -205,6 +210,13 @@ void GameObject::ComputeWorldTransform()
 	}
 }
 
+/*
+@fn 押し戻し関数(仮想関数)
+@brief 押し戻しを行う
+@param myAABB 自分のAABB
+@param pairAABB 相手のAABB
+@param _pairTag 相手がなんのオブジェクトなのか見る用のTag
+*/
 void GameObject::FixCollision(const AABB & myAABB, const AABB & pairAABB, const Tag& _pairTag)
 {
 	Vector3 ment = Vector3(0, 0, 0);
@@ -212,28 +224,48 @@ void GameObject::FixCollision(const AABB & myAABB, const AABB & pairAABB, const 
 	SetPosition(GetPosition() + (ment));
 }
 
+/*
+@fn 静的なmainCameraを生成する
+@param _pos ポジション
+@param _playerObject 追従するプレイヤーのポインタ
+*/
 void GameObject::CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObject)
 {
 	mainCamera = new MainCameraObject(_pos,_playerObject);
 }
 
+/*
+@fn 静的なtitleCameraを生成する
+@param _pos ポジション
+*/
 void GameObject::CreateTitleCamera(const Vector3 _pos)
 {
 	titleCamera = new TitleCameraObject(_pos);
 }
 
+/*
+@fn 静的なtitleCameraを生成する
+@param _pos ポジション
+*/
 void GameObject::CreateResultCamera(const Vector3 _pos)
 {
 	resultCamera = new ResultCameraObject(_pos);
 }
 
+/*
+@brief　tagを使用してGameObjectを探すための関数
+@return	std::vector<GameObject*>を返す
+*/
 std::vector<GameObject*> GameObject::FindGameObject(Tag _tag)
 {
 	// Mapから必要なオブジェクト配列を探して返す
 	return gameObjectMap.find(_tag)->second;
 }
 
-
+/*
+@brief　GameObjectの追加
+@param	追加するGameObjectのポインタ
+*/
 void GameObject::AddGameObject(GameObject* _object)
 {
 	// 途中で追加されたオブジェクトを一度一時追加用配列に追加
@@ -258,6 +290,10 @@ void GameObject::AddGameObject(GameObject* _object)
 	}
 }
 
+/*
+@brief　GameObjectの削除
+@param	削除するGameObjectのポインタ
+*/
 void GameObject::RemoveGameObject(GameObject* _object)
 {
 	// 途中追加用配列に対象のオブジェクトがあった場合削除する
@@ -279,6 +315,9 @@ void GameObject::RemoveGameObject(GameObject* _object)
 
 }
 
+/*
+@brief　使用した全てのGameObjectの削除
+*/
 void GameObject::RemoveUsedGameObject()
 {
 	// 現在シーン上に作られているオブジェクトを全て削除する
@@ -293,9 +332,11 @@ void GameObject::RemoveUsedGameObject()
 	gameObjectMap.clear();
 }
 
-
-// forwardベクトルの向きに回転する
-// in forward : 向かせたい前方方向ベクトル
+/*
+@fn オブジェクトの回転を計算する関数
+@brief 前方ベクトルを使用してオブジェクトを回転させる
+@param forward 前方ベクトル
+*/
 void GameObject::RotateToNewForward(const Vector3& forward)
 {
 	// X軸ベクトル(1,0,0)とforwardの間の角度を求める
@@ -320,6 +361,12 @@ void GameObject::RotateToNewForward(const Vector3& forward)
 	}
 }
 
+/*
+@fn 衝突したことが確定したとき、めり込みを戻す関数
+@param _movableBox 移動物体
+@param _fixedBox 移動しない物体
+@param _calcFixVec 移動物体の補正差分ベクトル
+*/
 void GameObject::CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	// 速度ベクトル初期化

@@ -4,14 +4,26 @@
 #include "PlayerObjectStateRespown.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateRespown::PlayerObjectStateRespown()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateRespown::~PlayerObjectStateRespown()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateRespown::Update(PlayerObject* _owner, float _deltaTime)
 {
 
@@ -27,10 +39,11 @@ PlayerState PlayerObjectStateRespown::Update(PlayerObject* _owner, float _deltaT
 	return state;
 }
 
-void PlayerObjectStateRespown::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateRespown::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

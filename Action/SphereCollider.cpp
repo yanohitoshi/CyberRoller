@@ -7,7 +7,7 @@
 #include "Collision.h"
 #include "Game.h"
 
-/**
+/*
 @brief	コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
 @param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
@@ -22,7 +22,7 @@ SphereCollider::SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFu
 	PHYSICS->AddSphere(this, _func);
 }
 
-/**
+/*
 @brief	デストラクタ
 */
 SphereCollider::~SphereCollider()
@@ -30,20 +30,23 @@ SphereCollider::~SphereCollider()
 	PHYSICS->SelectRemoveSpheres(this);
 }
 
-/**
+/*
 @brief	Transformのワールド変換
 */
 void SphereCollider::OnUpdateWorldTransform()
 {
-	refreshWorldTransform();
+	RefreshWorldTransform();
 	PHYSICS->HitCheck(this);	
 }
 
-void SphereCollider::refreshWorldTransform()
+/*
+@brief	Transformのワールド変換
+押し戻しが行われた直後にObjectのworldSphereを更新
+*/
+void SphereCollider::RefreshWorldTransform()
 {
 	//ワールド座標での中心位置を更新する
 	worldSphere.center = objectSphere.center + owner->GetPosition();
 	//ワールド空間での球の大きさを更新する
 	worldSphere.radius = objectSphere.radius * owner->GetScale();
-
 }

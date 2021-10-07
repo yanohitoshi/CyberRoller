@@ -14,6 +14,7 @@ class FireWorksEffectManager :
     public GameObject
 {
 public:
+
     /*
     @fn コンストラクタ
     @param	_owner 親クラスのポインタ

@@ -5,6 +5,9 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 
+/*
+@fn シーン開始時のライトアップ関数
+*/
 void BaseScene::StartSceneLightUpProcess()
 {
 	// ライトの数値を明るくする
@@ -22,6 +25,10 @@ void BaseScene::StartSceneLightUpProcess()
 	}
 }
 
+/*
+@fn クリアしたかのチェックとクリアカウントを数える処理関数
+@param _playerObject シーンに存在するプレイヤーのポインタ
+*/
 void BaseScene::SceneClearCountProcess(PlayerObject* _playerObject)
 {
 	if (_playerObject->GetClearFlag() == true)
@@ -32,6 +39,10 @@ void BaseScene::SceneClearCountProcess(PlayerObject* _playerObject)
 	}
 }
 
+/*
+@fn コンティニュー選択処理関数
+@param _inputState 入力情報
+*/
 void BaseScene::ContinueSelectProcess(const InputState& state)
 {
 	// ライト固定
@@ -55,6 +66,9 @@ void BaseScene::ContinueSelectProcess(const InputState& state)
 	}
 }
 
+/*
+@fn コンティニュー選択時のライト遷移関数
+*/
 void BaseScene::LightTransitionAtContinue()
 {
 	// 遷移カウント開始
@@ -80,6 +94,10 @@ void BaseScene::LightTransitionAtContinue()
 	}
 }
 
+/*
+@fn コンティニュー選択後のシーンステータス変更処理関数
+@param _nowScene コンティニューが選択された場合そのシーンのステータスが必要なため今のステータスをもらう
+*/
 void BaseScene::SceneStateChangeAtContinue(SceneState _nowScene)
 {
 	// コンテニューだったらステージ最初へゲームオーバーだったらリザルト画面へ

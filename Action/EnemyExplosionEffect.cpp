@@ -1,5 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyExplosionEffect.h"
 
+/*
+@fn コンストラクタ
+@param	親となるクラスのポインタ
+@param	ポジション
+@param	移動速度
+*/
 EnemyExplosionEffect::EnemyExplosionEffect(GameObject* _owner, const Vector3& _pos,const Vector3& _velocity)
 	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Fog3002.png", true)
 	, AddScale(8.0f)
@@ -20,10 +29,19 @@ EnemyExplosionEffect::EnemyExplosionEffect(GameObject* _owner, const Vector3& _p
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 EnemyExplosionEffect::~EnemyExplosionEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void EnemyExplosionEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -55,4 +73,3 @@ void EnemyExplosionEffect::UpdateGameObject(float _deltaTime)
 		state = State::Dead;
 	}
 }
-

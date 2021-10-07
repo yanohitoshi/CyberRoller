@@ -11,6 +11,13 @@
 #include "GameClearEffectManager.h"
 #include "CrystalEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	プレイヤーのポインタ
+@param	シーンの最後の動く壁オブジェクトのポインタ
+*/
 ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock)
 	: GameObject(false,_objectTag)
 	, playerObject(_playerObject)
@@ -53,10 +60,19 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ClearPointObject::~ClearPointObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ClearPointObject::UpdateGameObject(float _deltaTime)
 {
 	if (playerObject->GetClearFlag() == true)
@@ -76,6 +92,9 @@ void ClearPointObject::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn 回転処理関数
+*/
 void ClearPointObject::RotationProcess()
 {
 	//Z軸を10度回転させる
@@ -86,6 +105,9 @@ void ClearPointObject::RotationProcess()
 	SetRotation(target);
 }
 
+/*
+@fn 可動処理関数
+*/
 void ClearPointObject::MovableProcess()
 {
 	// ポジションに速度を足す
@@ -94,7 +116,11 @@ void ClearPointObject::MovableProcess()
 	SetPosition(position);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void ClearPointObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 }
-

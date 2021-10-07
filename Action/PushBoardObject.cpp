@@ -9,6 +9,13 @@
 #include "BoxCollider.h"
 #include "PushBoxObject.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param  プッシュボードを更新するのに使用するデータ構造体
+*/
 PushBoardObject::PushBoardObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, PushBoxData _pushBoxData)
 	:GameObject(false, _objectTag)
 	, MoveSpeed(_pushBoxData.speed)
@@ -41,10 +48,19 @@ PushBoardObject::PushBoardObject(const Vector3& _p, const Vector3& _size, const 
 	boxCollider->SetObjectBox(mesh->GetBox());
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PushBoardObject::~PushBoardObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PushBoardObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す
@@ -63,6 +79,9 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position);
 }
 
+/*
+@fn 反転チェック処理関数
+*/
 void PushBoardObject::ChackInversionProcess()
 {
 	// 動く方向のタグを見て処理を変える
@@ -83,6 +102,9 @@ void PushBoardObject::ChackInversionProcess()
 	}
 }
 
+/*
+@fn 可動処理関数
+*/
 void PushBoardObject::MovableProcess()
 {
 	// 速度を反転するかどうかを判定
@@ -98,6 +120,9 @@ void PushBoardObject::MovableProcess()
 	}
 }
 
+/*
+@fn X軸反転チェック処理関数
+*/
 void PushBoardObject::ChackAxisX()
 {
 	// 到達点に達していたら反転
@@ -113,6 +138,9 @@ void PushBoardObject::ChackAxisX()
 	}
 }
 
+/*
+@fn Y軸反転チェック処理関数
+*/
 void PushBoardObject::ChackAxisY()
 {
 	// 到達点に達していたら反転
@@ -128,6 +156,9 @@ void PushBoardObject::ChackAxisY()
 	}
 }
 
+/*
+@fn Z軸反転チェック処理関数
+*/
 void PushBoardObject::ChackAxisZ()
 {
 	// 到達点に達していたら反転

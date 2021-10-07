@@ -12,8 +12,9 @@ Matrix4 ParticleComponent::staticBillboardMat;
 Vector3 ParticleComponent::staticCameraWorldPos;
 
 /*
- @param _offset 親オブジェクトクラスと画像を描画する位置の差
- @param _scale 画像の描画サイズ
+@fn コンストラクタ
+@param _offset 親オブジェクトクラスと画像を描画する位置の差
+@param _scale 画像の描画サイズ
 */
 ParticleComponent::ParticleComponent(GameObject* _owner, bool _useStaticBillboardMat,const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
@@ -94,7 +95,9 @@ bool ParticleComponent::operator>(const ParticleComponent& rhs) const
 	return lenThis > lenRhs;
 }
 
-
+/*
+@return ビルボード行列(Matrix4)
+*/
 Matrix4 GetBillboardMatrix()
 {
 	Matrix4 ret;

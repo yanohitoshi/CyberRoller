@@ -45,7 +45,6 @@ private:
     */
     void ActiveSmallWallEffectProcess();
 
-
     /*
     @fn 動く壁のエフェクトを生成するの処理
     @param _maxEffect 最大エフェクト数

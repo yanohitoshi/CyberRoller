@@ -4,6 +4,10 @@
 #include "SwitchEffectMakeManeger.h"
 #include "SwitchParticleEffect.h"
 
+/*
+@fn コンストラクタ
+@param	親クラスのポインタ
+*/
 SwitchEffectMakeManeger::SwitchEffectMakeManeger(GameObject* _owner)
 	: GameObject(false,Tag::PARTICLE)
 	, SecondCorrectionValue(2.0f)
@@ -22,10 +26,19 @@ SwitchEffectMakeManeger::SwitchEffectMakeManeger(GameObject* _owner)
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SwitchEffectMakeManeger::~SwitchEffectMakeManeger()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 {
 	// ownerのフラグを保存
@@ -69,6 +82,9 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void SwitchEffectMakeManeger::ActiveEffectProcess()
 {
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
@@ -96,6 +112,9 @@ void SwitchEffectMakeManeger::ActiveEffectProcess()
 
 }
 
+/*
+@fn エフェクトを飛ばす方向計算処理関数
+*/
 void SwitchEffectMakeManeger::CalculatingDirectionProcess(int _index, Vector3& _velocity)
 {
 	// 2・3の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
@@ -122,4 +141,3 @@ void SwitchEffectMakeManeger::CalculatingDirectionProcess(int _index, Vector3& _
 	}
 
 }
-

@@ -7,6 +7,10 @@
 #include <fstream>
 #include <sstream>
 
+/*
+@fn コンストラクタ
+@brief Shaderクラスの生成を行う
+*/
 Shader::Shader()
 	:vertexShader(0)
 	, fragShader(0)
@@ -14,6 +18,10 @@ Shader::Shader()
 {
 }
 
+/*
+@fn デストラクタ
+@brief Shaderクラスの削除を行う
+*/
 Shader::~Shader()
 {
 }
@@ -111,13 +119,17 @@ void Shader::SetFloatUniform(const char * _name, const float & _value)
     glUniform1f(loc, _value);
 }
 
+/*
+@brief	intのUniform変数を設定する
+@param	_name 設定するUniform変数名
+@param	_value 設定するfloat
+*/
 void Shader::SetIntUniform(const char* name, int value)
 {
 	GLuint loc = glGetUniformLocation(shaderProgram, name);
 	// int値をシェーダー変数に送る
 	glUniform1i(loc, value);
 }
-
 
 /*
 @brief	シェーダーをコンパイルする
@@ -199,26 +211,3 @@ bool Shader::IsVaildProgram()
 	}
 	return true;
 }
-
-
-
-//シェーダー用関数
-//void glUniform1f(GLint location, GLfloat v0);
-//void glUniform1fv(GLint location, GLsizei count, const GLfloat* value);
-//void glUniform1i(GLint location, GLint v0);
-//void glUniform1iv(GLint location, GLsizei count, const GLint* value);
-//void glUniform2f(GLint location, GLfloat v0, GLfloat v1);
-//void glUniform2fv(GLint location, GLsizei count, const GLfloat* value);
-//void glUniform2i(GLint location, GLint v0, GLint v1);
-//void glUniform2iv(GLint location, GLsizei count, const GLint* value);
-//void glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-//void glUniform3fv(GLint location, GLsizei count, const GLfloat* value);
-//void glUniform3i(GLint location, GLint v0, GLint v1, GLint v2);
-//void glUniform3iv(GLint location, GLsizei count, const GLint* value);
-//void glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-//void glUniform4fv(GLint location, GLsizei count, const GLfloat* value);
-//void glUniform4i(GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-//void glUniform4iv(GLint location, GLsizei count, const GLint* value);
-//void glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-//void glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-//void glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);

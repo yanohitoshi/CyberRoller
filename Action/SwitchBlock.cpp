@@ -15,7 +15,13 @@
 #include "FirstStageUI.h"
 #include <string>
 
-
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param	チュートリアル用スイッチかどうかフラグ
+*/
 SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag,bool _isTutorial)
 	: GameObject(false, _objectTag)
 	, MoveUpSpeed(150.0f)
@@ -71,10 +77,19 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SwitchBlock::~SwitchBlock()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SwitchBlock::UpdateGameObject(float _deltaTime)
 {
 	// 当たり判定用のworld上のAABBを取得
@@ -98,7 +113,9 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 
 }
 
-
+/*
+@fn 可動処理関数
+*/
 void SwitchBlock::MovableProcess()
 {
 	// スイッチの可動処理
@@ -133,6 +150,9 @@ void SwitchBlock::MovableProcess()
 	}
 }
 
+/*
+@fn 色変更処理
+*/
 void SwitchBlock::ColorChangeProcess()
 {
 	// 前のフレームで色の変換が起きたかフラグを保存
@@ -166,6 +186,9 @@ void SwitchBlock::ColorChangeProcess()
 	SetColorProcess();
 }
 
+/*
+@fn 色セット処理
+*/
 void SwitchBlock::SetColorProcess()
 {
 	// スイッチの状態を見て色を変更
@@ -186,6 +209,10 @@ void SwitchBlock::SetColorProcess()
 	}
 }
 
+/*
+@fn タグごとのスイッチの状態チェック関数
+@param _Tag チェックするスイッチのTag
+*/
 void SwitchBlock::ChackOnFlag(Tag& _Tag)
 {
 	// 調べるスイッチの可変長配列を保存するための配列
@@ -216,6 +243,12 @@ void SwitchBlock::ChackOnFlag(Tag& _Tag)
 
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+	動く床と接している時にその速度をもらうための
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトがプレイヤーだったら
@@ -246,6 +279,12 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _ph
 
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+	プレイヤーの足元判定とのOnCollision
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)
 {
 }

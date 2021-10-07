@@ -1,12 +1,25 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateBase.h"
 #include "CountDownFont.h"
 
+/*
+@fn 地面移動処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateBase::GroundMove(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力情報チェック処理
 	ChackInputProcess(_owner, _keyState);
 }
 
+/*
+@fn 入力チェック処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _keyState)
 {
 
@@ -41,6 +54,10 @@ void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _
 	}
 }
 
+/*
+@fn 死亡状態か確認する関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateBase::ChackDeadFlag(PlayerObject* _owner)
 {
 	// 死亡フラグが立っていたら
@@ -50,6 +67,9 @@ void PlayerObjectStateBase::ChackDeadFlag(PlayerObject* _owner)
 	}
 }
 
+/*
+@fn タイムオーバーか確認する関数
+*/
 void PlayerObjectStateBase::ChackTimeOverFlag()
 {
 	// タイムオーバーフラグがtrueだったら
@@ -60,6 +80,12 @@ void PlayerObjectStateBase::ChackTimeOverFlag()
 	}
 }
 
+/*
+@fn 回転処理関数
+@param	_owner 親クラスのポインタ
+@param	_forward 回転させる方向ベクトル
+@param	_tmpForward 回転させる前の方向ベクトル
+*/
 void PlayerObjectStateBase::RotationProcess(PlayerObject* _owner, Vector3 _forward, Vector3 _tmpForward)
 {
 	//前のフレームと今のフレームの前方ベクトルで線形補間を取る
@@ -71,6 +97,10 @@ void PlayerObjectStateBase::RotationProcess(PlayerObject* _owner, Vector3 _forwa
 	_owner->SetCharaForwardVec(rotatioin);
 }
 
+/*
+@fn アナログスティック処理関数
+@param	_keyState 入力情報
+*/
 Vector3 PlayerObjectStateBase::ChackControllerAxis(const InputState& _keyState)
 {
 	//Axisの値をとる32700~-32700
@@ -88,6 +118,11 @@ Vector3 PlayerObjectStateBase::ChackControllerAxis(const InputState& _keyState)
 	return axis;
 }
 
+/*
+@fn 入力チェック関数処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateBase::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	// コントローラのアナログスティックの入力情報を計算する
@@ -117,6 +152,11 @@ void PlayerObjectStateBase::ChackInputProcess(PlayerObject* _owner, const InputS
 	}
 }
 
+/*
+@fn 入力がある場合の処理関数
+@param	_owner 親クラスのポインタ
+@param	_axis 補正済みのアナログスティック情報
+*/
 void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _axis)
 {
 	// 前のフレームのキャラクターの前方ベクトルを保存
@@ -164,6 +204,11 @@ void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _a
 	_owner->SetMoveSpeed(moveSpeed);
 }
 
+/*
+@fn ジャンプ系のステータスの時入力がある場合の処理関数
+@param	_owner 親クラスのポインタ
+@param	_axis 補正済みのアナログスティック情報
+*/
 void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector3 _axis)
 {
 	// 前のフレームのキャラクターの前方ベクトルを保存
@@ -206,12 +251,20 @@ void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector
 	_owner->SetMoveSpeed(moveSpeed);
 }
 
+/*
+@fn 入力がない場合の処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateBase::UninputMovableProcess(PlayerObject* _owner)
 {
 	// 移動入力フラグをfalseにセット
 	_owner->SetInputFlag(false);
 }
 
+/*
+@fn ジャンプ状態に遷移するための準備処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateBase::JumpTransitionProcess(PlayerObject* _owner)
 {
 	// ジャンプフラグをtrueにセット

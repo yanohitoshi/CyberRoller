@@ -3,6 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "SwitchParticleEffect.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Star.png",true)
 	, AddScale(1.0f)
@@ -18,10 +23,19 @@ SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _
 	speed = 20.0f;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SwitchParticleEffect::~SwitchParticleEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SwitchParticleEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

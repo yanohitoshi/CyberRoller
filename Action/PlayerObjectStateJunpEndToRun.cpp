@@ -4,15 +4,27 @@
 #include "PlayerObjectStateJunpEndToRun.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJunpEndToRun::PlayerObjectStateJunpEndToRun()
 	: DecelerationForce(75.0f)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJunpEndToRun::~PlayerObjectStateJunpEndToRun()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _deltaTime)
 {
 
@@ -60,6 +72,12 @@ PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _d
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -70,6 +88,11 @@ void PlayerObjectStateJunpEndToRun::Input(PlayerObject* _owner, const InputState
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -100,6 +123,11 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 
 }
 
+/*
+@fn 入力チェック関数処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJunpEndToRun::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	//実際に動かしたい軸がずれているので補正
@@ -129,6 +157,11 @@ void PlayerObjectStateJunpEndToRun::ChackInputProcess(PlayerObject* _owner, cons
 	}
 }
 
+/*
+@fn 入力がある場合の処理関数
+@param	_owner 親クラスのポインタ
+@param	_axis 補正済みのアナログスティック情報
+*/
 void PlayerObjectStateJunpEndToRun::InputMovableProcess(PlayerObject* _owner, Vector3 _axis)
 {
 	// 前のフレームのキャラクターの前方ベクトルを保存
@@ -160,6 +193,10 @@ void PlayerObjectStateJunpEndToRun::InputMovableProcess(PlayerObject* _owner, Ve
 
 }
 
+/*
+@fn 入力がない場合の処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJunpEndToRun::UninputMovableProcess(PlayerObject* _owner)
 {
 	// 速度が0.0f以上だったら
@@ -178,6 +215,10 @@ void PlayerObjectStateJunpEndToRun::UninputMovableProcess(PlayerObject* _owner)
 
 }
 
+/*
+@fn ジャンプ状態に遷移するための準備処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJunpEndToRun::JumpTransitionProcess(PlayerObject* _owner)
 {
 	// ジャンプフラグをtrueにセット

@@ -1,14 +1,28 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "MoveEnemyObjectStateMoving.h"
 
-
+/*
+@fn コンストラクタ
+*/
 MoveEnemyObjectStateMoving::MoveEnemyObjectStateMoving()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 MoveEnemyObjectStateMoving::~MoveEnemyObjectStateMoving()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 移動処理
@@ -49,6 +63,11 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void MoveEnemyObjectStateMoving::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -67,6 +86,11 @@ void MoveEnemyObjectStateMoving::Enter(EnemyObjectBase* _owner, float _deltaTime
 	RotationProcess(_owner, moveDirection, _owner->GetCharaForwardVec());
 }
 
+/*
+@fn 移動処理関数
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void MoveEnemyObjectStateMoving::Move(EnemyObjectBase* _owner, float _deltaTime)
 {
 	velocity = moveDirection * moveSpeed;

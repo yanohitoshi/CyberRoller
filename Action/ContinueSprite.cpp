@@ -11,6 +11,9 @@
 bool ContinueSprite::drawFlag = true;
 bool ContinueSprite::continueFlag = true;
 
+/*
+@brief	コンストラクタ
+*/
 ContinueSprite::ContinueSprite()
 	:GameObject(false, Tag::UI)
 	, DrawCount(60)
@@ -29,6 +32,10 @@ ContinueSprite::ContinueSprite()
 	visibleFlag = true;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ContinueSprite::~ContinueSprite()
 {
 	// 静的メンバー初期化
@@ -36,6 +43,11 @@ ContinueSprite::~ContinueSprite()
 	continueFlag = true;
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ContinueSprite::UpdateGameObject(float _deltaTime)
 {
 	// タイムアップ状態中タイムアップ画像の描画が終わったら描画する
@@ -46,6 +58,10 @@ void ContinueSprite::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@brief	入力
+@param	入力情報
+*/
 void ContinueSprite::GameObjectInput(const InputState& _keyState)
 {
 	// タイムアップ画像の描画が終わってコンテニュー画像描画開始から一定時間たっていたら
@@ -55,6 +71,10 @@ void ContinueSprite::GameObjectInput(const InputState& _keyState)
 	}
 }
 
+/*
+@brief	入力情報を元に描画を切り替える
+@param	入力情報
+*/
 void ContinueSprite::ChackKeyProcess(const InputState& _keyState)
 {
 	// Aボタンが押されたら

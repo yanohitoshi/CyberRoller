@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "JumpAttackPlayerObject.h"
 #include "MeshComponent.h"
 #include "Renderer.h"
@@ -6,6 +9,12 @@
 #include "JumpAttackEffectManager.h"
 #include "PlayerAttackHitEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクトのサイズ
+@param	オブジェクト判別用tag
+*/
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
 	, Rotation(10.0f)
@@ -35,10 +44,19 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	new PlayerAttackHitEffectManager(ownerObject);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 JumpAttackPlayerObject::~JumpAttackPlayerObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 {
 	if (ownerObject->GetNowState() == PlayerState::PLAYER_STATE_JUMP_ATTACK)
@@ -68,6 +86,11 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	if (_hitObject.GetTag() == Tag::ENEMY)

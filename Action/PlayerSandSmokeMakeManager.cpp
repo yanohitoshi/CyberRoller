@@ -5,6 +5,10 @@
 #include "PlayerSandSmokeEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, GenerateSpeedValue(600.0f)
@@ -19,10 +23,19 @@ PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(PlayerObject* _owner)
 	ownerState = owner->GetNowState();
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerSandSmokeMakeManager::~PlayerSandSmokeMakeManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerSandSmokeMakeManager::UpdateGameObject(float _deltaTime)
 {
 	ownerState = owner->GetNowState();
@@ -59,6 +72,9 @@ void PlayerSandSmokeMakeManager::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void PlayerSandSmokeMakeManager::ActiveEffectProcess()
 {
 	// ownerのポジションを得る
@@ -79,6 +95,9 @@ void PlayerSandSmokeMakeManager::ActiveEffectProcess()
 
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void PlayerSandSmokeMakeManager::GenerateEffectProcess()
 {
 	// 生成した数を数える
@@ -107,6 +126,9 @@ void PlayerSandSmokeMakeManager::GenerateEffectProcess()
 	new PlayerSandSmokeEffect(effectPosition, vel);
 }
 
+/*
+@fn エフェクトのポジションを右にずらす関数
+*/
 void PlayerSandSmokeMakeManager::ShiftRightEffectPosition()
 {
 	// 一度positionを保存
@@ -132,6 +154,9 @@ void PlayerSandSmokeMakeManager::ShiftRightEffectPosition()
 
 }
 
+/*
+@fn エフェクトのポジションを左にずらす関数
+*/
 void PlayerSandSmokeMakeManager::ShiftLeftEffectPosition()
 {
 	// 一度positionを保存

@@ -8,6 +8,13 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param	ライト付か否か
+*/
 GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, bool _isLight)
 	: GameObject(false, _objectTag)
 {
@@ -42,10 +49,19 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 GroundObject::~GroundObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void GroundObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す

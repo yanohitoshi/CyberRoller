@@ -18,6 +18,7 @@ public:
 
     /*
     @fn コンストラクタ
+    @param	親となるクラスのポインタ
     @param	ポジション
     @param	移動速度
     */

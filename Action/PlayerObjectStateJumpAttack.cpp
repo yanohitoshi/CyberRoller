@@ -1,16 +1,31 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpAttack.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack()
 	: AttackSpeed(3000.0f)
 	, UnSelectTargetAttackTime(15)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJumpAttack::~PlayerObjectStateJumpAttack()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// ターゲットを捉えていてかつターゲットがActiveだったら
@@ -44,10 +59,11 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 	return state;
 }
 
-void PlayerObjectStateJumpAttack::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// stateをジャンプ攻撃状態にして保存

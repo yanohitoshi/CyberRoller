@@ -1,6 +1,17 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectBase.h"
 #include "EnemyDeadEffectManager.h"
 
+/*
+@fn コンストラクタ
+@brief 通常のエネミーのコンストラクタ
+@param	ポジション
+@param	再利用するかフラグ
+@param	オブジェクト判別用tag
+@param	追跡対象
+*/
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
@@ -18,6 +29,16 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	new EnemyDeadEffectManager(this);
 }
 
+/*
+@fn コンストラクタ
+@brief 移動するエネミーのコンストラクタ
+@param	ポジション
+@param	再利用するかフラグ
+@param	オブジェクト判別用tag
+@param	移動速度
+@param	移動方向
+@param	移動距離
+*/
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
@@ -40,6 +61,15 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	new EnemyDeadEffectManager(this);
 }
 
+/*
+@fn コンストラクタ
+@brief 移動するエネミーのコンストラクタ
+@param	ポジション
+@param	再利用するかフラグ
+@param	オブジェクト判別用tag
+@param	移動速度
+@param	追跡対象
+*/
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
@@ -61,6 +91,11 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	new EnemyDeadEffectManager(this);
 }
 
+/*
+@fn Animationのgetter関数
+@param _state 現在のエネミーのステータス
+@return Animation Animationクラスのポインタを返す
+*/
 const Animation* EnemyObjectBase::GetAnimation(EnemyState _state)
 {
 	// _state番目のアニメーションを返す

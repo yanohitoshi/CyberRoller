@@ -4,6 +4,11 @@
 #include "GameClearEffect.h"
 #include "FireWorksEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(10.0f)
@@ -22,10 +27,19 @@ GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 GameClearEffect::~GameClearEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void GameClearEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

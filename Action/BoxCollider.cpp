@@ -7,7 +7,7 @@
 #include "Collision.h"
 #include "Game.h"
 
-/**
+/*
 @brief	コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
 @param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
@@ -23,7 +23,7 @@ BoxCollider::BoxCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _fu
 	PHYSICS->AddBox(this,_func);
 }
 
-/**
+/*
 @brief	デストラクタ
 */
 BoxCollider::~BoxCollider()
@@ -31,16 +31,20 @@ BoxCollider::~BoxCollider()
 	PHYSICS->SelectRemoveBoxes(this);
 }
 
-/**
+/*
 @brief	Transformのワールド変換
 */
 void BoxCollider::OnUpdateWorldTransform()
 {
-	refreshWorldTransform();
+	RefreshWorldTransform();
 	PHYSICS->HitCheck(this);
 }
 
-void BoxCollider::refreshWorldTransform()
+/*
+@brief	Transformのワールド変換
+押し戻しが行われた直後にObjectのworldBoxを更新
+*/
+void BoxCollider::RefreshWorldTransform()
 {
 	worldBox = objectBox;
 
@@ -56,4 +60,3 @@ void BoxCollider::refreshWorldTransform()
 	worldBox.max += owner->GetPosition();
 
 }
-

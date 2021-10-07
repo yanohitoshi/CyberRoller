@@ -25,11 +25,13 @@ class ParticleEffectBase :
 	public GameObject
 {
 public:
+
 	/*
 	@param _pos オブジェクトの生成場所
 	@param _velocity オブジェクトの移動量
 	@param _lifeCount オブジェクトの生存時間
 	@param _spriteFileName 画像へのアドレス
+	@param _useStaticBillboardMat StaticBillboardMatを使用して回転計算を行うかどうか
 	@param _scale 画像の拡大サイズ(デフォルトの値は10)
 	*/
 	ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, bool _useStaticBillboardMat,const float& _scale = 16.0f);

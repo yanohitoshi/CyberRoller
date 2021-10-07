@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "MoveEnemyObject.h"
 #include "Renderer.h"
 #include "SkeletalMeshComponent.h"
@@ -12,6 +15,13 @@
 #include "EnemyAttackArea.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	追跡対象のオブyジェクトのポインタ
+@param	左右に移動する敵が固有で持つデータ構造体
+*/
 MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
 	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveEnemyData)
 {
@@ -70,10 +80,19 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Game
 	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 MoveEnemyObject::~MoveEnemyObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	if (isAttack && !isDeadFlag)
@@ -107,10 +126,10 @@ void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 	isAttack = false;
 }
 
-void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
-{
-}
-
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+*/
 void MoveEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)

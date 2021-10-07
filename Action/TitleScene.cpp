@@ -9,6 +9,10 @@
 #include "TitleStageCreator.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 TitleScene::TitleScene()
 {
 	// ライト情報初期化
@@ -33,13 +37,22 @@ TitleScene::TitleScene()
 
 	// シーンUIを追加
 	new TitleSceneUI();
-
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 TitleScene::~TitleScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState TitleScene::Update(const InputState& _inputState)
 {
 	// トリガーの情報を変数に入れる
@@ -69,6 +82,4 @@ SceneState TitleScene::Update(const InputState& _inputState)
 
 	// 更新後のシーンステータスを返す
 	return state;
-
 }
-

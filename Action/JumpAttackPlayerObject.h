@@ -21,7 +21,7 @@ public:
 	/*
 	@fn コンストラクタ
 	@param	ポジション
-	@param	再利用するかフラグ
+	@param	オブジェクトのサイズ
 	@param	オブジェクト判別用tag
 	*/
 	JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag);
@@ -42,6 +42,7 @@ public:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

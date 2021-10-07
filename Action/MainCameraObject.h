@@ -17,9 +17,11 @@ class MainCameraObject :
 	public CameraObjectBase
 {
 public:
+
 	/*
 	@brief	コンストラクタ
 	@param	ポジション
+	@param	プレイヤーのポインタ
 	*/
 	MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject);
 
@@ -39,6 +41,7 @@ public:
 	/*
 	@fn 入力を引数で受け取る更新関数
 	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 入力情報
 	*/
 	void GameObjectInput(const InputState& _keyState)override;
 
@@ -63,7 +66,7 @@ public:
 	@param 相手のAABB
 	@param 押し戻し量
 	*/
-	void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
+	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 	
 	/*
 	@brief	player以外のものを注視する際に使うsetter
@@ -148,6 +151,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

@@ -9,6 +9,10 @@
 #include "ThirdStageUI.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 ThirdStageScene::ThirdStageScene()
 {
 	// ライト情報初期化
@@ -43,13 +47,22 @@ ThirdStageScene::ThirdStageScene()
 
 	// シーンUIを追加
 	new ThirdStageUI(playerObject);
-
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 ThirdStageScene::~ThirdStageScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState ThirdStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする

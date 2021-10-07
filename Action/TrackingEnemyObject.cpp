@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyObject.h"
 #include "Renderer.h"
 #include "SkeletalMeshComponent.h"
@@ -15,6 +18,14 @@
 #include "PlayerTrackingArea.h"
 #include "TrackingEnemyAttackArea.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	移動速度
+@param	追跡するオブジェクトのポインタ
+@param	追跡エリアの値
+*/
 TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
 	, Angle(180.0f)
@@ -87,10 +98,19 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	SetRotation(target);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TrackingEnemyObject::~TrackingEnemyObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	// AABBを更新
@@ -128,6 +148,11 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	forwardVec = charaForwardVec;
 }
 
+/*
+@fn めり込み判定
+@param	自分のAABB
+@param	相手のAABB
+*/
 void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 	// 仮速度変数
@@ -139,6 +164,11 @@ void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 	SetPosition(position + ment);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たり判定タグ
+*/
 void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ジャンプアタックプレイヤーだったら

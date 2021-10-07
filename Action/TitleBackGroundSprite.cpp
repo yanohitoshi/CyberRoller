@@ -5,6 +5,9 @@
 #include "Renderer.h"
 #include "SpriteComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 TitleBackGroundSprite::TitleBackGroundSprite()
 	:GameObject(false, Tag::UI)
 {
@@ -23,11 +26,19 @@ TitleBackGroundSprite::TitleBackGroundSprite()
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TitleBackGroundSprite::~TitleBackGroundSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TitleBackGroundSprite::UpdateGameObject(float _deltaTime)
 {
-
 }

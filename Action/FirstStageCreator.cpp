@@ -19,9 +19,11 @@
 #include "LightObject.h"
 
 /*
-   @fn コンストラクタ
-   @brief block同士の間隔の初期化(offset)
- */
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
+*/
 FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(5)
@@ -30,8 +32,9 @@ FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag
 }
 
 /*
-  @fn デストラクタ
- */
+@fn デストラクタ
+@brief マップデータの削除を行う
+*/
 FirstStageCreator::~FirstStageCreator()
 {
 	//マップデータの後始末
@@ -41,9 +44,12 @@ FirstStageCreator::~FirstStageCreator()
 	layer4StageData.clear();
 	layer5StageData.clear();
 	playerData.clear();
-
 }
 
+/*
+@fn ファイルを開く
+@return 成功か否か
+*/
 bool FirstStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
@@ -95,6 +101,9 @@ bool FirstStageCreator::OpenFile()
 	return false;
 }
 
+/*
+@fn ステージを生成する
+*/
 void FirstStageCreator::CreateStage()
 {
 	// ステージデータを見てその情報ごとのclassを生成する
@@ -116,6 +125,9 @@ void FirstStageCreator::CreateStage()
 	}
 }
 
+/*
+@fn プレイヤーを生成する
+*/
 PlayerObject* FirstStageCreator::CreatePlayer()
 {
 	// プレイヤーの位置情報検索
@@ -132,7 +144,12 @@ PlayerObject* FirstStageCreator::CreatePlayer()
 	return playerObject;
 }
 
-
+/*
+@fn レイヤー1クリエイター
+@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -151,6 +168,12 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 
 }
 
+/*
+@fn レイヤー2クリエイター
+@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -193,9 +216,14 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 	}
-
 }
 
+/*
+@fn レイヤー3クリエイター
+@brief  レイヤー3のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -218,9 +246,14 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
-
 }
 
+/*
+@fn レイヤー4クリエイター
+@brief  レイヤー4のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -246,9 +279,14 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 	}
-
 }
 
+/*
+@fn レイヤー5クリエイター
+@brief  レイヤー5のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -303,7 +341,5 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// 左右に動く敵を生成
 		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-
 	}
 }
-

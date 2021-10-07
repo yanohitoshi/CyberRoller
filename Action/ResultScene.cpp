@@ -9,6 +9,10 @@
 #include "ResultSceneCreator.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 ResultScene::ResultScene()
 {
 	// ライト情報初期化
@@ -37,11 +41,20 @@ ResultScene::ResultScene()
 	new ResultSceneUI();
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 ResultScene::~ResultScene()
 {
-
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState ResultScene::Update(const InputState& _inputState)
 {
 	// トリガーの情報を変数に入れる
@@ -72,4 +85,3 @@ SceneState ResultScene::Update(const InputState& _inputState)
 	// 更新後のシーンステータスを返す
 	return state;
 }
-

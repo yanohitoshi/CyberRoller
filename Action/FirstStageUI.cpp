@@ -10,6 +10,10 @@
 #include "StartCountDownSprite.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+*/
 FirstStageUI::FirstStageUI()
 	: GameObject(false, Tag::UI)
 	, JumpTutorialPosition(Vector3(3700.0f, -1000.0f, 700.0f))
@@ -29,12 +33,21 @@ FirstStageUI::FirstStageUI()
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 FirstStageUI::~FirstStageUI()
 {
 	// プレイヤーを動かすことができるようにするためのフラグの初期化
 	CountDownFont::SetCountStartFlag(false);
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void FirstStageUI::UpdateGameObject(float _deltaTime)
 {
 }

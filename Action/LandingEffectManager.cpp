@@ -5,6 +5,10 @@
 #include "LandingEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 LandingEffectManager::LandingEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, MaxEffects(8)
@@ -15,10 +19,19 @@ LandingEffectManager::LandingEffectManager(PlayerObject* _owner)
 	position = Vector3(0.0f, 0.0f, 0.0f);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 LandingEffectManager::~LandingEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void LandingEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 前のフレームでZ軸の速度が0.0fでなくこのフレームでのZ軸の速度0.0fでかつジャンプフラグがfalseだったら
@@ -50,6 +63,9 @@ void LandingEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void LandingEffectManager::ActiveEffectProcess()
 {
 	if (generateEffectsFlag)
@@ -71,6 +87,9 @@ void LandingEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクトを飛ばす方向計算処理関数
+*/
 void LandingEffectManager::CalculatingDirectionProcess(int _index, Vector3& _velocity)
 {
 	// 八方向に動かすのでそれぞれに方向ベクトルを渡す

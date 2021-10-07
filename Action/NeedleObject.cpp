@@ -8,6 +8,13 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	親となるobjectのポインタ
+@param	親objectとの間隔
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+*/
 NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vector3& _size, const Tag& _objectTag) :
 	GameObject(false, _objectTag)
 {
@@ -24,10 +31,19 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/needles.gpmesh"));
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 NeedleObject::~NeedleObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void NeedleObject::UpdateGameObject(float _deltaTime)
 {
 	// ownerの速度を付与

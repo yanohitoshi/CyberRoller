@@ -45,9 +45,13 @@
 
 // 定数と静的メンバーの初期化
 const float PlayerObject::Gravity = 4500.0f;
-bool PlayerObject::chackJumpFlag = false;
-bool PlayerObject::chackIsJumping = false;
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	再利用するかフラグ
+@param	オブジェクト判別用tag
+*/
 PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, playerBox({ Vector3::Zero,Vector3::Zero })
@@ -237,13 +241,19 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerObject::~PlayerObject()
 {
-	// 静的フラグの初期化
-	chackJumpFlag = false;
-	chackIsJumping = false;
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
 	if (FallPpsitionZ >= position.z)
@@ -314,6 +324,10 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	ChackRestartProcess();
 }
 
+/*
+@fn 入力処理
+@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+*/
 void PlayerObject::GameObjectInput(const InputState& _keyState)
 {
 
@@ -337,9 +351,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	// ステート実行
 	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
 
-	// 着地エフェクト用の判定フラグを更新
-	chackJumpFlag = jumpFlag;
-
 	if (nowState == PlayerState::PLAYER_STATE_JUMP_ATTACK)
 	{
 		skeltalMeshComponent->SetVisible(false);
@@ -352,7 +363,10 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 
 /*
-@fn めり込み判定と押し戻し
+@fn めり込み判定
+@param	myAABB 自分のAABB
+@param	pairAABB 当たった相手のAABB
+@param	_hitObjectTag ヒットしたオブジェクトのタグ
 */
 void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjectTag)
 {
@@ -366,13 +380,17 @@ void PlayerObject::FixCollision(AABB& myAABB, const AABB& pairAABB,Tag _hitObjec
 	else
 	{
 		// プレイヤーの押し戻し計算
-		playerCalcCollisionFixVec(myAABB, pairAABB, ment);
+		PlayerCalcCollisionFixVec(myAABB, pairAABB, ment);
 	}
 
 	// 押し戻し計算を考慮しポジションを更新
 	SetPosition(position + ment);
 }
 
+/*
+@brief 前方ベクトルを用いてキャラクターを回転させる関数
+@param	forward 前方ベクトル
+*/
 void PlayerObject::RotateToNewForward(const Vector3& forward)
 {
 	// X軸ベクトル(1,0,0)とforwardの間の角度を求める
@@ -397,6 +415,10 @@ void PlayerObject::RotateToNewForward(const Vector3& forward)
 	}
 }
 
+/*
+@fn クリアしている状態かをチェックする関数
+@param	_tag チェックするオブジェクトのタグ
+*/
 void PlayerObject::ClearChack(Tag _tag)
 {
 	// フラグ検索用可変長配列を生成
@@ -410,6 +432,10 @@ void PlayerObject::ClearChack(Tag _tag)
 
 }
 
+/*
+@fn クリアに必要なスイッチをチェックする関数
+@param	_chackVector チェックするスイッチが格納されている可変長コンテナ
+*/
 void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 {
 	// スイッチの総数カウント初期化
@@ -439,7 +465,11 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 	}
 }
 
-
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// Hitしたオブジェクトのタグを取得
@@ -495,6 +525,11 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	}
 }
 
+/*
+@fn 足元判定用当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// 接地判定を行うオブジェクトだったら
@@ -514,6 +549,11 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const Physics
 	}
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数(ジャンプ攻撃を行うエネミーとの判定を取る)
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 
@@ -543,6 +583,9 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, co
 	isSelectingTargetEnemy = true;
 }
 
+/*
+@fn スイッチジャンプを使用可能にする関数
+*/
 void PlayerObject::ActiveSwitchJumpProcess()
 {
 	// もし、ジャンプスイッチフラグがfalseだったら
@@ -557,6 +600,9 @@ void PlayerObject::ActiveSwitchJumpProcess()
 	}
 }
 
+/*
+@fn リスタートチェック関数
+*/
 void PlayerObject::ChackRestartProcess()
 {
 	// 一定時間入力が無かったらタイトルに戻る
@@ -578,6 +624,11 @@ void PlayerObject::ChackRestartProcess()
 	}
 }
 
+/*
+@brief	攻撃対象の敵を探す
+@param	_hitObject ヒットしたオブジェクト
+@return GameObject* 探し出したオブジェクト
+*/
 GameObject* PlayerObject::FindTargetEnemy(const GameObject& _hitObject)
 {
 	// 判定内に入った敵オブジェクトのポインタを取得
@@ -595,12 +646,13 @@ GameObject* PlayerObject::FindTargetEnemy(const GameObject& _hitObject)
 
 
 /*
-@fn 衝突したことが確定したとき、めり込みを戻す関数
-@param _movableBox 移動物体
-@param _fixedBox 移動しない物体
-//@param _calcFixVec 移動物体の補正差分ベクトル
+@fn 押し戻し処理
+@brief	x,y,z軸で押し戻し処理を行う
+@param	_movableBox 移動オブジェクトのAABB
+@param	_fixedBox 当たったオブジェクトのAABB
+@param	_calcFixVec 速度差分ベクトル
 */
-void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+void PlayerObject::PlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	// 速度ベクトル初期化
 	_calcFixVec = Vector3::Zero;
@@ -636,6 +688,13 @@ void PlayerObject::playerCalcCollisionFixVec(const AABB& _movableBox, const AABB
 	}
 }
 
+/*
+@fn 押し戻し処理
+@brief	x,y軸で押し戻し処理を行う
+@param	_movableBox 移動オブジェクトのAABB
+@param	_fixedBox 当たったオブジェクトのAABB
+@param	_calcFixVec 速度差分ベクトル
+*/
 void PlayerObject::HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	// 速度ベクトル初期化
@@ -664,6 +723,11 @@ void PlayerObject::HorizontalPlayerCalcCollisionFixVec(const AABB& _movableBox, 
 	}
 }
 
+/*
+@fn Animationのgetter関数
+@param _state 現在のプレイヤーのステータス
+@return Animation Animationクラスのポインタを返す
+*/
 const Animation* PlayerObject::GetAnimation(PlayerState _state)
 {
 	// _state番目のアニメーションを返す

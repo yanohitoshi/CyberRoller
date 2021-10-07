@@ -47,6 +47,8 @@ private:
 
     /*
     @fn エフェクトを飛ばす方向計算処理関数
+    @param _index何個目のエフェクトか
+    @param _velocity 速度
     */
     void CalculatingDirectionProcess(int _index, Vector3& _velocity);
     

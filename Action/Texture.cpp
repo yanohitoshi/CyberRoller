@@ -8,6 +8,9 @@
 #include "Renderer.h"
 #include <iostream>
 
+/*
+@brief	コンストラクタ
+*/
 Texture::Texture()
 	:textureID(0)
 	, width(0)
@@ -15,6 +18,9 @@ Texture::Texture()
 {
 }
 
+/*
+@brief	デストラクタ
+*/
 Texture::~Texture()
 {
 }
@@ -95,6 +101,10 @@ void Texture::Unload()
 	glDeleteTextures(1, &textureID);
 }
 
+/*
+@brief	Surfaceを元にtextureを作成
+@param	_surface 元にするSurfaceクラスのポインタ
+*/
 void Texture::CreateFromSurface(SDL_Surface * _surface)
 {
 	width = _surface->w;
@@ -153,6 +163,10 @@ bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
 	return false;
 }
 
+/*
+@brief	キューブマップの読み込み
+@param	ロードするファイルのパス
+*/
 bool Texture::LoadCubeMap(const std::string& in_filePath)
 {
 	glGenTextures(1, &textureID);
@@ -225,5 +239,4 @@ bool Texture::LoadCubeMap(const std::string& in_filePath)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 	return true;
-
 }

@@ -1,6 +1,13 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "JumpAttackEffectManager.h"
 #include "JumpAttackEffect.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 JumpAttackEffectManager::JumpAttackEffectManager(GameObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 {
@@ -10,10 +17,19 @@ JumpAttackEffectManager::JumpAttackEffectManager(GameObject* _owner)
 	effectPosition = Vector3::Zero;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 JumpAttackEffectManager::~JumpAttackEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 親クラスのステータスがActiveだったら
@@ -44,11 +60,17 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void JumpAttackEffectManager::ActiveEffectProcess()
 {
 	GenerateEffectProcess();
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void JumpAttackEffectManager::GenerateEffectProcess()
 {
 	// ownerのポジションを得る

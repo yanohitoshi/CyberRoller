@@ -23,6 +23,7 @@ public:
 	}PARTICLE_ENUM;
 
 	/*
+	@fn コンストラクタ
 	@param _offset 親オブジェクトクラスと画像を描画する位置の差
 	@param _scale 画像の描画サイズ
 	*/

@@ -48,6 +48,12 @@ public://ゲッターセッター
 	@return	true : 押されている , false : 押されていない
 	*/
 	bool GetKeyValue(SDL_Scancode _keyCode) const;
+
+	/*
+	@brief	指定したキーが押されたタイミングを判定する
+	@param	SDL_Scancodeのキーコード
+	@return	true : 押された , false : 押されていない
+	*/
 	bool GetKeyDownValue(SDL_Scancode _keyCode) const;
 
 	/*

@@ -5,6 +5,12 @@
 #include "ParticleComponent.h"
 #include "CrystalEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+@param	何色か判定用Tag
+*/
 FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, _velocity, 210, "Assets/Effect/Particle_Soft.png",true, true)
 	, FadeInAddScale(2.0f)
@@ -49,10 +55,19 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	}
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 FierWorksEffect::~FierWorksEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void FierWorksEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -110,6 +125,9 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn フェードイン関数
+*/
 void FierWorksEffect::FadeInProcess()
 {
 	// フェードイン状態だったら
@@ -128,6 +146,9 @@ void FierWorksEffect::FadeInProcess()
 
 }
 
+/*
+@fn 速度抑制関数
+*/
 void FierWorksEffect::ChackSpeedProcess()
 {
 	// 速度が定数より大きかったらだったら

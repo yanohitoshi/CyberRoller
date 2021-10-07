@@ -4,6 +4,9 @@
 #include "PlayerObjectStateJumpLoop.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
 	: TurnValue(600.0f)
 	, JumpCorrection(840.0f)
@@ -11,10 +14,19 @@ PlayerObjectStateJumpLoop::PlayerObjectStateJumpLoop()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateJumpLoop::~PlayerObjectStateJumpLoop()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 滞空時間のカウントを数える
@@ -71,6 +83,12 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -82,6 +100,11 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -116,6 +139,11 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	inputDeadSpace = _owner->GetDeadSpace();
 }
 
+/*
+@fn 入力チェック関数処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	//実際に動かしたい軸がずれているので補正
@@ -152,6 +180,10 @@ void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const In
 	}
 }
 
+/*
+@fn 入力がない場合の処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateJumpLoop::UninputMovableProcess(PlayerObject* _owner)
 {
 	//　移動速度から空中用減速値を引く

@@ -3,14 +3,27 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateDownStart.h"
 #include "SkeletalMeshComponent.h"
+
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateDownStart::PlayerObjectStateDownStart()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateDownStart::~PlayerObjectStateDownStart()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateDownStart::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 重力にデルタタイムをかけた値を代入
@@ -40,10 +53,11 @@ PlayerState PlayerObjectStateDownStart::Update(PlayerObject* _owner, float _delt
 	return state;
 }
 
-void PlayerObjectStateDownStart::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateDownStart::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

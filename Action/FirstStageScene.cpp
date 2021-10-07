@@ -8,8 +8,10 @@
 #include "FirstStageUI.h"
 #include "FirstStageCreator.h"
 
-
-
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 FirstStageScene::FirstStageScene()
 {
 	// ライト情報初期化
@@ -40,10 +42,20 @@ FirstStageScene::FirstStageScene()
 	new FirstStageUI();
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 FirstStageScene::~FirstStageScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState FirstStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする

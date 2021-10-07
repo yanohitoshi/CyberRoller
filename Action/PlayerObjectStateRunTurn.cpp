@@ -4,15 +4,27 @@
 #include "PlayerObjectStateRunTurn.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateRunTurn::PlayerObjectStateRunTurn()
 	: MinimumSpeed(200.0f)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateRunTurn::~PlayerObjectStateRunTurn()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 速度が0.0f以上だったら
@@ -75,6 +87,12 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -85,6 +103,11 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -103,6 +126,11 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 	_owner->SetTurnDelayCount(0);
 }
 
+/*
+@fn 入力チェック関数処理関数
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateRunTurn::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	// コントローラのアナログスティックの入力情報を計算する
@@ -132,6 +160,11 @@ void PlayerObjectStateRunTurn::ChackInputProcess(PlayerObject* _owner, const Inp
 	}
 }
 
+/*
+@fn 入力がある場合の処理関数
+@param	_owner 親クラスのポインタ
+@param	_axis 補正済みのアナログスティック情報
+*/
 void PlayerObjectStateRunTurn::InputMovableProcess(PlayerObject* _owner, Vector3 _axis)
 {
 	// 方向キーの入力値とカメラの向きから、移動方向を決定
@@ -144,12 +177,20 @@ void PlayerObjectStateRunTurn::InputMovableProcess(PlayerObject* _owner, Vector3
 	_owner->SetInputFlag(true);
 }
 
+/*
+@fn 入力がない場合の処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateRunTurn::UninputMovableProcess(PlayerObject* _owner)
 {
 	// 入力フラグをfalseに
 	_owner->SetInputFlag(false);
 }
 
+/*
+@fn ジャンプ状態に遷移するための準備処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateRunTurn::JumpTransitionProcess(PlayerObject* _owner)
 {
 	// ジャンプフラグをtrueにセット

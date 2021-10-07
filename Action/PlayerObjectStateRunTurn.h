@@ -51,6 +51,7 @@ private:
 	/*
 	@fn 入力チェック関数処理関数
 	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
 	*/
 	void ChackInputProcess(PlayerObject* _owner, const InputState& _keyState);
 

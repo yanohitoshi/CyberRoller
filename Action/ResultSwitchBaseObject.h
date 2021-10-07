@@ -18,9 +18,8 @@ public:
 	@param	ポジション
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
-	@param  どの区画のスイッチなのかを判別させるようのTag
 	*/
-	ResultSwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag);
+	ResultSwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag);
 
 	/*
 	@fn デストラクタ

@@ -106,7 +106,7 @@ public:
 	
 	/*
 	@fn デストラクタ
-	@brief  objectの削除を行う
+	@brief  マップデータの削除を行う
 	*/
 	~StageCreatorBase()override;
 
@@ -121,7 +121,6 @@ protected:
 	@return false=失敗
 	*/
 	bool readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _filename, const char* _layerName);
-
 	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& layer, std::string& layerName);
 
 	/*

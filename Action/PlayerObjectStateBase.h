@@ -132,14 +132,14 @@ public:
 	/*
 	@fn 回転処理関数
 	@param	_owner 親クラスのポインタ
-	@param	_keyState 入力情報
+	@param	_forward 回転させる方向ベクトル
+	@param	_tmpForward 回転させる前の方向ベクトル
 	*/
 	void RotationProcess(PlayerObject* _owner,Vector3 _forward,Vector3 _tmpForward);
 
 	/*
 	@fn アナログスティック処理関数
 	@param	_keyState 入力情報
-	@return Vector3 補正後のアナログスティックの入力情報
 	*/
 	Vector3 ChackControllerAxis(const InputState& _keyState);
 
@@ -172,6 +172,7 @@ private:
 	/*
 	@fn 入力チェック関数処理関数
 	@param	_owner 親クラスのポインタ
+	@param	_keyState 入力情報
 	*/
 	void ChackInputProcess(PlayerObject* _owner, const InputState& _keyState);
 

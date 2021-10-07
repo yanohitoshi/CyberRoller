@@ -6,6 +6,10 @@
 #include "SpriteComponent.h"
 #include "PlayerObject.h"
 
+/*
+@brief	コンストラクタ
+@param	_playerObject プレイヤーオブジェクトのポインタ
+*/
 GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	:GameObject(false, Tag::UI)
 	, DrawCount(120)
@@ -26,10 +30,19 @@ GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	frameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 GameClearSprite::~GameClearSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void GameClearSprite::UpdateGameObject(float _deltaTime)
 {
 	// クリア状態になったら

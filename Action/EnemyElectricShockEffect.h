@@ -18,8 +18,8 @@ public:
 
     /*
     @fn コンストラクタ
+    @param	親となるクラスのポインタ
     @param	ポジション
-    @param	移動速度
     */
     EnemyElectricShockEffect(GameObject* _owner,const Vector3& _pos);
 

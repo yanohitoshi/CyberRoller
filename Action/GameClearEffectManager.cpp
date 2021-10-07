@@ -4,6 +4,10 @@
 #include "GameClearEffectManager.h"
 #include "GameClearEffect.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 GameClearEffectManager::GameClearEffectManager(GameObject* _owner)
 	:GameObject(false, Tag::PARTICLE)
 	, SecondCorrectionValue(5.0f)
@@ -22,10 +26,19 @@ GameClearEffectManager::GameClearEffectManager(GameObject* _owner)
 	generateCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 GameClearEffectManager::~GameClearEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void GameClearEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// ownerの速度を見てZ軸上で動いていてかつownerの高さが一定値以上になったらACTIVEにする
@@ -59,6 +72,9 @@ void GameClearEffectManager::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void GameClearEffectManager::ActiveEffectProcess()
 {
 	// フレームカウントを数える
@@ -77,6 +93,9 @@ void GameClearEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void GameClearEffectManager::GenerateEffectProcess()
 {
 	// 10個のエフェクトを生成
@@ -102,6 +121,11 @@ void GameClearEffectManager::GenerateEffectProcess()
 
 }
 
+/*
+@fn エフェクトを飛ばす方向計算処理関数
+@param _index何個目のエフェクトか
+@param _velocity 速度
+*/
 void GameClearEffectManager::CalculatingDirectionProcess(int _index, Vector3& _velocity)
 {
 	// いろいろな方向に飛ばしたいため
@@ -128,4 +152,3 @@ void GameClearEffectManager::CalculatingDirectionProcess(int _index, Vector3& _v
 	}
 
 }
-

@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-/**
+/*
 @brief	コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
 @param	コンポーネントの更新順番（数値が小さいほど早く更新される）

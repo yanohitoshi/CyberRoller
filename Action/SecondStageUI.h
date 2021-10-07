@@ -12,9 +12,11 @@ class SecondStageUI :
     public GameObject
 {
 public:
+    
     /*
     @fn コンストラクタ
     @brief  objectの生成を行う
+    @param	_playerObject プレイヤークラスのポインタ
     */
     SecondStageUI(PlayerObject* _playerObject);
     

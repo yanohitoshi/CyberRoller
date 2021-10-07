@@ -1,13 +1,28 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "MoveEnemyObjectStateTurn.h"
 
+/*
+@fn コンストラクタ
+*/
 MoveEnemyObjectStateTurn::MoveEnemyObjectStateTurn()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 MoveEnemyObjectStateTurn::~MoveEnemyObjectStateTurn()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState MoveEnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 
@@ -28,6 +43,11 @@ EnemyState MoveEnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _delt
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void MoveEnemyObjectStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

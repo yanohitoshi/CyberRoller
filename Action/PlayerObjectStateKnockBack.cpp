@@ -5,6 +5,9 @@
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateKnockBack::PlayerObjectStateKnockBack()
 	: knockBackFrameCount(0)
 	, KnockBackSpeed(70.0f)
@@ -12,10 +15,19 @@ PlayerObjectStateKnockBack::PlayerObjectStateKnockBack()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateKnockBack::~PlayerObjectStateKnockBack()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// ノックバックの時間を数える
@@ -58,10 +70,11 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 	return state;
 }
 
-void PlayerObjectStateKnockBack::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

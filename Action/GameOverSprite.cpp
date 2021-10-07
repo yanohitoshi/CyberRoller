@@ -6,6 +6,9 @@
 #include "SpriteComponent.h"
 #include "ContinueSprite.h"
 
+/*
+@brief	コンストラクタ
+*/
 GameOverSprite::GameOverSprite()
 	:GameObject(false, Tag::UI)
 	, DrawCount(60)
@@ -23,10 +26,19 @@ GameOverSprite::GameOverSprite()
 	frameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 GameOverSprite::~GameOverSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void GameOverSprite::UpdateGameObject(float _deltaTime)
 {
 	// コンテニュー選択状態の時コンテニューが選択されなかったら

@@ -11,6 +11,9 @@
 
 PhysicsWorld* PhysicsWorld::physics = nullptr;
 
+/*
+@fn PhysicsWorldのインスタンス生成関数
+*/
 void PhysicsWorld::CreateInstance()
 {
 	if (physics == nullptr)
@@ -19,6 +22,9 @@ void PhysicsWorld::CreateInstance()
 	}
 }
 
+/*
+@fn PhysicsWorldのインスタンス削除関数
+*/
 void PhysicsWorld::DeleteInstance()
 {
 	if (physics != nullptr)
@@ -28,13 +34,19 @@ void PhysicsWorld::DeleteInstance()
 	}
 }
 
+/*
+@fn PhysicsWorldのインスタンス生成関数
+//コンストラクタの隠蔽
+*/
 PhysicsWorld::PhysicsWorld()
 {
 }
 
-
-
-
+/*
+@fn ヒットチェックを行う関数(Box)
+@brief　BoxCollider(AABB)の当たり判定を行う
+@param	_box 当たり判定に用いるBoxColliderのポインタ
+*/
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -96,6 +108,12 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 }
 
+/*
+@fn 当たり判定を行う関数(Box)
+@brief　BoxCollider(AABB)の当たり判定を行う
+@param	_box 当たり判定に用いるBoxColliderのポインタ
+@param	_checkBoxes 当たり判定を行う相手の可変長配列
+*/
 void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*> _checkBoxes)
 {
 	for (auto itr : _checkBoxes)
@@ -122,11 +140,17 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 			func(*(itr->GetOwner()),(itr->GetBoxTag()));
 			func = collisionFunction.at(itr);
 			func(*(_box->GetOwner()),(_box->GetBoxTag()));
-			_box->refreshWorldTransform();
+			_box->RefreshWorldTransform();
 		}
 	}
 }
 
+/*
+@fn 当たり判定を行う関数(Sphere)
+@brief　SphereCollider(Sphere)の当たり判定を行う
+@param	_sphere 当たり判定に用いるSphereColliderのポインタ
+@param	_checkBoxes 当たり判定を行う相手の可変長配列
+*/
 void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<BoxCollider*> _checkBoxes)
 {
 	for (auto itr : _checkBoxes)
@@ -146,11 +170,16 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 			func(*(itr->GetOwner()),(itr->GetBoxTag()));
 			func = collisionFunction.at(itr);
 			func(*(_sphere->GetOwner()),(_sphere->GetSphereTag()));
-			_sphere->refreshWorldTransform();
+			_sphere->RefreshWorldTransform();
 		}
 	}
 }
 
+/*
+@fn HitCheck関数(Sphere)
+@brief　SphereCollider(Sphere)の当たり判定を行う
+@param	_sphere 当たり判定に用いるSphereColliderのポインタ
+*/
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -204,8 +233,12 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	}
 }
 
-
-
+/*
+@fn BoxColliderを追加する関数
+@brief　BoxColliderを当たり判定のタグを参照してそれぞれの可変長コンテナに格納を行う
+@param	_box　追加するBoxColliderのポインタ
+@param	_func 関数ポインタに紐づけする関数
+*/
 void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 {
 	// タグを取得
@@ -275,6 +308,11 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 }
 
+/*
+@fn 削除するBoxColliderが格納されている関数
+@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+@param	_box　削除するBoxColliderのポインタ
+*/
 void PhysicsWorld::SelectRemoveBoxes(BoxCollider* _box)
 {
 	// タグを取得
@@ -327,6 +365,12 @@ void PhysicsWorld::SelectRemoveBoxes(BoxCollider* _box)
 	}
 }
 
+/*
+@fn BoxColliderを削除する関数
+@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタ
+@param	_box　削除するBoxColliderのポインタ
+*/
 void PhysicsWorld::RemoveBox(std::vector<BoxCollider*> _boxes,BoxCollider* _box)
 {
 	auto iter = std::find(_boxes.begin(), _boxes.end(), _box);
@@ -339,6 +383,12 @@ void PhysicsWorld::RemoveBox(std::vector<BoxCollider*> _boxes,BoxCollider* _box)
 	collisionFunction.erase(_box);
 }
 
+/*
+@fn SphereColliderを追加する関数
+@brief　SphereColliderを当たり判定のタグを参照してそれぞれの可変長コンテナに格納を行う
+@param	_sphere　追加するSphereColliderのポインタ
+@param	_func 関数ポインタに紐づけする関数
+*/
 void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
 	PhysicsTag objTag = _sphere->GetSphereTag();
@@ -371,6 +421,11 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
 
+/*
+@fn 削除するSphereColliderが格納されている関数
+@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+@param	_sphere　削除するSphereColliderのポインタ
+*/
 void PhysicsWorld::SelectRemoveSpheres(SphereCollider* _sphere)
 {
 	PhysicsTag objTag = _sphere->GetSphereTag();
@@ -395,6 +450,12 @@ void PhysicsWorld::SelectRemoveSpheres(SphereCollider* _sphere)
 	}
 }
 
+/*
+@fn SphereColliderを削除する関数
+@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
+@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタ
+@param	_sphere　削除するSphereColliderのポインタ
+*/
 void PhysicsWorld::RemoveSphere(std::vector<SphereCollider*> _spheres, SphereCollider* _sphere)
 {
 	auto iter = std::find(_spheres.begin(), _spheres.end(), _sphere);

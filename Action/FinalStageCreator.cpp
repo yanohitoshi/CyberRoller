@@ -22,8 +22,10 @@
 #include "LightObject.h"
 
 /*
-   @fn コンストラクタ
-   @brief block同士の間隔の初期化(Offset)
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
 */
 FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
@@ -33,7 +35,8 @@ FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag
 }
 
 /*
-  @fn デストラクタ
+@fn デストラクタ
+@brief マップデータの削除を行う
 */
 FinalStageCreator::~FinalStageCreator()
 {
@@ -61,6 +64,10 @@ FinalStageCreator::~FinalStageCreator()
 
 }
 
+/*
+@fn ファイルを開く
+@return 成功か否か
+*/
 bool FinalStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
@@ -183,6 +190,9 @@ bool FinalStageCreator::OpenFile()
 	return false;
 }
 
+/*
+@fn ステージを生成する
+*/
 void FinalStageCreator::CreateStage()
 {
 	// ステージデータを見てその情報ごとのclassを生成する
@@ -228,6 +238,9 @@ void FinalStageCreator::CreateStage()
 	}
 }
 
+/*
+@fn プレイヤーを生成する
+*/
 PlayerObject* FinalStageCreator::CreatePlayer()
 {
 
@@ -246,6 +259,12 @@ PlayerObject* FinalStageCreator::CreatePlayer()
 
 }
 
+/*
+@fn レイヤー1クリエイター
+@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -268,6 +287,12 @@ void FinalStageCreator::CreateLayer1(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー2クリエイター
+@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -312,6 +337,12 @@ void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー3クリエイター
+@brief  レイヤー3のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -341,6 +372,12 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー4クリエイター
+@brief  レイヤー4のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -377,6 +414,12 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー5クリエイター
+@brief  レイヤー5のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -531,6 +574,12 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー6クリエイター
+@brief  レイヤー6のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -595,6 +644,12 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー7クリエイター
+@brief  レイヤー7のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -671,6 +726,12 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー8クリエイター
+@brief  レイヤー8のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -722,6 +783,12 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー9クリエイター
+@brief  レイヤー9のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -804,6 +871,12 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー10クリエイター
+@brief  レイヤー10のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -869,6 +942,12 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー11クリエイター
+@brief  レイヤー11のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -920,6 +999,12 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー12クリエイター
+@brief  レイヤー12のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -966,10 +1051,15 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 動かない敵の生成
 		new NormalEnemyObject(layer12Pos, Tag::ENEMY, playerObject);
 		break;
-
 	}
 }
 
+/*
+@fn レイヤー3クリエイター
+@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -994,6 +1084,12 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー14クリエイター
+@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -1044,6 +1140,12 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー15クリエイター
+@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -1071,6 +1173,12 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー16クリエイター
+@brief  レイヤー16のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -1093,6 +1201,12 @@ void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー17クリエイター
+@brief  レイヤー17のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -1126,4 +1240,3 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 		break;
 	}
 }
-

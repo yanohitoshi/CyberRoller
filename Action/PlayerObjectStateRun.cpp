@@ -5,14 +5,26 @@
 #include "SkeletalMeshComponent.h"
 #include "GameObject.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateRun::PlayerObjectStateRun()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateRun::~PlayerObjectStateRun()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 {
 
@@ -60,6 +72,12 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -70,6 +88,11 @@ void PlayerObjectStateRun::Input(PlayerObject* _owner,const InputState& _keyStat
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

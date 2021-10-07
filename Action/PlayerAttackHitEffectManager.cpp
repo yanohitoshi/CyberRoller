@@ -1,7 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerAttackHitEffectManager.h"
 #include "PlayerAttackHitEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 PlayerAttackHitEffectManager::PlayerAttackHitEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, CorrectionPosition(100.0f)
@@ -14,10 +21,19 @@ PlayerAttackHitEffectManager::PlayerAttackHitEffectManager(PlayerObject* _owner)
 	effectPosition = Vector3::Zero;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerAttackHitEffectManager::~PlayerAttackHitEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerAttackHitEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 親クラスのステータスがActiveだったら
@@ -49,6 +65,9 @@ void PlayerAttackHitEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void PlayerAttackHitEffectManager::ActiveEffectProcess()
 {
 	// 生成フラグがtrueだったら
@@ -60,6 +79,9 @@ void PlayerAttackHitEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void PlayerAttackHitEffectManager::GenerateEffectProcess()
 {
 	// ポジション計算

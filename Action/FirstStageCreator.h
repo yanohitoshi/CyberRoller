@@ -23,7 +23,7 @@ public:
 	
 	/*
 	@fn デストラクタ
-	@brief  objectの削除を行う
+	@brief マップデータの削除を行う
 	*/
 	~FirstStageCreator()override;
 	/*

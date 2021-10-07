@@ -19,7 +19,11 @@ public:
 	*/
 	SkeletalMeshComponent(class GameObject* owner);
 
-	void Update(float deltaTime) override;
+	/*
+	@brief　更新処理
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	void Update(float _deltaTime) override;
 
 	/*
 	@brief　描画処理
@@ -35,10 +39,13 @@ public:
 	*/
 	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
 
-	//再生中かどうか
+	/*
+	@fn アニメーションが再生中か調べる関数
+	*/
 	bool IsPlaying();
 
 protected:
+
 	/*
 	@fn 行列パレットの計算
 	*/

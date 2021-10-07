@@ -5,6 +5,10 @@
 #include "Renderer.h"
 #include "SpriteComponent.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+*/
 ClearSceneUI::ClearSceneUI()
 	: GameObject(false,UI)
 {
@@ -21,10 +25,19 @@ ClearSceneUI::ClearSceneUI()
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ClearSceneUI::~ClearSceneUI()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ClearSceneUI::UpdateGameObject(float _deltaTime)
 {
 }

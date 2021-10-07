@@ -12,6 +12,10 @@
 bool CountDownFont::timeOverFlag = false;
 bool CountDownFont::countStartFlag = false;
 
+/*
+@brief	コンストラクタ
+@param	カウントする時間
+*/
 CountDownFont::CountDownFont(int _time)
 	: GameObject(false,Tag::UI)
 	, AddTimeCount(60)
@@ -31,6 +35,10 @@ CountDownFont::CountDownFont(int _time)
 	new TimeSprite();
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CountDownFont::~CountDownFont()
 {
 	// 静的メンバーの初期化
@@ -38,6 +46,11 @@ CountDownFont::~CountDownFont()
 	countStartFlag = false;
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CountDownFont::UpdateGameObject(float _deltaTime)
 {
 	// ゲームスタートしたらカウント開始

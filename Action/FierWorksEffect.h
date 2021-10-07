@@ -76,6 +76,5 @@ private:
     const Vector3 BlueValue;
     // —ÎF‚Ìê‡‚ÌF‚Ì’l’è”
     const Vector3 GreenValue;
-
 };
 

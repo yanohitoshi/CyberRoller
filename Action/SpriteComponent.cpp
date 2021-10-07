@@ -8,6 +8,12 @@
 #include "Game.h"
 #include "Renderer.h"
 
+/*
+@fn コンストラクタ
+@param _owner 親となるGameObjectのポインタ
+@param _isBackGround 背景画像かどうかのフラグ(bool)
+@param _drawOrder 描画順を決める値(int)
+*/
 SpriteComponent::SpriteComponent(GameObject * _owner, bool _isBackGround,int _drawOrder)
     :Component(_owner)
     ,texture(nullptr)
@@ -22,6 +28,10 @@ SpriteComponent::SpriteComponent(GameObject * _owner, bool _isBackGround,int _dr
 	RENDERER->AddSprite(this);
 }
 
+/*
+@fn デストラクタ
+@brief  Componentの削除を行う
+*/
 SpriteComponent::~SpriteComponent()
 {
 	//レンダラーからポインタを削除する

@@ -8,6 +8,10 @@
 #include <document.h>
 #include <SDL_log.h>
 
+/*
+@fn アニメーション読み込み
+@param アニメーションへのパス
+*/
 bool Animation::Load(const std::string& fileName, bool _loop)
 {
 	isLoopAnimation = _loop;
@@ -141,6 +145,12 @@ bool Animation::Load(const std::string& fileName, bool _loop)
 	return true;
 }
 
+/*
+@fn	inTime時刻時点のグローバルポーズ配列の取得
+@param	_outPoses outPosesの可変長配列(Matrix4)
+@param	_inSkeleton スケルトンデータのポインタ
+@param	_inTime
+*/
 void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& outPoses, const Skeleton* inSkeleton, float inTime) const
 {
 	//指定された配列を、アニメーションの指定された時間に、

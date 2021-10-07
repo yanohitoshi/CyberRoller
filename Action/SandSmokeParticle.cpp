@@ -3,6 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "SandSmokeParticle.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 SandSmokeParticle::SandSmokeParticle(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 25, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(5.0f)
@@ -17,10 +22,19 @@ SandSmokeParticle::SandSmokeParticle(const Vector3& _pos, const Vector3& _veloci
 	particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SandSmokeParticle::~SandSmokeParticle()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SandSmokeParticle::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ResultSwitchObject.h"
 #include "Skeleton.h"
 #include "ChangeColorMeshComponent.h"
@@ -12,7 +15,13 @@
 #include "FirstStageUI.h"
 #include <string>
 
-
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param	回転角度
+*/
 ResultSwitchObject::ResultSwitchObject(GameObject* _owner, const Vector3& _size, const Tag& _objectTag, const float _angle)
 	: GameObject(false, _objectTag)
 	, AllClearColer(Vector3(1.0f, 1.0f, 0.5f))
@@ -42,13 +51,19 @@ ResultSwitchObject::ResultSwitchObject(GameObject* _owner, const Vector3& _size,
 	meshComponent->SetColor(AllClearColer);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ResultSwitchObject::~ResultSwitchObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ResultSwitchObject::UpdateGameObject(float _deltaTime)
 {
 }
-
-
-

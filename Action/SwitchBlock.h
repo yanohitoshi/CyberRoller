@@ -23,6 +23,7 @@ public:
 	@param	ポジション
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
+	@param	チュートリアル用スイッチかどうかフラグ
 	*/
 	SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _objectTag ,bool _isTutorial = false);
 	
@@ -65,6 +66,7 @@ private:
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 		動く床と接している時にその速度をもらうための
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)override;
 	
@@ -72,6 +74,7 @@ private:
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 		プレイヤーの足元判定とのOnCollision
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag);
 

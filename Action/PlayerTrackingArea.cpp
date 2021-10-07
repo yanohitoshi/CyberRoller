@@ -1,8 +1,17 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerTrackingArea.h"
 #include "EnemyObjectStateBase.h"
 #include "TrackingEnemyObject.h"
 #include "SphereCollider.h"
 
+/*
+@fn コンストラクタ
+@param	オブジェクト判別用tag
+@param	親となる敵クラスのポインタ
+@param	エリアの大きさとなる値
+*/
 PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObject* _ownerEnemy, float _areaValue)
 	:GameObject(false, _objectTag)
 	, ownerEnemy(_ownerEnemy)
@@ -15,16 +24,30 @@ PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObjec
 	sphereCollider->SetObjectSphere(sphere);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerTrackingArea::~PlayerTrackingArea()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerTrackingArea::UpdateGameObject(float _deltaTime)
 {
 	// ポジションを固定
 	SetPosition(position);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たり判定タグ
+*/
 void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// リスポーン状態だったら返す

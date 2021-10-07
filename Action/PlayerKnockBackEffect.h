@@ -15,7 +15,7 @@ public:
 
     /*
     @fn コンストラクタ
-    @param	ポジション
+    @param	親クラスのポインタ
     @param	移動速度
     @param	プレイヤーの体に位置を合わせるための間隔
     */
@@ -41,6 +41,12 @@ private:
     @brief	エフェクトの回転を行う
     */
     void RotateEffect();
+    
+    /*
+    @fn 回転計算処理
+    @param _axis 回転軸
+    */
+    void Rotation(const Vector3 _axis);
 
     // 毎フレーム足すscale値 
     const float AddScale;

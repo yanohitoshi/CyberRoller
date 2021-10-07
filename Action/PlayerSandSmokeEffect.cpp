@@ -3,6 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "PlayerSandSmokeEffect.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle_Soft.png",true)
 	, AddScale(5.0f)
@@ -17,10 +22,19 @@ PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3&
 	speed = 10.0f;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerSandSmokeEffect::~PlayerSandSmokeEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerSandSmokeEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

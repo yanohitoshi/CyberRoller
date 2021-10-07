@@ -1,8 +1,16 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyAttackArea.h"
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectBase.h"
 #include "SphereCollider.h"
 
+/*
+@fn コンストラクタ
+@param	親となる敵クラスのポインタ
+@param	オブジェクト判別用tag
+*/
 TrackingEnemyAttackArea::TrackingEnemyAttackArea(const Tag& _objectTag, EnemyObjectBase* _ownerEnemy)
 	:GameObject(false, _objectTag)
 	, ownerEnemy(_ownerEnemy)
@@ -19,10 +27,19 @@ TrackingEnemyAttackArea::TrackingEnemyAttackArea(const Tag& _objectTag, EnemyObj
 	sphereCollider->SetObjectSphere(sphere);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TrackingEnemyAttackArea::~TrackingEnemyAttackArea()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TrackingEnemyAttackArea::UpdateGameObject(float _deltaTime)
 {
 	// ポジションを更新
@@ -42,6 +59,11 @@ void TrackingEnemyAttackArea::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void TrackingEnemyAttackArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// リスポーン状態だったら返す

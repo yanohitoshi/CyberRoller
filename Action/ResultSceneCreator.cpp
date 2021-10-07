@@ -1,10 +1,16 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ResultSceneCreator.h"
 #include "ResultSwitchBaseObject.h"
 #include "ResultCameraObject.h"
+
 /*
-   @fn コンストラクタ
-   @brief block同士の間隔の初期化(offset)
- */
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
+*/
 ResultSceneCreator::ResultSceneCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, SwitchNumber(22)
@@ -14,8 +20,9 @@ ResultSceneCreator::ResultSceneCreator(bool _reUseGameObject, const Tag _objectT
 }
 
 /*
-  @fn デストラクタ
- */
+@fn デストラクタ
+@brief マップデータの削除を行う
+*/
 ResultSceneCreator::~ResultSceneCreator()
 {
 	//マップデータの削除
@@ -23,6 +30,10 @@ ResultSceneCreator::~ResultSceneCreator()
 	resultCameraData.clear();
 }
 
+/*
+@fn ファイルを開く
+@return 成功か否か
+*/
 bool ResultSceneCreator::OpenFile()
 {
 
@@ -47,6 +58,9 @@ bool ResultSceneCreator::OpenFile()
 	return false;
 }
 
+/*
+@fn ステージを生成する
+*/
 void ResultSceneCreator::CreateStage()
 {
 	// 他クラスにプレイヤーのポジションを送るための変数
@@ -73,6 +87,12 @@ void ResultSceneCreator::CreateStage()
 	}
 }
 
+/*
+@fn baseLayerクリエイター
+@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ResultSceneCreator::CreateResultMap(int _indexX, int _indexZ)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -84,10 +104,16 @@ void ResultSceneCreator::CreateResultMap(int _indexX, int _indexZ)
 	if (BaseLayer == SwitchNumber)
 	{
 		// タイトル用オブジェクトの生成
-		new ResultSwitchBaseObject(resultBaseLayerPos, SwitchBaseSize, Tag::RESULT_OBJECT,Tag::RESULT_OBJECT);
+		new ResultSwitchBaseObject(resultBaseLayerPos, SwitchBaseSize, Tag::RESULT_OBJECT);
 	}
 }
 
+/*
+@fn CameraTargetクリエイター
+@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ResultSceneCreator::CreateCamera(int _indexX, int _indexZ)
 {
 	// ステージデータ配列からマップデータをもらう

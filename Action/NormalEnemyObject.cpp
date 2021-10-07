@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "NormalEnemyObject.h"
 #include "Renderer.h"
 #include "SkeletalMeshComponent.h"
@@ -10,6 +13,12 @@
 #include "EnemyAttackArea.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	追跡するオブジェクトのポインタ
+*/
 NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject)
 	: EnemyObjectBase(_pos, false , _objectTag, _trackingObject)
 	, Angle(180.0f)
@@ -73,10 +82,19 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, 
 	SetRotation(target);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 NormalEnemyObject::~NormalEnemyObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	if (isAttack && !isDeadFlag)
@@ -105,10 +123,10 @@ void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 	isAttack = false;
 }
 
-void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
-{
-}
-
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+*/
 void NormalEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)

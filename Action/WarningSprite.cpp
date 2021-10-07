@@ -6,6 +6,11 @@
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+@brief	コンストラクタ
+@param	親となるCountDownFont型ポインタ
+*/
 WarningSprite::WarningSprite(CountDownFont* _owner)
 	:GameObject(false, Tag::UI)
 	, ChangeFadeInValue(0.1f)
@@ -27,10 +32,19 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	sprite->SetAlpha(alpha);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 WarningSprite::~WarningSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void WarningSprite::UpdateGameObject(float _deltaTime)
 {
 	// countが2以下かつownerのフラグがtrueの時
@@ -53,6 +67,9 @@ void WarningSprite::UpdateGameObject(float _deltaTime)
 	sprite->SetAlpha(alpha);
 }
 
+/*
+@fn フェードインアウトの状態を見る関数
+*/
 void WarningSprite::ChackFadeInOutProcess()
 {
 	// フェードインアウト処理
@@ -62,6 +79,9 @@ void WarningSprite::ChackFadeInOutProcess()
 
 }
 
+/*
+@fn フェードインアウト処理関数
+*/
 void WarningSprite::FadeInOutProcess()
 {
 	// fadeFlagがtrueだったらfadein
@@ -75,6 +95,9 @@ void WarningSprite::FadeInOutProcess()
 	}
 }
 
+/*
+@fn 最後のフェードアウト処理関数
+*/
 void WarningSprite::LastFadeOutProcess()
 {
 	// alpha値が0.0f以上だったら
@@ -85,6 +108,9 @@ void WarningSprite::LastFadeOutProcess()
 	}
 }
 
+/*
+@fn フェードインアウトの切り替え処理関数
+*/
 void WarningSprite::ChangeFadeProcess()
 {
 	// alpha値を見てin/outを切り替え
@@ -99,4 +125,3 @@ void WarningSprite::ChangeFadeProcess()
 		fadeFlag = false;
 	}
 }
-

@@ -4,16 +4,28 @@
 #include "PlayerObjectStateRunStop.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateRunStop::PlayerObjectStateRunStop()
 	: TurnDelayValue(30)
 	, TurnValue(10)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateRunStop::~PlayerObjectStateRunStop()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// ターン有効カウントを数える
@@ -72,6 +84,12 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -82,6 +100,11 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateRunStop::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

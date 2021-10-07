@@ -34,9 +34,9 @@ public:
 
 	/*
 	@brief	Transformのワールド変換
-	押し戻しが行われた直後にObjectのworldBoxを更新（行われなくても呼ばれる）
+	押し戻しが行われた直後にObjectのworldBoxを更新
 	*/
-	void refreshWorldTransform();
+	void RefreshWorldTransform();
 
 
 private:

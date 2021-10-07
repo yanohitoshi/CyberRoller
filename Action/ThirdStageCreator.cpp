@@ -21,8 +21,10 @@
 #include "LightObject.h"
 
 /*
-   @fn コンストラクタ
-   @brief block同士の間隔の初期化(Offset)
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_reUseGameObject 再利用するかどうかフラグ
+@param	_objectTag オブジェクト判別用Tag
 */
 ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
@@ -32,7 +34,8 @@ ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag
 }
 
 /*
-  @fn デストラクタ
+@fn デストラクタ
+@brief マップデータの削除を行う
 */
 ThirdStageCreator::~ThirdStageCreator()
 {
@@ -55,9 +58,12 @@ ThirdStageCreator::~ThirdStageCreator()
 
 	// プレイヤーのマップデータ削除
 	playerData.clear();
-
 }
 
+/*
+@fn ファイルを開く
+@return 成功か否か
+*/
 bool ThirdStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
@@ -169,9 +175,11 @@ bool ThirdStageCreator::OpenFile()
 	return false;
 }
 
+/*
+@fn ステージを生成する
+*/
 void ThirdStageCreator::CreateStage()
 {
-
 	// ステージデータを見てその情報ごとのclassを生成する
 	for (int iy = 0; iy < sizeY; iy++)
 	{
@@ -212,6 +220,9 @@ void ThirdStageCreator::CreateStage()
 	}
 }
 
+/*
+@fn プレイヤーを生成する
+*/
 PlayerObject* ThirdStageCreator::CreatePlayer()
 {
 
@@ -229,7 +240,12 @@ PlayerObject* ThirdStageCreator::CreatePlayer()
 	return playerObject;
 }
 
-
+/*
+@fn レイヤー1クリエイター
+@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer1(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -252,6 +268,12 @@ void ThirdStageCreator::CreateLayer1(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー2クリエイター
+@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer2(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -293,6 +315,12 @@ void ThirdStageCreator::CreateLayer2(int _indexX, int _indexY)
 
 }
 
+/*
+@fn レイヤー3クリエイター
+@brief  レイヤー3のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -337,6 +365,12 @@ void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー4クリエイター
+@brief  レイヤー4のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer4(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -366,6 +400,12 @@ void ThirdStageCreator::CreateLayer4(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー5クリエイター
+@brief  レイヤー5のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -439,6 +479,12 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー6クリエイター
+@brief  レイヤー6のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -506,6 +552,12 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー7クリエイター
+@brief  レイヤー7のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -557,6 +609,12 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー8クリエイター
+@brief  レイヤー8のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -596,6 +654,12 @@ void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー9クリエイター
+@brief  レイヤー9のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -671,6 +735,12 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー10クリエイター
+@brief  レイヤー10のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -710,6 +780,12 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー11クリエイター
+@brief  レイヤー11のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -758,6 +834,12 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー12クリエイター
+@brief  レイヤー12のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -802,6 +884,12 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー13クリエイター
+@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -836,6 +924,12 @@ void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー14クリエイター
+@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -903,6 +997,12 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー15クリエイター
+@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -921,4 +1021,3 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 		break;
 	}
 }
-

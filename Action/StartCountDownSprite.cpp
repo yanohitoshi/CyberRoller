@@ -6,6 +6,9 @@
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
+/*
+@brief	コンストラクタ
+*/
 StartCountDownSprite::StartCountDownSprite()
 	:GameObject(false, PARTICLE)
 	, ChangeCount(60)
@@ -29,10 +32,19 @@ StartCountDownSprite::StartCountDownSprite()
 	drawSpriteFlag = true;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 StartCountDownSprite::~StartCountDownSprite()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 {
 	// 描画フラグがtrueだったら
@@ -46,6 +58,9 @@ void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn カウントダウン表示時間カウントを数える関数
+*/
 void StartCountDownSprite::ChackCountProcess()
 {
 	// カウント計測
@@ -68,6 +83,9 @@ void StartCountDownSprite::ChackCountProcess()
 	}
 }
 
+/*
+@fn テクスチャの状態を見る関数
+*/
 void StartCountDownSprite::ChackTextureProcess()
 {
 	// texture変更フラグがtrueだったら
@@ -78,6 +96,9 @@ void StartCountDownSprite::ChackTextureProcess()
 	}
 }
 
+/*
+@fn テクスチャを切り替える関数
+*/
 void StartCountDownSprite::ChangeTextureProcess()
 {
 	// time変数を見てそれに応じたtextureをセット

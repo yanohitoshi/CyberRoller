@@ -11,6 +11,12 @@
 #include "BoxCollider.h"
 #include  "Mesh.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+*/
 WallBlockObject::WallBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag) :
 	GameObject(false, _objectTag)
 {
@@ -35,10 +41,19 @@ WallBlockObject::WallBlockObject(const Vector3& _p, const Vector3& _size, const 
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 WallBlockObject::~WallBlockObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void WallBlockObject::UpdateGameObject(float _deltaTime)
 {
 	// ワールドボックスの更新

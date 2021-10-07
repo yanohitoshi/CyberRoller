@@ -3,6 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "LandingEffect.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle7.png", true)
 	, AddScale(0.8f)
@@ -18,10 +23,19 @@ LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)
 	particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 LandingEffect::~LandingEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void LandingEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

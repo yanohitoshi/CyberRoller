@@ -4,24 +4,37 @@
 #include "PlayerObjectStateDownUp.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateDownUp::PlayerObjectStateDownUp()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateDownUp::~PlayerObjectStateDownUp()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateDownUp::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 更新されたstateを返す
     return state;
 }
 
-void PlayerObjectStateDownUp::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateDownUp::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

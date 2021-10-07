@@ -1,14 +1,29 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyStateTracking.h"
 
+/*
+@fn コンストラクタ
+*/
 TrackingEnemyStateTracking::TrackingEnemyStateTracking()
 	:TrackingLengthValue(50.0f)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 TrackingEnemyStateTracking::~TrackingEnemyStateTracking()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 追跡対象から初期ポジションへと向かうベクトルを計算
@@ -68,6 +83,11 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void TrackingEnemyStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

@@ -14,7 +14,11 @@
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdlingDance.h"
 
-
+/*
+@brief	コンストラクタ
+@param	ポジション
+@param	プレイヤーのポインタ
+*/
 MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObject) 
 	: CameraObjectBase(false,Tag::CAMERA)
 	, YawSpeed(0.055f)
@@ -56,11 +60,19 @@ MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObje
 
 }
 
-
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 MainCameraObject::~MainCameraObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	// プレイヤーがクリア状態でなくかつタイムオーバーでもなく踊ってもいなかったら
@@ -87,6 +99,11 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn 入力を引数で受け取る更新関数
+@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 入力情報
+*/
 void MainCameraObject::GameObjectInput(const InputState& _keyState)
 {
 	// 入力状態チェック関数
@@ -95,7 +112,6 @@ void MainCameraObject::GameObjectInput(const InputState& _keyState)
 	// ピッチ補正関数
 	CorrectionPitch();
 }
-
 
 /*
 @param _offset　見たい座標との差
@@ -108,7 +124,10 @@ void MainCameraObject::SetViewMatrixLerpObject(const Vector3 & _offset, const Ve
 	lerpObjectPos = _parentPos;
 }
 
-
+/*
+@brief ゲーム中の移動処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::InGameMovableProcess(float _deltaTime)
 {
 	// カメラ半径の補正関数
@@ -135,6 +154,9 @@ void MainCameraObject::InGameMovableProcess(float _deltaTime)
 	hitFlag = false;
 }
 
+/*
+@brief 半径補正計算処理
+*/
 void MainCameraObject::CorrectionRadius()
 {
 	// 今のフレームで当たっていて前のフレームで当たっていなければ
@@ -200,6 +222,9 @@ void MainCameraObject::CorrectionRadius()
 	}
 }
 
+/*
+@brief ピッチ補正計算処理
+*/
 void MainCameraObject::CorrectionPitch()
 {
 	// ピッチが最大値を超えていたら
@@ -216,6 +241,10 @@ void MainCameraObject::CorrectionPitch()
 	}
 }
 
+/*
+@brief ポジション計算処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::CalculationPosition(float _deltaTime)
 {
 	// 回転角と半径を用いて仮のポジションを設定
@@ -230,6 +259,9 @@ void MainCameraObject::CalculationPosition(float _deltaTime)
 	SetPosition(position);
 }
 
+/*
+@brief ビュー行列計算処理
+*/
 void MainCameraObject::CalculationViewMatrix()
 {
 	// 追従するオブジェクトのポジションを代入
@@ -240,6 +272,10 @@ void MainCameraObject::CalculationViewMatrix()
 	RENDERER->SetViewMatrix(view);
 }
 
+/*
+@brief ゲームクリア時の処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::GameClearProcess(float _deltaTime)
 {
 	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
@@ -248,6 +284,10 @@ void MainCameraObject::GameClearProcess(float _deltaTime)
 	RENDERER->SetViewMatrix(view);
 }
 
+/*
+@brief ゲームオーバー時の処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::GameOverProcess(float _deltaTime)
 {
 	// 回転角を自動更新
@@ -269,6 +309,10 @@ void MainCameraObject::GameOverProcess(float _deltaTime)
 	RENDERER->SetViewMatrix(view);
 }
 
+/*
+@brief プレイヤーがダンス状態の時の処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MainCameraObject::PlayerInDanceProcess(float _deltaTime)
 {
 	// 回転角を自動更新
@@ -291,6 +335,10 @@ void MainCameraObject::PlayerInDanceProcess(float _deltaTime)
 
 }
 
+/*
+@brief 入力チェックとその処理
+@param	_keyState 入力情報
+*/
 void MainCameraObject::ChackInputProcess(const InputState& _keyState)
 {
 
@@ -328,6 +376,11 @@ void MainCameraObject::ChackInputProcess(const InputState& _keyState)
 
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void MainCameraObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {	
 	// ヒットした際にヒットフラグがfalseだったら
@@ -350,17 +403,29 @@ void MainCameraObject::OnCollision(const GameObject& _hitObject, const PhysicsTa
 
 }
 
+/*
+@brief 押し戻しを行う
+@param 自分のAABB
+@param 相手のAABB
+@param ペアとなる相手のTag
+*/
 void MainCameraObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 	// 速度補正ベクトル変数
 	Vector3 ment = Vector3::Zero;
 	// 押し戻し計算
-	calcCollisionFixVec(myAABB, pairAABB, ment);
+	CalcCollisionFixVec(myAABB, pairAABB, ment);
 	// ポジションを更新
 	SetPosition(position + ment);
 }
 
-void MainCameraObject::calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+/*
+@brief 押し戻し計算を行う
+@param 自分のAABB
+@param 相手のAABB
+@param 押し戻し量
+*/
+void MainCameraObject::CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	_calcFixVec = Vector3::Zero;
 

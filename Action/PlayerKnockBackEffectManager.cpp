@@ -1,7 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerKnockBackEffectManager.h"
 #include "PlayerKnockBackEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, PositionOffset(150.0f)
@@ -14,10 +21,19 @@ PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
 	effectFrameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerKnockBackEffectManager::~PlayerKnockBackEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 現在のステータスがノックバック状態だったらエフェクトを有効化
@@ -48,6 +64,9 @@ void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void PlayerKnockBackEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
@@ -57,6 +76,9 @@ void PlayerKnockBackEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void PlayerKnockBackEffectManager::GenerateEffectProcess()
 {
 	// ownerのポジションを得る

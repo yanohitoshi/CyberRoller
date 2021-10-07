@@ -23,7 +23,7 @@ public:
 
 	/*
 	@fn デストラクタ
-	@brief  objectの削除を行う
+	@brief マップデータの削除を行う
 	*/
 	~TitleStageCreator()override;
 
@@ -41,7 +41,7 @@ public:
 private:
 
 	/*
-	@fn レイヤー1クリエイター
+	@fn タイトルマップクリエイター
 	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
 	@param	_indexY 検索するマップデータの添え字Y
@@ -50,7 +50,7 @@ private:
 	void CreateTitleMap(int _indexX, int _indexY, Vector3 _playerPos);
 
 	/*
-	@fn レイヤー2クリエイター
+	@fn プレイヤークリエイター
 	@brief  レイヤー2のマップデータに含まれるオブジェクトの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
 	@param	_indexY 検索するマップデータの添え字Y

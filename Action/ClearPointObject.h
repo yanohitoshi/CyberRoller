@@ -24,6 +24,8 @@ public:
 	@fn コンストラクタ
 	@param	ポジション
 	@param	オブジェクト判別用tag
+	@param	プレイヤーのポインタ
+	@param	シーンの最後の動く壁オブジェクトのポインタ
 	*/
 	ClearPointObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock);
 
@@ -52,9 +54,11 @@ private:
 	@fn 可動処理関数
 	*/
 	void MovableProcess();
+
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

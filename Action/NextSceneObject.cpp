@@ -10,7 +10,13 @@
 #include "MainCameraObject.h"
 #include "CrystalEffectManager.h"
 
-
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	プレイヤーのポインタ
+@param	シーンの最後の動く壁オブジェクトのポインタ
+*/
 NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, PlayerObject* _playerObject, MoveWallBlock* _lastMoveWallBlock)
 	: GameObject(false, _objectTag)
 	, playerObject(_playerObject)
@@ -48,11 +54,19 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	new CrystalEffectManager(this, CrystalColor::GREEN, lastMoveWallBlock);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 NextSceneObject::~NextSceneObject()
 {
-
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void NextSceneObject::UpdateGameObject(float _deltaTime)
 {
 	if (playerObject->GetClearFlag() == true)
@@ -69,10 +83,11 @@ void NextSceneObject::UpdateGameObject(float _deltaTime)
 		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
 	}
-
-
 }
 
+/*
+@fn 回転処理関数
+*/
 void NextSceneObject::RotationProcess()
 {
 	//Z軸を指定角度回転させる
@@ -84,6 +99,9 @@ void NextSceneObject::RotationProcess()
 
 }
 
+/*
+@fn 可動処理関数
+*/
 void NextSceneObject::MovableProcess()
 {
 	// ポジションに速度を足す
@@ -99,6 +117,11 @@ void NextSceneObject::MovableProcess()
 
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void NextSceneObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 }

@@ -1,18 +1,33 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateDead.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateDead::PlayerObjectStateDead()
 	: RespawnTime(120)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateDead::~PlayerObjectStateDead()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// リスポーンに移行するフラグがfalseだったら
@@ -32,10 +47,11 @@ PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime
 	return state;
 }
 
-void PlayerObjectStateDead::Input(PlayerObject* _owner, const InputState& _keyState)
-{
-}
-
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 {
 
@@ -55,6 +71,10 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 	_owner->SetIsAvailableInput(false);
 }
 
+/*
+@fn 復帰遷移カウント処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateDead::ToRespawnCountProcess(PlayerObject* _owner)
 {
 	// リスポーンするまでの時間をカウントする

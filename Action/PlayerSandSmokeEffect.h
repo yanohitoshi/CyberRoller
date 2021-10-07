@@ -17,7 +17,6 @@ public:
     @fn コンストラクタ
     @param	ポジション
     @param	移動速度
-    @param  走り状態か判定フラグ
     */
     PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity);
 

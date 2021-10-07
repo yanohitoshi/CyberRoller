@@ -13,6 +13,11 @@
 #include "PlayerObject.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_playerObject プレイヤークラスのポインタ
+*/
 SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	: GameObject(false, Tag::UI)
 	, SceneTime(200)
@@ -31,10 +36,19 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SecondStageUI::~SecondStageUI()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SecondStageUI::UpdateGameObject(float _deltaTime)
 {
 }

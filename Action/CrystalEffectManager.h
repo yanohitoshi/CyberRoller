@@ -36,6 +36,7 @@ public:
     @fn コンストラクタ
     @param	親クラスのポインタ
     @param	何色か判定用Tag
+    @param シーン最後の動く壁のポインタ
     */
     CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor, MoveWallBlock* _lastMoveWall);
 
@@ -56,6 +57,7 @@ private:
 
     /*
     @fn エフェクトがアクティブ時の処理関数
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void ActiveEffectProcess(float _deltaTime);
     
@@ -66,6 +68,7 @@ private:
     
     /* 
     @fn ポジションの回転処理関数
+    @param	_deltaTime 前のフレームでかかった時間
     */
     void RotationProcess(float _deltaTime);
 

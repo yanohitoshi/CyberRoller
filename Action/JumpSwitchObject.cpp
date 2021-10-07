@@ -8,6 +8,12 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+*/
 JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
 {
@@ -31,10 +37,19 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 JumpSwitchObject::~JumpSwitchObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void JumpSwitchObject::UpdateGameObject(float _deltaTime)
 {
 	// ポジションに速度を足す
@@ -43,6 +58,11 @@ void JumpSwitchObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たったGameObjectの当たり判定タグ
+*/
 void JumpSwitchObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ヒットしたオブジェクトが動く床だったら

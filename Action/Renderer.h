@@ -152,7 +152,14 @@ public:
 private:
 
 	//コンストラクタ、デストラクタの隠蔽
+	/*
+	@brief  コンストラクタ
+	*/
 	Renderer();
+
+	/*
+	@brief  デストラクタ
+	*/
 	~Renderer();
 
 	SceneState nowSceneState;
@@ -180,7 +187,10 @@ private:
 	*/
 	void CreateParticleVerts();
 
-	void CreateCubeVerts();                                                // キューブマップ(スカイボックス用)頂点配列定義
+	/*
+	@brief  キューブマップ(スカイボックス用)頂点配列定義
+	*/
+	void CreateCubeVerts();
 
 	/*
 	@brief	時間制限用textureの生成
@@ -220,6 +230,7 @@ private:
 	@param  vao Vertex Buffer Object
 	*/
 	void screenVAOSetting(unsigned int& vao);
+
 	/*
 	@brief  particleのブレンドモードを変更する
 	@param  blendType　変更するモード

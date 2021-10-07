@@ -48,6 +48,7 @@ public:
 	@param	ポジション
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
+	@param	追跡対象
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject);
 
@@ -177,7 +178,7 @@ public:// ゲッターセッター
 
 	/*
 	@fn Animationのgetter関数
-	@param _state 現在のプレイヤーのステータス
+	@param _state 現在のエネミーのステータス
 	@return Animation Animationクラスのポインタを返す
 	*/
 	const Animation* GetAnimation(EnemyState _state);

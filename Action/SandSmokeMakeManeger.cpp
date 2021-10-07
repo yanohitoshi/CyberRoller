@@ -5,6 +5,10 @@
 #include "ParticleEffectBase.h"
 #include "SandSmokeParticle.h"
 
+/*
+@fn コンストラクタ
+@param	親クラスのポインタ
+*/
 SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	:GameObject(false,Tag::PARTICLE)
 	, ShiftPositionX(40.0f)
@@ -47,10 +51,19 @@ SandSmokeMakeManeger::SandSmokeMakeManeger(GameObject* _owner)
 	}
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 SandSmokeMakeManeger::~SandSmokeMakeManeger()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 {
 	// ownerの速度を見て動いている時
@@ -96,6 +109,9 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn 大きい壁のエフェクトがアクティブの時の処理関数
+*/
 void SandSmokeMakeManeger::ActiveBigWallEffectProcess()
 {
 	// 3フレームに一度
@@ -103,9 +119,11 @@ void SandSmokeMakeManeger::ActiveBigWallEffectProcess()
 	{
 		GenerateWallEffectProcess(BigWallMaxEffect, BigRandValueY);
 	}
-
 }
 
+/*
+@fn 小さい壁のエフェクトがアクティブの時の処理関数
+*/
 void SandSmokeMakeManeger::ActiveSmallWallEffectProcess()
 {
 	// 3フレームに一度
@@ -115,6 +133,11 @@ void SandSmokeMakeManeger::ActiveSmallWallEffectProcess()
 	}
 }
 
+/*
+@fn 動く壁のエフェクトを生成するの処理
+@param _maxEffect 最大エフェクト数
+@param _randYValue Y軸のランダムの値
+*/
 void SandSmokeMakeManeger::GenerateWallEffectProcess(const int _maxEffect, const int _randYValue)
 {
 	// エフェクトを10個生成
@@ -139,5 +162,3 @@ void SandSmokeMakeManeger::GenerateWallEffectProcess(const int _maxEffect, const
 		new SandSmokeParticle(pos, velocity);
 	}
 }
-
-

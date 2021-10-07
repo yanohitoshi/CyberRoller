@@ -9,6 +9,9 @@
 // staticメンバーを初期化
 bool TimeUpSprite::drawFlag = true;
 
+/*
+@fn コンストラクタ
+*/
 TimeUpSprite::TimeUpSprite()
 	:GameObject(false, Tag::UI)
 	, DrawCount(120)
@@ -27,12 +30,21 @@ TimeUpSprite::TimeUpSprite()
 
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TimeUpSprite::~TimeUpSprite()
 {
 	// 静的変数初期化
 	drawFlag = true;
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TimeUpSprite::UpdateGameObject(float _deltaTime)
 {
 	// タイムオーバーかつ1度だけ描画フラグがtrueだったら

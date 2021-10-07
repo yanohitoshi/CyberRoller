@@ -1,7 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerTransformEffectManager.h"
 #include "PlayerTransformEffect.h"
 #include "PlayerObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 {
@@ -15,10 +22,19 @@ PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	effectCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 PlayerTransformEffectManager::~PlayerTransformEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void PlayerTransformEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 親クラスのステータスがActiveだったら
@@ -50,6 +66,9 @@ void PlayerTransformEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void PlayerTransformEffectManager::ActiveEffectProcess()
 {
 
@@ -74,6 +93,9 @@ void PlayerTransformEffectManager::ActiveEffectProcess()
 
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void PlayerTransformEffectManager::GenerateEffectProcess()
 {
 	

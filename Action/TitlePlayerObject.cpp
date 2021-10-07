@@ -6,7 +6,12 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 
-
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	再利用するかフラグ
+@param	オブジェクト判別用tag
+*/
 TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, Gravity (400.0f)
@@ -47,14 +52,21 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 
 	// 回転処理
 	RotationProcess();
-
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TitlePlayerObject::~TitlePlayerObject()
 {
-
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 {
 	// Rendererにポジションを送る
@@ -92,6 +104,9 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn 回転処理関数
+*/
 void TitlePlayerObject::RotationProcess()
 {
 	//Z軸を90度回転させる
@@ -102,6 +117,10 @@ void TitlePlayerObject::RotationProcess()
 	SetRotation(target);
 }
 
+/*
+@fn 重力処理関数
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TitlePlayerObject::GravityProcess(float _deltaTime)
 {
 	// 重力を掛ける
@@ -115,6 +134,9 @@ void TitlePlayerObject::GravityProcess(float _deltaTime)
 	}
 }
 
+/*
+@fn ジャンプディレイ処理関数
+*/
 void TitlePlayerObject::JumpDelayProcess()
 {
 	// ジャンプする間隔を数える
@@ -134,6 +156,9 @@ void TitlePlayerObject::JumpDelayProcess()
 	}
 }
 
+/*
+@fn ジャンプ処理関数
+*/
 void TitlePlayerObject::JumpProcess()
 {
 	// ジャンプ力を追加
@@ -159,6 +184,9 @@ void TitlePlayerObject::JumpProcess()
 	}
 }
 
+/*
+@fn 接地判定処理関数
+*/
 void TitlePlayerObject::IsGroundingProcess()
 {
 	// 当たり判定で設置を取っていないので座標で判定
@@ -177,6 +205,9 @@ void TitlePlayerObject::IsGroundingProcess()
 	}
 }
 
+/*
+@fn アニメーションの更新処理
+*/
 void TitlePlayerObject::AnimationUpdate()
 {
 	// 接地中で無かったら
@@ -203,5 +234,4 @@ void TitlePlayerObject::AnimationUpdate()
 		animState = RUN;
 		return;
 	}
-
 }

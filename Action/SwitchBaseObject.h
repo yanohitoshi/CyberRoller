@@ -24,6 +24,7 @@ public:
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
 	@param  どの区画のスイッチなのかを判別させるようのTag
+	@param	チュートリアル用Switchかどうかのフラグ
 	*/
 	SwitchBaseObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, const Tag& _switchTag,bool _isTutorial = false);
 	
@@ -45,6 +46,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 	// 3Dモデルの描画を行うクラス

@@ -8,6 +8,13 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	objectのサイズ
+@param	オブジェクト判別用tag
+@param  動く床に必要なデータ構造体
+*/
 MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data)
 	:GameObject(false, _objectTag)
 {
@@ -38,10 +45,19 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	boxCollider->SetObjectBox(mesh->GetBox());
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 MoveBlockObject::~MoveBlockObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void MoveBlockObject::UpdateGameObject(float _deltaTime)
 {
 	//worldboxを渡す
@@ -61,6 +77,9 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@fn 可動処理関数
+*/
 void MoveBlockObject::MovableProcess()
 {
 	// 反転するかどうかフラグを判定しそれに応じて速度を付与
@@ -76,6 +95,9 @@ void MoveBlockObject::MovableProcess()
 	}
 }
 
+/*
+@fn 反転チェック処理関数
+*/
 void MoveBlockObject::ChackInversionProcess()
 {
 	// 動く方向のタグを見て処理を変える
@@ -96,6 +118,9 @@ void MoveBlockObject::ChackInversionProcess()
 	}
 }
 
+/*
+@fn X軸反転チェック処理関数
+*/
 void MoveBlockObject::ChackAxisX()
 {
 	// 到達点に達していたら反転
@@ -111,6 +136,9 @@ void MoveBlockObject::ChackAxisX()
 	}
 }
 
+/*
+@fn Y軸反転チェック処理関数
+*/
 void MoveBlockObject::ChackAxisY()
 {
 	// 到達点に達していたら反転
@@ -126,6 +154,9 @@ void MoveBlockObject::ChackAxisY()
 	}
 }
 
+/*
+@fn Z軸反転チェック処理関数
+*/
 void MoveBlockObject::ChackAxisZ()
 {
 	// 到達点に達していたら反転

@@ -302,7 +302,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClCompile>
     <ClCompile Include="SwitchParticleEffect.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="ThankYouSprite.cpp" />
     <ClCompile Include="ThirdStageCreator.cpp" />
     <ClCompile Include="ThirdStageScene.cpp" />
     <ClCompile Include="ThirdStageUI.cpp" />
@@ -486,7 +485,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClInclude>
     <ClInclude Include="SwitchParticleEffect.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="ThankYouSprite.h" />
     <ClInclude Include="ThirdStageCreator.h" />
     <ClInclude Include="ThirdStageScene.h" />
     <ClInclude Include="ThirdStageUI.h" />

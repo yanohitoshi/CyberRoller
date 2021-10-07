@@ -1,14 +1,29 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyStateAttack.h"
 
+/*
+@fn コンストラクタ
+*/
 TrackingEnemyStateAttack::TrackingEnemyStateAttack()
 	: AttcakMoveSpeed(100.0f)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 TrackingEnemyStateAttack::~TrackingEnemyStateAttack()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState TrackingEnemyStateAttack::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// アニメーションの再生が終わっていたら
@@ -32,6 +47,11 @@ EnemyState TrackingEnemyStateAttack::Update(EnemyObjectBase* _owner, float _delt
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void TrackingEnemyStateAttack::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

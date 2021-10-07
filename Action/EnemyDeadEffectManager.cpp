@@ -1,8 +1,15 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyDeadEffectManager.h"
 #include "EnemyElectricShockEffect.h"
 #include "EnemyObjectBase.h"
 #include "EnemyExplosionEffect.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, WaitingExplosionTime(120)
@@ -19,10 +26,19 @@ EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	effectFrameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 EnemyDeadEffectManager::~EnemyDeadEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
@@ -54,6 +70,9 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void EnemyDeadEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
@@ -64,6 +83,9 @@ void EnemyDeadEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void EnemyDeadEffectManager::GenerateEffectProcess()
 {
 	// ownerのポジションを得る
@@ -83,6 +105,9 @@ void EnemyDeadEffectManager::GenerateEffectProcess()
 	}
 }
 
+/*
+@fn 爆発エフェクト生産処理関数
+*/
 void EnemyDeadEffectManager::GenerateExplosionEffectProcess()
 {
 	velocity = Vector3::Zero;
@@ -111,4 +136,3 @@ void EnemyDeadEffectManager::GenerateExplosionEffectProcess()
 		new EnemyExplosionEffect(owner, position, velocity);
 	}
 }
-

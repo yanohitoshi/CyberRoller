@@ -5,15 +5,27 @@
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateIdle::PlayerObjectStateIdle()
 	: DanceStartTime(1800)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateIdle::~PlayerObjectStateIdle()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime)
 {
 	
@@ -39,6 +51,12 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -49,6 +67,11 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -84,6 +107,10 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 	_owner->SetTurnDelayCount(0);
 }
 
+/*
+@fn 入力チェック処理関数
+@param	_owner 親クラスのポインタ
+*/
 void PlayerObjectStateIdle::ChackMovableInputProcess(PlayerObject* _owner)
 {
 
@@ -116,9 +143,13 @@ void PlayerObjectStateIdle::ChackMovableInputProcess(PlayerObject* _owner)
 	}
 }
 
+/*
+@fn ダンス開始カウント関数
+@brief	ダンス開始までのカウントを数え時間が来たらフラグを切り替える
+*/
 void PlayerObjectStateIdle::DanceCountProcess()
 {
-	// ダンス以降までのカウントを数える
+	// ダンス開始までのカウントを数える
 	++danceCount;
 
 	// カウントが規定値を超えたら

@@ -5,6 +5,9 @@
 #include "FPS.h"
 #include "stdio.h"
 
+/*
+@fn コンストラクタ
+*/
 FPS::FPS()
 	: setFps(60)
 	, oneFrameTickCount(1000 / setFps)
@@ -17,6 +20,9 @@ FPS::FPS()
 
 }
 
+/*
+@fn デストラクタ
+*/
 FPS::~FPS()
 {
 }

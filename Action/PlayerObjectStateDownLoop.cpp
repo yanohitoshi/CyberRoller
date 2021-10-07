@@ -4,14 +4,26 @@
 #include "PlayerObjectStateDownLoop.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateDownLoop::PlayerObjectStateDownLoop()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateDownLoop::~PlayerObjectStateDownLoop()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// 重力にデルタタイムをかけた値を代入
@@ -38,6 +50,12 @@ PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _delta
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateDownLoop::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// もし、コントローラーのAボタンまたはキーボードのCボタンが押されたら
@@ -58,6 +76,11 @@ void PlayerObjectStateDownLoop::Input(PlayerObject* _owner, const InputState& _k
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -74,6 +97,9 @@ void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 	isInput = false;
 }
 
+/*
+@fn コンティニュー確認処理関数
+*/
 void PlayerObjectStateDownLoop::ChackContinueProcess()
 {
 	// コンティニューフラグがtrueだったら

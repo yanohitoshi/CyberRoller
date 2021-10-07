@@ -1,14 +1,29 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TrackingEnemyStateReposition.h"
 
+/*
+@fn コンストラクタ
+*/
 TrackingEnemyStateReposition::TrackingEnemyStateReposition()
 	: IdlingLength(2.0f)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 TrackingEnemyStateReposition::~TrackingEnemyStateReposition()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 追跡ターゲットがいない場合
@@ -47,6 +62,11 @@ EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void TrackingEnemyStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

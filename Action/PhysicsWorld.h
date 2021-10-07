@@ -129,7 +129,10 @@ public:
 	
 private:
 
+	/*
+	@fn PhysicsWorldのインスタンス生成関数
 	//コンストラクタの隠蔽
+	*/
 	PhysicsWorld();
 
 	static PhysicsWorld* physics;

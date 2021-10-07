@@ -6,7 +6,12 @@
 #include "PlayerObject.h"
 #include "MoveWallBlock.h"
 
-
+/*
+@fn コンストラクタ
+@param	親クラスのポインタ
+@param	何色か判定用Tag
+@param シーン最後の動く壁のポインタ
+*/
 CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _crystalColor, MoveWallBlock* _lastMoveWall)
 	:GameObject(false, Tag::PARTICLE)
 	, ShiftPositionZ(100.0f)
@@ -53,10 +58,19 @@ CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _cry
 	}
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CrystalEffectManager::~CrystalEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// エフェクトを発生させない状態の時
@@ -97,6 +111,10 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
 {
 	// 発生場所の回転処理
@@ -111,6 +129,9 @@ void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void CrystalEffectManager::GenerateEffectProcess()
 {
 	// 速度を一時保存する変数
@@ -133,6 +154,10 @@ void CrystalEffectManager::GenerateEffectProcess()
 	new CrystalDefaultEffect(pos, vel, crystalColor);
 }
 
+/*
+@fn ポジションの回転処理関数
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CrystalEffectManager::RotationProcess(float _deltaTime)
 {
 	// 回転速度を追加

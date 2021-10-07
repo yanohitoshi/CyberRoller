@@ -70,11 +70,13 @@ public:
 
 	/*
 	@brief  ゲームオブジェクトのアップデート処理
+	@param	最後のフレームを完了するのに要した時間
 	*/
 	friend void UpdateGameObjects(float _deltaTime);
 
 	/*
 	@brief  ゲームオブジェクトの入力処理
+	@param	_keyState 入力情報
 	*/
 	friend void ProcessInputs(const InputState& _state);
 

@@ -1,6 +1,9 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "PlayerObjectStateIdlingDance.h"
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
@@ -8,14 +11,26 @@
 // staticメンバーを初期化
 bool PlayerObjectStateIdlingDance::isDancing = false;
 
+/*
+@fn コンストラクタ
+*/
 PlayerObjectStateIdlingDance::PlayerObjectStateIdlingDance()
 {
 }
 
+/*
+@fn デストラクタ
+*/
 PlayerObjectStateIdlingDance::~PlayerObjectStateIdlingDance()
 {
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// positionに速度を足してキャラクターを動かす
@@ -66,6 +81,12 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 	return state;
 }
 
+/*
+@fn インプット
+@brief	stateに応じて入力処理を行う
+@param	_owner 親クラスのポインタ
+@param	_keyState 入力情報
+*/
 void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力可能状態かを見る
@@ -76,6 +97,11 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 	}
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void PlayerObjectStateIdlingDance::Enter(PlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

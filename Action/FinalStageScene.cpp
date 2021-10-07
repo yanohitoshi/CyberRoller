@@ -9,6 +9,10 @@
 #include "FinalStageUI.h"
 #include "CountDownFont.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 FinalStageScene::FinalStageScene()
 	: FinalClearToChangeScene(360)
 {
@@ -46,10 +50,20 @@ FinalStageScene::FinalStageScene()
 
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 FinalStageScene::~FinalStageScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState FinalStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする
@@ -100,5 +114,4 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 
 	// シーン変更しない場合今のシーンを返す
 	return state;
-
 }

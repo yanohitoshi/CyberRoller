@@ -19,6 +19,7 @@ public:
 	@param	ポジション
 	@param	objectのサイズ
 	@param	オブジェクト判別用tag
+	@param	回転角度
 	*/
 	ResultSwitchObject(GameObject* _owner, const Vector3& _size, const Tag& _objectTag, const float _angle );
 

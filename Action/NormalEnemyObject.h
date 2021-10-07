@@ -16,8 +16,8 @@ public:
 	/*
 	@fn コンストラクタ
 	@param	ポジション
-	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
+	@param	追跡するオブジェクトのポインタ
 	*/
 	NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject);
 
@@ -33,11 +33,6 @@ public:
 	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
-
-	/*
-	@fn めり込み判定
-	*/
-	void FixCollision(AABB& myAABB, const AABB& pairAABB)override;
 
 private:
 

@@ -26,11 +26,17 @@
 
 Renderer* Renderer::renderer = nullptr;
 
+/*
+@brief	Particle用頂点データのセット関数
+*/
 void Renderer::SetParticleVertex()
 {
 	particleVertex->SetActive();
 }
 
+/*
+@brief  コンストラクタ
+*/
 Renderer::Renderer()
 	: hdrRenderer(nullptr)
 	, spriteShader(nullptr)
@@ -63,6 +69,9 @@ Renderer::Renderer()
 {
 }
 
+/*
+@brief  デストラクタ
+*/
 Renderer::~Renderer()
 {
 }
@@ -310,7 +319,6 @@ void Renderer::Draw()
 	SDL_GL_SwapWindow(window);
 }
 
-
 /*
 @brief  スプライトの追加
 @param	_spriteComponent　追加するSpriteComponentクラスのポインタ
@@ -391,7 +399,6 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 	}
 
 }
-
 
 /*
 @brief  パーティクルの追加
@@ -483,7 +490,6 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 	}
 }
 
-
 /*
 @param _fileName モデルへのアドレス
 @return スケルトンモデルの取得
@@ -573,6 +579,11 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 	return texture;
 }
 
+/*
+@brief  フォントの取得
+@param	_fileName　取得したいフォントのファイル名
+@return Fontクラスのポインタ
+*/
 Font* Renderer::GetFont(const std::string& _fileName)
 {
 	Font* font = nullptr;
@@ -741,7 +752,9 @@ void Renderer::CreateSpriteVerts()
 	spriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
-// パーティクル頂点作成
+/*
+@brief  Particle用の頂点バッファとインデックスバッファの作成
+*/
 void Renderer::CreateParticleVerts()
 {
 	float vertices[] = {
@@ -758,12 +771,20 @@ void Renderer::CreateParticleVerts()
 	particleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
+/*
+@brief  キューブマップ(スカイボックス用)頂点配列定義
+*/
 void Renderer::CreateCubeVerts()
 {
 	cubeVerts = new VertexArray();
 	cubeVerts->CreateCubeVerts();
 }
 
+/*
+@brief	時間制限用textureの生成
+@param	_value　最大値
+@param _fontSize　フォントサイズ
+*/
 void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
 {
 	// フォントの生成
@@ -797,25 +818,41 @@ void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
 		str = std::to_string(i);
 		timeRedFontTextures[i] = font->RenderText(str, Color::Red, _fontSize);
 	}
-
-
 }
 
+/*
+@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
+@param	カウントダウンタイム
+@return カウントダウンタイムごとのTimeTexture
+*/
 Texture* Renderer::GetTimeTexture(int _time)
 {
 	return timeFontTextures[_time + 1];
 }
 
+/*
+@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
+@param	カウントダウンタイム
+@return カウントダウンタイムごとのTimeTexture
+*/
 Texture* Renderer::GetTimeBlackTexture(int _time)
 {
 	return timeBlackFontTextures[_time + 1];
 }
 
+/*
+@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
+@param	カウントダウンタイム
+@return カウントダウンタイムごとのTimeTexture
+*/
 Texture* Renderer::GetTimeRedTexture(int _time)
 {
 	return timeRedFontTextures[_time + 1];
 }
 
+/*
+@brief  シャドウマップの本描画関数
+*/
 void Renderer::DrawShadow()
 {
 
@@ -945,6 +982,9 @@ void Renderer::DrawShadow()
 
 }
 
+/*
+@brief  デプスマップ焼きこみ描画
+*/
 void Renderer::DepthRendering()
 {
 
@@ -1014,6 +1054,9 @@ void Renderer::DepthRendering()
 
 }
 
+/*
+@brief  背景の描画
+*/
 void Renderer::DrawBackGround()
 {
 	// アルファブレンディングを有効にする
@@ -1046,6 +1089,9 @@ void Renderer::DrawBackGround()
 
 }
 
+/*
+@brief  Particle用の頂点バッファとインデックスバッファの作成
+*/
 void Renderer::DrawParticle()
 {
 	// particleのコンテナをソート
@@ -1130,7 +1176,6 @@ void Renderer::DrawParticle()
 	glDepthMask(GL_TRUE);
 }
 
-
 /*
 @brief  光源情報をシェーダーの変数にセットする
 @param _shader セットするShaderクラスのポインタ
@@ -1152,6 +1197,10 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 		dirLight.specColor);
 }
 
+/*
+@brief  particleのブレンドモードを変更する
+@param  blendType　変更するモード
+*/
 void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
 {
 	// PARTICLE_BLEND_ENUMのタイプを参照
@@ -1171,13 +1220,19 @@ void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType
 	}
 }
 
+/*
+@brief  textureを変更する
+@param  changeTextureID　変更するtextureのID
+*/
 void Renderer::ChangeTexture(int changeTextureID)
 {
 	// textureIDをバインド
 	glBindTexture(GL_TEXTURE_2D, changeTextureID);
 }
 
-// ワールド空間のカメラ座標を計算
+/*
+@brief  ワールド空間のカメラ座標を計算
+*/
 Vector3 Renderer::CalcCameraPos()
 {
 	// ビュー行列よりワールドでのカメラ位置算出
@@ -1196,8 +1251,10 @@ Vector3 Renderer::CalcCameraPos()
 	return Vector3(Vector3::Transform(v, transMat));
 }
 
-
-// 画面全体を覆う頂点定義
+/*
+@brief  画面全体を覆う頂点の定義
+@param  vao Vertex Buffer Object
+*/
 void Renderer::screenVAOSetting(unsigned int& vao)
 {
 	unsigned int vbo;

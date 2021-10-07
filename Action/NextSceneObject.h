@@ -23,6 +23,8 @@ public:
 	@fn コンストラクタ
 	@param	ポジション
 	@param	オブジェクト判別用tag
+	@param	プレイヤーのポインタ
+	@param	シーンの最後の動く壁オブジェクトのポインタ
 	*/
 	NextSceneObject(const Vector3& _pos, const Tag& _objectTag,PlayerObject* _playerObject ,MoveWallBlock* _lastMoveWallBlock);
 
@@ -39,7 +41,6 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
-
 private:
 	
 	/*
@@ -55,6 +56,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

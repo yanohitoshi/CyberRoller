@@ -7,16 +7,27 @@
 #include "Game.h"
 #include "Renderer.h"
 
+/*
+@fn コンストラクタ
+@brief Fontクラスの生成を行う
+*/
 Font::Font()
 {
-
 }
 
+/*
+@fn デストラクタ
+@brief Fontクラスの削除を行う
+*/
 Font::~Font()
 {
-
 }
 
+/*
+@fn ファイルロード関数
+@brief TTFファイルのロードを行う
+@param fileName ロードするファイルのパス
+*/
 bool Font::Load(const std::string& fileName)
 {
 	// サポートされているフォントサイズ
@@ -44,6 +55,10 @@ bool Font::Load(const std::string& fileName)
 	return true;
 }
 
+/*
+@fn アンロード関数
+@brief TTFファイルのアンロードを行う
+*/
 void Font::Unload()
 {
 	for (auto& font : fontData)
@@ -52,9 +67,14 @@ void Font::Unload()
 	}
 }
 
-Texture* Font::RenderText(const std::string& renderingText,
-	const Vector3& color /*= Color::White*/,
-	int pointSize /*= 24*/)
+/*
+@fn texture生成関数
+@brief フォントを使用したtextureの生成を行う
+@param renderingText 生成するtextureに使用する文字列
+@param color 指定する色（デフォルトは白）
+@param pointSize フォントのサイズ（デフォルトは30）
+*/
+Texture* Font::RenderText(const std::string& renderingText,const Vector3& color,int pointSize)
 {
 	//return nullptr;
 	Texture* texture = nullptr;

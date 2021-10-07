@@ -13,6 +13,10 @@
 #include "Skeleton.h"
 #include "GameObject.h"
 
+/*
+@fn コンストラクタ
+@param _owner 親となるGameObjectのポインタ
+*/
 SkeletalMeshComponent::SkeletalMeshComponent(GameObject* owner)
 	:MeshComponent(owner, true,false)
 	, skeleton(nullptr)
@@ -55,11 +59,15 @@ void SkeletalMeshComponent::Draw(Shader* shader)
 	}
 }
 
-void SkeletalMeshComponent::Update(float deltaTime)
+/*
+@brief　更新処理
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
+void SkeletalMeshComponent::Update(float _deltaTime)
 {
 		if (animation && skeleton)
 		{
-			animTime += deltaTime * animPlayRate;
+			animTime += _deltaTime * animPlayRate;
 			if (animation->IsLoopAnimation())
 			{
 				//  アニメを巻き戻して再生
@@ -80,6 +88,12 @@ void SkeletalMeshComponent::Update(float deltaTime)
 	
 }
 
+/*
+@fn アニメーションの再生
+@param _anim アニメーションデータクラス
+@param _playRate アニメーションの再生速度
+@return アニメーションの残り時間
+*/
 float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRate) 
 {
 	animation = _anim;
@@ -96,6 +110,9 @@ float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRa
 	return animation->GetDuration();
 }
 
+/*
+@fn 行列パレットの計算
+*/
 void SkeletalMeshComponent::ComputeMatrixPalette()                             
 {
 	// グローバル逆バインド行列配列の取得
@@ -112,6 +129,9 @@ void SkeletalMeshComponent::ComputeMatrixPalette()
 	}
 }
 
+/*
+@fn アニメーションが再生中か調べる関数
+*/
 bool SkeletalMeshComponent::IsPlaying()
 {
 
@@ -126,7 +146,10 @@ bool SkeletalMeshComponent::IsPlaying()
 	return true;
 }
 
-
+/*
+@fn textureセット用関数
+@param _shader セットするシェーダーのポインタ
+*/
 void SkeletalMeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット

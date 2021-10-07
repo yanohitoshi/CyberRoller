@@ -12,8 +12,7 @@ public:
 	/*
 	@fn コンストラクタ
 	@param	ポジション
-	@param	objectのサイズ
-	@param	オブジェクト判別用tag
+	@param	親クラスのポインタ
 	*/
 	EnemyAttackArea(const Tag& _objectTag, EnemyObjectBase* _ownerEnemy);
 
@@ -35,6 +34,7 @@ private:
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
+	@param	当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 

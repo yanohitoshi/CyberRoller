@@ -4,6 +4,12 @@
 #include "CrystalDefaultEffect.h"
 #include "CrystalEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+@param	何色か判定用Tag
+*/
 CrystalDefaultEffect::CrystalDefaultEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, _velocity, 100, "Assets/Effect/Particle_Soft.png", true)
 	, AddScale(2.0f)
@@ -39,10 +45,19 @@ CrystalDefaultEffect::CrystalDefaultEffect(const Vector3& _pos, const Vector3& _
 	}
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CrystalDefaultEffect::~CrystalDefaultEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CrystalDefaultEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -79,6 +94,9 @@ void CrystalDefaultEffect::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn フェードイン関数
+*/
 void CrystalDefaultEffect::FadeInProcess()
 {
 	// フェードインフラグがtrueだったら

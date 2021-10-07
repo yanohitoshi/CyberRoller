@@ -272,6 +272,12 @@ void Game::ProcessInput()
 	}
 }
 
+/*
+@fn シーン変更関数
+@brief 前のシーンの解放と次のシーンの生成を行う
+@param _state シーンの状態
+@param _scene 進行中のシーンのポインタ
+*/
 void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 {
 	// シーン変更があった際に全ての使用済みオブジェクトを削除
@@ -330,6 +336,10 @@ void Game::UpdateGame()
 	UpdateGameObjects(deltaTime);
 }
 
+/*
+@brief  ゲームオブジェクトのアップデート処理
+@param	最後のフレームを完了するのに要した時間
+*/
 void UpdateGameObjects(float _deltaTime)
 {
 	// オブジェクトの更新フラグをtrueに
@@ -402,6 +412,10 @@ void UpdateGameObjects(float _deltaTime)
 	deadObjects.clear();
 }
 
+/*
+@brief  ゲームオブジェクトの入力処理
+@param	_keyState 入力情報
+*/
 void ProcessInputs(const InputState& _state)
 {
 	// オブジェクトの更新フラグをtrueに
