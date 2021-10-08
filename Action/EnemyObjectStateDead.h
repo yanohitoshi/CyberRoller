@@ -44,5 +44,6 @@ private:
 	int frameCount;
 	// リスポーンする時間定数
 	const int RespawnTime;
+	// 描画をオフにする時間定数
+	const int InvisibleTime;
 };
-

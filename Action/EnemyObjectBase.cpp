@@ -16,7 +16,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 	, trackingObject(_trackingObject)
-	, respawnPositionOffset(1600.0f)
+	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f,2.0f,2.0f))
 {
 	// メンバー変数初期化
@@ -25,6 +25,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	firstPosition = _pos;
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
+	isVisible = true;
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
 }
@@ -47,7 +48,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, moveDistance(_moveEnemyData.distance)
 	, moveSpeed(_moveEnemyData.speed)
 	, moveEnemyTag(_moveEnemyData.tag)
-	, respawnPositionOffset(1600.0f)
+	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {
 	// メンバー変数初期化
@@ -56,6 +57,8 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	firstPosition = _pos;
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
+
+	isVisible = true;
 
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
@@ -75,7 +78,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 	, moveSpeed(_moveSpeed)
 	, trackingObject(_trackingObject)
-	, respawnPositionOffset(1600.0f)
+	, respawnPositionOffset(1000.0f)
 	, BoxMin(Vector3(-10.0f, -10.0f, 0.0f))
 	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
@@ -86,6 +89,8 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	firstPosition = _pos;
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
+
+	isVisible = true;
 
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);

@@ -5,6 +5,7 @@
 #include "MeshComponent.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
+#include "BoxCollider.h"
 #include "SphereCollider.h"
 #include "JumpAttackEffectManager.h"
 #include "PlayerAttackHitEffectManager.h"
@@ -18,10 +19,11 @@
 JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const Vector3& _size, const Tag _objectTag)
 	: GameObject(false, _objectTag)
 	, Rotation(10.0f)
+	, ShiftPositionZ(100.0f)
 {
 	ownerObject = _ownerObject;
 	position = ownerObject->GetPosition();
-	position.z += 100.0f;
+	position.z += ShiftPositionZ;
 	rotationAngle = 0.0f;
 	// 前方ベクトル初期化
 	forwardVec = ownerObject->GetForwardVec();
@@ -33,7 +35,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	meshComponent = new MeshComponent(this, false, false);
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 
-	//接地判定用のsphereCollider
+	//攻撃判定用のsphereCollider
 	sphereCollider = new SphereCollider(this, PhysicsTag::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);

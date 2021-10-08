@@ -7,6 +7,7 @@
 @fn コンストラクタ
 */
 EnemyObjectStateAttack::EnemyObjectStateAttack()
+	: AttackSpeed(100.0f)
 {
 }
 
@@ -34,9 +35,14 @@ EnemyState EnemyObjectStateAttack::Update(EnemyObjectBase* _owner, float _deltaT
 	}
 	else
 	{
-		velocity = trackingRotationVec * 100.0f;
+		velocity = trackingRotationVec * AttackSpeed;
 		// positionに速度を足してキャラクターを動かす
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+	}
+
+	if (_owner->GetIsDeadFlag())
+	{
+		state = EnemyState::ENEMY_STATE_DEAD;
 	}
 
 	return state;

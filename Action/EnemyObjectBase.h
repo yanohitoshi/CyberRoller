@@ -145,6 +145,7 @@ protected:
 	bool isTracking;
 	// 攻撃モーション中か
 	bool isAttack;
+	bool isVisible;
 
 	// 今のプレーヤーのstate状態を保存するための変数
 	EnemyState nowState;
@@ -260,6 +261,12 @@ public:// ゲッターセッター
 	@return	bool isTracking 追跡するオブジェクトを捉えているかを返す
 	*/
 	bool GetIsTracking() { return isTracking; }
+	
+	/*
+	@fn isVisibleのGettrer関数
+	@return	bool isVisible 表示中かどうかを返す
+	*/
+	bool GetIsVisible() { return isVisible; }
 
 	/*
 	@fn nowStateのgetter関数
@@ -326,5 +333,11 @@ public:// ゲッターセッター
 	@param	bool isAttack 攻撃状態かどうか
 	*/
 	void SetIsAttack(bool _isAttack) { isAttack = _isAttack; }
+	
+	/*
+	@fn isVisibleのsetter関数
+	@param	bool isVisible 表示中かどうか
+	*/
+	void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
 };
 

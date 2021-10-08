@@ -39,5 +39,7 @@ private:
 	Vector3 trackingRotationVec;
 	// 初期ポジション
 	Vector3 firstPosition;
+	// 攻撃速度
+	const float AttackSpeed;
 };
 

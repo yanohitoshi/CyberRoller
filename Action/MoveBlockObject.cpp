@@ -17,6 +17,7 @@
 */
 MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data)
 	:GameObject(false, _objectTag)
+	, CorrectionAabbValue(0.1f)
 {
 	//GameObjectメンバ変数の初期化
 	SetPosition(_p);
@@ -42,7 +43,11 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	mesh = meshComponent->GetMesh();
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::MOVE_GROUND_TAG, GetOnCollisionFunc());
-	boxCollider->SetObjectBox(mesh->GetBox());
+	aabb = mesh->GetBox();
+	//プレイヤーがすり抜けないようにAABBのサイズを補正
+	aabb.max.y += CorrectionAabbValue;
+	aabb.min.y -= CorrectionAabbValue;
+	boxCollider->SetObjectBox(aabb);
 }
 
 /*

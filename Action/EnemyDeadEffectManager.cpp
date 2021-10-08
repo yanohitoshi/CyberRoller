@@ -12,7 +12,7 @@
 */
 EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, WaitingExplosionTime(120)
+	, WaitingExplosionTime(105)
 	, MaxExplosionEffects(10)
 	, RandValue(250)
 	, CorrectionRandValue(10.0f)
@@ -42,7 +42,7 @@ EnemyDeadEffectManager::~EnemyDeadEffectManager()
 void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
-	if (owner->GetIsDeadFlag())
+	if (owner->GetIsDeadFlag() && owner->GetIsVisible())
 	{
 		// パーティクルを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
@@ -61,6 +61,7 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 		effectFrameCount = 0;
 		generateExplosionEffectsFlag = true;
 		break;
+
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 

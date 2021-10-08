@@ -99,10 +99,10 @@ public:
 	/*
 	@fn BoxColliderを削除する関数
 	@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタ
+	@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタの参照
 	@param	_box　削除するBoxColliderのポインタ
 	*/
-	void RemoveBox(std::vector<BoxCollider*> _boxes, BoxCollider* _box);
+	void RemoveBox(std::vector<BoxCollider*>& _boxes, BoxCollider* _box);
 
 	/*
 	@fn SphereColliderを追加する関数
@@ -122,10 +122,10 @@ public:
 	/*
 	@fn SphereColliderを削除する関数
 	@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタ
+	@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタの参照
 	@param	_sphere　削除するSphereColliderのポインタ
 	*/
-	void RemoveSphere(std::vector<SphereCollider*> _spheres,SphereCollider* _sphere);
+	void RemoveSphere(std::vector<SphereCollider*>& _spheres,SphereCollider* _sphere);
 	
 private:
 

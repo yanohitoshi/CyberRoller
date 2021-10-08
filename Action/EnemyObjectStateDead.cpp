@@ -7,7 +7,8 @@
 @fn コンストラクタ
 */
 EnemyObjectStateDead::EnemyObjectStateDead()
-	: RespawnTime(120)
+	: RespawnTime(300)
+	, InvisibleTime(105)
 {
 }
 
@@ -28,10 +29,16 @@ EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTim
 {
 	++frameCount;
 
+	// 時間が来たら描画を切る
+	if (frameCount >= InvisibleTime)
+	{
+		_owner->SetIsVisible(false);
+		skeletalMeshComponent->SetVisible(false);
+	}
+
 	// 時間が来たらリスポーン
 	if (frameCount >= RespawnTime)
 	{
-		skeletalMeshComponent->SetVisible(false);
 		state = EnemyState::ENEMY_STATE_RESPAWN;
 	}
 

@@ -45,8 +45,9 @@ private:
 	Mesh* mesh;
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
-
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
+	// プレイヤーがすり抜けないようにAABBのサイズを補正するための定数
+	const float CorrectionAabbValue;
 };
 

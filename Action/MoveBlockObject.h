@@ -98,6 +98,7 @@ private:
 	Vector3 direction;
 	// どの方向に動くかを判定するためのTag変数
 	MoveDirectionTag moveTag;
-
+	// プレイヤーがすり抜けないようにAABBのサイズを補正するための定数
+	const float CorrectionAabbValue;
 };
 

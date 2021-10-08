@@ -62,6 +62,7 @@ void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// 描画をONに設定
 	skeletalMeshComponent->SetVisible(true);
+	_owner->SetIsVisible(true);
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_RESPAWN;
 	// 死亡フラグをfalseにセット

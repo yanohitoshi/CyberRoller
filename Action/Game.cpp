@@ -33,7 +33,7 @@ Game::Game()
     , isRunning(true)
 	, screenWidth(0.0f)
 	, screenHeight(0.0f)
-	, isFullScreen(true)
+	, isFullScreen(false)
 	, FullScreenWidth(1920.0f)
 	, FullScreenHeight(1080.0f)
 	, WindowScreenWidth(1080.0f)
@@ -209,7 +209,6 @@ void Game::UnloadData()
 		RENDERER->Shutdown();
 	}
 }
-
 
 /*
 @brief  “ü—ÍŠÖ˜A‚Ìˆ—

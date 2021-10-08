@@ -8,6 +8,7 @@
 class MeshComponent;
 class PlayerObject;
 class SphereCollider;
+class BoxCollider;
 
 /*
 @file JumpAttackPlayerObject.h
@@ -52,6 +53,8 @@ private:
     MeshComponent* meshComponent;
 	// 親となるオブジェクトのポインタ
 	PlayerObject* ownerObject;
+	// AABBの当たり判定を行うクラス
+	BoxCollider* boxCollider;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* sphereCollider;
 
@@ -59,5 +62,7 @@ private:
 	float rotationAngle;
 	// 回転角に足し続ける値定数
 	const float Rotation;
+	// Z軸をずらすための定数
+	const float ShiftPositionZ;
 };
 
