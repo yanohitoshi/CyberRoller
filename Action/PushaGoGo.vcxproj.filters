@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>FPS</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletalMeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneTransform.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsWorld.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJsonHelper.cpp">
+      <Filter>RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeColorMeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCameraObject.cpp">
+      <Filter>GameObjects\CameraObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectBase.cpp">
+      <Filter>GameObjects\CameraObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffectBase.cpp">
+      <Filter>GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CountDownFont.cpp">
+      <Filter>UI\FontUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpTutorialParticl.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTutorialParticl.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialSwitchParticlEffect.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCountDownSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="StageCreatorBase.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialSwitchOkEffect.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CountDownBackFont.cpp">
+      <Filter>UI\FontUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeUpSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="HDRRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGroundSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="WarningSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FierWorksEffect.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearEffect.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDefaultEffect.cpp">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalEffectManager.cpp">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandSmokeMakeManeger.cpp">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandSmokeParticle.cpp">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchEffectMakeManeger.cpp">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchParticleEffect.cpp">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBlockObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="WallBlockObject.cpp">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveWallBlock.cpp">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearPointObject.cpp">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NextSceneObject.cpp">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpSwitchObject.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBaseObject.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBlock.cpp">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NeedleObject.cpp">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NeedlePanelObject.cpp">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PushBoardObject.cpp">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PushBoxObject.cpp">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RespawnPoint.cpp">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpEndToIdle.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpLoop.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJunpEndToRun.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownLoop.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownOver.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDownUp.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateIdle.cpp">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateIdlingDance.cpp">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateDead.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRespown.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRun.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunStart.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunStop.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateRunTurn.cpp">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateBase.cpp">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMapComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBoxObject.cpp">
+      <Filter>GameObjects\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateFallDead.cpp">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSceneCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSwitchBaseObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSwitchObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultCameraObject.cpp">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCameraObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGroundObject.cpp">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateBase.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectBase.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateKnockBack.cpp">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpAttackPlayerObject.cpp">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpAttack.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateJumpAttackEnd.cpp">
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObjectStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpAttackTutorialParticl.cpp">
+      <Filter>UI\ParticleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpAttackEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearEffectManager.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireWorksEffectManager.cpp">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpAttackEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTransformEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTransformEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateMoving.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEnemyObjectStateTurn.cpp">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateTracking.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateMoving.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateTurn.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateReposition.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTrackingArea.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyStateAttack.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDeadEffectManager.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateRespawn.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackHitEffectRipples.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyExplosionEffect.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSandSmokeMakeManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockBackEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockBackEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyElectricShockEffect.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateAttack.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackingEnemyAttackArea.cpp">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttackArea.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="LightObject.cpp">
+      <Filter>GameObjects\StageObjects\LightObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadEffectManager.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadEffect.cpp">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
+      <Filter>FPS</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletalMeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneTransform.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixPalette.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsWorld.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObject.h">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidJsonHelper.h">
+      <Filter>RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeColorMeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCameraObject.h">
+      <Filter>GameObjects\CameraObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectBase.h">
+      <Filter>GameObjects\CameraObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffectBase.h">
+      <Filter>GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDownFont.h">
+      <Filter>UI\FontUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpTutorialParticl.h">
+      <Filter>UI\ParticleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTutorialParticl.h">
+      <Filter>UI\ParticleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialSwitchParticlEffect.h">
+      <Filter>UI\ParticleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCountDownSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageCreatorBase.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialSwitchOkEffect.h">
+      <Filter>UI\ParticleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDownBackFont.h">
+      <Filter>UI\FontUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeUpSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="HDRRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBackGroundSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="WarningSprite.h">
+      <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FierWorksEffect.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearEffect.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDefaultEffect.h">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalEffectManager.h">
+      <Filter>GameObjects\Effect\CrystalEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandSmokeMakeManeger.h">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandSmokeParticle.h">
+      <Filter>GameObjects\Effect\WallEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchEffectMakeManeger.h">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchParticleEffect.h">
+      <Filter>GameObjects\Effect\SwitchEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBlockObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="WallBlockObject.h">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveWallBlock.h">
+      <Filter>GameObjects\StageObjects\WallObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearPointObject.h">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpSwitchObject.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchBaseObject.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchBlock.h">
+      <Filter>GameObjects\StageObjects\SwitchObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NeedleObject.h">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NeedlePanelObject.h">
+      <Filter>GameObjects\StageObjects\NeedleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PushBoardObject.h">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PushBoxObject.h">
+      <Filter>GameObjects\StageObjects\PushBoardObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RespawnPoint.h">
+      <Filter>GameObjects\StageObjects\RespawnObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpEndToIdle.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpLoop.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpStart.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJunpEndToRun.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownLoop.h">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownOver.h">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownStart.h">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDownUp.h">
+      <Filter>GameObjects\PlayerObjects\State\DownState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateIdle.h">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateIdlingDance.h">
+      <Filter>GameObjects\PlayerObjects\State\IdleState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateDead.h">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRespown.h">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRun.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunStart.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunStop.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateRunTurn.h">
+      <Filter>GameObjects\PlayerObjects\State\RunState</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMapComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBoxObject.h">
+      <Filter>GameObjects\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateFallDead.h">
+      <Filter>GameObjects\PlayerObjects\State\DeadState</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSceneCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSwitchBaseObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSwitchObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultCameraObject.h">
+      <Filter>GameObjects\ResultObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCameraObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGroundObject.h">
+      <Filter>GameObjects\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateBase.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectBase.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateKnockBack.h">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateBase.h">
+      <Filter>GameObjects\PlayerObjects\State</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackPlayerObject.h">
+      <Filter>GameObjects\PlayerObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpAttack.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateJumpAttackEnd.h">
+      <Filter>GameObjects\PlayerObjects\State\JumpState\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalEnemyObjectStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\NormalEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackTutorialParticl.h">
+      <Filter>UI\ParticleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearEffectManager.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireWorksEffectManager.h">
+      <Filter>GameObjects\Effect\ClearEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAttackEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTransformEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTransformEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="NextSceneObject.h">
+      <Filter>GameObjects\StageObjects\ClearObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateMoving.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEnemyObjectStateTurn.h">
+      <Filter>GameObjects\EnemyObjects\MoveEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateTracking.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateMoving.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateTurn.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateReposition.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyStateAttack.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDeadEffectManager.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateRespawn.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackHitEffectRipples.h">
+      <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyExplosionEffect.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSandSmokeMakeManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockBackEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockBackEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyElectricShockEffect.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTrackingArea.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateAttack.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackingEnemyAttackArea.h">
+      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttackArea.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="LightObject.h">
+      <Filter>GameObjects\StageObjects\LightObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadEffectManager.h">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadEffect.h">
+      <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{614f7629-f9b4-4e84-a619-9d3738c2e48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{453546c5-e9de-4e3e-a25b-f98a2b7e8960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPS">
+      <UniqueIdentifier>{f5cd1200-4d13-4894-b195-06cc32386c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{86dd1375-242a-47c5-b4ab-8c242a88e640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6a202267-f302-460a-bad2-773b2329bbdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{c8e606d2-bf2c-4f01-ad9d-28b803aa7d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{016f7373-9fd9-4a05-bbd3-36e0ad2fe6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RapidJson">
+      <UniqueIdentifier>{8023c15e-6560-4266-9189-6c24df31b79f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{614ccc69-8204-42f6-90f1-581f4a670b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{60acc7c4-a57d-4388-8fcb-200c452e2a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{355a024d-c71a-40a5-91ae-9a3e77c02fdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\CameraObjects">
+      <UniqueIdentifier>{6813d1d6-cc3a-4998-8821-82413f219cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects">
+      <UniqueIdentifier>{11e8b99e-f8e0-4f4f-9973-12db99f563d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect">
+      <UniqueIdentifier>{0a8b7db9-3ef9-41ed-bce1-3506dd336aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\FontUI">
+      <UniqueIdentifier>{e8b60bab-4592-482b-ac9a-3ea48f4c27cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI">
+      <UniqueIdentifier>{31bf437c-667c-4863-bcbe-987387955e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\ParticleUI">
+      <UniqueIdentifier>{7df3786b-5a67-43ed-909c-5f520c21f8f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{cf86a356-ee92-4d85-8748-5fd8bc2f8787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StageCreator">
+      <UniqueIdentifier>{79d68f3c-2d8d-4ecf-a877-91a62ecaa99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\ClearEffect">
+      <UniqueIdentifier>{1b4d2354-df87-43a5-85fc-d6e303938786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\CrystalEffect">
+      <UniqueIdentifier>{d8285a44-6da1-4928-9015-ee8a2a3d9924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect">
+      <UniqueIdentifier>{c707438e-9d4a-4b49-8225-79e51dae6791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\WallEffect">
+      <UniqueIdentifier>{8d5950e9-c64c-4938-a132-2ee9f6286e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\SwitchEffect">
+      <UniqueIdentifier>{fa333578-8800-4fbc-81b6-2527e3bb3663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects">
+      <UniqueIdentifier>{11af32dc-6357-49d7-b8da-5a348d9f3504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\GroundObject">
+      <UniqueIdentifier>{a20fe376-0424-429d-af75-edb8880ec6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\WallObject">
+      <UniqueIdentifier>{ec1b9505-6fe2-4883-a9c2-4261b5449ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\ClearObject">
+      <UniqueIdentifier>{8a017935-e09d-406f-8d5b-cabf94520cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\SwitchObject">
+      <UniqueIdentifier>{fed01ebe-accf-4161-9b28-d00b8c06e951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\NeedleObject">
+      <UniqueIdentifier>{7726ba89-db61-493d-a8e5-7a61b0269300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\PushBoardObject">
+      <UniqueIdentifier>{d0e239d5-262a-4adc-b45d-0ed026f66789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\RespawnObject">
+      <UniqueIdentifier>{d239bcb1-d219-4f4f-bba4-92020076add2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SceneUI">
+      <UniqueIdentifier>{d75e6610-2c3b-40ff-9285-7012d2f0b8dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State">
+      <UniqueIdentifier>{ec42b851-463a-4355-8d38-ee8518a0f40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\JumpState">
+      <UniqueIdentifier>{989395e2-a301-4f98-8084-f15c7ae69de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\DownState">
+      <UniqueIdentifier>{8aa8a2bb-4495-49bb-8909-0fbfffdd91ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\IdleState">
+      <UniqueIdentifier>{9d4b679f-0d6b-48c9-a34c-b70a5bdfdfb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\DeadState">
+      <UniqueIdentifier>{8aa78689-c0d8-43ee-b7e1-d47c05ef74ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\RunState">
+      <UniqueIdentifier>{2df9d01b-cd9f-48e8-9dda-dae01d1b7c92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\SkyBox">
+      <UniqueIdentifier>{43a69f49-5df3-4bda-b91f-8abe1d102ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\ResultObject">
+      <UniqueIdentifier>{68ddba6c-a9d8-4113-a245-e38acd65b243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\TitleObject">
+      <UniqueIdentifier>{cfff7844-fb21-423c-ade7-d5ad5cc52ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects">
+      <UniqueIdentifier>{7e420d48-1aaf-4ed6-acc8-3b2b90ff777b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\KnockBackState">
+      <UniqueIdentifier>{082421a8-953b-403b-8e99-73ac2b5e5c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\PlayerObjects\State\JumpState\JumpAttack">
+      <UniqueIdentifier>{7a83991d-abbb-4237-b6ab-88078fd40518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\NormalEnemyObject">
+      <UniqueIdentifier>{c8314471-9f3e-46e8-b9bd-72a4e4c71ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\NormalEnemyObject\State">
+      <UniqueIdentifier>{525d8a34-ecfb-4ee2-962f-171ca64bef0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\JumpAttack">
+      <UniqueIdentifier>{cb5fd6ab-4db1-4e47-bcc4-aa26bc5017f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\MoveEnemyObject">
+      <UniqueIdentifier>{3bcd4548-d521-4801-90d4-460362be367a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\MoveEnemyObject\State">
+      <UniqueIdentifier>{ebd6a99f-e3c4-4984-b990-c1589258a118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\TrackingEnemyObject">
+      <UniqueIdentifier>{4f463f6d-23d8-4bd0-8605-19d0d7b4a62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\TrackingEnemyObject\State">
+      <UniqueIdentifier>{f8f2ee3c-86da-43a8-b4b7-b51d1153baf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\Enemy">
+      <UniqueIdentifier>{021c7306-83e2-43ab-af5e-be79f923bf00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\Jump">
+      <UniqueIdentifier>{80a67fe0-3714-4bc0-8413-4af7b82d7c69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\Run">
+      <UniqueIdentifier>{b5087da4-3684-4efe-ae04-50b3b2d4d105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\KnockBack">
+      <UniqueIdentifier>{abd46c73-a05f-43c2-b9c3-52380e54bbc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\LightObject">
+      <UniqueIdentifier>{5d245898-d1b0-4c2f-963d-cb0e78cc573f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\PlayerEffect\DeadEffect">
+      <UniqueIdentifier>{bd2561b2-44a2-4af0-b361-9e040db85d3a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
