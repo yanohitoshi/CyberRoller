@@ -10,7 +10,7 @@
     "specularmap":"none",
     "emissivemap":"Assets/Model/Environment/switch_texture/switch_emissive_red.png",
 	"specularPower":100.0,
-    "luminance":"0.5",
+    "luminance":"0.1",
 	"vertices":[
 		[47.500000,32.658001,50.000004,0.574803,0.574803,0.574803,0.000000,0.150391],
 		[32.658009,47.499992,50.000008,0.574803,0.574803,0.574803,0.053253,0.093323],
