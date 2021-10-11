@@ -3,9 +3,9 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/Environment/switch_model/T_FPPT_White_Tiles_diffuse.bmp"
+		"Assets/Model/Environment/switch_texture/switch_diffuse.png"
 	],
-	"diffusemap":"Assets/Model/Environment/switch_model/T_FPPT_White_Tiles_diffuse.bmp",
+	"diffusemap":"Assets/Model/Environment/switch_texture/switch_diffuse.png",
 	"nomalmap":"none",
     "specularmap":"none",
     "emissivemap":"none",

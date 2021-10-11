@@ -38,9 +38,10 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/SM_Gems_01a.gpmesh"));
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
+	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::CLEAR_POINT_TAG, GetOnCollisionFunc());

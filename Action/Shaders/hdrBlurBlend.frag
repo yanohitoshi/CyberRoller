@@ -19,9 +19,9 @@ void main()
     vec3 bloomColor2 = texture(bloom2, TexCoords).rgb * 2.0f;
     vec3 bloomColor3 = texture(bloom3, TexCoords).rgb * 4.0f;
     vec3 bloomColor4 = texture(bloom4, TexCoords).rgb * 8.0f;
-    vec3 bloomColor5 = texture(bloom5, TexCoords).rgb * 16.0f;
+    //vec3 bloomColor5 = texture(bloom5, TexCoords).rgb * 16.0f;
 
-    hdrColor += bloomColor1 + bloomColor2; //+ bloomColor3; //+ bloomColor4 + bloomColor5; 
+    hdrColor += bloomColor1 + bloomColor2 + bloomColor3 + bloomColor4;// + bloomColor5; 
   
     vec3 mapped = vec3(1.0) - exp(-hdrColor * exposure);
 

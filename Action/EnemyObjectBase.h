@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class SkeletalMeshComponent;
+class Mesh;
 class Animation;
 class BoxCollider;
 enum class EnemyState;
@@ -97,6 +98,8 @@ protected:
 
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
+	// Meshの読み込みを行うクラス
+	Mesh* mesh;
 	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// エネミーのAABB構造体

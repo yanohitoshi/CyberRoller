@@ -38,9 +38,11 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
+	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::MOVE_GROUND_TAG, GetOnCollisionFunc());
 	aabb = mesh->GetBox();

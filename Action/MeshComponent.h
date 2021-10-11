@@ -48,6 +48,8 @@ protected:
 	bool isSkelton;
 	//カラーチェンジを用いるか
 	bool isColorChange;
+	// 輝度
+	float luminance;
 
 	/*
 	@brief　使用するtextureをセットする

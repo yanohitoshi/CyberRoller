@@ -140,6 +140,10 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/PlayerModel/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
 	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/Player/PlayerModel/SK_Rob.gpskel"));
+	// mesh情報を取得
+	mesh = skeltalMeshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
 
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ

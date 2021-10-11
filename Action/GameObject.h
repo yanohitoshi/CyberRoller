@@ -272,6 +272,9 @@ protected:
 	Vector3 velocity;
 	Vector3 forwardVec;
 
+	// オブジェクトの輝度
+	float luminance;
+
 	// AABB
 	AABB aabb;
 
@@ -379,6 +382,13 @@ public://ゲッターセッター
 	@return	scale Vector3型
 	*/
 	Vector3 GetScaleVec() { return scale; }
+
+	/*
+	@brief　オブジェクトの輝度を取得
+	@return	luminance 輝度
+	*/
+	float GetLuminance() { return luminance; }
+
 	/*
 	@brief　オブジェクトのクォータニオンを取得する
 	@return	rotation（Quaternion型）
@@ -509,6 +519,5 @@ public://ゲッターセッター
 	@return	MainCameraObject*　メインカメラを返す
 	*/
 	static MainCameraObject* GetMainCamera() { return mainCamera; }
-
 };
 

@@ -3,6 +3,7 @@
 
 // クラスの前方宣言
 class MeshComponent;
+class Mesh;
 
 /*
 @file LightObject.h
@@ -39,6 +40,7 @@ private:
 
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
+	Mesh* mesh;
 	// X軸のずらす定数値
 	const float ShiftPositionX;
 	// 右側に添わせる場合のY軸をずらす定数値

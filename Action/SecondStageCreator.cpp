@@ -237,11 +237,6 @@ void SecondStageCreator::CreateLayer1(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付ブロックオブジェクト生成
-		new GroundObject(layer1Pos, BlockSize, Tag::GROUND, true);
-		break;
 	}
 
 }
@@ -267,11 +262,6 @@ void SecondStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer2Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -325,9 +315,14 @@ void SecondStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -364,9 +359,15 @@ void SecondStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
 		break;
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -404,11 +405,6 @@ void SecondStageCreator::CreateLayer5(int _indexX, int _indexY)
 	case(LAYER5_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer5Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer5Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -459,11 +455,6 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 	case(LAYER6_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer6Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -541,9 +532,14 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new GroundObject(layer7Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer7Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer7Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer7Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -600,11 +596,6 @@ void SecondStageCreator::CreateLayer8(int _indexX, int _indexY)
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer8Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
 		// パワーセルライトの生成
 		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, true);
@@ -657,11 +648,6 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer9Pos, BlockSize, Tag::GROUND, true);
-		break;
 	}
 }
 
@@ -684,11 +670,6 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 	case(LAYER10_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer10Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }

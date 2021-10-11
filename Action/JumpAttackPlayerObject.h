@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class MeshComponent;
+class Mesh;
 class PlayerObject;
 class SphereCollider;
 class BoxCollider;
@@ -51,6 +52,7 @@ private:
 
 	// 3Dモデルの描画を行うクラス
     MeshComponent* meshComponent;
+	Mesh* mesh;
 	// 親となるオブジェクトのポインタ
 	PlayerObject* ownerObject;
 	// AABBの当たり判定を行うクラス

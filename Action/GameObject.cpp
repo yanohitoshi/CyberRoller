@@ -41,6 +41,7 @@ GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	, isSendVelocityToPlayer(false)
 	, isChackGroundToPlayer(false)
 	, isPushBackToCamera(false)
+	, luminance(0.0f)
 {
 
 	//ID‚É”’l‚ğ1’Ç‰Á

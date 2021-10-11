@@ -191,11 +191,6 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer2Pos, BlockSize, Tag::GROUND,true);
-		break;
-
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
 		// パワーセルライトの生成
 		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND,true);
@@ -241,9 +236,14 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 	}
 }
@@ -269,9 +269,14 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(RESPOWN_POINT_PARTS):

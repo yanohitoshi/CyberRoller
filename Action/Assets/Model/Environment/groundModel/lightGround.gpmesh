@@ -10,7 +10,7 @@
     "specularmap":"none",
     "emissivemap":"Assets/Model/Environment/ground_texture/ground_Emissive_yellow.png",
 	"specularPower":100.0,
-    "luminance":"0.1",
+    "luminance":"0.05",
 
 	"vertices":[
 		[-1.000000,-1.000000,-1.000000,0.000000,0.000000,1.000000,0.666667,-0.333333],

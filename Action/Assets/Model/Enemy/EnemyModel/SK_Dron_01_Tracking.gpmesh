@@ -10,7 +10,7 @@
     "specularmap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_metallic.png",
     "emissivemap":"Assets/Model/Enemy/EnemyTexture/T_Dron_01_emissive.png",
 	"specularPower":100.0,
-    "luminance":"30.0",
+    "luminance":"5.0",
 	"vertices":[
 		[4.999272,-12.760496,25.512196,-0.003922,0.286275,-0.960784,0,6,6,6,255,0,0,0,0.968227,0.545428],
 		[4.999276,-9.590559,26.466629,-0.003922,0.286275,-0.960784,0,6,6,6,255,0,0,0,0.968051,0.564529],

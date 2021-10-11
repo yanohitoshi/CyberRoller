@@ -3,14 +3,14 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/Environment/goods_model/TX_Gems_01a_ALB.bmp"
+		"Assets/Model/Environment/goods_model/TX_Gems_01a_ALB.png"
 	],
-	"diffusemap":"Assets/Model/Environment/goods_model/TX_Gems_01a_NRM.bmp",
-	"nomalmap":"Assets/Model/Environment/goods_model/TX_Gems_01a_NRM.bmp",
+	"diffusemap":"Assets/Model/Environment/goods_model/TX_Gems_01a_NRM.png",
+	"nomalmap":"Assets/Model/Environment/goods_model/TX_Gems_01a_NRM.png",
     "specularmap":"none",
-    "emissivemap":"Assets/Model/Environment/goods_model/TX_Gems_01a_RMA.bmp",
+    "emissivemap":"Assets/Model/Environment/goods_model/TX_Gems_01a_RMA.png",
 	"specularPower":100.0,
-    "luminance":"1.0",
+    "luminance":"0.1",
 
 	"vertices":[
 		[1.438555,-1.438555,1.985590,0.401575,-0.598425,-0.692913,0.832520,0.624512],

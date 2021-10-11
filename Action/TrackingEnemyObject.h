@@ -3,7 +3,7 @@
 
 // クラスの前方宣言
 class SphereCollider;
-
+class Mesh;
 /*
 @file TrackingEnemyObject.h
 @brief 追跡する敵オブジェクトクラス
@@ -51,6 +51,9 @@ private:
 	@param	当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
+
+	// Meshの読み込みを行うクラス
+	Mesh* mesh;
 
 	// 回転角度
 	const float Angle;

@@ -24,7 +24,7 @@ public:
 	@param	オブジェクト判別用tag
 	@param	ライト付か否か
 	*/
-	GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, bool _isLight = false);
+	GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag);
 
 	/*
 	@fn デストラクタ

@@ -15,7 +15,7 @@
 @param	オブジェクト判別用tag
 @param	ライト付か否か
 */
-GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, bool _isLight)
+GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
 	, CorrectionAabbValue(0.1f)
 {
@@ -29,24 +29,19 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	isPushBackToCamera = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this,false,false);
+	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"));
 
-	if (_isLight)
-	{
-		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-		meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"));
-	}
-	else
-	{
-		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-		meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
-	}
-
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
+	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,PhysicsTag::GROUND_TAG, GetOnCollisionFunc());
 	aabb = mesh->GetBox();
+
 	//プレイヤーがすり抜けないようにAABBのサイズを補正
 	aabb.max.y += CorrectionAabbValue;
 	aabb.min.y -= CorrectionAabbValue;

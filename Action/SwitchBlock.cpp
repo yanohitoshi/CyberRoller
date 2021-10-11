@@ -48,9 +48,10 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergyCube.gpmesh"));
 
-	//メッシュからAABBで使うx,y,zのminとmaxを取得する
-	mesh = new Mesh();
+	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
 	//押し戻し判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::SWITCH_TAG, GetOnCollisionFunc());
 	AABB aabb = { Vector3(-55.0f,-55.0f,-40.0f),Vector3(55.0f,55.0f,55.0f) };
@@ -206,6 +207,7 @@ void SwitchBlock::SetColorProcess()
 	{
 		// 区画の全てのスイッチが押されている時
 		meshComponent->SetColor(AllClearColer);
+		luminance = 0.2f;
 	}
 }
 

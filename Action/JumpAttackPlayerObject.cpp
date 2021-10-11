@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "JumpAttackPlayerObject.h"
 #include "MeshComponent.h"
+#include "Mesh.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "BoxCollider.h"
@@ -34,6 +35,10 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 
 	meshComponent = new MeshComponent(this, false, false);
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
+	//メッシュ情報取得
+	mesh = meshComponent->GetMesh();
+	// 輝度情報を取得
+	luminance = mesh->GetLuminace();
 
 	//攻撃判定用のsphereCollider
 	sphereCollider = new SphereCollider(this, PhysicsTag::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());

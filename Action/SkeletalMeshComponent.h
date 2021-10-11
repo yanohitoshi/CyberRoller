@@ -62,6 +62,8 @@ protected:
 	float animTime;                                                       
 	//スケルトンデータに乗算する色
 	Vector3 color;
+	// 輝度
+	float luminance;
 
 	/*
 	@fn textureセット用関数

@@ -39,7 +39,7 @@ ResultSwitchObject::ResultSwitchObject(GameObject* _owner, const Vector3& _size,
 	meshComponent = new ChangeColorMeshComponent(this, false, true);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergyCube.gpmesh"));
-
+	luminance = 0.2f;
 	//Z軸を90度回転させる
 	float radian = Math::ToRadians(_angle);
 	Quaternion rot = this->GetRotation();

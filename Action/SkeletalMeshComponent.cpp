@@ -46,7 +46,8 @@ void SkeletalMeshComponent::Draw(Shader* shader)
 
 			shader->SetVectorUniform("uColor", color);
 
-			shader->SetFloatUniform("uLuminance", mesh->GetLuminace());
+			luminance = owner->GetLuminance();
+			shader->SetFloatUniform("uLuminance", luminance);
 
 			SetTextureToShader(shader);
 

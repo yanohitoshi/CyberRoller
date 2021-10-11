@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "ChangeColorMeshComponent.h"
 #include "MeshComponent.h"
+#include "Mesh.h"
 #include "GameObject.h"
 #include "Shader.h"
 #include "Renderer.h"

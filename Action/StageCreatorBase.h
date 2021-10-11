@@ -40,7 +40,9 @@ enum StagePartsName
 	// 第三区画のスイッチパーツ
 	THIRD_SWITCH_PARTS = 23,
 	
+	// 右寄せのパワーセルライトパーツ
 	POWERCELLS_LIGHT_PARTS_RIGHT = 36,
+	// 左寄せのパワーセルライトパーツ
 	POWERCELLS_LIGHT_PARTS_LEFT = 37,
 
 	// ジャンプスイッチパーツ
@@ -67,7 +69,6 @@ enum StagePartsName
 
 	// レイヤーごとのブロックパーツ名
 	// ※Tiled Map Editorを使用してJSONファイルを制作する際にレイヤー別にブロックのタイルマップの色を変えているため
-	LIGHT_BLOCK_PARTS = 80, // ライト付きblock
 	LAYER1_BLOCK_PARTS = 79, // レイヤー1
 	LAYER2_BLOCK_PARTS = 78, // レイヤー2
 	LAYER3_BLOCK_PARTS = 77, // レイヤー3

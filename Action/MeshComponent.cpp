@@ -42,11 +42,14 @@ void MeshComponent::Draw(Shader* _shader)
 	{
 		if (mesh)
 		{
+
 			_shader->SetMatrixUniform("uWorldTransform",owner->GetWorldTransform());
 
 			_shader->SetFloatUniform("uSpecPower", mesh->GetSpecPower());
 
-			_shader->SetFloatUniform("uLuminance", mesh->GetLuminace());
+			luminance = owner->GetLuminance();
+
+			_shader->SetFloatUniform("uLuminance", luminance);
 
 			SetTextureToShader(_shader);
 

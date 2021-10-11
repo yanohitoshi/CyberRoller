@@ -10,7 +10,7 @@
     "specularmap":"none",
     "emissivemap":"Assets/Model/Player/PlayerTexture/DEFAULT_EM_TX_BLUE.png",
 	"specularPower":100.0,
-    "luminance":"10.0",
+    "luminance":"5.0",
 	"vertices":[
 		[0.126558,-0.091950,-0.987688,0.141732,-0.094488,-0.984252,0.049988,0.949707],
 		[0.148778,-0.048341,-0.987688,0.165354,-0.047244,-0.984252,0.000000,0.949707],

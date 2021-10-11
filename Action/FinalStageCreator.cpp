@@ -279,11 +279,6 @@ void FinalStageCreator::CreateLayer1(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer1Pos, BlockSize, Tag::GROUND, true);
-		break;
 	}
 }
 
@@ -308,11 +303,6 @@ void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(LAYER2_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer2Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -360,11 +350,6 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer3Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(JUMP_SWITCH_PARTS):
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer3SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
@@ -393,11 +378,6 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer4Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -435,11 +415,6 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 	case(LAYER5_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer5Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer5Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -597,9 +572,14 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer6Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -665,11 +645,6 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 	case(LAYER7_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer7Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer7Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -749,9 +724,14 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer8Pos, BlockSize, Tag::GROUND, true);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(SECOND_SWITCH_PARTS):
@@ -804,11 +784,6 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 	case(LAYER9_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer9Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -894,11 +869,6 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer10Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
 		// パワーセルライトの生成
 		new LightObject(layer10Pos, LightObjectSize, Tag::GROUND, true);
@@ -965,11 +935,6 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer11Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::SECOND_SWITCH);
@@ -1022,11 +987,6 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		new GroundObject(layer12Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer12Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer12SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::SECOND_SWITCH);
@@ -1076,11 +1036,6 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer13Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer13Pos, BlockSize, Tag::GROUND, true);
-		break;
 	}
 }
 
@@ -1105,11 +1060,6 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 	case(LAYER14_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer14Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer14Pos, BlockSize, Tag::GROUND, true);
 		break;
 
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
@@ -1161,11 +1111,6 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 		new GroundObject(layer15Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer15Pos, BlockSize, Tag::GROUND, true);
-		break;
-
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
 		new NormalEnemyObject(layer15Pos, Tag::ENEMY, playerObject);
@@ -1192,11 +1137,6 @@ void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 	case(LAYER16_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer16Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(LIGHT_BLOCK_PARTS):
-		// ライト付きブロックオブジェクト生成
-		new GroundObject(layer16Pos, BlockSize, Tag::GROUND, true);
 		break;
 	}
 }

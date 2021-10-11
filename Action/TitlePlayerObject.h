@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class SkeletalMeshComponent;
+class Mesh;
 class Animation;
 
 /*
@@ -100,7 +101,9 @@ private:
 
     //3Dモデルの描画を行うクラス
     SkeletalMeshComponent* skeltalMeshComponent;
-    
+    // Meshの読み込みを行うクラス
+    Mesh* mesh;
+
     // 重力定数
     const float Gravity;
     // 接地フラグ

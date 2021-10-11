@@ -10,7 +10,7 @@
     "specularmap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Rough.png",
     "emissivemap":"Assets/Model/Environment/LightObject/PowerCells/Texture/T_PowerCells_Emissive.png",
 	"specularPower":100.0,
-    "luminance":"1.0",
+    "luminance":"0.4",
 	"vertices":[
 		[-101.759766,90.676941,12.037811,0.000000,-1.000000,0.000000,0.438477,0.175781],
 		[-104.659912,90.676941,12.037811,0.000000,-1.000000,0.000000,0.427002,0.175537],
