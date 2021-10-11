@@ -7,6 +7,7 @@
 #include <string>
 #include "Renderer.h"
 #include "BoxCollider.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -27,14 +28,17 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	isPushBackToPlayer = true;
 	isChackGroundToPlayer = true;
 	isPushBackToCamera = true;
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this,false,false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this,false,false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
 	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"));
 
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::gGround,500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
+
 	//メッシュ情報取得
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 	// 輝度情報を取得
 	luminance = mesh->GetLuminace();
 
@@ -54,6 +58,7 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 */
 GroundObject::~GroundObject()
 {
+	//geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

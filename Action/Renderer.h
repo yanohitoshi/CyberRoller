@@ -54,6 +54,7 @@ class ChangeColorMeshComponent;
 class TileMapSpriteComponent;
 class Font;
 class HDRRenderer;
+class GeometryInstanceManager;
 
 // enumクラスの前置宣言
 enum SceneState;
@@ -170,6 +171,9 @@ private:
 
 	// HDR レンダラー
 	HDRRenderer* hdrRenderer;
+
+	// ジオメトリインスタンスmanager
+	GeometryInstanceManager* geometryInstanceManager;
 
 	/*
 	@brief  シェーダーの読み込み
@@ -398,6 +402,13 @@ private:
 
 
 public://ゲッターセッター
+
+	/*
+	@brief  テクスチャの取得
+	@param	_fileName　取得したいテクスチャのファイル名
+	@return Textureクラスのポインタ
+	*/
+	GeometryInstanceManager* GetGeometryInstanceManager() { return geometryInstanceManager; }
 
 	/*
 	@brief  テクスチャの取得

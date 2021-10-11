@@ -4,7 +4,7 @@
 // クラスの前方宣言
 class MeshComponent;
 class Mesh;
-
+class GeometryInstanceComponent;
 /*
 @file LightObject.h
 @brief ライトオブジェクト(置物)の生成と更新処理を行う
@@ -41,6 +41,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// X軸のずらす定数値
 	const float ShiftPositionX;
 	// 右側に添わせる場合のY軸をずらす定数値

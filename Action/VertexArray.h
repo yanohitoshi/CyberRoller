@@ -67,5 +67,7 @@ public://ゲッターセッター
 	*/
 	unsigned int GetNumVerts() const { return numVerts; }
 
+	unsigned int GetVertexArray() const { return vertexArray; }
+
 };
 

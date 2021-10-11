@@ -23,6 +23,7 @@
 #include "GameObject.h"
 #include "MainCameraObject.h"
 #include "HDRRenderer.h"
+#include "GeometryInstanceManager.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -115,7 +116,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	// コアOpenGLプロファイルを使う
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	// OpenGLの使用バージョンを3.3に指定
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	// RGBA各チャンネル8ビットのカラーバッファを使う
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -191,7 +192,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 
 	//　HDRrendererの生成
 	hdrRenderer = new HDRRenderer(screenWidth, screenHeight,4);
-
+	geometryInstanceManager = new GeometryInstanceManager();
 	// カリングのモード設定
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
@@ -910,15 +911,19 @@ void Renderer::DrawShadow()
 
 	shadowMapShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 
-	// シェーダーに渡すライティング情報を更新する
-	// すべてのメッシュの描画
-	for (auto mc : meshComponents)
-	{
-		if (mc->GetVisible())
-		{
-			mc->Draw(shadowMapShader);
-		}
-	}
+	geometryInstanceManager->PrepareModelMatrice();
+
+	geometryInstanceManager->Draw(shadowMapShader);
+
+	//// シェーダーに渡すライティング情報を更新する
+	//// すべてのメッシュの描画
+	//for (auto mc : meshComponents)
+	//{
+	//	if (mc->GetVisible())
+	//	{
+	//		mc->Draw(shadowMapShader);
+	//	}
+	//}
 
 	//シャドウマップshaderをアクティブ(skinnend)
 	skinnedShadowMapShader->SetActive();

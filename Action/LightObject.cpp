@@ -40,6 +40,9 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
+	//geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::gGround);
+	//geometryInstanceComponent->AddGeometryInstanceManager();
+
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);

@@ -153,6 +153,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="GeometryInstanceComponent.cpp" />
+    <ClCompile Include="GeometryInstanceManager.cpp" />
     <ClCompile Include="GroundObject.cpp" />
     <ClCompile Include="CameraObjectBase.cpp" />
     <ClCompile Include="ChangeColorMeshComponent.cpp" />
@@ -336,6 +338,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="GeometryInstanceComponent.h" />
+    <ClInclude Include="GeometryInstanceManager.h" />
     <ClInclude Include="GroundObject.h" />
     <ClInclude Include="CameraObjectBase.h" />
     <ClInclude Include="ChangeColorMeshComponent.h" />

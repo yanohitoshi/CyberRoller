@@ -8,6 +8,7 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+class GeometryInstanceComponent;
 
 /*
 @file BoxObject.h
@@ -43,8 +44,9 @@ private:
 
 	// Meshを管理するクラス
 	Mesh* mesh;
-	// 3Dモデルの描画を行うクラス
-	MeshComponent* meshComponent;
+	//// 3Dモデルの描画を行うクラス
+	//MeshComponent* meshComponent;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// プレイヤーがすり抜けないようにAABBのサイズを補正するための定数
