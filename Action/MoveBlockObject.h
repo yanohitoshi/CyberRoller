@@ -8,6 +8,7 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+class GeometryInstanceComponent;
 
 /*
 @struct MoveBlockData
@@ -83,6 +84,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;
 	MeshComponent* meshComponent;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 

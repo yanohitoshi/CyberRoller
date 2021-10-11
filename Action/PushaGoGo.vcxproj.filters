@@ -495,9 +495,11 @@
     <ClCompile Include="PlayerDeadEffect.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
     </ClCompile>
-    <ClCompile Include="GeometryInstanceManager.cpp" />
     <ClCompile Include="GeometryInstanceComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryInstanceManager.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -997,9 +999,11 @@
     <ClInclude Include="PlayerDeadEffect.h">
       <Filter>GameObjects\Effect\PlayerEffect\DeadEffect</Filter>
     </ClInclude>
-    <ClInclude Include="GeometryInstanceManager.h" />
     <ClInclude Include="GeometryInstanceComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryInstanceManager.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

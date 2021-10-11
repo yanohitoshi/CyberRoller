@@ -915,15 +915,15 @@ void Renderer::DrawShadow()
 
 	geometryInstanceManager->Draw(shadowMapShader);
 
-	//// シェーダーに渡すライティング情報を更新する
-	//// すべてのメッシュの描画
-	//for (auto mc : meshComponents)
-	//{
-	//	if (mc->GetVisible())
-	//	{
-	//		mc->Draw(shadowMapShader);
-	//	}
-	//}
+	// シェーダーに渡すライティング情報を更新する
+	// すべてのメッシュの描画
+	for (auto mc : meshComponents)
+	{
+		if (mc->GetVisible())
+		{
+			mc->Draw(shadowMapShader);
+		}
+	}
 
 	//シャドウマップshaderをアクティブ(skinnend)
 	skinnedShadowMapShader->SetActive();

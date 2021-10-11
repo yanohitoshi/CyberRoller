@@ -9,6 +9,7 @@
 #include "SwitchBlock.h"
 #include "ResultSwitchObject.h"
 #include "Mesh.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -28,14 +29,16 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	tag = _objectTag;
 	isPushBackToPlayer = true;
 	isChackGroundToPlayer = true;
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
 
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"));
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"));
 
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 
 	// 当たり判定用ボックスコライダーを付与
 	boxCollider = new BoxCollider(this, PhysicsTag::SWITCH_BASE_TAG, GetOnCollisionFunc());
@@ -55,6 +58,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 */
 SwitchBaseObject::~SwitchBaseObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

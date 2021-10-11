@@ -34,7 +34,7 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
 	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"));
 
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::gGround,500);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::G_GROUND,500);
 	geometryInstanceComponent->AddGeometryInstanceManager();
 
 	//ƒƒbƒVƒ…î•ñŽæ“¾
@@ -58,7 +58,7 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 */
 GroundObject::~GroundObject()
 {
-	//geometryInstanceComponent->RemoveGeometryInstanceManager();
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

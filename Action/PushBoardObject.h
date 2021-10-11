@@ -10,6 +10,8 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 class PushBoxObject;
+class GeometryInstanceComponent;
+
 /*
 @file PushBoardObject.h
 @brief PushBoardObjectの生成と更新を行う
@@ -71,6 +73,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;
 	MeshComponent* meshComponent;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 

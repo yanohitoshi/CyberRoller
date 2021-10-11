@@ -28,9 +28,6 @@ TitleGroundObject::TitleGroundObject(const Vector3& _p, const Vector3& _size, co
 	goalPos = Vector3(position.x, position.y - ShiftGoalAndInitPosition, position.z);
 	initPos = Vector3(position.x, position.y + ShiftGoalAndInitPosition, position.z);
 	velocity = InitVelocity;
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this, false, false);
-
 }
 
 /*

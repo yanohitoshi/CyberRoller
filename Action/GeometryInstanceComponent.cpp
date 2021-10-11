@@ -28,8 +28,8 @@ void GeometryInstanceComponent::AddGeometryInstanceManager()
 
 void GeometryInstanceComponent::RemoveGeometryInstanceManager()
 {
-	//ジオメトリインスタンスマネージャーからアクターを削除
-	//mGeometryInstanceManager->RemoveGeometryInstanceActor(GetOwner(), mGeometryInstanceType);
+	// ジオメトリインスタンスマネージャーからアクターを削除
+	mGeometryInstanceManager->RemoveGeometryInstanceActor(GetOwner(), mGeometryInstanceType);
 	////ゲームの状態が終了でないなら
 	//if (Game::GetState() != GameState::EQuit)
 	//{

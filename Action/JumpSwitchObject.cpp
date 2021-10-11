@@ -7,6 +7,7 @@
 #include <string>
 #include "Renderer.h"
 #include "BoxCollider.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -23,14 +24,15 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	tag = _objectTag;
 	state = Active;
 
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"));
-
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"), GeometryInstanceType::G_JUMP_SWITCH, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::JUMP_SWITCH_TAG, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(mesh->GetBox());
@@ -43,6 +45,7 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 */
 JumpSwitchObject::~JumpSwitchObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

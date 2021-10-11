@@ -191,25 +191,25 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new GroundObject(layer2Pos, BlockSize, Tag::GROUND);
 		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer2Pos, LightObjectSize, Tag::GROUND,true);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND,true);
+		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_LEFT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 
-	//case(JUMP_SWITCH_PARTS):
-	//	// ジャンプスイッチオブジェクト生成
-	//	new JumpSwitchObject(layer2SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-	//	break;
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer2SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
 
-	//case(NEEDLE_PARTS):
-	//	// 二ードルオブジェクト生成
-	//	new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-	//	break;
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
 	}
 }
 
@@ -236,15 +236,15 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, true);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, true);
+		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_LEFT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, false);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 	}
 }
 
@@ -269,20 +269,20 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
 		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, true);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, true);
+		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_LEFT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, false);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer4Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 
-	//case(RESPOWN_POINT_PARTS):
-	//	// リスポーンポイントオブジェクト生成
-	//	new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
-	//	break;
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
 	}
 }
 
@@ -304,47 +304,47 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer5)
 	{
-	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, true);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, true);
+		break;
 
-	//case(POWERCELLS_LIGHT_PARTS_LEFT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
-	//	break;
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
+		break;
 
-	//case(FIRST_MOVE_WALL_PARTS):
-	//	// 第一区画の動く壁オブジェクト生成
-	//	lastMoveWallBlock = new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
-	//		Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
-	//	break;
+	case(FIRST_MOVE_WALL_PARTS):
+		// 第一区画の動く壁オブジェクト生成
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), SmallMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - SmallMoveWallSize.z));
+		break;
 
-	//case(FIRST_SWITCH_PARTS):
-	//	// 第一区画スイッチオブジェクト生成
-	//	new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
-	//	break;
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH,true);
+		break;
 
-	//case(CLEAR_OBJECT_PARTS):
-	//	// ステージクリアオブジェクト生成
-	//	new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
-	//	break;
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new NextSceneObject(Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
 
-	//case(RESPOWN_POINT_PARTS):
-	//	// リスポーンポイントオブジェクト生成
-	//	new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
-	//	break;
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
 
-	//case(NORMAL_ENEMY_PARTS):
-	//	// 動かない敵を生成
-	//	new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
-	//	break;
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵を生成
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
+		break;
 
-	//case(RIGHT_MOVE_ENEMY_PARTS):
-	//	// 左右に動く敵固有のデータ構造体をセット
-	//	SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
-	//	// 左右に動く敵を生成
-	//	new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
-	//	break;
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 左右に動く敵固有のデータ構造体をセット
+		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 左右に動く敵を生成
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
 	}
 }

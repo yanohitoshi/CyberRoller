@@ -7,7 +7,7 @@
 #include <string>
 #include "Renderer.h"
 #include "BoxCollider.h"
-
+#include "GeometryInstanceComponent.h"
 /*
 @fn コンストラクタ
 @param	ポジション
@@ -34,12 +34,15 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	isSendVelocityToPlayer = true;
 	isChackGroundToPlayer = true;
 
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"), GeometryInstanceType::G_GROUND, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
+
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
 	//メッシュ情報取得
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 	// 輝度情報を取得
 	luminance = mesh->GetLuminace();
 
@@ -58,6 +61,7 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 */
 MoveBlockObject::~MoveBlockObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

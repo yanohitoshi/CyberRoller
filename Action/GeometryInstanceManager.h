@@ -10,13 +10,16 @@
 /// </summary>
 enum class GeometryInstanceType
 {
-	gGround,
-	gWall,
-	gPlayerBullet,
-	gLesserEnemy,
-	gLesserEnemyBullet,
-	gHeavyEnemyBullet,
-	gHeavyEnemyBulletFallPoint,
+	G_GROUND,
+	G_CRYSTAL,
+	G_LIGHT,
+	G_NEEDLE,
+	G_NEEDLE_PANEL,
+	G_PUDH_BOARD,
+	G_PUDH_BOX,
+	G_JUMP_SWITCH,
+	G_BASE_SWITCH,
+	G_MOVE_WALL,
 	gBossEnemyBullet,
 	gHPPortion,
 	gSPPortion

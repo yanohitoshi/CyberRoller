@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 #include "NeedleObject.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -23,13 +24,14 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"), GeometryInstanceType::G_NEEDLE_PANEL, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::NEEDLE_TAG, GetOnCollisionFunc());
-	//AABB box = { Vector3(-0.5f,-0.5f,-5.0f),Vector3(0.5f,0.5f,5.0f) };
 	AABB box = { Vector3(-0.8f,-0.8f,-1.0f),Vector3(0.8f,0.8f,5.0f) };
 	boxCollider->SetObjectBox(box);
 
@@ -42,6 +44,7 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 */
 NeedlePanelObject::~NeedlePanelObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

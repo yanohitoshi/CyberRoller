@@ -7,6 +7,7 @@
 #include <string>
 #include "Renderer.h"
 #include "BoxCollider.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -25,10 +26,12 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 	tag = _objectTag;
 	state = Active;
 	owner = _owner;
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/needles.gpmesh"));
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/needles.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/goods_model/needles.gpmesh"), GeometryInstanceType::G_NEEDLE);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 }
 
 /*
@@ -37,6 +40,7 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 */
 NeedleObject::~NeedleObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

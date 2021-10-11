@@ -6,6 +6,7 @@
 #include <string>
 #include "MeshComponent.h"
 #include "Renderer.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -40,16 +41,16 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 	SetScale(_size);
 	tag = _objectTag;
 	state = Active;
-	//geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::gGround);
-	//geometryInstanceComponent->AddGeometryInstanceManager();
 
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"), GeometryInstanceType::G_LIGHT);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"));
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"));
 	//メッシュ情報取得
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 	// 輝度情報を取得
 	luminance = mesh->GetLuminace();
 }
@@ -60,6 +61,7 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 */
 LightObject::~LightObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

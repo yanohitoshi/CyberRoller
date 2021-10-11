@@ -8,6 +8,7 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+class GeometryInstanceComponent;
 
 /*
 @file MoveWallBlock.h
@@ -65,6 +66,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+	GeometryInstanceComponent* geometryInstanceComponent;
 
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;

@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 #include "PushBoxObject.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -33,15 +34,16 @@ PushBoardObject::PushBoardObject(const Vector3& _p, const Vector3& _size, const 
 	inversionFlag = false;
 	isSendVelocityToPlayer = true;
 	isPushBackToPlayer = true;
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
 
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
-
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"), GeometryInstanceType::G_PUDH_BOARD, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::MOVE_GROUND_TAG, GetOnCollisionFunc());
@@ -54,6 +56,7 @@ PushBoardObject::PushBoardObject(const Vector3& _p, const Vector3& _size, const 
 */
 PushBoardObject::~PushBoardObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

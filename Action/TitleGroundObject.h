@@ -37,10 +37,6 @@ public:
 
 private:
 
-	// 3Dモデルの描画を行うクラス
-	Mesh* mesh;
-	MeshComponent* meshComponent;
-
 	// 速度ベクトルの初期化定数
 	const Vector3 InitVelocity;
 	// 目標ポジションと初期ポジションを設定する際にポジションをずらす用定数

@@ -8,6 +8,7 @@
 class BoxCollider;
 class Mesh;
 class MeshComponent;
+class GeometryInstanceComponent;
 
 /*
 @file SwitchBaseObject.h
@@ -52,6 +53,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 

@@ -10,6 +10,7 @@ class BoxCollider;
 class Mesh;
 class PlayerObject;
 class MoveWallBlock;
+class GeometryInstanceComponent;
 
 /*
 @file ClearPointObject.h
@@ -65,6 +66,7 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+	GeometryInstanceComponent* geometryInstanceComponent;
 	// プレイヤーのポインタを持つためのポインタ変数
 	PlayerObject* playerObject;
 	// シーン最後の動く壁を持つためのポインタ変数

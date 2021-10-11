@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 #include "PushBoardObject.h"
+#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -32,15 +33,15 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	float offsetY = 210.0f;
 	float offsetZ = 100.0f;
 
-	//モデル描画用のコンポーネント
-	meshComponent = new MeshComponent(this, false, false);
-
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
-
+	////モデル描画用のコンポーネント
+	//meshComponent = new MeshComponent(this, false, false);
+	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
+	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/box.gpmesh"));
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"), GeometryInstanceType::G_PUDH_BOX, 500);
+	geometryInstanceComponent->AddGeometryInstanceManager();
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
-	mesh = meshComponent->GetMesh();
+	mesh = geometryInstanceComponent->GetMesh();
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::GROUND_TAG, GetOnCollisionFunc());
@@ -78,6 +79,7 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 */
 PushBoxObject::~PushBoxObject()
 {
+	geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*
