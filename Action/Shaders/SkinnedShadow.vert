@@ -13,7 +13,6 @@
 uniform mat4 uWorldTransform;
 uniform mat4 uViewProj;
 uniform mat4 uLightSpaceMat;
-// Uniform for matrix palette
 uniform mat4 uMatrixPalette[196];
 
 // Attribute 0 is position, 1 is normal,
