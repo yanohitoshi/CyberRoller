@@ -24,12 +24,11 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	tag = _objectTag;
 	state = Active;
 
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this, false, false);
-	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"));
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"), GeometryInstanceType::G_JUMP_SWITCH, 500);
+	// ジオメトリインスタンスコンポーネントを生成
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/jumpSwitch_model/jumpSwitch.gpmesh"), GeometryInstanceType::G_JUMP_SWITCH);
+	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
+
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = geometryInstanceComponent->GetMesh();

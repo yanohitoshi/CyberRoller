@@ -9,7 +9,6 @@
 #include "PlayerObject.h"
 #include "MainCameraObject.h"
 #include "CrystalEffectManager.h"
-#include "GeometryInstanceComponent.h"
 
 /*
 @fn コンストラクタ
@@ -39,8 +38,6 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/SM_Gems_01a.gpmesh"));
-	//geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/goods_model/SM_Gems_01a.gpmesh"), GeometryInstanceType::G_CRYSTAL, 500);
-	//geometryInstanceComponent->AddGeometryInstanceManager();
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得
@@ -64,7 +61,6 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 */
 NextSceneObject::~NextSceneObject()
 {
-	//geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

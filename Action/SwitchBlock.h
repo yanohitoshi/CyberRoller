@@ -31,7 +31,7 @@ public:
 	@fn デストラクタ
 	@brief  objectの削除を行う
 	*/
-	~SwitchBlock();
+	~SwitchBlock()override;
 
 	/*
 	@fn アップデート関数

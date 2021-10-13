@@ -44,8 +44,7 @@ private:
 
 	// Meshを管理するクラス
 	Mesh* mesh;
-	//// 3Dモデルの描画を行うクラス
-	//MeshComponent* meshComponent;
+	// 3Dモデルの描画を行うクラス
 	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;

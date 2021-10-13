@@ -6,43 +6,47 @@
 #include <string>
 #include "GeometryInstanceManager.h"
 
-/// <summary>
-/// ジオメトリインスタンスのためのコンポーネント
-/// </summary>
+/*
+@file GeometryInstanceComponent.h
+@brief ジオメトリインスタンスのためのコンポーネント
+*/
 class GeometryInstanceComponent : public Component
 {
 public:
-	/// <summary>
-	/// メンバー変数の初期化とジオメトリインスタンスマネージャーにメッシュを登録
-	/// </summary>
-	/// <param name="_owner">このコンポーネントの所有アクター</param>
-	/// <param name="_mesh">登録したいメッシュ</param>
-	/// <param name="_type">ジオメトリインスタンスの種類</param>
-	/// <param name="_maxInstanceNum">最大描画数</param>
+
+	/*
+	@fn コンストラクタ
+	@brief メンバー変数の初期化とジオメトリインスタンスマネージャーにメッシュを登録
+	@param _owner このコンポーネントの所有オブジェクト
+	@param _mesh 登録したいメッシュ
+	@param _type ジオメトリインスタンスの種類
+	@param _maxInstanceNum 最大描画数
+	*/
 	GeometryInstanceComponent(class GameObject* _owner,class Mesh* _mesh, GeometryInstanceType _type, const unsigned int _maxInstanceNum = 200);
 
-	/// <summary>
-	/// ジオメトリインスタンスマネージャーにアクターに描画可能なアクターを追加
-	/// </summary>
+	/*
+	@brief ジオメトリインスタンスマネージャーにアクターに描画可能なアクターを追加
+	*/
 	void AddGeometryInstanceManager();
 
-	/// <summary>
-	/// ジオメトリインスタンスマネージャーからアクターを削除
-	/// </summary>
+	/*
+	@brief ジオメトリインスタンスマネージャーからアクターを削除
+	*/
 	void RemoveGeometryInstanceManager();
 
-	/// <summary>
-	/// ジオメトリインスタンスマネージャーからメッシュのポインタを返す
-	/// </summary>
-	/// <returns>メッシュのポインタ</returns>
+	/*
+	@brief ジオメトリインスタンスマネージャーからメッシュのポインタを返す
+	@return メッシュのポインタ
+	*/
 	class Mesh* GetMesh()const;
 
 private:
+
 	//ジオメトリインスタンスマネージャーのポインタ
-	class GeometryInstanceManager* mGeometryInstanceManager;
+	class GeometryInstanceManager* geometryInstanceManager;
 	//ジオメトリインスタンスの種類
-	GeometryInstanceType mGeometryInstanceType;
+	GeometryInstanceType geometryInstanceType;
 	//メッシュのポインタ
-	class Mesh* mMesh;
+	class Mesh* mesh;
 };
 

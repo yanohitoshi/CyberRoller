@@ -33,7 +33,7 @@ public:
 	@fn デストラクタ
 	@brief  objectの削除を行う
 	*/
-	~SwitchBaseObject();
+	~SwitchBaseObject()override;
 	
 	/*
 	@fn アップデート関数
@@ -51,7 +51,6 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 	// 3Dモデルの描画を行うクラス
-	MeshComponent* meshComponent;
 	Mesh* mesh;
 	GeometryInstanceComponent* geometryInstanceComponent;
 	// 当たり判定を行うクラス

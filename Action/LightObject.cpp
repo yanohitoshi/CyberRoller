@@ -42,13 +42,11 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 	tag = _objectTag;
 	state = Active;
 
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"), GeometryInstanceType::G_LIGHT);
+	// ジオメトリインスタンスコンポーネントを生成
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"), GeometryInstanceType::G_LIGHT,300);
+	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this, false, false);
-	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"));
 	//メッシュ情報取得
 	mesh = geometryInstanceComponent->GetMesh();
 	// 輝度情報を取得

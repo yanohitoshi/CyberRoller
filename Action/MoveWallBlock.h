@@ -32,7 +32,7 @@ public:
 	@fn デストラクタ
 	@brief  objectの削除を行う
 	*/
-	~MoveWallBlock();
+	~MoveWallBlock()override;
 	
 	/*
 	@fn アップデート関数
@@ -64,7 +64,6 @@ private:
 	void SetChackSwitchTag(Tag& _tag);
 
 	// 3Dモデルの描画を行うクラス
-	MeshComponent* meshComponent;
 	Mesh* mesh;
 	GeometryInstanceComponent* geometryInstanceComponent;
 

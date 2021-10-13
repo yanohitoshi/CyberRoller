@@ -12,25 +12,34 @@ const unsigned int matrixElemNum = 16;
 //マトリックスサイズ
 const size_t matrix4Size = sizeof(float) * matrixElemNum;
 
+/*
+@fn デストラクタ
+*/
 GeometryInstanceManager::~GeometryInstanceManager()
 {
 
 	//ジオメトリインスタンスのアクター情報の中の行列バッファのメモリを解放する
-	for (auto itr = mGeometryInstanceActorInfoMap.begin(); itr != mGeometryInstanceActorInfoMap.end(); itr++)
+	for (auto itr = geometryInstanceGameObjectInfoMap.begin(); itr != geometryInstanceGameObjectInfoMap.end(); itr++)
 	{
-		delete itr->second.mModelMatrice;
+		delete itr->second.modelMatrice;
 	}
 	//マップのクリア
-	mGeometryInstanceActorInfoMap.clear();
+	geometryInstanceGameObjectInfoMap.clear();
 }
 
+/*
+@fn インスタンス用のメッシュを設定する
+@param _mesh 登録するメッシュ
+@param _maxInstanceNum 最大インスタンス数
+@param _type ジオメトリインスタンスの種類
+*/
 void GeometryInstanceManager::SetInstanceMesh(Mesh* _mesh, const unsigned int _maxInstanceNum, GeometryInstanceType _type)
 {
 	//登録したいジオメトリインスタンスの種類が既に登録されているかどうかを調べる
-	auto info = mGeometryInstanceActorInfoMap.find(_type);
+	auto info = geometryInstanceGameObjectInfoMap.find(_type);
 
 	//登録済みの場合
-	if (info != mGeometryInstanceActorInfoMap.end())
+	if (info != geometryInstanceGameObjectInfoMap.end())
 	{
 		//後の処理をスキップ
 		return;
@@ -38,23 +47,23 @@ void GeometryInstanceManager::SetInstanceMesh(Mesh* _mesh, const unsigned int _m
 	else //登録されていないとき
 	{
 		//メッシュを登録
-		mGeometryInstanceActorInfoMap[_type].mMesh = _mesh;
+		geometryInstanceGameObjectInfoMap[_type].mesh = _mesh;
 	}
 
 	// インスタンス最大数​
-	mGeometryInstanceActorInfoMap[_type].mMaxInstanceNum = _maxInstanceNum;
+	geometryInstanceGameObjectInfoMap[_type].maxInstanceNum = _maxInstanceNum;
 
 
 	// MeshVAOの取得
-	mGeometryInstanceActorInfoMap[_type].mVertexArray = _mesh->GetVertexArray()->GetVertexArray();
+	geometryInstanceGameObjectInfoMap[_type].vertexArray = _mesh->GetVertexArray()->GetVertexArray();
 
 
 	// インデックス数の取得​
-	mGeometryInstanceActorInfoMap[_type].mNumIndices = _mesh->GetVertexArray()->GetNumIndices();
+	geometryInstanceGameObjectInfoMap[_type].numIndices = _mesh->GetVertexArray()->GetNumIndices();
 
 
 	// 行列バッファの作成​
-	mGeometryInstanceActorInfoMap[_type].mModelMatrice = new float[mGeometryInstanceActorInfoMap[_type].mMaxInstanceNum * matrixElemNum];
+	geometryInstanceGameObjectInfoMap[_type].modelMatrice = new float[geometryInstanceGameObjectInfoMap[_type].maxInstanceNum * matrixElemNum];
 
 
 	// もともとあるmeshをインスタンスメッシュとして再登録​
@@ -67,10 +76,10 @@ void GeometryInstanceManager::SetInstanceMesh(Mesh* _mesh, const unsigned int _m
 	{
 
 		// 行列バッファをinstanceVaoとバインド​
-		glBufferData(GL_ARRAY_BUFFER, mGeometryInstanceActorInfoMap[_type].mMaxInstanceNum * matrix4Size, &mGeometryInstanceActorInfoMap[_type].mModelMatrice[0], GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, geometryInstanceGameObjectInfoMap[_type].maxInstanceNum * matrix4Size, &geometryInstanceGameObjectInfoMap[_type].modelMatrice[0], GL_DYNAMIC_DRAW);
 
 		// meshVAOをinstanceVaoに登録​
-		glBindVertexArray(mGeometryInstanceActorInfoMap[_type].mVertexArray);
+		glBindVertexArray(geometryInstanceGameObjectInfoMap[_type].vertexArray);
 
 		// 頂点アトリビュートに行列データを1行ずつ(vec4ずつ）セット​
 		const int matRowNum = 4;
@@ -96,10 +105,6 @@ void GeometryInstanceManager::SetInstanceMesh(Mesh* _mesh, const unsigned int _m
 
 		glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, matrix4Size, (void*)(3 * sizeof(float) * 4));  // 4行目​
 
-		//glEnableVertexAttribArray(7);
-
-		//glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, matrix4Size, (void*)(4 * sizeof(float) * 4));  // 4行目​
-
 
 		glVertexAttribDivisor(3, 1);
 
@@ -109,19 +114,21 @@ void GeometryInstanceManager::SetInstanceMesh(Mesh* _mesh, const unsigned int _m
 
 		glVertexAttribDivisor(6, 1);
 
-		//glVertexAttribDivisor(7, 1);
 
 		glBindVertexArray(0);
 	}
 
 	//ジオメトリインスタンスのアクター情報に頂点バッファーをセット
-	mGeometryInstanceActorInfoMap[_type].mInstanceVAO = instanceVao;
+	geometryInstanceGameObjectInfoMap[_type].instanceVAO = instanceVao;
 }
 
+/*
+@fn 行列バッファの更新
+*/
 void GeometryInstanceManager::PrepareModelMatrice()
 {
 	// インスタンス種類ごとに行列バッファを埋める​
-	for (auto itr = mGeometryInstanceActorMap.begin(); itr != mGeometryInstanceActorMap.end(); ++itr)
+	for (auto itr = geometryInstanceGameObjectMap.begin(); itr != geometryInstanceGameObjectMap.end(); ++itr)
 	{
 
 		int num = 0;
@@ -135,26 +142,30 @@ void GeometryInstanceManager::PrepareModelMatrice()
 			mat.Transpose();
 
 			//行列バッファに情報をコピー
-			memcpy(&(mGeometryInstanceActorInfoMap[itr->first].mModelMatrice[num * matrixElemNum]), mat.GetAsFloatPtr(), matrix4Size); // matrixElemNum は16, matrix4Sizeは行列のサイズ​
+			memcpy(&(geometryInstanceGameObjectInfoMap[itr->first].modelMatrice[num * matrixElemNum]), mat.GetAsFloatPtr(), matrix4Size); // matrixElemNum は16, matrix4Sizeは行列のサイズ​
 			++num;
 		}
 
 	}
 
 	// インスタンス種類ごとに行列バッファをコピー​
-	for (auto itr = mGeometryInstanceActorMap.begin(); itr != mGeometryInstanceActorMap.end(); ++itr)
+	for (auto itr = geometryInstanceGameObjectMap.begin(); itr != geometryInstanceGameObjectMap.end(); ++itr)
 	{
 		// 行列バッファにコピー​
-		glBindBuffer(GL_ARRAY_BUFFER, mGeometryInstanceActorInfoMap[itr->first].mInstanceVAO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, itr->second.size() * matrix4Size, &mGeometryInstanceActorInfoMap[itr->first].mModelMatrice[0]);
+		glBindBuffer(GL_ARRAY_BUFFER, geometryInstanceGameObjectInfoMap[itr->first].instanceVAO);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, itr->second.size() * matrix4Size, &geometryInstanceGameObjectInfoMap[itr->first].modelMatrice[0]);
 	}
 }
 
+/*
+@fn 描画処理
+@param _shader 描画するシェーダー
+*/
 void GeometryInstanceManager::Draw(Shader* _shader)
 {
 
 	// 全種類のインスタンス描画​
-	for (auto itr = mGeometryInstanceActorMap.begin(); itr != mGeometryInstanceActorMap.end(); ++itr)
+	for (auto itr = geometryInstanceGameObjectMap.begin(); itr != geometryInstanceGameObjectMap.end(); ++itr)
 	{
 
 		if (itr->second.empty())
@@ -163,20 +174,19 @@ void GeometryInstanceManager::Draw(Shader* _shader)
 		}
 
 		// 表面の鏡面反射指数をセット
-		_shader->SetFloatUniform("uSpecPower", mGeometryInstanceActorInfoMap[itr->first].mMesh->GetSpecPower());
-		_shader->SetFloatUniform("uLuminance", mGeometryInstanceActorInfoMap[itr->first].mMesh->GetLuminace());
-		//_shader->SetFloatUniform("uAlpha", mGeometryInstanceActorInfoMap[itr->first].mMesh->GetAlpha());
+		_shader->SetFloatUniform("uSpecPower", geometryInstanceGameObjectInfoMap[itr->first].mesh->GetSpecPower());
+		_shader->SetFloatUniform("uLuminance", geometryInstanceGameObjectInfoMap[itr->first].mesh->GetLuminace());
 
 		// テクスチャのセット​
 		SetTextureToShader(_shader, itr->first);
 
 
 		// インスタンシング描画​
-		glBindVertexArray(mGeometryInstanceActorInfoMap[itr->first].mVertexArray);
+		glBindVertexArray(geometryInstanceGameObjectInfoMap[itr->first].vertexArray);
 
 		glDrawElementsInstanced(GL_TRIANGLES,
 
-			mGeometryInstanceActorInfoMap[itr->first].mNumIndices,
+			geometryInstanceGameObjectInfoMap[itr->first].numIndices,
 
 			GL_UNSIGNED_INT,
 
@@ -188,32 +198,37 @@ void GeometryInstanceManager::Draw(Shader* _shader)
 	}
 }
 
+/*
+@fn シェーダーにテクスチャをセット
+@param _shader シェーダー
+@param _type ジオメトリインスタンスの種類
+*/
 void GeometryInstanceManager::SetTextureToShader(Shader* _shader, GeometryInstanceType _type)
 {
 	// メッシュテクスチャセット
 	int texID, stageCount = 0;
-	texID = mGeometryInstanceActorInfoMap[_type].mMesh->GetTextureID(TextureStage::DIFFUSE_MAP); // ディフューズ
+	texID = geometryInstanceGameObjectInfoMap[_type].mesh->GetTextureID(TextureStage::DIFFUSE_MAP); // ディフューズ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uDiffuseMap", stageCount);
 		stageCount++;
 	}
-	texID = mGeometryInstanceActorInfoMap[_type].mMesh->GetTextureID(TextureStage::NORMAL_MAP); // 法線マップ
+	texID = geometryInstanceGameObjectInfoMap[_type].mesh->GetTextureID(TextureStage::NORMAL_MAP); // 法線マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uNormalMap", stageCount);
 		stageCount++;
 	}
-	texID = mGeometryInstanceActorInfoMap[_type].mMesh->GetTextureID(TextureStage::SPECULAR_MAP); // スペキュラーマップ
+	texID = geometryInstanceGameObjectInfoMap[_type].mesh->GetTextureID(TextureStage::SPECULAR_MAP); // スペキュラーマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uSpecularMap", stageCount);
 		stageCount++;
 	}
-	texID = mGeometryInstanceActorInfoMap[_type].mMesh->GetTextureID(TextureStage::EMISSIVE_MAP); // 自己放射マップ
+	texID = geometryInstanceGameObjectInfoMap[_type].mesh->GetTextureID(TextureStage::EMISSIVE_MAP); // 自己放射マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -222,13 +237,18 @@ void GeometryInstanceManager::SetTextureToShader(Shader* _shader, GeometryInstan
 	}
 }
 
-void GeometryInstanceManager::AddGeometryInstanceActor(GameObject* _gameObject, GeometryInstanceType _type)
+/*
+@fn ジオメトリインスタンス用のオブジェクトを追加
+@param _gameObject 追加するオブジェクト
+@param _type 追加するオブジェクトのジオメトリインスタンスの種類
+*/
+void GeometryInstanceManager::AddGeometryInstanceGameObject(GameObject* _gameObject, GeometryInstanceType _type)
 {
 	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
-	auto gameObjects = mGeometryInstanceActorMap.find(_type);
+	auto gameObjects = geometryInstanceGameObjectMap.find(_type);
 
 	//あるとき
-	if (gameObjects != mGeometryInstanceActorMap.end())
+	if (gameObjects != geometryInstanceGameObjectMap.end())
 	{
 		//アクターに対応したコンテナに追加
 		gameObjects->second.emplace_back(_gameObject);
@@ -238,25 +258,33 @@ void GeometryInstanceManager::AddGeometryInstanceActor(GameObject* _gameObject, 
 		//コンテナを作成して追加する
 		std::vector<GameObject*> tmpVector;
 		tmpVector.emplace_back(_gameObject);
-		mGeometryInstanceActorMap[_type] = tmpVector;
+		geometryInstanceGameObjectMap[_type] = tmpVector;
 	}
 }
 
-void GeometryInstanceManager::RemoveGeometryInstanceActor(GameObject* _gameObject, GeometryInstanceType _type)
+/*
+@fn ジオメトリインスタンス用のオブジェクトを削除
+@param _gameObject 削除するオブジェクト
+@param _type 削除するオブジェクトのジオメトリインスタンスの種類
+*/
+void GeometryInstanceManager::RemoveGeometryInstanceGameObject(GameObject* _gameObject, GeometryInstanceType _type)
 {
 	//マップの中に削除するアクターがいるかどうかを調べる
-	auto iter = std::find(mGeometryInstanceActorMap[_type].begin(), mGeometryInstanceActorMap[_type].end(), _gameObject);
+	auto iter = std::find(geometryInstanceGameObjectMap[_type].begin(), geometryInstanceGameObjectMap[_type].end(), _gameObject);
 
 	//いるとき
-	if (iter != mGeometryInstanceActorMap[_type].end())
+	if (iter != geometryInstanceGameObjectMap[_type].end())
 	{
-		std::iter_swap(iter, mGeometryInstanceActorMap[_type].end() - 1);
-		mGeometryInstanceActorMap[_type].pop_back();
+		std::iter_swap(iter, geometryInstanceGameObjectMap[_type].end() - 1);
+		geometryInstanceGameObjectMap[_type].pop_back();
 	}
 }
 
-void GeometryInstanceManager::ClearGeometryInstanceActorMap()
+/*
+@fn ジオメトリインスタンスのアクターを格納するマップをクリア
+*/
+void GeometryInstanceManager::ClearGeometryInstanceGameObjectMap()
 {
 	//マップのクリア
-	mGeometryInstanceActorMap.clear();
+	geometryInstanceGameObjectMap.clear();
 }

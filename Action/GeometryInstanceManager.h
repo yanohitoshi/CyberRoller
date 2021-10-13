@@ -5,116 +5,114 @@
 #include <unordered_map>
 #include "GameObject.h"
 
-/// <summary>
-/// ジオメトリインスタンスの種類
-/// </summary>
+/*
+@enum GeometryInstanceType
+	ジオメトリインスタンスメッシュの種類
+*/
 enum class GeometryInstanceType
 {
 	G_GROUND,
-	G_CRYSTAL,
 	G_LIGHT,
 	G_NEEDLE,
 	G_NEEDLE_PANEL,
-	G_PUDH_BOARD,
-	G_PUDH_BOX,
 	G_JUMP_SWITCH,
 	G_BASE_SWITCH,
 	G_MOVE_WALL,
-	gBossEnemyBullet,
-	gHPPortion,
-	gSPPortion
 };
 
+/*
+@file GeometryInstanceManager.h
+@brief ジオメトリインスタンスメッシュの管理と描画を行うクラス
+*/
 class GeometryInstanceManager
 {
 public:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
+	/*
+	@fn コンストラクタ
+	*/
 	GeometryInstanceManager() {};
 
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
+	/*
+	@fn デストラクタ
+	*/
 	~GeometryInstanceManager();
 
-	/// <summary>
-	/// インスタンス用のメッシュを設定する
-	/// </summary>
-	/// <param name="_mesh">登録するメッシュ</param>
-	/// <param name="_maxInstanceNum">最大インスタンス数</param>
-	/// <param name="_type">ジオメトリインスタンスの種類</param>
+	/*
+	@fn インスタンス用のメッシュを設定する
+	@param _mesh 登録するメッシュ
+	@param _maxInstanceNum 最大インスタンス数
+	@param _type ジオメトリインスタンスの種類
+	*/
 	void SetInstanceMesh(class Mesh* _mesh, const unsigned int _maxInstanceNum, const GeometryInstanceType _type);
 
-	/// <summary>
-	/// 行列バッファの更新
-	/// </summary>
+	/*
+	@fn 行列バッファの更新
+	*/
 	void PrepareModelMatrice();
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="_shader">シェーダー</param>
+	/*
+	@fn 描画処理
+	@param _shader 描画するシェーダー
+	*/
 	void Draw(class Shader* _shader);
 
-	/// <summary>
-	/// ジオメトリインスタンス用のアクターを追加
-	/// </summary>
-	/// <param name="_actor">追加するアクター</param>
-	/// <param name="_type">追加するアクターのジオメトリインスタンスの種類</param>
-	void AddGeometryInstanceActor(class GameObject* _gameObject, GeometryInstanceType _type);
+	/*
+	@fn ジオメトリインスタンス用のオブジェクトを追加
+	@param _gameObject 追加するオブジェクト
+	@param _type 追加するオブジェクトのジオメトリインスタンスの種類
+	*/
+	void AddGeometryInstanceGameObject(class GameObject* _gameObject, GeometryInstanceType _type);
 
-	/// <summary>
-	/// ジオメトリインスタンス用のアクターの削除
-	/// </summary>
-	/// <param name="_actor">削除するアクター</param>
-	/// <param name="_type">削除するアクターのジオメトリインスタンスの種類</param>
-	void RemoveGeometryInstanceActor(class GameObject* _gameObject, GeometryInstanceType _type);
+	/*
+	@fn ジオメトリインスタンス用のオブジェクトを削除
+	@param _gameObject 削除するオブジェクト
+	@param _type 削除するオブジェクトのジオメトリインスタンスの種類
+	*/
+	void RemoveGeometryInstanceGameObject(class GameObject* _gameObject, GeometryInstanceType _type);
 
-	/// <summary>
-	/// ジオメトリインスタンスの種類に応じてメッシュを返す
-	/// </summary>
-	/// <param name="_type">ジオメトリインスタンスの種類</param>
-	class Mesh* GetMesh(GeometryInstanceType _type) { return mGeometryInstanceActorInfoMap[_type].mMesh; }
+	/*
+	@fn ジオメトリインスタンスの種類に応じてメッシュを返す
+	@param _type ジオメトリインスタンスの種類
+	*/
+	class Mesh* GetMesh(GeometryInstanceType _type) { return geometryInstanceGameObjectInfoMap[_type].mesh; }
 
-	/// <summary>
-	/// ジオメトリインスタンスのアクターを格納するマップをクリア
-	/// </summary>
-	void ClearGeometryInstanceActorMap();
+	/*
+	@fn ジオメトリインスタンスのアクターを格納するマップをクリア
+	*/
+	void ClearGeometryInstanceGameObjectMap();
 
 private:
 
-	/// <summary>
-	/// ジオメトリインスタンスのアクター情報の構造体
-	/// </summary>
+	/*
+	@struct ジオメトリインスタンスのアクター情報の構造体
+	*/
 	struct GeometryInstanceActorInfo
 	{
 		// インスタンス最大数​
-		unsigned int mMaxInstanceNum;
+		unsigned int maxInstanceNum;
 		// インデックスバッファにあるインデックスの数
-		unsigned int mNumIndices;
+		unsigned int numIndices;
 		//頂点配列オブジェクトのOpenGL ID
-		unsigned int mVertexArray;
+		unsigned int vertexArray;
 		//行列バッファ
-		float* mModelMatrice;
+		float* modelMatrice;
 		//インスタンス描画可能なID
-		unsigned int mInstanceVAO;
+		unsigned int instanceVAO;
 		//メッシュのポインタ
-		class Mesh* mMesh;
+		class Mesh* mesh;
 
 	};
 
-	/// <summary>
-	/// シェーダーにテクスチャをセット
-	/// </summary>
-	/// <param name="_shader">シェーダー</param>
-	/// <param name="_type">ジオメトリインスタンスの種類</param>
+	/*
+	@fn シェーダーにテクスチャをセット
+	@param _shader シェーダー
+	@param _type ジオメトリインスタンスの種類
+	*/
 	void SetTextureToShader(Shader* _shader, GeometryInstanceType _type);
 
-	//ジオメトリインスタンスのアクターを格納するマップ
-	std::unordered_map<GeometryInstanceType, std::vector<GameObject*>> mGeometryInstanceActorMap;
-	//ジオメトリインスタンスのアクター情報を格納するマップ
-	std::unordered_map<GeometryInstanceType, GeometryInstanceActorInfo> mGeometryInstanceActorInfoMap;
+	//ジオメトリインスタンスのオブジェクトを格納するマップ
+	std::unordered_map<GeometryInstanceType, std::vector<GameObject*>> geometryInstanceGameObjectMap;
+	//ジオメトリインスタンスのオブジェクト情報を格納するマップ
+	std::unordered_map<GeometryInstanceType, GeometryInstanceActorInfo> geometryInstanceGameObjectInfoMap;
 };
-

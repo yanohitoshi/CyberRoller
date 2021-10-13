@@ -29,13 +29,12 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	tag = _objectTag;
 	isPushBackToPlayer = true;
 	isChackGroundToPlayer = true;
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this, false, false);
 
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"));
-
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH, 500);
+	// ジオメトリインスタンスコンポーネントを生成
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH);
+	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
+
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();
 	mesh = geometryInstanceComponent->GetMesh();

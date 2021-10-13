@@ -32,7 +32,7 @@ public:
     @fn デストラクタ
     @brief  objectの削除を行う
     */
-    ~JumpSwitchObject();
+    ~JumpSwitchObject()override;
     
     /*
     @fn アップデート関数
@@ -51,7 +51,6 @@ private:
     void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
     // 3Dモデルの描画を行うクラス
     Mesh* mesh;
-    MeshComponent* meshComponent;
     GeometryInstanceComponent* geometryInstanceComponent;
     // 当たり判定を行うクラス
     BoxCollider* boxCollider;

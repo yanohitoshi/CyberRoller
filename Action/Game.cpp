@@ -19,6 +19,7 @@
 #include "FinalStageScene.h"
 #include "ResultScene.h"
 #include "GameObject.h"
+#include "GeometryInstanceManager.h"
 
 // シーンチェンジを行うかフラグの初期化
 bool Game::isChangeScene = false;
@@ -279,11 +280,13 @@ void Game::ProcessInput()
 */
 void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 {
+
 	// シーン変更があった際に全ての使用済みオブジェクトを削除
 	GameObject::RemoveUsedGameObject();
 	// シーンのメモリをdelete
 	delete _scene;
 
+	RENDERER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
 	// シーン遷移判定に使用するフラグを初期化
 	isChangeScene = false;
 	continueFlag = false;

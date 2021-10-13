@@ -710,6 +710,14 @@ bool Renderer::LoadShaders()
 	{
 		printf("シェーダー読み込み失敗\n");
 	}
+
+	// ジオメトリインスタンスを適用した描画用シェーダ作成
+	geometryInstanceShader = new Shader();
+	if (!geometryInstanceShader->Load("Shaders/GeometryInstance.vert", "Shaders/shadowmap.frag"))
+	{
+		printf("シェーダー読み込み失敗\n");
+	}
+
 	// シャドウを適用した描画用シェーダ作成(アニメーションなし)
 	shadowMapShader = new Shader();
 	if (!shadowMapShader->Load("Shaders/shadowmap.vert", "Shaders/shadowmap.frag"))
@@ -911,9 +919,6 @@ void Renderer::DrawShadow()
 
 	shadowMapShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 
-	geometryInstanceManager->PrepareModelMatrice();
-
-	geometryInstanceManager->Draw(shadowMapShader);
 
 	// シェーダーに渡すライティング情報を更新する
 	// すべてのメッシュの描画
@@ -924,6 +929,34 @@ void Renderer::DrawShadow()
 			mc->Draw(shadowMapShader);
 		}
 	}
+
+	//シャドウマップshaderをアクティブ
+	geometryInstanceShader->SetActive();
+	// ライトのカメラ情報
+	geometryInstanceShader->SetVectorUniform("uCameraPos", lightViewPos);
+	// アンビエントライト
+	geometryInstanceShader->SetVectorUniform("uAmbientLight", ambientLight);
+	geometryInstanceShader->SetFloatUniform("uLuminance", 1.0f);
+
+	// ディレクショナルライト
+	geometryInstanceShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	geometryInstanceShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	geometryInstanceShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+
+	geometryInstanceShader->SetMatrixUniform("view", view);
+	geometryInstanceShader->SetMatrixUniform("projection", projection);
+
+	// デプスマップをセット（メッシュ用）
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	geometryInstanceShader->SetIntUniform("depthMap", 4);
+
+	geometryInstanceShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
+
+	geometryInstanceManager->PrepareModelMatrice();
+
+	geometryInstanceManager->Draw(geometryInstanceShader);
+
 
 	//シャドウマップshaderをアクティブ(skinnend)
 	skinnedShadowMapShader->SetActive();
@@ -994,7 +1027,7 @@ void Renderer::DepthRendering()
 {
 
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
-	LightPos = Vector3(playerPos.x /*- ShiftLightPositionX*/, playerPos.y /*- 500.0f*/, playerPos.z + ShiftLightPositionZ);
+	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + ShiftLightPositionZ);
 
 	// ディレクショナルライトからライトの方向を取得
 	LightDir = dirLight.direction;

@@ -27,7 +27,7 @@ public:
 	@fn デストラクタ
 	@brief  objectの削除を行う
 	*/
-	~LightObject();
+	~LightObject()override;
 
 	/*
 	@fn アップデート関数
@@ -39,7 +39,6 @@ public:
 private:
 
 	// 3Dモデルの描画を行うクラス
-	MeshComponent* meshComponent;
 	Mesh* mesh;
 	GeometryInstanceComponent* geometryInstanceComponent;
 	// X軸のずらす定数値

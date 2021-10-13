@@ -100,14 +100,10 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 */
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	// 敵と当たったら
 	if (_hitObject.GetTag() == Tag::ENEMY)
 	{
+		// ジャンプアタック成功状態にする
 		ownerObject->SetIsJumpAttackSuccess(true);
-	}
-
-	if (_hitObject.GetTag() == Tag::GROUND && ownerObject->GetIsSelectingTargetEnemy() ||
-		_hitObject.GetTag() == Tag::PUSH_BOARD && ownerObject->GetIsSelectingTargetEnemy())
-	{
-		ownerObject->SetNextState(PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
 	}
 }

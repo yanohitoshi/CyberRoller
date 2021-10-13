@@ -41,13 +41,11 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	isPushBackToCamera = true;
 	SetChackSwitchTag(tag);
 
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this,false,false);
-	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/moveWall_model/moveWallBox.gpmesh"));
-
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/moveWall_model/moveWallBox.gpmesh"), GeometryInstanceType::G_MOVE_WALL, 500);
+	// ジオメトリインスタンスコンポーネントを生成
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/moveWall_model/moveWallBox.gpmesh"), GeometryInstanceType::G_MOVE_WALL);
+	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
+
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::WALL_TAG, GetOnCollisionFunc());
 	// 当たり判定のみY軸を大きくしたいので調整

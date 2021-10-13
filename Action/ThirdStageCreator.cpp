@@ -763,22 +763,44 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(SECOND_SWITCH_PARTS):
-		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, true);
 		break;
 
-	case(THIRD_STAGE_BACK_MOVE_GROUND):
-		// 移動する床にのみ使うデータ構造体を作成
-		SetMoveBlockData(Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
-		// 動く床を生成
-		new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer11Pos, Tag::ENEMY, playerObject);
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer11SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer11SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
+	//case(SECOND_SWITCH_PARTS):
+	//	// 第二区画スイッチオブジェクト生成
+	//	new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
+	//	break;
+
+	//case(THIRD_STAGE_BACK_MOVE_GROUND):
+	//	// 移動する床にのみ使うデータ構造体を作成
+	//	SetMoveBlockData(Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
+	//	// 動く床を生成
+	//	new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
+	//	break;
+
+
 	}
 }
 

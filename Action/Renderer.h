@@ -301,7 +301,8 @@ private:
 
 	// スイッチ用シェーダー
 	Shader* switchShader;
-
+	// ジオメトリインスタンス用シェーダー
+	Shader* geometryInstanceShader;
 	//スキンメッシュ
 	Shader*  mSkinnedShader;  
 

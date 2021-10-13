@@ -28,13 +28,10 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	isPushBackToPlayer = true;
 	isChackGroundToPlayer = true;
 	isPushBackToCamera = true;
-	////モデル描画用のコンポーネント
-	//meshComponent = new MeshComponent(this,false,false);
-	////Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"));
-	//meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/groundModel/lightGround.gpmesh"));
 
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::G_GROUND,500);
+	// ジオメトリインスタンスコンポーネントを生成
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/groundModel/normalGround.gpmesh"), GeometryInstanceType::G_GROUND,1000);
+	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 
 	//メッシュ情報取得
