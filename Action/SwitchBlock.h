@@ -60,7 +60,8 @@ private:
 	/*
 	@fn タグごとのスイッチの状態チェック関数
 	@param _Tag チェックするスイッチのTag
-	*/	void CheckOnFlag(Tag& _Tag);
+	*/
+	void CheckOnFlag(Tag& _Tag);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

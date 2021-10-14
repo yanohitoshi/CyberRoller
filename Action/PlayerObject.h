@@ -170,6 +170,8 @@ private:
 	const float DecelerationForce;
 	// 初速度
 	const float FirstMovePower;
+	// 空中移動時の初速度
+	const float FirstAirMovePower;
 	//初期ジャンプ力定数
 	const float FirstJumpPower;
 	// プレイヤーが落下したかどうかを判定する位置
@@ -343,6 +345,12 @@ public:// ゲッターセッター
 	@return FirstMovePowerを返す
 	*/
 	const float GetFirstMovePower() { return FirstMovePower; }
+
+	/*
+	@fn FirstAirMovePowerのgetter関数
+	@return FirstAirMovePowerを返す
+	*/
+	const float GetFirstAirMovePower() { return FirstAirMovePower; }
 	
 	/*
 	@fn MovePowerのgetter関数

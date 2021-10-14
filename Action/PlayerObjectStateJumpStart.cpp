@@ -111,7 +111,8 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	// ownerの速度ベクトルをもらう
 	velocity = _owner->GetVelocity();
 	// ownerの速度をもらう
-	moveSpeed = _owner->GetMoveSpeed();
+	moveSpeed = _owner->GetMoveSpeed() * 0.5f;
+	//moveSpeed = _owner->GetFirstAirMovePower();
 
 	// state終了フラグを初期化
 	endFlag = false;
