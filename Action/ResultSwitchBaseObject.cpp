@@ -21,7 +21,7 @@ ResultSwitchBaseObject::ResultSwitchBaseObject(const Vector3& _p, const Vector3&
 	SetScale(_size);
 	tag = _objectTag;
 	isPushBackToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 

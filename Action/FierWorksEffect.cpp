@@ -104,7 +104,7 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 		velocity.y = 0.0f;
 
 		// 速度をチェック
-		ChackSpeedProcess();
+		CheckSpeedProcess();
 
 		// scale値をセット
 		particleComponent->SetAlpha(alpha);
@@ -149,7 +149,7 @@ void FierWorksEffect::FadeInProcess()
 /*
 @fn 速度抑制関数
 */
-void FierWorksEffect::ChackSpeedProcess()
+void FierWorksEffect::CheckSpeedProcess()
 {
 	// 速度が定数より大きかったらだったら
 	if (speed > VelocityAtFadeOut)

@@ -107,7 +107,7 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 void MainCameraObject::GameObjectInput(const InputState& _keyState)
 {
 	// 入力状態チェック関数
-	ChackInputProcess(_keyState);
+	CheckInputProcess(_keyState);
 
 	// ピッチ補正関数
 	CorrectionPitch();
@@ -339,7 +339,7 @@ void MainCameraObject::PlayerInDanceProcess(float _deltaTime)
 @brief 入力チェックとその処理
 @param	_keyState 入力情報
 */
-void MainCameraObject::ChackInputProcess(const InputState& _keyState)
+void MainCameraObject::CheckInputProcess(const InputState& _keyState)
 {
 
 	// クリア状態じゃ無かったら

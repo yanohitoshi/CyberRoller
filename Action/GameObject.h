@@ -291,7 +291,7 @@ protected:
 	bool isSendVelocityToPlayer;
 
 	// プレイヤーと接地判定を行うかどうか
-	bool isChackGroundToPlayer;
+	bool isCheckGroundToPlayer;
 
 	// カメラと押し戻しを行うオブジェクトかどうか
 	bool isPushBackToCamera;
@@ -492,9 +492,9 @@ public://ゲッターセッター
 
 	/*
 	@brief　プレイヤーと押し戻し判定を行うかフラグのgetter
-	@return	isChackGroundToPlayer
+	@return	isCheckGroundToPlayer
 	*/
-	bool GetisChackGroundToPlayer() const { return isChackGroundToPlayer; }
+	bool GetIsCheckGroundToPlayer() const { return isCheckGroundToPlayer; }
 
 	/*
 	@brief　カメラと押し戻し判定を行うかフラグのgetter

@@ -53,22 +53,22 @@ private:
 	/*
 	@fn 反転チェック処理関数
 	*/
-	void ChackInversionProcess();
+	void CheckInversionProcess();
 
 	/*
 	@fn X軸反転チェック処理関数
 	*/
-	void ChackAxisX();
+	void CheckAxisX();
 
 	/*
 	@fn Y軸反転チェック処理関数
 	*/
-	void ChackAxisY();
+	void CheckAxisY();
 
 	/*
 	@fn Z軸反転チェック処理関数
 	*/
-	void ChackAxisZ();
+	void CheckAxisZ();
 
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;

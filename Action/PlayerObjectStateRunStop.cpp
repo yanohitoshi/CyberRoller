@@ -73,9 +73,9 @@ PlayerState PlayerObjectStateRunStop::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -96,7 +96,7 @@ void PlayerObjectStateRunStop::Input(PlayerObject* _owner, const InputState& _ke
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
-		ChackInput(_owner, _keyState);
+		CheckInput(_owner, _keyState);
 	}
 }
 

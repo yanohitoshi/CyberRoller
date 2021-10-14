@@ -52,9 +52,9 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	return state;
 }

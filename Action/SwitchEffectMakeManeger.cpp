@@ -20,8 +20,8 @@ SwitchEffectMakeManeger::SwitchEffectMakeManeger(GameObject* _owner)
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = owner->GetPosition();
-	ChackOnFlag = false;
-	tmpChackOnFlag = false;
+	checkOnFlag = false;
+	tmpCheckOnFlag = false;
 	generateFlag = false;
 
 }
@@ -42,10 +42,10 @@ SwitchEffectMakeManeger::~SwitchEffectMakeManeger()
 void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 {
 	// ownerのフラグを保存
-	ChackOnFlag = owner->GetSwitchFlag();
+	checkOnFlag = owner->GetSwitchFlag();
 
 	// 前フレームのフラグと今のフラグが違っていたら
-	if (ChackOnFlag != tmpChackOnFlag)
+	if (checkOnFlag != tmpCheckOnFlag)
 	{
 		// パーティクルを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
@@ -78,7 +78,7 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 	}
 	
 	// フラグを保存
-	tmpChackOnFlag = ChackOnFlag;
+	tmpCheckOnFlag = checkOnFlag;
 
 }
 

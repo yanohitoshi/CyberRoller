@@ -62,9 +62,9 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	_owner->SetVelocity(velocity);
 	
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// XV‚³‚ê‚½state‚ğ•Ô‚·
 	return state;

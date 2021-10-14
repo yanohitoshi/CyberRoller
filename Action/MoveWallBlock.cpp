@@ -39,7 +39,7 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	openFlag = false;
 	isPushBackToPlayer = true;
 	isPushBackToCamera = true;
-	SetChackSwitchTag(tag);
+	SetCheckSwitchTag(tag);
 
 	// ジオメトリインスタンスコンポーネントを生成
 	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/moveWall_model/moveWallBox.gpmesh"), GeometryInstanceType::G_MOVE_WALL);
@@ -76,7 +76,7 @@ void MoveWallBlock::UpdateGameObject(float _deltaTime)
 	aabb = boxCollider->GetWorldBox();
 
 	// 対象のスイッチの状態をチェック
-	ChackSwitch(chackTag);
+	CheckSwitch(checkTag);
 
 	// オープンフラグがtrueだったら
 	if (openFlag == true)
@@ -115,7 +115,7 @@ void MoveWallBlock::OpenWall(float _deltaTime)
 @param	どの種類のobjectか判定する用のTag
 @param	フレームレート固定用deltaTime
 */
-void MoveWallBlock::ChackSwitch(Tag& _tag)
+void MoveWallBlock::CheckSwitch(Tag& _tag)
 {
 	// チェック用可変長配列
 	std::vector<GameObject*> switches;
@@ -150,7 +150,7 @@ void MoveWallBlock::ChackSwitch(Tag& _tag)
 @fn どの壁がどのスイッチを確認するかセットする関数
 @param	どの種類のobjectか判定する用のTag
 */
-void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
+void MoveWallBlock::SetCheckSwitchTag(Tag& _tag)
 {
 
 	// なんの壁なのかを参照してチェックすべきスイッチをセット
@@ -158,17 +158,17 @@ void MoveWallBlock::SetChackSwitchTag(Tag& _tag)
 	{
 		// 第一区画の壁だったら
 	case(Tag::FIRST_MOVE_WALL):
-		chackTag = Tag::FIRST_SWITCH;
+		checkTag = Tag::FIRST_SWITCH;
 		break;
 
 		// 第二区画の壁だったら
 	case(Tag::SECOND_MOVE_WALL):
-		chackTag = Tag::SECOND_SWITCH;
+		checkTag = Tag::SECOND_SWITCH;
 		break;
 
 		// ゲームクリア前の壁だったら
 	case(Tag::CLEAR_SCENE_MOVE_WALL):
-		chackTag = Tag::CLEAR_SCENE_SWITCH;
+		checkTag = Tag::CLEAR_SCENE_SWITCH;
 		break;
 	}
 }

@@ -93,7 +93,7 @@ void PlayerObjectStateIdlingDance::Input(PlayerObject* _owner, const InputState&
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
-		ChackInput(_owner, _keyState);
+		CheckInput(_owner, _keyState);
 	}
 }
 

@@ -59,9 +59,9 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 		state = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// owner‚Ì•Ï”‚ðXV
 	_owner->SetMoveSpeed(moveSpeed);

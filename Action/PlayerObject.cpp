@@ -198,9 +198,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
-	groundChackSphereCol = new SphereCollider(this, PhysicsTag::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1,std::placeholders::_2));
-	Sphere groundChackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
-	groundChackSphereCol->SetObjectSphere(groundChackSphere);
+	groundCheckSphereCol = new SphereCollider(this, PhysicsTag::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1,std::placeholders::_2));
+	Sphere groundCheckSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
+	groundCheckSphereCol->SetObjectSphere(groundCheckSphere);
 
 	//ジャンプ攻撃判定用のsphereCollider
 	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1,std::placeholders::_2));
@@ -325,7 +325,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	}
 
 	// 一定時間放置によるゲームをリセットするかチェック
-	ChackRestartProcess();
+	CheckRestartProcess();
 }
 
 /*
@@ -423,7 +423,7 @@ void PlayerObject::RotateToNewForward(const Vector3& forward)
 @fn クリアしている状態かをチェックする関数
 @param	_tag チェックするオブジェクトのタグ
 */
-void PlayerObject::ClearChack(Tag _tag)
+void PlayerObject::ClearCheck(Tag _tag)
 {
 	// フラグ検索用可変長配列を生成
 	std::vector<GameObject*> switches;
@@ -432,15 +432,15 @@ void PlayerObject::ClearChack(Tag _tag)
 	switches = GameObject::FindGameObject(Tag::CLEAR_SCENE_SWITCH);
 
 	// スイッチの状態確認関数呼び出し
-	SwitchChackProcess(switches);
+	SwitchCheckProcess(switches);
 
 }
 
 /*
 @fn クリアに必要なスイッチをチェックする関数
-@param	_chackVector チェックするスイッチが格納されている可変長コンテナ
+@param	_checkVector チェックするスイッチが格納されている可変長コンテナ
 */
-void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
+void PlayerObject::SwitchCheckProcess(std::vector<GameObject*> _checkVector)
 {
 	// スイッチの総数カウント初期化
 	int switchCount = 0;
@@ -448,7 +448,7 @@ void PlayerObject::SwitchChackProcess(std::vector<GameObject*> _chackVector)
 	int flagCount = 0;
 
 	// スイッチの総数とONになっているスイッチの総数を数える
-	for (auto itr : _chackVector)
+	for (auto itr : _checkVector)
 	{
 		// スイッチの総数カウント
 		++switchCount;
@@ -509,7 +509,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	// ステージをクリアしたかをチェック
 	if (hitObjectTag == Tag::CLEAR_POINT)
 	{
-		ClearChack(hitObjectTag);
+		ClearCheck(hitObjectTag);
 	}
 
 	// 当たったオブジェクトがリスポーンオブジェクトだったら
@@ -537,7 +537,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// 接地判定を行うオブジェクトだったら
-	if (_hitObject.GetisChackGroundToPlayer())
+	if (_hitObject.GetIsCheckGroundToPlayer())
 	{
 		// 接地フラグをtrueに
 		onGround = true;
@@ -607,7 +607,7 @@ void PlayerObject::ActiveSwitchJumpProcess()
 /*
 @fn リスタートチェック関数
 */
-void PlayerObject::ChackRestartProcess()
+void PlayerObject::CheckRestartProcess()
 {
 	// 一定時間入力が無かったらタイトルに戻る
 	if (inputFlag == false && jumpFlag == false)

@@ -42,7 +42,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	stopPoint = position.z - ShiftStopPosition;
 	isPushBackToPlayer = true;
 	isSendVelocityToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new ChangeColorMeshComponent(this,false,true);
@@ -98,7 +98,7 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 	aabb = boxCollider->GetWorldBox();
 
 	// スイッチの状態を確認
-	ChackOnFlag(tag);
+	CheckOnFlag(tag);
 	// 色変更処理
 	ColorChangeProcess();
 	// 可動処理
@@ -216,7 +216,7 @@ void SwitchBlock::SetColorProcess()
 @fn タグごとのスイッチの状態チェック関数
 @param _Tag チェックするスイッチのTag
 */
-void SwitchBlock::ChackOnFlag(Tag& _Tag)
+void SwitchBlock::CheckOnFlag(Tag& _Tag)
 {
 	// 調べるスイッチの可変長配列を保存するための配列
 	std::vector<GameObject*> switches;

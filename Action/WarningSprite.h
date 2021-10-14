@@ -42,7 +42,7 @@ private:
     /*
     @fn フェードインアウトの状態を見る関数
     */
-    void ChackFadeInOutProcess();
+    void CheckFadeInOutProcess();
     
     /*
     @fn フェードインアウト処理関数

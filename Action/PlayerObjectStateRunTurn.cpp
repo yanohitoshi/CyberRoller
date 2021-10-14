@@ -75,9 +75,9 @@ PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaT
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -99,7 +99,7 @@ void PlayerObjectStateRunTurn::Input(PlayerObject* _owner, const InputState& _ke
 	if (_owner->GetIsAvailableInput())
 	{
 		// 入力情報チェック処理
-		ChackInputProcess(_owner, _keyState);
+		CheckInputProcess(_owner, _keyState);
 	}
 }
 
@@ -131,10 +131,10 @@ void PlayerObjectStateRunTurn::Enter(PlayerObject* _owner, float _deltaTime)
 @param	_owner 親クラスのポインタ
 @param	_keyState 入力情報
 */
-void PlayerObjectStateRunTurn::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
+void PlayerObjectStateRunTurn::CheckInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	// コントローラのアナログスティックの入力情報を計算する
-	Vector3 axis = ChackControllerAxis(_keyState);
+	Vector3 axis = CheckControllerAxis(_keyState);
 
 	// 取得した数値を見てデッドスペース外だったら入力処理を行う
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)

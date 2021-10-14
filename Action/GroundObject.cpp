@@ -26,7 +26,7 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	tag = _objectTag;
 	state = Active;
 	isPushBackToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 	isPushBackToCamera = true;
 
 	// ジオメトリインスタンスコンポーネントを生成

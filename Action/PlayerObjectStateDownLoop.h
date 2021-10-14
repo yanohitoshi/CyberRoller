@@ -51,7 +51,7 @@ private:
 	/*
 	@fn コンティニュー確認処理関数
 	*/
-	void ChackContinueProcess();
+	void CheckContinueProcess();
 
 	// コンティニューするかどうかのフラグ変数
 	bool isContinue;

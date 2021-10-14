@@ -28,7 +28,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	SetScale(_size);
 	tag = _objectTag;
 	isPushBackToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 
 	// ジオメトリインスタンスコンポーネントを生成
 	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH);

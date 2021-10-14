@@ -25,7 +25,7 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	tag = _objectTag;
 	state = Active;
 	isPushBackToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 
 	// PushBoard‚ÆPushBox‚ÌŠÔŠu
 	float offsetX = 210.0f;

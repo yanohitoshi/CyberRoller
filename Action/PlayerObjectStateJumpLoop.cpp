@@ -71,9 +71,9 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// ownerの変数を更新
 	_owner->SetVelocity(velocity);
@@ -95,7 +95,7 @@ void PlayerObjectStateJumpLoop::Input(PlayerObject* _owner, const InputState& _k
 	if (_owner->GetIsAvailableInput())
 	{
 		// 入力情報チェック処理
-		ChackInputProcess(_owner,_keyState);
+		CheckInputProcess(_owner,_keyState);
 	}
 
 }
@@ -144,10 +144,10 @@ void PlayerObjectStateJumpLoop::Enter(PlayerObject* _owner, float _deltaTime)
 @param	_owner 親クラスのポインタ
 @param	_keyState 入力情報
 */
-void PlayerObjectStateJumpLoop::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
+void PlayerObjectStateJumpLoop::CheckInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	//実際に動かしたい軸がずれているので補正
-	Vector3 axis = ChackControllerAxis(_keyState);
+	Vector3 axis = CheckControllerAxis(_keyState);
 
 	// 取得した数値を見てデッドスペース外だったら入力処理を行う
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)

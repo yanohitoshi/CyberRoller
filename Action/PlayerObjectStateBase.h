@@ -116,18 +116,18 @@ public:
 	@param	_owner 親クラスのポインタ
 	@param	_keyState 入力情報
 	*/
-	void ChackInput(PlayerObject* _owner, const InputState& _keyState);
+	void CheckInput(PlayerObject* _owner, const InputState& _keyState);
 	
 	/*
 	@fn 死亡状態か確認する関数
 	@param	_owner 親クラスのポインタ
 	*/
-	void ChackDeadFlag(PlayerObject* _owner);
+	void CheckDeadFlag(PlayerObject* _owner);
 
 	/*
 	@fn タイムオーバーか確認する関数
 	*/
-	void ChackTimeOverFlag();
+	void CheckTimeOverFlag();
 
 	/*
 	@fn 回転処理関数
@@ -141,7 +141,7 @@ public:
 	@fn アナログスティック処理関数
 	@param	_keyState 入力情報
 	*/
-	Vector3 ChackControllerAxis(const InputState& _keyState);
+	Vector3 CheckControllerAxis(const InputState& _keyState);
 
 protected:
 	
@@ -174,7 +174,7 @@ private:
 	@param	_owner 親クラスのポインタ
 	@param	_keyState 入力情報
 	*/
-	void ChackInputProcess(PlayerObject* _owner, const InputState& _keyState);
+	void CheckInputProcess(PlayerObject* _owner, const InputState& _keyState);
 
 	/*
 	@fn 入力がある場合の処理関数
