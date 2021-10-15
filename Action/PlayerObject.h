@@ -12,6 +12,7 @@ class BoxCollider;
 class Mesh;
 class SphereCollider;
 class JumpAttackPlayerObject;
+class PlayerObjectStateBase;
 enum class PlayerState;
 
 
@@ -155,6 +156,24 @@ private:
 	*/
 	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
+	/*
+	@brief ステートプール用マップにステートクラスを追加する関数
+	@param	_state 追加するステートクラスのポインタ
+	@param	_stateTag 鍵となるタグ
+	*/
+	void AddStatePoolMap(PlayerObjectStateBase* _state, PlayerState _stateTag);
+
+	/*
+	@brief ステートプール用マップからステートクラスを削除する関数
+	@param	_stateTag 鍵となるタグ
+	*/
+	void RemoveStatePoolMap(PlayerState _stateTag);
+
+	/*
+	@brief ステートプール用マップをクリアする
+	*/
+	void ClearStatePoolMap();
+
 	//重力
 	static const float Gravity;
 
@@ -262,8 +281,9 @@ private:
 
 	// Animationプール
 	std::vector<const Animation*> animTypes;
-	// stateプール
-	std::vector<class PlayerObjectStateBase*> statePools;
+
+	// 全stateが格納されるマップ
+	std::unordered_map<PlayerState, PlayerObjectStateBase*> statePoolMap;
 	
 public:// ゲッターセッター
 

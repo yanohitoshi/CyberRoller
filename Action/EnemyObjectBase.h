@@ -95,6 +95,9 @@ public:
 	*/
 	virtual void FixCollision(AABB& myAABB, const AABB& pairAABB) {};
 
+
+protected:
+
 	/*
 	@brief ステートプール用マップにステートクラスを追加する関数
 	@param	_state 追加するステートクラスのポインタ
@@ -112,8 +115,6 @@ public:
 	@brief ステートプール用マップをクリアする
 	*/
 	void ClearStatePoolMap();
-
-protected:
 
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;

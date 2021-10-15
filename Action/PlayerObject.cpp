@@ -215,28 +215,27 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	new PlayerKnockBackEffectManager(this);
 	new PlayerDeadEffectManager(this);
 
-	// stateプールの初期化
-	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
-	statePools.push_back(new PlayerObjectStateIdle);
-	statePools.push_back(new PlayerObjectStateIdlingDance);
-	statePools.push_back(new PlayerObjectStateRun);
-	statePools.push_back(new PlayerObjectStateRunStart);
-	statePools.push_back(new PlayerObjectStateRunStop);
-	statePools.push_back(new PlayerObjectStateRunTurn);
-	statePools.push_back(new PlayerObjectStateKnockBack);
-	statePools.push_back(new PlayerObjectStateJumpLoop);
-	statePools.push_back(new PlayerObjectStateJumpStart);
-	statePools.push_back(new PlayerObjectStateJumpEndToIdle);
-	statePools.push_back(new PlayerObjectStateJunpEndToRun);
-	statePools.push_back(new PlayerObjectStateJumpAttack);
-	statePools.push_back(new PlayerObjectStateJumpAttackEnd);
-	statePools.push_back(new PlayerObjectStateDownStart);
-	statePools.push_back(new PlayerObjectStateDownLoop);
-	statePools.push_back(new PlayerObjectStateDownUp);
-	statePools.push_back(new PlayerObjectStateDownOver);
-	statePools.push_back(new PlayerObjectStateDead);
-	statePools.push_back(new PlayerObjectStateFallDead);
-	statePools.push_back(new PlayerObjectStateRespown);
+	// stateをstatePool用マップに追加
+	AddStatePoolMap(new PlayerObjectStateIdle, PlayerState::PLAYER_STATE_IDLE);
+	AddStatePoolMap(new PlayerObjectStateIdlingDance, PlayerState::PLAYER_STATE_IDLE_DANCE);
+	AddStatePoolMap(new PlayerObjectStateRun, PlayerState::PLAYER_STATE_RUN);
+	AddStatePoolMap(new PlayerObjectStateRunStart, PlayerState::PLAYER_STATE_RUN_START);
+	AddStatePoolMap(new PlayerObjectStateRunStop, PlayerState::PLAYER_STATE_RUN_STOP);
+	AddStatePoolMap(new PlayerObjectStateRunTurn, PlayerState::PLAYER_STATE_RUN_TURN);
+	AddStatePoolMap(new PlayerObjectStateKnockBack, PlayerState::PLAYER_STATE_KNOCKBACK);
+	AddStatePoolMap(new PlayerObjectStateJumpLoop, PlayerState::PLAYER_STATE_JUMPLOOP);
+	AddStatePoolMap(new PlayerObjectStateJumpStart, PlayerState::PLAYER_STATE_JUMPSTART);
+	AddStatePoolMap(new PlayerObjectStateJumpEndToIdle, PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE);
+	AddStatePoolMap(new PlayerObjectStateJunpEndToRun, PlayerState::PLAYER_STATE_JUMPEND_TO_RUN);
+	AddStatePoolMap(new PlayerObjectStateJumpAttack, PlayerState::PLAYER_STATE_JUMP_ATTACK);
+	AddStatePoolMap(new PlayerObjectStateJumpAttackEnd, PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
+	AddStatePoolMap(new PlayerObjectStateDownStart, PlayerState::PLAYER_STATE_DOWNSTART);
+	AddStatePoolMap(new PlayerObjectStateDownLoop, PlayerState::PLAYER_STATE_DOWN_LOOP);
+	AddStatePoolMap(new PlayerObjectStateDownUp, PlayerState::PLAYER_STATE_DOWN_UP);
+	AddStatePoolMap(new PlayerObjectStateDownOver, PlayerState::PLAYER_STATE_DOWN_OVER);
+	AddStatePoolMap(new PlayerObjectStateDead, PlayerState::PLAYER_STATE_DEAD);
+	AddStatePoolMap(new PlayerObjectStateFallDead, PlayerState::PLAYER_STATE_FALL_DEAD);
+	AddStatePoolMap(new PlayerObjectStateRespown, PlayerState::PLAYER_STATE_RESPAWN);
 
 	// stateを初期化
 	nowState = PlayerState::PLAYER_STATE_IDLE;
@@ -252,6 +251,27 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 */
 PlayerObject::~PlayerObject()
 {
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_IDLE);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_IDLE_DANCE);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RUN);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RUN_START);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RUN_STOP);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RUN_TURN);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_KNOCKBACK);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMPLOOP);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMPSTART);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMP_ATTACK);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DOWNSTART);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DOWN_LOOP);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DOWN_UP);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DOWN_OVER);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DEAD);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_FALL_DEAD);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RESPAWN);
+	ClearStatePoolMap();
 }
 
 /*
@@ -274,13 +294,24 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
 	{
-		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+
 		nowState = nextState;
 		return;
 	}
 
 	// ステート実行
-	nextState = statePools[static_cast<unsigned int>(nowState)]->Update(this, _deltaTime);
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto state = statePoolMap.find(nowState);
+	if (state != statePoolMap.end())
+	{
+		nextState = statePoolMap[nowState]->Update(this, _deltaTime);
+	}
 
 	// プレイヤー以外の影響でポジションが変更された時用
 	position = (position + pushedVelocity * _deltaTime );
@@ -290,7 +321,11 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	// ステート内部からステート変更あったか？
 	if (nowState != nextState)
 	{
-		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
 		nowState = nextState;
 	}
 
@@ -354,7 +389,11 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 	rightVec = Vector3::Cross(forwardVec, Vector3(0.0f, 0.0f, 1.0f));
 
 	// ステート実行
-	statePools[static_cast<unsigned int>(nowState)]->Input(this, _keyState);
+	auto state = statePoolMap.find(nowState);
+	if (state != statePoolMap.end())
+	{
+		statePoolMap[nowState]->Input(this, _keyState);
+	}
 
 	if (nowState == PlayerState::PLAYER_STATE_JUMP_ATTACK)
 	{
@@ -586,6 +625,44 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, co
 	}
 
 	isSelectingTargetEnemy = true;
+}
+
+/*
+@brief ステートプール用マップにステートクラスを追加する関数
+@param	_state 追加するステートクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
+void PlayerObject::AddStatePoolMap(PlayerObjectStateBase* _state, PlayerState _stateTag)
+{
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto stateMaps = statePoolMap.find(_stateTag);
+
+	//あるとき
+	if (stateMaps != statePoolMap.end())
+	{
+		return;
+	}
+	else //ないとき
+	{
+		statePoolMap[_stateTag] = _state;
+	}
+}
+
+/*
+@brief ステートプール用マップからステートクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
+void PlayerObject::RemoveStatePoolMap(PlayerState _stateTag)
+{
+	delete statePoolMap[_stateTag];
+}
+
+/*
+@brief ステートプール用マップをクリアする
+*/
+void PlayerObject::ClearStatePoolMap()
+{
+	statePoolMap.clear();
 }
 
 /*
