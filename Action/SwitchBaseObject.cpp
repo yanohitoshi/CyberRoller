@@ -27,7 +27,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	SetPosition(_p);
 	SetScale(_size);
 	tag = _objectTag;
-	isPushBackToPlayer = true;
+	//isPushBackToPlayer = true;
 	isCheckGroundToPlayer = true;
 
 	// ジオメトリインスタンスコンポーネントを生成

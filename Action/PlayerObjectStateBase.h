@@ -73,6 +73,7 @@ public:
 	PlayerObjectStateBase()
 		: MaxFallSpeed(-2000.0f)
 		, MaxMoveSpeed(1800.0f)
+		, MaxAirMoveSpeed(1350.0f)
 	{};
 
 	/*
@@ -166,6 +167,8 @@ protected:
 	const float MaxMoveSpeed;
 	// 最大落下速度の規定値
 	const float MaxFallSpeed;
+	// 空中移動速度の最高値
+	const float MaxAirMoveSpeed;
 
 private:
 

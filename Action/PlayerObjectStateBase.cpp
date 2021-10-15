@@ -222,10 +222,10 @@ void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector
 	moveSpeed += _owner->GetAirMovePower();
 
 	// 移動速度が最大速度を超えていたら
-	if (moveSpeed >= MaxMoveSpeed)
+	if (moveSpeed >= MaxAirMoveSpeed)
 	{
 		// 最高速度に固定する
-		moveSpeed = MaxMoveSpeed * 0.7f;
+		moveSpeed = MaxAirMoveSpeed;
 	}
 
 	// アナログスティックの入力角度を絶対値化

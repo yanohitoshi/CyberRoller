@@ -1077,6 +1077,11 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new SwitchBaseObject(layer14SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer14SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
 	case(JUMP_SWITCH_PARTS):
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer14SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);

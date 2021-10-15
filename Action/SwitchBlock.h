@@ -70,14 +70,6 @@ private:
 	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)override;
-	
-	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数
-		プレイヤーの足元判定とのOnCollision
-	@param	当たったGameObject
-	@param	当たったGameObjectの当たり判定タグ
-	*/
-	void PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag);
 
 	// 色変更機能付きMeshComponent
 	ChangeColorMeshComponent* meshComponent;

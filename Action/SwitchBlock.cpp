@@ -254,8 +254,7 @@ void SwitchBlock::CheckOnFlag(Tag& _Tag)
 */
 void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	// ヒットしたオブジェクトがプレイヤーだったら
-	if (_hitObject.GetTag() == Tag::PLAYER)
+	if (_physicsTag == PhysicsTag::GROUND_CHECK_TAG)
 	{
 		// プレイヤーとのHitフラグをtrueに
 		isHitPlayer = true;
@@ -271,6 +270,7 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _ph
 			pushStop = true;
 		}
 	}
+
 	// ヒットしたオブジェクトが動く床だったら
 	if (_hitObject.GetTag() == Tag::MOVE_GROUND)
 	{
@@ -280,14 +280,4 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _ph
 		velocity.y = groundVel.y;
 	}
 
-}
-
-/*
-@fn 当たり判定が行われHitした際に呼ばれる関数
-	プレイヤーの足元判定とのOnCollision
-@param	当たったGameObject
-@param	当たったGameObjectの当たり判定タグ
-*/
-void SwitchBlock::PlayerFootOnCollision(const GameObject& _hitObject,const PhysicsTag _physicsTag)
-{
 }
