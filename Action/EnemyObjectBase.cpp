@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "EnemyObjectBase.h"
 #include "EnemyDeadEffectManager.h"
+#include "EnemyObjectStateBase.h"
 
 /*
 @fn コンストラクタ
@@ -94,6 +95,44 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
+}
+
+/*
+@brief ステートプール用マップにステートクラスを追加する関数
+@param	_state 追加するステートクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
+void EnemyObjectBase::AddStatePoolMap(EnemyObjectStateBase* _state, EnemyState _stateTag)
+{
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto stateMaps = statePoolMap.find(_stateTag);
+
+	//あるとき
+	if (stateMaps != statePoolMap.end())
+	{
+		return;
+	}
+	else //ないとき
+	{
+		statePoolMap[_stateTag] = _state;
+	}
+}
+
+/*
+@brief ステートプール用マップからステートクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
+void EnemyObjectBase::RemoveStatePoolMap(EnemyState _stateTag)
+{
+	delete statePoolMap[_stateTag];
+}
+
+/*
+@brief ステートプール用マップをクリアする
+*/
+void EnemyObjectBase::ClearStatePoolMap()
+{
+	statePoolMap.clear();
 }
 
 /*

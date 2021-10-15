@@ -195,12 +195,12 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this,PhysicsTag::PLAYER_TAG, GetOnCollisionFunc());
 	playerBox = mesh->GetBox();
-	playerBox = { Vector3(-60.0f,-15.0f,0.0f),Vector3(60.0f,15.0f,179.0f) };
+	playerBox = { Vector3(-10.0f,-10.0f,0.0f),Vector3(50.0f,10.0f,179.0f) };
 	boxCollider->SetObjectBox(playerBox);
 
 	//接地判定用のsphereCollider
 	groundCheckSphereCol = new SphereCollider(this, PhysicsTag::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1,std::placeholders::_2));
-	Sphere groundCheckSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
+	Sphere groundCheckSphere = { Vector3(0.0f,0.0f,0.0f),18.0f };
 	groundCheckSphereCol->SetObjectSphere(groundCheckSphere);
 
 	//ジャンプ攻撃判定用のsphereCollider

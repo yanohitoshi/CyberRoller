@@ -59,8 +59,8 @@ PlayerState PlayerObjectStateJumpLoop::Update(PlayerObject* _owner, float _delta
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK;
 	}
 
-	// 接地フラグがtrueでかつ移動入力がある状態でかつ速度が一定値以上だったら
-	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && moveSpeed >= TurnValue)
+	// 接地フラグがtrueでかつ移動入力がある状態でジャンプ攻撃を使用した後だったら
+	if (_owner->GetOnGround() == true && _owner->GetInputFlag() && !_owner->GetIsAvailableJumpAttck())
 	{
 		// ステータスをローリングアニメーションを持つ着地状態にする
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;

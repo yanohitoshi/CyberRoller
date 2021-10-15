@@ -73,17 +73,14 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	enemyBox = { BoxMin,BoxMax };
 	boxCollider->SetObjectBox(enemyBox);
 
-
-	// stateプールの初期化
-	// ※順番に配列に追加していくのでステータスの列挙と合う順番に追加
-	statePools.push_back(new TrackingEnemyStateIdle);
-	statePools.push_back(new EnemyObjectStateDead);
-	statePools.push_back(new EnemyObjectStateRespawn);
-	statePools.push_back(new TrackingEnemyStateAttack);
-	statePools.push_back(new TrackingEnemyStateMoving);
-	statePools.push_back(new TrackingEnemyStateTurn);
-	statePools.push_back(new TrackingEnemyStateTracking);
-	statePools.push_back(new TrackingEnemyStateReposition);
+	// stateをstatePool用マップに追加
+	AddStatePoolMap(new TrackingEnemyStateIdle, EnemyState::ENEMY_STATE_IDLE);
+	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
+	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
+	AddStatePoolMap(new TrackingEnemyStateAttack, EnemyState::ENEMY_STATE_ATTACK);
+	AddStatePoolMap(new TrackingEnemyStateTurn, EnemyState::ENEMY_STATE_TURN);
+	AddStatePoolMap(new TrackingEnemyStateTracking, EnemyState::ENEMY_STATE_TRACKING);
+	AddStatePoolMap(new TrackingEnemyStateReposition, EnemyState::ENEMY_STATE_REPOSITION);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
@@ -108,6 +105,14 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 */
 TrackingEnemyObject::~TrackingEnemyObject()
 {
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_IDLE);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_DEAD);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_RESPAWN);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_ATTACK);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_TURN);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_TRACKING);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_REPOSITION);
+	ClearStatePoolMap();
 }
 
 /*
@@ -133,18 +138,33 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
 	{
-		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+
 		nowState = nextState;
 		return;
 	}
 
 	// ステート実行
-	nextState = statePools[static_cast<unsigned int>(nowState)]->Update(this, _deltaTime);
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto state = statePoolMap.find(nowState);
+	if (state != statePoolMap.end())
+	{
+		nextState = statePoolMap[nowState]->Update(this, _deltaTime);
+	}
 
 	// ステート内部からステート変更あったか？
 	if (nowState != nextState)
 	{
-		statePools[static_cast<unsigned int>(nextState)]->Enter(this, _deltaTime);
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
 		nowState = nextState;
 	}
 

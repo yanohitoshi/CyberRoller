@@ -9,6 +9,7 @@ class SkeletalMeshComponent;
 class Mesh;
 class Animation;
 class BoxCollider;
+class EnemyObjectStateBase;
 enum class EnemyState;
 
 /*
@@ -94,6 +95,24 @@ public:
 	*/
 	virtual void FixCollision(AABB& myAABB, const AABB& pairAABB) {};
 
+	/*
+	@brief ステートプール用マップにステートクラスを追加する関数
+	@param	_state 追加するステートクラスのポインタ
+	@param	_stateTag 鍵となるタグ
+	*/
+	void AddStatePoolMap(EnemyObjectStateBase* _state, EnemyState _stateTag);
+
+	/*
+	@brief ステートプール用マップからステートクラスを削除する関数
+	@param	_stateTag 鍵となるタグ
+	*/
+	void RemoveStatePoolMap(EnemyState _stateTag);
+
+	/*
+	@brief ステートプール用マップをクリアする
+	*/
+	void ClearStatePoolMap();
+
 protected:
 
 	// 3Dモデルの描画を行うクラス
@@ -159,8 +178,8 @@ protected:
 
 	// Animationプール
 	std::vector<const Animation*> animTypes;
-	// stateプール
-	std::vector<class EnemyObjectStateBase*> statePools;
+	// 全stateが格納されるマップ
+	std::unordered_map<EnemyState, EnemyObjectStateBase*> statePoolMap;
 
 private:
 

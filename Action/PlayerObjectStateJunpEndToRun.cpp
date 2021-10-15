@@ -28,6 +28,8 @@ PlayerObjectStateJunpEndToRun::~PlayerObjectStateJunpEndToRun()
 */
 PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _deltaTime)
 {
+	// 着地時の減衰値を掛ける
+	velocity *= InputDecelerationForce;
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
@@ -98,7 +100,7 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	// 再生するアニメーションをもらい再生をかける
-	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN),1.5f);
+	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN),1.4f);
 	// stateを着地ローリング状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
@@ -181,8 +183,6 @@ void PlayerObjectStateJunpEndToRun::InputMovableProcess(PlayerObject* _owner, Ve
 		moveSpeed = MaxMoveSpeed;
 	}
 
-	// 着地時の減衰値を掛ける
-	moveSpeed *= InputDecelerationForce;
 
 	// 移動ベクトルに速度をかける
 	velocity.x = forward.x * moveSpeed;

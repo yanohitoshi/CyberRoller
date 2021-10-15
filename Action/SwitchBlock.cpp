@@ -55,7 +55,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	luminance = mesh->GetLuminace();
 	//押し戻し判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::SWITCH_TAG, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-55.0f,-55.0f,-40.0f),Vector3(55.0f,55.0f,55.0f) };
+	AABB aabb = { Vector3(-57.0f,-57.0f,-40.0f),Vector3(57.0f,57.0f,55.0f) };
 	boxCollider->SetObjectBox(aabb);
 
 	// フラグの初期化
