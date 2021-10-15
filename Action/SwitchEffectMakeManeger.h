@@ -52,9 +52,9 @@ private:
     ParticleState particleState;
 
     // switchがONになったかどうかフラグ
-    bool ChackOnFlag;
+    bool checkOnFlag;
     // 前のフレームのスイッチの状態を保存する用フラグ変数
-    bool tmpChackOnFlag;
+    bool tmpCheckOnFlag;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
 

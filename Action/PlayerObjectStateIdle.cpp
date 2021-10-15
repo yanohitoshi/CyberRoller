@@ -33,7 +33,7 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 	// 移動系入力確認
-	ChackMovableInputProcess(_owner);
+	CheckMovableInputProcess(_owner);
 
 	// 死亡フラグがfalseでかつタイムオーバー状態でもなくダンス開始フラグがtrueだったら
 	if (!_owner->GetDeadFlag() && CountDownFont::GetTimeOverFlag() == false && isDanceFlag == true)
@@ -42,9 +42,9 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// 更新されたstateを返す
 	return state;
@@ -63,7 +63,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
-		ChackInput(_owner, _keyState);
+		CheckInput(_owner, _keyState);
 	}
 }
 
@@ -111,7 +111,7 @@ void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 @fn 入力チェック処理関数
 @param	_owner 親クラスのポインタ
 */
-void PlayerObjectStateIdle::ChackMovableInputProcess(PlayerObject* _owner)
+void PlayerObjectStateIdle::CheckMovableInputProcess(PlayerObject* _owner)
 {
 
 	// ジャンプフラグがfalseでかつ接地していなかったら

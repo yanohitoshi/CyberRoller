@@ -92,13 +92,13 @@ private:
 	@fn クリアしている状態かをチェックする関数
 	@param	_tag チェックするオブジェクトのタグ
 	*/
-	void ClearChack(Tag _tag);
+	void ClearCheck(Tag _tag);
 	
 	/*
 	@fn クリアに必要なスイッチをチェックする関数
-	@param	_chackVector チェックするスイッチが格納されている可変長コンテナ
+	@param	_checkVector チェックするスイッチが格納されている可変長コンテナ
 	*/
-	void SwitchChackProcess(std::vector<GameObject*> _chackVector);
+	void SwitchCheckProcess(std::vector<GameObject*> _checkVector);
 
 	/*
 	@fn スイッチジャンプを使用可能にする関数
@@ -108,7 +108,7 @@ private:
 	/*
 	@fn リスタートチェック関数
 	*/
-	void ChackRestartProcess();
+	void CheckRestartProcess();
 
 	/*
 	@brief	攻撃対象の敵を探す
@@ -124,7 +124,7 @@ private:
 	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
 	// 球体の当たり判定を行うクラス
-	SphereCollider* groundChackSphereCol;
+	SphereCollider* groundCheckSphereCol;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* jumpAttackSphereCol;
 
@@ -170,6 +170,8 @@ private:
 	const float DecelerationForce;
 	// 初速度
 	const float FirstMovePower;
+	// 空中移動時の初速度
+	const float FirstAirMovePower;
 	//初期ジャンプ力定数
 	const float FirstJumpPower;
 	// プレイヤーが落下したかどうかを判定する位置
@@ -343,6 +345,12 @@ public:// ゲッターセッター
 	@return FirstMovePowerを返す
 	*/
 	const float GetFirstMovePower() { return FirstMovePower; }
+
+	/*
+	@fn FirstAirMovePowerのgetter関数
+	@return FirstAirMovePowerを返す
+	*/
+	const float GetFirstAirMovePower() { return FirstAirMovePower; }
 	
 	/*
 	@fn MovePowerのgetter関数

@@ -146,7 +146,7 @@ private:
 	@brief 入力チェックとその処理
 	@param	_keyState 入力情報
 	*/
-	void ChackInputProcess(const InputState& _keyState);
+	void CheckInputProcess(const InputState& _keyState);
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

@@ -44,14 +44,14 @@ EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _
 	// 今のポジションから初期ポジションへの方向ベクトルを計算
 	repositionRotationVec = firstPosition - _owner->GetPosition();
 	// 初期位置までの長さを得るために変数へ保存
-	Vector3 chackReposition = repositionRotationVec;
+	Vector3 checkReposition = repositionRotationVec;
 	// 正規化
 	repositionRotationVec.Normalize();
 	// 回転処理
 	RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
 
 	// 長さを取得
-	float Length = chackReposition.Length();
+	float Length = checkReposition.Length();
 
 	// 長さが規定値以下の場合アイドリング状態へ移行
 	if (Length <= IdlingLength)

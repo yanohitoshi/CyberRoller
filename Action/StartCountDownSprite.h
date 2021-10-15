@@ -48,12 +48,12 @@ private:
     /*
     @fn カウントダウン表示時間カウントを数える関数
     */
-    void ChackCountProcess();
+    void CheckCountProcess();
 
     /*
     @fn テクスチャの状態を見る関数
     */
-    void ChackTextureProcess();
+    void CheckTextureProcess();
 
     /*
     @fn テクスチャを切り替える関数

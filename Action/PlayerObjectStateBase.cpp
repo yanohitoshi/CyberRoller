@@ -12,7 +12,7 @@
 void PlayerObjectStateBase::GroundMove(PlayerObject* _owner, const InputState& _keyState)
 {
 	// 入力情報チェック処理
-	ChackInputProcess(_owner, _keyState);
+	CheckInputProcess(_owner, _keyState);
 }
 
 /*
@@ -20,11 +20,11 @@ void PlayerObjectStateBase::GroundMove(PlayerObject* _owner, const InputState& _
 @param	_owner 親クラスのポインタ
 @param	_keyState 入力情報
 */
-void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _keyState)
+void PlayerObjectStateBase::CheckInput(PlayerObject* _owner, const InputState& _keyState)
 {
 
 	// コントローラのアナログスティックの入力情報を計算する
-	Vector3 axis = ChackControllerAxis(_keyState);
+	Vector3 axis = CheckControllerAxis(_keyState);
 
 	// 取得した数値を見てデッドスペース外だったら入力処理を行う
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
@@ -58,7 +58,7 @@ void PlayerObjectStateBase::ChackInput(PlayerObject* _owner, const InputState& _
 @fn 死亡状態か確認する関数
 @param	_owner 親クラスのポインタ
 */
-void PlayerObjectStateBase::ChackDeadFlag(PlayerObject* _owner)
+void PlayerObjectStateBase::CheckDeadFlag(PlayerObject* _owner)
 {
 	// 死亡フラグが立っていたら
 	if (_owner->GetDeadFlag())
@@ -70,7 +70,7 @@ void PlayerObjectStateBase::ChackDeadFlag(PlayerObject* _owner)
 /*
 @fn タイムオーバーか確認する関数
 */
-void PlayerObjectStateBase::ChackTimeOverFlag()
+void PlayerObjectStateBase::CheckTimeOverFlag()
 {
 	// タイムオーバーフラグがtrueだったら
 	if (CountDownFont::GetTimeOverFlag() == true)
@@ -101,7 +101,7 @@ void PlayerObjectStateBase::RotationProcess(PlayerObject* _owner, Vector3 _forwa
 @fn アナログスティック処理関数
 @param	_keyState 入力情報
 */
-Vector3 PlayerObjectStateBase::ChackControllerAxis(const InputState& _keyState)
+Vector3 PlayerObjectStateBase::CheckControllerAxis(const InputState& _keyState)
 {
 	//Axisの値をとる32700~-32700
 	float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
@@ -123,10 +123,10 @@ Vector3 PlayerObjectStateBase::ChackControllerAxis(const InputState& _keyState)
 @param	_owner 親クラスのポインタ
 @param	_keyState 入力情報
 */
-void PlayerObjectStateBase::ChackInputProcess(PlayerObject* _owner, const InputState& _keyState)
+void PlayerObjectStateBase::CheckInputProcess(PlayerObject* _owner, const InputState& _keyState)
 {
 	// コントローラのアナログスティックの入力情報を計算する
-	Vector3 axis = ChackControllerAxis(_keyState);
+	Vector3 axis = CheckControllerAxis(_keyState);
 
 	// 取得した数値を見てデッドスペース外だったら入力処理を行う
 	if (Math::Abs(axis.x) > inputDeadSpace || Math::Abs(axis.y) > inputDeadSpace)
@@ -222,10 +222,10 @@ void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector
 	moveSpeed += _owner->GetAirMovePower();
 
 	// 移動速度が最大速度を超えていたら
-	if (moveSpeed >= MaxMoveSpeed)
+	if (moveSpeed >= MaxAirMoveSpeed)
 	{
 		// 最高速度に固定する
-		moveSpeed = MaxMoveSpeed;
+		moveSpeed = MaxAirMoveSpeed;
 	}
 
 	// アナログスティックの入力角度を絶対値化

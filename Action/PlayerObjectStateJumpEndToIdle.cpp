@@ -51,9 +51,9 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// ownerに速度をセット
 	_owner->SetVelocity(velocity);
@@ -74,7 +74,7 @@ void PlayerObjectStateJumpEndToIdle::Input(PlayerObject* _owner, const InputStat
 	if (_owner->GetIsAvailableInput())
 	{
 		// state変更の可能性のある入力のチェック
-		ChackInput(_owner, _keyState);
+		CheckInput(_owner, _keyState);
 	}
 }
 

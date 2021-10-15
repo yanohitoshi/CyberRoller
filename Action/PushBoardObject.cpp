@@ -70,7 +70,7 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 	MovableProcess();
 
 	// 反転するかチェック
-	ChackInversionProcess();
+	CheckInversionProcess();
 
 	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
@@ -82,22 +82,22 @@ void PushBoardObject::UpdateGameObject(float _deltaTime)
 /*
 @fn 反転チェック処理関数
 */
-void PushBoardObject::ChackInversionProcess()
+void PushBoardObject::CheckInversionProcess()
 {
 	// 動く方向のタグを見て処理を変える
 	switch (moveTag)
 	{
 	case MOVE_X:
 		// X軸の処理
-		ChackAxisX();
+		CheckAxisX();
 		break;
 	case MOVE_Y:
 		// Y軸の処理
-		ChackAxisY();
+		CheckAxisY();
 		break;
 	case MOVE_Z:
 		// Z軸の処理
-		ChackAxisZ();
+		CheckAxisZ();
 		break;
 	}
 }
@@ -123,7 +123,7 @@ void PushBoardObject::MovableProcess()
 /*
 @fn X軸反転チェック処理関数
 */
-void PushBoardObject::ChackAxisX()
+void PushBoardObject::CheckAxisX()
 {
 	// 到達点に達していたら反転
 	if (position.x >= goalPos.x && direction.x == 1.0f || position.x <= goalPos.x && direction.x == -1.0f)
@@ -141,7 +141,7 @@ void PushBoardObject::ChackAxisX()
 /*
 @fn Y軸反転チェック処理関数
 */
-void PushBoardObject::ChackAxisY()
+void PushBoardObject::CheckAxisY()
 {
 	// 到達点に達していたら反転
 	if (position.y >= goalPos.y && direction.y == 1.0f || position.y <= goalPos.y && direction.y == -1.0f)
@@ -159,7 +159,7 @@ void PushBoardObject::ChackAxisY()
 /*
 @fn Z軸反転チェック処理関数
 */
-void PushBoardObject::ChackAxisZ()
+void PushBoardObject::CheckAxisZ()
 {
 	// 到達点に達していたら反転
 	if (position.z >= goalPos.z && direction.z == 1.0f || position.z <= goalPos.z && direction.z == -1.0f)

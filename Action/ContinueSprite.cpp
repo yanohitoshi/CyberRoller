@@ -67,7 +67,7 @@ void ContinueSprite::GameObjectInput(const InputState& _keyState)
 	// タイムアップ画像の描画が終わってコンテニュー画像描画開始から一定時間たっていたら
 	if (TimeUpSprite::GetDrawFlag() == false && frameCount >= DrawCount)
 	{
-		ChackKeyProcess(_keyState);
+		CheckKeyProcess(_keyState);
 	}
 }
 
@@ -75,7 +75,7 @@ void ContinueSprite::GameObjectInput(const InputState& _keyState)
 @brief	入力情報を元に描画を切り替える
 @param	入力情報
 */
-void ContinueSprite::ChackKeyProcess(const InputState& _keyState)
+void ContinueSprite::CheckKeyProcess(const InputState& _keyState)
 {
 	// Aボタンが押されたら
 	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)

@@ -43,7 +43,7 @@ PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _delta
 	if (isInput)
 	{
 		// 入力状態を見てコンティニュー状態を確認
-		ChackContinueProcess();
+		CheckContinueProcess();
 	}
 
 	// 更新されたstateを返す
@@ -100,7 +100,7 @@ void PlayerObjectStateDownLoop::Enter(PlayerObject* _owner, float _deltaTime)
 /*
 @fn コンティニュー確認処理関数
 */
-void PlayerObjectStateDownLoop::ChackContinueProcess()
+void PlayerObjectStateDownLoop::CheckContinueProcess()
 {
 	// コンティニューフラグがtrueだったら
 	if (isContinue)

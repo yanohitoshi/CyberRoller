@@ -39,7 +39,7 @@ GameObject::GameObject(bool _reUseGameObject,const Tag _objectTag)
 	, aabb({ Vector3::Zero,Vector3::Zero })
 	, isPushBackToPlayer(false)
 	, isSendVelocityToPlayer(false)
-	, isChackGroundToPlayer(false)
+	, isCheckGroundToPlayer(false)
 	, isPushBackToCamera(false)
 	, luminance(0.0f)
 {

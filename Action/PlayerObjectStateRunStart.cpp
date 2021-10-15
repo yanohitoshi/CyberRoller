@@ -55,9 +55,9 @@ PlayerState PlayerObjectStateRunStart::Update(PlayerObject* _owner, float _delta
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
 
-	ChackDeadFlag(_owner);
+	CheckDeadFlag(_owner);
 
-	ChackTimeOverFlag();
+	CheckTimeOverFlag();
 
 	// owner‚Ì•Ï”‚ðXV
 	_owner->SetVelocity(velocity);

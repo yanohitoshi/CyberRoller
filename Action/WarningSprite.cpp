@@ -51,7 +51,7 @@ void WarningSprite::UpdateGameObject(float _deltaTime)
 	if (count <= 2 && owner->GetWarningFlag() == true)
 	{
 		// 状態チェックと実際の処理
-		ChackFadeInOutProcess();
+		CheckFadeInOutProcess();
 	}
 	else if (count >= 3)	// countが3以上になったらalpha値が0になるまでout
 	{
@@ -70,7 +70,7 @@ void WarningSprite::UpdateGameObject(float _deltaTime)
 /*
 @fn フェードインアウトの状態を見る関数
 */
-void WarningSprite::ChackFadeInOutProcess()
+void WarningSprite::CheckFadeInOutProcess()
 {
 	// フェードインアウト処理
 	FadeInOutProcess();

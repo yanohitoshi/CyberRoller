@@ -53,7 +53,7 @@ private:
 	@param	_owner 親クラスのポインタ
 	@param	_keyState 入力情報
 	*/
-	void ChackInputProcess(PlayerObject* _owner, const InputState& _keyState);
+	void CheckInputProcess(PlayerObject* _owner, const InputState& _keyState);
 
 	/*
 	@fn 入力がある場合の処理関数

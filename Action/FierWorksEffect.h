@@ -45,7 +45,7 @@ private:
     /*
     @fn 速度抑制関数
     */
-    void ChackSpeedProcess();
+    void CheckSpeedProcess();
 
     // フェードインフラグ
     bool inFlag;

@@ -47,8 +47,13 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 		// ‹K’è’l‚Ü‚Å‹ß‚Ã‚­‚Ü‚Å’ÇÕ
 		if (ownerPosToTrackingObjectLength >= TrackingLengthValue)
 		{
-			trackingRotationVec.Normalize();
+			if (!Math::NearZero(trackingRotationVec.Length()))
+			{
+				trackingRotationVec.Normalize();
+			}
+
 			velocity = trackingRotationVec * moveSpeed;
+
 			// position‚É‘¬“x‚ð‘«‚µ‚ÄƒLƒƒƒ‰ƒNƒ^[‚ð“®‚©‚·
 			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
@@ -110,8 +115,12 @@ void TrackingEnemyStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime
 	trackingRotationVec = trackingObject->GetPosition() - _owner->GetPosition();
 	// ã‰ºˆÚ“®‚Í‚³‚¹‚È‚¢‚Ì‚Å0‚ÅŒÅ’è
 	trackingRotationVec.z = 0.0f;
-	// ³‹K‰»
-	trackingRotationVec.Normalize();
+
+	if (!Math::NearZero(trackingRotationVec.Length()))
+	{
+		// ³‹K‰»
+		trackingRotationVec.Normalize();
+	}
 
 	// ‰ñ“]ˆ—
 	RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());

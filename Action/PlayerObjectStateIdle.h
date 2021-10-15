@@ -52,7 +52,7 @@ private:
 	@fn 入力チェック処理関数
 	@param	_owner 親クラスのポインタ
 	*/
-	void ChackMovableInputProcess(PlayerObject* _owner);
+	void CheckMovableInputProcess(PlayerObject* _owner);
 
 	/*
 	@fn ダンス開始カウント関数

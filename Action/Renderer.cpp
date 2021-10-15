@@ -188,7 +188,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	}
 
 
-	undefineTexID = GetTexture("Assets/noneTexture.png")->GetTextureID();
+	undefineTexID = GetTexture("Assets/sprite/noneTexture.png")->GetTextureID();
 
 	//@HDRrenderer‚Ì¶¬
 	hdrRenderer = new HDRRenderer(screenWidth, screenHeight,4);
@@ -1057,9 +1057,9 @@ void Renderer::DepthRendering()
 	{
 		// •ÇˆÈŠO‚ð[“xƒ}ƒbƒv‚É‘‚«ž‚Ý
 		// ¦•Ç‚Ì‰e‚ð•`‰æ‚·‚é‚ÆŒ©‚½–ÚãŒ©‚Ã‚ç‚©‚Á‚½‚½‚ß
-		Tag chackTag = mc->GetOwner()->GetTag();
+		Tag checkTag = mc->GetOwner()->GetTag();
 
-		if (mc->GetVisible() && chackTag != Tag::WALL)
+		if (mc->GetVisible() && checkTag != Tag::WALL)
 		{
 			mc->Draw(depthMapShader);
 		}

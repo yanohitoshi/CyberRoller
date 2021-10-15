@@ -55,13 +55,13 @@ private:
 	@param	どの種類のobjectか判定する用のTag
 	@param	フレームレート固定用deltaTime
 	*/
-	void ChackSwitch(Tag& _tag);
+	void CheckSwitch(Tag& _tag);
 	
 	/*
 	@fn どの壁がどのスイッチを確認するかセットする関数
 	@param	どの種類のobjectか判定する用のTag
 	*/
-	void SetChackSwitchTag(Tag& _tag);
+	void SetCheckSwitchTag(Tag& _tag);
 
 	// 3Dモデルの描画を行うクラス
 	Mesh* mesh;
@@ -81,7 +81,7 @@ private:
 	Vector3 stopPos;
 
 	// チェックするTag保存用
-	Tag chackTag;
+	Tag checkTag;
 
 	// open/close判定用flag
 	bool openFlag;

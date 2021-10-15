@@ -51,17 +51,17 @@ void StartCountDownSprite::UpdateGameObject(float _deltaTime)
 	if (drawSpriteFlag == true)
 	{
 		// カウントダウン表示用カウントを数える
-		ChackCountProcess();
+		CheckCountProcess();
 
 		// テクスチャの状態をチェック
-		ChackTextureProcess();
+		CheckTextureProcess();
 	}
 }
 
 /*
 @fn カウントダウン表示時間カウントを数える関数
 */
-void StartCountDownSprite::ChackCountProcess()
+void StartCountDownSprite::CheckCountProcess()
 {
 	// カウント計測
 	++timeStartCount;
@@ -86,7 +86,7 @@ void StartCountDownSprite::ChackCountProcess()
 /*
 @fn テクスチャの状態を見る関数
 */
-void StartCountDownSprite::ChackTextureProcess()
+void StartCountDownSprite::CheckTextureProcess()
 {
 	// texture変更フラグがtrueだったら
 	if (texChangeFlag == true)

@@ -16,7 +16,7 @@
 StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, BlockSize(Vector3(200.0f, 200.0f, 100.0f))
-	, SwitchBaseSize(Vector3(2.0f, 2.0f, 1.0f))
+	, SwitchBaseSize(Vector3(1.6f, 1.6f, 1.0f))
 	, NeedlePanelSize(Vector3(200.0f, 200.0f, 3.0f))
 	, JumpSwitchSize(Vector3(200.0f, 200.0f, 3.0f))
 	, PortraitWallBlockSize(Vector3(600.0f, 200.0f, 2400.0f))

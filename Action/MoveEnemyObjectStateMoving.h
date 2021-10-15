@@ -47,7 +47,6 @@ private:
 	*/
 	void Move(EnemyObjectBase* _owner, float _deltaTime);
 
-	void ChackTurn();
 	// ˆÚ“®•ûŒü
 	Vector3 moveDirection;
 	// ˆÚ“®ŠÔŠu

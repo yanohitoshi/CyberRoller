@@ -32,7 +32,7 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 	inversionFlag = false;
 	isPushBackToPlayer = true;
 	isSendVelocityToPlayer = true;
-	isChackGroundToPlayer = true;
+	isCheckGroundToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
@@ -76,7 +76,7 @@ void MoveBlockObject::UpdateGameObject(float _deltaTime)
 	MovableProcess();
 
 	// 移動状態確認
-	ChackInversionProcess();
+	CheckInversionProcess();
 
 	// ポジションに速度を足す
 	position = position + velocity * _deltaTime;
@@ -107,22 +107,22 @@ void MoveBlockObject::MovableProcess()
 /*
 @fn 反転チェック処理関数
 */
-void MoveBlockObject::ChackInversionProcess()
+void MoveBlockObject::CheckInversionProcess()
 {
 	// 動く方向のタグを見て処理を変える
 	switch (moveTag)
 	{
 	case MOVE_X:
 		// X軸の処理
-		ChackAxisX();
+		CheckAxisX();
 		break;
 	case MOVE_Y:
 		// Y軸の処理
-		ChackAxisY();
+		CheckAxisY();
 		break;
 	case MOVE_Z:
 		// Z軸の処理
-		ChackAxisZ();
+		CheckAxisZ();
 		break;
 	}
 }
@@ -130,7 +130,7 @@ void MoveBlockObject::ChackInversionProcess()
 /*
 @fn X軸反転チェック処理関数
 */
-void MoveBlockObject::ChackAxisX()
+void MoveBlockObject::CheckAxisX()
 {
 	// 到達点に達していたら反転
 	if (position.x >= goalPos.x && direction.x == 1.0f || position.x <= goalPos.x && direction.x == -1.0f)
@@ -148,7 +148,7 @@ void MoveBlockObject::ChackAxisX()
 /*
 @fn Y軸反転チェック処理関数
 */
-void MoveBlockObject::ChackAxisY()
+void MoveBlockObject::CheckAxisY()
 {
 	// 到達点に達していたら反転
 	if (position.y >= goalPos.y && direction.y == 1.0f || position.y <= goalPos.y && direction.y == -1.0f)
@@ -166,7 +166,7 @@ void MoveBlockObject::ChackAxisY()
 /*
 @fn Z軸反転チェック処理関数
 */
-void MoveBlockObject::ChackAxisZ()
+void MoveBlockObject::CheckAxisZ()
 {
 	// 到達点に達していたら反転
 	if (position.z >= goalPos.z && direction.z == 1.0f || position.z <= goalPos.z && direction.z == -1.0f)
