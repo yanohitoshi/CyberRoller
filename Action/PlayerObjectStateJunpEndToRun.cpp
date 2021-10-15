@@ -8,7 +8,8 @@
 @fn コンストラクタ
 */
 PlayerObjectStateJunpEndToRun::PlayerObjectStateJunpEndToRun()
-	: DecelerationForce(75.0f)
+	: UnInputDecelerationForce(75.0f)
+	, InputDecelerationForce(0.7f)
 {
 }
 
@@ -27,7 +28,6 @@ PlayerObjectStateJunpEndToRun::~PlayerObjectStateJunpEndToRun()
 */
 PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _deltaTime)
 {
-
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
@@ -98,7 +98,7 @@ void PlayerObjectStateJunpEndToRun::Enter(PlayerObject* _owner, float _deltaTime
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
 	// 再生するアニメーションをもらい再生をかける
-	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN));
+	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN),1.5f);
 	// stateを着地ローリング状態にして保存
 	state = PlayerState::PLAYER_STATE_JUMPEND_TO_RUN;
 
@@ -181,6 +181,9 @@ void PlayerObjectStateJunpEndToRun::InputMovableProcess(PlayerObject* _owner, Ve
 		moveSpeed = MaxMoveSpeed;
 	}
 
+	// 着地時の減衰値を掛ける
+	moveSpeed *= InputDecelerationForce;
+
 	// 移動ベクトルに速度をかける
 	velocity.x = forward.x * moveSpeed;
 	velocity.y = forward.y * moveSpeed;
@@ -203,7 +206,7 @@ void PlayerObjectStateJunpEndToRun::UninputMovableProcess(PlayerObject* _owner)
 	if (moveSpeed >= 0.0f)
 	{
 		// 速度から減速定数を引く
-		moveSpeed -= DecelerationForce;
+		moveSpeed -= UnInputDecelerationForce;
 	}
 
 	// 移動ベクトルの変更がないのでownerの前方ベクトルをもらいそのベクトルに速度をかける

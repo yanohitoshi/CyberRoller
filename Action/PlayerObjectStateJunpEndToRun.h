@@ -77,7 +77,10 @@ private:
 	*/
 	void JumpTransitionProcess(PlayerObject* _owner);
 
-	// Œ¸‘¬—Í
-	const float DecelerationForce;
+	// ”ñˆÚ“®“ü—ÍŽž‚ÌŒ¸‘¬—Í
+	const float UnInputDecelerationForce;
+	// ˆÚ“®“ü—ÍŽž‚ÌŒ¸‘¬—Í
+	const float InputDecelerationForce;
+
 };
 
