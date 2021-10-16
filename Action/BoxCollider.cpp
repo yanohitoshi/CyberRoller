@@ -20,7 +20,7 @@ BoxCollider::BoxCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _fu
 	, worldBox({ Vector3::Zero,Vector3::Zero })
 	, shouldRotate(true)
 {
-	PHYSICS->AddBox(this,_func);
+	PHYSICS->AddBoxes(this, _func);
 }
 
 /*
@@ -28,7 +28,7 @@ BoxCollider::BoxCollider(GameObject* _owner, PhysicsTag tag, onCollisionFunc _fu
 */
 BoxCollider::~BoxCollider()
 {
-	PHYSICS->SelectRemoveBoxes(this);
+	PHYSICS->RemoveBoxes(this);
 }
 
 /*
@@ -58,5 +58,4 @@ void BoxCollider::RefreshWorldTransform()
 
 	worldBox.min += owner->GetPosition();
 	worldBox.max += owner->GetPosition();
-
 }

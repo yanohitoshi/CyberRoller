@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <functional>
 #include <iostream>
 #include "Math.h"
@@ -87,22 +88,14 @@ public:
 	@param	_box　追加するBoxColliderのポインタ
 	@param	_func 関数ポインタに紐づけする関数
 	*/
-    void AddBox(BoxCollider* _box, onCollisionFunc _func);
-	
-	/*
-	@fn 削除するBoxColliderが格納されている関数
-	@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_box　削除するBoxColliderのポインタ
-	*/
-    void SelectRemoveBoxes(BoxCollider* _box);
-	
+	void AddBoxes(BoxCollider* _box, onCollisionFunc _func);
+
 	/*
 	@fn BoxColliderを削除する関数
 	@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタの参照
 	@param	_box　削除するBoxColliderのポインタ
 	*/
-	void RemoveBox(std::vector<BoxCollider*>& _boxes, BoxCollider* _box);
+	void RemoveBoxes(BoxCollider* _box);
 
 	/*
 	@fn SphereColliderを追加する関数
@@ -110,22 +103,15 @@ public:
 	@param	_sphere　追加するSphereColliderのポインタ
 	@param	_func 関数ポインタに紐づけする関数
 	*/
-	void AddSphere(SphereCollider* _sphere, onCollisionFunc _func);
+	void AddSpheres(SphereCollider* _sphere, onCollisionFunc _func);
 	
+
 	/*
 	@fn 削除するSphereColliderが格納されている関数
 	@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
 	@param	_sphere　削除するSphereColliderのポインタ
 	*/
-	void SelectRemoveSpheres(SphereCollider* _box);
-
-	/*
-	@fn SphereColliderを削除する関数
-	@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-	@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタの参照
-	@param	_sphere　削除するSphereColliderのポインタ
-	*/
-	void RemoveSphere(std::vector<SphereCollider*>& _spheres,SphereCollider* _sphere);
+	void RemoveSpheres(SphereCollider* _sphere);
 	
 private:
 
@@ -137,30 +123,9 @@ private:
 
 	static PhysicsWorld* physics;
 
-	//それぞれのobjectごとのAABBの可変長配列
-	std::vector<BoxCollider*> boxes;
-    std::vector<BoxCollider*> playerBoxes;
-	std::vector<BoxCollider*> enemyBoxes;
-	std::vector<BoxCollider*> wallBoxes;
-	std::vector<BoxCollider*> groundBoxes;
-	std::vector<BoxCollider*> moveGroundBoxes;
-	std::vector<BoxCollider*> switchBoxes;
-	std::vector<BoxCollider*> switchBaseBoxes;
-	std::vector<BoxCollider*> needlePlaneBoxes;
-	std::vector<BoxCollider*> jumpSwitchBoxes;
-	std::vector<BoxCollider*> groundCheckBoxes;
-	std::vector<BoxCollider*> footCheckBoxes;
-	std::vector<BoxCollider*> cameraBoxes;
-	std::vector<BoxCollider*> clearPointBoxes;
-	std::vector<BoxCollider*> respownPointBoxes;
+	std::unordered_map<PhysicsTag, std::vector<BoxCollider*>> boxesMap;
 
-
-	//それぞれのsphereごとのAABBの可変長配列
-	std::vector<SphereCollider*> groundCheckSpheres;
-	std::vector<SphereCollider*> attackRangeSpheres;
-	std::vector<SphereCollider*> jumpAttackPlayerSpheres;
-	std::vector<SphereCollider*> playerTrackingAreaSpheres;
-	std::vector<SphereCollider*> enemyAttackAreaSpheres;
+	std::unordered_map<PhysicsTag, std::vector<SphereCollider*>> spheresMap;
 
 	onCollisionMap collisionFunction;
 

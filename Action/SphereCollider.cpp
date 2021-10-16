@@ -19,7 +19,7 @@ SphereCollider::SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFu
 	, objectSphere({ Vector3::Zero,0.0f })
 	, worldSphere({ Vector3::Zero,0.0f })
 {
-	PHYSICS->AddSphere(this, _func);
+	PHYSICS->AddSpheres(this, _func);
 }
 
 /*
@@ -27,7 +27,7 @@ SphereCollider::SphereCollider(GameObject* _owner, PhysicsTag tag, onCollisionFu
 */
 SphereCollider::~SphereCollider()
 {
-	PHYSICS->SelectRemoveSpheres(this);
+	PHYSICS->RemoveSpheres(this);
 }
 
 /*

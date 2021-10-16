@@ -58,52 +58,52 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
 		// プレイヤーと地面の判定処理
-		IntersectCheckBox(_box,groundBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
 		
 		// プレイヤーと動く地面の判定処理
-		IntersectCheckBox(_box, moveGroundBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
 
 		// プレイヤーと壁の判定処理
-		IntersectCheckBox(_box,wallBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::WALL_TAG]);
 
 		// プレイヤーとエネミーの判定処理
-		IntersectCheckBox(_box, enemyBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::ENEMY_TAG]);
 
 		// プレイヤーとクリアポイントの判定処理
-		IntersectCheckBox(_box, clearPointBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::CLEAR_POINT_TAG]);
 
 		// プレイヤーとリスポーンポイントの判定処理
-		IntersectCheckBox(_box, respownPointBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::RESPOWN_TAG]);
 
 		// プレイヤーと棘配置用床の判定処理
-		IntersectCheckBox(_box, needlePlaneBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::NEEDLE_TAG]);
 
 		// プレイヤーとスイッチの土台の判定処理
-		IntersectCheckBox(_box, switchBaseBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::SWITCH_BASE_TAG]);
 
 		// プレイヤーとスイッチの判定処理
-		IntersectCheckBox(_box, switchBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::SWITCH_TAG]);
 	}
 
 	if (_box->GetBoxTag() == PhysicsTag::ENEMY_TAG)
 	{
-		IntersectCheckBox(_box, groundBoxes);
-		IntersectCheckBox(_box, enemyBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::ENEMY_TAG]);
 	}
 
 	if (_box->GetBoxTag() == PhysicsTag::CAMERA_TAG)
 	{
 		// カメラと地面の判定処理
-		IntersectCheckBox(_box, groundBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
 	}
 
 	if (_box->GetBoxTag() == PhysicsTag::MOVE_GROUND_TAG)
 	{
 		// 動く床とジャンプスイッチの判定処理
-		IntersectCheckBox(_box, jumpSwitchBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::JUMP_SWITCH_TAG]);
 
 		// 動く床と棘配置用床の判定処理
-		IntersectCheckBox(_box, needlePlaneBoxes);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::NEEDLE_TAG]);
 	}
 }
 
@@ -194,45 +194,45 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	if (_sphere->GetSphereTag() == PhysicsTag::GROUND_CHECK_TAG)
 	{
 		// 接地判定スフィアと地面の当たり判定
-		IntersectCheckSphere(_sphere,groundBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::GROUND_TAG]);
 
 		// 接地判定スフィアと動く地面の当たり判定
-		IntersectCheckSphere(_sphere, moveGroundBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
 
 		// 接地判定スフィアとスイッチの土台の当たり判定
-		IntersectCheckSphere(_sphere, switchBaseBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_BASE_TAG]);
 
 		// 接地判定スフィアとスイッチの当たり判定
-		IntersectCheckSphere(_sphere, switchBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_TAG]);
 
 		// 接地判定スフィアとジャンプスイッチの当たり判定
-		IntersectCheckSphere(_sphere, jumpSwitchBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::JUMP_SWITCH_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::PLAYER_TRACKING_AREA_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
-		IntersectCheckSphere(_sphere, playerBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::ENEMY_ATTACK_AREA_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
-		IntersectCheckSphere(_sphere, playerBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
 	{
 		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
-		IntersectCheckSphere(_sphere, enemyBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
-		IntersectCheckSphere(_sphere, enemyBoxes);
-		IntersectCheckSphere(_sphere, groundBoxes);
-		IntersectCheckSphere(_sphere, moveGroundBoxes);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::GROUND_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
 	}
 }
 
@@ -242,158 +242,36 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 @param	_box　追加するBoxColliderのポインタ
 @param	_func 関数ポインタに紐づけする関数
 */
-void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
+void PhysicsWorld::AddBoxes(BoxCollider* _box, onCollisionFunc _func)
 {
-	// タグを取得
-	PhysicsTag objTag = _box->GetBoxTag();
-
-	// Tagに応じたvector配列に格納
-	switch (_box->GetBoxTag())
+	// 途中追加でない場合最初にそれぞれの配列に追加
+	auto boxes = boxesMap.find(_box->GetBoxTag());
+	if (boxes != boxesMap.end())
 	{
-	case PhysicsTag::GROUND_TAG:
-		groundBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::MOVE_GROUND_TAG:
-		moveGroundBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::WALL_TAG:
-		wallBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::PLAYER_TAG:
-		playerBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::SWITCH_TAG:
-		switchBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::SWITCH_BASE_TAG:
-		switchBaseBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::JUMP_SWITCH_TAG:
-		jumpSwitchBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::GROUND_CHECK_TAG:
-		groundCheckBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::FOOT_CHECK_TAG:
-		footCheckBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::CAMERA_TAG:
-		cameraBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::CLEAR_POINT_TAG:
-		clearPointBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::NEEDLE_TAG:
-		needlePlaneBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::RESPOWN_TAG:
-		respownPointBoxes.emplace_back(_box);
-		break;
-
-	case PhysicsTag::ENEMY_TAG:
-		enemyBoxes.emplace_back(_box);
-		break;
+		boxes->second.emplace_back(_box);
 	}
-
+	else
+	{
+		std::vector<BoxCollider*> tmpVector;
+		tmpVector.emplace_back(_box);
+		boxesMap[_box->GetBoxTag()] = tmpVector;
+	}
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 }
 
 /*
-@fn 削除するBoxColliderが格納されている関数
-@brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-@param	_box　削除するBoxColliderのポインタ
-*/
-void PhysicsWorld::SelectRemoveBoxes(BoxCollider* _box)
-{
-	// タグを取得
-	PhysicsTag objTag = _box->GetBoxTag();
-
-	switch (objTag)
-	{
-	case PhysicsTag::GROUND_TAG:
-		RemoveBox(groundBoxes, _box);
-		break;
-
-	case PhysicsTag::MOVE_GROUND_TAG:
-		RemoveBox(moveGroundBoxes, _box);
-		break;
-
-	case PhysicsTag::WALL_TAG:
-		RemoveBox(wallBoxes, _box);
-		break;
-
-	case PhysicsTag::PLAYER_TAG:
-		RemoveBox(playerBoxes, _box);
-		break;
-
-	case PhysicsTag::SWITCH_TAG:
-		RemoveBox(switchBoxes, _box);
-		break;
-
-	case PhysicsTag::SWITCH_BASE_TAG:
-		RemoveBox(switchBaseBoxes, _box);
-		break;
-
-	case PhysicsTag::JUMP_SWITCH_TAG:
-		RemoveBox(jumpSwitchBoxes, _box);
-		break;
-
-	case PhysicsTag::GROUND_CHECK_TAG:
-		RemoveBox(groundCheckBoxes, _box);
-		break;
-
-	case PhysicsTag::FOOT_CHECK_TAG:
-		RemoveBox(footCheckBoxes, _box);
-		break;
-
-	case PhysicsTag::CAMERA_TAG:
-		RemoveBox(cameraBoxes, _box);
-		break;
-
-	case PhysicsTag::CLEAR_POINT_TAG:
-		RemoveBox(clearPointBoxes, _box);
-		break;
-
-	case PhysicsTag::NEEDLE_TAG:
-		RemoveBox(needlePlaneBoxes, _box);
-		break;
-
-	case PhysicsTag::RESPOWN_TAG:
-		RemoveBox(respownPointBoxes, _box);
-		break;
-
-	case PhysicsTag::ENEMY_TAG:
-		RemoveBox(enemyBoxes, _box);
-		break;
-	}
-}
-
-/*
 @fn BoxColliderを削除する関数
 @brief　使わなくなったBoxColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-@param	_boxes　削除するBoxColliderが格納されている可変長配列のポインタの参照
 @param	_box　削除するBoxColliderのポインタ
 */
-void PhysicsWorld::RemoveBox(std::vector<BoxCollider*>& _boxes,BoxCollider* _box)
+void PhysicsWorld::RemoveBoxes(BoxCollider* _box)
 {
-	auto iter = std::find(_boxes.begin(), _boxes.end(), _box);
-	if (iter != _boxes.end())
+	auto boxes = std::find(boxesMap[_box->GetBoxTag()].begin(), boxesMap[_box->GetBoxTag()].end(), _box);
+	if (boxes != boxesMap[_box->GetBoxTag()].end())
 	{
-		std::iter_swap(iter, _boxes.end() - 1);
-		_boxes.pop_back();
+		std::iter_swap(boxes, boxesMap[_box->GetBoxTag()].end() - 1);
+		boxesMap[_box->GetBoxTag()].pop_back();
 	}
 	collisionFunction.erase(_box);
 }
@@ -404,34 +282,19 @@ void PhysicsWorld::RemoveBox(std::vector<BoxCollider*>& _boxes,BoxCollider* _box
 @param	_sphere　追加するSphereColliderのポインタ
 @param	_func 関数ポインタに紐づけする関数
 */
-void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
+void PhysicsWorld::AddSpheres(SphereCollider* _sphere, onCollisionFunc _func)
 {
-	PhysicsTag objTag = _sphere->GetSphereTag();
-
-	// Tagに応じたvector配列に格納
-	switch (objTag)
+	auto spheres = spheresMap.find(_sphere->GetSphereTag());
+	if (spheres != spheresMap.end())
 	{
-	case PhysicsTag::GROUND_CHECK_TAG:
-		groundCheckSpheres.emplace_back(_sphere);
-		break;
-
-	case PhysicsTag::ATTACK_RANGE_TAG:
-		attackRangeSpheres.emplace_back(_sphere);
-		break;
-
-	case PhysicsTag::JUMP_ATTACK_PLAYER_TAG:
-		jumpAttackPlayerSpheres.emplace_back(_sphere);
-		break;
-
-	case PhysicsTag::PLAYER_TRACKING_AREA_TAG:
-		playerTrackingAreaSpheres.emplace_back(_sphere);
-		break;
-
-	case PhysicsTag::ENEMY_ATTACK_AREA_TAG:
-		enemyAttackAreaSpheres.emplace_back(_sphere);
-		break;
+		spheres->second.emplace_back(_sphere);
 	}
-
+	else
+	{
+		std::vector<SphereCollider*> tmpVector;
+		tmpVector.emplace_back(_sphere);
+		spheresMap[_sphere->GetSphereTag()] = tmpVector;
+	}
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 	collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
@@ -441,48 +304,13 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 @brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
 @param	_sphere　削除するSphereColliderのポインタ
 */
-void PhysicsWorld::SelectRemoveSpheres(SphereCollider* _sphere)
+void PhysicsWorld::RemoveSpheres(SphereCollider* _sphere)
 {
-	PhysicsTag objTag = _sphere->GetSphereTag();
-
-	// Tagに応じたvector配列に格納
-	switch (objTag)
+	auto spheres = std::find(spheresMap[_sphere->GetSphereTag()].begin(), spheresMap[_sphere->GetSphereTag()].end(), _sphere);
+	if (spheres != spheresMap[_sphere->GetSphereTag()].end())
 	{
-	case PhysicsTag::GROUND_CHECK_TAG:
-		RemoveSphere(groundCheckSpheres, _sphere);
-		break;
-
-	case PhysicsTag::ATTACK_RANGE_TAG:
-		RemoveSphere(attackRangeSpheres, _sphere);
-		break;
-
-	case PhysicsTag::JUMP_ATTACK_PLAYER_TAG:
-		RemoveSphere(jumpAttackPlayerSpheres, _sphere);
-		break;
-
-	case PhysicsTag::PLAYER_TRACKING_AREA_TAG:
-		RemoveSphere(playerTrackingAreaSpheres, _sphere);
-		break;
-
-	case PhysicsTag::ENEMY_ATTACK_AREA_TAG:
-		RemoveSphere(enemyAttackAreaSpheres, _sphere);
-		break;
-	}
-}
-
-/*
-@fn SphereColliderを削除する関数
-@brief　使わなくなったSphereColliderを当たり判定タグを参照してそれぞれの可変長コンテナから探し削除を行う
-@param	_spheres　削除するSphereColliderが格納されている可変長配列のポインタの参照
-@param	_sphere　削除するSphereColliderのポインタ
-*/
-void PhysicsWorld::RemoveSphere(std::vector<SphereCollider*>& _spheres, SphereCollider* _sphere)
-{
-	auto iter = std::find(_spheres.begin(), _spheres.end(), _sphere);
-	if (iter != _spheres.end())
-	{
-		std::iter_swap(iter, _spheres.end() - 1);
-		_spheres.pop_back();
+		std::iter_swap(spheres, spheresMap[_sphere->GetSphereTag()].end() - 1);
+		spheresMap[_sphere->GetSphereTag()].pop_back();
 	}
 	collisionFunction.erase(_sphere);
 }
