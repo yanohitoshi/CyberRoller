@@ -64,7 +64,7 @@ public:
 	@param	移動方向
 	@param	移動距離
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObjectfloat, MoveEnemyData _moveEnemyData);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData);
 
 	/*
 	@fn コンストラクタ

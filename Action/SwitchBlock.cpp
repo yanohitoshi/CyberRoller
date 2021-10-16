@@ -198,11 +198,13 @@ void SwitchBlock::SetColorProcess()
 	{
 		// ON‚ÌŽž
 		meshComponent->SetColor(OnColor);
+		luminance = 0.15f;
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{
 		// OFF‚ÌŽž
 		meshComponent->SetColor(OffColor);
+		luminance = 0.05f;
 	}
 	else if (isAvailableSwitch == false)
 	{

@@ -21,5 +21,4 @@ void main()
     vec4 col = texture(uTexture, fragTexCoord);
 	outColor.rgb = col.rgb * uColor;
 	outColor.a = col.a * uAlpha;
-
 }

@@ -105,6 +105,7 @@ NormalEnemyObject::~NormalEnemyObject()
 */
 void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 {
+	
 	if (isAttack && !isDeadFlag)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
@@ -156,4 +157,26 @@ void NormalEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsT
 	{
 		isDeadFlag = true;
 	}
+
+	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
+		_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::SWITCH_BASE_TAG ||
+		_physicsTag == PhysicsTag::SWITCH_TAG;
+
+	if (isPushBack)
+	{
+		aabb = boxCollider->GetWorldBox();
+		// 押し戻し
+		FixCollision(aabb, _hitObject.GetAabb());
+	}
+}
+
+void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
+{
+	// 仮速度変数
+	Vector3 ment = Vector3::Zero;
+
+	CalcCollisionFixVec(myAABB, pairAABB, ment);
+
+	// 押し戻し計算を考慮しポジションを更新
+	SetPosition(position + ment);
 }

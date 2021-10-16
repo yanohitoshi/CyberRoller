@@ -42,6 +42,13 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
+	/*
+	@fn ‚ß‚è‚İ”»’è
+	@param	©•ª‚ÌAABB
+	@param	‘Šè‚ÌAABB
+	*/
+	void FixCollision(AABB& myAABB, const AABB& pairAABB)override;
+
 	// ‰ñ“]Šp“x
 	const float Angle;
 

@@ -46,4 +46,12 @@ private:
 	const int RespawnTime;
 	// 描画をオフにする時間定数
 	const int InvisibleTime;
+	const int MoveTime;
+	const float BlowAwayPower;
+	const float FirstBlowAwayPower;
+	const float MaxSpeed;
+	// playerのポインタを保存するポインタ変数
+	GameObject* playerObject;
+	// 吹っ飛ぶ方向ベクトル
+	Vector3 blowAwayDirection;
 };

@@ -9,6 +9,10 @@
 EnemyObjectStateDead::EnemyObjectStateDead()
 	: RespawnTime(300)
 	, InvisibleTime(105)
+	, MoveTime(5)
+	, FirstBlowAwayPower(10.0f)
+	, BlowAwayPower(1.5f)
+	, MaxSpeed(1500.0f)
 {
 }
 
@@ -28,6 +32,24 @@ EnemyObjectStateDead::~EnemyObjectStateDead()
 EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
+
+	if (MoveTime <= frameCount)
+	{
+		// 加速度
+		moveSpeed *= BlowAwayPower;
+
+		// 最大速度に到達していたら最大速度に固定する
+		if (moveSpeed >= MaxSpeed)
+		{
+			moveSpeed = MaxSpeed;
+		}
+
+		// 作用する速度ベクトル計算
+		velocity = blowAwayDirection * moveSpeed;
+
+		// positionに速度を足してキャラクターを動かす
+		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+	}
 
 	// 時間が来たら描画を切る
 	if (frameCount >= InvisibleTime)
@@ -59,5 +81,14 @@ void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_DEAD;
 	_owner->SetState(State::Disabling);
+	// フレームカウント初期化
 	frameCount = 0;
+	// プレイヤーのポインタを得る
+	playerObject = _owner->GetTrackingObject();
+	// 吹っ飛ぶ方向を計算
+	blowAwayDirection = _owner->GetPosition() - playerObject->GetPosition();
+	// 正規化
+	blowAwayDirection.Normalize();
+	// 移動速度を初速にする
+	moveSpeed = FirstBlowAwayPower;
 }

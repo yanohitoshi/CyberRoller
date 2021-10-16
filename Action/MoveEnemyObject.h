@@ -38,6 +38,13 @@ public:
 private:
 
 	/*
+	@fn ‚ß‚è‚İ”»’è
+	@param	©•ª‚ÌAABB
+	@param	‘Šè‚ÌAABB
+	*/
+	void FixCollision(AABB& myAABB, const AABB& pairAABB)override;
+
+	/*
 	@fn “–‚½‚è”»’è‚ªs‚í‚êHit‚µ‚½Û‚ÉŒÄ‚Î‚ê‚éŠÖ”
 	@param	“–‚½‚Á‚½GameObject
 	*/

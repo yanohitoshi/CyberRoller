@@ -402,5 +402,4 @@ void GameObject::CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixed
 		// z‚¾‚Á‚½‚çxŽ²•ûŒü‚É‰Ÿ‚µ–ß‚µ
 		_calcFixVec.z = dz;
 	}
-
 }

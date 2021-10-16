@@ -49,8 +49,8 @@ PhysicsWorld::PhysicsWorld()
 */
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
-	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_box->GetOwner()->GetState() != State::Active)
+	//コライダーの親オブジェクトがActiveでもDisablingでも終了する
+	if (_box->GetOwner()->GetState() != State::Active && _box->GetOwner()->GetState() != State::Disabling)
 	{
 		return;
 	}
@@ -160,6 +160,12 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 	{
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		// 相手がエネミーでステータスが無効化状態だったら終了する
+		if (itr->GetBoxTag() == PhysicsTag::ENEMY_TAG && itr->GetOwner()->GetState() == State::Disabling)
 		{
 			continue;
 		}

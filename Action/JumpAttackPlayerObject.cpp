@@ -26,6 +26,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	position = ownerObject->GetPosition();
 	position.z += ShiftPositionZ;
 	rotationAngle = 0.0f;
+	isHIt = false;
 	// 前方ベクトル初期化
 	forwardVec = ownerObject->GetForwardVec();
 
@@ -75,9 +76,10 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 	{
 		SetState(State::Disabling);
 		meshComponent->SetVisible(false);
+		isHIt = false;
 	}
 
-	if (state == State::Active)
+	if (state == State::Active && !isHIt)
 	{
 		rotationAngle += Rotation;
 		//Z軸を指定角度回転させる
@@ -103,6 +105,8 @@ void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const Phy
 	// 敵と当たったら
 	if (_hitObject.GetTag() == Tag::ENEMY)
 	{
+		// ヒットフラグをtrueに
+		isHIt = true;
 		// ジャンプアタック成功状態にする
 		ownerObject->SetIsJumpAttackSuccess(true);
 	}

@@ -203,9 +203,19 @@ void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 	}
 
 	// ‘¼‚Ì“G‚Ü‚½‚ÍƒOƒ‰ƒEƒ“ƒh‚Æ“–‚½‚Á‚½‚ç
-	if (_hitObject.GetTag() == Tag::ENEMY || _hitObject.GetTag() == Tag::GROUND)
+	if (_hitObject.GetTag() == Tag::ENEMY)
 	{
+		aabb = boxCollider->GetWorldBox();
 		// ‰Ÿ‚µ–ß‚µ
+		FixCollision(aabb, _hitObject.GetAabb());
+	}
+
+	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
+		_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::SWITCH_BASE_TAG ||
+		_physicsTag == PhysicsTag::SWITCH_TAG;
+
+	if(isPushBack)
+	{
 		FixCollision(aabb, _hitObject.GetAabb());
 	}
 }

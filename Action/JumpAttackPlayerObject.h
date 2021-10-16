@@ -59,6 +59,9 @@ private:
 	BoxCollider* boxCollider;
 	// 球体の当たり判定を行うクラス
 	SphereCollider* sphereCollider;
+	
+	// 敵にヒットしたかどうか
+	bool isHIt;
 
 	// 回転する際の角度
 	float rotationAngle;

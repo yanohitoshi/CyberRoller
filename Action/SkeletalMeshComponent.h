@@ -82,5 +82,9 @@ public://ゲッターセッター
 	*/
 	void SetColor(const Vector3& _color) { color = _color; }
 
+	/*
+	@param _color スケルトンデータに乗算する色
+	*/
+	void SetAnimPlayRate(const float _animPlayRate) { animPlayRate = _animPlayRate; }
 
 };
