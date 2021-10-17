@@ -248,7 +248,7 @@ protected:
 	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 
 	// ゲーム中メインカメラ
-	static class MainCameraObject* mainCamera;
+	static class CameraObjectBase* mainCamera;
 	// タイトル画面で使用するカメラ
 	static class TitleCameraObject* titleCamera;
 	// タイトル画面で使用するカメラ
@@ -518,6 +518,6 @@ public://ゲッターセッター
 	@brief　メインカメラのgetter
 	@return	MainCameraObject*　メインカメラを返す
 	*/
-	static MainCameraObject* GetMainCamera() { return mainCamera; }
+	static CameraObjectBase* GetMainCamera() { return mainCamera; }
 };
 

@@ -48,8 +48,6 @@ private:
 	unsigned int indexBuffer;
 	//頂点配列オブジェクトのOpenGL ID
 	unsigned int vertexArray;
-	//unsigned int m_VAO;                                            // 頂点配列オブジェクトID
-	//unsigned int m_VBO;                                           // 頂点バッファID (OpenGLに登録時に付与される)
 
 public://ゲッターセッター
 

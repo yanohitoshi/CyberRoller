@@ -11,9 +11,10 @@
 #include "TitleCameraObject.h"
 #include "ResultCameraObject.h"
 #include "CameraObjectBase.h"
+#include "AutoMoveCamera.h"
 
 int GameObject::gameObjectId = 0;
-MainCameraObject* GameObject::mainCamera = nullptr;
+CameraObjectBase* GameObject::mainCamera = nullptr;
 TitleCameraObject* GameObject::titleCamera = nullptr;
 ResultCameraObject* GameObject::resultCamera = nullptr;
 
@@ -86,7 +87,6 @@ void GameObject::Update(float _deltaTime)
 	}
 	else
 	{
-		//PausingUpdateGameObject();
 		UpdateComponents(_deltaTime);
 	}
 }
@@ -232,7 +232,8 @@ void GameObject::FixCollision(const AABB & myAABB, const AABB & pairAABB, const 
 */
 void GameObject::CreateMainCamera(const Vector3 _pos, PlayerObject* _playerObject)
 {
-	mainCamera = new MainCameraObject(_pos,_playerObject);
+	//mainCamera = new MainCameraObject(_pos,_playerObject);
+	mainCamera = new AutoMoveCamera(_pos, _playerObject);
 }
 
 /*

@@ -6,7 +6,7 @@
 #include "MoveBlockObject.h"
 #include "EnemyObjectBase.h"
 #include "PushBoxObject.h"
-
+#include "AutoMoveCamera.h"
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
@@ -166,6 +166,7 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 		// プレイヤーオブジェクト生成
 		playerObject = new PlayerObject(pos, false, Tag::PLAYER);
 
+		//new AutoMoveCamera(pos, playerObject);
 		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
 		GameObject::CreateMainCamera(pos, playerObject);
 	}

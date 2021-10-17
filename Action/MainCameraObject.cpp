@@ -9,8 +9,6 @@
 #include "PlayerObject.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-#include "FirstStageScene.h"
-#include "FirstStageUI.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdlingDance.h"
 

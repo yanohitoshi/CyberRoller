@@ -149,6 +149,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AutoMoveCamera.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
@@ -333,6 +334,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AutoMoveCamera.h" />
     <ClInclude Include="CountDownBackFont.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Animation.h" />

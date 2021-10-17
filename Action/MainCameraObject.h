@@ -69,31 +69,12 @@ public:
 	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 	
 	/*
-	@brief	player以外のものを注視する際に使うsetter
-	@param 見る対象物のポジション
-	*/
-	void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
-	
-	/*
-	@brief カメラの前方ベクトルを得るためのgetter
-	@param カメラの前方ベクトル
-	*/
-	Vector3 GetCameraVec() { return forwardVec; }
-	
-
-	/*
 	@brief 追跡する対象オブジェクトのポジションのgetter
 	@param 追跡する対象オブジェクトポジション
 	*/
 	Vector3 GetlerpObjectPos() { return lerpObjectPos; }
 
-	/*
-	@brief リスポーンしたときにカメラの位置を初期状態にセットする関数
-	*/
-	void ResetCamera() { yaw = Math::ToRadians(180); pitch = Math::ToRadians(30);}
 
-	//追従先のオブジェクト座標
-	Vector3 lerpObjectPos;
 
 private:
 
@@ -191,24 +172,14 @@ private:
 	// 少し先を注視するようにしたいのでZ軸をずらす定数
 	const float ShiftGazePoint;
 
-	// プレイヤーのポインタを保持するための変数
-	PlayerObject* playerObject;
-
 	//親オブジェクトとの差
 	Vector3 offsetPos;
-
-	//移動先position
-	Vector3 tmpMovePos;
-	Vector3 tmpPosition;
 
 	// 押し戻しを行う相手と当たった位置を保存するVector3変数
 	Vector3 hitPosition;
 
 	// 当たり判定を行うクラス(AABB/球体)
 	BoxCollider* boxcollider;
-
-	// view行列
-	Matrix4 view;
 
 	//追従先のオブジェクトを所持しているか
 	bool hasParentObject;
@@ -221,10 +192,6 @@ private:
 
 	//カメラの高さ
 	float height;
-
-	//カメラ回転計算用のヨーとピッチ
-	float yaw;
-	float pitch;
 
 	//カメラ回転の半径
 	float radius;

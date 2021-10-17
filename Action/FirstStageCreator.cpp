@@ -17,6 +17,7 @@
 #include "MoveEnemyObject.h"
 #include "EnemyObjectBase.h"
 #include "LightObject.h"
+#include "AutoMoveCamera.h"
 
 /*
 @fn コンストラクタ

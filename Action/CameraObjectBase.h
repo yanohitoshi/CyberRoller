@@ -41,7 +41,40 @@ public:
     */
     virtual void GameObjectInput(const InputState& _keyState);
 
+    /*
+    @brief	player以外のものを注視する際に使うsetter
+    @param 見る対象物のポジション
+    */
+    void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
+
+    /*
+    @brief リスポーンしたときにカメラの位置を初期状態にセットする関数
+    */
+    void ResetCamera() { yaw = Math::ToRadians(180); pitch = Math::ToRadians(30); }
+
+protected:
+
+    //移動先position
+    Vector3 tmpMovePos;
+    Vector3 tmpPosition;
+    //追従先のオブジェクト座標
+    Vector3 lerpObjectPos;
+    // view行列
+    Matrix4 view;
+    // プレイヤーのポインタを保持するための変数
+    PlayerObject* playerObject;
+    //カメラ回転計算用のヨーとピッチ
+    float yaw;
+    float pitch;
 private:
+
+public:
+    
+    /*
+    @brief カメラの前方ベクトルを得るためのgetter
+    @param カメラの前方ベクトル
+    */
+    Vector3 GetCameraVec() { return forwardVec; }
 
 };
 

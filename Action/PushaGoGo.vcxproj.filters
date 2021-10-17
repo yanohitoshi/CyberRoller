@@ -501,6 +501,9 @@
     <ClCompile Include="GeometryInstanceManager.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="AutoMoveCamera.cpp">
+      <Filter>GameObjects\CameraObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1004,6 +1007,9 @@
     </ClInclude>
     <ClInclude Include="GeometryInstanceManager.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoMoveCamera.h">
+      <Filter>GameObjects\CameraObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

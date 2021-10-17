@@ -115,7 +115,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	// OpenGLの各属性を設定する
 	// コアOpenGLプロファイルを使う
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	// OpenGLの使用バージョンを3.3に指定
+	// OpenGLの使用バージョンを4.3に指定
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	// RGBA各チャンネル8ビットのカラーバッファを使う
@@ -171,7 +171,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 		SDL_Log("Failed to load shaders.");
 		return false;
 	}
-
 
 	//スプライト用の頂点配列を作成
 	CreateSpriteVerts();
