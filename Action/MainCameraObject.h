@@ -166,9 +166,6 @@ private:
 	// 見る対象物から当たった場所を引いて長さを取る際の補正定数
 	const float CorrectionBackRadius;
 
-	// 線形保管時にデルタタイムをかけるとき用の補正定数
-	const float DeltaCorrection;
-
 	// 少し先を注視するようにしたいのでZ軸をずらす定数
 	const float ShiftGazePoint;
 

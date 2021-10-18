@@ -85,12 +85,21 @@ private:
 	*/
 	void CreateLayer5(int _indexX, int _indexY);
 
+	/*
+	@fn カメラモード変更ポイント生成
+	@brief  カメラモード変更ポイントの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateCameraDirecting(int _indexX, int _indexY);
+
 	// 第一ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
 
 	//ファーストステージデータ
+	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
 	std::vector<std::vector<int>> layer3StageData;

@@ -28,7 +28,6 @@ MainCameraObject::MainCameraObject(const Vector3 _pos, PlayerObject* _playerObje
 	, DanceRadius(500.0f)
 	, TimeOverRadius(400.0f)
 	, MediumRadius(300.0f)
-	, DeltaCorrection(8.0f)
 	, AutomaticMoveSpeed(0.01f)
 	, ShiftGazePoint(100.0f)
 	, CorrectionBackRadius(20.f)

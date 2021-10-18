@@ -69,7 +69,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//GameObjectメンバ変数の初期化
 	state = Active;
-	scale = Vector3(1.2f, 1.2f, 1.2f);
+	scale = Vector3(1.5f, 1.5f, 1.5f);
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	SetScale(scale);
 	SetPosition(_pos);
@@ -384,7 +384,6 @@ void PlayerObject::GameObjectInput(const InputState& _keyState)
 
 	//今カメラが向いている方向をplayerに渡す
 	forwardVec = mainCamera->GetCameraVec();
-
 	//カメラの向きから右方向を計算
 	rightVec = Vector3::Cross(forwardVec, Vector3(0.0f, 0.0f, 1.0f));
 

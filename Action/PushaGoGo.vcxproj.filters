@@ -504,6 +504,9 @@
     <ClCompile Include="AutoMoveCamera.cpp">
       <Filter>GameObjects\CameraObjects</Filter>
     </ClCompile>
+    <ClCompile Include="CameraChangePoint.cpp">
+      <Filter>GameObjects\CameraObjects\CameraChangePoint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1011,6 +1014,9 @@
     <ClInclude Include="AutoMoveCamera.h">
       <Filter>GameObjects\CameraObjects</Filter>
     </ClInclude>
+    <ClInclude Include="CameraChangePoint.h">
+      <Filter>GameObjects\CameraObjects\CameraChangePoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1186,6 +1192,9 @@
     </Filter>
     <Filter Include="GameObjects\Effect\PlayerEffect\DeadEffect">
       <UniqueIdentifier>{bd2561b2-44a2-4af0-b361-9e040db85d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\CameraObjects\CameraChangePoint">
+      <UniqueIdentifier>{f5da8c34-9260-480f-ba1a-35e0c5d899d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -154,6 +154,7 @@ protected:
 	@param　どの方向に動くのか判別するためのタグ
 	*/
 	void SetPushBoxData(const Vector3& _distance, const Vector3& _direction, const float& _speed, const float& _cutBackSpeed, MoveDirectionTag _moveTag);
+
 	// プッシュボード床クラスにデータを渡すための変数
 	PushBoxData pushBoxData;
 

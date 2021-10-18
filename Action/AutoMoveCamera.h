@@ -35,5 +35,8 @@ public:
 
 private:
 
+	void InAction(float _deltaTime);
+	void Behind(float _deltaTime);
+
 };
 

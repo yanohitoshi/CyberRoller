@@ -4,6 +4,12 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+enum class CameraMode
+{
+    NORMAL,
+    BEHIND
+};
+
 /*
 @file CameraObjectBase.h
 @brief GameObjectを継承したカメラの基底クラス
@@ -63,9 +69,15 @@ protected:
     Matrix4 view;
     // プレイヤーのポインタを保持するための変数
     PlayerObject* playerObject;
+    // 線形保管時にデルタタイムをかけるとき用の補正定数
+    const float DeltaCorrection;
     //カメラ回転計算用のヨーとピッチ
     float yaw;
     float pitch;
+
+    // カメラモード
+    CameraMode cameraMode;
+
 private:
 
 public:
@@ -76,5 +88,6 @@ public:
     */
     Vector3 GetCameraVec() { return forwardVec; }
 
+    void SetCameraMode(const CameraMode _cameraMode) { cameraMode = _cameraMode; }
 };
 

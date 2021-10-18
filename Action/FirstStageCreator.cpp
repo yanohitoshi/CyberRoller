@@ -18,6 +18,7 @@
 #include "EnemyObjectBase.h"
 #include "LightObject.h"
 #include "AutoMoveCamera.h"
+#include "CameraChangePoint.h"
 
 /*
 @fn コンストラクタ
@@ -53,6 +54,13 @@ FirstStageCreator::~FirstStageCreator()
 */
 bool FirstStageCreator::OpenFile()
 {
+	// ステージデータ読み込み (baseLayer)
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/firstStageMap.json", "CameraDirecting"))
+	{
+		printf("do'nt have Layer/CameraDirecting\n");
+		return true;
+	}
+
 	// ステージデータ読み込み (baseLayer)
 	if (!readTiledJson(layer1StageData, "Assets/Config/firstStageMap.json", "layer1"))
 	{
@@ -112,6 +120,7 @@ void FirstStageCreator::CreateStage()
 	{
 		for (int ix = 0; ix < sizeX; ix++)
 		{
+			CreateCameraDirecting(ix, iy);
 			// Layer1内を検索
 			CreateLayer1(ix, iy);
 			// Layer2内を検索
@@ -346,6 +355,24 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵を生成
 		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
+	}
+}
+
+void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
+	// レイヤー1のマップオブジェクトのポジション
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (CameraDirectingData)
+	{
+	case(38):
+		AABB aabb = { Vector3(-500.0f,-500.0f,-500.0f),Vector3(500.0f,500.0f,500.0f) };
+		// ブロックオブジェクト生成
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
 		break;
 	}
 }

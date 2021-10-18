@@ -19,6 +19,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	lerpObjectPos = Vector3::Zero;
 	// プレイヤーのポインタを保存
 	playerObject = _playerObject;
+	cameraMode = CameraMode::NORMAL;
 }
 
 AutoMoveCamera::~AutoMoveCamera()
@@ -27,22 +28,15 @@ AutoMoveCamera::~AutoMoveCamera()
 
 void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 {
-	// 追従するオブジェクトのポジションを取得
-	lerpObjectPos = playerObject->GetPosition();
-	// 仮の移動ポジション変数に代入
-	tmpMovePos = lerpObjectPos;
-	tmpMovePos.x -= 500.0f;
-	tmpMovePos.z += 500.0f;
-	// 仮のポジションと現在のポジションで線形補間
-	position = Vector3::Lerp(position, tmpMovePos, _deltaTime);
 
-	// 線形補間したポジションをセット
-	SetPosition(position);
-
-	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
-	view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
-	// view行列をセット
-	RENDERER->SetViewMatrix(view);
+	if (cameraMode == CameraMode::BEHIND)
+	{
+		Behind(_deltaTime);
+	}
+	else
+	{
+		InAction(_deltaTime);
+	}
 
 	// プレイヤー側に渡す前方ベクトルを生成
 	forwardVec = lerpObjectPos - position;
@@ -50,8 +44,54 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 	forwardVec.Normalize();
 	// Z軸を固定
 	forwardVec.z = 0.0f;
+
+	cameraMode = CameraMode::NORMAL;
 }
 
 void AutoMoveCamera::GameObjectInput(const InputState& _keyState)
 {
+}
+
+void AutoMoveCamera::InAction(float _deltaTime)
+{
+	// 追従するオブジェクトのポジションを取得
+	lerpObjectPos = playerObject->GetPosition();
+	// 仮の移動ポジション変数に代入
+	tmpMovePos = lerpObjectPos;
+	tmpMovePos.x -= 600.0f;
+	tmpMovePos.z += 600.0f;
+	tmpMovePos.y += 700.0f;
+	// 仮のポジションと現在のポジションで線形補間
+	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
+
+	// 線形補間したポジションをセット
+	SetPosition(position);
+	Vector3 tmpViewPos = lerpObjectPos;
+	//tmpViewPos.x += 200.0f;
+	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
+	view = Matrix4::CreateLookAt(position, tmpViewPos, Vector3::UnitZ);
+	// view行列をセット
+	RENDERER->SetViewMatrix(view);
+}
+
+void AutoMoveCamera::Behind(float _deltaTime)
+{
+	// 追従するオブジェクトのポジションを取得
+	lerpObjectPos = playerObject->GetPosition();
+	// 仮の移動ポジション変数に代入
+	tmpMovePos = lerpObjectPos;
+	tmpMovePos.x -= 600.0f;
+	tmpMovePos.z += 600.0f;
+	//tmpMovePos.y += 700.0f;
+	// 仮のポジションと現在のポジションで線形補間
+	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
+
+	// 線形補間したポジションをセット
+	SetPosition(position);
+	Vector3 tmpViewPos = lerpObjectPos;
+	//tmpViewPos.x += 200.0f;
+	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
+	view = Matrix4::CreateLookAt(position, tmpViewPos, Vector3::UnitZ);
+	// view行列をセット
+	RENDERER->SetViewMatrix(view);
 }

@@ -48,7 +48,10 @@ enum class PhysicsTag
 	// プレイヤーを敵が追跡するエリア
 	PLAYER_TRACKING_AREA_TAG,
 	// 敵の攻撃判定エリア
-	ENEMY_ATTACK_AREA_TAG
+	ENEMY_ATTACK_AREA_TAG,
+	// カメラモードをbehindカメラにするエリア判定
+	CAMERA_MODE_BEHIND_AREA,
+
 };
 
 /*

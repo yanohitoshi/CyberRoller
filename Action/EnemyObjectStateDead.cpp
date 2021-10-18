@@ -11,7 +11,7 @@ EnemyObjectStateDead::EnemyObjectStateDead()
 	, InvisibleTime(105)
 	, MoveTime(5)
 	, FirstBlowAwayPower(10.0f)
-	, BlowAwayPower(1.5f)
+	, BlowAwayPower(1.1f)
 	, MaxSpeed(1500.0f)
 {
 }
@@ -89,6 +89,8 @@ void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	blowAwayDirection = _owner->GetPosition() - playerObject->GetPosition();
 	// ³‹K‰»
 	blowAwayDirection.Normalize();
+	// ã‰º•ûŒü‚ğ0‚ÉŒÅ’è
+	blowAwayDirection.z = 0.0f;
 	// ˆÚ“®‘¬“x‚ğ‰‘¬‚É‚·‚é
 	moveSpeed = FirstBlowAwayPower;
 }
