@@ -242,6 +242,12 @@ void Game::ProcessInput()
 	// 入力状態を保存
 	const InputState& state = inputSystem->GetState();
 
+	// 当たり判定を可視化させるデバッグモードの切り替え
+	if (state.Keyboard.GetKeyState(SDL_SCANCODE_0) == Released)
+	{
+		PHYSICS->ToggleDebugMode();
+	}
+
 	// エスケープまたはコントローラーのバックボタンが押されたらゲームループから抜ける
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released ||
 		state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_BACK) == Pressed)

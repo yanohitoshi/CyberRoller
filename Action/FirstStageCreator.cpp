@@ -45,6 +45,7 @@ FirstStageCreator::~FirstStageCreator()
 	layer3StageData.clear();
 	layer4StageData.clear();
 	layer5StageData.clear();
+	cameraDirectingData.clear();
 	playerData.clear();
 }
 
@@ -54,12 +55,6 @@ FirstStageCreator::~FirstStageCreator()
 */
 bool FirstStageCreator::OpenFile()
 {
-	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/firstStageMap.json", "CameraDirecting"))
-	{
-		printf("do'nt have Layer/CameraDirecting\n");
-		return true;
-	}
 
 	// ステージデータ読み込み (baseLayer)
 	if (!readTiledJson(layer1StageData, "Assets/Config/firstStageMap.json", "layer1"))
@@ -104,6 +99,13 @@ bool FirstStageCreator::OpenFile()
 	if (!readTiledJson(playerData, "Assets/Config/firstStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
+		return true;
+	}
+
+	// ステージデータ読み込み (CameraDirecting)
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/firstStageMap.json", "CameraDirecting"))
+	{
+		printf("do'nt have Layer/CameraDirecting\n");
 		return true;
 	}
 
@@ -370,7 +372,7 @@ void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	switch (CameraDirectingData)
 	{
 	case(38):
-		AABB aabb = { Vector3(-500.0f,-500.0f,-500.0f),Vector3(500.0f,500.0f,500.0f) };
+		AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(1600.0f,1800.0f,4000.0f) };
 		// ブロックオブジェクト生成
 		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
 		break;

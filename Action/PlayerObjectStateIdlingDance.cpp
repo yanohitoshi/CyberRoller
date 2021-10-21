@@ -7,6 +7,7 @@
 #include "PlayerObjectStateIdlingDance.h"
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
+#include "GameObject.h"
 
 // staticメンバーを初期化
 bool PlayerObjectStateIdlingDance::isDancing = false;
@@ -42,21 +43,21 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 		// ステータスをジャンプループ状態にする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 		// 空中でダンスしないようにダンスフラグをfalseに変更
-		isDancing = false;
+		_owner->SetIsDancing(false);
 	}
 	else if (_owner->GetInputFlag()) // 移動入力があれば
 	{
 		// ステータスを走り出し状態にする
 		state = PlayerState::PLAYER_STATE_RUN_START;
 		// 空中でダンスしないようにダンスフラグをfalseに変更
-		isDancing = false;
+		_owner->SetIsDancing(false);
 	}
 	else if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag()) // ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
 	{
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 		// 空中でダンスしないようにダンスフラグをfalseに変更
-		isDancing = false;
+		_owner->SetIsDancing(false);
 	}
 
 	// 死亡フラグが立っていたら
@@ -65,7 +66,7 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 		// ステータスを死亡状態開始にする
 		state = PlayerState::PLAYER_STATE_DEAD;
 		// 空中でダンスしないようにダンスフラグをfalseに変更
-		isDancing = false;
+		_owner->SetIsDancing(false);
 	}
 
 	// タイムオーバーになったら
@@ -74,7 +75,7 @@ PlayerState PlayerObjectStateIdlingDance::Update(PlayerObject* _owner, float _de
 		// ステータスをコンティニュー選択開始状態にする
 		state = PlayerState::PLAYER_STATE_DOWNSTART;
 		// 空中でダンスしないようにダンスフラグをfalseに変更
-		isDancing = false;
+		_owner->SetIsDancing(false);
 	}
 
 	// 更新されたstateを返す
@@ -110,6 +111,7 @@ void PlayerObjectStateIdlingDance::Enter(PlayerObject* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_IDLE_DANCE));
 	// stateをダンス状態にして保存
 	state = PlayerState::PLAYER_STATE_IDLE_DANCE;
+
 	// ダンスフラグをtrueにセット
-	isDancing = true;
+	_owner->SetIsDancing(true);
 }

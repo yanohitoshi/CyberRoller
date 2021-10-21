@@ -152,6 +152,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="AutoMoveCamera.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="CameraChangePoint.cpp" />
+    <ClCompile Include="CameraObjectStateBase.cpp" />
+    <ClCompile Include="CameraObjectStateDance.cpp" />
+    <ClCompile Include="CameraObjectStateGameOver.cpp" />
+    <ClCompile Include="CameraObjectStateNormal.cpp" />
+    <ClCompile Include="CameraObjectStateOblique.cpp" />
+    <ClCompile Include="CameraObjectStateSceneClear.cpp" />
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
@@ -337,6 +343,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AutoMoveCamera.h" />
     <ClInclude Include="CameraChangePoint.h" />
+    <ClInclude Include="CameraObjectStateBase.h" />
+    <ClInclude Include="CameraObjectStateDance.h" />
+    <ClInclude Include="CameraObjectStateGameOver.h" />
+    <ClInclude Include="CameraObjectStateNormal.h" />
+    <ClInclude Include="CameraObjectStateOblique.h" />
+    <ClInclude Include="CameraObjectStateSceneClear.h" />
     <ClInclude Include="CountDownBackFont.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Animation.h" />

@@ -507,6 +507,24 @@
     <ClCompile Include="CameraChangePoint.cpp">
       <Filter>GameObjects\CameraObjects\CameraChangePoint</Filter>
     </ClCompile>
+    <ClCompile Include="CameraObjectStateBase.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateNormal.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateOblique.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateDance.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateGameOver.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateSceneClear.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1017,6 +1035,24 @@
     <ClInclude Include="CameraChangePoint.h">
       <Filter>GameObjects\CameraObjects\CameraChangePoint</Filter>
     </ClInclude>
+    <ClInclude Include="CameraObjectStateBase.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateNormal.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateOblique.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateDance.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateGameOver.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateSceneClear.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1195,6 +1231,9 @@
     </Filter>
     <Filter Include="GameObjects\CameraObjects\CameraChangePoint">
       <UniqueIdentifier>{f5da8c34-9260-480f-ba1a-35e0c5d899d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\CameraObjects\CameraState">
+      <UniqueIdentifier>{2324ad45-fb94-4d82-8fd0-72b669d6e9a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

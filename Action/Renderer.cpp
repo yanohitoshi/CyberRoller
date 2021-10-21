@@ -7,14 +7,14 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include <algorithm>
-#include "Shader.h"
-#include "VertexArray.h"
-#include "SpriteComponent.h"
-#include "MeshComponent.h"
 #include <glew.h>
 #include <fstream>
 #include <sstream>
 #include <document.h>
+#include "Shader.h"
+#include "VertexArray.h"
+#include "SpriteComponent.h"
+#include "MeshComponent.h"
 #include "Skeleton.h"
 #include "Animation.h"
 #include "SkeletalMeshComponent.h"
@@ -24,6 +24,7 @@
 #include "MainCameraObject.h"
 #include "HDRRenderer.h"
 #include "GeometryInstanceManager.h"
+#include "PhysicsWorld.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -894,6 +895,9 @@ void Renderer::DrawShadow()
 
 		activeSkyBox->Draw(skyboxShader);
 	}
+
+	// 当たり判定デバッグBoxの表示
+	PHYSICS->DebugShowBox();
 
 	//シャドウマップshaderをアクティブ
 	shadowMapShader->SetActive();

@@ -1,5 +1,6 @@
 #include "AutoMoveCamera.h"
 #include "Renderer.h"
+#include "CameraObjectStateBase.h"
 #include "ColliderComponent.h"
 #include "InputSystem.h"
 #include "PlayerObject.h"
@@ -7,6 +8,11 @@
 #include "BoxCollider.h"
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdlingDance.h"
+#include "CameraObjectStateNormal.h"
+#include "CameraObjectStateOblique.h"
+#include "CameraObjectStateDance.h"
+#include "CameraObjectStateGameOver.h"
+#include "CameraObjectStateSceneClear.h"
 
 AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	: CameraObjectBase(false, Tag::CAMERA)
@@ -19,79 +25,84 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	lerpObjectPos = Vector3::Zero;
 	// プレイヤーのポインタを保存
 	playerObject = _playerObject;
-	cameraMode = CameraMode::NORMAL;
+
+	AddStatePoolMap(new CameraObjectStateNormal(), CameraState::NORMAL);
+	AddStatePoolMap(new CameraObjectStateOblique(), CameraState::OBLIQUE);
+	AddStatePoolMap(new CameraObjectStateDance(), CameraState::DANCE);
+	AddStatePoolMap(new CameraObjectStateGameOver(), CameraState::GAMEOVER);
+	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
+
+	nowState = CameraState::NORMAL;
+	nextState = CameraState::NORMAL;
 }
 
 AutoMoveCamera::~AutoMoveCamera()
 {
+	RemoveStatePoolMap(CameraState::NORMAL);
+	RemoveStatePoolMap(CameraState::OBLIQUE);
+	RemoveStatePoolMap(CameraState::DANCE);
+	RemoveStatePoolMap(CameraState::GAMEOVER);
+	RemoveStatePoolMap(CameraState::SCENECLEAR);
+	ClearStatePoolMap();
 }
 
 void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 {
-
-	if (cameraMode == CameraMode::BEHIND)
+	// プレイヤーがダンス状態だったら
+	if (playerObject->GetIsDancing())
 	{
-		Behind(_deltaTime);
-	}
-	else
-	{
-		InAction(_deltaTime);
+		// ダンスカメラに変更
+		nextState = CameraState::DANCE;
 	}
 
-	// プレイヤー側に渡す前方ベクトルを生成
-	forwardVec = lerpObjectPos - position;
-	// 正規化
-	forwardVec.Normalize();
-	// Z軸を固定
-	forwardVec.z = 0.0f;
+	if (CountDownFont::GetTimeOverFlag())
+	{
+		// ゲームオーバーカメラに変更
+		nextState = CameraState::GAMEOVER;
+	}
 
-	cameraMode = CameraMode::NORMAL;
+	if (playerObject->GetClearFlag())
+	{
+		// ゲームオーバーカメラに変更
+		nextState = CameraState::SCENECLEAR;
+	}
+
+	// ステート外部からステート変更があったか？
+	if (nowState != nextState)
+	{
+		//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+
+		nowState = nextState;
+		return;
+	}
+
+	// ステート実行
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto state = statePoolMap.find(nowState);
+	if (state != statePoolMap.end())
+	{
+		nextState = statePoolMap[nowState]->Update(this, _deltaTime);
+	}
+
+	// ステート内部からステート変更あったか？
+	if (nowState != nextState)
+	{
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+		nowState = nextState;
+	}
+
+	nextState = CameraState::NORMAL;
 }
 
 void AutoMoveCamera::GameObjectInput(const InputState& _keyState)
 {
-}
-
-void AutoMoveCamera::InAction(float _deltaTime)
-{
-	// 追従するオブジェクトのポジションを取得
-	lerpObjectPos = playerObject->GetPosition();
-	// 仮の移動ポジション変数に代入
-	tmpMovePos = lerpObjectPos;
-	tmpMovePos.x -= 600.0f;
-	tmpMovePos.z += 600.0f;
-	tmpMovePos.y += 700.0f;
-	// 仮のポジションと現在のポジションで線形補間
-	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
-
-	// 線形補間したポジションをセット
-	SetPosition(position);
-	Vector3 tmpViewPos = lerpObjectPos;
-	//tmpViewPos.x += 200.0f;
-	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
-	view = Matrix4::CreateLookAt(position, tmpViewPos, Vector3::UnitZ);
-	// view行列をセット
-	RENDERER->SetViewMatrix(view);
-}
-
-void AutoMoveCamera::Behind(float _deltaTime)
-{
-	// 追従するオブジェクトのポジションを取得
-	lerpObjectPos = playerObject->GetPosition();
-	// 仮の移動ポジション変数に代入
-	tmpMovePos = lerpObjectPos;
-	tmpMovePos.x -= 600.0f;
-	tmpMovePos.z += 600.0f;
-	//tmpMovePos.y += 700.0f;
-	// 仮のポジションと現在のポジションで線形補間
-	position = Vector3::Lerp(position, tmpMovePos, _deltaTime * DeltaCorrection);
-
-	// 線形補間したポジションをセット
-	SetPosition(position);
-	Vector3 tmpViewPos = lerpObjectPos;
-	//tmpViewPos.x += 200.0f;
-	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
-	view = Matrix4::CreateLookAt(position, tmpViewPos, Vector3::UnitZ);
-	// view行列をセット
-	RENDERER->SetViewMatrix(view);
 }

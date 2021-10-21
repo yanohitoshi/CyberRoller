@@ -1,6 +1,6 @@
 #include "CameraChangePoint.h"
 #include "BoxCollider.h"
-#include "CameraObjectBase.h"
+#include "CameraObjectStateBase.h"
 
 CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box, const Tag& _objectTag)
 	: GameObject(false, _objectTag)
@@ -12,7 +12,7 @@ CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box, const 
 	SetPosition(position);
 
 	// 当たり判定用ボックスコライダー付与
-	boxCollider = new BoxCollider(this, PhysicsTag::CAMERA_MODE_BEHIND_AREA, GetOnCollisionFunc());
+	boxCollider = new BoxCollider(this, PhysicsTag::CAMERA_MODE_CHANGE_AREA, GetOnCollisionFunc());
 	boxCollider->SetObjectBox(_box);
 }
 
@@ -28,6 +28,6 @@ void CameraChangePoint::OnCollision(const GameObject& _hitObject, const PhysicsT
 {
 	if (_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
-		mainCamera->SetCameraMode(CameraMode::BEHIND);
+		mainCamera->SetNextState(CameraState::OBLIQUE);
 	}
 }

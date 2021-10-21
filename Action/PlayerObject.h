@@ -257,8 +257,6 @@ private:
 	bool switchJumpFlag;
 	//接地フラグ
 	bool onGround;
-	//走り状態かどうか
-	bool runFlag;
 	// 入力が可能かどうか
 	bool isAvailableInput;
 	// ダウン状態かどうか
@@ -273,6 +271,7 @@ private:
 	bool deadFlag;
 	// 敵にヒットしたか
 	bool isHitEnemy;
+	bool isDancing;
 	
 	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
@@ -443,13 +442,7 @@ public:// ゲッターセッター
 	@return inputFlagを返す
 	*/
 	bool GetInputFlag() { return inputFlag; }
-	
-	/*
-	@fn runFlagのgetter関数
-	@return runFlagを返す
-	*/
-	bool GetRunFlag() { return runFlag; }
-	
+		
 	/*
 	@fn deadFlagのgetter関数
 	@return deadFlagを返す
@@ -515,6 +508,12 @@ public:// ゲッターセッター
 	@return restartFlagを返す
 	*/
 	bool GetRestartFlag() { return restartFlag; }
+
+	/*
+	@fn isDancingのgetter関数
+	@return isDancingを返す
+	*/
+	bool GetIsDancing() { return isDancing; }
 
 	/*
 	@fn jumpFrameCountのgetter関数
@@ -593,13 +592,7 @@ public:// ゲッターセッター
 	@param	bool _inputFlag 入力されているかをセット
 	*/
 	void SetInputFlag(bool _inputFlag) { inputFlag = _inputFlag; }
-	
-	/*
-	@fn runFlagのsetter関数
-	@param	bool _runFlag 走り状態かどうかをセット
-	*/
-	void SetRunFlag(bool _runFlag) { runFlag = _runFlag; }
-	
+		
 	/*
 	@fn jumpFrameCountのsetter関数
 	@param	bool _jumpFrameCount ジャンプ中のカウントをセット
@@ -653,5 +646,10 @@ public:// ゲッターセッター
 	*/
 	void SetIsHitEnemy(bool _isHitEnemy) { isHitEnemy = _isHitEnemy; }
 
-};
+	/*
+	@fn isDancingのsetter関数
+	@param	bool isDancing ダンスしているかどうか
+	*/
+	void SetIsDancing(bool _isDancing) { isDancing = _isDancing; }
 
+};

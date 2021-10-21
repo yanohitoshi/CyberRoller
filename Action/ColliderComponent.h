@@ -50,7 +50,7 @@ enum class PhysicsTag
 	// 敵の攻撃判定エリア
 	ENEMY_ATTACK_AREA_TAG,
 	// カメラモードをbehindカメラにするエリア判定
-	CAMERA_MODE_BEHIND_AREA,
+	CAMERA_MODE_CHANGE_AREA,
 
 };
 

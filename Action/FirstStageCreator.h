@@ -98,7 +98,7 @@ private:
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
 
-	//ファーストステージデータ
+	//ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;

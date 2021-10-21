@@ -8,6 +8,8 @@
 #include "BoxCollider.h"
 #include "GameObject.h"
 #include "ColliderComponent.h"
+#include "Renderer.h"
+#include "Shader.h"
 
 PhysicsWorld* PhysicsWorld::physics = nullptr;
 
@@ -39,7 +41,85 @@ void PhysicsWorld::DeleteInstance()
 //コンストラクタの隠蔽
 */
 PhysicsWorld::PhysicsWorld()
+	: boolDebugMode(false)
 {
+	InitBoxVertices();
+
+	lineShader = new Shader();
+	lineShader->Load("shaders/LineWorld.vert", "shaders/Line.frag");
+}
+
+void PhysicsWorld::DrawBoxs(std::vector<class BoxCollider*>& _Boxs, const Vector3& _Color)
+{
+	Matrix4 scaleMat, posMat, worldMat;
+	Vector3 scale, pos;
+
+	lineShader->SetVectorUniform("uColor", _Color);
+	for (auto item : _Boxs)
+	{
+		AABB box = AABB(Vector3::Zero, Vector3::Zero);
+		Vector3 min, max;
+		box = item->GetWorldBox();
+
+		// ボックスのスケールと位置を取得
+		min = box.min;
+		max = box.max;
+		scale = max - min;
+		pos = min;
+
+		scaleMat = Matrix4::CreateScale(scale);
+		posMat = Matrix4::CreateTranslation(pos);
+
+		worldMat = scaleMat * posMat;
+		lineShader->SetMatrixUniform("uWorld", worldMat);
+
+		glBindVertexArray(boxVAO);
+		glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
+	}
+}
+
+void PhysicsWorld::InitBoxVertices()
+{
+	// ボックス頂点リスト
+	float vertices[] = {
+		0.0f, 0.0f, 0.0f,  // min
+		1.0f, 0.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,  // max
+		0.0f, 1.0f, 1.0f,
+	};
+	// ボックスのラインリスト
+	unsigned int lineList[] = {
+		0,1,
+		1,2,
+		2,3,
+		3,0,
+		4,5,
+		5,6,
+		6,7,
+		7,4,
+		0,4,
+		1,5,
+		2,6,
+		3,7,
+	};
+	unsigned int vbo, ebo;
+	glGenVertexArrays(1, &boxVAO);
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ebo);
+	glBindVertexArray(boxVAO);
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(lineList), lineList, GL_STATIC_DRAW);
+	}
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 }
 
 /*
@@ -57,7 +137,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
-		IntersectCheckBox(_box, boxesMap[PhysicsTag::CAMERA_MODE_BEHIND_AREA]);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA]);
 		// プレイヤーと地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
 		
@@ -320,4 +400,29 @@ void PhysicsWorld::RemoveSpheres(SphereCollider* _sphere)
 		spheresMap[_sphere->GetSphereTag()].pop_back();
 	}
 	collisionFunction.erase(_sphere);
+}
+
+void PhysicsWorld::DebugShowBox()
+{
+	// デバッグモードか？
+	if (!boolDebugMode)
+	{
+		return;
+	}
+
+	// AABB描画準備
+	Matrix4 scale, trans, world, view, proj, viewProj;
+	view = RENDERER->GetViewMatrix();
+	proj = RENDERER->GetProjectionMatrix();
+	viewProj = view * proj;
+	lineShader->SetActive();
+	lineShader->SetMatrixUniform("uViewProj", viewProj);
+
+	// 当たり判定ボックス描画
+	DrawBoxs(boxesMap[PhysicsTag::GROUND_TAG], Color::Red);
+	DrawBoxs(boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA], Color::Blue);
+	//DrawBoxs(mPlayerBoxes, Color::LightPink);
+	//DrawBoxs(mEnemyBoxes, Color::White);
+	//DrawBoxs(mWeaponBoxes, Color::LightGreen);
+	//DrawBoxs(mEnemyAttackDecisionBoxes, Color::Yellow);
 }

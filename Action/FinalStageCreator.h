@@ -225,6 +225,14 @@ private:
 	*/
 	void CreateLayer17(int _indexX, int _indexY);
 
+	/*
+	@fn カメラモード変更ポイント生成
+	@brief  カメラモード変更ポイントの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateCameraDirecting(int _indexX, int _indexY);
+
 	// 最終ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
 
@@ -232,6 +240,7 @@ private:
 	const float LightPointPositionZ;
 	
 	// 最終ステージデータ
+	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
 	std::vector<std::vector<int>> layer3StageData;

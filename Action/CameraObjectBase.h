@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
-enum class CameraMode
-{
-    NORMAL,
-    BEHIND
-};
+class CameraObjectStateBase;
+enum class CameraState;
 
 /*
 @file CameraObjectBase.h
@@ -48,15 +45,27 @@ public:
     virtual void GameObjectInput(const InputState& _keyState);
 
     /*
-    @brief	player以外のものを注視する際に使うsetter
-    @param 見る対象物のポジション
-    */
-    void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
-
-    /*
     @brief リスポーンしたときにカメラの位置を初期状態にセットする関数
     */
     void ResetCamera() { yaw = Math::ToRadians(180); pitch = Math::ToRadians(30); }
+
+    /*
+    @brief ステートプール用マップにステートクラスを追加する関数
+    @param	_state 追加するステートクラスのポインタ
+    @param	_stateTag 鍵となるタグ
+    */
+    void AddStatePoolMap(CameraObjectStateBase* _state, CameraState _stateTag);
+
+    /*
+    @brief ステートプール用マップからステートクラスを削除する関数
+    @param	_stateTag 鍵となるタグ
+    */
+    void RemoveStatePoolMap(CameraState _stateTag);
+
+    /*
+    @brief ステートプール用マップをクリアする
+    */
+    void ClearStatePoolMap();
 
 protected:
 
@@ -75,19 +84,44 @@ protected:
     float yaw;
     float pitch;
 
-    // カメラモード
-    CameraMode cameraMode;
+    // 今のenemyのstate状態を保存するための変数
+    CameraState nowState;
+    // 変更された次のenemyのstate状態を保存するための変数
+    CameraState nextState;
+    // 全stateが格納されるマップ
+    std::unordered_map<CameraState, CameraObjectStateBase*> statePoolMap;
 
 private:
+
 
 public:
     
     /*
     @brief カメラの前方ベクトルを得るためのgetter
-    @param カメラの前方ベクトル
+    @return カメラの前方ベクトル
     */
     Vector3 GetCameraVec() { return forwardVec; }
 
-    void SetCameraMode(const CameraMode _cameraMode) { cameraMode = _cameraMode; }
+    /*
+    @brief 追従するオブジェクトのポインタを得るためのgetter
+    @return 追従するオブジェクトのポインタ
+    */
+    PlayerObject* GetLerpObject() { return playerObject; }
+
+    /*
+    @brief player以外のものを注視する場合のポジション得るためのgetter
+    @return 注視点
+    */
+    Vector3 GetLerpObjectPos() { return lerpObjectPos; }
+
+    /*
+    @brief	player以外のものを注視する際に使うsetter
+    @param 見る対象物のポジション
+    */
+    void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
+
+
+    void SetNextState(CameraState _nextState) { nextState = _nextState; }
+    void SetCameraVec(Vector3 _nextForward) { forwardVec = _nextForward; }
 };
 

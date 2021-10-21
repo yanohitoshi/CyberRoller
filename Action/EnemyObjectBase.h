@@ -170,13 +170,13 @@ protected:
 	bool isAttack;
 	bool isVisible;
 
-	// 今のプレーヤーのstate状態を保存するための変数
-	EnemyState nowState;
-	// 変更された次のプレーヤーのstate状態を保存するための変数
-	EnemyState nextState;
 	// 移動する敵のTag
 	MoveEnemyTag moveEnemyTag;
 
+	// 今のenemyのstate状態を保存するための変数
+	EnemyState nowState;
+	// 変更された次のenemyのstate状態を保存するための変数
+	EnemyState nextState;
 	// Animationプール
 	std::vector<const Animation*> animTypes;
 	// 全stateが格納されるマップ

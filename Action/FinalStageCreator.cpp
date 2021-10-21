@@ -20,6 +20,7 @@
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "LightObject.h"
+#include "CameraChangePoint.h"
 
 /*
 @fn コンストラクタ
@@ -59,6 +60,7 @@ FinalStageCreator::~FinalStageCreator()
 	layer16StageData.clear();
 	layer17StageData.clear();
 
+	cameraDirectingData.clear();
 	//プレイヤーのマップデータ削除
 	playerData.clear();
 
@@ -186,6 +188,12 @@ bool FinalStageCreator::OpenFile()
 		return true;
 	}
 
+	// ステージデータ読み込み (CameraDirecting)
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/finalStageMap.json", "CameraDirecting"))
+	{
+		printf("do'nt have Layer/CameraDirecting\n");
+		return true;
+	}
 
 	return false;
 }
@@ -234,6 +242,7 @@ void FinalStageCreator::CreateStage()
 			CreateLayer16(ix, iy);
 			// Layer17内を検索
 			CreateLayer17(ix, iy);
+			CreateCameraDirecting(ix, iy);
 		}
 	}
 }
@@ -1182,6 +1191,24 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
 		new ClearPointObject(Vector3(layer17Pos.x, layer17Pos.y, layer17Pos.z), Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
+	}
+}
+
+void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
+	// レイヤー1のマップオブジェクトのポジション
+	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (CameraDirectingData)
+	{
+	case(38):
+		AABB aabb = { Vector3(-3600.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
+		// ブロックオブジェクト生成
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
 		break;
 	}
 }

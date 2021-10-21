@@ -1,24 +1,24 @@
 ﻿//-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
+#include <string>
 #include "PlayerObject.h"
 #include "SkeletalMeshComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "MainCameraObject.h"
-#include <string>
 #include "Renderer.h"
 #include "Skeleton.h"
 #include "Animation.h"
 #include "InputSystem.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
+#include "CountDownFont.h"
 #include "PlayerSandSmokeMakeManager.h"
 #include "LandingEffectManager.h"
 #include "PlayerTransformEffectManager.h"
 #include "PlayerKnockBackEffectManager.h"
 #include "PlayerDeadEffectManager.h"
-#include "CountDownFont.h"
 #include "PlayerObjectStateIdle.h"
 #include "PlayerObjectStateRun.h"
 #include "PlayerObjectStateDead.h"
@@ -98,8 +98,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	inputFlag = false;
 	// 入力可能かフラグ初期化
 	isAvailableInput = true;
-	// 走り状態かフラグ初期化
-	runFlag = false;
 
 	// ジャンプフラグ初期化
 	jumpFlag = false;
@@ -813,4 +811,3 @@ const Animation* PlayerObject::GetAnimation(PlayerState _state)
 	// _state番目のアニメーションを返す
 	return animTypes[static_cast<unsigned int>(_state)];
 }
-

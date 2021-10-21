@@ -110,11 +110,11 @@ void NextSceneObject::MovableProcess()
 	// ポジションを更新
 	SetPosition(position);
 
-	// 定位置まで届いたら描画カット
-	if (position.z >= firstPos.z + CalculationDrawEndPosition)
-	{
-		meshComponent->SetVisible(false);
-	}
+	//// 定位置まで届いたら描画カット
+	//if (position.z >= firstPos.z + CalculationDrawEndPosition)
+	//{
+	//	meshComponent->SetVisible(false);
+	//}
 
 }
 

@@ -39,3 +39,29 @@ void CameraObjectBase::UpdateGameObject(float _deltaTime)
 void CameraObjectBase::GameObjectInput(const InputState& _keyState)
 {
 }
+
+void CameraObjectBase::AddStatePoolMap(CameraObjectStateBase* _state, CameraState _stateTag)
+{
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto stateMaps = statePoolMap.find(_stateTag);
+
+	//あるとき
+	if (stateMaps != statePoolMap.end())
+	{
+		return;
+	}
+	else //ないとき
+	{
+		statePoolMap[_stateTag] = _state;
+	}
+}
+
+void CameraObjectBase::RemoveStatePoolMap(CameraState _stateTag)
+{
+	delete statePoolMap[_stateTag];
+}
+
+void CameraObjectBase::ClearStatePoolMap()
+{
+	statePoolMap.clear();
+}
