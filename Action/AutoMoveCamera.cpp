@@ -9,7 +9,7 @@
 #include "CountDownFont.h"
 #include "PlayerObjectStateIdlingDance.h"
 #include "CameraObjectStateNormal.h"
-#include "CameraObjectStateOblique.h"
+#include "CameraObjectStateLandscape.h"
 #include "CameraObjectStateDance.h"
 #include "CameraObjectStateGameOver.h"
 #include "CameraObjectStateSceneClear.h"
@@ -27,7 +27,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	playerObject = _playerObject;
 
 	AddStatePoolMap(new CameraObjectStateNormal(), CameraState::NORMAL);
-	AddStatePoolMap(new CameraObjectStateOblique(), CameraState::OBLIQUE);
+	AddStatePoolMap(new CameraObjectStateLandscape(), CameraState::LANDSCAPE);
 	AddStatePoolMap(new CameraObjectStateDance(), CameraState::DANCE);
 	AddStatePoolMap(new CameraObjectStateGameOver(), CameraState::GAMEOVER);
 	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
@@ -39,7 +39,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 AutoMoveCamera::~AutoMoveCamera()
 {
 	RemoveStatePoolMap(CameraState::NORMAL);
-	RemoveStatePoolMap(CameraState::OBLIQUE);
+	RemoveStatePoolMap(CameraState::LANDSCAPE);
 	RemoveStatePoolMap(CameraState::DANCE);
 	RemoveStatePoolMap(CameraState::GAMEOVER);
 	RemoveStatePoolMap(CameraState::SCENECLEAR);

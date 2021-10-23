@@ -43,7 +43,7 @@ enum Tag
 	OTHER,
 	// カメラ
 	CAMERA,
-	CAMERA_CHANGE_BEHIND,
+	CAMERA_CHANGE_OBLIQUE,
 	// プレイヤー
 	PLAYER,
 	// ジャンプアタック時のプレイヤー

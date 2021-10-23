@@ -28,6 +28,6 @@ void CameraChangePoint::OnCollision(const GameObject& _hitObject, const PhysicsT
 {
 	if (_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
-		mainCamera->SetNextState(CameraState::OBLIQUE);
+		mainCamera->SetNextState(CameraState::LANDSCAPE);
 	}
 }

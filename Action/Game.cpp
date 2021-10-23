@@ -137,7 +137,7 @@ bool Game::Initialize()
 	fps = new FPS();
 
 	// ビュー行列を生成してRendererに渡す
-	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200,0, 0),Vector3::UnitY);
+	Matrix4 v = Matrix4::CreateLookAt(Vector3(200.0f, 0.0f, -500.0f), Vector3(200.0f,0.0f, 0.0f),Vector3::UnitY);
 	RENDERER->SetViewMatrix(v);
 
 	// 最初のシーンステータスの初期化
@@ -149,6 +149,12 @@ bool Game::Initialize()
 	RENDERER->SetNowSceneState(nowSceneState);
 
 	return true;
+
+
+
+
+
+
 }
 
 /*

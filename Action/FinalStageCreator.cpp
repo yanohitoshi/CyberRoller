@@ -1201,14 +1201,20 @@ void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
 	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
+	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (CameraDirectingData)
 	{
 	case(38):
-		AABB aabb = { Vector3(-3600.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
 		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
+		break;
+
+	case(39):
+		// ブロックオブジェクト生成
+		new CameraChangePoint(layer1Pos, aabb2, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }

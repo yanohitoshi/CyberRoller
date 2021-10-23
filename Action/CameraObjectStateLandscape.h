@@ -1,6 +1,7 @@
 #pragma once
 #include "CameraObjectStateBase.h"
-class CameraObjectStateOblique :
+
+class CameraObjectStateLandscape :
     public CameraObjectStateBase
 {
 public:
@@ -8,12 +9,12 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	CameraObjectStateOblique() {};
+	CameraObjectStateLandscape() {};
 
 	/*
 	@fn デストラクタ
 	*/
-	~CameraObjectStateOblique() {};
+	~CameraObjectStateLandscape() {};
 
 	/*
 	@fn アップデート

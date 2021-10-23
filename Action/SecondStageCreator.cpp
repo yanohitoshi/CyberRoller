@@ -755,9 +755,9 @@ void SecondStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	switch (CameraDirectingData)
 	{
 	case(38):
-		AABB aabb = { Vector3(-6000.0f,-1800.0f,0.0f),Vector3(3600.0f,1800.0f,4000.0f) };
+		AABB aabb = { Vector3(-5800.0f,-1800.0f,0.0f),Vector3(3200.0f,1800.0f,4000.0f) };
 		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }

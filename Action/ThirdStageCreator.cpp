@@ -221,6 +221,7 @@ void ThirdStageCreator::CreateStage()
 			CreateLayer14(ix, iy);
 			// Layer15内を検索
 			CreateLayer15(ix, iy);
+			//
 			CreateCameraDirecting(ix, iy);
 		}
 	}
@@ -793,20 +794,6 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer11SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-
-	//case(SECOND_SWITCH_PARTS):
-	//	// 第二区画スイッチオブジェクト生成
-	//	new SwitchBaseObject(layer11SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-	//	break;
-
-	//case(THIRD_STAGE_BACK_MOVE_GROUND):
-	//	// 移動する床にのみ使うデータ構造体を作成
-	//	SetMoveBlockData(Vector3(-1600.0f, 0.0f, 0.0f), Vector3::NegUnitX, 600.0f, MoveDirectionTag::MOVE_X);
-	//	// 動く床を生成
-	//	new MoveBlockObject(layer11Pos, BlockSize, Tag::MOVE_GROUND, moveBlockData);
-	//	break;
-
-
 	}
 }
 
@@ -990,20 +977,32 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn カメラモード変更ポイント生成
+@brief  カメラモード変更ポイントの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void ThirdStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
 	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+	AABB aabb = { Vector3(-5400.0f,-2000.0f,0.0f),Vector3(3600.0f,1800.0f,4000.0f) };
+	AABB aabb2 = { Vector3(-4600.0f,-2000.0f,0.0f),Vector3(2400.0f,1800.0f,4000.0f) };
 
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (CameraDirectingData)
 	{
 	case(38):
-		AABB aabb = { Vector3(-3600.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
 		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
+		break;
+
+	case(39):
+		// ブロックオブジェクト生成
+		new CameraChangePoint(layer1Pos, aabb2, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }

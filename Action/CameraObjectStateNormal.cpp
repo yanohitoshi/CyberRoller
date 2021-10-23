@@ -12,7 +12,7 @@ CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _del
 	// 仮の移動ポジション変数に代入
 	tmpMovePos = lerpObjectPos;
 	tmpMovePos.x -= 600.0f;
-	tmpMovePos.z += 600.0f;
+	tmpMovePos.z += 500.0f;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間

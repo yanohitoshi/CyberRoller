@@ -4,7 +4,7 @@
 enum class CameraState
 {
 	NORMAL,
-	OBLIQUE,
+	LANDSCAPE,
 	DANCE,
 	GAMEOVER,
 	SCENECLEAR,

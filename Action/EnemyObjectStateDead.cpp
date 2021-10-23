@@ -7,12 +7,12 @@
 @fn コンストラクタ
 */
 EnemyObjectStateDead::EnemyObjectStateDead()
-	: RespawnTime(300)
-	, InvisibleTime(105)
-	, MoveTime(5)
-	, FirstBlowAwayPower(10.0f)
-	, BlowAwayPower(1.1f)
-	, MaxSpeed(1500.0f)
+	: RespawnTime(200)
+	, InvisibleTime(50)
+	, MoveTime(0)
+	, FirstBlowAwayPower(100.0f)
+	, BlowAwayPower(1.2f)
+	, MaxSpeed(2000.0f)
 {
 }
 

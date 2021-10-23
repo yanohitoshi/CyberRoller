@@ -10,7 +10,7 @@
 PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack()
 	: AttackSpeed(3000.0f)
 	, UnSelectTargetAttackTime(15)
-	, ChangeTime(5)
+	, ChangeTime(0)
 {
 }
 
@@ -39,19 +39,26 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 	}
-	else // ターゲットがいない場合のジャンプアタック移動処理
+	else if (!isSelectingTargetEnemy) // ターゲットがいない場合のジャンプアタック移動処理
 	{
 		++unSelectTargetEnemyFrameCount;
 		jumpAttackDirection.z = 0.0f;
 		velocity = jumpAttackDirection * AttackSpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-	}
+	} 
 
 	// ジャンプアタックが敵にヒットして成功したら
 	if (_owner->GetIsJumpAttackSuccess())
 	{
 		// ステータスを切り替わるまでのカウントを数える
 		++changeCount;
+
+		// 仮ポジション変数
+		Vector3 tmpPosition;
+		// 線形補完をとり変数に保存
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
+		// ポジションをセット
+		_owner->SetPosition(tmpPosition);
 
 		// 時間が来たら切り替えフラグをtrueに変更
 		if (changeCount >= ChangeTime)
@@ -63,6 +70,7 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 	// 切り替えフラグがtrueまたはジャンプアタックの時間が終了していたらステータスを変更
 	if (isChange == true || unSelectTargetEnemyFrameCount > UnSelectTargetAttackTime)
 	{
+		_owner->SetMoveSpeed(AttackSpeed);
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
 

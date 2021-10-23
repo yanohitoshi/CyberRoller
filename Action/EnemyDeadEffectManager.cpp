@@ -12,7 +12,7 @@
 */
 EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	, WaitingExplosionTime(105)
+	, WaitingExplosionTime(49)
 	, MaxExplosionEffects(10)
 	, RandValue(250)
 	, CorrectionRandValue(10.0f)
@@ -78,7 +78,7 @@ void EnemyDeadEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
 
-	if (effectFrameCount % 15 == 0)
+	if (effectFrameCount % 5 == 0)
 	{
 		GenerateEffectProcess();
 	}

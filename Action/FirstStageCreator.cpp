@@ -122,7 +122,7 @@ void FirstStageCreator::CreateStage()
 	{
 		for (int ix = 0; ix < sizeX; ix++)
 		{
-			CreateCameraDirecting(ix, iy);
+			//CreateCameraDirecting(ix, iy);
 			// Layer1内を検索
 			CreateLayer1(ix, iy);
 			// Layer2内を検索
@@ -374,7 +374,7 @@ void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	case(38):
 		AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(1600.0f,1800.0f,4000.0f) };
 		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_BEHIND);
+		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }

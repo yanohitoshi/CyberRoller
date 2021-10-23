@@ -115,6 +115,7 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	}
 	else
 	{
+		moveSpeed = _owner->GetMoveSpeed();
 		velocity = _owner->GetVelocity();
 		velocity.z = 0.0f;
 		_owner->SetVelocity(velocity);

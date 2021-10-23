@@ -513,9 +513,6 @@
     <ClCompile Include="CameraObjectStateNormal.cpp">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClCompile>
-    <ClCompile Include="CameraObjectStateOblique.cpp">
-      <Filter>GameObjects\CameraObjects\CameraState</Filter>
-    </ClCompile>
     <ClCompile Include="CameraObjectStateDance.cpp">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClCompile>
@@ -523,6 +520,9 @@
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClCompile>
     <ClCompile Include="CameraObjectStateSceneClear.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObjectStateLandscape.cpp">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1041,9 +1041,6 @@
     <ClInclude Include="CameraObjectStateNormal.h">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClInclude>
-    <ClInclude Include="CameraObjectStateOblique.h">
-      <Filter>GameObjects\CameraObjects\CameraState</Filter>
-    </ClInclude>
     <ClInclude Include="CameraObjectStateDance.h">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClInclude>
@@ -1051,6 +1048,9 @@
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClInclude>
     <ClInclude Include="CameraObjectStateSceneClear.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObjectStateLandscape.h">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClInclude>
   </ItemGroup>

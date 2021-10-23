@@ -1,8 +1,8 @@
-#include "CameraObjectStateOblique.h"
+#include "CameraObjectStateLandscape.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 
-CameraState CameraObjectStateOblique::Update(CameraObjectBase* _owner, float _deltaTime)
+CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _deltaTime)
 {
 	Vector3 tmpMovePos;
 	Vector3 lerpObjectPos;
@@ -12,9 +12,8 @@ CameraState CameraObjectStateOblique::Update(CameraObjectBase* _owner, float _de
 	lerpObjectPos = lerpObject->GetPosition();
 	// 仮の移動ポジション変数に代入
 	tmpMovePos = lerpObjectPos;
-	tmpMovePos.x -= 600.0f;
 	tmpMovePos.z += 600.0f;
-	tmpMovePos.y += 700.0f;
+	tmpMovePos.y += 600.0f;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
@@ -42,11 +41,11 @@ CameraState CameraObjectStateOblique::Update(CameraObjectBase* _owner, float _de
 	return state;
 }
 
-void CameraObjectStateOblique::Input(CameraObjectBase* _owner, const InputState& _keyState)
+void CameraObjectStateLandscape::Input(CameraObjectBase* _owner, const InputState& _keyState)
 {
 }
 
-void CameraObjectStateOblique::Enter(CameraObjectBase* _owner, float _deltaTime)
+void CameraObjectStateLandscape::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
-	state = CameraState::OBLIQUE;
+	state = CameraState::LANDSCAPE;
 }
