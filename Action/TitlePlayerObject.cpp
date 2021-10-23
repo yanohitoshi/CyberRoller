@@ -3,9 +3,11 @@
 //-----------------------------------------------------------------------------
 #include "TitlePlayerObject.h"
 #include "SkeletalMeshComponent.h"
+#include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
+#include "TitlePlayerStateBase.h"
 
 /*
 @fn コンストラクタ
@@ -22,6 +24,8 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	, JumpLimitTime(13)
 	, OnGroundCoordinate(100.0f)
 	, RotationAngle(90.0f)
+	, JumpAttackRotationAngle(10.0f)
+	, FirstJumpPower(40.0f)
 {
 
 	// ポジションをセット
@@ -38,9 +42,12 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	// 輝度情報を取得
 	luminance = mesh->GetLuminace();
 
+	meshComponent = new MeshComponent(this, false, false);
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
+
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
-	animTypes.resize(TitleAnimState::ITEMNUM);
+	animTypes.resize(TitlePlayerState::STATE_NUM);
 	//アニメーションを読み込み
 	animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Happy_Idle_Anim.gpanim", true);
 	animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Running.gpanim", true);
@@ -52,11 +59,11 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
 
 	// メンバー変数初期化
-	firstJumpPower = 40.0f;
-	jumpPower = firstJumpPower;
-
+	//firstJumpPower = 40.0f;
+	//jumpPower = firstJumpPower;
+	jumpCount = 0;
 	// 回転処理
-	RotationProcess();
+	RotationProcess(RotationAngle,Vector3::UnitZ);
 }
 
 /*
@@ -82,7 +89,7 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 
 
 	//ジャンプ中もしくは落下中の時重力をかける（一定数以上かかったら止めて定数にする）
-	if (onGround == false )
+	if (onGround == false && animState != JUMPATTACK)
 	{
 		GravityProcess(_deltaTime);
 	}
@@ -112,12 +119,12 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 /*
 @fn 回転処理関数
 */
-void TitlePlayerObject::RotationProcess()
+void TitlePlayerObject::RotationProcess(float _angle, Vector3 _axis)
 {
 	//Z軸を90度回転させる
-	float radian = Math::ToRadians(RotationAngle);
+	float radian = Math::ToRadians(_angle);
 	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitZ, radian);
+	Quaternion inc(_axis, radian);
 	Quaternion target = Quaternion::Concatenate(rot, inc);
 	SetRotation(target);
 }
@@ -152,6 +159,7 @@ void TitlePlayerObject::JumpDelayProcess()
 	{
 		// ジャンプフラグをtrueに
 		jumpFlag = true;
+		++jumpCount;
 		// アニメーション再生
 		skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
 		// ステータスをJUMPSTARTに変更
@@ -166,26 +174,34 @@ void TitlePlayerObject::JumpDelayProcess()
 */
 void TitlePlayerObject::JumpProcess()
 {
-	// ジャンプ力を追加
-	velocity.z = jumpPower;
-
-	// ジャンプ中のカウントを数える
-	++jumpFrameCount;
-
-	// ジャンプ中のカウントが規定値以下だったら
-	if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
+	if (animState == JUMPATTACK)
 	{
-		// さらにジャンプ力を追加
-		jumpPower += JumpSpeed;
+		jumpAttackRotationAngle += JumpAttackRotationAngle;
+		RotationProcess(jumpAttackRotationAngle, Vector3::UnitX);
 	}
-	else // ジャンプ中のカウントが規定値以上だったら
+	else
 	{
-		// ジャンプ力を初期に戻す
-		jumpPower = firstJumpPower;
-		// カウントリセット
-		jumpFrameCount = 0;
-		// ジャンプフラグをfalseに
-		jumpFlag = false;
+		// ジャンプ力を追加
+		velocity.z = jumpPower;
+
+		// ジャンプ中のカウントを数える
+		++jumpFrameCount;
+
+		// ジャンプ中のカウントが規定値以下だったら
+		if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
+		{
+			// さらにジャンプ力を追加
+			jumpPower += JumpSpeed;
+		}
+		else // ジャンプ中のカウントが規定値以上だったら
+		{
+			// ジャンプ力を初期に戻す
+			jumpPower = firstJumpPower;
+			// カウントリセット
+			jumpFrameCount = 0;
+			// ジャンプフラグをfalseに
+			jumpFlag = false;
+		}
 	}
 }
 
@@ -226,11 +242,10 @@ void TitlePlayerObject::AnimationUpdate()
 			// ステータスをJUMPLOOPに変更
 			animState = JUMPLOOP;
 		}
-
-		return;
+		
 	}
 
-	// 接地中でなくアニメーションステータスがRUNで無かったら
+	// ジャンプ中でなくアニメーションステータスがRUNで無かったら
 	if (jumpFlag == false && animState != RUN)
 	{
 		// ランアニメーションの再生を開始
@@ -239,4 +254,21 @@ void TitlePlayerObject::AnimationUpdate()
 		animState = RUN;
 		return;
 	}
+
+	if (animState == JUMPATTACK)
+	{
+		skeltalMeshComponent->SetVisible(false);
+		meshComponent->SetVisible(true);
+	}
+	else
+	{
+		skeltalMeshComponent->SetVisible(true);
+		meshComponent->SetVisible(false);
+	}
+}
+
+const Animation* TitlePlayerObject::GetAnimation(TitlePlayerState _state)
+{
+	// _state番目のアニメーションを返す
+	return animTypes[static_cast<unsigned int>(_state)];
 }

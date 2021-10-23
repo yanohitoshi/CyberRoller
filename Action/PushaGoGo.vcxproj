@@ -184,6 +184,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="PlayerDeadEffect.cpp" />
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
+    <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
+    <ClCompile Include="TitlePlayerStateJumpLoop.cpp" />
+    <ClCompile Include="TitlePlayerStateJumpStart.cpp" />
+    <ClCompile Include="TitlePlayerStateRun.cpp" />
     <ClCompile Include="TrackingEnemyAttackArea.cpp" />
     <ClCompile Include="EnemyElectricShockEffect.cpp" />
     <ClCompile Include="EnemyDeadEffectManager.cpp" />
@@ -377,6 +381,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="LightObject.h" />
     <ClInclude Include="PlayerDeadEffect.h" />
     <ClInclude Include="PlayerDeadEffectManager.h" />
+    <ClInclude Include="TitlePlayerStateBase.h" />
+    <ClInclude Include="TitlePlayerStateJumpAttack.h" />
+    <ClInclude Include="TitlePlayerStateJumpLoop.h" />
+    <ClInclude Include="TitlePlayerStateJumpStart.h" />
+    <ClInclude Include="TitlePlayerStateRun.h" />
     <ClInclude Include="TrackingEnemyAttackArea.h" />
     <ClInclude Include="EnemyElectricShockEffect.h" />
     <ClInclude Include="EnemyDeadEffectManager.h" />

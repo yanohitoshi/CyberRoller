@@ -58,6 +58,8 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	AABB aabb = { Vector3(-57.0f,-57.0f,-40.0f),Vector3(57.0f,57.0f,55.0f) };
 	boxCollider->SetObjectBox(aabb);
 
+	meshComponent->SetColor(OffColor);
+
 	// フラグの初期化
 	tmpChangeColorFlag = false;
 	changeColorFlag = false;
@@ -108,11 +110,6 @@ void SwitchBlock::UpdateGameObject(float _deltaTime)
 	position = position + velocity * _deltaTime;
 	// ポジションを更新
 	SetPosition(position);
-
-	// 当たり判定系フラグを初期化
-	isOnPlayer = false;
-	isHitPlayer = false;
-
 }
 
 /*
@@ -122,7 +119,7 @@ void SwitchBlock::MovableProcess()
 {
 	// スイッチの可動処理
 	// プレイヤーが乗っていなくてかつ当たっていなかったら
-	if (isOnPlayer == false && isHitPlayer == false)
+	if (isHitPlayer == false)
 	{
 		// 初期のポジションよりも低い位置に居たら
 		if (position.z < initPosition.z)
@@ -136,18 +133,18 @@ void SwitchBlock::MovableProcess()
 			velocity.z = 0.0f;
 		}
 	}
-	else if (isOnPlayer == true) // プレイヤーが乗っていたら
+	else // プレイヤーが乗っていたら
 	{
-		// 停止フラグがfalseだったら
-		if (pushStop == false)
-		{
-			// 下降の速度を持たせる
-			velocity.z = MoveDownSpeed;
-		}
-		else if (pushStop == true) // 停止フラグがtrueだったら
+		if (position.z <= stopPoint)
 		{
 			// 速度を切る
 			velocity.z = 0.0f;
+			isHitPlayer = false;
+		}
+		else // 停止フラグがtrueだったら
+		{
+			// 下降の速度を持たせる
+			velocity.z = MoveDownSpeed;
 		}
 	}
 }
@@ -161,7 +158,7 @@ void SwitchBlock::ColorChangeProcess()
 	tmpChangeColorFlag = changeColorFlag;
 
 	// ポジションが色を変更する位置よりも低くプレイヤーが乗っていたら色変更フラグをtrueに
-	if (position.z <= stopPoint && isOnPlayer == true)
+	if (position.z <= stopPoint)
 	{
 		changeColorFlag = true;
 	}
@@ -180,6 +177,7 @@ void SwitchBlock::ColorChangeProcess()
 			// スイッチがOFFだったら
 			if (onFlag == false)
 			{
+				state = State::Disabling;
 				onFlag = true;
 			}
 		}
@@ -196,21 +194,16 @@ void SwitchBlock::SetColorProcess()
 	// スイッチの状態を見て色を変更
 	if (onFlag == true && isAvailableSwitch == true)
 	{
-		// ONの時
-		meshComponent->SetColor(OnColor);
 		luminance = 0.2f;
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{
-		// OFFの時
-		meshComponent->SetColor(OffColor);
 		luminance = 0.0f;
 	}
 	else if (isAvailableSwitch == false)
 	{
 		// 区画の全てのスイッチが押されている時
 		meshComponent->SetColor(AllClearColer);
-		luminance = 0.2f;
 	}
 }
 
@@ -260,11 +253,24 @@ void SwitchBlock::OnCollision(const GameObject& _hitObject, const PhysicsTag _ph
 	{
 		// プレイヤーとのHitフラグをtrueに
 		isHitPlayer = true;
-
-		// 上に乗っているフラグをtrueに
-		isOnPlayer = true;
 		// 一度停止フラグをfalseに
 		pushStop = false;
+		// もし停止位置にあったら
+		if (position.z <= stopPoint)
+		{
+			// 停止フラグをtrueに
+			pushStop = true;
+		}
+	}
+
+	if (_physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
+	{
+		state = State::Disabling;
+		// プレイヤーとのHitフラグをtrueに
+		isHitPlayer = true;
+		// 一度停止フラグをfalseに
+		pushStop = false;
+
 		// もし停止位置にあったら
 		if (position.z <= stopPoint)
 		{

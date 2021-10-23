@@ -345,9 +345,6 @@
     <ClCompile Include="TitleCameraObject.cpp">
       <Filter>GameObjects\TitleObject</Filter>
     </ClCompile>
-    <ClCompile Include="TitlePlayerObject.cpp">
-      <Filter>GameObjects\TitleObject</Filter>
-    </ClCompile>
     <ClCompile Include="TitleGroundObject.cpp">
       <Filter>GameObjects\TitleObject</Filter>
     </ClCompile>
@@ -524,6 +521,21 @@
     </ClCompile>
     <ClCompile Include="CameraObjectStateLandscape.cpp">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerObject.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerStateJumpAttack.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerStateJumpLoop.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerStateJumpStart.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayerStateRun.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -867,9 +879,6 @@
     <ClInclude Include="TitleCameraObject.h">
       <Filter>GameObjects\TitleObject</Filter>
     </ClInclude>
-    <ClInclude Include="TitlePlayerObject.h">
-      <Filter>GameObjects\TitleObject</Filter>
-    </ClInclude>
     <ClInclude Include="TitleGroundObject.h">
       <Filter>GameObjects\TitleObject</Filter>
     </ClInclude>
@@ -1053,6 +1062,24 @@
     <ClInclude Include="CameraObjectStateLandscape.h">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
     </ClInclude>
+    <ClInclude Include="TitlePlayerObject.h">
+      <Filter>GameObjects\TitleObject\PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerStateBase.h">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerStateJumpAttack.h">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerStateJumpLoop.h">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerStateJumpStart.h">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayerStateRun.h">
+      <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1234,6 +1261,12 @@
     </Filter>
     <Filter Include="GameObjects\CameraObjects\CameraState">
       <UniqueIdentifier>{2324ad45-fb94-4d82-8fd0-72b669d6e9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\TitleObject\PlayerObject">
+      <UniqueIdentifier>{2dff837a-8fe0-439c-8ce0-38375dad95db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\TitleObject\PlayerObject\State">
+      <UniqueIdentifier>{3c6c8567-a6eb-4a4a-9dc8-ef85982f1b10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

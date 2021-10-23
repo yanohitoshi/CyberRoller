@@ -51,7 +51,7 @@ private:
 	Vector3 jumpAttackDirection;
 
 	// ターゲットとなる敵のポインタ
-	GameObject* attackTargetEnemy;
+	GameObject* attackTarget;
 
 	// ステータスを切り替える時間
 	const int ChangeTime;

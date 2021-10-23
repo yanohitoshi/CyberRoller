@@ -118,7 +118,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 
 	hitEnemyPosition = Vector3::Zero;
 	// 
-	attackTargetEnemy = nullptr;
+	attackTarget = nullptr;
 
 	// 押し出されたときにその速度を保存しキャラクターの速度に足すためのベクトル初期化
 	pushedVelocity = Vector3::Zero;
@@ -202,7 +202,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	groundCheckSphereCol->SetObjectSphere(groundCheckSphere);
 
 	//ジャンプ攻撃判定用のsphereCollider
-	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTargetEnemy, this, std::placeholders::_1,std::placeholders::_2));
+	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTarget, this, std::placeholders::_1,std::placeholders::_2));
 	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
@@ -348,7 +348,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	isHitEnemy = false;
 	pushedVelocity = Vector3::Zero;
 	isSelectingTargetEnemy = false;
-	attackTargetEnemy = nullptr;
+	attackTarget = nullptr;
 
 	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
 	// 連続で切り替えしアニメーションに入らないように抑制をかけるため
@@ -595,10 +595,14 @@ void PlayerObject::OnCollisionGround(const GameObject& _hitObject, const Physics
 @param	当たったGameObject
 @param	当たったGameObjectの当たり判定タグ
 */
-void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag)
+void PlayerObject::OnCollisionAttackTarget(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	if (_hitObject.GetState() != State::Active)
+	{
+		return;
+	}
 
-	if (attackTargetEnemy != nullptr)
+	if (attackTarget != nullptr)
 	{
 		// ヒットしたEnemyのポジションと距離を計算
 		Vector3 hitEnemyPosition = _hitObject.GetPosition();
@@ -606,19 +610,19 @@ void PlayerObject::OnCollisionAttackTargetEnemy(const GameObject& _hitObject, co
 		hitEnemyDistance.z = 0.0f;
 		
 		// select中のEnemyのポジションと距離を計算
-		Vector3 selectEnemyPosition = attackTargetEnemy->GetPosition();
+		Vector3 selectEnemyPosition = attackTarget->GetPosition();
 		Vector3 selectEnemyDistance = selectEnemyPosition - position;
 		selectEnemyDistance.z = 0.0f;
 		
 		// 距離をベクトルの長さで比較選択している敵よりも新しい敵の方が近かったら更新
 		if (hitEnemyDistance.Length() < selectEnemyDistance.Length())
 		{
-			attackTargetEnemy = FindTargetEnemy(_hitObject);
+			attackTarget = FindTargetEnemy(_hitObject);
 		}
 	}
 	else
 	{
-		attackTargetEnemy = FindTargetEnemy(_hitObject);
+		attackTarget = FindTargetEnemy(_hitObject);
 	}
 
 	isSelectingTargetEnemy = true;

@@ -154,7 +154,7 @@ private:
 	@param	当たったGameObject
 	@param	当たったGameObjectの当たり判定タグ
 	*/
-	void OnCollisionAttackTargetEnemy(const GameObject& _hitObject, const PhysicsTag _physicsTag);
+	void OnCollisionAttackTarget(const GameObject& _hitObject, const PhysicsTag _physicsTag);
 
 	/*
 	@brief ステートプール用マップにステートクラスを追加する関数
@@ -216,7 +216,7 @@ private:
 	// ジャンプアタック中でないときにヒットした敵のポジション
 	Vector3 hitEnemyPosition;
 	// ジャンプ攻撃対象の敵のポインタ
-	GameObject* attackTargetEnemy;
+	GameObject* attackTarget;
 
 	// 死んだ際にすぐリスポーンさせないためのカウント
 	int respawnCount;
@@ -351,7 +351,7 @@ public:// ゲッターセッター
 	@fn hitEnemyPositionのgetter関数
 	@return respownPosを返す
 	*/
-	GameObject* GetAttackTargetEnemy() { return attackTargetEnemy; }
+	GameObject* GetAttackTargetEnemy() { return attackTarget; }
 
 	/*
 	@fn DeadSpaceのgetter関数

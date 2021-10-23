@@ -30,16 +30,16 @@ PlayerObjectStateJumpAttack::~PlayerObjectStateJumpAttack()
 PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _deltaTime)
 {
 	// ターゲットを捉えていてかつターゲットがActiveだったら
-	if (isSelectingTargetEnemy && attackTargetEnemy->GetState() == State::Active)
+	if (isSelectingTargetEnemy && attackTarget->GetState() == State::Active)
 	{
 		// 仮ポジション変数
 		Vector3 tmpPosition;
 		// 線形補完をとり変数に保存
-		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTarget->GetPosition(), _deltaTime * 9.0);
 		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 	}
-	else if (!isSelectingTargetEnemy) // ターゲットがいない場合のジャンプアタック移動処理
+	else // ターゲットがいない場合のジャンプアタック移動処理
 	{
 		++unSelectTargetEnemyFrameCount;
 		jumpAttackDirection.z = 0.0f;
@@ -56,7 +56,7 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		// 仮ポジション変数
 		Vector3 tmpPosition;
 		// 線形補完をとり変数に保存
-		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTargetEnemy->GetPosition(), _deltaTime * 9.0);
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTarget->GetPosition(), _deltaTime * 9.0);
 		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 
@@ -100,9 +100,9 @@ void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 
 	isSelectingTargetEnemy = _owner->GetIsSelectingTargetEnemy();
 	// ターゲットを捉えているか判定
-	if (isSelectingTargetEnemy)
+	if (isSelectingTargetEnemy && _owner->GetAttackTargetEnemy()->GetState() == State::Active)
 	{
-		attackTargetEnemy = _owner->GetAttackTargetEnemy();
+		attackTarget = _owner->GetAttackTargetEnemy();
 	}
 	else
 	{
