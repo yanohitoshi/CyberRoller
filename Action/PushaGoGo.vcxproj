@@ -184,6 +184,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="PlayerDeadEffect.cpp" />
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
+    <ClCompile Include="TitleJumpAttackPlayerObject.cpp" />
     <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
     <ClCompile Include="TitlePlayerStateJumpLoop.cpp" />
     <ClCompile Include="TitlePlayerStateJumpStart.cpp" />
@@ -381,6 +382,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="LightObject.h" />
     <ClInclude Include="PlayerDeadEffect.h" />
     <ClInclude Include="PlayerDeadEffectManager.h" />
+    <ClInclude Include="TitleJumpAttackPlayerObject.h" />
     <ClInclude Include="TitlePlayerStateBase.h" />
     <ClInclude Include="TitlePlayerStateJumpAttack.h" />
     <ClInclude Include="TitlePlayerStateJumpLoop.h" />

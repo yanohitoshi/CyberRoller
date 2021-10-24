@@ -537,6 +537,9 @@
     <ClCompile Include="TitlePlayerStateRun.cpp">
       <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
     </ClCompile>
+    <ClCompile Include="TitleJumpAttackPlayerObject.cpp">
+      <Filter>GameObjects\TitleObject\PlayerObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1079,6 +1082,9 @@
     </ClInclude>
     <ClInclude Include="TitlePlayerStateRun.h">
       <Filter>GameObjects\TitleObject\PlayerObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleJumpAttackPlayerObject.h">
+      <Filter>GameObjects\TitleObject\PlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

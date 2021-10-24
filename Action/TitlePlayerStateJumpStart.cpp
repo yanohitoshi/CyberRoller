@@ -2,11 +2,24 @@
 #include "TitlePlayerObject.h"
 #include "SkeletalMeshComponent.h"
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+@return TitlePlayerState　更新終了時のステータスを返す
+*/
 TitlePlayerState TitlePlayerStateJumpStart::Update(TitlePlayerObject* _owner, float _deltaTime)
 {
-
+	// ジャンプ中のカウントを数える
+	++jumpFrameCount;
+	// さらにジャンプ力を追加
+	jumpPower += JumpSpeed;
 	// 重力を掛ける
-	velocity.z -= Gravity * _deltaTime;
+	jumpPower -= Gravity * _deltaTime;
+
+	// ジャンプ力を追加
+	velocity.z = jumpPower;
 
 	// 落下速度が規定値を超えていたら
 	if (velocity.z <= MaxFallSpeed)
@@ -15,31 +28,30 @@ TitlePlayerState TitlePlayerStateJumpStart::Update(TitlePlayerObject* _owner, fl
 		velocity.z = MaxFallSpeed;
 	}
 
-	// ジャンプ中のカウントを数える
-	++jumpFrameCount;
-	// さらにジャンプ力を追加
-	jumpPower += JumpSpeed;
-	// ジャンプ力を追加
-	velocity.z = jumpPower;
+	// ポジションを更新
+	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	_owner->SetPosition(_owner->GetPosition() + velocity);
-
+	// animationが終了していたら
 	if (!skeletalMeshComponent->IsPlaying())
 	{
+		// ジャンプした回数を加算
+		++jumpCount;
+		// 親クラスに値をセット
+		_owner->SetJumpCount(jumpCount);
 		_owner->SetJumpPower(jumpPower);
 		_owner->SetJumpFrameCount(jumpFrameCount);
+		// ステータスをジャンプループに変更
 		state = TitlePlayerState::JUMP_LOOP;
-	}
-
-	if (!skeletalMeshComponent->IsPlaying() && _owner->GetJumpCount() % 3 == 0)
-	{
-		_owner->SetJumpCount(0);
-		state = TitlePlayerState::JUMP_ATTACK;
 	}
 
     return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void TitlePlayerStateJumpStart::Enter(TitlePlayerObject* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
@@ -48,6 +60,8 @@ void TitlePlayerStateJumpStart::Enter(TitlePlayerObject* _owner, float _deltaTim
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(TitlePlayerState::JUMP_START));
 	// stateをDEAD状態にして保存
 	state = TitlePlayerState::JUMP_START;
+	// 初期化
 	jumpPower = FirstJumpPower;
 	jumpFrameCount = 0;
+	jumpCount = _owner->GetJumpCount();
 }

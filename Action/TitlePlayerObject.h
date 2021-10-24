@@ -6,33 +6,11 @@
 
 // クラスの前方宣言
 class SkeletalMeshComponent;
-class MeshComponent;
 class Mesh;
 class Animation;
+class TitleJumpAttackPlayerObject;
+class TitlePlayerStateBase;
 enum class TitlePlayerState;
-
-///*
-//@enum AnimState
-//    　プレイヤーのアニメーションの状態
-//      タイトル用
-//*/
-//enum TitlePlayerState
-//{
-//    // アイドリング状態
-//    IDLE,
-//    // 走り状態
-//    RUN,
-//    // ジャンプループ
-//    JUMPLOOP,
-//    // ジャンプ開始
-//    JUMPSTART,
-//    // ジャンプ終了
-//    JUMPEND,
-//    // ジャンプアタック
-//    JUMPATTACK,
-//    // 総ステータス数
-//    ITEMNUM
-//};
 
 /*
 @file TitlePlayerObject.h
@@ -72,52 +50,44 @@ public:
     
 private:
 
+    /*
+    @brief ステートプール用マップにステートクラスを追加する関数
+    @param	_state 追加するステートクラスのポインタ
+    @param	_stateTag 鍵となるタグ
+    */
+    void AddStatePoolMap(TitlePlayerStateBase* _state, TitlePlayerState _stateTag);
 
     /*
-    @fn 重力処理関数
-    @param	_deltaTime 前のフレームでかかった時間
+    @brief ステートプール用マップからステートクラスを削除する関数
+    @param	_stateTag 鍵となるタグ
     */
-    void GravityProcess(float _deltaTime);
+    void RemoveStatePoolMap(TitlePlayerState _stateTag);
 
     /*
-    @fn ジャンプディレイ処理関数
+    @brief ステートプール用マップをクリアする
     */
-    void JumpDelayProcess();
-
-    /*
-    @fn ジャンプ処理関数
-    */
-    void JumpProcess();
-
-    /*
-    @fn 接地判定処理関数
-    */
-    void IsGroundingProcess();
-
-    /*
-    @fn アニメーションの更新処理
-    */
-    void AnimationUpdate();
-
-    // アニメーション用vector配列
-    std::vector<const Animation*> animTypes;
-    // アニメーションの状態用変数
-    int animState;
-
-    // 全stateが格納されるマップ
-    std::unordered_map<TitlePlayerState, TitlePlayerStateBase*> statePoolMap;
+    void ClearStatePoolMap();
 
     //3Dモデルの描画を行うクラス
     SkeletalMeshComponent* skeltalMeshComponent;
     // Meshの読み込みを行うクラス
     Mesh* mesh;
-    // 3Dモデルの描画を行うクラス
-    MeshComponent* meshComponent;
+    // アニメーション用vector配列
+    std::vector<const Animation*> animTypes;
 
-    // 重力定数
-    const float Gravity;
-    // 接地フラグ
-    bool onGround;
+    // 今のプレーヤーのstate状態を保存するための変数
+    TitlePlayerState nowState;
+    // 変更された次のプレーヤーのstate状態を保存するための変数
+    TitlePlayerState nextState;
+
+    // 全stateが格納されるマップ
+    std::unordered_map<TitlePlayerState, TitlePlayerStateBase*> statePoolMap;
+
+    // ジャンプアタック状態のプレイヤークラスのポインタ
+    TitleJumpAttackPlayerObject* titleJumpAttackPlayerObject;
+
+    // 初期ポジション定数
+    const Vector3 InitPosition;
     // ジャンプフラグ
     bool jumpFlag;
     // ジャンプの間隔を測るためのカウント
@@ -126,32 +96,11 @@ private:
     int jumpCount;
     // 作用するジャンプ力
     float jumpPower;
-    // 初速
-    const float FirstJumpPower;
     // ジャンプする時間用カウント
-    float jumpFrameCount;
-    float jumpAttackRotationAngle;
-
-    // 落下速度の最大値
-    const float MaxFallSpeed;
-
-    // ジャンプを続けるフレームカウント定数
-    const float JumpLimitTime;
-
-    // ジャンプする間隔の時間定数
-    const int JumpDelayTime;
-
-    // ジャンプ加速度定数
-    const float JumpSpeed;
-
-    // 接地判定を取る座標値定数
-    const float OnGroundCoordinate;
+    int jumpFrameCount;
 
     // 回転角定数
     const float RotationAngle;
-
-    // 回転角定数
-    const float JumpAttackRotationAngle;
 
 public:
 
@@ -162,10 +111,10 @@ public:
     SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
 
     /*
-    @fn meshComponentのgetter関数
-    @return meshComponent　meshComponentクラスのポインタを返す
+    @fn titleJumpAttackPlayerObjectのgetter関数
+    @return titleJumpAttackPlayerObject　titleJumpAttackPlayerObjectクラスのポインタを返す
     */
-    MeshComponent* GetMeshComponent() { return meshComponent; }
+    TitleJumpAttackPlayerObject* GetTitleJumpAttackPlayerObject() { return titleJumpAttackPlayerObject; }
 
     /*
     @fn Animationのgetter関数
@@ -174,16 +123,58 @@ public:
     */
     const Animation* GetAnimation(TitlePlayerState _state);
 
+    /*
+    @fn InitPositionのgetter関数
+    @return InitPosition　InitPositionを返す
+    */
+    Vector3 GetInitPosition() { return InitPosition; }
+
+    /*
+    @fn jumpFlagのgetter関数
+    @return jumpFlag　jumpFlagを返す
+    */
     bool GetJumpFlag() { return jumpFlag; }
-    bool GetOnGroundFlag() { return onGround; }
+
+    /*
+    @fn jumpFrameCountのgetter関数
+    @return jumpFrameCount　jumpFrameCountを返す
+    */
     int GetJumpFrameCount() { return jumpFrameCount; }
+
+    /*
+    @fn jumpCountのgetter関数
+    @return jumpCount　jumpCountを返す
+    */
     int GetJumpCount() { return jumpCount; }
+
+    /*
+    @fn jumpPowerのgetter関数
+    @return jumpPower　jumpPowerを返す
+    */
     float GetJumpPower() { return jumpPower; }
 
+    /*
+    @fn jumpFlagのsetter関数
+    @param	bool _jumpFlag true:ジャンプ中 false:ジャンプ中でない
+    */
     void SetJumpFlag(bool _jumpFlag) { jumpFlag = _jumpFlag; }
-    void SetOnGround(bool _onGround) { onGround = _onGround; }
+    
+    /*
+    @fn jumpFrameCountのsetter関数
+    @param	int _jumpFrameCount ジャンプ中のカウント
+    */
     void SetJumpFrameCount(int _jumpFrameCount) { jumpFrameCount = _jumpFrameCount; }
+    
+    /*
+    @fn nextStateのsetter関数
+    @param	int _jumpCount ジャンプした回数
+    */
     void SetJumpCount(int _jumpCount) { jumpCount = _jumpCount; }
+    
+    /*
+    @fn nextStateのsetter関数
+    @param	float _jumpPower ジャンプ力
+    */
     void SetJumpPower(float _jumpPower) { jumpPower = _jumpPower; }
 };
 

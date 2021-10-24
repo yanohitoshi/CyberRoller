@@ -1,5 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TitlePlayerStateBase.h"
+
+/*
+@file TitlePlayerStateJumpAttack.h
+@brief タイトルシーン中でのジャンプアタック状態を管理するクラス
+*/
 class TitlePlayerStateJumpAttack :
     public TitlePlayerStateBase
 {
@@ -10,7 +18,9 @@ public:
 	*/
 	TitlePlayerStateJumpAttack()
 	: JumpAttackRotationAngle(10.0f)
-	, JumpAttackTime(10){};
+	, JumpAttackTime(30)
+	, ShiftPositionZ(100.0f)
+	, Offset(400.0f){};
 
 	/*
 	@fn デストラクタ
@@ -22,7 +32,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return TitlePlayerState　更新終了時のステータスを返す
 	*/
 	TitlePlayerState Update(TitlePlayerObject* _owner, float _deltaTime)override;
 
@@ -35,10 +45,16 @@ public:
 
 private:
 
+	TitleJumpAttackPlayerObject* titleJumpAttackPlayerObject;
+
+	Vector3 enterPosition;
 	float rotationAngle;
 	int frameCount;
+	const float Offset;
 	const int JumpAttackTime;
 	// 回転角定数
 	const float JumpAttackRotationAngle;
+	// Z軸をずらすための定数
+	const float ShiftPositionZ;
 };
 

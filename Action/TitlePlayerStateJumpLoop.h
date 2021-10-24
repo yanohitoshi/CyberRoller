@@ -1,5 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TitlePlayerStateBase.h"
+
+/*
+@file TitlePlayerStateJumpLoop.h
+@brief タイトルシーン中でのジャンプループ状態を管理するクラス
+*/
 class TitlePlayerStateJumpLoop :
     public TitlePlayerStateBase
 {
@@ -21,7 +29,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return TitlePlayerState　更新終了時のステータスを返す
 	*/
 	TitlePlayerState Update(TitlePlayerObject* _owner, float _deltaTime)override;
 
@@ -39,5 +47,7 @@ private:
 	int jumpFrameCount;
 	// 接地判定を取る座標値定数
 	const float OnGroundCoordinate;
+
+	TitleJumpAttackPlayerObject* titleJumpAttackPlayerObject;
 };
 

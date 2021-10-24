@@ -1,10 +1,18 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "TitlePlayerObject.h"
 
 // クラスの前方宣言
 class TitlePlayerObject;
 class SkeletalMeshComponent;
 class MeshComponent;
 
+/*
+@enum　TitlePlayerState
+タイトルでのプレイヤーのステータス
+*/
 enum class TitlePlayerState
 {
 	RUN,
@@ -14,6 +22,10 @@ enum class TitlePlayerState
 	STATE_NUM
 };
 
+/*
+@file TitlePlayerStateBase.h
+@brief タイトルシーン中でのプレイヤーのステータスを管理するクラスの基底クラス
+*/
 class TitlePlayerStateBase
 {
 public:

@@ -900,6 +900,31 @@ void Renderer::DrawShadow()
 	PHYSICS->DebugShowBox();
 
 	//シャドウマップshaderをアクティブ
+	geometryInstanceShader->SetActive();
+	// ライトのカメラ情報
+	geometryInstanceShader->SetVectorUniform("uCameraPos", lightViewPos);
+	// アンビエントライト
+	geometryInstanceShader->SetVectorUniform("uAmbientLight", ambientLight);
+	geometryInstanceShader->SetFloatUniform("uLuminance", 1.0f);
+
+	// ディレクショナルライト
+	geometryInstanceShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	geometryInstanceShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	geometryInstanceShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+
+	geometryInstanceShader->SetMatrixUniform("view", view);
+	geometryInstanceShader->SetMatrixUniform("projection", projection);
+
+	// デプスマップをセット（メッシュ用）
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	geometryInstanceShader->SetIntUniform("depthMap", 4);
+	geometryInstanceShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
+	geometryInstanceManager->PrepareModelMatrice();
+	geometryInstanceManager->Draw(geometryInstanceShader);
+
+
+	//シャドウマップshaderをアクティブ
 	shadowMapShader->SetActive();
 	// ライトのカメラ情報
 	shadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
@@ -933,32 +958,7 @@ void Renderer::DrawShadow()
 		}
 	}
 
-	//シャドウマップshaderをアクティブ
-	geometryInstanceShader->SetActive();
-	// ライトのカメラ情報
-	geometryInstanceShader->SetVectorUniform("uCameraPos", lightViewPos);
-	// アンビエントライト
-	geometryInstanceShader->SetVectorUniform("uAmbientLight", ambientLight);
-	geometryInstanceShader->SetFloatUniform("uLuminance", 1.0f);
 
-	// ディレクショナルライト
-	geometryInstanceShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	geometryInstanceShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	geometryInstanceShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
-
-	geometryInstanceShader->SetMatrixUniform("view", view);
-	geometryInstanceShader->SetMatrixUniform("projection", projection);
-
-	// デプスマップをセット（メッシュ用）
-	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, depthMap);
-	geometryInstanceShader->SetIntUniform("depthMap", 4);
-
-	geometryInstanceShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
-
-	geometryInstanceManager->PrepareModelMatrice();
-
-	geometryInstanceManager->Draw(geometryInstanceShader);
 
 
 	//シャドウマップshaderをアクティブ(skinnend)

@@ -8,6 +8,11 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "TitlePlayerStateBase.h"
+#include "TitleJumpAttackPlayerObject.h"
+#include "TitlePlayerStateJumpAttack.h"
+#include "TitlePlayerStateJumpLoop.h"
+#include "TitlePlayerStateJumpStart.h"
+#include "TitlePlayerStateRun.h"
 
 /*
 @fn コンストラクタ
@@ -17,17 +22,12 @@
 */
 TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
-	, Gravity (400.0f)
-	, MaxFallSpeed(-200.0f)
-	, JumpDelayTime(120)
-	, JumpSpeed(15.0f)
-	, JumpLimitTime(13)
-	, OnGroundCoordinate(100.0f)
+	, InitPosition(_pos)
 	, RotationAngle(90.0f)
-	, JumpAttackRotationAngle(10.0f)
-	, FirstJumpPower(40.0f)
 {
-
+	// メンバー変数初期化
+	jumpCount = 0;
+	jumpFlag = false;
 	// ポジションをセット
 	SetPosition(_pos);
 
@@ -42,28 +42,28 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	// 輝度情報を取得
 	luminance = mesh->GetLuminace();
 
-	meshComponent = new MeshComponent(this, false, false);
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
-
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してAnimationをセット(.gpanim)
 	//アニメ―ション用の可変長配列をリサイズ
-	animTypes.resize(TitlePlayerState::STATE_NUM);
+	animTypes.resize(static_cast<unsigned int>(TitlePlayerState::STATE_NUM));
 	//アニメーションを読み込み
-	animTypes[IDLE] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Happy_Idle_Anim.gpanim", true);
-	animTypes[RUN] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Running.gpanim", true);
-	animTypes[JUMPLOOP] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Floating.gpanim", true);
-	animTypes[JUMPSTART] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Jump_up.gpanim", false);
-	animTypes[JUMPEND] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Landing.gpanim", false);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::RUN)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Running.gpanim", true);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_LOOP)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Floating.gpanim", true);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_START)] = RENDERER->GetAnimation("Assets/Model/Player/PlayerAnimation/Jump_up.gpanim", false);
 
-	//anim変数を速度0.5fで再生
-	skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
+	AddStatePoolMap(new TitlePlayerStateJumpAttack, TitlePlayerState::JUMP_ATTACK);
+	AddStatePoolMap(new TitlePlayerStateJumpLoop, TitlePlayerState::JUMP_LOOP);
+	AddStatePoolMap(new TitlePlayerStateJumpStart, TitlePlayerState::JUMP_START);
+	AddStatePoolMap(new TitlePlayerStateRun, TitlePlayerState::RUN);
 
-	// メンバー変数初期化
-	//firstJumpPower = 40.0f;
-	//jumpPower = firstJumpPower;
-	jumpCount = 0;
 	// 回転処理
 	RotationProcess(RotationAngle,Vector3::UnitZ);
+
+	// タイトル用ジャンプアタックプレイヤーを追加
+	titleJumpAttackPlayerObject = new TitleJumpAttackPlayerObject(this, Vector3(50.0f, 50.0f, 50.0f), JUMP_ATTACK_PLAYER);
+
+	// ステータスの初期化
+	nowState = TitlePlayerState::STATE_NUM;
+	nextState = TitlePlayerState::RUN;
 }
 
 /*
@@ -72,6 +72,10 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 */
 TitlePlayerObject::~TitlePlayerObject()
 {
+	RemoveStatePoolMap(TitlePlayerState::JUMP_ATTACK);
+	RemoveStatePoolMap(TitlePlayerState::JUMP_LOOP);
+	RemoveStatePoolMap(TitlePlayerState::JUMP_START);
+	RemoveStatePoolMap(TitlePlayerState::RUN);
 }
 
 /*
@@ -84,36 +88,39 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 	// Rendererにポジションを送る
 	RENDERER->SetPlayerPositon(position);
 
-	// アニメーション状態の更新
-	AnimationUpdate();
 
-
-	//ジャンプ中もしくは落下中の時重力をかける（一定数以上かかったら止めて定数にする）
-	if (onGround == false && animState != JUMPATTACK)
+	// ステート外部からステート変更があったか？
+	if (nowState != nextState)
 	{
-		GravityProcess(_deltaTime);
+		//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+
+		nowState = nextState;
+		return;
 	}
 
-	// 接地状態でかつジャンプ中で無かったら
-	if (onGround == true && jumpFlag == false)
+	// ステート実行
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto state = statePoolMap.find(nowState);
+	if (state != statePoolMap.end())
 	{
-		JumpDelayProcess();
+		nextState = statePoolMap[nowState]->Update(this, _deltaTime);
 	}
 
-	// ジャンプ中だったら
-	if(jumpFlag == true)
+	// ステート内部からステート変更あったか？
+	if (nowState != nextState)
 	{
-		JumpProcess();
+		auto state = statePoolMap.find(nextState);
+		if (state != statePoolMap.end())
+		{
+			statePoolMap[nextState]->Enter(this, _deltaTime);
+		}
+		nowState = nextState;
 	}
-
-	// ポジションに速度を追加
-	position = position + velocity * _deltaTime;
-	// ポジションを更新
-	SetPosition(position);
-
-	// 接地判定処理
-	IsGroundingProcess();
-
 }
 
 /*
@@ -130,143 +137,48 @@ void TitlePlayerObject::RotationProcess(float _angle, Vector3 _axis)
 }
 
 /*
-@fn 重力処理関数
-@param	_deltaTime 前のフレームでかかった時間
+@brief ステートプール用マップにステートクラスを追加する関数
+@param	_state 追加するステートクラスのポインタ
+@param	_stateTag 鍵となるタグ
 */
-void TitlePlayerObject::GravityProcess(float _deltaTime)
+void TitlePlayerObject::AddStatePoolMap(TitlePlayerStateBase* _state, TitlePlayerState _stateTag)
 {
-	// 重力を掛ける
-	velocity.z -= Gravity * _deltaTime;
+	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	auto stateMaps = statePoolMap.find(_stateTag);
 
-	// 落下速度が規定値を超えていたら
-	if (velocity.z <= MaxFallSpeed)
+	//あるとき
+	if (stateMaps != statePoolMap.end())
 	{
-		// 落下速度を規定値に固定する
-		velocity.z = MaxFallSpeed;
-	}
-}
-
-/*
-@fn ジャンプディレイ処理関数
-*/
-void TitlePlayerObject::JumpDelayProcess()
-{
-	// ジャンプする間隔を数える
-	++jumpDelayCount;
-
-	// 時間が来たらジャンプさせジャンプ開始アニメーションを再生
-	if (jumpDelayCount >= JumpDelayTime)
-	{
-		// ジャンプフラグをtrueに
-		jumpFlag = true;
-		++jumpCount;
-		// アニメーション再生
-		skeltalMeshComponent->PlayAnimation(animTypes[JUMPSTART], 1.0f);
-		// ステータスをJUMPSTARTに変更
-		animState = JUMPSTART;
-		// カウントリセット
-		jumpDelayCount = 0;
-	}
-}
-
-/*
-@fn ジャンプ処理関数
-*/
-void TitlePlayerObject::JumpProcess()
-{
-	if (animState == JUMPATTACK)
-	{
-		jumpAttackRotationAngle += JumpAttackRotationAngle;
-		RotationProcess(jumpAttackRotationAngle, Vector3::UnitX);
-	}
-	else
-	{
-		// ジャンプ力を追加
-		velocity.z = jumpPower;
-
-		// ジャンプ中のカウントを数える
-		++jumpFrameCount;
-
-		// ジャンプ中のカウントが規定値以下だったら
-		if (jumpFrameCount > 0 && jumpFrameCount < JumpLimitTime)
-		{
-			// さらにジャンプ力を追加
-			jumpPower += JumpSpeed;
-		}
-		else // ジャンプ中のカウントが規定値以上だったら
-		{
-			// ジャンプ力を初期に戻す
-			jumpPower = firstJumpPower;
-			// カウントリセット
-			jumpFrameCount = 0;
-			// ジャンプフラグをfalseに
-			jumpFlag = false;
-		}
-	}
-}
-
-/*
-@fn 接地判定処理関数
-*/
-void TitlePlayerObject::IsGroundingProcess()
-{
-	// 当たり判定で設置を取っていないので座標で判定
-	// 座標が規定値以下だったら
-	if (position.z <= OnGroundCoordinate)
-	{
-		// 接地状態にする
-		onGround = true;
-		// Z軸の速度を0に初期化
-		velocity.z = 0.0f;
-	}
-	else 	// 座標が規定値以上だったら
-	{
-		// 接地フラグをfalseに
-		onGround = false;
-	}
-}
-
-/*
-@fn アニメーションの更新処理
-*/
-void TitlePlayerObject::AnimationUpdate()
-{
-	// 接地中で無かったら
-	if (onGround == false)
-	{
-		// アニメーションの再生が終わっていたら
-		if (!skeltalMeshComponent->IsPlaying())
-		{
-			// ジャンプループアニメーションの再生を開始
-			skeltalMeshComponent->PlayAnimation(animTypes[JUMPLOOP], 1.0f);
-			// ステータスをJUMPLOOPに変更
-			animState = JUMPLOOP;
-		}
-		
-	}
-
-	// ジャンプ中でなくアニメーションステータスがRUNで無かったら
-	if (jumpFlag == false && animState != RUN)
-	{
-		// ランアニメーションの再生を開始
-		skeltalMeshComponent->PlayAnimation(animTypes[RUN], 1.0f);
-		// ステータスをRUNに変更
-		animState = RUN;
 		return;
 	}
-
-	if (animState == JUMPATTACK)
+	else //ないとき
 	{
-		skeltalMeshComponent->SetVisible(false);
-		meshComponent->SetVisible(true);
-	}
-	else
-	{
-		skeltalMeshComponent->SetVisible(true);
-		meshComponent->SetVisible(false);
+		statePoolMap[_stateTag] = _state;
 	}
 }
 
+/*
+@brief ステートプール用マップからステートクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
+void TitlePlayerObject::RemoveStatePoolMap(TitlePlayerState _stateTag)
+{
+	delete statePoolMap[_stateTag];
+}
+
+/*
+@brief ステートプール用マップをクリアする
+*/
+void TitlePlayerObject::ClearStatePoolMap()
+{
+	statePoolMap.clear();
+}
+
+/*
+@fn Animationのgetter関数
+@param _state 現在のプレイヤーのステータス
+@return Animation Animationクラスのポインタを返す
+*/
 const Animation* TitlePlayerObject::GetAnimation(TitlePlayerState _state)
 {
 	// _state番目のアニメーションを返す
