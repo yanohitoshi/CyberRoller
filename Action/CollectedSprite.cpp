@@ -10,7 +10,7 @@ CollectedSprite::CollectedSprite(CollectionTag collectionTag)
 	{
 	case CollectionTag::FIRST:
 		// ポジションをセット
-		SetPosition(Vector3(-700.0f, 480.0f, 0.0f));
+		SetPosition(Vector3(-850.0f, 480.0f, 0.0f));
 		break;
 	case CollectionTag::SECOND:
 		// ポジションをセット
@@ -18,7 +18,7 @@ CollectedSprite::CollectedSprite(CollectionTag collectionTag)
 		break;
 	case CollectionTag::THIRD:
 		// ポジションをセット
-		SetPosition(Vector3(-700.0f, 480.0f, 0.0f));
+		SetPosition(Vector3(-550.0f, 480.0f, 0.0f));
 		break;
 	}
 

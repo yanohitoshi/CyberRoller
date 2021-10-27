@@ -7,7 +7,7 @@
 #include "CrystalEffectManager.h"
 #include "CollectionUI.h"
 
-CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, CollectionTag collectionTag)
+CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, CollectionTag _collectionTag)
 	: GameObject(false, _objectTag)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
@@ -31,7 +31,7 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,15.0f) };
 	boxCollider->SetObjectBox(aabb);
 
-
+	collectionTag = _collectionTag;
 	value = 0.0f;
 	frameCount = 0;
 	collectedRotationAngle = 0.0f;

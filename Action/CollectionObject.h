@@ -26,7 +26,7 @@ public:
 	@param	ポジション
 	@param	オブジェクト判別用tag
 	*/
-	CollectionObject(const Vector3& _pos, const Tag& _objectTag, CollectionTag collectionTag);
+	CollectionObject(const Vector3& _pos, const Tag& _objectTag, CollectionTag _collectionTag);
 
 	/*
 	@fn デストラクタ

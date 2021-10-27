@@ -8,8 +8,9 @@ CollectionUI::CollectionUI(CollectionObject* _owner)
 	: GameObject(false, Tag::UI)
 {
 	owner = _owner;
-	collectedSprite = new CollectedSprite(owner->GetCollectionTag());
-	unCollectedSprite = new UnCollectedSprite(owner->GetCollectionTag());
+	CollectionTag tag = owner->GetCollectionTag();
+	collectedSprite = new CollectedSprite(tag);
+	unCollectedSprite = new UnCollectedSprite(tag);
 }
 
 CollectionUI::~CollectionUI()
