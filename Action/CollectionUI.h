@@ -4,6 +4,7 @@
 class CollectionObject;
 class CollectedSprite;
 class UnCollectedSprite;
+class CollectedEffectSprite;
 
 class CollectionUI :
     public GameObject
@@ -33,6 +34,7 @@ private:
     CollectionObject* owner;
     CollectedSprite* collectedSprite;
     UnCollectedSprite* unCollectedSprite;
+    CollectedEffectSprite* collectedEffectSprite;
 
 };
 

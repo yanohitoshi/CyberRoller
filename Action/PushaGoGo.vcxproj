@@ -158,6 +158,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CameraObjectStateNormal.cpp" />
     <ClCompile Include="CameraObjectStateLandscape.cpp" />
     <ClCompile Include="CameraObjectStateSceneClear.cpp" />
+    <ClCompile Include="CollectedEffectSprite.cpp" />
     <ClCompile Include="CollectedSprite.cpp" />
     <ClCompile Include="CollectionEffectManager.cpp" />
     <ClCompile Include="CollectionLightEffect.cpp" />
@@ -361,6 +362,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CameraObjectStateNormal.h" />
     <ClInclude Include="CameraObjectStateLandscape.h" />
     <ClInclude Include="CameraObjectStateSceneClear.h" />
+    <ClInclude Include="CollectedEffectSprite.h" />
     <ClInclude Include="CollectedSprite.h" />
     <ClInclude Include="CollectionEffectManager.h" />
     <ClInclude Include="CollectionLightEffect.h" />

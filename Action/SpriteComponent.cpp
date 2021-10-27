@@ -16,12 +16,13 @@
 */
 SpriteComponent::SpriteComponent(GameObject * _owner, bool _isBackGround,int _drawOrder)
     :Component(_owner)
-    ,texture(nullptr)
-    ,drawOrder(_drawOrder)
-    ,textureWidth(0)
-    ,textureHeight(0)
+    , texture(nullptr)
+    , drawOrder(_drawOrder)
+    , textureWidth(0)
+    , textureHeight(0)
 	, visible(true)
 	, isBackGround(_isBackGround)
+	, scale(1.0f)
 {
 
 		//レンダラーにポインターを送る
@@ -48,8 +49,8 @@ void SpriteComponent::Draw(Shader * _shader)
 	if (texture&&owner->GetState()!=State::Dead)
 	{
 		Matrix4 scaleMatrix = Matrix4::CreateScale(
-			static_cast<float>(textureWidth),
-			static_cast<float>(textureHeight),
+			static_cast<float>(textureWidth * scale),
+			static_cast<float>(textureHeight * scale),
 			1.0f);
 
 		Matrix4 world = scaleMatrix * owner->GetWorldTransform();

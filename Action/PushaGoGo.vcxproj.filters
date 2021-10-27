@@ -561,6 +561,9 @@
     <ClCompile Include="CollectionUI.cpp">
       <Filter>UI\SpriteUI\CollectionUI</Filter>
     </ClCompile>
+    <ClCompile Include="CollectedEffectSprite.cpp">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1126,6 +1129,9 @@
       <Filter>UI\SpriteUI\CollectionUI</Filter>
     </ClInclude>
     <ClInclude Include="CollectionUI.h">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectedEffectSprite.h">
       <Filter>UI\SpriteUI\CollectionUI</Filter>
     </ClInclude>
   </ItemGroup>

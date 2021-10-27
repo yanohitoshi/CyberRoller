@@ -41,6 +41,7 @@ protected:
 
 	//クラスのポインタ
     Texture* texture;
+	float scale;
 	//描画される順番（数値が少ないほど早く更新される）
     int drawOrder;
 	//テクスチャの横幅
@@ -51,7 +52,6 @@ protected:
 	float alpha;
 	//描画を行うか
 	bool visible;
-
 	// 背景用spriteかどうか
 	bool isBackGround;
 
@@ -107,6 +107,12 @@ public://ゲッターセッター
 	@return	設定されているAlpha値の値(float)
 	*/
 	float GetAlpha() const { return alpha; }
+
+	/*
+	@brief　Alpha値の値を設定する
+	@return	_alpha 設定するAlpha値の値(float)
+	*/
+	void SetScale(float _scale) { scale = _scale; }
 
 };
 
