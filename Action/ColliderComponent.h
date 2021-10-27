@@ -29,6 +29,8 @@ enum class PhysicsTag
 	SWITCH_BASE_TAG,
 	// ジャンプスイッチ
 	JUMP_SWITCH_TAG,
+	// 収集物
+	COLLECTION_TAG,
 	// 接地判定
 	GROUND_CHECK_TAG,
 	// 足元チェック

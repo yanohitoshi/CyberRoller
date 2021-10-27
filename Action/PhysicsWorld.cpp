@@ -137,7 +137,10 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 	if (_box->GetBoxTag() == PhysicsTag::PLAYER_TAG)
 	{
+		// カメラ変更地点との判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA]);
+		// 収集物との判定処理
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::COLLECTION_TAG]);
 		// プレイヤーと地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
 		

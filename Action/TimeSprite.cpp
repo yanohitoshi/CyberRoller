@@ -10,7 +10,7 @@
 @brief	コンストラクタ
 */
 TimeSprite::TimeSprite()
-	:GameObject(false, Tag::UI)
+	: GameObject(false, Tag::UI)
 {
 	// ポジションをセット
 	SetPosition(Vector3(700.0f, 480.0f, 0.0f));

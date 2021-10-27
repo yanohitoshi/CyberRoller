@@ -19,6 +19,7 @@
 #include "LightObject.h"
 #include "AutoMoveCamera.h"
 #include "CameraChangePoint.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -122,7 +123,6 @@ void FirstStageCreator::CreateStage()
 	{
 		for (int ix = 0; ix < sizeX; ix++)
 		{
-			//CreateCameraDirecting(ix, iy);
 			// Layer1内を検索
 			CreateLayer1(ix, iy);
 			// Layer2内を検索
@@ -221,6 +221,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+	case(35):
+		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 	}
 }

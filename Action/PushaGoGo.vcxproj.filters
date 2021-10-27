@@ -540,6 +540,27 @@
     <ClCompile Include="TitleJumpAttackPlayerObject.cpp">
       <Filter>GameObjects\TitleObject\PlayerObject</Filter>
     </ClCompile>
+    <ClCompile Include="CollectionObject.cpp">
+      <Filter>GameObjects\StageObjects\CollectionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionEffectManager.cpp">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionRipplesEffect.cpp">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionLightEffect.cpp">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectedSprite.cpp">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClCompile>
+    <ClCompile Include="UnCollectedSprite.cpp">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionUI.cpp">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1086,6 +1107,27 @@
     <ClInclude Include="TitleJumpAttackPlayerObject.h">
       <Filter>GameObjects\TitleObject\PlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="CollectionObject.h">
+      <Filter>GameObjects\StageObjects\CollectionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionEffectManager.h">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionRipplesEffect.h">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionLightEffect.h">
+      <Filter>GameObjects\Effect\CollectionEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectedSprite.h">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UnCollectedSprite.h">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionUI.h">
+      <Filter>UI\SpriteUI\CollectionUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1273,6 +1315,15 @@
     </Filter>
     <Filter Include="GameObjects\TitleObject\PlayerObject\State">
       <UniqueIdentifier>{3c6c8567-a6eb-4a4a-9dc8-ef85982f1b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\CollectionObject">
+      <UniqueIdentifier>{909e0eed-a84a-4222-bd8b-80e1e4b58bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\CollectionEffect">
+      <UniqueIdentifier>{dfd0be4e-d427-4b17-9b7c-1cbb91a0358b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\CollectionUI">
+      <UniqueIdentifier>{e85f08fa-9667-491e-897d-d20ada9dd502}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

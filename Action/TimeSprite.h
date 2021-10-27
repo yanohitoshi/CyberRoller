@@ -39,7 +39,6 @@ private:
 
     // スプライトComponent
     SpriteComponent* sprite;
-
     // texture
     Texture* tex;
 

@@ -43,6 +43,7 @@ enum Tag
 	OTHER,
 	// カメラ
 	CAMERA,
+	// カメラ変更ポイント
 	CAMERA_CHANGE_OBLIQUE,
 	// プレイヤー
 	PLAYER,
@@ -82,8 +83,8 @@ enum Tag
 	JUMP_SWITCH,
 	// スイッチのベースオブジェクト
 	SWITCH_BASE,
-	// 接地判定オブジェクト
-	GROUND_CHECK,
+	// 収集物
+	COLLECTION,
 	// シーン
 	SCENE,
 	// ゲームクリアオブジェクト
