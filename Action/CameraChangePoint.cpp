@@ -2,12 +2,12 @@
 #include "BoxCollider.h"
 #include "CameraObjectStateBase.h"
 
-CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box, const Tag& _objectTag)
+CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box, Vector3& _changeOffset,const Tag& _objectTag)
 	: GameObject(false, _objectTag)
 {
 	// ポジションの初期化
 	position = _p;
-
+	changeOffset = _changeOffset;
 	// ポジションをセット
 	SetPosition(position);
 
@@ -29,5 +29,6 @@ void CameraChangePoint::OnCollision(const GameObject& _hitObject, const PhysicsT
 	if (_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
 		mainCamera->SetNextState(CameraState::LANDSCAPE);
+		mainCamera->SetOffsetPosition(changeOffset);
 	}
 }

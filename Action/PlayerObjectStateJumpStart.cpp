@@ -11,9 +11,9 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	: JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
 	, JumpTime(8)
-	, SwitchJumpTime(10)
+	, SwitchJumpTime(15)
 	, JumpAccelPower(100.0f)
-	, SwitchJumpAccelPower(110.0f)
+	, SwitchJumpAccelPower(120.0f)
 {
 }
 
@@ -197,12 +197,12 @@ void PlayerObjectStateJumpStart::JumpStartProcess(PlayerObject* _owner)
 	velocity.z = jumpPower;
 
 	// スイッチジャンプではなくてかつジャンプ利用可能な時間内だったら
-	if (JumpTime > jumpFrameCount && _owner->GetSwitchJumpFlag() == false)
+	if (JumpTime > jumpFrameCount && !_owner->GetSwitchJumpFlag())
 	{
 		// ジャンプ力に定数値を足してジャンプ力をownerのジャンプ力変数にセット
 		_owner->SetJumpPower(jumpPower + JumpAccelPower);
 	}
-	else if (_owner->GetSwitchJumpFlag() == true && SwitchJumpTime > jumpFrameCount) // スイッチジャンプでかつジャンプ利用可能な時間内だったら
+	else if (_owner->GetSwitchJumpFlag() && SwitchJumpTime > jumpFrameCount) // スイッチジャンプでかつジャンプ利用可能な時間内だったら
 	{
 		// ジャンプ力に定数値を足してジャンプ力をownerのジャンプ力変数にセット
 		_owner->SetJumpPower(jumpPower + SwitchJumpAccelPower);

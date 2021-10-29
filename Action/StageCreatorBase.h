@@ -19,16 +19,16 @@ class MoveWallBlock;
 */
 enum StagePartsName
 {
-	// 縦長壁パーツ
-	PORTRAIT_WALL_PARTS = 1,
-	// 横長壁パーツ
-	LANDSCAPE_WALL_PARTS = 2,
+	// 右寄せのパワーセルライトパーツ
+	POWERCELLS_LIGHT_PARTS_RIGHT = 1,
+	// 左寄せのパワーセルライトパーツ
+	POWERCELLS_LIGHT_PARTS_LEFT = 2,
 
 	// リスポーンポイントパーツ
-	RESPOWN_POINT_PARTS = 3,
+	RESPOWN_POINT_PARTS = 18,
 
 	// 棘パネルパーツ
-	NEEDLE_PARTS = 4,
+	NEEDLE_PARTS = 6,
 
 	// ステージクリアオブジェクトパーツ
 	CLEAR_OBJECT_PARTS = 20,
@@ -40,13 +40,13 @@ enum StagePartsName
 	// 第三区画のスイッチパーツ
 	THIRD_SWITCH_PARTS = 23,
 	
-	// 右寄せのパワーセルライトパーツ
-	POWERCELLS_LIGHT_PARTS_RIGHT = 36,
-	// 左寄せのパワーセルライトパーツ
-	POWERCELLS_LIGHT_PARTS_LEFT = 37,
+	// 最初右に動くblockパーツ
+	RIGHT_MOVE_BLOCK_PARTS = 24,
+	// 最初左に動くblockパーツ
+	LEFT_MOVE_BLOCK_PARTS = 25,
 
 	// ジャンプスイッチパーツ
-	JUMP_SWITCH_PARTS = 40,
+	JUMP_SWITCH_PARTS = 7,
 
 	// 第一区画の動く壁パーツ
 	FIRST_MOVE_WALL_PARTS = 41,
@@ -56,36 +56,43 @@ enum StagePartsName
 	THIRD_MOVE_WALL_PARTS = 43,
 
 	// 動かない敵
-	NORMAL_ENEMY_PARTS = 61,
+	NORMAL_ENEMY_PARTS = 44,
 	// 最初右方向に移動する敵
-	RIGHT_MOVE_ENEMY_PARTS = 62,
+	RIGHT_MOVE_ENEMY_PARTS = 45,
 	// 最初左方向に移動する敵
-	LEFT_MOVE_ENEMY_PARTS = 63,
+	LEFT_MOVE_ENEMY_PARTS = 46,
 	// 追跡する敵
-	TRACKING_ENEMY_PARTS = 65,
+	TRACKING_ENEMY_PARTS = 47,
+
+	// 1番目の収集物パーツ
+	COLLECTION_FIRST = 3,
+	// 2番目の収集物パーツ
+	COLLECTION_SECOND = 4,
+	// 3番目の収集物パーツ
+	COLLECTION_THIRD = 5,
 
 	// プレイヤー
 	PLAYER_PARTS = 19,
 
 	// レイヤーごとのブロックパーツ名
 	// ※Tiled Map Editorを使用してJSONファイルを制作する際にレイヤー別にブロックのタイルマップの色を変えているため
-	LAYER1_BLOCK_PARTS = 79, // レイヤー1
-	LAYER2_BLOCK_PARTS = 78, // レイヤー2
-	LAYER3_BLOCK_PARTS = 77, // レイヤー3
-	LAYER4_BLOCK_PARTS = 76, // レイヤー4
-	LAYER5_BLOCK_PARTS = 75, // レイヤー5
-	LAYER6_BLOCK_PARTS = 74, // レイヤー6
-	LAYER7_BLOCK_PARTS = 73, // レイヤー7
-	LAYER8_BLOCK_PARTS = 72, // レイヤー8
-	LAYER9_BLOCK_PARTS = 71, // レイヤー9
+	LAYER1_BLOCK_PARTS = 61, // レイヤー1
+	LAYER2_BLOCK_PARTS = 62, // レイヤー2
+	LAYER3_BLOCK_PARTS = 63, // レイヤー3
+	LAYER4_BLOCK_PARTS = 64, // レイヤー4
+	LAYER5_BLOCK_PARTS = 65, // レイヤー5
+	LAYER6_BLOCK_PARTS = 66, // レイヤー6
+	LAYER7_BLOCK_PARTS = 67, // レイヤー7
+	LAYER8_BLOCK_PARTS = 68, // レイヤー8
+	LAYER9_BLOCK_PARTS = 69, // レイヤー9
 	LAYER10_BLOCK_PARTS = 70, // レイヤー10
-	LAYER11_BLOCK_PARTS = 69, // レイヤー11
-	LAYER12_BLOCK_PARTS = 68, // レイヤー12
-	LAYER13_BLOCK_PARTS = 67, // レイヤー13
-	LAYER14_BLOCK_PARTS = 66, // レイヤー14
-	LAYER15_BLOCK_PARTS = 65, // レイヤー15
-	LAYER16_BLOCK_PARTS = 64, // レイヤー16
-	LAYER17_BLOCK_PARTS = 63, // レイヤー17
+	LAYER11_BLOCK_PARTS = 71, // レイヤー11
+	LAYER12_BLOCK_PARTS = 72, // レイヤー12
+	LAYER13_BLOCK_PARTS = 73, // レイヤー13
+	LAYER14_BLOCK_PARTS = 74, // レイヤー14
+	LAYER15_BLOCK_PARTS = 75, // レイヤー15
+	LAYER16_BLOCK_PARTS = 76, // レイヤー16
+	LAYER17_BLOCK_PARTS = 77, // レイヤー17
 };
 
 /*
@@ -140,7 +147,7 @@ protected:
 	@param　速度
 	@param　どの方向に動くのか判別するためのタグ
 	*/
-	void SetMoveBlockData(const Vector3 _distance, const Vector3 _direction, const float _speed, MoveDirectionTag _moveTag);
+	void SetMoveBlockData(const float _distance, const Vector3 _direction, const float _speed,const Vector3 _objectSize,MoveDirectionTag _moveTag);
 	
 
 	// 動く床クラスにデータを渡すための変数
@@ -234,7 +241,7 @@ protected:
 	const int MaxLayer;
 
 	// レイヤーごとに割り当てるオブジェクトのZ軸の値を格納する配列
-	float objectPositionZ[17];
+	float objectPositionZ[18];
 
 };
 

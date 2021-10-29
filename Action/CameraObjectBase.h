@@ -84,6 +84,8 @@ protected:
     float yaw;
     float pitch;
 
+    Vector3 offSetPosition;
+
     // ¡‚Ìenemy‚Ìstateó‘Ô‚ğ•Û‘¶‚·‚é‚½‚ß‚Ì•Ï”
     CameraState nowState;
     // •ÏX‚³‚ê‚½Ÿ‚Ìenemy‚Ìstateó‘Ô‚ğ•Û‘¶‚·‚é‚½‚ß‚Ì•Ï”
@@ -120,6 +122,9 @@ public:
     */
     void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
 
+    Vector3 GetOffsetPosition() { return offSetPosition; }
+
+    void SetOffsetPosition(Vector3 _offset) { offSetPosition = _offset; }
 
     void SetNextState(CameraState _nextState) { nextState = _nextState; }
     void SetCameraVec(Vector3 _nextForward) { forwardVec = _nextForward; }

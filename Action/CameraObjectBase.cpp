@@ -11,6 +11,7 @@
 CameraObjectBase::CameraObjectBase(bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, DeltaCorrection(8.0f)
+	, offSetPosition(Vector3(Vector3::Zero))
 {
 }
 

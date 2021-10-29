@@ -11,8 +11,8 @@ CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _del
 	lerpObjectPos = lerpObject->GetPosition();
 	// 仮の移動ポジション変数に代入
 	tmpMovePos = lerpObjectPos;
-	tmpMovePos.x -= 600.0f;
-	tmpMovePos.z += 500.0f;
+	tmpMovePos.x += offsetPosition.x;
+	tmpMovePos.z += offsetPosition.z;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
@@ -47,4 +47,5 @@ void CameraObjectStateNormal::Input(CameraObjectBase* _owner, const InputState& 
 void CameraObjectStateNormal::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::NORMAL;
+	offsetPosition = _owner->GetOffsetPosition();
 }

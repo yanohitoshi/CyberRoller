@@ -8,6 +8,7 @@ enum class CameraState
 	DANCE,
 	GAMEOVER,
 	SCENECLEAR,
+	NONE
 };
 
 class CameraObjectStateBase
@@ -54,5 +55,6 @@ protected:
 	// 線形保管時にデルタタイムをかけるとき用の補正定数
 	const float DeltaCorrection;
 	CameraState state;
+	Vector3 offsetPosition;
 };
 

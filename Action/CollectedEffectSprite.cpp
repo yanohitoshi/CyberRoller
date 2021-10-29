@@ -24,7 +24,7 @@ CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/Particle5.png");
+	tex = RENDERER->GetTexture("Assets/sprite/AuroraRing.png");
 	sprite->SetTexture(tex);
 	alpha = 1.0f;
 	sprite->SetAlpha(alpha);
@@ -41,7 +41,7 @@ void CollectedEffectSprite::UpdateGameObject(float _deltaTime)
 {
 	if (sprite->GetVisible())
 	{
-		scale += 0.05;
+		scale += 0.1;
 		sprite->SetScale(scale);
 		alpha -= 0.05;
 		sprite->SetAlpha(alpha);

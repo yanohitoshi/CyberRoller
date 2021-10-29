@@ -19,7 +19,7 @@ public:
 	@param	当たり判定用AABB
 	@param	オブジェクト判別用tag
 	*/
-	CameraChangePoint(const Vector3& _p, const AABB& _box, const Tag& _objectTag);
+	CameraChangePoint(const Vector3& _p, const AABB& _box,Vector3& _changeOffset ,const Tag& _objectTag);
 
 	/*
 	@fn デストラクタ
@@ -44,5 +44,7 @@ private:
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
+
+	Vector3 changeOffset;
 };
 

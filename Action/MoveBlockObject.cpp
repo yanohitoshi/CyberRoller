@@ -15,18 +15,18 @@
 @param	オブジェクト判別用tag
 @param  動く床に必要なデータ構造体
 */
-MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data)
-	:GameObject(false, _objectTag)
+MoveBlockObject::MoveBlockObject(const Vector3& _p, const Tag& _objectTag, MoveBlockData _data)
+	: GameObject(false, _objectTag)
 	, CorrectionAabbValue(0.1f)
 {
 	//GameObjectメンバ変数の初期化
 	SetPosition(_p);
-	SetScale(_size);
+	SetScale(_data.objectSize);
 	tag = _objectTag;
 	state = Active;
-	initPos = _p;
-	goalPos = initPos + _data.distance;
 	direction = _data.direction;
+	initPos = _p;
+	goalPos = initPos + direction * _data.distance;
 	moveSpeed = _data.speed;
 	moveTag = _data.tag;
 	inversionFlag = false;
@@ -59,7 +59,6 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Vector3& _size, const 
 */
 MoveBlockObject::~MoveBlockObject()
 {
-	//geometryInstanceComponent->RemoveGeometryInstanceManager();
 }
 
 /*

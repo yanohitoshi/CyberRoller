@@ -222,8 +222,14 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(35):
+	case(33):
 		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		break;
+	case(34):
+		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::SECOND);
+		break;
+	case(35):
+		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 	}
 }
@@ -371,13 +377,13 @@ void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	// レイヤー1のマップオブジェクトのポジション
 	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
 
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (CameraDirectingData)
-	{
-	case(38):
-		AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(1600.0f,1800.0f,4000.0f) };
-		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
-		break;
-	}
+	//// マップデータを見てそれぞれのオブジェクトを生成
+	//switch (CameraDirectingData)
+	//{
+	//case(38):
+	//	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(1600.0f,1800.0f,4000.0f) };
+	//	// ブロックオブジェクト生成
+	//	new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
+	//	break;
+	//}
 }

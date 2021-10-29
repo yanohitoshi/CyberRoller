@@ -148,6 +148,22 @@ private:
 	void CreateLayer12(int _indexX, int _indexY);
 
 	/*
+	@fn レイヤー13クリエイター
+	@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer13(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー14クリエイター
+	@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer14(int _indexX, int _indexY);
+
+	/*
 	@fn カメラモード変更ポイント生成
 	@brief  カメラモード変更ポイントの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
@@ -174,6 +190,8 @@ private:
 	std::vector<std::vector<int>> layer10StageData;
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
+	std::vector<std::vector<int>> layer13StageData;
+	std::vector<std::vector<int>> layer14StageData;
 
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;

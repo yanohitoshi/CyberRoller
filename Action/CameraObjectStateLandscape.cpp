@@ -12,8 +12,8 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	lerpObjectPos = lerpObject->GetPosition();
 	// 仮の移動ポジション変数に代入
 	tmpMovePos = lerpObjectPos;
-	tmpMovePos.z += 600.0f;
-	tmpMovePos.y += 600.0f;
+	tmpMovePos.z += offsetPosition.z;
+	tmpMovePos.y += offsetPosition.y;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
@@ -48,4 +48,5 @@ void CameraObjectStateLandscape::Input(CameraObjectBase* _owner, const InputStat
 void CameraObjectStateLandscape::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::LANDSCAPE;
+	offsetPosition = _owner->GetOffsetPosition();
 }

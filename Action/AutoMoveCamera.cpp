@@ -16,6 +16,7 @@
 
 AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	: CameraObjectBase(false, Tag::CAMERA)
+	, NormalOffset(Vector3(-600.0f, 0.0f, 500.0f))
 {
 	// メンバー変数の初期化
 	SetPosition(_pos);
@@ -23,6 +24,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	forwardVec = Vector3::UnitX;
 	tmpMovePos = Vector3::Zero;
 	lerpObjectPos = Vector3::Zero;
+	offSetPosition = NormalOffset;
 	// プレイヤーのポインタを保存
 	playerObject = _playerObject;
 
@@ -32,7 +34,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	AddStatePoolMap(new CameraObjectStateGameOver(), CameraState::GAMEOVER);
 	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
 
-	nowState = CameraState::NORMAL;
+	nowState = CameraState::NONE;
 	nextState = CameraState::NORMAL;
 }
 
@@ -101,6 +103,7 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 	}
 
 	nextState = CameraState::NORMAL;
+	offSetPosition = NormalOffset;
 }
 
 void AutoMoveCamera::GameObjectInput(const InputState& _keyState)

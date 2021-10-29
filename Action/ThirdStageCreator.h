@@ -44,28 +44,6 @@ public:
 
 private:
 
-	// 押し出し板のナンバー列挙
-	// 現在の仕様上こういった形でしか列挙出来ませんでした。
-	// 改善案模索中です
-	enum ThirdStagePushBoxNumber
-	{
-		FRONT_PUSH_BOX = 7,
-		RIGHT_PUSH_BOX = 44,
-	};
-
-	// 動く床のナンバー列挙
-	// 現在の仕様上こういった形でしか列挙出来ませんでした。
-	// 改善案模索中です
-	enum MoveGroundNumber
-	{
-		// レイヤー4のナンバー列挙
-		THIRD_STAGE_FRONT_MOVE_GROUND = 5,
-		THIRD_STAGE_BACK_MOVE_GROUND = 7,
-		// レイヤー5のナンバー列挙
-		THIRD_STAGE_LEFT_MOVE_GROUND = 8,
-		THIRD_STAGE_RIGHT_MOVE_GROUND = 9,
-	};
-
 	/*
 	@fn レイヤー1クリエイター
 	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う
@@ -162,30 +140,6 @@ private:
 	void CreateLayer12(int _indexX, int _indexY);
 
 	/*
-	@fn レイヤー13クリエイター
-	@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer13(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー14クリエイター
-	@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer14(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー15クリエイター
-	@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer15(int _indexX, int _indexY);
-
-	/*
 	@fn カメラモード変更ポイント生成
 	@brief  カメラモード変更ポイントの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
@@ -212,9 +166,6 @@ private:
 	std::vector<std::vector<int>> layer10StageData;
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
-	std::vector<std::vector<int>> layer13StageData;
-	std::vector<std::vector<int>> layer14StageData;
-	std::vector<std::vector<int>> layer15StageData;
 
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;

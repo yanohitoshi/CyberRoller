@@ -35,5 +35,6 @@ public:
 
 private:
 
+	const Vector3 NormalOffset;
 };
 

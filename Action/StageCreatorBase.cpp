@@ -33,7 +33,7 @@ StageCreatorBase::StageCreatorBase(bool _reUseGameObject, const Tag _objectTag)
 	, MoveWallSpeed(300.0f)
 	, ShiftSwitchPositionZ(100.0f)
 	, PlayerPositionZ(500.0f)
-	, MaxLayer(17)
+	, MaxLayer(18)
 	, lastMoveWallBlock(nullptr)
 {
 	// レイヤーのZ軸ポジションの初期化
@@ -178,10 +178,11 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 @param　速度
 @param　どの方向に動くのか判別するためのタグ
 */
-void StageCreatorBase::SetMoveBlockData(const Vector3 _distance, const Vector3 _direction, const float _speed, MoveDirectionTag _moveTag)
+void StageCreatorBase::SetMoveBlockData(const float _distance, const Vector3 _direction, const float _speed, const Vector3 _objectSize, MoveDirectionTag _moveTag)
 {
 	moveBlockData.distance = _distance;
 	moveBlockData.direction = _direction;
+	moveBlockData.objectSize = _objectSize;
 	moveBlockData.speed = _speed;
 	moveBlockData.tag = _moveTag;
 }

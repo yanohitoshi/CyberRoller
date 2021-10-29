@@ -18,7 +18,8 @@ struct MoveBlockData
 {
 	MoveDirectionTag tag;
 	Vector3 direction;
-	Vector3 distance;
+	Vector3 objectSize;
+	float distance;
 	float speed;
 };
 
@@ -39,7 +40,7 @@ public:
 	@param	オブジェクト判別用tag
 	@param  動く床に必要なデータ構造体
 	*/
-	MoveBlockObject(const Vector3& _p, const Vector3& _size, const Tag& _objectTag, MoveBlockData _data);
+	MoveBlockObject(const Vector3& _p, const Tag& _objectTag, MoveBlockData _data);
 
 	/*
 	@fn デストラクタ
