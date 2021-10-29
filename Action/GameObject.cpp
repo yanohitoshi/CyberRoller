@@ -270,6 +270,7 @@ std::vector<GameObject*> GameObject::FindGameObject(Tag _tag)
 */
 void GameObject::AddGameObject(GameObject* _object)
 {
+
 	// 途中で追加されたオブジェクトを一度一時追加用配列に追加
 	if (updatingGameObject)
 	{

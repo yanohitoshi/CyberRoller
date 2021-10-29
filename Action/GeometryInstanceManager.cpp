@@ -185,13 +185,9 @@ void GeometryInstanceManager::Draw(Shader* _shader)
 		glBindVertexArray(geometryInstanceGameObjectInfoMap[itr->first].vertexArray);
 
 		glDrawElementsInstanced(GL_TRIANGLES,
-
 			geometryInstanceGameObjectInfoMap[itr->first].numIndices,
-
 			GL_UNSIGNED_INT,
-
 			0,
-
 			static_cast<GLsizei>(itr->second.size()));
 
 		glBindVertexArray(0);
