@@ -33,10 +33,6 @@ CameraState CameraObjectStateGameOver::Update(CameraObjectBase* _owner, float _d
 	return state;
 }
 
-void CameraObjectStateGameOver::Input(CameraObjectBase* _owner, const InputState& _keyState)
-{
-}
-
 void CameraObjectStateGameOver::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::GAMEOVER;

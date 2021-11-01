@@ -13,6 +13,7 @@
 #include "CameraObjectStateDance.h"
 #include "CameraObjectStateGameOver.h"
 #include "CameraObjectStateSceneClear.h"
+#include "CameraObjectStateSceneStart.h"
 
 AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	: CameraObjectBase(false, Tag::CAMERA)
@@ -33,8 +34,10 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	AddStatePoolMap(new CameraObjectStateDance(), CameraState::DANCE);
 	AddStatePoolMap(new CameraObjectStateGameOver(), CameraState::GAMEOVER);
 	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
+	AddStatePoolMap(new CameraObjectStateSceneStart(), CameraState::SCENESTART);
 
 	nowState = CameraState::NONE;
+	//nextState = CameraState::SCENESTART;
 	nextState = CameraState::NORMAL;
 }
 

@@ -35,7 +35,6 @@
     <ClCompile Include="Skeleton.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="ColliderComponent.cpp">
       <Filter>Components\Collider</Filter>
     </ClCompile>
@@ -564,6 +563,15 @@
     <ClCompile Include="CollectedEffectSprite.cpp">
       <Filter>UI\SpriteUI\CollectionUI</Filter>
     </ClCompile>
+    <ClCompile Include="CameraObjectStateSceneStart.cpp">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObject.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -605,7 +613,6 @@
     <ClInclude Include="MatrixPalette.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h" />
     <ClInclude Include="ColliderComponent.h">
       <Filter>Components\Collider</Filter>
     </ClInclude>
@@ -1134,6 +1141,15 @@
     <ClInclude Include="CollectedEffectSprite.h">
       <Filter>UI\SpriteUI\CollectionUI</Filter>
     </ClInclude>
+    <ClInclude Include="CameraObjectStateSceneStart.h">
+      <Filter>GameObjects\CameraObjects\CameraState</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObject.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1330,6 +1346,12 @@
     </Filter>
     <Filter Include="UI\SpriteUI\CollectionUI">
       <UniqueIdentifier>{e85f08fa-9667-491e-897d-d20ada9dd502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ac649ba1-4208-44c1-878a-5dedf3aecad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\ExplosionObject">
+      <UniqueIdentifier>{19f3cf6f-c5e5-458c-8879-a5f78f5d24d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -166,7 +166,6 @@ void StageCreatorBase::ProductionPlayer(int _data, int _indexX, int _indexY)
 		// プレイヤーオブジェクト生成
 		playerObject = new PlayerObject(pos, false, Tag::PLAYER);
 
-		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
 		GameObject::CreateMainCamera(pos, playerObject);
 	}
 }

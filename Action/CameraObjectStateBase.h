@@ -8,6 +8,7 @@ enum class CameraState
 	DANCE,
 	GAMEOVER,
 	SCENECLEAR,
+	SCENESTART,
 	NONE
 };
 

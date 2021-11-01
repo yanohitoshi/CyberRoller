@@ -137,6 +137,10 @@ void FirstStageCreator::CreateStage()
 	}
 }
 
+void FirstStageCreator::CreateCamera()
+{
+}
+
 /*
 @fn プレイヤーを生成する
 */
@@ -375,15 +379,14 @@ void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+	Vector3 cameraPos = Vector3(Offset * _indexX, -Offset * _indexY, 3000.0f);
 
-	//// マップデータを見てそれぞれのオブジェクトを生成
-	//switch (CameraDirectingData)
-	//{
-	//case(38):
-	//	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(1600.0f,1800.0f,4000.0f) };
-	//	// ブロックオブジェクト生成
-	//	new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
-	//	break;
-	//}
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (CameraDirectingData)
+	{
+	case(17):
+		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
+		GameObject::CreateMainCamera(cameraPos, playerObject);
+		break;
+	}
 }

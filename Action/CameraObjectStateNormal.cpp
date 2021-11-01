@@ -40,10 +40,6 @@ CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _del
 	return state;
 }
 
-void CameraObjectStateNormal::Input(CameraObjectBase* _owner, const InputState& _keyState)
-{
-}
-
 void CameraObjectStateNormal::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::NORMAL;

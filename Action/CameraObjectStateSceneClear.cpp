@@ -42,10 +42,6 @@ CameraState CameraObjectStateSceneClear::Update(CameraObjectBase* _owner, float 
 	return state;
 }
 
-void CameraObjectStateSceneClear::Input(CameraObjectBase* _owner, const InputState& _keyState)
-{
-}
-
 void CameraObjectStateSceneClear::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::SCENECLEAR;

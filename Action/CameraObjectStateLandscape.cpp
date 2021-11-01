@@ -41,10 +41,6 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	return state;
 }
 
-void CameraObjectStateLandscape::Input(CameraObjectBase* _owner, const InputState& _keyState)
-{
-}
-
 void CameraObjectStateLandscape::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::LANDSCAPE;

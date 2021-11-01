@@ -38,10 +38,6 @@ CameraState CameraObjectStateDance::Update(CameraObjectBase* _owner, float _delt
 	return state;
 }
 
-void CameraObjectStateDance::Input(CameraObjectBase* _owner, const InputState& _keyState)
-{
-}
-
 void CameraObjectStateDance::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::DANCE;
