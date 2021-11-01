@@ -41,6 +41,8 @@ enum class PhysicsTag
 	CLEAR_POINT_TAG,
 	// 棘
 	NEEDLE_TAG,
+	// 爆弾
+	BOMB_TAG,
 	// リスポーンポイント
 	RESPOWN_TAG,
 	// 敵

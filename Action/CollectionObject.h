@@ -76,7 +76,7 @@ private:
 	int collectedCount;
 	int frameCount;
 	float value;
-	float a;
+	float rate;
 
 public:
 

@@ -21,6 +21,8 @@
 #include "CameraChangePoint.h"
 #include "CollectionObject.h"
 
+#include "ExplosionObject.h"
+
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
@@ -226,14 +228,8 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(33):
-		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::FIRST);
-		break;
-	case(34):
-		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::SECOND);
-		break;
-	case(35):
-		new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::THIRD);
+	case(40):
+		new ExplosionObject(layer2Pos, Tag::BOMB, 100.0f);
 		break;
 	}
 }

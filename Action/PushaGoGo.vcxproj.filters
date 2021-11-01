@@ -572,6 +572,21 @@
     <ClCompile Include="ExplosionObject.cpp">
       <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionObjectStateBase.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObjectStateIdle.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObjectStateExplosion.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObjectStateRespawn.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObjectStateStartExplosion.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1150,6 +1165,21 @@
     <ClInclude Include="ExplosionObject.h">
       <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionObjectStateBase.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateIdle.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateExplosion.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateRespawn.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateStartExplosion.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1352,6 +1382,9 @@
     </Filter>
     <Filter Include="GameObjects\StageObjects\ExplosionObject">
       <UniqueIdentifier>{19f3cf6f-c5e5-458c-8879-a5f78f5d24d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\ExplosionObject\state">
+      <UniqueIdentifier>{b9895e3a-2684-48a8-8bd3-9a1fc52f78d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

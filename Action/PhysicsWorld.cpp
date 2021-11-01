@@ -152,6 +152,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 		// プレイヤーとエネミーの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::ENEMY_TAG]);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::BOMB_TAG]);
 
 		// プレイヤーとクリアポイントの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::CLEAR_POINT_TAG]);
@@ -310,12 +311,14 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		// ジャンプアタック判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BOMB_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BOMB_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::GROUND_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);

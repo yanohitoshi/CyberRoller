@@ -103,7 +103,8 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// “G‚Æ“–‚½‚Á‚½‚ç
-	if (_hitObject.GetTag() == Tag::ENEMY || _physicsTag == PhysicsTag::SWITCH_TAG)
+	if (_hitObject.GetTag() == Tag::ENEMY || _physicsTag == PhysicsTag::SWITCH_TAG ||
+		_physicsTag == PhysicsTag::BOMB_TAG)
 	{
 		// ƒqƒbƒgƒtƒ‰ƒO‚ðtrue‚É
 		isHIt = true;

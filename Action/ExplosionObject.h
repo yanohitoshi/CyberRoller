@@ -1,7 +1,11 @@
 #pragma once
 #include "GameObject.h"
 
+class MeshComponent;
 class Mesh;
+class BoxCollider;
+class ExplosionObjectStateBase;
+enum class ExplosionObjectState;
 
 class ExplosionObject :
     public GameObject
@@ -16,7 +20,7 @@ public:
 	@param	追跡するオブジェクトのポインタ
 	@param	追跡エリアの値
 	*/
-	ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue);
+	ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _areaValue);
 
 	/*
 	@fn デストラクタ
@@ -41,6 +45,24 @@ public:
 private:
 
 	/*
+	@brief ステートプール用マップにステートクラスを追加する関数
+	@param	_state 追加するステートクラスのポインタ
+	@param	_stateTag 鍵となるタグ
+	*/
+	void AddStatePoolMap(ExplosionObjectStateBase* _state, ExplosionObjectState _stateTag);
+
+	/*
+	@brief ステートプール用マップからステートクラスを削除する関数
+	@param	_stateTag 鍵となるタグ
+	*/
+	void RemoveStatePoolMap(ExplosionObjectState _stateTag);
+
+	/*
+	@brief ステートプール用マップをクリアする
+	*/
+	void ClearStatePoolMap();
+
+	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
 	@param	当たり判定タグ
@@ -49,10 +71,26 @@ private:
 
 	// Meshの読み込みを行うクラス
 	Mesh* mesh;
+	// 3Dモデルの描画を行うクラス
+	MeshComponent* meshComponent;
+	// AABBの当たり判定を行うクラス
+	BoxCollider* boxCollider;
 
-	// 回転角度
-	const float Angle;
+	ExplosionObjectState nowState;
+	ExplosionObjectState nextState;
+
+	bool isExplosion;
+	bool isHitJumpAttackPlayer;
+
+	Vector3 hitPosition;
+
+	// 全stateが格納されるマップ
+	std::unordered_map<ExplosionObjectState, ExplosionObjectStateBase*> statePoolMap;
 
 public:
+
+	bool GetIsHitJumpAttackPlayer() { return isHitJumpAttackPlayer; }
+	Vector3 GetHitPosition() { return hitPosition; }
+
 };
 

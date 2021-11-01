@@ -170,6 +170,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="ExplosionObject.cpp" />
+    <ClCompile Include="ExplosionObjectStateBase.cpp" />
+    <ClCompile Include="ExplosionObjectStateExplosion.cpp" />
+    <ClCompile Include="ExplosionObjectStateStartExplosion.cpp" />
+    <ClCompile Include="ExplosionObjectStateIdle.cpp" />
+    <ClCompile Include="ExplosionObjectStateRespawn.cpp" />
     <ClCompile Include="GeometryInstanceComponent.cpp" />
     <ClCompile Include="GeometryInstanceManager.cpp" />
     <ClCompile Include="GroundObject.cpp" />
@@ -378,6 +383,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="ExplosionObject.h" />
+    <ClInclude Include="ExplosionObjectStateBase.h" />
+    <ClInclude Include="ExplosionObjectStateExplosion.h" />
+    <ClInclude Include="ExplosionObjectStateStartExplosion.h" />
+    <ClInclude Include="ExplosionObjectStateIdle.h" />
+    <ClInclude Include="ExplosionObjectStateRespawn.h" />
     <ClInclude Include="GeometryInstanceComponent.h" />
     <ClInclude Include="GeometryInstanceManager.h" />
     <ClInclude Include="GroundObject.h" />

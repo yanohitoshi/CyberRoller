@@ -59,6 +59,8 @@ enum Tag
 	MOVE_GROUND,
 	// •Ç
 	WALL,
+	// ”š’e
+	BOMB,
 	// ž™
 	NEEDLE,
 	// ž™—pƒpƒlƒ‹

@@ -37,6 +37,7 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 
 	collectionTag = _collectionTag;
 	value = 0.0f;
+	rate = 0.0f;
 	frameCount = 0;
 	collectedRotationAngle = 0.0f;
 	collectedCount = 0;
@@ -86,10 +87,10 @@ void CollectionObject::Movable(float _deltaTime)
 	if (frameCount % 30 == 0)
 	{
 		++value;
-		a = Math::Cos(value);
+		rate = Math::Cos(value);
 	}
 
-	velocity.z = a * 50.0f;
+	velocity.z = rate * 50.0f;
 
 	SetPosition(position + velocity * _deltaTime);
 }
