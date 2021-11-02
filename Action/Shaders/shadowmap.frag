@@ -25,6 +25,7 @@ uniform sampler2D uEmissiveMap;
 uniform sampler2D depthMap;
 
 uniform vec3 uCameraPos;
+uniform vec3 uColor = vec3(1.0f,1.0f,1.0f);
 
 uniform float uSpecPower;
 
@@ -33,8 +34,6 @@ uniform vec3 uAmbientLight;
 uniform float uLuminance;
 
 uniform DirectionalLight uDirLight;
-
-
 
 float ShadowCalculation(vec4 fragPosLightSpace);
 
@@ -73,7 +72,9 @@ void main()
     //    HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) ;
     //}
 
-    HiBrightBuffer =  texture(uEmissiveMap, fragTexCoord) * uLuminance;
+    //HiBrightBuffer = texture(uEmissiveMap, fragTexCoord) * uLuminance;
+    vec3 emissiveColor = texture(uEmissiveMap, fragTexCoord).rgb;
+    HiBrightBuffer = vec4(emissiveColor * uColor,0.0f) * uLuminance;
 
     HDRBuffer = vec4(result, 0.0);
 }

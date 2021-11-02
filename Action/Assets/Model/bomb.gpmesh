@@ -8,9 +8,9 @@
 	"diffusemap":"Assets/Model/bomb.png",
 	"nomalmap":"Assets/Model/T_ScientificDevice04_N.png",
     "specularmap":"none",
-    "emissivemap":"Assets/Model/Bomb_E_1.png",
+    "emissivemap":"Assets/Model/T_ScientificDevice04_E.png",
 	"specularPower":100.0,
-    "luminance":"5.0",
+    "luminance":"10.0",
 	"vertices":[
 		[-64.049492,45.804539,-64.968651,0.433071,-0.251969,-0.866142,0.037903,0.029205],
 		[-67.241501,48.906410,-67.407631,0.433071,-0.251969,-0.866142,0.035919,0.042175],

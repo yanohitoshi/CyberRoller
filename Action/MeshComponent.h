@@ -3,6 +3,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "Component.h"
+#include "Math.h"
 
 // クラスの前方宣言
 class GameObject;
@@ -50,7 +51,8 @@ protected:
 	bool isColorChange;
 	// 輝度
 	float luminance;
-
+	// 色情報
+	Vector3 emissiveColor;
 	/*
 	@brief　使用するtextureをセットする
 	@param	_shader 使用するシェーダークラスのポインタ
@@ -69,6 +71,8 @@ public: //ゲッターセッター
 	@return 設定されたMeshクラスのポインタ
 	*/
 	virtual Mesh* GetMesh() { return mesh; }
+
+	void SetEmissiveColor(Vector3 _emissiveColor) { emissiveColor = _emissiveColor; }
 
 	/*
 	@brief　メッシュコンポーネントが使うTextureインデックスの設定

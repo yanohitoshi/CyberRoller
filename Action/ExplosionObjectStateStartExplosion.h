@@ -9,7 +9,9 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateStartExplosion(){};
+	ExplosionObjectStateStartExplosion()
+	: EmissiveColorBlue(Color::LightBlue)
+	, EmissiveColorRed(Color::Red){};
 
 	/*
 	@fn デストラクタ
@@ -33,9 +35,21 @@ public:
 	void Enter(ExplosionObject* _owner, float _deltaTime);
 
 private:
+	
+	/*
+	@fn 点滅処理
+	*/
+	void Flashing();
 
 	bool isHitJumpAttackPlayer;
 	// 吹っ飛ぶ方向ベクトル
 	Vector3 blowAwayDirection;
+
+	int explosionStart;
+
+	int colorChangeTime;
+	bool isRed;
+	const Vector3 EmissiveColorRed; 
+	const Vector3 EmissiveColorBlue;
 };
 

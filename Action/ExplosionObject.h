@@ -79,18 +79,29 @@ private:
 	ExplosionObjectState nowState;
 	ExplosionObjectState nextState;
 
-	bool isExplosion;
+	bool isStartExplosion;
+	bool isExplode;
 	bool isHitJumpAttackPlayer;
 
+	// プレイヤーが当たった時のプレイヤーのポジション
 	Vector3 hitPosition;
+	// 初期ポジション
+	Vector3 firstPosition;
 
 	// 全stateが格納されるマップ
 	std::unordered_map<ExplosionObjectState, ExplosionObjectStateBase*> statePoolMap;
 
 public:
 
+	MeshComponent* GetMeshComponent() { return meshComponent; }
+
+	bool GetIsExplode() { return isExplode; }
+	bool GetIsStartExplosion() { return isStartExplosion; }
 	bool GetIsHitJumpAttackPlayer() { return isHitJumpAttackPlayer; }
 	Vector3 GetHitPosition() { return hitPosition; }
+	Vector3 GetFirstPosition() { return firstPosition; }
 
+	void SetIsExplode(bool _isExplode) { isExplode = _isExplode; }
+	void SetIsStartExplosion(bool _isStartExplosion) { isStartExplosion = _isStartExplosion; }
 };
 

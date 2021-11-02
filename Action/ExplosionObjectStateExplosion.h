@@ -9,8 +9,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateExplosion()
-		: MoveSpeed(50.0f) {};
+	ExplosionObjectStateExplosion(){};
 
 	/*
 	@fn デストラクタ
@@ -35,9 +34,6 @@ public:
 
 private:
 
-	int frameCount;
-	float rate;
-	float angle;
-	const float MoveSpeed;
+	int explosionCount;
 };
 

@@ -5,7 +5,9 @@
 #include "BoxCollider.h"
 #include "ExplosionObjectStateBase.h"
 #include "ExplosionObjectStateIdle.h"
-
+#include "ExplosionObjectStateStartExplosion.h"
+#include "ExplosionObjectStateExplosion.h"
+#include "ExplosionObjectStateRespawn.h"
 
 ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _areaValue)
 	: GameObject(false, _objectTag)
@@ -16,14 +18,16 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, floa
 	position.z += 100.0f;
 	SetPosition(position);
 	SetScale(Vector3(0.5f, 0.5f, 0.5f));
-	isExplosion = false;
+	isStartExplosion = false;
 	isHitJumpAttackPlayer = false;
 	hitPosition = Vector3(0.0f,0.0f,0.0f);
-
+	// 初期ポジションを保存
+	firstPosition = position;
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/bomb.gpmesh"));
+	meshComponent->SetEmissiveColor(Color::LightBlue);
 
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
@@ -36,20 +40,26 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, floa
 	boxCollider->SetObjectBox(aabb);
 
 	AddStatePoolMap(new ExplosionObjectStateIdle(), ExplosionObjectState::IDLE);
+	AddStatePoolMap(new ExplosionObjectStateStartExplosion(), ExplosionObjectState::EXPLOSION_START);
+	AddStatePoolMap(new ExplosionObjectStateExplosion(), ExplosionObjectState::EXPLOSION);
+	AddStatePoolMap(new ExplosionObjectStateRespawn(), ExplosionObjectState::RESPAWN);
 
-	nowState = ExplosionObjectState::NONE;
+	nowState = ExplosionObjectState::NUM;
 	nextState = ExplosionObjectState::IDLE;
 }
 
 ExplosionObject::~ExplosionObject()
 {
 	RemoveStatePoolMap(ExplosionObjectState::IDLE);
+	RemoveStatePoolMap(ExplosionObjectState::EXPLOSION_START);
+	RemoveStatePoolMap(ExplosionObjectState::EXPLOSION);
+	RemoveStatePoolMap(ExplosionObjectState::RESPAWN);
 	ClearStatePoolMap();
 }
 
 void ExplosionObject::UpdateGameObject(float _deltaTime)
 {
-	if (isExplosion)
+	if (isStartExplosion)
 	{
 		nextState = ExplosionObjectState::EXPLOSION_START;
 	}
@@ -116,18 +126,18 @@ void ExplosionObject::ClearStatePoolMap()
 
 void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	if (_physicsTag == PhysicsTag::PLAYER_TAG || _physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
-	{
-		isExplosion = true;
-	}
 
 	if (_physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
 	{
+		isStartExplosion = true;
 		isHitJumpAttackPlayer = true;
 		hitPosition = _hitObject.GetPosition();
 	}
-	else if(_physicsTag == PhysicsTag::PLAYER_TAG)
+	
+	if(_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
+		isStartExplosion = true;
 		isHitJumpAttackPlayer = false;
+		hitPosition = Vector3::Zero;
 	}
 }

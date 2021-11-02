@@ -101,7 +101,6 @@ private:
 		unsigned int instanceVAO;
 		//メッシュのポインタ
 		class Mesh* mesh;
-
 	};
 
 	/*

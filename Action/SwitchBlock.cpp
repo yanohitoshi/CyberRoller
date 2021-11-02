@@ -29,7 +29,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	, ShiftStopPosition(40.0f)
 	, AllClearColer(Vector3(1.0f, 1.0f, 0.5f))
 	, OnColor(Vector3(1.0f, 0.1f, 0.1f))
-	, OffColor(Vector3(1.0f, 0.1f, 0.1f))
+	, OffColor(Vector3(0.35f, 0.35f, 0.35f))
 	,isTutorialSwitch(_isTutorial)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
@@ -195,10 +195,12 @@ void SwitchBlock::SetColorProcess()
 	if (onFlag == true && isAvailableSwitch == true)
 	{
 		luminance = 0.2f;
+		meshComponent->SetColor(OnColor);
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{
 		luminance = 0.0f;
+		meshComponent->SetColor(OffColor);
 	}
 	else if (isAvailableSwitch == false)
 	{

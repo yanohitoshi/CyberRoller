@@ -587,6 +587,9 @@
     <ClCompile Include="ExplosionObjectStateStartExplosion.cpp">
       <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionObjectEffectManager.cpp">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1180,6 +1183,9 @@
     <ClInclude Include="ExplosionObjectStateStartExplosion.h">
       <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionObjectEffectManager.h">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1385,6 +1391,9 @@
     </Filter>
     <Filter Include="GameObjects\StageObjects\ExplosionObject\state">
       <UniqueIdentifier>{b9895e3a-2684-48a8-8bd3-9a1fc52f78d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\ExplosionObject">
+      <UniqueIdentifier>{da241237-468a-4695-a9f9-a8a94e442869}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

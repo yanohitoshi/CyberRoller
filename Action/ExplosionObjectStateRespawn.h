@@ -9,8 +9,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateRespawn()
-		: MoveSpeed(50.0f) {};
+	ExplosionObjectStateRespawn(){};
 
 	/*
 	@fn デストラクタ
@@ -35,9 +34,7 @@ public:
 
 private:
 
-	int frameCount;
-	float rate;
-	float angle;
-	const float MoveSpeed;
+	int respawnCount;
+
 };
 

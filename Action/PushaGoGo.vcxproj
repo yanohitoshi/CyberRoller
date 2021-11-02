@@ -170,6 +170,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="ExplosionObject.cpp" />
+    <ClCompile Include="ExplosionObjectEffectManager.cpp" />
     <ClCompile Include="ExplosionObjectStateBase.cpp" />
     <ClCompile Include="ExplosionObjectStateExplosion.cpp" />
     <ClCompile Include="ExplosionObjectStateStartExplosion.cpp" />
@@ -383,6 +384,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="ExplosionObject.h" />
+    <ClInclude Include="ExplosionObjectEffectManager.h" />
     <ClInclude Include="ExplosionObjectStateBase.h" />
     <ClInclude Include="ExplosionObjectStateExplosion.h" />
     <ClInclude Include="ExplosionObjectStateStartExplosion.h" />

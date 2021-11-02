@@ -22,9 +22,6 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/goods_model/SM_Small_Gems.gpmesh"));
 	
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/bomb.gpmesh"));
-
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得

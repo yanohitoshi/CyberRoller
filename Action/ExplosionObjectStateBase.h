@@ -15,12 +15,8 @@ enum class ExplosionObjectState
 	EXPLOSION,
 	// 点滅状態
 	EXPLOSION_START,
-	// 移動しながら点滅
-	MOVE_EXPLOSION_START,
 	// 復帰待機
 	RESPAWN,
-	// 
-	NONE,
 	// ステートの総数
 	NUM,
 };

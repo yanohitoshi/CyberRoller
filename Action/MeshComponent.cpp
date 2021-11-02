@@ -21,6 +21,7 @@ MeshComponent::MeshComponent(GameObject* _owner, bool _skelton,bool _color)
 	, visible(true)
 	, isSkelton(_skelton)
 	, isColorChange(_color)
+	, emissiveColor(Vector3(1.0f, 1.0f, 1.0f))
 {
 	//レンダラーにポインターを送る
 	RENDERER->AddMeshComponent(this);
@@ -50,6 +51,11 @@ void MeshComponent::Draw(Shader* _shader)
 			luminance = owner->GetLuminance();
 
 			_shader->SetFloatUniform("uLuminance", luminance);
+
+			if (!isColorChange)
+			{
+				_shader->SetVectorUniform("uColor", emissiveColor);
+			}
 
 			SetTextureToShader(_shader);
 
