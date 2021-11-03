@@ -34,6 +34,7 @@ public:
 
 private:
 
+	// ”š”­‚ÌŠÔ‚ğƒJƒEƒ“ƒg‚·‚é•Ï”
 	int explosionCount;
 };
 

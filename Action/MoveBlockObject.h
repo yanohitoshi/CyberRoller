@@ -8,7 +8,6 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
-class GeometryInstanceComponent;
 
 /*
 @struct MoveBlockData

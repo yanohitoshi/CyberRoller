@@ -59,6 +59,8 @@ private:
 
 protected:
 	
+	void Rotation(GameObject* _owner,const float _angle , const Vector3 _axis);
+
 	/*
 	@fn 生存時間をカウントダウンする関数。派生クラスで更新関数を決定した場合そこに追加すること。
 	*/

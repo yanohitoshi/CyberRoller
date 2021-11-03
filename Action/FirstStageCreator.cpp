@@ -22,6 +22,7 @@
 #include "CollectionObject.h"
 
 #include "ExplosionObject.h"
+#include "BreakBlockObject.h"
 
 /*
 @fn コンストラクタ
@@ -230,6 +231,9 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		break;
 	case(40):
 		new ExplosionObject(layer2Pos, Tag::BOMB, 100.0f);
+		break;
+	case(39):
+		new BreakBlockObject(layer2Pos, BlockSize,Tag::BREAK_GROUND);
 		break;
 	}
 }

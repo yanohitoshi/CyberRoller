@@ -75,3 +75,17 @@ void ParticleEffectBase::LifeCountDown()
 	}
 
 }
+
+/*
+@fn ‰ñ“]ŒvŽZˆ—
+@param _axis ‰ñ“]Ž²
+*/
+void ParticleEffectBase::Rotation(GameObject* _owner, const float _angle, const Vector3 _axis)
+{
+	//ƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
+	float radian = Math::ToRadians(_angle);
+	Quaternion rot = _owner->GetRotation();
+	Quaternion inc(_axis, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	_owner->SetRotation(target);
+}

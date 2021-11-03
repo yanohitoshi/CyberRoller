@@ -10,8 +10,8 @@ public:
 	@fn コンストラクタ
 	*/
 	ExplosionObjectStateStartExplosion()
-	: EmissiveColorBlue(Color::LightBlue)
-	, EmissiveColorRed(Color::Red){};
+	: BlowAwaySpeed(1000.0f)
+	, FirstColorChangeTime(15){};
 
 	/*
 	@fn デストラクタ
@@ -49,7 +49,6 @@ private:
 
 	int colorChangeTime;
 	bool isRed;
-	const Vector3 EmissiveColorRed; 
-	const Vector3 EmissiveColorBlue;
+	const float BlowAwaySpeed;
+	const int FirstColorChangeTime;
 };
-

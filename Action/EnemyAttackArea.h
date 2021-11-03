@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾
 class SphereCollider;
 class EnemyObjectBase;

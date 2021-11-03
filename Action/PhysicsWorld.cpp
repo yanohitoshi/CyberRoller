@@ -141,11 +141,13 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA]);
 		// 収集物との判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::COLLECTION_TAG]);
+
 		// プレイヤーと地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
-		
 		// プレイヤーと動く地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
+		// プレイヤーと壊れる地面の判定処理
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
 
 		// プレイヤーと壁の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::WALL_TAG]);
@@ -170,6 +172,16 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::SWITCH_TAG]);
 	}
 
+	if (_box->GetBoxTag() == PhysicsTag::BOMB_TAG)
+	{
+		// プレイヤーと地面の判定処理
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
+		// プレイヤーと動く地面の判定処理
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
+		// プレイヤーと壊れる地面の判定処理
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
+	}
+
 	if (_box->GetBoxTag() == PhysicsTag::ENEMY_TAG)
 	{
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
@@ -186,7 +198,6 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 	{
 		// 動く床とジャンプスイッチの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::JUMP_SWITCH_TAG]);
-
 		// 動く床と棘配置用床の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::NEEDLE_TAG]);
 	}
@@ -215,6 +226,11 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active && itr->GetOwner()->GetState() != State::Disabling)
+		{
+			continue;
+		}
+
+		if (itr->GetOwner()->GetTag() == Tag::BREAK_GROUND && itr->GetOwner()->GetState() == State::Disabling)
 		{
 			continue;
 		}
@@ -283,6 +299,8 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 
 		// 接地判定スフィアと動く地面の当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
+		// 接地判定スフィアと壊れる地面の当たり判定
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
 
 		// 接地判定スフィアとスイッチの土台の当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_BASE_TAG]);
@@ -304,6 +322,14 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	{
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
+	}
+
+	if (_sphere->GetSphereTag() == PhysicsTag::EXPLOSION_AREA_TAG)
+	{
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
+		// 接地判定スフィアとジャンプスイッチの当たり判定
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
@@ -421,9 +447,9 @@ void PhysicsWorld::DebugShowBox()
 	lineShader->SetMatrixUniform("uViewProj", viewProj);
 
 	// 当たり判定ボックス描画
-	DrawBoxs(boxesMap[PhysicsTag::NEEDLE_TAG], Color::Red);
-	DrawBoxs(boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA], Color::Blue);
-	//DrawBoxs(mPlayerBoxes, Color::LightPink);
+	DrawBoxs(boxesMap[PhysicsTag::PLAYER_TAG], Color::Red);
+	DrawBoxs(boxesMap[PhysicsTag::BOMB_TAG], Color::Blue);
+	DrawBoxs(boxesMap[PhysicsTag::BREAK_GROUND_TAG], Color::LightPink);
 	//DrawBoxs(mEnemyBoxes, Color::White);
 	//DrawBoxs(mWeaponBoxes, Color::LightGreen);
 	//DrawBoxs(mEnemyAttackDecisionBoxes, Color::Yellow);

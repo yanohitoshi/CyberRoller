@@ -34,6 +34,7 @@ public:
 
 private:
 
+	// リスポーン中のカウント変数
 	int respawnCount;
 
 };

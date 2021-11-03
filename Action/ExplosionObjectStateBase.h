@@ -30,7 +30,9 @@ public:
 	@fn コンストラクタ
 	*/
 	ExplosionObjectStateBase()
-	: VerticalMoveSpeed(50.0f){};
+	: VerticalMoveSpeed(50.0f)
+	, EmissiveColorRed(Color::Red)
+	, EmissiveColorBlue(Color::LightBlue){};
 
 	/*
 	@fn デストラクタ
@@ -53,13 +55,13 @@ public:
 	*/
 	virtual void Enter(ExplosionObject* _owner, float _deltaTime) {};
 
-	///*
-	//@fn 前方ベクトルを用いてキャラクターを回転させる関数
-	//@param	_owner 親クラスのポインタ
-	//@param	_forward 今のフレームの前方ベクトル
-	//@param	_tmpForward 前のフレームの前方ベクトル
-	//*/
-	//void RotationProcess(EnemyObjectBase* _owner, Vector3 _forward, Vector3 _tmpForward);
+	/*
+	@fn 前方ベクトルを用いてキャラクターを回転させる関数
+	@param	_owner 親クラスのポインタ
+	@param	_forward 今のフレームの前方ベクトル
+	@param	_tmpForward 前のフレームの前方ベクトル
+	*/
+	void RotationProcess(ExplosionObject* _owner,float _angle, Vector3 _axis);
 
 	void VerticalMove(ExplosionObject* _owner, float _deltaTime);
 
@@ -74,10 +76,17 @@ protected:
 	// 速度を格納するための変数
 	float moveSpeed;
 
+	// フレームをカウントする変数
 	int frameCount;
+	// 移動する速度に掛ける倍率
 	float rate;
+	// 角度
 	float angle;
+	// 縦移動する際の移動速度定数
 	const float VerticalMoveSpeed;
+	const Vector3 EmissiveColorRed;
+	const Vector3 EmissiveColorBlue;
+
 private:
 
 

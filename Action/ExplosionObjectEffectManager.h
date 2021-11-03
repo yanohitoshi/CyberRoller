@@ -63,8 +63,10 @@ private:
     //// ランダムの範囲
     //const int RandValue;
 
-    //// 1度だけ生成する用の生成フラグ変数
-    //bool generateExplosionEffectsFlag;
+    Vector3 effectPosition;
+    Vector3 effectVelocity;
+    // 1度だけ生成する用の生成フラグ変数
+    bool generateExplosionEffectsFlag;
     //// エフェクトが有効化されてからのフレームを測る
     //int effectFrameCount;
 };

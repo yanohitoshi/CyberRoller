@@ -17,6 +17,8 @@ enum class PhysicsTag
 	GROUND_TAG,
 	// 動く地面
 	MOVE_GROUND_TAG,
+	// 壊れる地面
+	BREAK_GROUND_TAG,
 	// 壁
 	WALL_TAG,
 	// プレイヤー
@@ -53,6 +55,8 @@ enum class PhysicsTag
 	PLAYER_TRACKING_AREA_TAG,
 	// 敵の攻撃判定エリア
 	ENEMY_ATTACK_AREA_TAG,
+	// 爆発判定エリア
+	EXPLOSION_AREA_TAG,
 	// カメラモードをbehindカメラにするエリア判定
 	CAMERA_MODE_CHANGE_AREA,
 

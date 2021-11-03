@@ -18,4 +18,5 @@ void ExplosionObjectStateExplosion::Enter(ExplosionObject* _owner, float _deltaT
 	state = ExplosionObjectState::EXPLOSION;
 	meshComponent = _owner->GetMeshComponent();
 	meshComponent->SetVisible(false);
+	_owner->SetIsExplode(true);
 }

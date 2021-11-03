@@ -50,6 +50,5 @@ private:
 	BoxCollider* boxCollider;
 	// プレイヤーがすり抜けないようにAABBのサイズを補正するための定数
 	const float CorrectionAabbValue;
-	int a;
 };
 

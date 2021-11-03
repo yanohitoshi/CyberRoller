@@ -590,6 +590,24 @@
     <ClCompile Include="ExplosionObjectEffectManager.cpp">
       <Filter>GameObjects\Effect\ExplosionObject</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionEffect.cpp">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakBlockObject.cpp">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionArea.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakBlockObjectEffectManager.cpp">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DustEffect.cpp">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionRipplesEffect.cpp">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1186,6 +1204,24 @@
     <ClInclude Include="ExplosionObjectEffectManager.h">
       <Filter>GameObjects\Effect\ExplosionObject</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionEffect.h">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakBlockObject.h">
+      <Filter>GameObjects\StageObjects\GroundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionArea.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakBlockObjectEffectManager.h">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DustEffect.h">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionRipplesEffect.h">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1394,6 +1430,9 @@
     </Filter>
     <Filter Include="GameObjects\Effect\ExplosionObject">
       <UniqueIdentifier>{da241237-468a-4695-a9f9-a8a94e442869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Effect\BreakBlockObject">
+      <UniqueIdentifier>{bc3362b9-894b-4603-b523-41d691de77dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

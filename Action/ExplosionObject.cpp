@@ -8,6 +8,8 @@
 #include "ExplosionObjectStateStartExplosion.h"
 #include "ExplosionObjectStateExplosion.h"
 #include "ExplosionObjectStateRespawn.h"
+#include "ExplosionObjectEffectManager.h"
+#include "ExplosionArea.h"
 
 ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _areaValue)
 	: GameObject(false, _objectTag)
@@ -20,6 +22,7 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, floa
 	SetScale(Vector3(0.5f, 0.5f, 0.5f));
 	isStartExplosion = false;
 	isHitJumpAttackPlayer = false;
+	isHitExplosionObject = false;
 	hitPosition = Vector3(0.0f,0.0f,0.0f);
 	// 初期ポジションを保存
 	firstPosition = position;
@@ -36,7 +39,7 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, floa
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::BOMB_TAG, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,15.0f) };
+	AABB aabb = { Vector3(-100.0f,-100.0f,-100.0f),Vector3(100.0f,100.0f,100.0f) };
 	boxCollider->SetObjectBox(aabb);
 
 	AddStatePoolMap(new ExplosionObjectStateIdle(), ExplosionObjectState::IDLE);
@@ -46,6 +49,9 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, floa
 
 	nowState = ExplosionObjectState::NUM;
 	nextState = ExplosionObjectState::IDLE;
+
+	new ExplosionObjectEffectManager(this);
+	new ExplosionArea(Tag::EXPLOSION_AREA,this);
 }
 
 ExplosionObject::~ExplosionObject()
@@ -139,5 +145,14 @@ void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag
 		isStartExplosion = true;
 		isHitJumpAttackPlayer = false;
 		hitPosition = Vector3::Zero;
+	}
+
+	if (nowState == ExplosionObjectState::EXPLOSION_START)
+	{
+		if (_physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
+			_physicsTag == PhysicsTag::BREAK_GROUND_TAG || _physicsTag == PhysicsTag::ENEMY_TAG)
+		{
+			isHitExplosionObject = true;
+		}
 	}
 }

@@ -9,6 +9,9 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+/*
+@enum CollectionTag 何番目の収集物か判別するタグ
+*/
 enum class CollectionTag
 {
 	FIRST,
@@ -54,7 +57,7 @@ private:
 	void Movable(float _deltaTime);
 
 	/*
-	@fn 可動処理関数
+	@fn 収集された時の処理関数
 	*/
 	void Collected(float _deltaTime);
 
@@ -71,6 +74,10 @@ private:
 	BoxCollider* boxCollider;
 	CollectionTag collectionTag;
 
+	const float ShiftPositionZ;
+	const float CollectedSpeed;
+	const float VerticalMoveSpeed;
+
 	float collectedRotationAngle;
 	bool isCollected;
 	int collectedCount;
@@ -80,8 +87,16 @@ private:
 
 public:
 
+	/*
+	@fn 獲得されているかどうかを取得
+	@return isCollected 獲得されているかどうか
+	*/
 	bool GetIsCollected() { return isCollected; }
 
+	/*
+	@fn 何番目の収集物か判別するタグ取得
+	@return collectionTag 何番目の収集物か判別するタグ
+	*/
 	CollectionTag GetCollectionTag() { return collectionTag; }
 };
 

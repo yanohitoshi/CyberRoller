@@ -9,11 +9,14 @@
 
 CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, CollectionTag _collectionTag)
 	: GameObject(false, _objectTag)
+	, ShiftPositionZ(100.0f)
+	, CollectedSpeed(1200.0f)
+	, VerticalMoveSpeed(50.0f)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	velocity.Zero;
 	position = _pos;
-	position.z += 100.0f;
+	position.z += ShiftPositionZ;
 	SetPosition(position);
 	SetScale(Vector3(25.0f, 25.0f, 25.0f));
 
@@ -70,7 +73,7 @@ void CollectionObject::UpdateGameObject(float _deltaTime)
 
 void CollectionObject::RotationProcess(float _angle, Vector3 _axis)
 {
-	//ZŽ²‚ð10“x‰ñ“]‚³‚¹‚é
+	//_axisŽ²‚ð_angle“x‰ñ“]‚³‚¹‚é
 	float radian = Math::ToRadians(_angle);
 	Quaternion rot = this->GetRotation();
 	Quaternion inc(_axis, radian);
@@ -87,7 +90,7 @@ void CollectionObject::Movable(float _deltaTime)
 		rate = Math::Cos(value);
 	}
 
-	velocity.z = rate * 50.0f;
+	velocity.z = rate * VerticalMoveSpeed;
 
 	SetPosition(position + velocity * _deltaTime);
 }
@@ -100,7 +103,7 @@ void CollectionObject::Collected(float _deltaTime)
 
 	if (collectedCount <= 15)
 	{
-		velocity.z = 1200.0f;
+		velocity.z = CollectedSpeed;
 		SetPosition(position + velocity * _deltaTime);
 	}
 

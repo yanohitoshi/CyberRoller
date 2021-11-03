@@ -5,10 +5,11 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 {
 	++explosionStart;
 
-	if (explosionStart > 180)
+	if (explosionStart > 180 || _owner->GetIsHitExplosionObject())
 	{
 		_owner->SetIsStartExplosion(false);
 		state = ExplosionObjectState::EXPLOSION;
+		return state;
 	}
 
 	if (!isHitJumpAttackPlayer)
@@ -17,12 +18,13 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 	}
 	else
 	{
-		velocity = blowAwayDirection * 1000.0f;
+		velocity = blowAwayDirection * BlowAwaySpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+		angle += 0.1;
+		RotationProcess(_owner, angle, Vector3::UnitY);
 	}
 
 	Flashing();
-
 
 	return state;
 }
@@ -40,8 +42,9 @@ void ExplosionObjectStateStartExplosion::Enter(ExplosionObject* _owner, float _d
 	blowAwayDirection.Normalize();
 	blowAwayDirection.z = 0.0f;
 	isRed = false;
-	colorChangeTime = 15;
+	colorChangeTime = FirstColorChangeTime;
 	explosionStart = 0;
+	angle = 0;
 	_owner->SetState(State::Disabling);
 
 }
@@ -49,9 +52,14 @@ void ExplosionObjectStateStartExplosion::Enter(ExplosionObject* _owner, float _d
 void ExplosionObjectStateStartExplosion::Flashing()
 {
 
-	if (explosionStart > 120)
+	if (explosionStart > 60)
 	{
 		colorChangeTime = 7;
+	}
+
+	if (explosionStart > 120)
+	{
+		colorChangeTime = 3;
 	}
 
 	if (explosionStart % colorChangeTime == 0)

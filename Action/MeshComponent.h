@@ -72,6 +72,10 @@ public: //ゲッターセッター
 	*/
 	virtual Mesh* GetMesh() { return mesh; }
 
+	/*
+	@brief　Emissiveの色を変更する
+	@param	_emissiveColor 変更する色の値
+	*/
 	void SetEmissiveColor(Vector3 _emissiveColor) { emissiveColor = _emissiveColor; }
 
 	/*

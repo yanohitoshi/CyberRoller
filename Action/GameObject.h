@@ -57,10 +57,14 @@ enum Tag
 	GROUND,
 	// 動くグラウンド
 	MOVE_GROUND,
+	// 壊れるグラウンド
+	BREAK_GROUND,
 	// 壁
 	WALL,
 	// 爆弾
 	BOMB,
+	// 爆発エリア
+	EXPLOSION_AREA,
 	// 棘
 	NEEDLE,
 	// 棘用パネル

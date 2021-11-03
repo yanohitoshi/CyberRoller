@@ -1,5 +1,7 @@
 #include "ExplosionObjectEffectManager.h"
 #include "ExplosionObject.h"
+#include "ExplosionEffect.h"
+#include "ExplosionRipplesEffect.h"
 
 ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
@@ -13,7 +15,7 @@ ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObject* _own
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
-	//generateExplosionEffectsFlag = true;
+	generateExplosionEffectsFlag = true;
 	//effectFrameCount = 0;
 }
 ExplosionObjectEffectManager::~ExplosionObjectEffectManager()
@@ -23,7 +25,7 @@ ExplosionObjectEffectManager::~ExplosionObjectEffectManager()
 void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
-	if (owner->GetIsStartExplosion())
+	if (owner->GetIsExplode())
 	{
 		// パーティクルを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;
@@ -40,7 +42,7 @@ void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
 		//effectFrameCount = 0;
-		//generateExplosionEffectsFlag = true;
+		generateExplosionEffectsFlag = true;
 		break;
 
 		// 有効状態だったら
@@ -54,6 +56,18 @@ void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 
 void ExplosionObjectEffectManager::ActiveEffectProcess()
 {
+	
+	if (generateExplosionEffectsFlag)
+	{
+		effectPosition = owner->GetPosition();
+		new ExplosionEffect(this,effectPosition, effectVelocity);
+
+		for (int i = 0; i < 2; i++)
+		{
+			new ExplosionRipplesEffect(this, effectPosition, effectVelocity);
+		}
+		generateExplosionEffectsFlag = false;
+	}
 }
 
 void ExplosionObjectEffectManager::GenerateEffectProcess()
