@@ -1,10 +1,10 @@
 #include "ExplosionEffect.h"
 
-ExplosionEffect::ExplosionEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Particle04_bokashistrong_soft.png", true)
-	, AddScale(8.0f)
-	, SubAlpha(0.02f)
-	, EffectColor(Vector3(0.68f, 0.85f, 0.9f))
+ExplosionEffect::ExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
+	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/blueBall.png", true)
+	, AddScale(16.0f)
+	, SubAlpha(0.01f)
+	, EffectColor(Color::LightBlue)
 {
 	// メンバー変数の初期化
 	scale = 0.0f;
@@ -12,7 +12,6 @@ ExplosionEffect::ExplosionEffect(GameObject* _owner, const Vector3& _pos, const 
 	alpha = 1.0f;
 	position = _pos;
 	velocity = _velocity;
-	speed = rand() % 50 / 10.0f;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(EffectColor);
@@ -41,10 +40,6 @@ void ExplosionEffect::UpdateGameObject(float _deltaTime)
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 
-		// ポジションに速度を追加
-		position += velocity * speed;
-		// ポジションを更新
-		SetPosition(position);
 	}
 
 	// ライフカウントが0以下になったら

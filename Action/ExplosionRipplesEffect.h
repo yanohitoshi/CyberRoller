@@ -12,7 +12,7 @@ public:
     @param	ポジション
     @param	移動速度
     */
-    ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity);
+    ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos);
 
     /*
     @fn デストラクタ

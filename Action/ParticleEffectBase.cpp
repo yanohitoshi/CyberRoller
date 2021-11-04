@@ -73,7 +73,6 @@ void ParticleEffectBase::LifeCountDown()
 		particleComponent->SetVisible(true);
 		lifeCount--;
 	}
-
 }
 
 /*
@@ -84,8 +83,8 @@ void ParticleEffectBase::Rotation(GameObject* _owner, const float _angle, const 
 {
 	//ƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
 	float radian = Math::ToRadians(_angle);
-	Quaternion rot = _owner->GetRotation();
+	Quaternion rot = this->GetRotation();
 	Quaternion inc(_axis, radian);
 	Quaternion target = Quaternion::Concatenate(rot, inc);
-	_owner->SetRotation(target);
+	SetRotation(target);
 }

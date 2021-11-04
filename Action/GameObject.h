@@ -255,6 +255,8 @@ protected:
 	*/
 	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 
+	void Rotation(GameObject* _owner, const float _angle, const Vector3 _axis);
+
 	// ゲーム中メインカメラ
 	static class CameraObjectBase* mainCamera;
 	// タイトル画面で使用するカメラ

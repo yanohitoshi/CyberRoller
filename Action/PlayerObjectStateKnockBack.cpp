@@ -90,7 +90,7 @@ void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 	knockBackFrameCount = 0;
 
 	// 当たったエネミーのポジションを取得
-	hitEnemyPosition = _owner->GetHitEnemyPosition();
+	hitEnemyPosition = _owner->GetHitKnockBackObjectPosition();
 	// ノックバックする方向ベクトルを計算
 	knockBackDirection = _owner->GetPosition() - hitEnemyPosition;
 

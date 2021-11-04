@@ -265,6 +265,11 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 			continue;
 		}
 
+		if (itr->GetOwner()->GetTag() == Tag::BREAK_GROUND && itr->GetOwner()->GetState() == State::Disabling)
+		{
+			continue;
+		}
+
 		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 
 		// Hitしていたら

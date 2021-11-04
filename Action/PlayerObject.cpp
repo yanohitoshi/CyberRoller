@@ -39,6 +39,7 @@
 #include "PlayerObjectStateIdlingDance.h"
 #include "PlayerObjectStateKnockBack.h"
 #include "PlayerObjectStateFallDead.h"
+#include "PlayerObjectStateExplosionBlowAway.h"
 #include "JumpAttackPlayerObject.h"
 
 #include "ParticleComponent.h"
@@ -116,7 +117,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// 回転ベクトル初期化
 	rotateVec = Vector3(0.0f, 0.0f, 0.0f);
 	// 
-	hitEnemyPosition = Vector3::Zero;
+	hitKnockBackObjectPosition = Vector3::Zero;
 	// 
 	attackTarget = nullptr;
 
@@ -128,6 +129,8 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	// ジャンプswitch用フラグ初期化
 	switchJumpFlag = false;
+
+	isHitExplosion = false;
 
 	// カウント初期化
 	reStartCount = 0;
@@ -198,7 +201,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//接地判定用のsphereCollider
 	groundCheckSphereCol = new SphereCollider(this, PhysicsTag::GROUND_CHECK_TAG, std::bind(&PlayerObject::OnCollisionGround, this, std::placeholders::_1,std::placeholders::_2));
-	Sphere groundCheckSphere = { Vector3(0.0f,0.0f,0.0f),18.0f };
+	Sphere groundCheckSphere = { Vector3(0.0f,0.0f,0.0f),8.0f };
 	groundCheckSphereCol->SetObjectSphere(groundCheckSphere);
 
 	//ジャンプ攻撃判定用のsphereCollider
@@ -234,6 +237,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	AddStatePoolMap(new PlayerObjectStateDead, PlayerState::PLAYER_STATE_DEAD);
 	AddStatePoolMap(new PlayerObjectStateFallDead, PlayerState::PLAYER_STATE_FALL_DEAD);
 	AddStatePoolMap(new PlayerObjectStateRespown, PlayerState::PLAYER_STATE_RESPAWN);
+	AddStatePoolMap(new PlayerObjectStateExplosionBlowAway, PlayerState::PLAYER_STATE_BLOWAWAY);
 
 	// stateを初期化
 	nowState = PlayerState::PLAYER_STATE_IDLE;
@@ -269,6 +273,7 @@ PlayerObject::~PlayerObject()
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_DEAD);
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_FALL_DEAD);
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RESPAWN);
+	RemoveStatePoolMap(PlayerState::PLAYER_STATE_BLOWAWAY);
 	ClearStatePoolMap();
 }
 
@@ -287,6 +292,11 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	if (isHitEnemy && nowState != PlayerState::PLAYER_STATE_DEAD)
 	{
 		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
+	}
+
+	if (isHitExplosion && nowState != PlayerState::PLAYER_STATE_DEAD)
+	{
+		nextState = PlayerState::PLAYER_STATE_BLOWAWAY;
 	}
 
 	// ステート外部からステート変更があったか？
@@ -532,7 +542,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 		if (!isJumpAttck)
 		{
 			isHitEnemy = true;
-			hitEnemyPosition = _hitObject.GetPosition();
+			hitKnockBackObjectPosition = _hitObject.GetPosition();
 		}
 	}
 
@@ -563,6 +573,13 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	{
 		// 死亡フラグをtureにセット
 		deadFlag = true;
+	}
+
+	if (_physicsTag == PhysicsTag::EXPLOSION_AREA_TAG && !isHitExplosion)
+	{
+		// 死亡フラグをtureにセット
+		isHitExplosion = true;
+		hitKnockBackObjectPosition = _hitObject.GetPosition();
 	}
 }
 

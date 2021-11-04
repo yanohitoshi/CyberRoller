@@ -51,17 +51,15 @@ private:
     // particleの状態管理用変数
     ParticleState particleState;
 
-    //// ランダムな値を生成する際にかける補正
-    //const float CorrectionRandValue;
-    //// ランダムな値に対して最後にかける補正値
-    //const float LastCorrection;
+    // ランダムな値を生成する際にかける補正
+    const float CorrectionRandValue;
+    // ランダムな値に対して最後にかける補正値
+    const float LastCorrection;
 
-    //// 1度に生成する爆発エフェクトの数
-    //const int MaxExplosionEffects;
-    //// 爆発エフェクトが発生するまでの待機時間
-    //const int WaitingExplosionTime;
-    //// ランダムの範囲
-    //const int RandValue;
+    // 1度に生成する爆発エフェクトの数
+    const int MaxExplosionEffects;
+    // ランダムの範囲
+    const int RandValue;
 
     Vector3 effectPosition;
     Vector3 effectVelocity;

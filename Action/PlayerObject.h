@@ -214,7 +214,8 @@ private:
 	// 他のオブジェクトから押されている時の速度
 	Vector3 pushedVelocity;
 	// ジャンプアタック中でないときにヒットした敵のポジション
-	Vector3 hitEnemyPosition;
+	Vector3 hitKnockBackObjectPosition;
+
 	// ジャンプ攻撃対象の敵のポインタ
 	GameObject* attackTarget;
 
@@ -272,6 +273,8 @@ private:
 	// 敵にヒットしたか
 	bool isHitEnemy;
 	bool isDancing;
+
+	bool isHitExplosion;
 	
 	// 今のプレーヤーのstate状態を保存するための変数
 	PlayerState nowState;
@@ -345,7 +348,7 @@ public:// ゲッターセッター
 	@fn hitEnemyPositionのgetter関数
 	@return respownPosを返す
 	*/
-	Vector3 GetHitEnemyPosition() { return hitEnemyPosition; }
+	Vector3 GetHitKnockBackObjectPosition() { return hitKnockBackObjectPosition; }
 
 	/*
 	@fn hitEnemyPositionのgetter関数
@@ -640,11 +643,18 @@ public:// ゲッターセッター
 	@param	bool _isAvailableInput 入力可能かどうかをセット
 	*/
 	void SetIsJumpAttackSuccess(bool _isJumpAttackSuccess) { isJumpAttackSuccess = _isJumpAttackSuccess; }
+
 	/*
-	@fn isHitWallのsetter関数
-	@param	bool _isHitWall 怯みモーションを行う壁にヒットしたかどうかをセット
+	@fn isHitEnemyのsetter関数
+	@param	bool _isHitEnemy 怯みモーションを行う敵にヒットしたかどうかをセット
 	*/
 	void SetIsHitEnemy(bool _isHitEnemy) { isHitEnemy = _isHitEnemy; }
+
+	/*
+	@fn isHitExplosionのsetter関数
+	@param	bool _isHitWall 爆弾の爆発にヒットしているか
+	*/
+	void SetIsHitExplosion(bool _isHitExplosion) { isHitExplosion = _isHitExplosion; }
 
 	/*
 	@fn isDancingのsetter関数

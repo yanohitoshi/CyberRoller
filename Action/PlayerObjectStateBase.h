@@ -26,8 +26,10 @@ enum class PlayerState
 	PLAYER_STATE_RUN_STOP,
 	// 走り状態から振り返り
 	PLAYER_STATE_RUN_TURN,
-	// 走り中壁に当たった際の怯み状態
+	// 怯み状態
 	PLAYER_STATE_KNOCKBACK,
+	// 爆発に当たった時の吹っ飛び状態
+	PLAYER_STATE_BLOWAWAY,
 	// ジャンプループ
 	PLAYER_STATE_JUMPLOOP, 
 	// ジャンプスタート

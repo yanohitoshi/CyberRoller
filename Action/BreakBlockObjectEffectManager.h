@@ -38,12 +38,12 @@ private:
     /*
     @fn エフェクト生産処理関数
     */
-    void GenerateEffectProcess();
+    void GenerateDustEffectProcess();
 
     /*
     @fn 爆発エフェクト生産処理関数
     */
-    void GenerateExplosionEffectProcess();
+    void GenerateDebrisEffectProcess();
 
     // 親のGameObject保存用変数
     BreakBlockObject* owner;
@@ -51,6 +51,10 @@ private:
     // particleの状態管理用変数
     ParticleState particleState;
 
+    const int DustEffectRandValue;
+    const float CorrectionRandValue;
+    const float LastCorrection;
+    int activeCount;
     Vector3 effectPosition;
     Vector3 effectVelocity;
     // 1度だけ生成する用の生成フラグ変数

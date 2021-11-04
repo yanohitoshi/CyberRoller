@@ -5,7 +5,7 @@
 ExplosionArea::ExplosionArea(const Tag& _objectTag, ExplosionObject* _owner)
 	:GameObject(false, _objectTag)
 	, owner(_owner)
-	, ExplosionAreaSize(500.0f)
+	, ExplosionAreaSize(100.0f)
 {
 	SetState(State::Active);
 	SetPosition(owner->GetPosition());

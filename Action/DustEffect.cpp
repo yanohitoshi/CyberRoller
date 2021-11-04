@@ -1,8 +1,8 @@
 #include "DustEffect.h"
 
 DustEffect::DustEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Particle_Soft.png", true)
-	, AddScale(8.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 45, "Assets/Effect/Particle_Soft.png", true)
+	, AddScale(12.0f)
 	, SubAlpha(0.02f)
 	, EffectColor(Vector3(0.93f, 0.93f, 0.93f))
 {
@@ -28,7 +28,7 @@ void DustEffect::UpdateGameObject(float _deltaTime)
 	// 生存時間のカウントダウン
 	ParticleEffectBase::LifeCountDown();
 
-	// ライフカウントが0以上になったら
+	// ライフカウントが0以上にだったら
 	if (lifeCount >= 0)
 	{
 		// 定数を足して拡大

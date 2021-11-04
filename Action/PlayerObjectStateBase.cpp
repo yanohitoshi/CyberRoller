@@ -89,8 +89,7 @@ void PlayerObjectStateBase::CheckTimeOverFlag()
 void PlayerObjectStateBase::RotationProcess(PlayerObject* _owner, Vector3 _forward, Vector3 _tmpForward)
 {
 	//前のフレームと今のフレームの前方ベクトルで線形補間を取る
-	Vector3 rotatioin = Vector3::Lerp(_forward, _tmpForward, 0.01f);
-
+	Vector3 rotatioin = Vector3::Lerp(_forward, _tmpForward, 0.001f);
 	// 回転軸を求める
 	_owner->RotateToNewForward(rotatioin);
 	// 前方ベクトル更新

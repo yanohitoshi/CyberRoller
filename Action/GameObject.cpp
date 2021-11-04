@@ -405,3 +405,13 @@ void GameObject::CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixed
 		_calcFixVec.z = dz;
 	}
 }
+
+void GameObject::Rotation(GameObject* _owner, const float _angle, const Vector3 _axis)
+{
+	//ƒ‰ƒ“ƒ_ƒ€‚È’l‰ñ“]‚³‚¹‚é
+	float radian = Math::ToRadians(_angle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(_axis, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
+}

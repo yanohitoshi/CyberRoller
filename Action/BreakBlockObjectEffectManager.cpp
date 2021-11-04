@@ -1,21 +1,20 @@
 #include "BreakBlockObjectEffectManager.h"
 #include "BreakBlockObject.h"
 #include "DustEffect.h"
+#include "DebrisEffectObject.h"
 
 BreakBlockObjectEffectManager::BreakBlockObjectEffectManager(BreakBlockObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
-	//, WaitingExplosionTime(49)
-	//, MaxExplosionEffects(10)
-	//, RandValue(250)
-	//, CorrectionRandValue(10.0f)
-	//, LastCorrection(0.1f)
+	, DustEffectRandValue(250)
+	, CorrectionRandValue(10.0f)
+	, LastCorrection(0.1f)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
 	generateExplosionEffectsFlag = true;
-	//effectFrameCount = 0;
+	activeCount = 0;
 }
 
 BreakBlockObjectEffectManager::~BreakBlockObjectEffectManager()
@@ -41,7 +40,7 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 	{
 		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
-		//effectFrameCount = 0;
+		activeCount = 0;
 		generateExplosionEffectsFlag = true;
 		break;
 
@@ -60,15 +59,59 @@ void BreakBlockObjectEffectManager::ActiveEffectProcess()
 	if (generateExplosionEffectsFlag)
 	{
 		effectPosition = owner->GetPosition();
-		new DustEffect(this, effectPosition, effectVelocity);
+		GenerateDustEffectProcess();
+		GenerateDebrisEffectProcess();
 		generateExplosionEffectsFlag = false;
 	}
 }
 
-void BreakBlockObjectEffectManager::GenerateEffectProcess()
+void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
 {
+	for (int dustEfectCount = 0; dustEfectCount < 20; dustEfectCount++)
+	{
+		// ランダムな値を生成
+		Vector3 randV((rand() % DustEffectRandValue) / CorrectionRandValue, (rand() % DustEffectRandValue) / CorrectionRandValue, (rand() % DustEffectRandValue) / CorrectionRandValue);
+
+		// 値が大きすぎるので最後の補正をかけて速度に代入
+		effectVelocity = randV * LastCorrection;
+		effectVelocity.Normalize();
+
+		if (dustEfectCount % 2 == 0)
+		{
+			effectVelocity.x *= -1.0f;
+			effectVelocity.z *= -1.0f;
+		}
+
+		if (dustEfectCount % 3 == 0)
+		{
+			effectVelocity.y *= -1.0f;
+		}
+
+		//エフェクトを生成
+		new DustEffect(this, effectPosition, effectVelocity);
+	}
 }
 
-void BreakBlockObjectEffectManager::GenerateExplosionEffectProcess()
+void BreakBlockObjectEffectManager::GenerateDebrisEffectProcess()
 {
+	for (int i = 0; i < 20; i++)
+	{
+		// ランダムな値を生成
+		Vector3 randDir((float)(rand() % 50), (float)(rand() % 50), 1.0f);
+		randDir.Normalize();
+
+		if (i % 2 == 0)
+		{
+			randDir.x *= -1.0f;
+		}
+
+		if (i % 3 == 0)
+		{
+			randDir.y *= -1.0f;
+		}
+
+		randDir.z = 1.0f;
+
+		new DebrisEffectObject(effectPosition, randDir);
+	}
 }

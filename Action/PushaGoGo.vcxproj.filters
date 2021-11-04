@@ -608,6 +608,15 @@
     <ClCompile Include="ExplosionRipplesEffect.cpp">
       <Filter>GameObjects\Effect\ExplosionObject</Filter>
     </ClCompile>
+    <ClCompile Include="DebrisEffectObject.cpp">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashExplosionEffect.cpp">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1221,6 +1230,15 @@
     </ClInclude>
     <ClInclude Include="ExplosionRipplesEffect.h">
       <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DebrisEffectObject.h">
+      <Filter>GameObjects\Effect\BreakBlockObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashExplosionEffect.h">
+      <Filter>GameObjects\Effect\ExplosionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObjectStateExplosionBlowAway.h">
+      <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ public:
     @param	ポジション
     @param	移動速度
     */
-    ExplosionEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity);
+    ExplosionEffect(const Vector3& _pos, const Vector3& _velocity);
 
     /*
     @fn デストラクタ

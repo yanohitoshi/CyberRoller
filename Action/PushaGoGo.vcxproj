@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="CountDownBackFont.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="DebrisEffectObject.cpp" />
     <ClCompile Include="DustEffect.cpp" />
     <ClCompile Include="ExplosionArea.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
@@ -205,6 +206,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="PlayerDeadEffect.cpp" />
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
+    <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp" />
+    <ClCompile Include="SplashExplosionEffect.cpp" />
     <ClCompile Include="TitleJumpAttackPlayerObject.cpp" />
     <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
     <ClCompile Include="TitlePlayerStateJumpLoop.cpp" />
@@ -391,6 +394,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="DebrisEffectObject.h" />
     <ClInclude Include="DustEffect.h" />
     <ClInclude Include="ExplosionArea.h" />
     <ClInclude Include="ExplosionEffect.h" />
@@ -425,6 +429,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="LightObject.h" />
     <ClInclude Include="PlayerDeadEffect.h" />
     <ClInclude Include="PlayerDeadEffectManager.h" />
+    <ClInclude Include="PlayerObjectStateExplosionBlowAway.h" />
+    <ClInclude Include="SplashExplosionEffect.h" />
     <ClInclude Include="TitleJumpAttackPlayerObject.h" />
     <ClInclude Include="TitlePlayerStateBase.h" />
     <ClInclude Include="TitlePlayerStateJumpAttack.h" />
