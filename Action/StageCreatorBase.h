@@ -13,6 +13,8 @@
 // 前置宣言
 class PlayerObject;
 class MoveWallBlock;
+class CollectionObject;
+enum class CollectionTag;
 
 /*
 @enum　ステージを生成するに当たって使用するパーツの名前
@@ -184,6 +186,11 @@ protected:
 	// クリアオブジェクトに渡す(エフェクトを発生させるトリガーに使用するため)
 	MoveWallBlock* lastMoveWallBlock;
 
+
+	CollectionObject* firstCollectionObject;
+	CollectionObject* secondCollectionObject;
+	CollectionObject* thirdCollectionObject;
+
 	// 動く壁のポジションを少しずらす定数
 	// Y軸は中心のずらすため・Z軸は少し埋まった状態で生成したいため
 	const float ShiftMoveWallY;
@@ -242,6 +249,10 @@ protected:
 
 	// レイヤーごとに割り当てるオブジェクトのZ軸の値を格納する配列
 	float objectPositionZ[18];
+
+public:
+
+	CollectionObject* FindCollectionObject(CollectionTag _CollectionTag);
 
 };
 

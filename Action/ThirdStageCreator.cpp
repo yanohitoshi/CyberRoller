@@ -618,11 +618,11 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 	switch (Layer11)
 	{
 	case(COLLECTION_SECOND):
-		new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::SECOND);
+		secondCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 
 	case(COLLECTION_THIRD):
-		new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		thirdCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 	}
 }
@@ -646,7 +646,7 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 	switch (Layer12)
 	{
 	case(COLLECTION_FIRST):
-		new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		firstCollectionObject = new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 	}
 }

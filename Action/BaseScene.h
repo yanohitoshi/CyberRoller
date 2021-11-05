@@ -5,9 +5,9 @@
 #include "Math.h"
 
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾
+class PlayerObject;
 struct InputState;
 enum SceneState;
-class PlayerObject;
 
 /*
 @file BaseScene.h

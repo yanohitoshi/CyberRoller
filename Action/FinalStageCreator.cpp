@@ -531,7 +531,7 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 
 	case(COLLECTION_SECOND):
 		// 2”Ô–Ú‚ÌûW•¨‚ğ¶¬
-		new CollectionObject(layer6Pos, Tag::COLLECTION, CollectionTag::SECOND);
+		secondCollectionObject = new CollectionObject(layer6Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 	}
 }
@@ -619,7 +619,7 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 
 	case(COLLECTION_THIRD):
 		// 3”Ô–Ú‚ÌûW•¨‚ğ¶¬
-		new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		thirdCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 
 	}
@@ -934,7 +934,7 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(COLLECTION_FIRST):
 		// 1”Ô–Ú‚ÌûW•¨‚ğ¶¬
-		new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		firstCollectionObject = new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 
 	case(NORMAL_ENEMY_PARTS):

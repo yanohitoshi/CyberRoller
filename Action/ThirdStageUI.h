@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+class CollectionObject;
+class CollectionUI;
+
 /*
 @file ThirdStageUI.h
 @brief ThirdStageのUI表示を行う
@@ -18,7 +21,7 @@ public:
     @brief  objectの生成を行う
     @param	_playerObject プレイヤークラスのポインタ
     */
-    ThirdStageUI(PlayerObject* _playerObject);
+    ThirdStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
     
     /*
     @fn デストラクタ
@@ -40,5 +43,11 @@ private:
     const int SceneTime;
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
+
+    PlayerObject* playerObject;
+
+    CollectionUI* firstCollectionUI;
+    CollectionUI* secondCollectionUI;
+    CollectionUI* thirdCollectionUI;
 };
 

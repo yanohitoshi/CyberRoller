@@ -8,6 +8,7 @@
 #include "FinalStageCreator.h"
 #include "FinalStageUI.h"
 #include "CountDownFont.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -45,8 +46,12 @@ FinalStageScene::FinalStageScene()
 		finalStageCreator->CreateStage();
 	}
 
+	CollectionObject* firstCollection = finalStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = finalStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = finalStageCreator->FindCollectionObject(CollectionTag::THIRD);
+
 	// シーンUIを追加
-	new FinalStageUI(playerObject);
+	new FinalStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 
 }
 

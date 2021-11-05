@@ -8,6 +8,7 @@
 #include "ThirdStageCreator.h"
 #include "ThirdStageUI.h"
 #include "CountDownFont.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -42,11 +43,14 @@ ThirdStageScene::ThirdStageScene()
 		playerObject = thirdStageCreator->CreatePlayer();
 		//ステージを生成する
 		thirdStageCreator->CreateStage();
-
 	}
 
+	CollectionObject* firstCollection = thirdStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = thirdStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = thirdStageCreator->FindCollectionObject(CollectionTag::THIRD);
+
 	// シーンUIを追加
-	new ThirdStageUI(playerObject);
+	new ThirdStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 }
 
 /*

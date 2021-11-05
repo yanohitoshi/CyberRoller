@@ -45,5 +45,7 @@ public:
     @return	SpriteComponent‚Ìƒ|ƒCƒ“ƒ^
     */
     SpriteComponent* GetSpriteComponent() { return sprite; }
+
+    void Reset();
 };
 

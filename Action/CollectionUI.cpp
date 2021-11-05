@@ -13,6 +13,7 @@ CollectionUI::CollectionUI(CollectionObject* _owner)
 	collectedSprite = new CollectedSprite(tag);
 	unCollectedSprite = new UnCollectedSprite(tag);
 	collectedEffectSprite = new CollectedEffectSprite(tag);
+	isInGame = true;
 }
 
 CollectionUI::~CollectionUI()
@@ -20,6 +21,10 @@ CollectionUI::~CollectionUI()
 }
 
 void CollectionUI::UpdateGameObject(float _deltaTime)
+{
+}
+
+void CollectionUI::DrawInGame()
 {
 	if (owner->GetIsCollected())
 	{
@@ -33,4 +38,19 @@ void CollectionUI::UpdateGameObject(float _deltaTime)
 		collectedEffectSprite->GetSpriteComponent()->SetVisible(false);
 		unCollectedSprite->GetSpriteComponent()->SetVisible(true);
 	}
+}
+
+void CollectionUI::ResetDraw()
+{
+	collectedSprite->GetSpriteComponent()->SetVisible(false);
+	collectedEffectSprite->GetSpriteComponent()->SetVisible(false);
+	collectedEffectSprite->Reset();
+	unCollectedSprite->GetSpriteComponent()->SetVisible(false);
+}
+
+void CollectionUI::SetDrawPosition(Vector3 _position)
+{
+	collectedSprite->SetPosition(_position);
+	unCollectedSprite->SetPosition(_position);
+	collectedEffectSprite->SetPosition(_position);
 }

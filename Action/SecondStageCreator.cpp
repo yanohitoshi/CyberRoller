@@ -639,7 +639,7 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 
 	case(COLLECTION_FIRST):
 		// 1î‘ñ⁄ÇÃé˚èWï®Çê∂ê¨
-		new CollectionObject(layer10Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		firstCollectionObject = new CollectionObject(layer10Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
@@ -673,7 +673,7 @@ void SecondStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 	case(COLLECTION_THIRD):
 		// 3î‘ñ⁄ÇÃé˚èWï®Çê∂ê¨
-		new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		thirdCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 	}
 }
@@ -703,7 +703,7 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 
 	case(COLLECTION_SECOND):
 		// 2î‘ñ⁄ÇÃé˚èWï®Çê∂ê¨
-		new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::SECOND);
+		secondCollectionObject = new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 
 	case(NEEDLE_PARTS):

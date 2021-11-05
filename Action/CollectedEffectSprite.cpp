@@ -52,3 +52,11 @@ void CollectedEffectSprite::UpdateGameObject(float _deltaTime)
 		SetState(State::Dead);
 	}
 }
+
+void CollectedEffectSprite::Reset()
+{
+	alpha = 1.0f;
+	sprite->SetAlpha(alpha);
+	scale = 0.0f;
+	sprite->SetScale(scale);
+}

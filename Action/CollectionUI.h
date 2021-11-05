@@ -29,12 +29,20 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
 
+    void DrawInGame();
+
+    void ResetDraw();
+
+    void SetDrawPosition(Vector3 _position);
+
 private:
+
 
     CollectionObject* owner;
     CollectedSprite* collectedSprite;
     UnCollectedSprite* unCollectedSprite;
     CollectedEffectSprite* collectedEffectSprite;
 
+    bool isInGame;
 };
 

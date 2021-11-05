@@ -11,13 +11,14 @@
 #include "GameClearSprite.h"
 #include "PlayerObject.h"
 #include "SkyBoxObject.h"
-
+#include "CollectionUI.h"
+#include "CollectionObject.h"
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
 @param	_playerObject プレイヤークラスのポインタ
 */
-FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
+FinalStageUI::FinalStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(500)
 {
@@ -35,6 +36,13 @@ FinalStageUI::FinalStageUI(PlayerObject* _playerObject)
 	new GameClearSprite(_playerObject);
 
 	skyBox = new SkyBoxObject(false, Tag::UI);
+
+	playerObject = _playerObject;
+
+	firstCollectionUI = new CollectionUI(_first);
+	secondCollectionUI = new CollectionUI(_second);
+	thirdCollectionUI = new CollectionUI(_third);
+
 }
 
 /*
@@ -52,4 +60,10 @@ FinalStageUI::~FinalStageUI()
 */
 void FinalStageUI::UpdateGameObject(float _deltaTime)
 {
+	if (!playerObject->GetClearFlag())
+	{
+		firstCollectionUI->DrawInGame();
+		secondCollectionUI->DrawInGame();
+		thirdCollectionUI->DrawInGame();
+	}
 }

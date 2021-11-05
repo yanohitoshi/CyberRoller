@@ -12,13 +12,14 @@
 #include "GameOverSprite.h"
 #include "PlayerObject.h"
 #include "SkyBoxObject.h"
-
+#include "CollectionUI.h"
+#include "CollectionObject.h"
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
 @param	_playerObject プレイヤークラスのポインタ
 */
-ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
+ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(300)
 {
@@ -34,6 +35,13 @@ ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject)
 	new GameOverSprite();
 	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
+
+	playerObject = _playerObject;
+
+	firstCollectionUI = new CollectionUI(_first);
+	secondCollectionUI = new CollectionUI(_second);
+	thirdCollectionUI = new CollectionUI(_third);
+
 }
 
 /*
@@ -51,4 +59,10 @@ ThirdStageUI::~ThirdStageUI()
 */
 void ThirdStageUI::UpdateGameObject(float _deltaTime)
 {
+	if (!playerObject->GetClearFlag())
+	{
+		firstCollectionUI->DrawInGame();
+		secondCollectionUI->DrawInGame();
+		thirdCollectionUI->DrawInGame();
+	}
 }

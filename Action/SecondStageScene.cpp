@@ -9,6 +9,7 @@
 #include "SecondStageCreator.h"
 #include "SecondStageUI.h"
 #include "CountDownFont.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -45,8 +46,12 @@ SecondStageScene::SecondStageScene()
 		secondStageCreator->CreateStage();
 	}
 
+	CollectionObject* firstCollection = secondStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = secondStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = secondStageCreator->FindCollectionObject(CollectionTag::THIRD);
+
 	// シーンUIを追加
-	new SecondStageUI(playerObject);
+	new SecondStageUI(playerObject,firstCollection,secondCollection,thirdCollection);
 }
 
 /*
@@ -76,7 +81,7 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	SceneClearCountProcess(playerObject);
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (clearCount >= ClearToChangeSceneTime)
+	if (clearCount >= ClearToChangeSceneTime && _inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
 	{
 		// 次のシーンに変更
 		state = SceneState::THIRD_SATGE_SCENE;

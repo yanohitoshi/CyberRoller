@@ -44,7 +44,6 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 	isCollected = false;
 
 	new CollectionEffectManager(this);
-	new CollectionUI(this);
 }
 
 CollectionObject::~CollectionObject()

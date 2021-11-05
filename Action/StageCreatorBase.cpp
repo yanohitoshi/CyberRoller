@@ -7,6 +7,7 @@
 #include "EnemyObjectBase.h"
 #include "PushBoxObject.h"
 #include "AutoMoveCamera.h"
+#include "CollectionObject.h"
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
@@ -215,4 +216,24 @@ void StageCreatorBase::SetMoveEnemyData(const float _speed, const Vector3 _direc
 	moveEnemyData.distance = _distance;
 	moveEnemyData.speed = _speed;
 	moveEnemyData.tag = _moveTag;
+}
+
+CollectionObject* StageCreatorBase::FindCollectionObject(CollectionTag _CollectionTag)
+{
+	CollectionObject* sendObject = nullptr;
+
+	switch (_CollectionTag)
+	{
+	case(CollectionTag::FIRST):
+		sendObject = firstCollectionObject;
+		break;
+	case(CollectionTag::SECOND):
+		sendObject = secondCollectionObject;
+		break;
+	case(CollectionTag::THIRD):
+		sendObject = thirdCollectionObject;
+		break;
+	}
+
+	return sendObject;
 }

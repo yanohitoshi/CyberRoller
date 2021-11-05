@@ -12,13 +12,15 @@
 #include "GameOverSprite.h"
 #include "PlayerObject.h"
 #include "SkyBoxObject.h"
+#include "CollectionUI.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
 @param	_playerObject プレイヤークラスのポインタ
 */
-SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
+SecondStageUI::SecondStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(200)
 {
@@ -34,6 +36,16 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject)
 	new GameOverSprite();
 	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
+
+	playerObject = _playerObject;
+
+	firstCollectionUI = new CollectionUI(_first);
+	secondCollectionUI = new CollectionUI(_second);
+	thirdCollectionUI = new CollectionUI(_third);
+
+	clearCount = 0;
+	isClearCollectionDraw = false;
+	isChangeCollectionUIPosition = false;
 }
 
 /*
@@ -51,4 +63,42 @@ SecondStageUI::~SecondStageUI()
 */
 void SecondStageUI::UpdateGameObject(float _deltaTime)
 {
+	if (playerObject->GetClearFlag())
+	{
+		++clearCount;
+
+		if (!isChangeCollectionUIPosition)
+		{
+			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
+			firstCollectionUI->ResetDraw();
+
+			secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
+			secondCollectionUI->ResetDraw();
+
+			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
+			thirdCollectionUI->ResetDraw();
+			isChangeCollectionUIPosition = true;
+		}
+
+		if (clearCount >= 120)
+		{
+			firstCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 180)
+		{
+			secondCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 240)
+		{
+			thirdCollectionUI->DrawInGame();
+		}
+	}
+	else
+	{
+		firstCollectionUI->DrawInGame();
+		secondCollectionUI->DrawInGame();
+		thirdCollectionUI->DrawInGame();
+	}
 }
