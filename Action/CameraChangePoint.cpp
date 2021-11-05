@@ -28,7 +28,7 @@ void CameraChangePoint::OnCollision(const GameObject& _hitObject, const PhysicsT
 {
 	if (_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
-		mainCamera->SetNextState(CameraState::LANDSCAPE);
+		mainCamera->SetNextState(CameraState::CHANGEMODE);
 		mainCamera->SetOffsetPosition(changeOffset);
 	}
 }

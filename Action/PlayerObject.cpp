@@ -131,7 +131,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	switchJumpFlag = false;
 
 	isHitExplosion = false;
-
+	isHitEnemy = false;
 	// カウント初期化
 	reStartCount = 0;
 	turnDelayCount = 0;
@@ -206,7 +206,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//ジャンプ攻撃判定用のsphereCollider
 	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTarget, this, std::placeholders::_1,std::placeholders::_2));
-	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),800.0f };
+	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),700.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
 	// プレイヤーに必要なeffectを持たせる
@@ -244,7 +244,6 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	nextState = PlayerState::PLAYER_STATE_IDLE;
 
 	jumpAttackPlayerObject = new JumpAttackPlayerObject(this,Vector3(50.0f, 50.0f, 50.0f), JUMP_ATTACK_PLAYER);
-
 }
 
 /*
@@ -284,19 +283,20 @@ PlayerObject::~PlayerObject()
 */
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
-	if (FallPpsitionZ >= position.z)
-	{
-		nextState = PlayerState::PLAYER_STATE_FALL_DEAD;
-	}
 
 	if (isHitEnemy && nowState != PlayerState::PLAYER_STATE_DEAD)
 	{
 		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
-	if (isHitExplosion && nowState != PlayerState::PLAYER_STATE_DEAD)
+	if (isHitExplosion && nowState != PlayerState::PLAYER_STATE_DEAD && nowState != PlayerState::PLAYER_STATE_BLOWAWAY)
 	{
 		nextState = PlayerState::PLAYER_STATE_BLOWAWAY;
+	}
+
+	if (FallPpsitionZ >= position.z)
+	{
+		nextState = PlayerState::PLAYER_STATE_FALL_DEAD;
 	}
 
 	// ステート外部からステート変更があったか？
@@ -356,6 +356,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	// フレームの最後に接地判定と押されている速度を初期化
 	onGround = false;
 	isHitEnemy = false;
+	isHitExplosion = false;
 	pushedVelocity = Vector3::Zero;
 	isSelectingTargetEnemy = false;
 	attackTarget = nullptr;

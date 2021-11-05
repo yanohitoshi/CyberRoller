@@ -44,6 +44,7 @@ private:
 	// 親となるクラスのポインタ
 	ExplosionObject* owner;
 
+	bool isActive;
 	// 攻撃エリアのサイズ
 	const float ExplosionAreaSize;
 };

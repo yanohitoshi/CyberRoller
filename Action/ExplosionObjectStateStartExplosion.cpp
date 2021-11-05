@@ -7,7 +7,6 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 
 	if (explosionStart > 180 || _owner->GetIsHitExplosionObject())
 	{
-		_owner->SetIsStartExplosion(false);
 		state = ExplosionObjectState::EXPLOSION;
 		return state;
 	}

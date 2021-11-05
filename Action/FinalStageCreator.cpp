@@ -22,6 +22,10 @@
 #include "LightObject.h"
 #include "CameraChangePoint.h"
 #include "CollectionObject.h"
+#include "ExplosionObject.h"
+#include "BreakBlockObject.h"
+
+
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
@@ -580,6 +584,10 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		lastMoveWallBlock = new MoveWallBlock(Vector3(layer7Pos.x, layer7Pos.y + ShiftMoveWallY, layer7Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
 		break;
+
+	case(39):
+		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 }
 
@@ -605,6 +613,15 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
+	case(39):
+		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
+		new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		break;
+
 	}
 }
 
@@ -660,6 +677,13 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
+	case(39):
+		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(40):
+		new ExplosionObject(layer9Pos, Tag::BOMB);
+		break;
 	}
 }
 
@@ -702,6 +726,9 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
+	case(39):
+		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 }
 
@@ -728,11 +755,24 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
 		break;
 
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, false);
+		break;
+
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
+	case(39):
+		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -776,6 +816,9 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer12Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
+	case(39):
+		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 }
 
@@ -817,6 +860,14 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer13Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
+
+	case(39):
+		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(40):
+		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
 }
@@ -886,11 +937,6 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 
-	case(COLLECTION_THIRD):
-		// 3番目の収集物を生成
-		new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::THIRD);
-		break;
-
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
 		new NormalEnemyObject(layer14Pos, Tag::ENEMY, playerObject);
@@ -901,6 +947,10 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer14Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
+
+	case(39):
+		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -946,6 +996,10 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 	case(LEFT_MOVE_BLOCK_PARTS):
 		SetMoveBlockData(1100.0f, Vector3::NegUnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+
+	case(39):
+		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }

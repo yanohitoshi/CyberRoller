@@ -1,14 +1,14 @@
 #include "ExplosionRipplesEffect.h"
 
 ExplosionRipplesEffect::ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Shockwave.png", false)
-	, AddScale(12.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Shockwave.png", false)
+	, AddScale(96.0f)
 	, SubAlpha(0.03f)
 	, EffectColor(Vector3(1.0f, 1.0f, 1.0f))
 	, RandValue(271)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 0.0f;
+	scale = 24.0f;
 	alpha = 0.0f;
 	alpha = 1.0f;
 	position = _pos;

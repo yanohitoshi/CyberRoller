@@ -30,7 +30,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	playerObject = _playerObject;
 
 	AddStatePoolMap(new CameraObjectStateNormal(), CameraState::NORMAL);
-	AddStatePoolMap(new CameraObjectStateLandscape(), CameraState::LANDSCAPE);
+	AddStatePoolMap(new CameraObjectStateLandscape(), CameraState::CHANGEMODE);
 	AddStatePoolMap(new CameraObjectStateDance(), CameraState::DANCE);
 	AddStatePoolMap(new CameraObjectStateGameOver(), CameraState::GAMEOVER);
 	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
@@ -44,7 +44,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 AutoMoveCamera::~AutoMoveCamera()
 {
 	RemoveStatePoolMap(CameraState::NORMAL);
-	RemoveStatePoolMap(CameraState::LANDSCAPE);
+	RemoveStatePoolMap(CameraState::CHANGEMODE);
 	RemoveStatePoolMap(CameraState::DANCE);
 	RemoveStatePoolMap(CameraState::GAMEOVER);
 	RemoveStatePoolMap(CameraState::SCENECLEAR);

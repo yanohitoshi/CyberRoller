@@ -20,6 +20,8 @@
 #include "LightObject.h"
 #include "CameraChangePoint.h"
 #include "CollectionObject.h"
+#include "BreakBlockObject.h"
+#include "ExplosionObject.h"
 
 /*
 @fn コンストラクタ
@@ -708,6 +710,12 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
+	case(39):
+		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+	case(40):
+		new ExplosionObject(layer12Pos, Tag::BOMB);
+		break;
 	}
 }
 
@@ -728,6 +736,9 @@ void SecondStageCreator::CreateLayer13(int _indexX, int _indexY)
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
 		new NormalEnemyObject(layer13Pos, Tag::ENEMY, playerObject);
+		break;
+	case(39):
+		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -754,6 +765,9 @@ void SecondStageCreator::CreateLayer14(int _indexX, int _indexY)
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(layer14Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
+	case(39):
+		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 
 }
@@ -763,15 +777,16 @@ void SecondStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
+	Vector3 layer11Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[10]);
 
-	//// マップデータを見てそれぞれのオブジェクトを生成
-	//switch (CameraDirectingData)
-	//{
-	//case(38):
-	//	AABB aabb = { Vector3(-5800.0f,-1800.0f,0.0f),Vector3(3200.0f,1800.0f,4000.0f) };
-	//	// ブロックオブジェクト生成
-	//	new CameraChangePoint(layer1Pos, aabb, Tag::CAMERA_CHANGE_OBLIQUE);
-	//	break;
-	//}
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (CameraDirectingData)
+	{
+	case(17):
+		AABB aabb = { Vector3(-1000.0f,-1200.0f,-1000.0f),Vector3(1000.0f,1000.0f,1000.0f) };
+		Vector3 offset = Vector3(0.0f, -900.0f, 700.0f);
+		// ブロックオブジェクト生成
+		new CameraChangePoint(layer11Pos, aabb, offset,Tag::CAMERA_CHANGE_OBLIQUE);
+		break;
+	}
 }

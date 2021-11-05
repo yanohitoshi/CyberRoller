@@ -183,6 +183,9 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
+	case(39):
+		new BreakBlockObject(layer1Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 
 }
@@ -229,9 +232,7 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(40):
-		new ExplosionObject(layer2Pos, Tag::BOMB, 100.0f);
-		break;
+
 	case(39):
 		new BreakBlockObject(layer2Pos, BlockSize,Tag::BREAK_GROUND);
 		break;
@@ -270,6 +271,19 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		// パワーセルライトの生成
 		new LightObject(layer3Pos, LightObjectSize, Tag::GROUND, false);
 		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵を生成
+		new NormalEnemyObject(layer3Pos, Tag::ENEMY, playerObject);
+		break;
+
+	case(40):
+		new ExplosionObject(layer3Pos, Tag::BOMB);
+		break;
+
+	case(39):
+		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 }
 
@@ -307,6 +321,9 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+	case(39):
+		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -370,6 +387,10 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵を生成
 		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		break;
+
+	case(39):
+		new BreakBlockObject(layer5Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }

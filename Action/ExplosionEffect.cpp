@@ -1,13 +1,13 @@
 #include "ExplosionEffect.h"
 
 ExplosionEffect::ExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/blueBall.png", true)
-	, AddScale(16.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/blueBall.png", true)
+	, AddScale(64.0f)
 	, SubAlpha(0.01f)
 	, EffectColor(Color::LightBlue)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 0.0f;
+	scale = 32.0f;
 	alpha = 0.0f;
 	alpha = 1.0f;
 	position = _pos;

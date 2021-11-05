@@ -30,7 +30,7 @@ public:
 	@fn コンストラクタ
 	*/
 	ExplosionObjectStateBase()
-	: VerticalMoveSpeed(50.0f)
+	: VerticalMoveSpeed(100.0f)
 	, EmissiveColorRed(Color::Red)
 	, EmissiveColorBlue(Color::LightBlue){};
 

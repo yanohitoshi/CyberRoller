@@ -20,7 +20,7 @@ public:
 	@param	追跡するオブジェクトのポインタ
 	@param	追跡エリアの値
 	*/
-	ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _areaValue);
+	ExplosionObject(const Vector3& _pos, const Tag _objectTag);
 
 	/*
 	@fn デストラクタ
@@ -34,13 +34,6 @@ public:
 	@param	_deltaTime 前のフレームでかかった時間
 	*/
 	void UpdateGameObject(float _deltaTime)override;
-
-	///*
-	//@fn めり込み判定
-	//@param	自分のAABB
-	//@param	相手のAABB
-	//*/
-	//void FixCollision(AABB& myAABB, const AABB& pairAABB)override;
 
 private:
 

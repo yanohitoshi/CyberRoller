@@ -376,6 +376,24 @@ public://ゲッターセッター
 	void SetScale(float _scale) { scale.x = _scale; scale.y = _scale; scale.z = _scale; recomputeWorldTransform = true; }
 
 	/*
+	@brief　オブジェクトのスケールを設定する(x軸のみの場合)
+	@param	scale float型
+	*/
+	void SetScaleX(float _scale) { scale.x = _scale; recomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトのスケールを設定する(y軸のみの場合)
+	@param	scale float型
+	*/
+	void SetScaleY(float _scale) { scale.y = _scale; recomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトのスケールを設定する(z軸のみの場合)
+	@param	scale float型
+	*/
+	void SetScaleZ(float _scale) { scale.z = _scale; recomputeWorldTransform = true; }
+
+	/*
 	@brief　オブジェクトのスケールを設定する(x.y.zの比率が違うとき)
 	@param	scale Vector3型
 	*/

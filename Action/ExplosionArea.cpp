@@ -5,7 +5,7 @@
 ExplosionArea::ExplosionArea(const Tag& _objectTag, ExplosionObject* _owner)
 	:GameObject(false, _objectTag)
 	, owner(_owner)
-	, ExplosionAreaSize(100.0f)
+	, ExplosionAreaSize(250.0f)
 {
 	SetState(State::Active);
 	SetPosition(owner->GetPosition());
@@ -23,7 +23,10 @@ ExplosionArea::~ExplosionArea()
 void ExplosionArea::UpdateGameObject(float _deltaTime)
 {
 	SetPosition(owner->GetPosition());
-	if (owner->GetIsExplode())
+
+	isActive = owner->GetIsExplode();
+
+	if (isActive)
 	{
 		SetState(State::Active);
 	}

@@ -11,7 +11,7 @@
 #include "ExplosionObjectEffectManager.h"
 #include "ExplosionArea.h"
 
-ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag, float _areaValue)
+ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag)
 	: GameObject(false, _objectTag)
 {
 	//GameObjectÉÅÉìÉoïœêîÇÃèâä˙âª
@@ -65,7 +65,7 @@ ExplosionObject::~ExplosionObject()
 
 void ExplosionObject::UpdateGameObject(float _deltaTime)
 {
-	if (isStartExplosion)
+	if (isStartExplosion && !isExplode && nowState != ExplosionObjectState::EXPLOSION_START)
 	{
 		nextState = ExplosionObjectState::EXPLOSION_START;
 	}
@@ -133,14 +133,14 @@ void ExplosionObject::ClearStatePoolMap()
 void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 
-	if (_physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
+	if (_physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG && nowState == ExplosionObjectState::IDLE)
 	{
 		isStartExplosion = true;
 		isHitJumpAttackPlayer = true;
 		hitPosition = _hitObject.GetPosition();
 	}
 	
-	if(_physicsTag == PhysicsTag::PLAYER_TAG)
+	if(_physicsTag == PhysicsTag::PLAYER_TAG && nowState == ExplosionObjectState::IDLE)
 	{
 		isStartExplosion = true;
 		isHitJumpAttackPlayer = false;

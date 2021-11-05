@@ -36,14 +36,23 @@ PlayerState PlayerObjectStateExplosionBlowAway::Update(PlayerObject* _owner, flo
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	if (_owner->GetOnGround())
+	if (_owner->GetOnGround() && knockBackFrameCount >= KnockBackTime)
 	{
 		velocity = Vector3::Zero;
 		_owner->SetVelocity(velocity);
-		// 壁に当たったフラグをfalseに
+		// 
 		_owner->SetIsHitExplosion(false);
 		// stateをアイドリングに変更
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
+	}
+
+	if (-500.0f >= _owner->GetPosition().z)
+	{
+		velocity = Vector3::Zero;
+		_owner->SetVelocity(velocity);
+		_owner->SetIsHitExplosion(false);
+		skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPLOOP));
+		state = PlayerState::PLAYER_STATE_FALL_DEAD;
 	}
 
 	CheckDeadFlag(_owner);
@@ -66,6 +75,7 @@ void PlayerObjectStateExplosionBlowAway::Enter(PlayerObject* _owner, float _delt
 	// 速度初期化
 	velocity = Vector3::Zero;
 	knockBackSpeed = 50.0f;
+
 	// カウントを初期化
 	knockBackFrameCount = 0;
 

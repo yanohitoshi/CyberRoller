@@ -4,6 +4,8 @@
 
 CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _deltaTime)
 {
+	++startStateCount;
+
 	Vector3 tmpMovePos;
 	Vector3 lerpObjectPos;
 	GameObject* lerpObject = _owner->GetLerpObject();
@@ -16,8 +18,17 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	tmpMovePos.y += offsetPosition.y;
 
 	Vector3 setPosition;
-	// 仮のポジションと現在のポジションで線形補間
-	setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * DeltaCorrection);
+
+	if (startStateCount <= SlowLrapTime)
+	{
+		// 仮のポジションと現在のポジションで線形補間
+		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * 4.0f);
+	}
+	else
+	{
+		// 仮のポジションと現在のポジションで線形補間
+		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * DeltaCorrection);
+	}
 
 	// 線形補間したポジションをセット
 	_owner->SetPosition(setPosition);
@@ -43,6 +54,7 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 
 void CameraObjectStateLandscape::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
-	state = CameraState::LANDSCAPE;
+	state = CameraState::CHANGEMODE;
 	offsetPosition = _owner->GetOffsetPosition();
+	startStateCount = 0;
 }

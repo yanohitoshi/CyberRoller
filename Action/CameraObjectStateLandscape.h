@@ -9,7 +9,8 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	CameraObjectStateLandscape() {};
+	CameraObjectStateLandscape()
+	: SlowLrapTime(120){};
 
 	/*
 	@fn デストラクタ
@@ -32,5 +33,10 @@ public:
 	*/
 	void Enter(CameraObjectBase* _owner, float _deltaTime)override;
 
+private:
+
+	// ステータス開始以降のカウントを数える
+	int startStateCount;
+	const int SlowLrapTime;
 };
 
