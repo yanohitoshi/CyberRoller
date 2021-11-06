@@ -43,6 +43,8 @@ FinalStageUI::FinalStageUI(PlayerObject* _playerObject, CollectionObject* _first
 	secondCollectionUI = new CollectionUI(_second);
 	thirdCollectionUI = new CollectionUI(_third);
 
+	clearCount = 0;
+	isChangePosition = false;
 }
 
 /*
@@ -60,7 +62,39 @@ FinalStageUI::~FinalStageUI()
 */
 void FinalStageUI::UpdateGameObject(float _deltaTime)
 {
-	if (!playerObject->GetClearFlag())
+	if (playerObject->GetClearFlag())
+	{
+		++clearCount;
+
+		if (!isChangePosition)
+		{
+			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
+			firstCollectionUI->ResetDraw();
+
+			secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
+			secondCollectionUI->ResetDraw();
+
+			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
+			thirdCollectionUI->ResetDraw();
+			isChangePosition = true;
+		}
+
+		if (clearCount >= 120)
+		{
+			firstCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 180)
+		{
+			secondCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 240)
+		{
+			thirdCollectionUI->DrawInGame();
+		}
+	}
+	else
 	{
 		firstCollectionUI->DrawInGame();
 		secondCollectionUI->DrawInGame();

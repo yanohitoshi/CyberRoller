@@ -82,7 +82,7 @@ SceneState ThirdStageScene::Update(const InputState& _inputState)
 	// クリアカウントが一定を超えたらシーンを切り替える
 	if (clearCount >= ClearToChangeSceneTime)
 	{
-		state = SceneState::FINAL_STAGE_SCENE;
+		state = SceneState::FOURTH_SATGE_SCENE;
 	}
 
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら

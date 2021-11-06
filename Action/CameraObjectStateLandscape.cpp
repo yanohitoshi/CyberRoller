@@ -22,7 +22,7 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	if (startStateCount <= SlowLrapTime)
 	{
 		// 仮のポジションと現在のポジションで線形補間
-		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * 4.0f);
+		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * 2.0f);
 	}
 	else
 	{

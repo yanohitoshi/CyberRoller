@@ -44,8 +44,7 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject,CollectionObject* _firs
 	thirdCollectionUI = new CollectionUI(_third);
 
 	clearCount = 0;
-	isClearCollectionDraw = false;
-	isChangeCollectionUIPosition = false;
+	isChangePosition = false;
 }
 
 /*
@@ -67,7 +66,7 @@ void SecondStageUI::UpdateGameObject(float _deltaTime)
 	{
 		++clearCount;
 
-		if (!isChangeCollectionUIPosition)
+		if (!isChangePosition)
 		{
 			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
 			firstCollectionUI->ResetDraw();
@@ -77,7 +76,7 @@ void SecondStageUI::UpdateGameObject(float _deltaTime)
 
 			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
 			thirdCollectionUI->ResetDraw();
-			isChangeCollectionUIPosition = true;
+			isChangePosition = true;
 		}
 
 		if (clearCount >= 120)

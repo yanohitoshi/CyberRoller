@@ -50,7 +50,6 @@ private:
     CollectionUI* thirdCollectionUI;
 
     int clearCount;
-    bool isClearCollectionDraw;
-    bool isChangeCollectionUIPosition;
+    bool isChangePosition;
 };
 

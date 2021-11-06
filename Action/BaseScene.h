@@ -20,7 +20,7 @@ public:
 	// コンストラクタ
 	BaseScene() 
 	: MaxLight(0.8f)
-	, ClearToChangeSceneTime(180)
+	, ClearToChangeSceneTime(360)
 	, ChoiceContinueCount(90)
 	, ContinueToChangeScene(360)
 	, TimeoversLight(Vector3(0.3f, 0.3f, 0.3f))
@@ -39,7 +39,7 @@ public:
 	@param	入力情報
 	@return シーンの遷移を判定するためのenum型のSceneState
 	*/
-	virtual SceneState Update(const InputState& state) = 0;
+	virtual SceneState Update(const InputState& _inputState) = 0;
 
 
 protected:

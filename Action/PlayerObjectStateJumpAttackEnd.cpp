@@ -111,7 +111,9 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	{
 		// ジャンプ力をセットする
 		_owner->SetJumpPower(JumpAttackSuccessFirstPower);
+		velocity = _owner->GetVelocity();
 		_owner->SetIsAvailableJumpAttck(true);
+		velocity.z = 0.0f;
 	}
 	else
 	{

@@ -49,7 +49,7 @@ void CollectedEffectSprite::UpdateGameObject(float _deltaTime)
 
 	if (alpha < 0.0f)
 	{
-		SetState(State::Dead);
+		sprite->SetVisible(false);
 	}
 }
 

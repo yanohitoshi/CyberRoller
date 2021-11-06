@@ -49,5 +49,8 @@ private:
     CollectionUI* firstCollectionUI;
     CollectionUI* secondCollectionUI;
     CollectionUI* thirdCollectionUI;
+
+    int clearCount;
+    bool isChangePosition;
 };
 

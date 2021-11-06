@@ -81,7 +81,7 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	SceneClearCountProcess(playerObject);
 
 	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
-	if (clearCount >= ClearToChangeSceneTime && _inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
+	if (clearCount >= ClearToChangeSceneTime)
 	{
 		// 次のシーンに変更
 		state = SceneState::THIRD_SATGE_SCENE;
