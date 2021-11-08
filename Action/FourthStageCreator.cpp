@@ -2,28 +2,24 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FourthStageCreator.h"
-#include "GroundObject.h"
-#include "SwitchBlock.h"
-#include "JumpSwitchObject.h"
-#include "WallBlockObject.h"
-#include "MoveWallBlock.h"
 #include "PlayerObject.h"
-#include "NextSceneObject.h"
-#include "ClearPointObject.h"
-#include "RespawnPoint.h"
-#include "NeedlePanelObject.h"
+#include "GroundObject.h"
+#include "BreakBlockObject.h"
+#include "LightObject.h"
 #include "MoveBlockObject.h"
+#include "MoveWallBlock.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
-#include "EnemyObjectBase.h"
+#include "JumpSwitchObject.h"
+#include "ExplosionObject.h"
+#include "NeedlePanelObject.h"
+#include "RespawnPoint.h"
 #include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
-#include "LightObject.h"
 #include "CameraChangePoint.h"
+#include "NextSceneObject.h"
 #include "CollectionObject.h"
-#include "ExplosionObject.h"
-#include "BreakBlockObject.h"
 
 
 /*
@@ -1094,7 +1090,7 @@ void FourthStageCreator::CreateLayer18(int _indexX, int _indexY)
 		break;
 	case(CLEAR_OBJECT_PARTS):
 		// ステージクリアオブジェクト生成
-		new ClearPointObject(layer18Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		new NextSceneObject(layer18Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 
 	case(SECOND_SWITCH_PARTS):

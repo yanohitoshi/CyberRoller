@@ -17,6 +17,7 @@
 #include "SecondStageScene.h"
 #include "ThirdStageScene.h"
 #include "FourthStageScene.h"
+#include "FifthStageScene.h"
 #include "FinalStageScene.h"
 #include "ResultScene.h"
 #include "GameObject.h"
@@ -317,7 +318,7 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 		nowScene = new FourthStageScene();
 		break;
 	case SceneState::FIFTH_SATGE_SCENE:
-		nowScene = new FinalStageScene();
+		nowScene = new FifthStageScene();
 		break;
 	case SceneState::FINAL_STAGE_SCENE:
 		nowScene = new FinalStageScene();

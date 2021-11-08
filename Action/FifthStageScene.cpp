@@ -38,12 +38,12 @@ FifthStageScene::FifthStageScene()
 		fifthStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = fifthStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = fifthStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = fifthStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	//CollectionObject* firstCollection = fifthStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	//CollectionObject* secondCollection = fifthStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	//CollectionObject* thirdCollection = fifthStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
-	// シーンUIを追加
-	new FifthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
+	//// シーンUIを追加
+	//new FifthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 }
 
 FifthStageScene::~FifthStageScene()
