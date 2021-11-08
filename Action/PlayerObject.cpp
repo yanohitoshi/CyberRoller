@@ -540,7 +540,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	if (hitObjectTag == Tag::ENEMY && _physicsTag == PhysicsTag::ENEMY_TAG)
 	{
 		// ジャンプアタック状態でなかったら
-		if (!isJumpAttck)
+		if (!isJumpAttck && _hitObject.GetState() == State::Active)
 		{
 			isHitEnemy = true;
 			hitKnockBackObjectPosition = _hitObject.GetPosition();

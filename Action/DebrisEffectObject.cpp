@@ -29,8 +29,10 @@ DebrisEffectObject::DebrisEffectObject(const Vector3& _pos, const Vector3& _dire
 	// ‹P“xî•ñ‚ðŽæ“¾
 	luminance = mesh->GetLuminace();
 
+	// ƒ‰ƒ“ƒ_ƒ€‚È‘¬“x‚ð“¾‚é
 	moveSpeed = (float)(rand() % 1500 + 1000 );
 
+	// ƒ‰ƒ“ƒ_ƒ€‚È’l‚Å‰ñ“]‚ðŠ|‚¯‚é
 	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitX);
 	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitY);
 	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitZ);

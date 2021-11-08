@@ -458,35 +458,35 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(40):
+	case(RIGHT_PUSH_BOX_NUMBER_1):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(38):
+	case(RIGHT_PUSH_BOX_NUMBER_2):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(36):
+	case(RIGHT_PUSH_BOX_NUMBER_3):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(39):
+	case(LEFT_PUSH_BOX_NUMBER_1):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(37):
+	case(LEFT_PUSH_BOX_NUMBER_2):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
@@ -585,7 +585,8 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
 		break;
 
-	case(39):
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -613,7 +614,9 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
-	case(39):
+
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -677,11 +680,14 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(39):
+
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
+		// 爆弾を生成
 		new ExplosionObject(layer9Pos, Tag::BOMB);
 		break;
 	}
@@ -726,7 +732,9 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -771,7 +779,9 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -816,7 +826,9 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer12Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -862,11 +874,13 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		new MoveEnemyObject(layer13Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
-	case(39):
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
+		// 爆弾を生成
 		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
@@ -949,7 +963,8 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new MoveEnemyObject(layer14Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
-	case(39):
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -998,7 +1013,8 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
-	case(39):
+	case(BRAKE_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file DustEffect.h
+@brief 土埃エフェクトの更新を行う
+*/
 class DustEffect :
     public ParticleEffectBase
 {

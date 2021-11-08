@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file ExplosionRipplesEffect.h
+@brief 爆発の波紋エフェクトの更新を行う
+*/
 class ExplosionRipplesEffect :
     public ParticleEffectBase
 {
@@ -29,9 +36,12 @@ public:
 
 private:
 
-
+    /*
+    @fn エフェクトの回転処理
+    */
     void RotateEffect();
 
+    // 角度
     float angle;
 
     const int RandValue;

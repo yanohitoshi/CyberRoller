@@ -183,12 +183,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="ExplosionObjectStateIdle.cpp" />
     <ClCompile Include="ExplosionObjectStateRespawn.cpp" />
     <ClCompile Include="ExplosionRipplesEffect.cpp" />
-    <ClCompile Include="FifthStageCreator.cpp" />
-    <ClCompile Include="FifthStageScene.cpp" />
-    <ClCompile Include="FifthStageUI.cpp" />
-    <ClCompile Include="FourthStageCreator.cpp" />
-    <ClCompile Include="FourthStageScene.cpp" />
-    <ClCompile Include="FourthStageUI.cpp" />
     <ClCompile Include="GeometryInstanceComponent.cpp" />
     <ClCompile Include="GeometryInstanceManager.cpp" />
     <ClCompile Include="GroundObject.cpp" />
@@ -412,12 +406,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="ExplosionObjectStateIdle.h" />
     <ClInclude Include="ExplosionObjectStateRespawn.h" />
     <ClInclude Include="ExplosionRipplesEffect.h" />
-    <ClInclude Include="FifthStageCreator.h" />
-    <ClInclude Include="FifthStageScene.h" />
-    <ClInclude Include="FifthStageUI.h" />
-    <ClInclude Include="FourthStageCreator.h" />
-    <ClInclude Include="FourthStageScene.h" />
-    <ClInclude Include="FourthStageUI.h" />
     <ClInclude Include="GeometryInstanceComponent.h" />
     <ClInclude Include="GeometryInstanceManager.h" />
     <ClInclude Include="GroundObject.h" />

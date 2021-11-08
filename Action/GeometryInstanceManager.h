@@ -83,6 +83,7 @@ public:
 	void ClearGeometryInstanceGameObjectMap();
 
 private:
+	
 
 	/*
 	@struct ジオメトリインスタンスのアクター情報の構造体

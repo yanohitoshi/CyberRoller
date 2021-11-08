@@ -1,10 +1,18 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 class Texture;
 enum class CollectionTag;
 
+/*
+@file CollectedEffectSprite.h
+@brief 収集物を獲得したときのエフェクトを表示する
+*/
 class CollectedEffectSprite :
     public GameObject
 {

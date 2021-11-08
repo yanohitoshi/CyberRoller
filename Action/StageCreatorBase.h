@@ -47,6 +47,10 @@ enum StagePartsName
 	// 最初左に動くblockパーツ
 	LEFT_MOVE_BLOCK_PARTS = 25,
 
+	// 壊れるblockパーツ
+	BRAKE_BLOCK_PARTS = 59,
+	// 爆弾パーツ
+	BOMB_PARTS = 60,
 	// ジャンプスイッチパーツ
 	JUMP_SWITCH_PARTS = 7,
 

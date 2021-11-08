@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file SplashExplosionEffect.h
+@brief 爆発の飛沫エフェクトの更新を行う
+*/
 class SplashExplosionEffect :
     public ParticleEffectBase
 {

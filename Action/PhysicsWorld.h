@@ -114,15 +114,14 @@ public:
 	*/
 	void RemoveSpheres(SphereCollider* _sphere);
 	
-
-	/// <summary>
-	/// デバッグ用ボックス表示準備
-	/// </summary>
+	/*
+	@fn デバッグ用ボックス表示準備
+	*/
 	void DebugShowBox();
 
-	/// <summary>
-	/// デバッグモードフラグを切り替え
-	/// </summary>
+	/*
+	@fn デバッグモードフラグを切り替え
+	*/
 	void ToggleDebugMode() { boolDebugMode = !boolDebugMode; }
 
 private:
@@ -133,16 +132,16 @@ private:
 	*/
 	PhysicsWorld();
 
-	/// <summary>
-	/// デバッグ用の矩形当たり判定を描画
-	/// </summary>
-	/// <param name="_Boxs"> 矩形当たり判定 </param>
-	/// <param name="_Color"> ラインの色 </param>
+	/*
+	@fn デバッグ用の矩形当たり判定を描画
+	@param _Boxs 矩形当たり判定
+	@param _Color ラインの色
+	*/
 	void DrawBoxs(std::vector<class BoxCollider*>& _Boxs, const Vector3& _Color);
 
-	/// <summary>
-	/// 頂点配列を初期化
-	/// </summary>
+	/*
+	@fn 頂点配列を初期化
+	*/
 	void InitBoxVertices();
 
 	// デバッグモードフラグ
@@ -154,11 +153,13 @@ private:
 	// デバッグ用の当たり判定描画用シェーダー
 	Shader* lineShader;
 
-	// 
+	// インスタンス
 	static PhysicsWorld* physics;
 
+	// BoxColliderをタグごとに格納するマップ
 	std::unordered_map<PhysicsTag, std::vector<BoxCollider*>> boxesMap;
 
+	// SphereColliderをタグごとに格納するマップ
 	std::unordered_map<PhysicsTag, std::vector<SphereCollider*>> spheresMap;
 
 	onCollisionMap collisionFunction;

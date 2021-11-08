@@ -1,10 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 // クラスの前方宣言
 class MeshComponent;
 class Mesh;
 
+/*
+@file DebrisEffectObject.h
+@brief 破片エフェクトの更新を行う
+*/
 class DebrisEffectObject :
     public GameObject
 {
@@ -40,17 +47,14 @@ private:
     // 3Dモデルの描画を行うクラス
     MeshComponent* meshComponent;
 
+    // 方組ベクトル
     Vector3 direction;
+    // 生存時間
     int lifeCount;
 
+    // 移動速度
     float moveSpeed;
+    // 速度に足す力
     const float MovePower;
-
-    //// 毎フレーム足すscale値 
-    //const float AddScale;
-    //// 毎フレーム引くalpha値
-    //const float SubAlpha;
-    //// エフェクトの色
-    //const Vector3 EffectColor;
 };
 

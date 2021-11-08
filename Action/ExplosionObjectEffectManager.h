@@ -1,9 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 class ExplosionObject;
 
+/*
+@file ExplosionObjectEffectManager.h
+@brief 爆発物のエフェクトの生成を行う
+*/
 class ExplosionObjectEffectManager :
     public GameObject
 {
@@ -65,6 +73,4 @@ private:
     Vector3 effectVelocity;
     // 1度だけ生成する用の生成フラグ変数
     bool generateExplosionEffectsFlag;
-    //// エフェクトが有効化されてからのフレームを測る
-    //int effectFrameCount;
 };

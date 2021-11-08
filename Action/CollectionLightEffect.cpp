@@ -14,7 +14,9 @@ CollectionLightEffect::CollectionLightEffect(GameObject* _owner, const Vector3& 
 	direction = _direction;
 	SetPosition(position);
 
+	// ランダムな速度を得る
 	speed = (rand() % 400 + 200);
+	// ランダムな初期の値を得る
 	value = (rand() % 180);
 	sinV = Math::Sin(value);
 

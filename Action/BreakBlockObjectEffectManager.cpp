@@ -55,7 +55,7 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 
 void BreakBlockObjectEffectManager::ActiveEffectProcess()
 {
-
+	// ‚Ü‚¾¶¬‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç
 	if (generateExplosionEffectsFlag)
 	{
 		effectPosition = owner->GetPosition();

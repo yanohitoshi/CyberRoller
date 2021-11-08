@@ -1,10 +1,18 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
-enum CrystalColor;
+// クラスの前方宣言
 class CollectionObject;
+enum CrystalColor;
 
+/*
+@file CollectionEffectManager.h
+@brief 収集物エフェクトの生成を行う
+*/
 class CollectionEffectManager :
     public GameObject
 {

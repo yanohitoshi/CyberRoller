@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+// クラスの前方宣言
 enum CrystalColor;
 
+/*
+@file CollectionLightEffect.h
+@brief 光エフェクトの更新を行う
+*/
 class CollectionLightEffect :
     public ParticleEffectBase
 {
@@ -35,8 +43,11 @@ private:
     const float AddScale;
     // 毎フレーム引くalpha値
     const float SubAlpha;
+    // 方向ベクトル
     Vector3 direction;
+    // サイン関数に渡す値
     float value;
+    // サイン関数から返ってきた値
     float sinV;
 };
 

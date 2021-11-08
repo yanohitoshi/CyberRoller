@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
 
+/*
+@file CollectionRipplesEffect.h
+@brief 波紋エフェクトの更新を行う
+*/
 class CollectionRipplesEffect :
     public ParticleEffectBase
 {
