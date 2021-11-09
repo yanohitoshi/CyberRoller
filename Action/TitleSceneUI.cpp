@@ -15,11 +15,12 @@ TitleSceneUI::TitleSceneUI()
 	: GameObject(false,UI)
 {
 	// ポジションをセット
-	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+	SetPosition(Vector3(0.0f, 300.0f, 0.0f));
+	SetScale(Vector3(0.3f, 0.3f, 0.3f));
 	// spriteComponentをnewする
 	sprite = new SpriteComponent(this, false);
 	// タイトルのtextureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/Title.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/CyberRoller_Neon.png");
 	// textureをComponentにセット
 	sprite->SetTexture(tex);
 	// alpha値を初期化
