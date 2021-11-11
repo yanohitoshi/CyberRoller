@@ -581,7 +581,7 @@ void FourthStageCreator::CreateLayer7(int _indexX, int _indexY)
 			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -609,7 +609,7 @@ void FourthStageCreator::CreateLayer8(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -673,11 +673,11 @@ void FourthStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
 		new ExplosionObject(layer9Pos, Tag::BOMB);
 		break;
 	}
@@ -722,7 +722,7 @@ void FourthStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -767,7 +767,7 @@ void FourthStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -812,7 +812,7 @@ void FourthStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer12Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -858,11 +858,11 @@ void FourthStageCreator::CreateLayer13(int _indexX, int _indexY)
 		new MoveEnemyObject(layer13Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
 		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
@@ -945,7 +945,7 @@ void FourthStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new MoveEnemyObject(layer14Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -994,7 +994,7 @@ void FourthStageCreator::CreateLayer15(int _indexX, int _indexY)
 		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

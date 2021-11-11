@@ -178,7 +178,7 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer1Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -228,7 +228,7 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer2Pos, BlockSize,Tag::BREAK_GROUND);
 		break;
 	}
@@ -272,11 +272,11 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new NormalEnemyObject(layer3Pos, Tag::ENEMY, playerObject);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
 		new ExplosionObject(layer3Pos, Tag::BOMB);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -317,7 +317,7 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -384,7 +384,7 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer5Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

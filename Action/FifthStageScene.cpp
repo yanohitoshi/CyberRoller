@@ -42,8 +42,9 @@ FifthStageScene::FifthStageScene()
 	//CollectionObject* secondCollection = fifthStageCreator->FindCollectionObject(CollectionTag::SECOND);
 	//CollectionObject* thirdCollection = fifthStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
-	//// シーンUIを追加
-	//new FifthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
+	// シーンUIを追加
+	// new FifthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
+	new FifthStageUI(playerObject);
 }
 
 FifthStageScene::~FifthStageScene()

@@ -4,7 +4,7 @@
 #include "TitleSceneUI.h"
 #include "Renderer.h"
 #include "SpriteComponent.h"
-#include "TitleBackGroundSprite.h"
+#include "StartButtonSprite.h"
 #include "SkyBoxObject.h"
 
 /*
@@ -16,15 +16,16 @@ TitleSceneUI::TitleSceneUI()
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 300.0f, 0.0f));
-	SetScale(Vector3(0.3f, 0.3f, 0.3f));
+	SetScale(Vector3(0.8f, 0.8f, 0.8f));
 	// spriteComponentをnewする
 	sprite = new SpriteComponent(this, false);
 	// タイトルのtextureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/CyberRoller_Neon.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/Title_Log.png");
 	// textureをComponentにセット
 	sprite->SetTexture(tex);
 	// alpha値を初期化
 	sprite->SetAlpha(1.0f);
+	new StartButtonSprite();
 	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }

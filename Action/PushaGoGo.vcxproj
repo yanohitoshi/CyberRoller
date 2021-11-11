@@ -214,6 +214,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
     <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp" />
     <ClCompile Include="SplashExplosionEffect.cpp" />
+    <ClCompile Include="StartButtonSprite.cpp" />
     <ClCompile Include="TitleJumpAttackPlayerObject.cpp" />
     <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
     <ClCompile Include="TitlePlayerStateJumpLoop.cpp" />
@@ -443,6 +444,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerDeadEffectManager.h" />
     <ClInclude Include="PlayerObjectStateExplosionBlowAway.h" />
     <ClInclude Include="SplashExplosionEffect.h" />
+    <ClInclude Include="StartButtonSprite.h" />
     <ClInclude Include="TitleJumpAttackPlayerObject.h" />
     <ClInclude Include="TitlePlayerStateBase.h" />
     <ClInclude Include="TitlePlayerStateJumpAttack.h" />

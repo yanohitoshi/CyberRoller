@@ -15,7 +15,7 @@ public:
     @param	_playerObject プレイヤークラスのポインタ
     */
     FifthStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
-
+    FifthStageUI(PlayerObject* _playerObject);
     /*
     @fn デストラクタ
     @brief  objectの削除を行う

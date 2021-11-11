@@ -337,6 +337,10 @@ void FifthStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(layer2Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
+
+	case(59):
+		new BreakBlockObject(layer2Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
 	}
 }
 
@@ -376,6 +380,13 @@ void FifthStageCreator::CreateLayer3(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer3Pos, Tag::ENEMY, playerObject, moveEnemyData);
 		break;
+
+	case(59):
+		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+	case(60):
+		new ExplosionObject(layer3Pos, Tag::BOMB);
+		break;
 	}
 }
 
@@ -400,6 +411,9 @@ void FifthStageCreator::CreateLayer4(int _indexX, int _indexY)
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+	case(59):
+		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }

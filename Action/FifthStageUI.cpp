@@ -39,48 +39,68 @@ FifthStageUI::FifthStageUI(PlayerObject* _playerObject, CollectionObject* _first
 	isChangePosition = false;
 }
 
+FifthStageUI::FifthStageUI(PlayerObject* _playerObject)
+	: GameObject(false, Tag::UI)
+	, SceneTime(300)
+{
+	// カウントダウン
+	new CountDownFont(SceneTime);
+	// start時のカウントダウン
+	new StartCountDownSprite();
+	// タイムアップ時のsprite
+	new TimeUpSprite();
+	// コンティニュー選択時のsprite
+	new ContinueSprite();
+	// GameOver時のsprite
+	new GameOverSprite();
+	// スカイボックスを生成
+	skyBox = new SkyBoxObject(false, Tag::UI);
+
+	playerObject = _playerObject;
+}
+
 FifthStageUI::~FifthStageUI()
 {
 }
 
 void FifthStageUI::UpdateGameObject(float _deltaTime)
 {
-	if (playerObject->GetClearFlag())
-	{
-		++clearCount;
+	//if (playerObject->GetClearFlag())
+	//{
+	//	++clearCount;
 
-		if (!isChangePosition)
-		{
-			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
-			firstCollectionUI->ResetDraw();
+	//	if (!isChangePosition)
+	//	{
+	//		firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
+	//		firstCollectionUI->ResetDraw();
 
-			secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
-			secondCollectionUI->ResetDraw();
+	//		secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
+	//		secondCollectionUI->ResetDraw();
 
-			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
-			thirdCollectionUI->ResetDraw();
-			isChangePosition = true;
-		}
+	//		thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
+	//		thirdCollectionUI->ResetDraw();
+	//		isChangePosition = true;
+	//	}
 
-		if (clearCount >= 120)
-		{
-			firstCollectionUI->DrawInGame();
-		}
+	//	if (clearCount >= 120)
+	//	{
+	//		firstCollectionUI->DrawInGame();
+	//	}
 
-		if (clearCount >= 180)
-		{
-			secondCollectionUI->DrawInGame();
-		}
+	//	if (clearCount >= 180)
+	//	{
+	//		secondCollectionUI->DrawInGame();
+	//	}
 
-		if (clearCount >= 240)
-		{
-			thirdCollectionUI->DrawInGame();
-		}
-	}
-	else
-	{
-		firstCollectionUI->DrawInGame();
-		secondCollectionUI->DrawInGame();
-		thirdCollectionUI->DrawInGame();
-	}
+	//	if (clearCount >= 240)
+	//	{
+	//		thirdCollectionUI->DrawInGame();
+	//	}
+	//}
+	//else
+	//{
+	//	firstCollectionUI->DrawInGame();
+	//	secondCollectionUI->DrawInGame();
+	//	thirdCollectionUI->DrawInGame();
+	//}
 }

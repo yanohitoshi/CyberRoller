@@ -707,10 +707,10 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
-	case(40):
+	case(BOMB_PARTS):
 		new ExplosionObject(layer12Pos, Tag::BOMB);
 		break;
 	}
@@ -734,7 +734,7 @@ void SecondStageCreator::CreateLayer13(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new NormalEnemyObject(layer13Pos, Tag::ENEMY, playerObject);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -762,7 +762,7 @@ void SecondStageCreator::CreateLayer14(int _indexX, int _indexY)
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(layer14Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

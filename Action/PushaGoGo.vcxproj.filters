@@ -635,6 +635,9 @@
     <ClCompile Include="FifthStageUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
+    <ClCompile Include="StartButtonSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1275,6 +1278,9 @@
     </ClInclude>
     <ClInclude Include="FifthStageUI.h">
       <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButtonSprite.h">
+      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

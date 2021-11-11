@@ -21,6 +21,12 @@ enum class CollectionTag;
 */
 enum StagePartsName
 {
+	// 壊れるブロックパーツ
+	BREAK_BLOCK_PARTS = 59,
+
+	// 爆発物パーツ
+	BOMB_PARTS = 60,
+
 	// 右寄せのパワーセルライトパーツ
 	POWERCELLS_LIGHT_PARTS_RIGHT = 1,
 	// 左寄せのパワーセルライトパーツ
