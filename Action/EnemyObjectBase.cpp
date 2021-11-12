@@ -19,8 +19,8 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, trackingObject(_trackingObject)
 	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f,2.0f,2.0f))
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 {
 	// メンバー変数初期化
 	SetPosition(_pos);
@@ -53,8 +53,8 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, moveEnemyTag(_moveEnemyData.tag)
 	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 {
 	// メンバー変数初期化
 	tag = _objectTag;
@@ -84,8 +84,8 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	, moveSpeed(_moveSpeed)
 	, trackingObject(_trackingObject)
 	, respawnPositionOffset(1000.0f)
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {
 	// メンバー変数初期化

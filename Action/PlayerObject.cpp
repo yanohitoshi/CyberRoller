@@ -106,7 +106,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	isAvailableJumpKey = false;
 	isAvailableJumpAttck = false;
 	isJumpAttck = false;
-	isSelectingTargetEnemy = false;
+	isSelectingTargetObject = false;
 	isJumpAttackSuccess = false;
 	// 前方ベクトル初期化
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
@@ -206,7 +206,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//ジャンプ攻撃判定用のsphereCollider
 	jumpAttackSphereCol = new SphereCollider(this, PhysicsTag::ATTACK_RANGE_TAG, std::bind(&PlayerObject::OnCollisionAttackTarget, this, std::placeholders::_1,std::placeholders::_2));
-	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),700.0f };
+	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),750.0f };
 	jumpAttackSphereCol->SetObjectSphere(jumpAttackSphere);
 
 	// プレイヤーに必要なeffectを持たせる
@@ -358,7 +358,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	isHitEnemy = false;
 	isHitExplosion = false;
 	pushedVelocity = Vector3::Zero;
-	isSelectingTargetEnemy = false;
+	isSelectingTargetObject = false;
 	attackTarget = nullptr;
 
 	// ステータスが走りはじめもしくはランループだったら切り替えしディレイカウントをカウントする
@@ -540,7 +540,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 	if (hitObjectTag == Tag::ENEMY && _physicsTag == PhysicsTag::ENEMY_TAG)
 	{
 		// ジャンプアタック状態でなかったら
-		if (!isJumpAttck)
+		if (!isJumpAttck && _hitObject.GetState() == State::Active)
 		{
 			isHitEnemy = true;
 			hitKnockBackObjectPosition = _hitObject.GetPosition();
@@ -622,28 +622,28 @@ void PlayerObject::OnCollisionAttackTarget(const GameObject& _hitObject, const P
 
 	if (attackTarget != nullptr)
 	{
-		// ヒットしたEnemyのポジションと距離を計算
-		Vector3 hitEnemyPosition = _hitObject.GetPosition();
-		Vector3 hitEnemyDistance = hitEnemyPosition - position;
-		hitEnemyDistance.z = 0.0f;
+		// ヒットしたObjectのポジションと距離を計算
+		Vector3 hitObjectPosition = _hitObject.GetPosition();
+		Vector3 hitObjectDistance = hitObjectPosition - position;
+		hitObjectDistance.z = 0.0f;
 		
-		// select中のEnemyのポジションと距離を計算
-		Vector3 selectEnemyPosition = attackTarget->GetPosition();
-		Vector3 selectEnemyDistance = selectEnemyPosition - position;
-		selectEnemyDistance.z = 0.0f;
+		// select中のObjectのポジションと距離を計算
+		Vector3 selectObjectPosition = attackTarget->GetPosition();
+		Vector3 selectObjectDistance = selectObjectPosition - position;
+		selectObjectDistance.z = 0.0f;
 		
 		// 距離をベクトルの長さで比較選択している敵よりも新しい敵の方が近かったら更新
-		if (hitEnemyDistance.Length() < selectEnemyDistance.Length())
+		if (hitObjectDistance.Length() < selectObjectDistance.Length())
 		{
-			attackTarget = FindTargetEnemy(_hitObject);
+			attackTarget = FindTargetObject(_hitObject);
 		}
 	}
 	else
 	{
-		attackTarget = FindTargetEnemy(_hitObject);
+		attackTarget = FindTargetObject(_hitObject);
 	}
 
-	isSelectingTargetEnemy = true;
+	isSelectingTargetObject = true;
 }
 
 /*
@@ -730,19 +730,19 @@ void PlayerObject::CheckRestartProcess()
 @param	_hitObject ヒットしたオブジェクト
 @return GameObject* 探し出したオブジェクト
 */
-GameObject* PlayerObject::FindTargetEnemy(const GameObject& _hitObject)
+GameObject* PlayerObject::FindTargetObject(const GameObject& _hitObject)
 {
 	// 判定内に入った敵オブジェクトのポインタを取得
-	std::vector<GameObject*>targetEnemies = FindGameObject(_hitObject.GetTag());
-	GameObject* selectEnemy = nullptr;
-	for (auto itr : targetEnemies)
+	std::vector<GameObject*>targetObjects = FindGameObject(_hitObject.GetTag());
+	GameObject* selectObject = nullptr;
+	for (auto itr : targetObjects)
 	{
 		if (itr->GetObjectId() == _hitObject.GetObjectId())
 		{
-			selectEnemy = itr;
+			selectObject = itr;
 		}
 	}
-	return selectEnemy;
+	return selectObject;
 }
 
 /*

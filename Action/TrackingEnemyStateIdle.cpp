@@ -7,7 +7,7 @@
 @fn コンストラクタ
 */
 TrackingEnemyStateIdle::TrackingEnemyStateIdle()
-	: StayTime(120)
+	: StayTime(60)
 {
 }
 

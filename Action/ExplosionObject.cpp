@@ -140,7 +140,8 @@ void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag
 		hitPosition = _hitObject.GetPosition();
 	}
 	
-	if(_physicsTag == PhysicsTag::PLAYER_TAG && nowState == ExplosionObjectState::IDLE)
+	if(_physicsTag == PhysicsTag::PLAYER_TAG && nowState == ExplosionObjectState::IDLE ||
+		_physicsTag == PhysicsTag::ENEMY_TAG && nowState == ExplosionObjectState::IDLE)
 	{
 		isStartExplosion = true;
 		isHitJumpAttackPlayer = false;

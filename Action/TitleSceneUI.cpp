@@ -16,11 +16,11 @@ TitleSceneUI::TitleSceneUI()
 {
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 300.0f, 0.0f));
-	SetScale(Vector3(0.8f, 0.8f, 0.8f));
+	SetScale(Vector3(0.2f, 0.2f, 0.2f));
 	// spriteComponentをnewする
 	sprite = new SpriteComponent(this, false);
 	// タイトルのtextureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/Title_Log.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/Title_test.png");
 	// textureをComponentにセット
 	sprite->SetTexture(tex);
 	// alpha値を初期化

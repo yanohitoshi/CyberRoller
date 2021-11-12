@@ -142,10 +142,15 @@ bool Game::Initialize()
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(200.0f, 0.0f, -500.0f), Vector3(200.0f,0.0f, 0.0f),Vector3::UnitY);
 	RENDERER->SetViewMatrix(v);
 
+	//// 最初のシーンステータスの初期化
+	//nowSceneState = TITLE_SCENE;
+	//// 最初のシーンを生成
+	//nowScene = new TitleScene();
+
 	// 最初のシーンステータスの初期化
-	nowSceneState = TITLE_SCENE;
+	nowSceneState = FIFTH_SATGE_SCENE;
 	// 最初のシーンを生成
-	nowScene = new TitleScene();
+	nowScene = new FifthStageScene();
 
 	// 現在のシーンのステータスをレンダラーに渡す
 	RENDERER->SetNowSceneState(nowSceneState);

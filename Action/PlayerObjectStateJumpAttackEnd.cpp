@@ -106,20 +106,29 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	endFlag = false;
 	jumpFrameCount = 0;
 
+	_owner->SetAttackTargetObject(nullptr);
+
+	// オーナーの移動速度を得る
+	moveSpeed = _owner->GetMoveSpeed();
+
+	// 移動速度が最大値を超えていたら固定する
+	if (moveSpeed >= MaxMoveSpeed)
+	{
+		// 移動速度の最大定数を代入
+		moveSpeed = MaxMoveSpeed;
+	}
+
 	// ジャンプ攻撃が成功したかどうか判定
 	if (_owner->GetIsJumpAttackSuccess())
 	{
 		// ジャンプ力をセットする
 		_owner->SetJumpPower(JumpAttackSuccessFirstPower);
-		velocity = _owner->GetVelocity();
 		_owner->SetIsAvailableJumpAttck(true);
-		velocity.z = 0.0f;
+		velocity = Vector3::Zero;
 	}
 	else
 	{
-		moveSpeed = _owner->GetMoveSpeed() * 0.5f;
 		velocity = _owner->GetVelocity();
 		velocity.z = 0.0f;
-		_owner->SetVelocity(velocity);
 	}
 }

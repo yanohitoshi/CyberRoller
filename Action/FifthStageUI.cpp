@@ -65,42 +65,42 @@ FifthStageUI::~FifthStageUI()
 
 void FifthStageUI::UpdateGameObject(float _deltaTime)
 {
-	//if (playerObject->GetClearFlag())
-	//{
-	//	++clearCount;
+	if (playerObject->GetClearFlag())
+	{
+		++clearCount;
 
-	//	if (!isChangePosition)
-	//	{
-	//		firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
-	//		firstCollectionUI->ResetDraw();
+		if (!isChangePosition)
+		{
+			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
+			firstCollectionUI->ResetDraw();
 
-	//		secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
-	//		secondCollectionUI->ResetDraw();
+			secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
+			secondCollectionUI->ResetDraw();
 
-	//		thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
-	//		thirdCollectionUI->ResetDraw();
-	//		isChangePosition = true;
-	//	}
+			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
+			thirdCollectionUI->ResetDraw();
+			isChangePosition = true;
+		}
 
-	//	if (clearCount >= 120)
-	//	{
-	//		firstCollectionUI->DrawInGame();
-	//	}
+		if (clearCount >= 120)
+		{
+			firstCollectionUI->DrawInGame();
+		}
 
-	//	if (clearCount >= 180)
-	//	{
-	//		secondCollectionUI->DrawInGame();
-	//	}
+		if (clearCount >= 180)
+		{
+			secondCollectionUI->DrawInGame();
+		}
 
-	//	if (clearCount >= 240)
-	//	{
-	//		thirdCollectionUI->DrawInGame();
-	//	}
-	//}
-	//else
-	//{
-	//	firstCollectionUI->DrawInGame();
-	//	secondCollectionUI->DrawInGame();
-	//	thirdCollectionUI->DrawInGame();
-	//}
+		if (clearCount >= 240)
+		{
+			thirdCollectionUI->DrawInGame();
+		}
+	}
+	else
+	{
+		firstCollectionUI->DrawInGame();
+		secondCollectionUI->DrawInGame();
+		thirdCollectionUI->DrawInGame();
+	}
 }
