@@ -221,18 +221,7 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 			continue;
 		}
 
-		if (itr->GetOwner() == nullptr)
-		{
-			continue;
-		}
-
-		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (itr->GetOwner()->GetState() != State::Active && itr->GetOwner()->GetState() != State::Disabling)
-		{
-			continue;
-		}
-
-		if (itr->GetOwner()->GetTag() == Tag::BREAK_GROUND && itr->GetOwner()->GetState() == State::Disabling)
+		if (itr->GetOwner()->GetState() == State::Disabling)
 		{
 			continue;
 		}
@@ -262,7 +251,7 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 	for (auto itr : _checkBoxes)
 	{
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (itr->GetOwner()->GetState() != State::Active/* && itr->GetOwner()->GetState() != State::Disabling*/)
+		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
@@ -337,6 +326,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)

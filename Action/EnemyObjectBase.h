@@ -145,6 +145,8 @@ protected:
 	Vector3 respawnPosition;
 	// 移動方向
 	Vector3 moveDirection;
+	// 自分を倒したオブジェクトのポジション
+	Vector3 defeatedObjectPosition;
 	// AABBの最小値
 	const Vector3 BoxMin;
 	// AABBの最大値
@@ -254,6 +256,12 @@ public:// ゲッターセッター
 	@return Vector3 respawnPosition リスポーンする場所を返す
 	*/
 	Vector3 GetRespawnPosition() { return respawnPosition; }
+
+	/*
+	@fn respawnPositionのgetter関数
+	@return Vector3 respawnPosition リスポーンする場所を返す
+	*/
+	Vector3 GetDefeatedObjectPosition() { return defeatedObjectPosition; }
 
 	/*
 	@fn moveDistanceのgetter関数

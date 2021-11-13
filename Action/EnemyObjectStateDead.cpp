@@ -83,10 +83,8 @@ void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	_owner->SetState(State::Disabling);
 	// フレームカウント初期化
 	frameCount = 0;
-	// プレイヤーのポインタを得る
-	playerObject = _owner->GetTrackingObject();
 	// 吹っ飛ぶ方向を計算
-	blowAwayDirection = _owner->GetPosition() - playerObject->GetPosition();
+	blowAwayDirection = _owner->GetPosition() - _owner->GetDefeatedObjectPosition();
 	// 正規化
 	blowAwayDirection.Normalize();
 	// 上下方向を0に固定

@@ -169,9 +169,10 @@ void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 */
 void MoveEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
 		isDeadFlag = true;
+		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
 	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||

@@ -196,10 +196,11 @@ void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ジャンプアタックプレイヤーだったら
-	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
 		// 死亡フラグをtrueに
 		isDeadFlag = true;
+		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
 	// 他の敵またはグラウンドと当たったら

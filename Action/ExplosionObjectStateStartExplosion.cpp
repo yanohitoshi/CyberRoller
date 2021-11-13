@@ -13,8 +13,6 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 			return state;
 		}
 
-		VerticalMove(_owner, _deltaTime);
-
 	}
 	else
 	{
@@ -28,7 +26,6 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 		angle += 0.1;
 		RotationProcess(_owner, angle, Vector3::UnitY);
-
 	}
 
 	Flashing();

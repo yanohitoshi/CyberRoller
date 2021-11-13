@@ -13,7 +13,8 @@ void ExplosionObjectStateBase::RotationProcess(ExplosionObject* _owner, float _a
 void ExplosionObjectStateBase::VerticalMove(ExplosionObject* _owner, float _deltaTime)
 {
 	++frameCount;
-	if (frameCount % 30 == 0)
+
+	if (frameCount % 45 == 0)
 	{
 		++angle;
 		rate = Math::Cos(angle);
