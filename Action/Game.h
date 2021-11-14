@@ -29,6 +29,10 @@ enum SceneState
 	SECOND_SATGE_SCENE,
 	// 第三ステージシーン
 	THIRD_SATGE_SCENE,
+	// 第四ステージシーン
+	FOURTH_SATGE_SCENE,
+	// 第五ステージシーン
+	FIFTH_SATGE_SCENE,
 	// 最終ステージシーン
 	FINAL_STAGE_SCENE,
 	// リザルトシーン

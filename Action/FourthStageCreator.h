@@ -1,15 +1,12 @@
 #pragma once
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
 /*
-@file FinalStageCreator.h
-@brief FinalStageを生成する
+@file FourthStageCreator.h
+@brief FourthStageを生成する
 */
-class FinalStageCreator :
-    public StageCreatorBase
+class FourthStageCreator :
+	public StageCreatorBase
 {
 public:
 
@@ -19,13 +16,13 @@ public:
 	@param	_reUseGameObject 再利用するかどうかフラグ
 	@param	_objectTag オブジェクト判別用Tag
 	*/
-	FinalStageCreator(bool _reUseGameObject, const Tag _objectTag);
-	
+	FourthStageCreator(bool _reUseGameObject, const Tag _objectTag);
+
 	/*
 	@fn デストラクタ
 	@brief  マップデータの削除を行う
 	*/
-	~FinalStageCreator()override;
+	~FourthStageCreator()override;
 
 	/*
 	@fn ファイルを開く
@@ -44,27 +41,6 @@ public:
 	void CreateStage();
 
 private:
-
-	//// 押し出し板のナンバー列挙
-	//// 現在の仕様上こういった形でしか列挙出来ませんでした。
-	//// 改善案模索中です
-	//enum FinalStagePushBoxNumber
-	//{
-	//	// 左向きの押し出し板の列挙ナンバー
-	//	LEFT_PUSH_BOX_NUMBER_1 = 46,
-	//	LEFT_PUSH_BOX_NUMBER_2 = 47,
-	//	LEFT_PUSH_BOX_NUMBER_3 = 48,
-	//	LEFT_PUSH_BOX_NUMBER_4 = 49,
-	//	LEFT_PUSH_BOX_NUMBER_5 = 44,
-
-	//	// 右向きの押し出し板の列挙ナンバー
-	//	RIGHT_PUSH_BOX_NUMBER_1 = 50,
-	//	RIGHT_PUSH_BOX_NUMBER_2 = 51,
-	//	RIGHT_PUSH_BOX_NUMBER_3 = 52,
-	//	RIGHT_PUSH_BOX_NUMBER_4 = 53,
-	//	RIGHT_PUSH_BOX_NUMBER_5 = 45,
-
-	//};
 
 	/*
 	@fn レイヤー1クリエイター
@@ -222,7 +198,7 @@ private:
 
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
-	
+
 	// 最終ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
@@ -251,6 +227,5 @@ private:
 	int sizeX;
 	//配置するオブジェクトの間隔Y
 	int sizeY;
-	
-};
 
+};
