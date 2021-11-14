@@ -37,8 +37,6 @@ public:
 
 private:
 
-	// 追跡するオブジェクトのポインタ
-	GameObject* trackingObject;
 	// 追跡方向のベクトルの
 	Vector3 trackingRotationVec;
 	// 初期ポジション

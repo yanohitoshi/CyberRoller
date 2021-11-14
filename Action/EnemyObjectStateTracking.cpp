@@ -27,7 +27,7 @@ EnemyObjectStateTracking::~EnemyObjectStateTracking()
 EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 追跡対象から初期ポジションへと向かうベクトルを計算
-	Vector3 trackingObjectToFirstPos = firstPosition - trackingObject->GetPosition();
+	Vector3 trackingObjectToFirstPos = firstPosition - _owner->GetAttackObjectPosition();
 	// オーナーのポジションから初期ポジションへと向かうベクトルを計算
 	Vector3 ownerObjectToFirstPos = firstPosition - _owner->GetPosition();
 
@@ -40,7 +40,7 @@ EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _delt
 	if (_owner->GetIsTracking())
 	{
 		// オーナーから追跡対象へ向かうベクトル
-		trackingRotationVec =  trackingObject->GetPosition() - _owner->GetPosition();
+		trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
 		trackingRotationVec.z = 0.0f;
 		float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
 
@@ -106,13 +106,11 @@ void EnemyObjectStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// 初期ポジションを得る
 	firstPosition = _owner->GetFirstPosition();
 
-	// 追跡のターゲットとなるオブジェクトを得る
-	trackingObject = _owner->GetTrackingObject();
 	// 移動速度を得る
 	moveSpeed = _owner->GetMoveSpeed();
 
 	// 追跡方向を計算
-	trackingRotationVec = trackingObject->GetPosition() - _owner->GetPosition();
+	trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
 	// 上下移動はさせないので0で固定
 	trackingRotationVec.z = 0.0f;
 

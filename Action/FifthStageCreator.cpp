@@ -367,17 +367,17 @@ void FifthStageCreator::CreateLayer2(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer2Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer2Pos, Tag::ENEMY);
 		break;
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(ENHANCED_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new EnhancedEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new EnhancedEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -445,7 +445,7 @@ void FifthStageCreator::CreateLayer3(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer3Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer3Pos, Tag::ENEMY);
 		break;
 
 	case(BOMB_PARTS):
@@ -533,7 +533,7 @@ void FifthStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY);
 		break;
 
 	case(BOMB_PARTS):
@@ -615,7 +615,7 @@ void FifthStageCreator::CreateLayer7(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
 		break;
 
 	case(BOMB_PARTS):
@@ -748,14 +748,14 @@ void FifthStageCreator::CreateLayer10(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer10Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer10Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer10Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	case(39):
 		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
@@ -800,7 +800,7 @@ void FifthStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	case(39):
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
@@ -838,14 +838,14 @@ void FifthStageCreator::CreateLayer12(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer12Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer12Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	case(39):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
@@ -883,14 +883,14 @@ void FifthStageCreator::CreateLayer13(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer13Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer13Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(39):
@@ -948,7 +948,7 @@ void FifthStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(35):
@@ -966,14 +966,14 @@ void FifthStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer14Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer14Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer14Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(39):
@@ -1005,14 +1005,14 @@ void FifthStageCreator::CreateLayer15(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer15Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer15Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer15Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
@@ -1054,14 +1054,14 @@ void FifthStageCreator::CreateLayer16(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer16Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer16Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer16Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer16Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -1093,7 +1093,7 @@ void FifthStageCreator::CreateLayer17(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer17Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer17Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }

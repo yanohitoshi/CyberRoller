@@ -497,7 +497,7 @@ void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(CLEAR_OBJECT_PARTS):
@@ -527,21 +527,21 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 	{
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):

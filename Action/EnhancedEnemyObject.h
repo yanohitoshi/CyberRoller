@@ -22,7 +22,7 @@ public:
 	@param	追跡するオブジェクトのポインタ
 	@param	追跡エリアの値
 	*/
-	EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue);
+	EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue);
 
 	/*
 	@fn デストラクタ

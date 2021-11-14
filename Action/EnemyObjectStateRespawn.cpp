@@ -66,7 +66,7 @@ void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_RESPAWN;
 	// 死亡フラグをfalseにセット
-	_owner->SetIsDeadFlag(false);
+	_owner->SetIsDead(false);
 	_owner->SetIsAttack(false);
 	// positionをリスポーンする場所にセット
 	_owner->SetPosition(_owner->GetRespawnPosition());

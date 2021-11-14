@@ -632,6 +632,15 @@
     <ClCompile Include="EnemyObjectStateTurn.cpp">
       <Filter>GameObjects\EnemyObjects\CommonState</Filter>
     </ClCompile>
+    <ClCompile Include="EnhancedEnemyStateIdle.cpp">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="EnhancedEnemyStateFlinch.cpp">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject\State</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFlinchEffectManager.cpp">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1270,6 +1279,15 @@
     <ClInclude Include="EnemyObjectStateTurn.h">
       <Filter>GameObjects\EnemyObjects\CommonState</Filter>
     </ClInclude>
+    <ClInclude Include="EnhancedEnemyStateIdle.h">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="EnhancedEnemyStateFlinch.h">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject\State</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFlinchEffectManager.h">
+      <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1487,6 +1505,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects\CommonState">
       <UniqueIdentifier>{a9f3661e-ed66-46ec-b0db-d283308680a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\EnhancedEnemyObject\State">
+      <UniqueIdentifier>{db6cfae5-19e1-446e-a854-90770dc69f5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

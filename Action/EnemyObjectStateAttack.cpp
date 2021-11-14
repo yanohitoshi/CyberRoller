@@ -40,7 +40,7 @@ EnemyState EnemyObjectStateAttack::Update(EnemyObjectBase* _owner, float _deltaT
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

@@ -25,8 +25,8 @@
 @param	追跡するオブジェクトのポインタ
 @param	追跡エリアの値
 */
-TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
-	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
+TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue)
+	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed)
 	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
@@ -38,7 +38,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	SetScale(scale);
 
 	isTracking = false;
-	isDeadFlag = false;
+	isDead = false;
 	isAttack = false;
 	isPushBackToPlayer = true;
 
@@ -124,12 +124,12 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	// AABBを更新
 	aabb = boxCollider->GetWorldBox();
 
-	if (isAttack && !isDeadFlag)
+	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
-	if (isDeadFlag)
+	if (isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_DEAD;
 	}
@@ -198,7 +198,7 @@ void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
 		// 死亡フラグをtrueに
-		isDeadFlag = true;
+		isDead = true;
 		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 

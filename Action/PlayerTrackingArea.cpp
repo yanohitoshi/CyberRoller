@@ -61,5 +61,6 @@ void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const Physics
 	{
 		// 親クラスを追跡状態にセット
 		ownerEnemy->SetIsTracking(true);
+		ownerEnemy->SetAttackObjectPosition(_hitObject.GetPosition());
 	}
 }

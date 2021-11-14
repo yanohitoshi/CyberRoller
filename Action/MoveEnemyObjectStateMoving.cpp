@@ -55,7 +55,7 @@ EnemyState MoveEnemyObjectStateMoving::Update(EnemyObjectBase* _owner, float _de
 	}
 
 	// Ž€–S‚µ‚Ä‚¢‚½‚ç
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

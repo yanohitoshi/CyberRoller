@@ -5,17 +5,19 @@
 #include "EnemyObjectStateBase.h"
 #include "EnemyObjectStateRespawn.h"
 #include "EnemyObjectStateDead.h"
-#include "TrackingEnemyStateIdle.h"
+#include "EnhancedEnemyStateIdle.h"
+#include "EnhancedEnemyStateFlinch.h"
 #include "EnemyObjectStateTracking.h"
 #include "EnemyObjectStateTurn.h"
 #include "EnemyObjectStateReposition.h"
 #include "EnemyObjectStateAttack.h"
 #include "BoxCollider.h"
 #include "PlayerTrackingArea.h"
+#include "EnemyFlinchEffectManager.h"
 #include "EnemyAttackArea.h"
 
-EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
-	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
+EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue)
+	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed)
 	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
@@ -27,8 +29,9 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 	SetScale(scale);
 
 	isTracking = false;
-	isDeadFlag = false;
+	isDead = false;
 	isAttack = false;
+	isFlinch = false;
 	isPushBackToPlayer = true;
 
 	//モデル描画用のコンポーネント
@@ -51,6 +54,8 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Idle.gpanim", true);
 	// 死亡時のアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Dead.gpanim", false);
+	// 怯み時のアニメーション
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_FLINCH)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_Get_Hit.gpanim", false);
 	// ターンアニメーション
 	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERER->GetAnimation("Assets/Model/Enemy/EnemyAnimation/Dron_01_rotatation_180_L.gpanim", false);
 	// 攻撃アニメーション
@@ -62,9 +67,10 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 	boxCollider->SetObjectBox(enemyBox);
 
 	// stateをstatePool用マップに追加
-	AddStatePoolMap(new TrackingEnemyStateIdle, EnemyState::ENEMY_STATE_IDLE);
+	AddStatePoolMap(new EnhancedEnemyStateIdle, EnemyState::ENEMY_STATE_IDLE);
 	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
 	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
+	AddStatePoolMap(new EnhancedEnemyStateFlinch, EnemyState::ENEMY_STATE_FLINCH);
 	AddStatePoolMap(new EnemyObjectStateAttack, EnemyState::ENEMY_STATE_ATTACK);
 	AddStatePoolMap(new EnemyObjectStateTurn, EnemyState::ENEMY_STATE_TURN);
 	AddStatePoolMap(new EnemyObjectStateTracking, EnemyState::ENEMY_STATE_TRACKING);
@@ -78,6 +84,7 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 
 	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this, _areaValue);
 	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
+	new EnemyFlinchEffectManager(this);
 
 	//Z軸を180度回転させる
 	float radian = Math::ToRadians(Angle);
@@ -92,7 +99,8 @@ EnhancedEnemyObject::~EnhancedEnemyObject()
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_IDLE);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_DEAD);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_RESPAWN);
-	//RemoveStatePoolMap(EnemyState::ENEMY_STATE_ATTACK);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_FLINCH);
+	RemoveStatePoolMap(EnemyState::ENEMY_STATE_ATTACK);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_TURN);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_TRACKING);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_REPOSITION);
@@ -104,12 +112,17 @@ void EnhancedEnemyObject::UpdateGameObject(float _deltaTime)
 	// AABBを更新
 	aabb = boxCollider->GetWorldBox();
 
-	if (isAttack && !isDeadFlag)
+	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
-	if (isDeadFlag)
+	if (isFlinch && !isDead)
+	{
+		nextState = EnemyState::ENEMY_STATE_FLINCH;
+	}
+
+	if (isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_DEAD;
 	}
@@ -168,7 +181,15 @@ void EnhancedEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 	if (_physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
 		// 死亡フラグをtrueに
-		isDeadFlag = true;
+		isDead = true;
+		defeatedObjectPosition = _hitObject.GetPosition();
+	}
+
+	// ジャンプアタックプレイヤーだったら
+	if (_physicsTag == PhysicsTag::JUMP_ATTACK_PLAYER_TAG)
+	{
+		// 死亡フラグをtrueに
+		isFlinch = true;
 		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 

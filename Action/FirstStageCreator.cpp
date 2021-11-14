@@ -269,7 +269,7 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵を生成
-		new NormalEnemyObject(layer3Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer3Pos, Tag::ENEMY);
 		break;
 
 	case(BOMB_PARTS):
@@ -374,14 +374,14 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵を生成
-		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 左右に動く敵固有のデータ構造体をセット
 		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵を生成
-		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BREAK_BLOCK_PARTS):

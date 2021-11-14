@@ -32,7 +32,7 @@ EnemyState EnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _deltaTim
 		state = EnemyState::ENEMY_STATE_REPOSITION;
 	}
 
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

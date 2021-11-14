@@ -41,6 +41,5 @@ private:
 	const int StayTime;
 	// ŠÔ‚ğŒv‘ª
 	int frameCount;
-
 };
 

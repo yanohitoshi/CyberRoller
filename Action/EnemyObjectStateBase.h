@@ -18,6 +18,8 @@ enum class EnemyState
 	ENEMY_STATE_IDLE = 0,
 	// Ž€–Só‘Ô
 	ENEMY_STATE_DEAD,
+	// ‹¯‚Ýó‘Ô
+	ENEMY_STATE_FLINCH,
 	// •œ‹A‘Ò‹@
 	ENEMY_STATE_RESPAWN,
 	// UŒ‚

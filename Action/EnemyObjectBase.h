@@ -52,7 +52,7 @@ public:
 	@param	オブジェクト判別用tag
 	@param	追跡対象
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag);
 
 	/*
 	@fn コンストラクタ
@@ -64,7 +64,7 @@ public:
 	@param	移動方向
 	@param	移動距離
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, MoveEnemyData _moveEnemyData);
 
 	/*
 	@fn コンストラクタ
@@ -75,7 +75,7 @@ public:
 	@param	移動速度
 	@param	追跡対象
 	*/
-	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject);
+	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed);
 
 	/*
 	@fn デストラクタ
@@ -124,8 +124,8 @@ protected:
 	BoxCollider* boxCollider;
 	// エネミーのAABB構造体
 	AABB enemyBox;
-	// 追跡するオブジェクトのポインタ
-	GameObject* trackingObject;
+	//// 追跡するオブジェクトのポインタ
+	//GameObject* trackingObject;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -169,7 +169,9 @@ protected:
 	//接地フラグ
 	bool onGround;
 	// 死んでいるかどうか
-	bool isDeadFlag;
+	bool isDead;
+	// 怯んでいるかどうか
+	bool isFlinch;
 	// 追跡相手をとらえているかどうか
 	bool isTracking;
 	// 攻撃モーション中か
@@ -200,11 +202,11 @@ public:// ゲッターセッター
 	*/
 	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
 
-	/*
-	@fn trackingObjectのgetter関数
-	@return trackingObject　追跡するオブジェクトのポインタを返す
-	*/
-	GameObject* GetTrackingObject(){ return trackingObject; }
+	///*
+	//@fn trackingObjectのgetter関数
+	//@return trackingObject　追跡するオブジェクトのポインタを返す
+	//*/
+	//GameObject* GetTrackingObject(){ return trackingObject; }
 
 	/*
 	@fn Animationのgetter関数
@@ -295,7 +297,13 @@ public:// ゲッターセッター
 	@fn isDeadFlagのGettrer関数
 	@return	bool isDeadFlag 死亡状態を返す
 	*/
-	bool GetIsDeadFlag() { return isDeadFlag; }
+	bool GetIsDead() { return isDead; }
+	
+	/*
+	@fn isFlinchのGettrer関数
+	@return	bool isFlinch 怯み状態かどうかを返す
+	*/
+	bool GetIsFlinch() { return isFlinch; }
 
 	/*
 	@fn isTrackingのGettrer関数
@@ -321,11 +329,11 @@ public:// ゲッターセッター
 	*/
 	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
 
-	/*
-	@fn trackingObjectのgetter関数
-	@param 追跡するオブジェクトのポインタをセット
-	*/
-	void SetTrackingObject(GameObject* _trackingObject) { trackingObject = _trackingObject; }
+	///*
+	//@fn trackingObjectのgetter関数
+	//@param 追跡するオブジェクトのポインタをセット
+	//*/
+	//void SetTrackingObject(GameObject* _trackingObject) { trackingObject = _trackingObject; }
 
 	/*
 	@fn charaForwardVecのsetter関数
@@ -367,7 +375,13 @@ public:// ゲッターセッター
 	@fn isDeadFlagのsetter関数
 	@param	bool isDeadFlag 死亡状態
 	*/
-	void SetIsDeadFlag(bool _isDeadFlag) { isDeadFlag = _isDeadFlag; }
+	void SetIsDead(bool _isDeadFlag) { isDead = _isDeadFlag; }
+
+	/*
+	@fn isDeadFlagのsetter関数
+	@param	bool isDeadFlag 死亡状態
+	*/
+	void SetIsFlinch(bool _isFlinch) { isFlinch = _isFlinch; }
 
 	/*
 	@fn isTrackingのsetter関数

@@ -173,7 +173,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="DebrisEffectObject.cpp" />
     <ClCompile Include="DustEffect.cpp" />
+    <ClCompile Include="EnemyFlinchEffectManager.cpp" />
     <ClCompile Include="EnhancedEnemyObject.cpp" />
+    <ClCompile Include="EnhancedEnemyStateFlinch.cpp" />
+    <ClCompile Include="EnhancedEnemyStateIdle.cpp" />
     <ClCompile Include="ExplosionArea.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
     <ClCompile Include="ExplosionObject.cpp" />
@@ -401,7 +404,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="DebrisEffectObject.h" />
     <ClInclude Include="DustEffect.h" />
+    <ClInclude Include="EnemyFlinchEffectManager.h" />
     <ClInclude Include="EnhancedEnemyObject.h" />
+    <ClInclude Include="EnhancedEnemyStateFlinch.h" />
+    <ClInclude Include="EnhancedEnemyStateIdle.h" />
     <ClInclude Include="ExplosionArea.h" />
     <ClInclude Include="ExplosionEffect.h" />
     <ClInclude Include="ExplosionObject.h" />

@@ -27,12 +27,12 @@ TrackingEnemyStateIdle::~TrackingEnemyStateIdle()
 EnemyState TrackingEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
-	if (_owner->GetIsTracking() && !_owner->GetIsDeadFlag() && frameCount > StayTime)
+	if (_owner->GetIsTracking() && !_owner->GetIsDead() && frameCount > StayTime)
 	{
 		state = EnemyState::ENEMY_STATE_TRACKING;
 	}
 
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

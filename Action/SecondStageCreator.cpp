@@ -482,7 +482,7 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer6Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer6Pos, Tag::ENEMY);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -517,7 +517,7 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -608,7 +608,7 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 敵オブジェクト生成
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
 		break;
 	}
 }
@@ -643,7 +643,7 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(400.0f,Vector3::UnitY,600.0f,MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject,moveEnemyData);
+		new MoveEnemyObject(layer10Pos, Tag::ENEMY,moveEnemyData);
 		break;
 	}
 }
@@ -732,7 +732,7 @@ void SecondStageCreator::CreateLayer13(int _indexX, int _indexY)
 		break;
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer13Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer13Pos, Tag::ENEMY);
 		break;
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);

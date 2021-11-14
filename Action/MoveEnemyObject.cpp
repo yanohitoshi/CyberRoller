@@ -22,8 +22,8 @@
 @param	追跡対象のオブyジェクトのポインタ
 @param	左右に移動する敵が固有で持つデータ構造体
 */
-MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
-	: EnemyObjectBase(_pos, false, _objectTag, _trackingObject, _moveEnemyData)
+MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, MoveEnemyData _moveEnemyData)
+	: EnemyObjectBase(_pos, false, _objectTag, _moveEnemyData)
 {
 	//GameObjectメンバ変数の初期化
 	state = Active;
@@ -34,7 +34,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Game
 	SetScale(scale);
 
 	isAttack = false;
-	isDeadFlag = false;
+	isDead = false;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -105,12 +105,12 @@ MoveEnemyObject::~MoveEnemyObject()
 */
 void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 {
-	if (isAttack && !isDeadFlag)
+	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
-	if (isDeadFlag)
+	if (isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_DEAD;
 	}
@@ -171,7 +171,7 @@ void MoveEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag
 {
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
-		isDeadFlag = true;
+		isDead = true;
 		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
