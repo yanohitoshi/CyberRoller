@@ -584,24 +584,6 @@
     <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClCompile>
-    <ClCompile Include="FourthStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FourthStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="FourthStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
-    <ClCompile Include="FifthStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FifthStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="FifthStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
     <ClCompile Include="StartButtonSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
@@ -640,6 +622,24 @@
     </ClCompile>
     <ClCompile Include="EnemyFlinchEffectManager.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="FifthStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="FifthStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FifthStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1231,24 +1231,6 @@
     <ClInclude Include="PlayerObjectStateExplosionBlowAway.h">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
     </ClInclude>
-    <ClInclude Include="FourthStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="FourthStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="FourthStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
-    <ClInclude Include="FifthStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="FifthStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="FifthStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
     <ClInclude Include="StartButtonSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
@@ -1287,6 +1269,24 @@
     </ClInclude>
     <ClInclude Include="EnemyFlinchEffectManager.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="FifthStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="FifthStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStageScene.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FifthStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStageUI.h">
+      <Filter>UI\SceneUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
