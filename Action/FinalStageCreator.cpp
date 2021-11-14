@@ -332,6 +332,26 @@ void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// パワーセルライトの生成
 		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
+
+	case(COLLECTION_FIRST):
+		// 1番目の収集物を生成
+		firstCollectionObject = new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		break;
+
+	case(COLLECTION_SECOND):
+		// 2番目の収集物を生成
+		secondCollectionObject = new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::SECOND);
+		break;
+
+	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
+		thirdCollectionObject = new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		break;
+
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new ClearPointObject(layer2Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
 	}
 }
 
@@ -524,10 +544,6 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new MoveBlockObject(layer6Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
-	case(COLLECTION_SECOND):
-		// 2番目の収集物を生成
-		secondCollectionObject = new CollectionObject(layer6Pos, Tag::COLLECTION, CollectionTag::SECOND);
-		break;
 	}
 }
 
@@ -612,10 +628,6 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(COLLECTION_THIRD):
-		// 3番目の収集物を生成
-		thirdCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
-		break;
 
 	}
 }
@@ -927,11 +939,6 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new RespawnPoint(layer14Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(COLLECTION_FIRST):
-		// 1番目の収集物を生成
-		firstCollectionObject = new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
-		break;
-
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
 		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
@@ -1087,10 +1094,7 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 		// パワーセルライトの生成
 		new LightObject(layer18Pos, LightObjectSize, Tag::GROUND, false);
 		break;
-	case(CLEAR_OBJECT_PARTS):
-		// ステージクリアオブジェクト生成
-		new ClearPointObject(layer18Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
-		break;
+
 
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
