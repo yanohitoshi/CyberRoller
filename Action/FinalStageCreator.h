@@ -45,26 +45,18 @@ public:
 
 private:
 
-	//// 押し出し板のナンバー列挙
-	//// 現在の仕様上こういった形でしか列挙出来ませんでした。
-	//// 改善案模索中です
-	//enum FinalStagePushBoxNumber
-	//{
-	//	// 左向きの押し出し板の列挙ナンバー
-	//	LEFT_PUSH_BOX_NUMBER_1 = 46,
-	//	LEFT_PUSH_BOX_NUMBER_2 = 47,
-	//	LEFT_PUSH_BOX_NUMBER_3 = 48,
-	//	LEFT_PUSH_BOX_NUMBER_4 = 49,
-	//	LEFT_PUSH_BOX_NUMBER_5 = 44,
+	// 押し出し板のナンバー列挙
+	enum FinalStagePushBoxNumber
+	{
+		// 左向きの押し出し板の列挙ナンバー
+		LEFT_PUSH_BOX_NUMBER_1 = 39,
+		LEFT_PUSH_BOX_NUMBER_2 = 37,
 
-	//	// 右向きの押し出し板の列挙ナンバー
-	//	RIGHT_PUSH_BOX_NUMBER_1 = 50,
-	//	RIGHT_PUSH_BOX_NUMBER_2 = 51,
-	//	RIGHT_PUSH_BOX_NUMBER_3 = 52,
-	//	RIGHT_PUSH_BOX_NUMBER_4 = 53,
-	//	RIGHT_PUSH_BOX_NUMBER_5 = 45,
-
-	//};
+		// 右向きの押し出し板の列挙ナンバー
+		RIGHT_PUSH_BOX_NUMBER_1 = 40,
+		RIGHT_PUSH_BOX_NUMBER_2 = 38,
+		RIGHT_PUSH_BOX_NUMBER_3 = 36,
+	};
 
 	/*
 	@fn レイヤー1クリエイター

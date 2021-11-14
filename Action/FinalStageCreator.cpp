@@ -378,6 +378,11 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
 
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer3SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
+		break;
+
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
@@ -415,6 +420,11 @@ void FinalStageCreator::CreateLayer4(int _indexX, int _indexY)
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer4SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
 		break;
 	}
 }
@@ -538,6 +548,16 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer6Pos, Tag::ENEMY);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer6Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
 	case(27):
 		// 上下移動のblockを生成
 		SetMoveBlockData(600.0f, Vector3::UnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
@@ -580,6 +600,41 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new LightObject(layer7Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
+	case(RIGHT_PUSH_BOX_NUMBER_1):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 1800.0f, 0.4f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_2):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 1650.0f, 0.4f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_3):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1400.0f, 0.0f), Vector3::UnitY, 1600.0f, 0.4f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(LEFT_PUSH_BOX_NUMBER_1):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 1700.0f, 0.4f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(LEFT_PUSH_BOX_NUMBER_2):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, -1400.0f, 0.0f), Vector3::NegUnitY, 1750.0f, 0.4f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
 	case(JUMP_SWITCH_PARTS):
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer7SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
@@ -594,10 +649,6 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// 第二区画の動く壁オブジェクト生成
 		lastMoveWallBlock = new MoveWallBlock(Vector3(layer7Pos.x, layer7Pos.y + ShiftMoveWallY, layer7Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
 			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
-		break;
-
-	case(39):
-		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -684,6 +735,7 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
+
 	case(39):
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;

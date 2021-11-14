@@ -42,6 +42,19 @@ public:
 
 private:
 
+	// 押し出し板のナンバー列挙
+	enum FourthStagePushBoxNumber
+	{
+		// 左向きの押し出し板の列挙ナンバー
+		LEFT_PUSH_BOX_NUMBER_1 = 39,
+		LEFT_PUSH_BOX_NUMBER_2 = 37,
+
+		// 右向きの押し出し板の列挙ナンバー
+		RIGHT_PUSH_BOX_NUMBER_1 = 40,
+		RIGHT_PUSH_BOX_NUMBER_2 = 38,
+		RIGHT_PUSH_BOX_NUMBER_3 = 36,
+	};
+
 	/*
 	@fn レイヤー1クリエイター
 	@brief  レイヤー1のマップデータに含まれるオブジェクトの生成を行う

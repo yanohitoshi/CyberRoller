@@ -454,35 +454,35 @@ void FourthStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(40):
+	case(RIGHT_PUSH_BOX_NUMBER_1):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(38):
+	case(RIGHT_PUSH_BOX_NUMBER_2):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(36):
+	case(RIGHT_PUSH_BOX_NUMBER_3):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(39):
+	case(LEFT_PUSH_BOX_NUMBER_1):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
 		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(37):
+	case(LEFT_PUSH_BOX_NUMBER_2):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
