@@ -75,6 +75,4 @@ private:
     bool generateExplosionEffectsFlag;
     // エフェクトが有効化されてからのフレームを測る
     int effectFrameCount;
-
 };
-

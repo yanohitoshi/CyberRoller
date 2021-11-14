@@ -2,29 +2,24 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FinalStageCreator.h"
-#include "GroundObject.h"
-#include "SwitchBlock.h"
-#include "JumpSwitchObject.h"
-#include "WallBlockObject.h"
-#include "MoveWallBlock.h"
 #include "PlayerObject.h"
-#include "NextSceneObject.h"
-#include "ClearPointObject.h"
-#include "RespawnPoint.h"
-#include "NeedlePanelObject.h"
+#include "GroundObject.h"
+#include "BreakBlockObject.h"
+#include "LightObject.h"
 #include "MoveBlockObject.h"
+#include "MoveWallBlock.h"
 #include "PushBoxObject.h"
 #include "SwitchBaseObject.h"
-#include "EnemyObjectBase.h"
+#include "JumpSwitchObject.h"
+#include "ExplosionObject.h"
+#include "NeedlePanelObject.h"
+#include "RespawnPoint.h"
 #include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
-#include "LightObject.h"
 #include "CameraChangePoint.h"
+#include "ClearPointObject.h"
 #include "CollectionObject.h"
-#include "ExplosionObject.h"
-#include "BreakBlockObject.h"
-
 
 /*
 @fn コンストラクタ
@@ -367,14 +362,14 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer3Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(300.0f, Vector3::NegUnitY, 400.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer3Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -495,7 +490,7 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer5Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer5Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 	}
 }
@@ -723,14 +718,14 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer10Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer10Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer10Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BRAKE_BLOCK_PARTS):
@@ -777,7 +772,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BRAKE_BLOCK_PARTS):
@@ -817,14 +812,14 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer12Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer12Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BRAKE_BLOCK_PARTS):
@@ -864,14 +859,14 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer13Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer13Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BRAKE_BLOCK_PARTS):
@@ -931,7 +926,7 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
 	case(35):
@@ -953,14 +948,14 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer14Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer14Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer14Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(BRAKE_BLOCK_PARTS):
@@ -993,14 +988,14 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer15Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
 		break;
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer15Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer15Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
@@ -1043,14 +1038,14 @@ void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
-		new NormalEnemyObject(layer16Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer16Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer16Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer16Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -1082,7 +1077,7 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer17Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer17Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -1138,10 +1133,5 @@ void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
 	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
 
-	//switch (CameraDirectingData)
-	//{
-	//default:
-	//	break;
-	//}
 
 }

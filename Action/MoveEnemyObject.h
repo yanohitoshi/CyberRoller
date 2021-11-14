@@ -20,7 +20,7 @@ public:
 	@param	追跡対象のオブyジェクトのポインタ
 	@param	左右に移動する敵が固有で持つデータ構造体
 	*/
-	MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData);
+	MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, MoveEnemyData _moveEnemyData);
 
 	/*
 	@fn デストラクタ

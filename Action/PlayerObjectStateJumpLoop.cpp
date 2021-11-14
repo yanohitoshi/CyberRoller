@@ -165,7 +165,7 @@ void PlayerObjectStateJumpLoop::CheckInputProcess(PlayerObject* _owner, const In
 	if (_owner->GetIsAvailableJumpAttck())
 	{
 		// ターゲットを選択しているまたはジャンプアタック中でなくかつターゲットを選択していない時
-		if (_owner->GetIsSelectingTargetEnemy() || !_owner->GetIsJumpAttck() && !_owner->GetIsSelectingTargetEnemy())
+		if (_owner->GetIsSelectingTargetObject() || !_owner->GetIsJumpAttck() && !_owner->GetIsSelectingTargetObject())
 		{
 			// キー入力があれば
 			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||

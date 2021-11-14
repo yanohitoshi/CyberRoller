@@ -3,12 +3,12 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/Environment/bombObject/bomb.png"
+		"Assets/Model/Environment/BombObject/bomb.png"
 	],
-	"diffusemap":"Assets/Model/Environment/bombObject/bomb.png",
-	"nomalmap":"Assets/Model/Environment/bombObject/T_ScientificDevice04_N.png",
+	"diffusemap":"Assets/Model/Environment/BombObject/bomb.png",
+	"nomalmap":"Assets/Model/Environment/BombObject/T_ScientificDevice04_N.png",
     "specularmap":"none",
-    "emissivemap":"Assets/Model/Environment/bombObject/T_ScientificDevice04_E.png",
+    "emissivemap":"Assets/Model/Environment/BombObject/T_ScientificDevice04_E.png",
 	"specularPower":100.0,
     "luminance":"10.0",
 	"vertices":[

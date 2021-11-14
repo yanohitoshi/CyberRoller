@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "TrackingEnemyStateTracking.h"
+#include "EnemyObjectStateTracking.h"
 
 /*
 @fn コンストラクタ
 */
-TrackingEnemyStateTracking::TrackingEnemyStateTracking()
+EnemyObjectStateTracking::EnemyObjectStateTracking()
 	:TrackingLengthValue(50.0f)
 {
 }
@@ -14,7 +14,7 @@ TrackingEnemyStateTracking::TrackingEnemyStateTracking()
 /*
 @fn デストラクタ
 */
-TrackingEnemyStateTracking::~TrackingEnemyStateTracking()
+EnemyObjectStateTracking::~EnemyObjectStateTracking()
 {
 }
 
@@ -24,10 +24,10 @@ TrackingEnemyStateTracking::~TrackingEnemyStateTracking()
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
+EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 追跡対象から初期ポジションへと向かうベクトルを計算
-	Vector3 trackingObjectToFirstPos = firstPosition - trackingObject->GetPosition();
+	Vector3 trackingObjectToFirstPos = firstPosition - _owner->GetAttackObjectPosition();
 	// オーナーのポジションから初期ポジションへと向かうベクトルを計算
 	Vector3 ownerObjectToFirstPos = firstPosition - _owner->GetPosition();
 
@@ -40,7 +40,7 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 	if (_owner->GetIsTracking())
 	{
 		// オーナーから追跡対象へ向かうベクトル
-		trackingRotationVec =  trackingObject->GetPosition() - _owner->GetPosition();
+		trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
 		trackingRotationVec.z = 0.0f;
 		float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
 
@@ -93,7 +93,7 @@ EnemyState TrackingEnemyStateTracking::Update(EnemyObjectBase* _owner, float _de
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-void TrackingEnemyStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
+void EnemyObjectStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();
@@ -106,13 +106,11 @@ void TrackingEnemyStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime
 	// 初期ポジションを得る
 	firstPosition = _owner->GetFirstPosition();
 
-	// 追跡のターゲットとなるオブジェクトを得る
-	trackingObject = _owner->GetTrackingObject();
 	// 移動速度を得る
 	moveSpeed = _owner->GetMoveSpeed();
 
 	// 追跡方向を計算
-	trackingRotationVec = trackingObject->GetPosition() - _owner->GetPosition();
+	trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
 	// 上下移動はさせないので0で固定
 	trackingRotationVec.z = 0.0f;
 

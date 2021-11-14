@@ -19,8 +19,8 @@
 @param	オブジェクト判別用tag
 @param	追跡するオブジェクトのポインタ
 */
-NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject)
-	: EnemyObjectBase(_pos, false , _objectTag, _trackingObject)
+NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
+	: EnemyObjectBase(_pos, false , _objectTag)
 	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
@@ -30,9 +30,6 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, 
 	forwardVec = Vector3::NegUnitX;
 	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
-
-	isAttack = false;
-	isDeadFlag = false;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -106,7 +103,7 @@ NormalEnemyObject::~NormalEnemyObject()
 void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	
-	if (isAttack && !isDeadFlag)
+	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
@@ -153,9 +150,10 @@ void NormalEnemyObject::UpdateGameObject(float _deltaTime)
 */
 void NormalEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
-		isDeadFlag = true;
+		isDead = true;
+		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
 	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||

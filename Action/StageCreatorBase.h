@@ -21,6 +21,12 @@ enum class CollectionTag;
 */
 enum StagePartsName
 {
+	// 壊れるブロックパーツ
+	BREAK_BLOCK_PARTS = 59,
+
+	// 爆発物パーツ
+	BOMB_PARTS = 60,
+
 	// 右寄せのパワーセルライトパーツ
 	POWERCELLS_LIGHT_PARTS_RIGHT = 1,
 	// 左寄せのパワーセルライトパーツ
@@ -69,7 +75,8 @@ enum StagePartsName
 	LEFT_MOVE_ENEMY_PARTS = 46,
 	// 追跡する敵
 	TRACKING_ENEMY_PARTS = 47,
-
+	// ジャンプ攻撃で死なない敵
+	ENHANCED_ENEMY_PARTS = 48,
 	// 1番目の収集物パーツ
 	COLLECTION_FIRST = 3,
 	// 2番目の収集物パーツ

@@ -41,8 +41,9 @@ EnemyDeadEffectManager::~EnemyDeadEffectManager()
 */
 void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 {
+
 	// 死亡状態だったら有効化
-	if (owner->GetIsDeadFlag() && owner->GetIsVisible())
+	if (owner->GetIsDead() && owner->GetIsVisible())
 	{
 		// パーティクルを有効化
 		particleState = ParticleState::PARTICLE_ACTIVE;

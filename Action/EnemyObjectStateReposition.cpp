@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "TrackingEnemyStateReposition.h"
+#include "EnemyObjectStateReposition.h"
 
 /*
 @fn コンストラクタ
 */
-TrackingEnemyStateReposition::TrackingEnemyStateReposition()
+EnemyObjectStateReposition::EnemyObjectStateReposition()
 	: IdlingLength(2.0f)
 {
 }
@@ -14,7 +14,7 @@ TrackingEnemyStateReposition::TrackingEnemyStateReposition()
 /*
 @fn デストラクタ
 */
-TrackingEnemyStateReposition::~TrackingEnemyStateReposition()
+EnemyObjectStateReposition::~EnemyObjectStateReposition()
 {
 }
 
@@ -24,7 +24,7 @@ TrackingEnemyStateReposition::~TrackingEnemyStateReposition()
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _deltaTime)
+EnemyState EnemyObjectStateReposition::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// 追跡ターゲットがいない場合
 	if (!_owner->GetIsTracking())
@@ -67,7 +67,7 @@ EnemyState TrackingEnemyStateReposition::Update(EnemyObjectBase* _owner, float _
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-void TrackingEnemyStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime)
+void EnemyObjectStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();

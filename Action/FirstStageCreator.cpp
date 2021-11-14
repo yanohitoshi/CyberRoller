@@ -2,27 +2,22 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FirstStageCreator.h"
-#include "GroundObject.h"
-#include "SwitchBlock.h"
-#include "JumpSwitchObject.h"
-#include "WallBlockObject.h"
-#include "MoveWallBlock.h"
-#include "PlayerObject.h"
-#include "NextSceneObject.h"
-#include "NeedlePanelObject.h"
-#include "RespawnPoint.h"
-#include "PushBoxObject.h"
-#include "SwitchBaseObject.h"
-#include "NormalEnemyObject.h"
-#include "MoveEnemyObject.h"
-#include "EnemyObjectBase.h"
-#include "LightObject.h"
 #include "AutoMoveCamera.h"
 #include "CameraChangePoint.h"
-#include "CollectionObject.h"
-
-#include "ExplosionObject.h"
+#include "PlayerObject.h"
+#include "GroundObject.h"
 #include "BreakBlockObject.h"
+#include "MoveWallBlock.h"
+#include "LightObject.h"
+#include "SwitchBaseObject.h"
+#include "JumpSwitchObject.h"
+#include "NeedlePanelObject.h"
+#include "NextSceneObject.h"
+#include "RespawnPoint.h"
+#include "NormalEnemyObject.h"
+#include "MoveEnemyObject.h"
+#include "ExplosionObject.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -183,9 +178,7 @@ void FirstStageCreator::CreateLayer1(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer1Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer1Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -235,8 +228,7 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new NeedlePanelObject(layer2SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer2Pos, BlockSize,Tag::BREAK_GROUND);
 		break;
 	}
@@ -277,16 +269,14 @@ void FirstStageCreator::CreateLayer3(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵を生成
-		new NormalEnemyObject(layer3Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer3Pos, Tag::ENEMY);
 		break;
 
 	case(BOMB_PARTS):
-		// 爆弾を生成
 		new ExplosionObject(layer3Pos, Tag::BOMB);
 		break;
 
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -327,9 +317,7 @@ void FirstStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -386,18 +374,17 @@ void FirstStageCreator::CreateLayer5(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵を生成
-		new NormalEnemyObject(layer5Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer5Pos, Tag::ENEMY);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 左右に動く敵固有のデータ構造体をセット
 		SetMoveEnemyData(100.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 左右に動く敵を生成
-		new MoveEnemyObject(layer5Pos, Tag::ENEMY, playerObject, moveEnemyData);
+		new MoveEnemyObject(layer5Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer5Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

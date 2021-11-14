@@ -2,10 +2,10 @@
 #include "EnemyObjectStateBase.h"
 
 /*
-@file TrackingEnemyStateAttack.h
-@brief 追跡する敵オブジェクトの攻撃状態を管理するクラス
+@file TrackingEnemyStateTracking.h
+@brief 追跡する敵オブジェクトの追跡状態を管理するクラス
 */
-class TrackingEnemyStateAttack :
+class EnemyObjectStateTracking :
     public EnemyObjectStateBase
 {
 public:
@@ -13,12 +13,12 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	TrackingEnemyStateAttack();
+	EnemyObjectStateTracking();
 
 	/*
 	@fn デストラクタ
 	*/
-	~TrackingEnemyStateAttack()override;
+	~EnemyObjectStateTracking()override;
 
 	/*
 	@fn アップデート
@@ -37,13 +37,11 @@ public:
 
 private:
 
-	// 追跡対象のオブジェクトのポインタ
-	GameObject* trackingObject;
-	// 追跡する方向
+	// 追跡方向のベクトルの
 	Vector3 trackingRotationVec;
 	// 初期ポジション
 	Vector3 firstPosition;
-	// 攻撃時の移動速度
-	const float AttcakMoveSpeed;
+	// 追跡でどこまで近づくかの値
+	const float TrackingLengthValue;
 };
 

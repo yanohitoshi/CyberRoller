@@ -53,13 +53,5 @@ private:
 	// ターゲットとなる敵のポインタ
 	GameObject* attackTarget;
 
-	// ステータスを切り替える時間
-	const int ChangeTime;
-	// 切り替えるまでの時間を測る変数
-	int changeCount;
-	// ステータスを切り替えるかどうか
-	bool isChange;
-
-
 };
 

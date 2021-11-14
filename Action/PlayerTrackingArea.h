@@ -3,7 +3,7 @@
 
 // クラスの前方宣言
 class SphereCollider;
-class TrackingEnemyObject;
+class EnemyObjectBase;
 
 /*
 @file PlayerTrackingArea.h
@@ -20,7 +20,7 @@ public:
 	@param	親となる敵クラスのポインタ
 	@param	エリアの大きさとなる値
 	*/
-	PlayerTrackingArea(const Tag& _objectTag,TrackingEnemyObject* _ownerEnemy,float _areaValue);
+	PlayerTrackingArea(const Tag& _objectTag,EnemyObjectBase* _ownerEnemy,float _areaValue);
 
 	/*
 	@fn デストラクタ
@@ -47,6 +47,6 @@ private:
 	// 当たり判定を行うクラス
 	SphereCollider* sphereCollider;
 	// 親となるクラスのポインタ
-	TrackingEnemyObject* ownerEnemy;
+	EnemyObjectBase* owner;
 };
 

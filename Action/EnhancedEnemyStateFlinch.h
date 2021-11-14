@@ -1,11 +1,7 @@
 #pragma once
 #include "EnemyObjectStateBase.h"
 
-/*
-@file TrackingEnemyStateReposition.h
-@brief 追跡する敵オブジェクトの追跡場所から元の位置に戻るまでを管理するクラス
-*/
-class TrackingEnemyStateReposition :
+class EnhancedEnemyStateFlinch :
     public EnemyObjectStateBase
 {
 public:
@@ -13,12 +9,12 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	TrackingEnemyStateReposition();
+	EnhancedEnemyStateFlinch();
 
 	/*
 	@fn デストラクタ
 	*/
-	~TrackingEnemyStateReposition()override;
+	~EnhancedEnemyStateFlinch()override;
 
 	/*
 	@fn アップデート
@@ -36,11 +32,14 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
-	//初期ポジション
-	Vector3 firstPosition;
-	// 元のポジションに戻る際の方向
-	Vector3 repositionRotationVec;
-	// アイドリングへ移行する規定値
-	const float IdlingLength;
-};
 
+	// 怯み状態の時間をカウント
+	int flinchCount;
+	// 復帰する時間定数
+	const int EndTime;
+	const float BlowAwayPower;
+	const float FirstBlowAwayPower;
+	const float MaxSpeed;
+	// 吹っ飛ぶ方向ベクトル
+	Vector3 blowAwayDirection;
+};

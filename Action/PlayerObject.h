@@ -116,7 +116,7 @@ private:
 	@param	_hitObject ヒットしたオブジェクト
 	@return GameObject* 探し出したオブジェクト
 	*/
-	GameObject* FindTargetEnemy(const GameObject& _hitObject);
+	GameObject* FindTargetObject(const GameObject& _hitObject);
 
 	// 3Dモデルの描画を行うクラス
 	SkeletalMeshComponent* skeltalMeshComponent;
@@ -249,7 +249,7 @@ private:
 	// ジャンプアタックフラグ
 	bool isJumpAttck;
 	// ジャンプアタックするエネミーの選択フラグ
-	bool isSelectingTargetEnemy;
+	bool isSelectingTargetObject;
 	// ジャンプアタック成功したか
 	bool isJumpAttackSuccess;
 	//ジャンプできるかフラグ
@@ -480,7 +480,7 @@ public:// ゲッターセッター
 	@fn isJumpAttckのgetter関数
 	@return isAvailableInputを返す
 	*/
-	bool GetIsSelectingTargetEnemy() { return isSelectingTargetEnemy; }
+	bool GetIsSelectingTargetObject() { return isSelectingTargetObject; }
 	
 	/*
 	@fn isJumpAttackSuccessのgetter関数
@@ -529,6 +529,12 @@ public:// ゲッターセッター
 	@return nowStateを返す
 	*/
 	PlayerState GetNowState() { return nowState; }
+
+	/*
+	@fn AttackTargetObjectのsetter関数
+	@param	GameObject* _target ジャンプ攻撃の対象となるオブジェクトのポインタ
+	*/
+	void SetAttackTargetObject(GameObject* _target) { attackTarget = _target; }
 
 	/*
 	@fn nextStateのsetter関数
@@ -636,7 +642,7 @@ public:// ゲッターセッター
 	@fn isJumpAttckのsetter関数
 	@param	bool _isAvailableInput 入力可能かどうかをセット
 	*/
-	void SetIsSelectingTargetEnemy(bool _isSelectingTargetEnemy) { isSelectingTargetEnemy = _isSelectingTargetEnemy; }
+	void SetIsSelectingTargetObject(bool _isSelectingTargetEnemy) { isSelectingTargetObject = _isSelectingTargetEnemy; }
 	
 	/*
 	@fn isJumpAttackSuccessのsetter関数

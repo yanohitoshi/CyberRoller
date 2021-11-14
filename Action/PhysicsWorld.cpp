@@ -174,12 +174,14 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 	if (_box->GetBoxTag() == PhysicsTag::BOMB_TAG)
 	{
-		// プレイヤーと地面の判定処理
+		// 爆発物と地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
-		// プレイヤーと動く地面の判定処理
+		// 爆発物と動く地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
-		// プレイヤーと壊れる地面の判定処理
+		// 爆発物と壊れる地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
+		// 爆発物と敵の判定処理 
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::ENEMY_TAG]);
 	}
 
 	if (_box->GetBoxTag() == PhysicsTag::ENEMY_TAG)
@@ -219,18 +221,7 @@ void PhysicsWorld::IntersectCheckBox(BoxCollider* _box, std::vector<BoxCollider*
 			continue;
 		}
 
-		if (itr->GetOwner() == nullptr)
-		{
-			continue;
-		}
-
-		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (itr->GetOwner()->GetState() != State::Active && itr->GetOwner()->GetState() != State::Disabling)
-		{
-			continue;
-		}
-
-		if (itr->GetOwner()->GetTag() == Tag::BREAK_GROUND && itr->GetOwner()->GetState() == State::Disabling)
+		if (itr->GetOwner()->GetState() == State::Disabling)
 		{
 			continue;
 		}
@@ -260,7 +251,7 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 	for (auto itr : _checkBoxes)
 	{
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (itr->GetOwner()->GetState() != State::Active/* && itr->GetOwner()->GetState() != State::Disabling*/)
+		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
@@ -269,11 +260,6 @@ void PhysicsWorld::IntersectCheckSphere(SphereCollider* _sphere, std::vector<Box
 		{
 			continue;
 		}
-
-		//if (itr->GetOwner()->GetTag() == Tag::EXPLOSION_AREA && itr->GetOwner()->GetState() == State::Disabling)
-		//{
-		//	continue;
-		//}
 
 		bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 
@@ -340,6 +326,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::PLAYER_TAG]);
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BREAK_GROUND_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
 	}
 
 	if (_sphere->GetSphereTag() == PhysicsTag::ATTACK_RANGE_TAG)
@@ -461,6 +448,6 @@ void PhysicsWorld::DebugShowBox()
 	DrawBoxs(boxesMap[PhysicsTag::BOMB_TAG], Color::Blue);
 	DrawBoxs(boxesMap[PhysicsTag::BREAK_GROUND_TAG], Color::LightPink);
 	DrawBoxs(boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA], Color::White);
-	//DrawBoxs(mWeaponBoxes, Color::LightGreen);
+	DrawBoxs(boxesMap[PhysicsTag::ENEMY_TAG], Color::LightGreen);
 	//DrawBoxs(mEnemyAttackDecisionBoxes, Color::Yellow);
 }

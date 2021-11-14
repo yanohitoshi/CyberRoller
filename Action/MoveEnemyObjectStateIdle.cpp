@@ -30,7 +30,7 @@ EnemyState MoveEnemyObjectStateIdle::Update(EnemyObjectBase* _owner, float _delt
 
 	state = EnemyState::ENEMY_STATE_MOVING;
 
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

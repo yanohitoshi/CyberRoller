@@ -9,14 +9,13 @@
 #include "EnemyObjectStateRespawn.h"
 #include "EnemyObjectStateDead.h"
 #include "TrackingEnemyStateIdle.h"
-#include "TrackingEnemyStateTracking.h"
-#include "TrackingEnemyStateMoving.h"
-#include "TrackingEnemyStateTurn.h"
-#include "TrackingEnemyStateReposition.h"
-#include "TrackingEnemyStateAttack.h"
+#include "EnemyObjectStateTracking.h"
+#include "EnemyObjectStateTurn.h"
+#include "EnemyObjectStateReposition.h"
+#include "EnemyObjectStateAttack.h"
 #include "BoxCollider.h"
 #include "PlayerTrackingArea.h"
-#include "TrackingEnemyAttackArea.h"
+#include "EnemyAttackArea.h"
 
 /*
 @fn コンストラクタ
@@ -26,8 +25,8 @@
 @param	追跡するオブジェクトのポインタ
 @param	追跡エリアの値
 */
-TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject, float _areaValue)
-	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed, _trackingObject)
+TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue)
+	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed)
 	, Angle(180.0f)
 {
 	//GameObjectメンバ変数の初期化
@@ -37,11 +36,6 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	forwardVec = Vector3::NegUnitX;
 	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
-
-	isTracking = false;
-	isDeadFlag = false;
-	isAttack = false;
-	isPushBackToPlayer = true;
 
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
@@ -77,10 +71,10 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	AddStatePoolMap(new TrackingEnemyStateIdle, EnemyState::ENEMY_STATE_IDLE);
 	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
 	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
-	AddStatePoolMap(new TrackingEnemyStateAttack, EnemyState::ENEMY_STATE_ATTACK);
-	AddStatePoolMap(new TrackingEnemyStateTurn, EnemyState::ENEMY_STATE_TURN);
-	AddStatePoolMap(new TrackingEnemyStateTracking, EnemyState::ENEMY_STATE_TRACKING);
-	AddStatePoolMap(new TrackingEnemyStateReposition, EnemyState::ENEMY_STATE_REPOSITION);
+	AddStatePoolMap(new EnemyObjectStateAttack, EnemyState::ENEMY_STATE_ATTACK);
+	AddStatePoolMap(new EnemyObjectStateTurn, EnemyState::ENEMY_STATE_TURN);
+	AddStatePoolMap(new EnemyObjectStateTracking, EnemyState::ENEMY_STATE_TRACKING);
+	AddStatePoolMap(new EnemyObjectStateReposition, EnemyState::ENEMY_STATE_REPOSITION);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)], 1.0f);
@@ -89,7 +83,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 	nextState = EnemyState::ENEMY_STATE_IDLE;
 
 	new PlayerTrackingArea(Tag::PLAYER_TRACKING_AREA, this, _areaValue);
-	new TrackingEnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
+	new EnemyAttackArea(Tag::PLAYER_TRACKING_AREA, this);
 
 	//Z軸を180度回転させる
 	float radian = Math::ToRadians(Angle);
@@ -125,12 +119,12 @@ void TrackingEnemyObject::UpdateGameObject(float _deltaTime)
 	// AABBを更新
 	aabb = boxCollider->GetWorldBox();
 
-	if (isAttack && !isDeadFlag)
+	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
-	if (isDeadFlag)
+	if (isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_DEAD;
 	}
@@ -196,10 +190,11 @@ void TrackingEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 void TrackingEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ジャンプアタックプレイヤーだったら
-	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER)
+	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
 		// 死亡フラグをtrueに
-		isDeadFlag = true;
+		isDead = true;
+		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
 	// 他の敵またはグラウンドと当たったら

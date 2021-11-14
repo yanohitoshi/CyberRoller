@@ -19,7 +19,7 @@ public:
 	@param	オブジェクト判別用tag
 	@param	追跡するオブジェクトのポインタ
 	*/
-	NormalEnemyObject(const Vector3& _pos, const Tag _objectTag, GameObject* _trackingObject);
+	NormalEnemyObject(const Vector3& _pos, const Tag _objectTag);
 
 	/*
 	@fn デストラクタ

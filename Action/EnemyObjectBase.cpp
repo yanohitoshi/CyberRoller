@@ -13,14 +13,13 @@
 @param	オブジェクト判別用tag
 @param	追跡対象
 */
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
-	, trackingObject(_trackingObject)
 	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f,2.0f,2.0f))
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 {
 	// メンバー変数初期化
 	SetPosition(_pos);
@@ -28,7 +27,14 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	firstPosition = _pos;
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
+
+	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
+
 	isVisible = true;
+	isDead = false;
+	isAttack = false;
+
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
 }
@@ -43,18 +49,17 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 @param	移動方向
 @param	移動距離
 */
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, GameObject* _trackingObject, MoveEnemyData _moveEnemyData)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, MoveEnemyData _moveEnemyData)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
-	, trackingObject(_trackingObject)
 	, moveDirection(_moveEnemyData.direction)
 	, moveDistance(_moveEnemyData.distance)
 	, moveSpeed(_moveEnemyData.speed)
 	, moveEnemyTag(_moveEnemyData.tag)
 	, respawnPositionOffset(1000.0f)
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 {
 	// メンバー変数初期化
 	tag = _objectTag;
@@ -63,7 +68,12 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
 
+	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
+
 	isVisible = true;
+	isDead = false;
+	isAttack = false;
 
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
@@ -78,14 +88,13 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 @param	移動速度
 @param	追跡対象
 */
-EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed, GameObject* _trackingObject)
+EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed)
 	: GameObject(_reUseGameObject, _objectTag)
 	, enemyBox({ Vector3::Zero,Vector3::Zero })
 	, moveSpeed(_moveSpeed)
-	, trackingObject(_trackingObject)
 	, respawnPositionOffset(1000.0f)
-	, BoxMin(Vector3(-10.0f, -10.0f, -10.0f))
-	, BoxMax(Vector3(10.0f, 10.0f, 10.0f))
+	, BoxMin(Vector3(-30.0f, -30.0f, -10.0f))
+	, BoxMax(Vector3(10.0f, 10.0f, 60.0f))
 	, Size(Vector3(2.0f, 2.0f, 2.0f))
 {
 	// メンバー変数初期化
@@ -95,7 +104,14 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
 
+	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
+
 	isVisible = true;
+	isDead = false;
+	isAttack = false;
+	isTracking = false;
+	isPushBackToPlayer = true;
 
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);

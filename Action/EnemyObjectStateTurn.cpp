@@ -1,19 +1,19 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "TrackingEnemyStateTurn.h"
+#include "EnemyObjectStateTurn.h"
 
 /*
 @fn コンストラクタ
 */
-TrackingEnemyStateTurn::TrackingEnemyStateTurn()
+EnemyObjectStateTurn::EnemyObjectStateTurn()
 {
 }
 
 /*
 @fn デストラクタ
 */
-TrackingEnemyStateTurn::~TrackingEnemyStateTurn()
+EnemyObjectStateTurn::~EnemyObjectStateTurn()
 {
 }
 
@@ -23,7 +23,7 @@ TrackingEnemyStateTurn::~TrackingEnemyStateTurn()
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaTime)
+EnemyState EnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// アニメーションの再生が終わっていたら
 	if (!skeletalMeshComponent->IsPlaying())
@@ -32,7 +32,7 @@ EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaT
 		state = EnemyState::ENEMY_STATE_REPOSITION;
 	}
 
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}
@@ -45,7 +45,7 @@ EnemyState TrackingEnemyStateTurn::Update(EnemyObjectBase* _owner, float _deltaT
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-void TrackingEnemyStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
+void EnemyObjectStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう
 	skeletalMeshComponent = _owner->GetSkeletalMeshComponent();

@@ -156,12 +156,11 @@ private:
 	// インスタンス
 	static PhysicsWorld* physics;
 
-	// BoxColliderをタグごとに格納するマップ
+	// BoxColliderを格納するMap
 	std::unordered_map<PhysicsTag, std::vector<BoxCollider*>> boxesMap;
 
-	// SphereColliderをタグごとに格納するマップ
+	// SphereColliderを格納するMap
 	std::unordered_map<PhysicsTag, std::vector<SphereCollider*>> spheresMap;
 
 	onCollisionMap collisionFunction;
-
 };

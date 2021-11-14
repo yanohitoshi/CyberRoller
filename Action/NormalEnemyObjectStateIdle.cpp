@@ -25,7 +25,7 @@ NormalEnemyObjectStateIdle::~NormalEnemyObjectStateIdle()
 */
 EnemyState NormalEnemyObjectStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
-	if (_owner->GetIsDeadFlag())
+	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}

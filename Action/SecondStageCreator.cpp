@@ -2,26 +2,23 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "SecondStageCreator.h"
-#include "GroundObject.h"
-#include "SwitchBlock.h"
-#include "JumpSwitchObject.h"
-#include "WallBlockObject.h"
-#include "MoveWallBlock.h"
 #include "PlayerObject.h"
-#include "NextSceneObject.h"
-#include "RespawnPoint.h"
-#include "NeedlePanelObject.h"
-#include "MoveBlockObject.h"
+#include "CameraChangePoint.h"
+#include "GroundObject.h"
+#include "LightObject.h"
+#include "MoveWallBlock.h"
+#include "BreakBlockObject.h"
+#include "JumpSwitchObject.h"
 #include "SwitchBaseObject.h"
-#include "EnemyObjectBase.h"
+#include "MoveBlockObject.h"
+#include "NeedlePanelObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
 #include "TrackingEnemyObject.h"
-#include "LightObject.h"
-#include "CameraChangePoint.h"
-#include "CollectionObject.h"
-#include "BreakBlockObject.h"
 #include "ExplosionObject.h"
+#include "NextSceneObject.h"
+#include "RespawnPoint.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
@@ -485,7 +482,7 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer6Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer6Pos, Tag::ENEMY);
 		break;
 
 	case(JUMP_SWITCH_PARTS):
@@ -520,7 +517,7 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer7Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer7Pos, Tag::ENEMY);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -611,7 +608,7 @@ void SecondStageCreator::CreateLayer9(int _indexX, int _indexY)
 
 	case(NORMAL_ENEMY_PARTS):
 		// 敵オブジェクト生成
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
 		break;
 	}
 }
@@ -646,7 +643,7 @@ void SecondStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 移動情報をセット
 		SetMoveEnemyData(400.0f,Vector3::UnitY,600.0f,MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
-		new MoveEnemyObject(layer10Pos, Tag::ENEMY, playerObject,moveEnemyData);
+		new MoveEnemyObject(layer10Pos, Tag::ENEMY,moveEnemyData);
 		break;
 	}
 }
@@ -710,13 +707,10 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
-
 	case(BOMB_PARTS):
-		// 爆弾を生成
 		new ExplosionObject(layer12Pos, Tag::BOMB);
 		break;
 	}
@@ -736,14 +730,11 @@ void SecondStageCreator::CreateLayer13(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer13Pos, BlockSize, Tag::GROUND);
 		break;
-
 	case(NORMAL_ENEMY_PARTS):
 		// ブロックオブジェクト生成
-		new NormalEnemyObject(layer13Pos, Tag::ENEMY, playerObject);
+		new NormalEnemyObject(layer13Pos, Tag::ENEMY);
 		break;
-
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -771,9 +762,7 @@ void SecondStageCreator::CreateLayer14(int _indexX, int _indexY)
 		// ステージクリアオブジェクト生成
 		new NextSceneObject(layer14Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
-
-	case(BRAKE_BLOCK_PARTS):
-		// 壊れるblockを生成
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}

@@ -2,10 +2,10 @@
 #include "EnemyObjectStateBase.h"
 
 /*
-@file TrackingEnemyStateTurn.h
-@brief 追跡する敵オブジェクトのターン状態を管理するクラス
+@file TrackingEnemyStateReposition.h
+@brief 追跡する敵オブジェクトの追跡場所から元の位置に戻るまでを管理するクラス
 */
-class TrackingEnemyStateTurn :
+class EnemyObjectStateReposition :
     public EnemyObjectStateBase
 {
 public:
@@ -13,12 +13,12 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	TrackingEnemyStateTurn();
+	EnemyObjectStateReposition();
 
 	/*
 	@fn デストラクタ
 	*/
-	~TrackingEnemyStateTurn()override;
+	~EnemyObjectStateReposition()override;
 
 	/*
 	@fn アップデート
@@ -36,6 +36,11 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
-
+	//初期ポジション
+	Vector3 firstPosition;
+	// 元のポジションに戻る際の方向
+	Vector3 repositionRotationVec;
+	// アイドリングへ移行する規定値
+	const float IdlingLength;
 };
 

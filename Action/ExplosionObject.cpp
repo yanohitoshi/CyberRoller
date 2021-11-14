@@ -16,20 +16,23 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag)
 {
 	//GameObjectメンバ変数の初期化
 	velocity.Zero;
+
 	position = _pos;
 	position.z += 100.0f;
 	SetPosition(position);
+	// 初期ポジションを保存
+	firstPosition = position;
+
 	SetScale(Vector3(0.5f, 0.5f, 0.5f));
 	isStartExplosion = false;
 	isHitJumpAttackPlayer = false;
 	isHitExplosionObject = false;
 	hitPosition = Vector3(0.0f,0.0f,0.0f);
-	// 初期ポジションを保存
-	firstPosition = position;
+
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/bombObject/bomb.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/BombObject/bomb.gpmesh"));
 	meshComponent->SetEmissiveColor(Color::LightBlue);
 
 	//メッシュ情報取得
@@ -140,7 +143,8 @@ void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag
 		hitPosition = _hitObject.GetPosition();
 	}
 	
-	if(_physicsTag == PhysicsTag::PLAYER_TAG && nowState == ExplosionObjectState::IDLE)
+	if(_physicsTag == PhysicsTag::PLAYER_TAG && nowState == ExplosionObjectState::IDLE ||
+		_physicsTag == PhysicsTag::ENEMY_TAG && nowState == ExplosionObjectState::IDLE)
 	{
 		isStartExplosion = true;
 		isHitJumpAttackPlayer = false;

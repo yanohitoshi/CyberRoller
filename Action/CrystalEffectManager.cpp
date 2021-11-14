@@ -77,7 +77,8 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	if (!isEffectActive)
 	{
 		// ÅŒã‚Ì•Ç‚ªŠJ‚¢‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO‚ð‚à‚ç‚¤
-		isEffectActive = lastMoveWallBlock->GetOpenFlag();
+		//isEffectActive = lastMoveWallBlock->GetOpenFlag();
+		isEffectActive = true;
 	}
 
 

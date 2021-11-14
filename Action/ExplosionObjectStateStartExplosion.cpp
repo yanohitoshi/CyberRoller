@@ -5,18 +5,23 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 {
 	++explosionStart;
 
-	if (explosionStart > 180 || _owner->GetIsHitExplosionObject())
-	{
-		state = ExplosionObjectState::EXPLOSION;
-		return state;
-	}
-
 	if (!isHitJumpAttackPlayer)
 	{
-		VerticalMove(_owner, _deltaTime);
+		if (explosionStart > 180)
+		{
+			state = ExplosionObjectState::EXPLOSION;
+			return state;
+		}
+
 	}
 	else
 	{
+		if (explosionStart > 180 || _owner->GetIsHitExplosionObject())
+		{
+			state = ExplosionObjectState::EXPLOSION;
+			return state;
+		}
+
 		velocity = blowAwayDirection * BlowAwaySpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 		angle += 0.1;
