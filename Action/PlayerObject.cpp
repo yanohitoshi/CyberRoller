@@ -108,6 +108,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	isJumpAttck = false;
 	isSelectingTargetObject = false;
 	isJumpAttackSuccess = false;
+	isJumpAttackCancel = false;
 	// 前方ベクトル初期化
 	forwardVec = Vector3(1.0f, 0.0f, 0.0f);
 	// キャラクターの前方ベクトル初期化

@@ -248,10 +248,13 @@ private:
 	bool isAvailableJumpAttck;
 	// ジャンプアタックフラグ
 	bool isJumpAttck;
-	// ジャンプアタックするエネミーの選択フラグ
+	// ジャンプアタックするオブジェクトの選択フラグ
 	bool isSelectingTargetObject;
 	// ジャンプアタック成功したか
 	bool isJumpAttackSuccess;
+	// ジャンプ攻撃がキャンセルされたか
+	bool isJumpAttackCancel;
+
 	//ジャンプできるかフラグ
 	bool jumpFlag;
 	//ジャンプスイッチを押したかどうか
@@ -272,8 +275,9 @@ private:
 	bool deadFlag;
 	// 敵にヒットしたか
 	bool isHitEnemy;
+	// ダンス状態か
 	bool isDancing;
-
+	// 爆発に当たったか
 	bool isHitExplosion;
 	
 	// 今のプレーヤーのstate状態を保存するための変数
@@ -489,6 +493,12 @@ public:// ゲッターセッター
 	bool GetIsJumpAttackSuccess() { return isJumpAttackSuccess; }
 
 	/*
+	@fn isJumpAttackCancelのgetter関数
+	@return isJumpAttackCancelを返す
+	*/
+	bool GetIsJumpAttackCancel() { return isJumpAttackCancel; }
+
+	/*
 	@fn isHitWallのgetter関数
 	@return isHitWallを返す
 	*/
@@ -646,9 +656,15 @@ public:// ゲッターセッター
 	
 	/*
 	@fn isJumpAttackSuccessのsetter関数
-	@param	bool _isAvailableInput 入力可能かどうかをセット
+	@param	bool _isJumpAttackSuccess ジャンプ攻撃が成功したかどうかをセット
 	*/
 	void SetIsJumpAttackSuccess(bool _isJumpAttackSuccess) { isJumpAttackSuccess = _isJumpAttackSuccess; }
+
+	/*
+	@fn isJumpAttackCancelのsetter関数
+	@param	bool _isJumpAttackCancel 入力可能かどうかをセット
+	*/
+	void SetIsJumpAttackCancel(bool _isJumpAttackCancel) { isJumpAttackCancel = _isJumpAttackCancel; }
 
 	/*
 	@fn isHitEnemyのsetter関数

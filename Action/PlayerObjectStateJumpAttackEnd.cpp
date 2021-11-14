@@ -48,6 +48,7 @@ PlayerState PlayerObjectStateJumpAttackEnd::Update(PlayerObject* _owner, float _
 		_owner->SetMoveSpeed(moveSpeed);
 		_owner->SetVelocity(velocity);
 		_owner->SetIsJumpAttackSuccess(false);
+		_owner->SetIsJumpAttackCancel(false);
 		_owner->SetIsJumpAttck(false);
 
 		// ステータスをジャンプループにする
