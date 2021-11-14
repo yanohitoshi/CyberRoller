@@ -1,10 +1,10 @@
 #include "EnhancedEnemyStateFlinch.h"
 
 EnhancedEnemyStateFlinch::EnhancedEnemyStateFlinch()
-	: EndTime(30)
+	: EndTime(60)
 	, FirstBlowAwayPower(100.0f)
 	, BlowAwayPower(1.2f)
-	, MaxSpeed(2000.0f)
+	, MaxSpeed(500.0f)
 {
 }
 

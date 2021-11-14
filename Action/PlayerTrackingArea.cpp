@@ -14,9 +14,9 @@
 */
 PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, EnemyObjectBase* _ownerEnemy, float _areaValue)
 	:GameObject(false, _objectTag)
-	, ownerEnemy(_ownerEnemy)
+	, owner(_ownerEnemy)
 {
-	SetPosition(ownerEnemy->GetPosition());
+	SetPosition(owner->GetPosition());
 
 	//ジャンプ攻撃判定用のsphereCollider
 	sphereCollider = new SphereCollider(this, PhysicsTag::PLAYER_TRACKING_AREA_TAG, GetOnCollisionFunc());
@@ -51,7 +51,7 @@ void PlayerTrackingArea::UpdateGameObject(float _deltaTime)
 void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// リスポーン状態だったら返す
-	if (ownerEnemy->GetNowState() == EnemyState::ENEMY_STATE_RESPAWN)
+	if (owner->GetNowState() == EnemyState::ENEMY_STATE_RESPAWN)
 	{
 		return;
 	}
@@ -60,7 +60,8 @@ void PlayerTrackingArea::OnCollision(const GameObject& _hitObject, const Physics
 	if (_hitObject.GetTag() == Tag::PLAYER)
 	{
 		// 親クラスを追跡状態にセット
-		ownerEnemy->SetIsTracking(true);
-		ownerEnemy->SetAttackObjectPosition(_hitObject.GetPosition());
+		owner->SetIsTracking(true);
+		// 追跡する対象のポジションをセット
+		owner->SetAttackObjectPosition(_hitObject.GetPosition());
 	}
 }

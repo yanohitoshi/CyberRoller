@@ -47,6 +47,6 @@ private:
 	// 当たり判定を行うクラス
 	SphereCollider* sphereCollider;
 	// 親となるクラスのポインタ
-	EnemyObjectBase* ownerEnemy;
+	EnemyObjectBase* owner;
 };
 

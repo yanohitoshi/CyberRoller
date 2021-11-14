@@ -14,7 +14,7 @@
 EnemyAttackArea::EnemyAttackArea(const Tag& _objectTag, EnemyObjectBase* _ownerEnemy)
 	:GameObject(false, _objectTag)
 	, ownerEnemy(_ownerEnemy)
-	, AttackArea(50.0f)
+	, AttackArea(80.0f)
 	, EnableTime(60)
 {
 	SetPosition(ownerEnemy->GetPosition());

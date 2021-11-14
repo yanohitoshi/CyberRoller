@@ -31,9 +31,6 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
 
-	isAttack = false;
-	isDead = false;
-
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)

@@ -22,15 +22,13 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	state = Active;
-	scale = Vector3(3.0f, 3.0f, 3.0f);
+	scale = Vector3(4.0f, 4.0f, 4.0f);
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
 	forwardVec = Vector3::NegUnitX;
 	charaForwardVec = Vector3::NegUnitX;
 	SetScale(scale);
 
 	isTracking = false;
-	isDead = false;
-	isAttack = false;
 	isFlinch = false;
 	isPushBackToPlayer = true;
 

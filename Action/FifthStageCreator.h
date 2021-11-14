@@ -145,45 +145,6 @@ private:
 	*/
 	void CreateLayer13(int _indexX, int _indexY);
 
-	/*
-	@fn レイヤー14クリエイター
-	@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer14(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー15クリエイター
-	@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer15(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー16クリエイター
-	@brief  レイヤー16のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer16(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー17クリエイター
-	@brief  レイヤー17のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer17(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー18クリエイター
-	@brief  レイヤー18のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer18(int _indexX, int _indexY);
 
 	/*
 	@fn カメラモード変更ポイント生成
@@ -214,11 +175,6 @@ private:
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
 	std::vector<std::vector<int>> layer13StageData;
-	std::vector<std::vector<int>> layer14StageData;
-	std::vector<std::vector<int>> layer15StageData;
-	std::vector<std::vector<int>> layer16StageData;
-	std::vector<std::vector<int>> layer17StageData;
-	std::vector<std::vector<int>> layer18StageData;
 
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;
