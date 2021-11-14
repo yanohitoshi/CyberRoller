@@ -44,7 +44,6 @@ FifthStageScene::FifthStageScene()
 
 	//ÉVÅ[ÉìUIÇí«â¡
 	new FifthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
-	//new FifthStageUI(playerObject);
 }
 
 FifthStageScene::~FifthStageScene()
