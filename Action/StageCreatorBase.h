@@ -71,7 +71,8 @@ enum StagePartsName
 	LEFT_MOVE_ENEMY_PARTS = 46,
 	// 追跡する敵
 	TRACKING_ENEMY_PARTS = 47,
-
+	// ジャンプ攻撃で死なない敵
+	ENHANCED_ENEMY_PARTS = 48,
 	// 1番目の収集物パーツ
 	COLLECTION_FIRST = 3,
 	// 2番目の収集物パーツ

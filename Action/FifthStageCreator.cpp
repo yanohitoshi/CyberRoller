@@ -17,6 +17,7 @@
 #include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
+#include "EnhancedEnemyObject.h"
 #include "CameraChangePoint.h"
 #include "NextSceneObject.h"
 #include "CollectionObject.h"
@@ -372,6 +373,11 @@ void FifthStageCreator::CreateLayer2(int _indexX, int _indexY)
 	case(TRACKING_ENEMY_PARTS):
 		// í«ê’Ç∑ÇÈìGÇÃê∂ê¨
 		new TrackingEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
+		break;
+
+	case(ENHANCED_ENEMY_PARTS):
+		// í«ê’Ç∑ÇÈìGÇÃê∂ê¨
+		new EnhancedEnemyObject(layer2Pos, Tag::ENEMY, 600.0f, playerObject, 1400.0f);
 		break;
 
 	case(RESPOWN_POINT_PARTS):

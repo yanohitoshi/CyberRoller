@@ -30,6 +30,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	respawnPosition.z += respawnPositionOffset;
 	isVisible = true;
 	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
 	// 死亡時のエフェクトを付与
 	new EnemyDeadEffectManager(this);
 }
@@ -64,6 +65,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
 	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
 	isVisible = true;
 
 	// 死亡時のエフェクトを付与
@@ -96,6 +98,7 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 	respawnPosition = firstPosition;
 	respawnPosition.z += respawnPositionOffset;
 	defeatedObjectPosition = Vector3::Zero;
+	attackObjectPosition = Vector3::Zero;
 	isVisible = true;
 
 	// 死亡時のエフェクトを付与

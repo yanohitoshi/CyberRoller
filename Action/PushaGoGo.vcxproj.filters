@@ -347,9 +347,6 @@
     <ClCompile Include="TitleGroundObject.cpp">
       <Filter>GameObjects\TitleObject</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyObjectStateBase.cpp">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyObjectBase.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
@@ -410,29 +407,8 @@
     <ClCompile Include="TrackingEnemyStateIdle.cpp">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClCompile>
-    <ClCompile Include="TrackingEnemyStateTracking.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyStateMoving.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyStateTurn.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyStateReposition.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerTrackingArea.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyStateAttack.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyDeadEffectManager.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyObjectStateRespawn.cpp">
-      <Filter>GameObjects\EnemyObjects</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAttackHitEffectManager.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
@@ -464,17 +440,8 @@
     <ClCompile Include="PlayerKnockBackEffect.cpp">
       <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyObjectStateDead.cpp">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyElectricShockEffect.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyObjectStateAttack.cpp">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackingEnemyAttackArea.cpp">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAttackArea.cpp">
       <Filter>GameObjects\EnemyObjects</Filter>
@@ -637,6 +604,33 @@
     </ClCompile>
     <ClCompile Include="StartButtonSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EnhancedEnemyObject.cpp">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTrackingArea.cpp">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateAttack.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateBase.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateDead.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateRespawn.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateTracking.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateReposition.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyObjectStateTurn.cpp">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -982,9 +976,6 @@
     <ClInclude Include="TitleGroundObject.h">
       <Filter>GameObjects\TitleObject</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyObjectStateBase.h">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyObjectBase.h">
       <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
@@ -1051,26 +1042,8 @@
     <ClInclude Include="TrackingEnemyStateIdle.h">
       <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
     </ClInclude>
-    <ClInclude Include="TrackingEnemyStateTracking.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyStateMoving.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyStateTurn.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyStateReposition.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyStateAttack.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject\State</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyDeadEffectManager.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyObjectStateRespawn.h">
-      <Filter>GameObjects\EnemyObjects</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAttackHitEffectManager.h">
       <Filter>GameObjects\Effect\PlayerEffect\JumpAttack</Filter>
@@ -1102,20 +1075,8 @@
     <ClInclude Include="PlayerKnockBackEffect.h">
       <Filter>GameObjects\Effect\PlayerEffect\KnockBack</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyObjectStateDead.h">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyElectricShockEffect.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerTrackingArea.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyObjectStateAttack.h">
-      <Filter>GameObjects\EnemyObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackingEnemyAttackArea.h">
-      <Filter>GameObjects\EnemyObjects\TrackingEnemyObject</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttackArea.h">
       <Filter>GameObjects\EnemyObjects</Filter>
@@ -1281,6 +1242,33 @@
     </ClInclude>
     <ClInclude Include="StartButtonSprite.h">
       <Filter>UI\SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnhancedEnemyObject.h">
+      <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTrackingArea.h">
+      <Filter>GameObjects\EnemyObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateAttack.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateBase.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateDead.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateRespawn.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateTracking.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateReposition.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyObjectStateTurn.h">
+      <Filter>GameObjects\EnemyObjects\CommonState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1493,6 +1481,12 @@
     </Filter>
     <Filter Include="GameObjects\Effect\BreakBlockObject">
       <UniqueIdentifier>{bc3362b9-894b-4603-b523-41d691de77dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\EnhancedEnemyObject">
+      <UniqueIdentifier>{b32919b1-89aa-4c67-9b39-5f6c6723b707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\EnemyObjects\CommonState">
+      <UniqueIdentifier>{a9f3661e-ed66-46ec-b0db-d283308680a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

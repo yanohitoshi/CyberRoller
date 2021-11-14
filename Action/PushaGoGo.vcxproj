@@ -173,6 +173,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="DebrisEffectObject.cpp" />
     <ClCompile Include="DustEffect.cpp" />
+    <ClCompile Include="EnhancedEnemyObject.cpp" />
     <ClCompile Include="ExplosionArea.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
     <ClCompile Include="ExplosionObject.cpp" />
@@ -220,7 +221,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TitlePlayerStateJumpLoop.cpp" />
     <ClCompile Include="TitlePlayerStateJumpStart.cpp" />
     <ClCompile Include="TitlePlayerStateRun.cpp" />
-    <ClCompile Include="TrackingEnemyAttackArea.cpp" />
     <ClCompile Include="EnemyElectricShockEffect.cpp" />
     <ClCompile Include="EnemyDeadEffectManager.cpp" />
     <ClCompile Include="EnemyExplosionEffect.cpp" />
@@ -362,13 +362,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TitleSceneUI.cpp" />
     <ClCompile Include="TitleStageCreator.cpp" />
     <ClCompile Include="TrackingEnemyObject.cpp" />
-    <ClCompile Include="TrackingEnemyStateAttack.cpp" />
     <ClCompile Include="EnemyObjectStateDead.cpp" />
     <ClCompile Include="TrackingEnemyStateIdle.cpp" />
-    <ClCompile Include="TrackingEnemyStateMoving.cpp" />
-    <ClCompile Include="TrackingEnemyStateReposition.cpp" />
-    <ClCompile Include="TrackingEnemyStateTracking.cpp" />
-    <ClCompile Include="TrackingEnemyStateTurn.cpp" />
+    <ClCompile Include="EnemyObjectStateReposition.cpp" />
+    <ClCompile Include="EnemyObjectStateTracking.cpp" />
+    <ClCompile Include="EnemyObjectStateTurn.cpp" />
     <ClCompile Include="TutorialSwitchOkEffect.cpp" />
     <ClCompile Include="TutorialSwitchParticlEffect.cpp" />
     <ClCompile Include="UnCollectedSprite.cpp" />
@@ -403,6 +401,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="DebrisEffectObject.h" />
     <ClInclude Include="DustEffect.h" />
+    <ClInclude Include="EnhancedEnemyObject.h" />
     <ClInclude Include="ExplosionArea.h" />
     <ClInclude Include="ExplosionEffect.h" />
     <ClInclude Include="ExplosionObject.h" />
@@ -451,7 +450,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TitlePlayerStateJumpLoop.h" />
     <ClInclude Include="TitlePlayerStateJumpStart.h" />
     <ClInclude Include="TitlePlayerStateRun.h" />
-    <ClInclude Include="TrackingEnemyAttackArea.h" />
     <ClInclude Include="EnemyElectricShockEffect.h" />
     <ClInclude Include="EnemyDeadEffectManager.h" />
     <ClInclude Include="EnemyExplosionEffect.h" />
@@ -593,13 +591,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TitleSceneUI.h" />
     <ClInclude Include="TitleStageCreator.h" />
     <ClInclude Include="TrackingEnemyObject.h" />
-    <ClInclude Include="TrackingEnemyStateAttack.h" />
     <ClInclude Include="EnemyObjectStateDead.h" />
     <ClInclude Include="TrackingEnemyStateIdle.h" />
-    <ClInclude Include="TrackingEnemyStateMoving.h" />
-    <ClInclude Include="TrackingEnemyStateReposition.h" />
-    <ClInclude Include="TrackingEnemyStateTracking.h" />
-    <ClInclude Include="TrackingEnemyStateTurn.h" />
+    <ClInclude Include="EnemyObjectStateReposition.h" />
+    <ClInclude Include="EnemyObjectStateTracking.h" />
+    <ClInclude Include="EnemyObjectStateTurn.h" />
     <ClInclude Include="TutorialSwitchOkEffect.h" />
     <ClInclude Include="TutorialSwitchParticlEffect.h" />
     <ClInclude Include="UnCollectedSprite.h" />

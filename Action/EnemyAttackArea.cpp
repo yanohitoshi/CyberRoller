@@ -77,6 +77,7 @@ void EnemyAttackArea::OnCollision(const GameObject& _hitObject, const PhysicsTag
 	{
 		// 親クラスを攻撃状態にセット
 		ownerEnemy->SetIsAttack(true);
+		ownerEnemy->SetAttackObjectPosition(_hitObject.GetPosition());
 		isEnable = false;
 		disableCount = 0;
 	}

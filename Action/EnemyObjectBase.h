@@ -147,6 +147,10 @@ protected:
 	Vector3 moveDirection;
 	// 自分を倒したオブジェクトのポジション
 	Vector3 defeatedObjectPosition;
+
+	// 攻撃対象オブジェクトのポジション
+	Vector3 attackObjectPosition;
+
 	// AABBの最小値
 	const Vector3 BoxMin;
 	// AABBの最大値
@@ -258,10 +262,16 @@ public:// ゲッターセッター
 	Vector3 GetRespawnPosition() { return respawnPosition; }
 
 	/*
-	@fn respawnPositionのgetter関数
-	@return Vector3 respawnPosition リスポーンする場所を返す
+	@fn defeatedObjectPositionのgetter関数
+	@return Vector3 defeatedObjectPosition 自分を倒したオブジェクトのポジションを返す
 	*/
 	Vector3 GetDefeatedObjectPosition() { return defeatedObjectPosition; }
+	
+	/*
+	@fn attackObjectPositionのgetter関数
+	@return Vector3 defeatedObjectPosition 自分を倒したオブジェクトのポジションを返す
+	*/
+	Vector3 GetAttackObjectPosition() { return attackObjectPosition; }
 
 	/*
 	@fn moveDistanceのgetter関数
@@ -322,6 +332,12 @@ public:// ゲッターセッター
 	@param	Vector3 _charaForwardVec キャラクターの前方ベクトル
 	*/
 	void SetCharaForwardVec(Vector3 _charaForwardVec) { charaForwardVec = _charaForwardVec; }
+
+	/*
+	@fn velocityのsetter関数
+	@param	Vector3 _velocity キャラクターの速度ベクトル
+	*/
+	void SetAttackObjectPosition(Vector3 _attackObjectPosition) { attackObjectPosition = _attackObjectPosition; }
 
 	/*
 	@fn velocityのsetter関数

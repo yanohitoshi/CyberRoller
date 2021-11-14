@@ -12,7 +12,7 @@
 @param	親となる敵クラスのポインタ
 @param	エリアの大きさとなる値
 */
-PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, TrackingEnemyObject* _ownerEnemy, float _areaValue)
+PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, EnemyObjectBase* _ownerEnemy, float _areaValue)
 	:GameObject(false, _objectTag)
 	, ownerEnemy(_ownerEnemy)
 {
