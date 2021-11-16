@@ -17,6 +17,7 @@
 #include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
+#include "EnhancedEnemyObject.h"
 #include "CameraChangePoint.h"
 #include "ClearPointObject.h"
 #include "CollectionObject.h"
@@ -249,8 +250,8 @@ void FinalStageCreator::CreateStage()
 			CreateLayer16(ix, iy);
 			// Layer17内を検索
 			CreateLayer17(ix, iy);
-			// Layer18内を検索
-			CreateLayer18(ix, iy);
+			//// Layer18内を検索
+			//CreateLayer18(ix, iy);
 			CreateCameraDirecting(ix, iy);
 		}
 	}
@@ -332,21 +333,6 @@ void FinalStageCreator::CreateLayer2(int _indexX, int _indexY)
 		// パワーセルライトの生成
 		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
-
-	case(COLLECTION_SECOND):
-		// 2番目の収集物を生成
-		secondCollectionObject = new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::SECOND);
-		break;
-
-	case(COLLECTION_THIRD):
-		// 3番目の収集物を生成
-		thirdCollectionObject = new CollectionObject(layer2Pos, Tag::COLLECTION, CollectionTag::THIRD);
-		break;
-
-	case(CLEAR_OBJECT_PARTS):
-		// ステージクリアオブジェクト生成
-		new ClearPointObject(layer2Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
-		break;
 	}
 }
 
@@ -376,20 +362,6 @@ void FinalStageCreator::CreateLayer3(int _indexX, int _indexY)
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer3SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
-		break;
-
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
-		break;
-
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(300.0f, Vector3::NegUnitY, 400.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -461,51 +433,6 @@ void FinalStageCreator::CreateLayer5(int _indexX, int _indexY)
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
 		break;
-
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer5SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-	case(RESPOWN_POINT_PARTS):
-		// リスポーンポイントオブジェクト生成
-		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
-		break;
-
-	case(40):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
-		break;
-
-	case(38):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
-		break;
-
-	case(36):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
-		break;
-
-	case(39):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
-		break;
-
-	case(37):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
-		break;
 	}
 }
 
@@ -532,11 +459,6 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer6SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
 		new NormalEnemyObject(layer6Pos, Tag::ENEMY);
@@ -550,13 +472,6 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer6Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
-
-	case(27):
-		// 上下移動のblockを生成
-		SetMoveBlockData(600.0f, Vector3::UnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
-		new MoveBlockObject(layer6Pos, Tag::MOVE_GROUND, moveBlockData);
-		break;
-
 	}
 }
 
@@ -633,11 +548,6 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new PushBoxObject(layer7Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer7SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer7SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
@@ -664,6 +574,22 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		// 追跡する敵の生成
 		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
+
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(ENHANCED_ENEMY_PARTS):
+		new EnhancedEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 2400.0f);
+		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer7Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
 	}
 }
 
@@ -699,10 +625,21 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		new ExplosionObject(layer8Pos, Tag::BOMB);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(300.0f, Vector3::NegUnitY, 400.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer8Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
+	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
+		thirdCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
+		break;
 
 	}
 }
@@ -729,30 +666,9 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(POWERCELLS_LIGHT_PARTS_RIGHT):
-		// パワーセルライトの生成
-		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, true);
-		break;
-
-	case(POWERCELLS_LIGHT_PARTS_LEFT):
-		// パワーセルライトの生成
-		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, false);
-		break;
-
-	case(SECOND_SWITCH_PARTS):
-		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer9SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-		break;
-
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer9SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-	case(NEEDLE_PARTS):
-		// 二ードルオブジェクト生成
-		new NeedlePanelObject(layer9SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+	case(COLLECTION_SECOND):
+		// 2番目の収集物を生成
+		secondCollectionObject = new CollectionObject(layer9Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -760,12 +676,15 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(BOMB_PARTS):
-		new ExplosionObject(layer9Pos, Tag::BOMB);
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -793,6 +712,11 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
 		break;
 
+	case(RIGHT_MOVE_BLOCK_PARTS):
+		SetMoveBlockData(2600.0f, Vector3::UnitY, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+
 	case(FRONT_MOVE_BLOCK_PARTS):
 		SetMoveBlockData(2400.0f, Vector3::UnitX, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_X);
 		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
@@ -801,26 +725,6 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 	case(BACK_MOVE_BLOCK_PARTS):
 		SetMoveBlockData(2400.0f, Vector3::NegUnitX, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_X);
 		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
-		break;
-
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer10SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer10Pos, Tag::ENEMY);
-		break;
-
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer10Pos, Tag::ENEMY, moveEnemyData);
-		break;
-	case(BREAK_BLOCK_PARTS):
-		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -868,20 +772,18 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new JumpSwitchObject(layer11SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
 
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer11Pos, Tag::ENEMY, moveEnemyData);
-		break;
-
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer11SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new ClearPointObject(layer11Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 	}
 }
@@ -914,25 +816,29 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		new JumpSwitchObject(layer12SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
 
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
-		break;
+	//case(NORMAL_ENEMY_PARTS):
+	//	// 動かない敵の生成
+	//	new NormalEnemyObject(layer12Pos, Tag::ENEMY);
+	//	break;
 
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
-		break;
+	//case(RIGHT_MOVE_ENEMY_PARTS):
+	//	// 移動情報をセット
+	//	SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
+	//	// 敵オブジェクト生成
+	//	new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
+	//	break;
 
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(BOMB_PARTS):
+		new ExplosionObject(layer12Pos, Tag::BOMB);
 		break;
 	}
 }
@@ -960,28 +866,11 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		new GroundObject(layer13Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer13SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-	case(TRACKING_ENEMY_PARTS):
-		// 追跡する敵の生成
-		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, 1400.0f);
-		break;
-
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer13Pos, Tag::ENEMY, moveEnemyData);
-		break;
-
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(40):
+	case(BOMB_PARTS):
 		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
@@ -1010,41 +899,19 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new GroundObject(layer14Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(POWERCELLS_LIGHT_PARTS_RIGHT):
-		// パワーセルライトの生成
-		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, true);
-		break;
+	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
+	//	// パワーセルライトの生成
+	//	new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, true);
+	//	break;
 
-	case(POWERCELLS_LIGHT_PARTS_LEFT):
-		// パワーセルライトの生成
-		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, false);
-		break;
+	//case(POWERCELLS_LIGHT_PARTS_LEFT):
+	//	// パワーセルライトの生成
+	//	new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, false);
+	//	break;
 
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer14SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
-		break;
-
-	case(NEEDLE_PARTS):
-		// 二ードルオブジェクト生成
-		new NeedlePanelObject(layer14SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-		break;
-
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer14SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-	case(TRACKING_ENEMY_PARTS):
-		// 追跡する敵の生成
-		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, 1400.0f);
-		break;
-
-	case(35):
-		// プッシュボード固有のデータ構造体をセット
-		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
-		// ケースごとに方向の違う押し出しボックスの生成
-		new PushBoxObject(layer14Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -1052,24 +919,12 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new RespawnPoint(layer14Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
-		break;
-
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer14Pos, Tag::ENEMY, moveEnemyData);
-		break;
-
 	case(COLLECTION_FIRST):
 		// 1番目の収集物を生成
 		firstCollectionObject = new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 
-	case(39):
+	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -1097,43 +952,6 @@ void FinalStageCreator::CreateLayer15(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer15Pos, BlockSize, Tag::GROUND);
 		break;
-
-	case(RESPOWN_POINT_PARTS):
-		// リスポーンポイントオブジェクト生成
-		new RespawnPoint(layer15Pos, RespawnBox, Tag::RESPOWN_POINT);
-		break;
-
-	case(JUMP_SWITCH_PARTS):
-		// ジャンプスイッチオブジェクト生成
-		new JumpSwitchObject(layer15SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
-		break;
-
-
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
-		break;
-
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer15Pos, Tag::ENEMY, moveEnemyData);
-		break;
-
-	case(RIGHT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1100.0f, Vector3::UnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
-		break;
-
-	case(LEFT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1100.0f, Vector3::NegUnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
-		break;
-
-	case(39):
-		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
-		break;
 	}
 }
 
@@ -1156,22 +974,6 @@ void FinalStageCreator::CreateLayer16(int _indexX, int _indexY)
 	case(LAYER16_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer16Pos, BlockSize, Tag::GROUND);
-		break;
-
-	case(BREAK_BLOCK_PARTS):
-		new BreakBlockObject(layer16Pos, BlockSize, Tag::BREAK_GROUND);
-		break;
-
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer16Pos, Tag::ENEMY);
-		break;
-
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer16Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }
@@ -1202,13 +1004,6 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer17SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-		break;
-
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer17Pos, Tag::ENEMY, moveEnemyData);
 		break;
 	}
 }

@@ -68,13 +68,13 @@ void FinalStageUI::UpdateGameObject(float _deltaTime)
 
 		if (!isChangePosition)
 		{
-			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, 0.0f, 0.0f));
+			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, -200.0f, 0.0f));
 			firstCollectionUI->ResetDraw();
 
-			secondCollectionUI->SetDrawPosition(Vector3(0.0f, 0.0f, 0.0f));
+			secondCollectionUI->SetDrawPosition(Vector3(0.0f, -200.0f, 0.0f));
 			secondCollectionUI->ResetDraw();
 
-			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, 0.0f, 0.0f));
+			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, -200.0f, 0.0f));
 			thirdCollectionUI->ResetDraw();
 			isChangePosition = true;
 		}
