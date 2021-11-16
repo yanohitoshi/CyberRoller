@@ -444,7 +444,7 @@ void PhysicsWorld::DebugShowBox()
 	lineShader->SetMatrixUniform("uViewProj", viewProj);
 
 	// 当たり判定ボックス描画
-	DrawBoxs(boxesMap[PhysicsTag::PLAYER_TAG], Color::Red);
+	//DrawBoxs(boxesMap[PhysicsTag::PLAYER_TAG], Color::Red);
 	DrawBoxs(boxesMap[PhysicsTag::BOMB_TAG], Color::Blue);
 	DrawBoxs(boxesMap[PhysicsTag::BREAK_GROUND_TAG], Color::LightPink);
 	DrawBoxs(boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA], Color::White);

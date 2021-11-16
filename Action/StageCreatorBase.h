@@ -53,6 +53,16 @@ enum StagePartsName
 	// 最初左に動くblockパーツ
 	LEFT_MOVE_BLOCK_PARTS = 25,
 
+	// 最初下に動くblockパーツ
+	DOWN_MOVE_BLOCK_PARTS = 26,
+	// 最初上に動くblockパーツ
+	UP_MOVE_BLOCK_PARTS = 27,
+
+	// 最初奥に動くblockパーツ
+	FRONT_MOVE_BLOCK_PARTS = 28,
+	// 最初手前に動くblockパーツ
+	BACK_MOVE_BLOCK_PARTS = 29,
+
 	// ジャンプスイッチパーツ
 	JUMP_SWITCH_PARTS = 7,
 
@@ -73,6 +83,7 @@ enum StagePartsName
 	TRACKING_ENEMY_PARTS = 47,
 	// ジャンプ攻撃で死なない敵
 	ENHANCED_ENEMY_PARTS = 48,
+
 	// 1番目の収集物パーツ
 	COLLECTION_FIRST = 3,
 	// 2番目の収集物パーツ
@@ -102,6 +113,7 @@ enum StagePartsName
 	LAYER15_BLOCK_PARTS = 75, // レイヤー15
 	LAYER16_BLOCK_PARTS = 76, // レイヤー16
 	LAYER17_BLOCK_PARTS = 77, // レイヤー17
+	LAYER18_BLOCK_PARTS = 78, // レイヤー18
 };
 
 /*

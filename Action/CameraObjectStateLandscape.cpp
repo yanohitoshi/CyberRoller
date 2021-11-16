@@ -14,8 +14,9 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	lerpObjectPos = lerpObject->GetPosition();
 	// ‰¼‚ÌˆÚ“®ƒ|ƒWƒVƒ‡ƒ“•Ï”‚É‘ã“ü
 	tmpMovePos = lerpObjectPos;
-	tmpMovePos.z += offsetPosition.z;
+	tmpMovePos.x += offsetPosition.x;
 	tmpMovePos.y += offsetPosition.y;
+	tmpMovePos.z += offsetPosition.z;
 
 	Vector3 setPosition;
 

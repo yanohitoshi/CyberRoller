@@ -710,9 +710,6 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
-	case(BOMB_PARTS):
-		new ExplosionObject(layer12Pos, Tag::BOMB);
-		break;
 	}
 }
 
@@ -736,6 +733,9 @@ void SecondStageCreator::CreateLayer13(int _indexX, int _indexY)
 		break;
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+	case(BOMB_PARTS):
+		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
 }

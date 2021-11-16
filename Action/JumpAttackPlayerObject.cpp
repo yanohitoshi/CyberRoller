@@ -43,7 +43,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 
 	//攻撃判定用のsphereCollider
 	sphereCollider = new SphereCollider(this, PhysicsTag::JUMP_ATTACK_PLAYER_TAG, GetOnCollisionFunc());
-	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),3.0f };
+	Sphere jumpAttackSphere = { Vector3(0.0f,0.0f,0.0f),5.0f };
 	sphereCollider->SetObjectSphere(jumpAttackSphere);
 
 	// ジャンプアタック中のエフェクトを管理するクラスを生成
@@ -102,7 +102,7 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 */
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	// 敵と当たったら
+	// 追跡対象に当たったら
 	if (_hitObject.GetTag() == Tag::ENEMY || _physicsTag == PhysicsTag::SWITCH_TAG ||
 		_physicsTag == PhysicsTag::BOMB_TAG)
 	{
@@ -112,8 +112,8 @@ void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const Phy
 		ownerObject->SetIsJumpAttackSuccess(true);
 	}
 
-	//if (_physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::BREAK_GROUND_TAG ||
-	//	_physicsTag == PhysicsTag::WALL_TAG)
+	//if (_physicsTag == PhysicsTag::BREAK_GROUND_TAG ||
+	//	_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG)
 	//{
 	//	ownerObject->SetIsJumpAttackCancel(true);
 	//}

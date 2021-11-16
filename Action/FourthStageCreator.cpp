@@ -519,7 +519,7 @@ void FourthStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(27):
+	case(UP_MOVE_BLOCK_PARTS):
 		// 上下移動のblockを生成
 		SetMoveBlockData(600.0f, Vector3::UnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
 		new MoveBlockObject(layer6Pos, Tag::MOVE_GROUND, moveBlockData);
@@ -1102,7 +1102,8 @@ void FourthStageCreator::CreateLayer18(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer18Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-	case(26):
+
+	case(DOWN_MOVE_BLOCK_PARTS):
 		SetMoveBlockData(600.0f, Vector3::NegUnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
 		new MoveBlockObject(layer18Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;

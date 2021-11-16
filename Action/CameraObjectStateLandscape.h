@@ -10,7 +10,7 @@ public:
 	@fn コンストラクタ
 	*/
 	CameraObjectStateLandscape()
-	: SlowLrapTime(120){};
+	: SlowLrapTime(80){};
 
 	/*
 	@fn デストラクタ
