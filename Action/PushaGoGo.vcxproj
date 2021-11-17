@@ -224,6 +224,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
     <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp" />
     <ClCompile Include="SplashExplosionEffect.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
+    <ClCompile Include="StageSelectSceneUI.cpp" />
     <ClCompile Include="StartButtonSprite.cpp" />
     <ClCompile Include="TitleJumpAttackPlayerObject.cpp" />
     <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
@@ -363,7 +365,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TimeSprite.cpp" />
     <ClCompile Include="ContinueSprite.cpp" />
     <ClCompile Include="TimeUpSprite.cpp" />
-    <ClCompile Include="TitleBackGroundSprite.cpp" />
+    <ClCompile Include="TitleSprite.cpp" />
     <ClCompile Include="TitleCameraObject.cpp" />
     <ClCompile Include="TitleGroundObject.cpp" />
     <ClCompile Include="TitlePlayerObject.cpp" />
@@ -461,6 +463,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerDeadEffectManager.h" />
     <ClInclude Include="PlayerObjectStateExplosionBlowAway.h" />
     <ClInclude Include="SplashExplosionEffect.h" />
+    <ClInclude Include="StageSelectScene.h" />
+    <ClInclude Include="StageSelectSceneUI.h" />
     <ClInclude Include="StartButtonSprite.h" />
     <ClInclude Include="TitleJumpAttackPlayerObject.h" />
     <ClInclude Include="TitlePlayerStateBase.h" />
@@ -601,7 +605,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TimeSprite.h" />
     <ClInclude Include="ContinueSprite.h" />
     <ClInclude Include="TimeUpSprite.h" />
-    <ClInclude Include="TitleBackGroundSprite.h" />
+    <ClInclude Include="TitleSprite.h" />
     <ClInclude Include="TitleCameraObject.h" />
     <ClInclude Include="TitleGroundObject.h" />
     <ClInclude Include="TitlePlayerObject.h" />

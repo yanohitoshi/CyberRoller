@@ -23,6 +23,8 @@ enum SceneState
 {
 	// タイトルシーン
 	TITLE_SCENE,
+	// stage選択シーン
+	STAGE_SELECT_SCENE,
 	// 第一ステージシーン
 	FIRST_SATGE_SCENE,
 	// 第二ステージシーン

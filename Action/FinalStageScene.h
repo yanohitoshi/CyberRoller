@@ -31,7 +31,7 @@ public:
 	@param	“ü—Íî•ñ
 	@return ƒV[ƒ“‚Ì‘JˆÚ‚ğ”»’è‚·‚é‚½‚ß‚ÌenumŒ^‚ÌSceneState
 	*/
-	SceneState Update(const InputState& state)override;
+	SceneState Update(const InputState& _inputState)override;
 
 private:
 

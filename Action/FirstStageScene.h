@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
-
 /*
 @file FirstStageScene.h
 @brief 第一ステージ(チュートリアル)の初期化と生成、次のシーンへのシーン遷移を行う
@@ -30,9 +29,8 @@ public:
 	@param	入力情報
 	@return シーンの遷移を判定するためのenum型のSceneState
 	*/
-	SceneState Update(const InputState& state)override;
+	SceneState Update(const InputState& _inputState)override;
 
 private:
-	//class SkyBoxObject* skyBox;
-};
 
+};

@@ -5,8 +5,8 @@
 #include "GameObject.h"
 
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾
-class SpriteComponent;
 class SkyBoxObject;
+class SpriteComponent;
 
 /*
 @file TitleUI.h

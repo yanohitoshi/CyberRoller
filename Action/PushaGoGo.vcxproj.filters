@@ -170,9 +170,6 @@
     <ClCompile Include="HDRRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="TitleBackGroundSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
     <ClCompile Include="WarningSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
@@ -659,6 +656,15 @@
     <ClCompile Include="FallExplosionObjectStateRespawn.cpp">
       <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
     </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectSceneUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSprite.cpp">
+      <Filter>UI\SpriteUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -837,9 +843,6 @@
     </ClInclude>
     <ClInclude Include="HDRRenderer.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleBackGroundSprite.h">
-      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
     <ClInclude Include="WarningSprite.h">
       <Filter>UI\SpriteUI</Filter>
@@ -1294,9 +1297,6 @@
     <ClInclude Include="FifthStageScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="FourthStageScene.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
     <ClInclude Include="FifthStageUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
@@ -1323,6 +1323,18 @@
     </ClInclude>
     <ClInclude Include="ExplosionObjectStateRespawn.h">
       <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectSceneUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSprite.h">
+      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
