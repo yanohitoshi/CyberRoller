@@ -1,6 +1,6 @@
 #include "ExplosionObjectStateIdle.h"
 
-ExplosionObjectState ExplosionObjectStateIdle::Update(ExplosionObject* _owner, float _deltaTime)
+ExplosionObjectState ExplosionObjectStateIdle::Update(ExplosionObjectBase* _owner, float _deltaTime)
 {
 
 	if (nowScaleZ > 0.5f)
@@ -17,7 +17,7 @@ ExplosionObjectState ExplosionObjectStateIdle::Update(ExplosionObject* _owner, f
 	return state;
 }
 
-void ExplosionObjectStateIdle::Enter(ExplosionObject* _owner, float _deltaTime)
+void ExplosionObjectStateIdle::Enter(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	state = ExplosionObjectState::IDLE;
 	rate = 0.0f;

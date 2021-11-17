@@ -1,7 +1,7 @@
 #include "ExplosionObjectStateExplosion.h"
 #include "MeshComponent.h"
 
-ExplosionObjectState ExplosionObjectStateExplosion::Update(ExplosionObject* _owner, float _deltaTime)
+ExplosionObjectState ExplosionObjectStateExplosion::Update(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	++explosionCount;
 	if (explosionCount >= 10)
@@ -12,7 +12,7 @@ ExplosionObjectState ExplosionObjectStateExplosion::Update(ExplosionObject* _own
 	return state;
 }
 
-void ExplosionObjectStateExplosion::Enter(ExplosionObject* _owner, float _deltaTime)
+void ExplosionObjectStateExplosion::Enter(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	state = ExplosionObjectState::EXPLOSION;
 	explosionCount = 0;

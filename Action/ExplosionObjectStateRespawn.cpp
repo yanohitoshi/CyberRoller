@@ -1,7 +1,7 @@
 #include "ExplosionObjectStateRespawn.h"
 #include "MeshComponent.h"
 
-ExplosionObjectState ExplosionObjectStateRespawn::Update(ExplosionObject* _owner, float _deltaTime)
+ExplosionObjectState ExplosionObjectStateRespawn::Update(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	++respawnCount;
 
@@ -19,7 +19,7 @@ ExplosionObjectState ExplosionObjectStateRespawn::Update(ExplosionObject* _owner
 	return state;
 }
 
-void ExplosionObjectStateRespawn::Enter(ExplosionObject* _owner, float _deltaTime)
+void ExplosionObjectStateRespawn::Enter(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	state = ExplosionObjectState::RESPAWN;
 	firstPosition = _owner->GetFirstPosition();

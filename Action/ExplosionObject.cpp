@@ -12,7 +12,7 @@
 #include "ExplosionArea.h"
 
 ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag)
-	: GameObject(false, _objectTag)
+	: ExplosionObjectBase(_objectTag)
 {
 	//GameObjectメンバ変数の初期化
 	velocity.Zero;
@@ -105,32 +105,6 @@ void ExplosionObject::UpdateGameObject(float _deltaTime)
 		}
 		nowState = nextState;
 	}
-}
-
-void ExplosionObject::AddStatePoolMap(ExplosionObjectStateBase* _state, ExplosionObjectState _stateTag)
-{
-	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
-	auto stateMaps = statePoolMap.find(_stateTag);
-
-	//あるとき
-	if (stateMaps != statePoolMap.end())
-	{
-		return;
-	}
-	else //ないとき
-	{
-		statePoolMap[_stateTag] = _state;
-	}
-}
-
-void ExplosionObject::RemoveStatePoolMap(ExplosionObjectState _stateTag)
-{
-	delete statePoolMap[_stateTag];
-}
-
-void ExplosionObject::ClearStatePoolMap()
-{
-	statePoolMap.clear();
 }
 
 void ExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)

@@ -6,7 +6,7 @@
 #include "ParticleEffectBase.h"
 
 // クラスの前方宣言
-class ExplosionObject;
+class ExplosionObjectBase;
 
 /*
 @file ExplosionObjectEffectManager.h
@@ -21,7 +21,7 @@ public:
     @fn コンストラクタ
     @param	_owner 親クラスのポインタ
     */
-    ExplosionObjectEffectManager(ExplosionObject* _owner);
+    ExplosionObjectEffectManager(ExplosionObjectBase* _owner);
 
     /*
     @fn デストラクタ
@@ -54,7 +54,7 @@ private:
     void GenerateExplosionEffectProcess();
 
     // 親のGameObject保存用変数
-    ExplosionObject* owner;
+    ExplosionObjectBase* owner;
 
     // particleの状態管理用変数
     ParticleState particleState;

@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ExplosionObjectStateBase.h"
 
+/*
+@file ExplosionObjectStateStartExplosion.h
+@brief 爆発するオブジェクトの爆発前の予備動作を管理するクラス
+*/
 class ExplosionObjectStateStartExplosion :
     public ExplosionObjectStateBase
 {
@@ -25,14 +32,14 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	@return PlayerState　更新終了時のステータスを返す
 	*/
-	ExplosionObjectState Update(ExplosionObject* _owner, float _deltaTime);
+	ExplosionObjectState Update(ExplosionObjectBase* _owner, float _deltaTime);
 
 	/*
 	@fn state変更時の初期化
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
-	void Enter(ExplosionObject* _owner, float _deltaTime);
+	void Enter(ExplosionObjectBase* _owner, float _deltaTime);
 
 private:
 	

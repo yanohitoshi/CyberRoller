@@ -21,6 +21,7 @@
 #include "CameraChangePoint.h"
 #include "ClearPointObject.h"
 #include "CollectionObject.h"
+#include "FallExplosionArea.h"
 
 /*
 @fn コンストラクタ
@@ -182,12 +183,12 @@ bool FinalStageCreator::OpenFile()
 		return true;
 	}
 
-	// ステージデータ読み込み (layer18) 
-	if (!readTiledJson(layer18StageData, "Assets/Config/finalStageMap.json", "layer18"))
-	{
-		printf("do'nt have Layer/layer18\n");
-		return true;
-	}
+	//// ステージデータ読み込み (layer18) 
+	//if (!readTiledJson(layer18StageData, "Assets/Config/finalStageMap.json", "layer18"))
+	//{
+	//	printf("do'nt have Layer/layer18\n");
+	//	return true;
+	//}
 
 	// ステージデータ読み込み (player) 
 	if (!readTiledJson(playerData, "Assets/Config/finalStageMap.json", "Player"))
@@ -572,15 +573,15 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 
 	case(TRACKING_ENEMY_PARTS):
 		// 追跡する敵の生成
-		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 1400.0f);
+		new TrackingEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 1200.0f);
+		break;
+
+	case(ENHANCED_ENEMY_PARTS):
+		new EnhancedEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 1800.0f);
 		break;
 
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
-		break;
-
-	case(ENHANCED_ENEMY_PARTS):
-		new EnhancedEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 2400.0f);
 		break;
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
@@ -590,6 +591,10 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new MoveEnemyObject(layer7Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer7Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
 	}
 }
 
@@ -816,18 +821,6 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		new JumpSwitchObject(layer12SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
 
-	//case(NORMAL_ENEMY_PARTS):
-	//	// 動かない敵の生成
-	//	new NormalEnemyObject(layer12Pos, Tag::ENEMY);
-	//	break;
-
-	//case(RIGHT_MOVE_ENEMY_PARTS):
-	//	// 移動情報をセット
-	//	SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-	//	// 敵オブジェクト生成
-	//	new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
-	//	break;
-
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer12SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
@@ -898,16 +891,6 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer14Pos, BlockSize, Tag::GROUND);
 		break;
-
-	//case(POWERCELLS_LIGHT_PARTS_RIGHT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, true);
-	//	break;
-
-	//case(POWERCELLS_LIGHT_PARTS_LEFT):
-	//	// パワーセルライトの生成
-	//	new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, false);
-	//	break;
 
 	case(FIRST_SWITCH_PARTS):
 		// 第一区画スイッチオブジェクト生成
@@ -1005,6 +988,10 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer17SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
+	case(58):
+		Vector3 area = Vector3(4000.0f, 4000.0f, 4000.0f);
+		new FallExplosionArea(layer17Pos, Tag::OTHER, area, 20);
+		break;
 	}
 }
 
@@ -1068,5 +1055,4 @@ void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 		new CameraChangePoint(aabbPos, aabb, offset, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
-
 }

@@ -1,6 +1,6 @@
 #include "ExplosionObjectStateBase.h"
 
-void ExplosionObjectStateBase::RotationProcess(ExplosionObject* _owner, float _angle, Vector3 _axis)
+void ExplosionObjectStateBase::RotationProcess(ExplosionObjectBase* _owner, float _angle, Vector3 _axis)
 {
 	//_axisŽ²‚ð_angle“x‰ñ“]‚³‚¹‚é
 	float radian = Math::ToRadians(_angle);
@@ -10,7 +10,7 @@ void ExplosionObjectStateBase::RotationProcess(ExplosionObject* _owner, float _a
 	_owner->SetRotation(target);
 }
 
-void ExplosionObjectStateBase::VerticalMove(ExplosionObject* _owner, float _deltaTime)
+void ExplosionObjectStateBase::VerticalMove(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
 

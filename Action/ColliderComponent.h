@@ -45,6 +45,8 @@ enum class PhysicsTag
 	NEEDLE_TAG,
 	// 爆弾
 	BOMB_TAG,
+	FALL_BOMB_TAG,
+	FALL_BOMB_AREA_TAG,
 	// リスポーンポイント
 	RESPOWN_TAG,
 	// 敵

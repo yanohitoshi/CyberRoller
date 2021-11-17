@@ -641,6 +641,24 @@
     <ClCompile Include="FourthStageUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionObjectBase.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionObjectStateFall.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FallExplosionObjectStateIdle.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FallExplosionObject.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FallExplosionArea.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FallExplosionObjectStateRespawn.cpp">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1195,9 +1213,6 @@
     <ClInclude Include="ExplosionObjectStateExplosion.h">
       <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
     </ClInclude>
-    <ClInclude Include="ExplosionObjectStateRespawn.h">
-      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
-    </ClInclude>
     <ClInclude Include="ExplosionObjectStateStartExplosion.h">
       <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
     </ClInclude>
@@ -1287,6 +1302,27 @@
     </ClInclude>
     <ClInclude Include="FourthStageUI.h">
       <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectBase.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateFall.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FallExplosionObjectStateIdle.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FallExplosionObject.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FallExplosionArea.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FallExplosionObjectStateRespawn.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\FallExposionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionObjectStateRespawn.h">
+      <Filter>GameObjects\StageObjects\ExplosionObject\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1508,6 +1544,9 @@
     </Filter>
     <Filter Include="GameObjects\EnemyObjects\EnhancedEnemyObject\State">
       <UniqueIdentifier>{db6cfae5-19e1-446e-a854-90770dc69f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\StageObjects\ExplosionObject\FallExposionObject">
+      <UniqueIdentifier>{1e123fa9-a5eb-4e56-8b27-ec2a716b782a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

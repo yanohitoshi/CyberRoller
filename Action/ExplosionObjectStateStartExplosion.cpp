@@ -1,7 +1,7 @@
 #include "ExplosionObjectStateStartExplosion.h"
 #include "MeshComponent.h"
 
-ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject* _owner, float _deltaTime)
+ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	++explosionStart;
 
@@ -33,7 +33,7 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObject*
 	return state;
 }
 
-void ExplosionObjectStateStartExplosion::Enter(ExplosionObject* _owner, float _deltaTime)
+void ExplosionObjectStateStartExplosion::Enter(ExplosionObjectBase* _owner, float _deltaTime)
 {
 	state = ExplosionObjectState::EXPLOSION_START;
 	meshComponent = _owner->GetMeshComponent();

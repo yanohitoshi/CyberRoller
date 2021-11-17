@@ -1,8 +1,8 @@
 #include "ExplosionArea.h"
-#include "ExplosionObject.h"
+#include "ExplosionObjectBase.h"
 #include "SphereCollider.h"
 
-ExplosionArea::ExplosionArea(const Tag& _objectTag, ExplosionObject* _owner)
+ExplosionArea::ExplosionArea(const Tag& _objectTag, ExplosionObjectBase* _owner)
 	:GameObject(false, _objectTag)
 	, owner(_owner)
 	, ExplosionAreaSize(300.0f)

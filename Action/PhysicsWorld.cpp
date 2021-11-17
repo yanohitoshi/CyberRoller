@@ -155,6 +155,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		// プレイヤーとエネミーの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::ENEMY_TAG]);
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::BOMB_TAG]);
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::FALL_BOMB_TAG]);
 
 		// プレイヤーとクリアポイントの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::CLEAR_POINT_TAG]);
@@ -170,9 +171,11 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 		// プレイヤーとスイッチの判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::SWITCH_TAG]);
+
+		IntersectCheckBox(_box, boxesMap[PhysicsTag::FALL_BOMB_AREA_TAG]);
 	}
 
-	if (_box->GetBoxTag() == PhysicsTag::BOMB_TAG)
+	if (_box->GetBoxTag() == PhysicsTag::BOMB_TAG || _box->GetBoxTag() == PhysicsTag::FALL_BOMB_TAG)
 	{
 		// 爆発物と地面の判定処理
 		IntersectCheckBox(_box, boxesMap[PhysicsTag::GROUND_TAG]);
@@ -342,6 +345,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		// 接地判定スフィアとジャンプスイッチの当たり判定
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::ENEMY_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::BOMB_TAG]);
+		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::FALL_BOMB_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::SWITCH_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::GROUND_TAG]);
 		IntersectCheckSphere(_sphere, boxesMap[PhysicsTag::MOVE_GROUND_TAG]);
@@ -449,5 +453,5 @@ void PhysicsWorld::DebugShowBox()
 	DrawBoxs(boxesMap[PhysicsTag::BREAK_GROUND_TAG], Color::LightPink);
 	DrawBoxs(boxesMap[PhysicsTag::CAMERA_MODE_CHANGE_AREA], Color::White);
 	DrawBoxs(boxesMap[PhysicsTag::ENEMY_TAG], Color::LightGreen);
-	//DrawBoxs(mEnemyAttackDecisionBoxes, Color::Yellow);
+	DrawBoxs(boxesMap[PhysicsTag::FALL_BOMB_AREA_TAG], Color::Yellow);
 }

@@ -285,7 +285,7 @@ PlayerObject::~PlayerObject()
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
 
-	if (isHitEnemy && nowState != PlayerState::PLAYER_STATE_DEAD)
+	if (isHitEnemy && nowState != PlayerState::PLAYER_STATE_DEAD && nowState != PlayerState::PLAYER_STATE_KNOCKBACK)
 	{
 		nextState = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}

@@ -1,8 +1,11 @@
 #pragma once
-#include "ExplosionObject.h"
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
+#include "ExplosionObjectBase.h"
 
+// クラスの前方宣言
 class MeshComponent;
-
 
 /*
 @enum　ExplosionObjectState 爆発物のステータス判別用
@@ -11,6 +14,8 @@ enum class ExplosionObjectState
 {
 	// 待機状態
 	IDLE = 0,
+	// 落下状態
+	FALL,
 	// 爆発状態
 	EXPLOSION,
 	// 点滅状態
@@ -21,7 +26,10 @@ enum class ExplosionObjectState
 	NUM,
 };
 
-
+/*
+@file ExplosionObjectStateBase.h
+@brief 爆発するオブジェクトの状態管理クラスの基底クラス
+*/
 class ExplosionObjectStateBase
 {
 public:
@@ -46,14 +54,14 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	@return PlayerState　更新終了時のステータスを返す
 	*/
-	virtual ExplosionObjectState Update(ExplosionObject* _owner, float _deltaTime) = 0;
+	virtual ExplosionObjectState Update(ExplosionObjectBase* _owner, float _deltaTime) = 0;
 
 	/*
 	@fn state変更時の初期化
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
-	virtual void Enter(ExplosionObject* _owner, float _deltaTime) {};
+	virtual void Enter(ExplosionObjectBase* _owner, float _deltaTime) {};
 
 	/*
 	@fn 前方ベクトルを用いてキャラクターを回転させる関数
@@ -61,9 +69,9 @@ public:
 	@param	_forward 今のフレームの前方ベクトル
 	@param	_tmpForward 前のフレームの前方ベクトル
 	*/
-	void RotationProcess(ExplosionObject* _owner,float _angle, Vector3 _axis);
+	void RotationProcess(ExplosionObjectBase* _owner,float _angle, Vector3 _axis);
 
-	void VerticalMove(ExplosionObject* _owner, float _deltaTime);
+	void VerticalMove(ExplosionObjectBase* _owner, float _deltaTime);
 
 protected:
 
@@ -88,6 +96,5 @@ protected:
 	const Vector3 EmissiveColorBlue;
 
 private:
-
 
 };

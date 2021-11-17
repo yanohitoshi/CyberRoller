@@ -63,6 +63,8 @@ enum Tag
 	WALL,
 	// ”š’e
 	BOMB,
+	// ~‚Á‚Ä‚­‚é”š’e
+	FALL_BOMB,
 	// ”š”­ƒGƒŠƒA
 	EXPLOSION_AREA,
 	// ž™

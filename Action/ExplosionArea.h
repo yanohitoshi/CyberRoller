@@ -1,10 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 // クラスの前方宣言
 class SphereCollider;
-class ExplosionObject;
+class ExplosionObjectBase;
 
+/*
+@file ExplosionArea.h
+@brief 爆破効果範囲を管理するクラス
+*/
 class ExplosionArea :
     public GameObject
 {
@@ -15,7 +22,7 @@ public:
 	@param	ポジション
 	@param	親クラスのポインタ
 	*/
-	ExplosionArea(const Tag& _objectTag, ExplosionObject* _owner);
+	ExplosionArea(const Tag& _objectTag, ExplosionObjectBase* _owner);
 
 	/*
 	@fn デストラクタ
@@ -42,7 +49,7 @@ private:
 	// 当たり判定を行うクラス
 	SphereCollider* sphereCollider;
 	// 親となるクラスのポインタ
-	ExplosionObject* owner;
+	ExplosionObjectBase* owner;
 
 	bool isActive;
 	// 攻撃エリアのサイズ

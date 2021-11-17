@@ -1,10 +1,10 @@
 #include "ExplosionObjectEffectManager.h"
-#include "ExplosionObject.h"
+#include "ExplosionObjectBase.h"
 #include "ExplosionEffect.h"
 #include "ExplosionRipplesEffect.h"
 #include "SplashExplosionEffect.h"
 
-ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObject* _owner)
+ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, MaxExplosionEffects(10)
 	, RandValue(250)

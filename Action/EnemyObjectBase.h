@@ -124,8 +124,6 @@ protected:
 	BoxCollider* boxCollider;
 	// エネミーのAABB構造体
 	AABB enemyBox;
-	//// 追跡するオブジェクトのポインタ
-	//GameObject* trackingObject;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数

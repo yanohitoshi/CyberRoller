@@ -529,6 +529,12 @@ public:// ゲッターセッター
 	bool GetIsDancing() { return isDancing; }
 
 	/*
+	@fn isDancingのgetter関数
+	@return isDancingを返す
+	*/
+	bool GetIsHitExplosion() { return isHitExplosion; }
+
+	/*
 	@fn jumpFrameCountのgetter関数
 	@return jumpFrameCountを返す
 	*/
