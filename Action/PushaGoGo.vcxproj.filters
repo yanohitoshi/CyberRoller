@@ -665,6 +665,15 @@
     <ClCompile Include="TitleSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
+    <ClCompile Include="StageSelectSprite.cpp">
+      <Filter>UI\SpriteUI\StageSelectSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectIconSprite.cpp">
+      <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="StageUnSelectIcon.cpp">
+      <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1336,6 +1345,15 @@
     <ClInclude Include="TitleSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
+    <ClInclude Include="StageSelectSprite.h">
+      <Filter>UI\SpriteUI\StageSelectSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectIconSprite.h">
+      <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUnSelectIcon.h">
+      <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1559,6 +1577,12 @@
     </Filter>
     <Filter Include="GameObjects\StageObjects\ExplosionObject\FallExposionObject">
       <UniqueIdentifier>{1e123fa9-a5eb-4e56-8b27-ec2a716b782a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\StageSelectSprite">
+      <UniqueIdentifier>{e1ba2000-f554-4e8c-bf54-d051cd6096b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\StageSelectIcon">
+      <UniqueIdentifier>{19a4e744-1c5d-4fca-88eb-8ff13c9d9e79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

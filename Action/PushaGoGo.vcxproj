@@ -224,8 +224,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerDeadEffectManager.cpp" />
     <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp" />
     <ClCompile Include="SplashExplosionEffect.cpp" />
+    <ClCompile Include="StageSelectIconSprite.cpp" />
     <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="StageSelectSceneUI.cpp" />
+    <ClCompile Include="StageSelectSprite.cpp" />
+    <ClCompile Include="StageUnSelectIcon.cpp" />
     <ClCompile Include="StartButtonSprite.cpp" />
     <ClCompile Include="TitleJumpAttackPlayerObject.cpp" />
     <ClCompile Include="TitlePlayerStateJumpAttack.cpp" />
@@ -463,8 +466,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerDeadEffectManager.h" />
     <ClInclude Include="PlayerObjectStateExplosionBlowAway.h" />
     <ClInclude Include="SplashExplosionEffect.h" />
+    <ClInclude Include="StageSelectIconSprite.h" />
     <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="StageSelectSceneUI.h" />
+    <ClInclude Include="StageSelectSprite.h" />
+    <ClInclude Include="StageUnSelectIcon.h" />
     <ClInclude Include="StartButtonSprite.h" />
     <ClInclude Include="TitleJumpAttackPlayerObject.h" />
     <ClInclude Include="TitlePlayerStateBase.h" />

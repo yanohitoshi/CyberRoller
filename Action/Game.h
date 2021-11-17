@@ -22,7 +22,7 @@ class BaseScene;
 enum SceneState
 {
 	// タイトルシーン
-	TITLE_SCENE,
+	TITLE_SCENE = 0,
 	// stage選択シーン
 	STAGE_SELECT_SCENE,
 	// 第一ステージシーン

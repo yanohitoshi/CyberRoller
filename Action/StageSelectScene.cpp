@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Renderer.h"
 #include "SkyBoxObject.h"
+#include "StageSelectSceneUI.h"
 
 StageSelectScene::StageSelectScene()
 {
@@ -17,6 +18,8 @@ StageSelectScene::StageSelectScene()
 	// シーンステータス初期化
 	state = SceneState::STAGE_SELECT_SCENE;
 	selectState = SceneState::FIRST_SATGE_SCENE;
+
+	new StageSelectSceneUI();
 }
 
 StageSelectScene::~StageSelectScene()
@@ -27,32 +30,12 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 {
 	if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed)
 	{
-		Select();
-		//selectState = FIRST_SATGE_SCENE;
+		SelectLeft();
 	}
 	else if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed)
 	{
-		Select();
-		//selectState = SECOND_SATGE_SCENE;
+		SelectRight();
 	}
-
-	switch (state)
-	{
-	case FIRST_SATGE_SCENE:
-		break;
-
-	case SECOND_SATGE_SCENE:
-		break;
-	case THIRD_SATGE_SCENE:
-		break;
-	case FOURTH_SATGE_SCENE:
-		break;
-	case FIFTH_SATGE_SCENE:
-		break;
-	case FINAL_STAGE_SCENE:
-		break;
-	}
-
 
 	// 選択されたら選ばれたシーンを返す
 	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
@@ -64,6 +47,62 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 	return state;
 }
 
-void StageSelectScene::Select(const InputState& _inputState)
+void StageSelectScene::SelectRight()
 {
+	switch (selectState)
+	{
+	case FIRST_SATGE_SCENE:
+		selectState = SceneState::SECOND_SATGE_SCENE;
+		break;
+
+	case SECOND_SATGE_SCENE:
+		selectState = SceneState::THIRD_SATGE_SCENE;
+		break;
+
+	case THIRD_SATGE_SCENE:
+		selectState = SceneState::FOURTH_SATGE_SCENE;
+		break;
+
+	case FOURTH_SATGE_SCENE:
+		selectState = SceneState::FIFTH_SATGE_SCENE;
+		break;
+
+	case FIFTH_SATGE_SCENE:
+		selectState = SceneState::FINAL_STAGE_SCENE;
+		break;
+
+	case FINAL_STAGE_SCENE:
+		selectState = SceneState::FINAL_STAGE_SCENE;
+		break;
+	}
+}
+
+void StageSelectScene::SelectLeft()
+{
+	switch (selectState)
+	{
+	case FIRST_SATGE_SCENE:
+		selectState = SceneState::FIRST_SATGE_SCENE;
+		break;
+
+	case SECOND_SATGE_SCENE:
+		selectState = SceneState::FIRST_SATGE_SCENE;
+		break;
+
+	case THIRD_SATGE_SCENE:
+		selectState = SceneState::SECOND_SATGE_SCENE;
+		break;
+
+	case FOURTH_SATGE_SCENE:
+		selectState = SceneState::THIRD_SATGE_SCENE;
+		break;
+
+	case FIFTH_SATGE_SCENE:
+		selectState = SceneState::FOURTH_SATGE_SCENE;
+		break;
+
+	case FINAL_STAGE_SCENE:
+		selectState = SceneState::FIFTH_SATGE_SCENE;
+		break;
+	}
 }

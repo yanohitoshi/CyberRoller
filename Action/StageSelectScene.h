@@ -28,7 +28,8 @@ public:
 
 private:
 
-	void Select(const InputState& _inputState);
+	void SelectRight();
+	void SelectLeft();
 
 	SceneState selectState;
 
