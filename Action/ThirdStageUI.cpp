@@ -1,6 +1,3 @@
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "ThirdStageUI.h"
 #include "Renderer.h"
 #include "CountDownFont.h"
@@ -15,11 +12,6 @@
 #include "CollectionUI.h"
 #include "CollectionObject.h"
 
-/*
-@fn コンストラクタ
-@brief  objectの生成を行う
-@param	_playerObject プレイヤークラスのポインタ
-*/
 ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(300)
@@ -47,19 +39,10 @@ ThirdStageUI::ThirdStageUI(PlayerObject* _playerObject, CollectionObject* _first
 	isChangePosition = false;
 }
 
-/*
-@fn デストラクタ
-@brief  objectの削除を行う
-*/
 ThirdStageUI::~ThirdStageUI()
 {
 }
 
-/*
-@fn アップデート関数
-@brief	更新処理を行う
-@param	_deltaTime 前のフレームでかかった時間
-*/
 void ThirdStageUI::UpdateGameObject(float _deltaTime)
 {
 	if (playerObject->GetClearFlag())

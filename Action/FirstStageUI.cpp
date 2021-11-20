@@ -6,31 +6,45 @@
 #include "CountDownFont.h"
 #include "JumpTutorialParticl.h"
 #include "MoveTutorialParticl.h"
-#include "JumpAttackTutorialParticl.h"
 #include "StartCountDownSprite.h"
+#include "TimeUpSprite.h"
+#include "ContinueSprite.h"
+#include "GameOverSprite.h"
+#include "PlayerObject.h"
 #include "SkyBoxObject.h"
+#include "CollectionUI.h"
+#include "CollectionObject.h"
 
 /*
 @fn コンストラクタ
 @brief  objectの生成を行う
+@param	_playerObject プレイヤークラスのポインタ
 */
-FirstStageUI::FirstStageUI()
+FirstStageUI::FirstStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
-	, JumpTutorialPosition(Vector3(3700.0f, -1000.0f, 700.0f))
-	, MoveTutorialPosition(Vector3(3700.0f, -2200.0f, 700.0f))
-	, JumpAttackTutorialPosition(Vector3(9200.0f, -2000.0f, 1200.0f))
+	, SceneTime(200)
 {
-	// ジャンプチュートリアル用Particl
-	new JumpTutorialParticl(JumpTutorialPosition);
-	// 移動チュートリアル用Particl
-	new MoveTutorialParticl(MoveTutorialPosition);
-	// ジャンプ攻撃チュートリアル用Particl
-	new JumpAttackTutorialParticl(JumpAttackTutorialPosition);
-
-	// プレイヤーを動かすことができるようにするためのフラグ
-	CountDownFont::SetCountStartFlag(true);
+	// カウントダウン
+	new CountDownFont(SceneTime);
+	// start時のカウントダウン
+	new StartCountDownSprite();
+	// タイムアップ時のsprite
+	new TimeUpSprite();
+	// コンティニュー選択時のsprite
+	new ContinueSprite();
+	// GameOver時のsprite
+	new GameOverSprite();
 	// スカイボックスを生成
 	skyBox = new SkyBoxObject(false, Tag::UI);
+
+	playerObject = _playerObject;
+
+	firstCollectionUI = new CollectionUI(_first);
+	secondCollectionUI = new CollectionUI(_second);
+	thirdCollectionUI = new CollectionUI(_third);
+
+	clearCount = 0;
+	isChangePosition = false;
 }
 
 /*
@@ -39,8 +53,6 @@ FirstStageUI::FirstStageUI()
 */
 FirstStageUI::~FirstStageUI()
 {
-	// プレイヤーを動かすことができるようにするためのフラグの初期化
-	CountDownFont::SetCountStartFlag(false);
 }
 
 /*
@@ -50,4 +62,42 @@ FirstStageUI::~FirstStageUI()
 */
 void FirstStageUI::UpdateGameObject(float _deltaTime)
 {
+	if (playerObject->GetClearFlag())
+	{
+		++clearCount;
+
+		if (!isChangePosition)
+		{
+			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, -200.0f, 0.0f));
+			firstCollectionUI->ResetDraw();
+
+			secondCollectionUI->SetDrawPosition(Vector3(0.0f, -200.0f, 0.0f));
+			secondCollectionUI->ResetDraw();
+
+			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, -200.0f, 0.0f));
+			thirdCollectionUI->ResetDraw();
+			isChangePosition = true;
+		}
+
+		if (clearCount >= 120)
+		{
+			firstCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 180)
+		{
+			secondCollectionUI->DrawInGame();
+		}
+
+		if (clearCount >= 240)
+		{
+			thirdCollectionUI->DrawInGame();
+		}
+	}
+	else
+	{
+		firstCollectionUI->DrawInGame();
+		secondCollectionUI->DrawInGame();
+		thirdCollectionUI->DrawInGame();
+	}
 }

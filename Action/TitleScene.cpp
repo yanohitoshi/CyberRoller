@@ -76,7 +76,7 @@ SceneState TitleScene::Update(const InputState& _inputState)
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
 		leftTrigger == 1.0f || rightTrigger == 1.0f)
 	{
-		state = SceneState::FIRST_SATGE_SCENE;
+		state = SceneState::TUTORIAL_SATGE_SCENE;
 	}
 
 	// 更新後のシーンステータスを返す

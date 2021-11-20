@@ -5,11 +5,11 @@
 #include "StageCreatorBase.h"
 
 /*
-@file SecondStageCreator.h
-@brief SecondStageを生成する
+@file ThirdStageCreator.h
+@brief ThirdStageを生成する
 */
 class SecondStageCreator 
-	: public StageCreatorBase
+    : public StageCreatorBase
 {
 public:
 	/*
@@ -25,6 +25,7 @@ public:
 	@brief マップデータの削除を行う
 	*/
 	~SecondStageCreator()override;
+
 	/*
 	@fn ファイルを開く
 	@return 成功か否か
@@ -42,15 +43,6 @@ public:
 	void CreateStage();
 
 private:
-
-	// 動く床のナンバー列挙
-	// 現在の仕様上こういった形でしか列挙出来ませんでした。
-	// 改善案模索中です
-	enum SecondStageMoveGroundNumber
-	{
-		SECOND_STAGE_LEFT_MOVE_GROUND = 7,
-		SECOND_STAGE_RIGHT_MOVE_GROUND = 5,
-	};
 
 	/*
 	@fn レイヤー1クリエイター
@@ -148,22 +140,6 @@ private:
 	void CreateLayer12(int _indexX, int _indexY);
 
 	/*
-	@fn レイヤー13クリエイター
-	@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer13(int _indexX, int _indexY);
-
-	/*
-	@fn レイヤー14クリエイター
-	@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateLayer14(int _indexX, int _indexY);
-
-	/*
 	@fn カメラモード変更ポイント生成
 	@brief  カメラモード変更ポイントの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
@@ -171,12 +147,12 @@ private:
 	*/
 	void CreateCameraDirecting(int _indexX, int _indexY);
 
-	// 第二ステージのレイヤーの最大定数
+	// 第三ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
-
-	//第二ステージデータ
+	
+	// 第三ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
@@ -190,8 +166,6 @@ private:
 	std::vector<std::vector<int>> layer10StageData;
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
-	std::vector<std::vector<int>> layer13StageData;
-	std::vector<std::vector<int>> layer14StageData;
 
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;

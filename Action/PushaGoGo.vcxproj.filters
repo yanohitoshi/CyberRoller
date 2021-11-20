@@ -116,29 +116,11 @@
     <ClCompile Include="StartCountDownSprite.cpp">
       <Filter>UI\SpriteUI</Filter>
     </ClCompile>
-    <ClCompile Include="FirstStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
     <ClCompile Include="StageCreatorBase.cpp">
       <Filter>StageCreator</Filter>
     </ClCompile>
     <ClCompile Include="TitleStageCreator.cpp">
       <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdStageScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="FinalStageScene.cpp">
       <Filter>Scene</Filter>
@@ -242,19 +224,10 @@
     <ClCompile Include="FinalStageUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
-    <ClCompile Include="FirstStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverSceneUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
     <ClCompile Include="ResultSceneUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdStageUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
     <ClCompile Include="TitleSceneUI.cpp">
@@ -620,24 +593,6 @@
     <ClCompile Include="EnemyFlinchEffectManager.cpp">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="FifthStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="FourthStageCreator.cpp">
-      <Filter>StageCreator</Filter>
-    </ClCompile>
-    <ClCompile Include="FifthStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FourthStageScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="FifthStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
-    <ClCompile Include="FourthStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
     <ClCompile Include="ExplosionObjectBase.cpp">
       <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
     </ClCompile>
@@ -673,6 +628,51 @@
     </ClCompile>
     <ClCompile Include="StageUnSelectIcon.cpp">
       <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="ForthStageCreator.cpp">
+      <Filter>StageCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ForthStageUI.cpp">
+      <Filter>UI\SceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -799,29 +799,11 @@
     <ClInclude Include="StartCountDownSprite.h">
       <Filter>UI\SpriteUI</Filter>
     </ClInclude>
-    <ClInclude Include="FirstStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="StageCreatorBase.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstStageCreator.h">
       <Filter>StageCreator</Filter>
     </ClInclude>
     <ClInclude Include="TitleStageCreator.h">
       <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdStageScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="FinalStageScene.h">
       <Filter>Scene</Filter>
@@ -922,19 +904,10 @@
     <ClInclude Include="FinalStageUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
-    <ClInclude Include="FirstStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverSceneUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
     <ClInclude Include="ResultSceneUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdStageUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
     <ClInclude Include="TitleSceneUI.h">
@@ -1297,21 +1270,6 @@
     <ClInclude Include="EnemyFlinchEffectManager.h">
       <Filter>GameObjects\Effect\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="FifthStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="FourthStageCreator.h">
-      <Filter>StageCreator</Filter>
-    </ClInclude>
-    <ClInclude Include="FifthStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="FifthStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
-    <ClInclude Include="FourthStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
     <ClInclude Include="ExplosionObjectBase.h">
       <Filter>GameObjects\StageObjects\ExplosionObject</Filter>
     </ClInclude>
@@ -1336,9 +1294,6 @@
     <ClInclude Include="StageSelectScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="FourthStageScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="StageSelectSceneUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
@@ -1353,6 +1308,51 @@
     </ClInclude>
     <ClInclude Include="StageUnSelectIcon.h">
       <Filter>UI\SpriteUI\StageSelectIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="ForthStageCreator.h">
+      <Filter>StageCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ForthStageUI.h">
+      <Filter>UI\SceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

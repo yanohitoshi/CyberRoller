@@ -193,12 +193,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FallExplosionArea.cpp" />
     <ClCompile Include="FallExplosionObject.cpp" />
     <ClCompile Include="FallExplosionObjectStateRespawn.cpp" />
-    <ClCompile Include="FifthStageCreator.cpp" />
-    <ClCompile Include="FifthStageScene.cpp" />
-    <ClCompile Include="FifthStageUI.cpp" />
-    <ClCompile Include="FourthStageCreator.cpp" />
+    <ClCompile Include="ForthStageCreator.cpp" />
     <ClCompile Include="FourthStageScene.cpp" />
-    <ClCompile Include="FourthStageUI.cpp" />
+    <ClCompile Include="ForthStageUI.cpp" />
+    <ClCompile Include="ThirdStageCreator.cpp" />
+    <ClCompile Include="ThirdStageScene.cpp" />
+    <ClCompile Include="ThirdStageUI.cpp" />
     <ClCompile Include="GeometryInstanceComponent.cpp" />
     <ClCompile Include="GeometryInstanceManager.cpp" />
     <ClCompile Include="GroundObject.cpp" />
@@ -253,7 +253,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FinalStageCreator.cpp" />
     <ClCompile Include="FinalStageScene.cpp" />
     <ClCompile Include="FinalStageUI.cpp" />
-    <ClCompile Include="FirstStageCreator.cpp" />
+    <ClCompile Include="TutorialStageCreator.cpp" />
     <ClCompile Include="GameClearSprite.cpp" />
     <ClCompile Include="GameOverSprite.cpp" />
     <ClCompile Include="HDRRenderer.cpp" />
@@ -303,9 +303,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="ResultSceneUI.cpp" />
     <ClCompile Include="ResultSwitchBaseObject.cpp" />
     <ClCompile Include="ResultSwitchObject.cpp" />
-    <ClCompile Include="SecondStageCreator.cpp" />
-    <ClCompile Include="SecondStageScene.cpp" />
-    <ClCompile Include="SecondStageUI.cpp" />
+    <ClCompile Include="FirstStageCreator.cpp" />
+    <ClCompile Include="FirstStageScene.cpp" />
+    <ClCompile Include="FirstStageUI.cpp" />
     <ClCompile Include="SkyBoxObject.cpp" />
     <ClCompile Include="StageCreatorBase.cpp" />
     <ClCompile Include="StartCountDownSprite.cpp" />
@@ -341,8 +341,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayerSandSmokeEffect.cpp" />
     <ClCompile Include="PlayerSandSmokeMakeManager.cpp" />
-    <ClCompile Include="FirstStageScene.cpp" />
-    <ClCompile Include="FirstStageUI.cpp" />
+    <ClCompile Include="TutorialStageScene.cpp" />
+    <ClCompile Include="TutorialStageUI.cpp" />
     <ClCompile Include="RapidJsonHelper.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ClearSceneUI.cpp" />
@@ -362,9 +362,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClCompile>
     <ClCompile Include="SwitchParticleEffect.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="ThirdStageCreator.cpp" />
-    <ClCompile Include="ThirdStageScene.cpp" />
-    <ClCompile Include="ThirdStageUI.cpp" />
+    <ClCompile Include="SecondStageCreator.cpp" />
+    <ClCompile Include="SecondStageScene.cpp" />
+    <ClCompile Include="SecondStageUI.cpp" />
     <ClCompile Include="TimeSprite.cpp" />
     <ClCompile Include="ContinueSprite.cpp" />
     <ClCompile Include="TimeUpSprite.cpp" />
@@ -435,12 +435,12 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FallExplosionArea.h" />
     <ClInclude Include="FallExplosionObject.h" />
     <ClInclude Include="FallExplosionObjectStateRespawn.h" />
-    <ClInclude Include="FifthStageCreator.h" />
-    <ClInclude Include="FifthStageScene.h" />
-    <ClInclude Include="FifthStageUI.h" />
-    <ClInclude Include="FourthStageCreator.h" />
+    <ClInclude Include="ForthStageCreator.h" />
     <ClInclude Include="FourthStageScene.h" />
-    <ClInclude Include="FourthStageUI.h" />
+    <ClInclude Include="ForthStageUI.h" />
+    <ClInclude Include="ThirdStageCreator.h" />
+    <ClInclude Include="ThirdStageScene.h" />
+    <ClInclude Include="ThirdStageUI.h" />
     <ClInclude Include="GeometryInstanceComponent.h" />
     <ClInclude Include="GeometryInstanceManager.h" />
     <ClInclude Include="GroundObject.h" />
@@ -496,7 +496,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FinalStageCreator.h" />
     <ClInclude Include="FinalStageScene.h" />
     <ClInclude Include="FinalStageUI.h" />
-    <ClInclude Include="FirstStageCreator.h" />
+    <ClInclude Include="TutorialStageCreator.h" />
     <ClInclude Include="GameClearSprite.h" />
     <ClInclude Include="GameOverSprite.h" />
     <ClInclude Include="HDRRenderer.h" />
@@ -546,9 +546,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="ResultSceneUI.h" />
     <ClInclude Include="ResultSwitchBaseObject.h" />
     <ClInclude Include="ResultSwitchObject.h" />
-    <ClInclude Include="SecondStageCreator.h" />
-    <ClInclude Include="SecondStageScene.h" />
-    <ClInclude Include="SecondStageUI.h" />
+    <ClInclude Include="FirstStageCreator.h" />
+    <ClInclude Include="FirstStageScene.h" />
+    <ClInclude Include="FirstStageUI.h" />
     <ClInclude Include="SkyBoxObject.h" />
     <ClInclude Include="StageCreatorBase.h" />
     <ClInclude Include="StartCountDownSprite.h" />
@@ -584,8 +584,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayerSandSmokeEffect.h" />
     <ClInclude Include="PlayerSandSmokeMakeManager.h" />
-    <ClInclude Include="FirstStageScene.h" />
-    <ClInclude Include="FirstStageUI.h" />
+    <ClInclude Include="TutorialStageScene.h" />
+    <ClInclude Include="TutorialStageUI.h" />
     <ClInclude Include="RapidJsonHelper.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ClearSceneUI.h" />
@@ -605,9 +605,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     </ClInclude>
     <ClInclude Include="SwitchParticleEffect.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="ThirdStageCreator.h" />
-    <ClInclude Include="ThirdStageScene.h" />
-    <ClInclude Include="ThirdStageUI.h" />
+    <ClInclude Include="SecondStageCreator.h" />
+    <ClInclude Include="SecondStageScene.h" />
+    <ClInclude Include="SecondStageUI.h" />
     <ClInclude Include="TimeSprite.h" />
     <ClInclude Include="ContinueSprite.h" />
     <ClInclude Include="TimeUpSprite.h" />

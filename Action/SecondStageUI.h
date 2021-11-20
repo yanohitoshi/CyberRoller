@@ -8,20 +8,20 @@ class CollectionObject;
 class CollectionUI;
 
 /*
-@file SecondStageUI.h
-@brief SecondStageのUI表示を行う
+@file ThirdStageUI.h
+@brief ThirdStageのUI表示を行う
 */
 class SecondStageUI :
     public GameObject
 {
 public:
-    
+
     /*
     @fn コンストラクタ
     @brief  objectの生成を行う
     @param	_playerObject プレイヤークラスのポインタ
     */
-    SecondStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
+    SecondStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
     
     /*
     @fn デストラクタ
@@ -35,6 +35,7 @@ public:
     @param	_deltaTime 前のフレームでかかった時間
     */
     void UpdateGameObject(float _deltaTime)override;
+
 
 private:
 

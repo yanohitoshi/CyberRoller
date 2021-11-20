@@ -20,9 +20,9 @@
 @brief  objectの生成を行う
 @param	_playerObject プレイヤークラスのポインタ
 */
-SecondStageUI::SecondStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
+SecondStageUI::SecondStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
-	, SceneTime(200)
+	, SceneTime(300)
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);

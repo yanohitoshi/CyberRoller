@@ -2,6 +2,7 @@
 #include "GameObject.h"
 
 class SpriteComponent;
+class StageSelectSceneUI;
 
 class StageSelectIconSprite :
     public GameObject
@@ -11,7 +12,7 @@ public:
     /*
     @fn コンストラクタ
     */
-    StageSelectIconSprite(Vector3& _pos, const std::string& _spriteFileName);
+    StageSelectIconSprite(StageSelectSceneUI* _owner, SceneState _state, const std::string& _spriteFileName);
 
     /*
     @fn デストラクタ
@@ -30,5 +31,13 @@ private:
 
     // 背景用スプライトComponent
     SpriteComponent* sprite;
+    SceneState myState;
+
+    bool isVisible;
+
+public:
+    
+    void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
+
 };
 

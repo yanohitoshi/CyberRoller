@@ -2,7 +2,6 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "SecondStageScene.h"
-#include "BaseScene.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "InputSystem.h"
@@ -35,23 +34,23 @@ SecondStageScene::SecondStageScene()
 	state = SceneState::SECOND_SATGE_SCENE;
 
 	// クリエイター生成
-	SecondStageCreator* secondStageCreator = new SecondStageCreator(false,Tag::OTHER);
+	SecondStageCreator* thirdStageCreator = new SecondStageCreator(false, Tag::OTHER);
 
 	//ステージ情報ファイルを開く
-	if (!secondStageCreator->OpenFile())
+	if (!thirdStageCreator->OpenFile())
 	{
 		//プレイヤーの生成
-		playerObject = secondStageCreator->CreatePlayer();
+		playerObject = thirdStageCreator->CreatePlayer();
 		//ステージを生成する
-		secondStageCreator->CreateStage();
+		thirdStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = secondStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = secondStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = secondStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	CollectionObject* firstCollection = thirdStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = thirdStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = thirdStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
 	// シーンUIを追加
-	new SecondStageUI(playerObject,firstCollection,secondCollection,thirdCollection);
+	new SecondStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 }
 
 /*
@@ -80,10 +79,9 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	// クリアしたかのチェックとクリアカウントを数える処理関数
 	SceneClearCountProcess(playerObject);
 
-	// クリア状態かつクリアカウントが一定を超えたらシーンを切り替える
+	// クリアカウントが一定を超えたらシーンを切り替える
 	if (clearCount >= ClearToChangeSceneTime)
 	{
-		// 次のシーンに変更
 		state = SceneState::THIRD_SATGE_SCENE;
 	}
 
@@ -94,7 +92,7 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 		ContinueSelectProcess(_inputState);
 	}
 
-	// コンテニューかゲームオーバーが選択されたら
+	 // コンテニューかゲームオーバーが選択されたら
 	if (isContinueFlag == true || endFlag == true)
 	{
 		// コンティニュー選択時のライト遷移処理

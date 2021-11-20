@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 // クラスの前方宣言
+class StageSelectScene;
 class SkyBoxObject;
 class StageSelectIconSprite;
 class StageUnSelectIcon;
@@ -17,7 +18,7 @@ public:
     @fn コンストラクタ
     @brief  objectの生成を行う
     */
-    StageSelectSceneUI();
+    StageSelectSceneUI(StageSelectScene* _owner);
 
     /*
     @fn デストラクタ
@@ -76,10 +77,20 @@ private:
     // スカイボックスクラスのポインタ
     SkyBoxObject* skyBox;
 
+    StageSelectScene* owner;
+
     /*
     @brief 全てのspriteマップをクリアする
     */
     void ClearAllSpriteMap();
+
+    void CreatStageSelectSprite();
+
+    void SetFirstStageSprite(); 
+    void SetSecondStageSprite();
+    void SetThirdStageSprite();
+    void SetFourthStageSprite();
+    void SetFinalStageSprite();
 
     // StageSelectIconSpriteを格納するMap
     std::unordered_map<SceneState, StageSelectIconSprite*> selectIconSpriteMap;

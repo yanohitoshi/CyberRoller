@@ -1,17 +1,15 @@
 #pragma once
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "StageCreatorBase.h"
 
 /*
-@file ThirdStageCreator.h
-@brief ThirdStageを生成する
+@file FourthStageCreator.h
+@brief FourthStageを生成する
 */
-class ThirdStageCreator 
-    : public StageCreatorBase
+class ThirdStageCreator :
+	public StageCreatorBase
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@brief  objectの生成を行う
@@ -19,10 +17,10 @@ public:
 	@param	_objectTag オブジェクト判別用Tag
 	*/
 	ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag);
-	
+
 	/*
 	@fn デストラクタ
-	@brief マップデータの削除を行う
+	@brief  マップデータの削除を行う
 	*/
 	~ThirdStageCreator()override;
 
@@ -43,6 +41,19 @@ public:
 	void CreateStage();
 
 private:
+
+	// 押し出し板のナンバー列挙
+	enum FourthStagePushBoxNumber
+	{
+		// 左向きの押し出し板の列挙ナンバー
+		LEFT_PUSH_BOX_NUMBER_1 = 39,
+		LEFT_PUSH_BOX_NUMBER_2 = 37,
+
+		// 右向きの押し出し板の列挙ナンバー
+		RIGHT_PUSH_BOX_NUMBER_1 = 40,
+		RIGHT_PUSH_BOX_NUMBER_2 = 38,
+		RIGHT_PUSH_BOX_NUMBER_3 = 36,
+	};
 
 	/*
 	@fn レイヤー1クリエイター
@@ -140,6 +151,54 @@ private:
 	void CreateLayer12(int _indexX, int _indexY);
 
 	/*
+	@fn レイヤー13クリエイター
+	@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer13(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー14クリエイター
+	@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer14(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー15クリエイター
+	@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer15(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー16クリエイター
+	@brief  レイヤー16のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer16(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー17クリエイター
+	@brief  レイヤー17のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer17(int _indexX, int _indexY);
+
+	/*
+	@fn レイヤー18クリエイター
+	@brief  レイヤー18のマップデータに含まれるオブジェクトの生成を行う
+	@param	_indexX 検索するマップデータの添え字X
+	@param	_indexY 検索するマップデータの添え字Y
+	*/
+	void CreateLayer18(int _indexX, int _indexY);
+
+	/*
 	@fn カメラモード変更ポイント生成
 	@brief  カメラモード変更ポイントの生成を行う
 	@param	_indexX 検索するマップデータの添え字X
@@ -147,12 +206,13 @@ private:
 	*/
 	void CreateCameraDirecting(int _indexX, int _indexY);
 
-	// 第三ステージのレイヤーの最大定数
+	// 最終ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
+
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
-	
-	// 第三ステージデータ
+
+	// 最終ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;
@@ -166,6 +226,12 @@ private:
 	std::vector<std::vector<int>> layer10StageData;
 	std::vector<std::vector<int>> layer11StageData;
 	std::vector<std::vector<int>> layer12StageData;
+	std::vector<std::vector<int>> layer13StageData;
+	std::vector<std::vector<int>> layer14StageData;
+	std::vector<std::vector<int>> layer15StageData;
+	std::vector<std::vector<int>> layer16StageData;
+	std::vector<std::vector<int>> layer17StageData;
+	std::vector<std::vector<int>> layer18StageData;
 
 	//playerのデータ
 	std::vector<std::vector<int>> playerData;
@@ -176,4 +242,3 @@ private:
 	int sizeY;
 
 };
-

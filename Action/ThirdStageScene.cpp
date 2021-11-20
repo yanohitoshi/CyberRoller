@@ -1,6 +1,3 @@
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "ThirdStageScene.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
@@ -10,10 +7,6 @@
 #include "CountDownFont.h"
 #include "CollectionObject.h"
 
-/*
-@fn コンストラクタ
-@brief  Sceneの生成を行う
-*/
 ThirdStageScene::ThirdStageScene()
 {
 	// ライト情報初期化
@@ -34,39 +27,29 @@ ThirdStageScene::ThirdStageScene()
 	state = SceneState::THIRD_SATGE_SCENE;
 
 	// クリエイター生成
-	ThirdStageCreator* thirdStageCreator = new ThirdStageCreator(false, Tag::OTHER);
+	ThirdStageCreator* fourthStageCreator = new ThirdStageCreator(false, Tag::OTHER);
 
 	//ステージ情報ファイルを開く
-	if (!thirdStageCreator->OpenFile())
+	if (!fourthStageCreator->OpenFile())
 	{
 		//プレイヤーの生成
-		playerObject = thirdStageCreator->CreatePlayer();
+		playerObject = fourthStageCreator->CreatePlayer();
 		//ステージを生成する
-		thirdStageCreator->CreateStage();
+		fourthStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = thirdStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = thirdStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = thirdStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	CollectionObject* firstCollection = fourthStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = fourthStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = fourthStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
 	// シーンUIを追加
 	new ThirdStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 }
 
-/*
-@fn デストラクタ
-@brief  sceneの削除を行う
-*/
 ThirdStageScene::~ThirdStageScene()
 {
 }
 
-/*
-@fn　シーンのアップデート関数
-@brief	シーンの更新処理を行う
-@param	入力情報
-@return シーンの遷移を判定するためのenum型のSceneState
-*/
 SceneState ThirdStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする
@@ -92,7 +75,7 @@ SceneState ThirdStageScene::Update(const InputState& _inputState)
 		ContinueSelectProcess(_inputState);
 	}
 
-	 // コンテニューかゲームオーバーが選択されたら
+	// コンテニューかゲームオーバーが選択されたら
 	if (isContinueFlag == true || endFlag == true)
 	{
 		// コンティニュー選択時のライト遷移処理

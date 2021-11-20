@@ -26,15 +26,15 @@ enum SceneState
 	// stage選択シーン
 	STAGE_SELECT_SCENE,
 	// 第一ステージシーン
-	FIRST_SATGE_SCENE,
+	TUTORIAL_SATGE_SCENE,
 	// 第二ステージシーン
-	SECOND_SATGE_SCENE,
+	FIRST_SATGE_SCENE,
 	// 第三ステージシーン
-	THIRD_SATGE_SCENE,
+	SECOND_SATGE_SCENE,
 	// 第四ステージシーン
-	FOURTH_SATGE_SCENE,
+	THIRD_SATGE_SCENE,
 	// 第五ステージシーン
-	FIFTH_SATGE_SCENE,
+	FOURTH_SATGE_SCENE,
 	// 最終ステージシーン
 	FINAL_STAGE_SCENE,
 	// リザルトシーン

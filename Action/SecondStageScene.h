@@ -5,13 +5,14 @@
 #include "BaseScene.h"
 
 /*
-@file SecondStageScene.h
-@brief 第二ステージの初期化と生成、次のシーンへのシーン遷移を行う
+@file ThirdStageScene.h
+@brief 第三ステージの初期化と生成、次のシーンへのシーン遷移を行う
 */
 class SecondStageScene :
     public BaseScene
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@brief  Sceneの生成を行う

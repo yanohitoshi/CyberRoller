@@ -5,10 +5,11 @@
 #include "BaseScene.h"
 
 /*
-@file FirstStageScene.h
-@brief 第一ステージ(チュートリアル)の初期化と生成、次のシーンへのシーン遷移を行う
+@file SecondStageScene.h
+@brief 第二ステージの初期化と生成、次のシーンへのシーン遷移を行う
 */
-class FirstStageScene : public BaseScene
+class FirstStageScene :
+    public BaseScene
 {
 public:
 	/*
@@ -34,3 +35,4 @@ public:
 private:
 
 };
+

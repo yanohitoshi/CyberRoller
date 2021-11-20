@@ -2,22 +2,25 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ThirdStageCreator.h"
-#include "CameraChangePoint.h"
 #include "PlayerObject.h"
 #include "GroundObject.h"
+#include "BreakBlockObject.h"
 #include "LightObject.h"
-#include "MoveWallBlock.h"
 #include "MoveBlockObject.h"
+#include "MoveWallBlock.h"
 #include "PushBoxObject.h"
-#include "JumpSwitchObject.h"
-#include "RespawnPoint.h"
-#include "NeedlePanelObject.h"
 #include "SwitchBaseObject.h"
+#include "JumpSwitchObject.h"
+#include "ExplosionObject.h"
+#include "NeedlePanelObject.h"
+#include "RespawnPoint.h"
+#include "TrackingEnemyObject.h"
 #include "NormalEnemyObject.h"
 #include "MoveEnemyObject.h"
-#include "TrackingEnemyObject.h"
+#include "CameraChangePoint.h"
 #include "NextSceneObject.h"
 #include "CollectionObject.h"
+
 
 /*
 @fn コンストラクタ
@@ -27,7 +30,7 @@
 */
 ThirdStageCreator::ThirdStageCreator(bool _reUseGameObject, const Tag _objectTag)
 	: StageCreatorBase(_reUseGameObject, _objectTag)
-	, MaxLayerNumber(15)
+	, MaxLayerNumber(17)
 	, LightPointPositionZ(7000.0f)
 {
 }
@@ -51,9 +54,17 @@ ThirdStageCreator::~ThirdStageCreator()
 	layer10StageData.clear();
 	layer11StageData.clear();
 	layer12StageData.clear();
+	layer13StageData.clear();
+	layer14StageData.clear();
+	layer15StageData.clear();
+	layer16StageData.clear();
+	layer17StageData.clear();
+	layer18StageData.clear();
+
 	cameraDirectingData.clear();
-	// プレイヤーのマップデータ削除
+	//プレイヤーのマップデータ削除
 	playerData.clear();
+
 }
 
 /*
@@ -63,7 +74,7 @@ ThirdStageCreator::~ThirdStageCreator()
 bool ThirdStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(layer1StageData, "Assets/Config/thirdStageMap.json", "layer1"))
+	if (!readTiledJson(layer1StageData, "Assets/Config/fourthStageMap.json", "layer1"))
 	{
 		printf("do'nt have Layer/layer1\n");
 		return true;
@@ -74,82 +85,119 @@ bool ThirdStageCreator::OpenFile()
 	sizeY = layer1StageData.size();
 
 	// ステージデータ読み込み (layer2) 
-	if (!readTiledJson(layer2StageData, "Assets/Config/thirdStageMap.json", "layer2"))
+	if (!readTiledJson(layer2StageData, "Assets/Config/fourthStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer3) 
-	if (!readTiledJson(layer3StageData, "Assets/Config/thirdStageMap.json", "layer3"))
+	if (!readTiledJson(layer3StageData, "Assets/Config/fourthStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer4) 
-	if (!readTiledJson(layer4StageData, "Assets/Config/thirdStageMap.json", "layer4"))
+	if (!readTiledJson(layer4StageData, "Assets/Config/fourthStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer5) 
-	if (!readTiledJson(layer5StageData, "Assets/Config/thirdStageMap.json", "layer5"))
+	if (!readTiledJson(layer5StageData, "Assets/Config/fourthStageMap.json", "layer5"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer6) 
-	if (!readTiledJson(layer6StageData, "Assets/Config/thirdStageMap.json", "layer6"))
+	if (!readTiledJson(layer6StageData, "Assets/Config/fourthStageMap.json", "layer6"))
 	{
 		printf("do'nt have Layer/layer6\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer7) 
-	if (!readTiledJson(layer7StageData, "Assets/Config/thirdStageMap.json", "layer7"))
+	if (!readTiledJson(layer7StageData, "Assets/Config/fourthStageMap.json", "layer7"))
 	{
 		printf("do'nt have Layer/layer7\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer8) 
-	if (!readTiledJson(layer8StageData, "Assets/Config/thirdStageMap.json", "layer8"))
+	if (!readTiledJson(layer8StageData, "Assets/Config/fourthStageMap.json", "layer8"))
 	{
 		printf("do'nt have Layer/layer8\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer9) 
-	if (!readTiledJson(layer9StageData, "Assets/Config/thirdStageMap.json", "layer9"))
+	if (!readTiledJson(layer9StageData, "Assets/Config/fourthStageMap.json", "layer9"))
 	{
 		printf("do'nt have Layer/layer9\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer10) 
-	if (!readTiledJson(layer10StageData, "Assets/Config/thirdStageMap.json", "layer10"))
+	if (!readTiledJson(layer10StageData, "Assets/Config/fourthStageMap.json", "layer10"))
 	{
 		printf("do'nt have Layer/layer10\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer11) 
-	if (!readTiledJson(layer11StageData, "Assets/Config/thirdStageMap.json", "layer11"))
+	if (!readTiledJson(layer11StageData, "Assets/Config/fourthStageMap.json", "layer11"))
 	{
 		printf("do'nt have Layer/layer11\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer12) 
-	if (!readTiledJson(layer12StageData, "Assets/Config/thirdStageMap.json", "layer12"))
+	if (!readTiledJson(layer12StageData, "Assets/Config/fourthStageMap.json", "layer12"))
 	{
 		printf("do'nt have Layer/layer12\n");
 		return true;
 	}
+	// ステージデータ読み込み (layer13) 
+	if (!readTiledJson(layer13StageData, "Assets/Config/fourthStageMap.json", "layer13"))
+	{
+		printf("do'nt have Layer/layer13\n");
+		return true;
+	}
+	// ステージデータ読み込み (layer14) 
+	if (!readTiledJson(layer14StageData, "Assets/Config/fourthStageMap.json", "layer14"))
+	{
+		printf("do'nt have Layer/layer14\n");
+		return true;
+	}
+	// ステージデータ読み込み (layer15) 
+	if (!readTiledJson(layer15StageData, "Assets/Config/fourthStageMap.json", "layer15"))
+	{
+		printf("do'nt have Layer/layer15\n");
+		return true;
+	}
+	// ステージデータ読み込み (layer16) 
+	if (!readTiledJson(layer16StageData, "Assets/Config/fourthStageMap.json", "layer16"))
+	{
+		printf("do'nt have Layer/layer16\n");
+		return true;
+	}
+	// ステージデータ読み込み (layer17) 
+	if (!readTiledJson(layer17StageData, "Assets/Config/fourthStageMap.json", "layer17"))
+	{
+		printf("do'nt have Layer/layer17\n");
+		return true;
+	}
+
+	// ステージデータ読み込み (layer18) 
+	if (!readTiledJson(layer18StageData, "Assets/Config/fourthStageMap.json", "layer18"))
+	{
+		printf("do'nt have Layer/layer18\n");
+		return true;
+	}
 
 	// ステージデータ読み込み (player) 
-	if (!readTiledJson(playerData, "Assets/Config/thirdStageMap.json", "Player"))
+	if (!readTiledJson(playerData, "Assets/Config/fourthStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (CameraDirecting)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/thirdStageMap.json", "CameraDirecting"))
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/fourthStageMap.json", "CameraDirecting"))
 	{
 		printf("do'nt have Layer/CameraDirecting\n");
 		return true;
@@ -192,8 +240,19 @@ void ThirdStageCreator::CreateStage()
 			CreateLayer11(ix, iy);
 			// Layer12内を検索
 			CreateLayer12(ix, iy);
-			// カメラ演出ポイント生成
-			CreateCameraDirecting(ix, iy);
+			// Layer13内を検索
+			CreateLayer13(ix, iy);
+			// Layer14内を検索
+			CreateLayer14(ix, iy);
+			// Layer15内を検索
+			CreateLayer15(ix, iy);
+			// Layer16内を検索
+			CreateLayer16(ix, iy);
+			// Layer17内を検索
+			CreateLayer17(ix, iy);
+			// Layer18内を検索
+			CreateLayer18(ix, iy);
+			//CreateCameraDirecting(ix, iy);
 		}
 	}
 }
@@ -216,6 +275,7 @@ PlayerObject* ThirdStageCreator::CreatePlayer()
 
 	// プレイヤーオブジェクトのポインタを返す
 	return playerObject;
+
 }
 
 /*
@@ -298,6 +358,20 @@ void ThirdStageCreator::CreateLayer3(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer3Pos, BlockSize, Tag::GROUND);
 		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(300.0f, Vector3::NegUnitY, 400.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer3Pos, Tag::ENEMY, moveEnemyData);
+		break;
 	}
 }
 
@@ -315,17 +389,13 @@ void ThirdStageCreator::CreateLayer4(int _indexX, int _indexY)
 	Vector3 layer4Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[3]);
 	// レイヤー4のスイッチ系マップオブジェクトのポジション
 	Vector3 layer4SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[3] - ShiftSwitchPositionZ);
-	
+
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer4)
 	{
 	case(LAYER4_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
-		break;
-	case(RIGHT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1600.0f,Vector3::UnitY,400.0f,Vector3(600.0f, 1200.0f,100.0f),MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer4Pos,Tag::MOVE_GROUND,moveBlockData);
 		break;
 	}
 }
@@ -363,14 +433,65 @@ void ThirdStageCreator::CreateLayer5(int _indexX, int _indexY)
 		new LightObject(layer5Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
-	case(LEFT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1600.0f, Vector3::NegUnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer5Pos, Tag::MOVE_GROUND, moveBlockData);
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer5SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
+		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer5SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(FIRST_MOVE_WALL_PARTS):
+		// 第一区画の動く壁オブジェクト生成
+		new MoveWallBlock(Vector3(layer5Pos.x, layer5Pos.y + ShiftMoveWallY, layer5Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::FIRST_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer5Pos.x, layer5Pos.y, layer5Pos.z - BigMoveWallSize.z));
 		break;
 
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer5Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_1):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_2):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(RIGHT_PUSH_BOX_NUMBER_3):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, 1200.0f, 0.0f), Vector3::UnitY, 1400.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(LEFT_PUSH_BOX_NUMBER_1):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(LEFT_PUSH_BOX_NUMBER_2):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1450.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer5Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer5Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 	}
 }
@@ -398,9 +519,15 @@ void ThirdStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(RIGHT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1600.0f, Vector3::UnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
+	case(UP_MOVE_BLOCK_PARTS):
+		// 上下移動のblockを生成
+		SetMoveBlockData(600.0f, Vector3::UnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
 		new MoveBlockObject(layer6Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+
+	case(COLLECTION_SECOND):
+		// 2番目の収集物を生成
+		secondCollectionObject = new CollectionObject(layer6Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 	}
 }
@@ -428,9 +555,34 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new GroundObject(layer7Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(LEFT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1600.0f, Vector3::NegUnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer7Pos, Tag::MOVE_GROUND, moveBlockData);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer7Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer7Pos, LightObjectSize, Tag::GROUND, false);
+		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer7SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(SECOND_SWITCH_PARTS):
+		// 第二区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer7SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
+		break;
+
+	case(SECOND_MOVE_WALL_PARTS):
+		// 第二区画の動く壁オブジェクト生成
+		lastMoveWallBlock = new MoveWallBlock(Vector3(layer7Pos.x, layer7Pos.y + ShiftMoveWallY, layer7Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
+		break;
+
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -453,57 +605,19 @@ void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer8)
 	{
-	case(POWERCELLS_LIGHT_PARTS_RIGHT):
-		// パワーセルライトの生成
-		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, true);
+	case(LAYER8_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
+		break;
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
-	case(POWERCELLS_LIGHT_PARTS_LEFT):
-		// パワーセルライトの生成
-		new LightObject(layer8Pos, LightObjectSize, Tag::GROUND, false);
+	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
+		thirdCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 
-	case(FIRST_SWITCH_PARTS):
-		// 第一区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer8SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
-		break;
-
-	case(FIRST_MOVE_WALL_PARTS):
-		// 第一区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::FIRST_MOVE_WALL, MoveWallSpeed,
-			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - BigMoveWallSize.z));
-		break;
-
-	case(SECOND_SWITCH_PARTS):
-		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer8SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-		break;
-
-	case(SECOND_MOVE_WALL_PARTS):
-		// 第二区画の動く壁オブジェクト生成
-		lastMoveWallBlock = new MoveWallBlock(Vector3(layer8Pos.x, layer8Pos.y + ShiftMoveWallY, layer8Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::CLEAR_SCENE_MOVE_WALL, MoveWallSpeed,
-			Vector3(layer8Pos.x, layer8Pos.y, layer8Pos.z - BigMoveWallSize.z));
-		break;
-
-	case(RESPOWN_POINT_PARTS):
-		// リスポーンポイントオブジェクト生成
-		new RespawnPoint(layer8Pos, RespawnBox, Tag::RESPOWN_POINT);
-		break;
-
-	case(NEEDLE_PARTS):
-		// 二ードルオブジェクト生成
-		new NeedlePanelObject(layer8SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
-		break;
-
-	case(TRACKING_ENEMY_PARTS):
-		// 追跡する敵の生成
-		new TrackingEnemyObject(layer8Pos, Tag::ENEMY, 600.0f, 1400.0f);
-		break;
-
-	case(CLEAR_OBJECT_PARTS):
-		// ステージクリアオブジェクト生成
-		new NextSceneObject(layer8Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
-		break;
 	}
 }
 
@@ -525,33 +639,46 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer9)
 	{
-	case(NORMAL_ENEMY_PARTS):
-		// 動かない敵の生成
-		new NormalEnemyObject(layer9Pos, Tag::ENEMY);
+	case(LAYER9_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(RIGHT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, true);
 		break;
 
-	case(LEFT_MOVE_ENEMY_PARTS):
-		// 移動情報をセット
-		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
-		// 敵オブジェクト生成
-		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer9Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
-	case(RIGHT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1100.0f, Vector3::UnitY, 700.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer9Pos, Tag::MOVE_GROUND, moveBlockData);
+	case(SECOND_SWITCH_PARTS):
+		// 第二区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer9SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
 		break;
 
-	case(LEFT_MOVE_BLOCK_PARTS):
-		SetMoveBlockData(1100.0f, Vector3::NegUnitY, 700.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
-		new MoveBlockObject(layer9Pos, Tag::MOVE_GROUND, moveBlockData);
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer9SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer9SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(BOMB_PARTS):
+		new ExplosionObject(layer9Pos, Tag::BOMB);
 		break;
 	}
 }
@@ -579,19 +706,24 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 		new GroundObject(layer10Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(FIRST_SWITCH_PARTS):
-		// 第一区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer10SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
-		break;
-
-	case(SECOND_SWITCH_PARTS):
-		// 第二区画スイッチオブジェクト生成
-		new SwitchBaseObject(layer10SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
-		break;
-
 	case(JUMP_SWITCH_PARTS):
 		// ジャンプスイッチオブジェクト生成
 		new JumpSwitchObject(layer10SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer10Pos, Tag::ENEMY);
+		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer10Pos, Tag::ENEMY, moveEnemyData);
+		break;
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -614,12 +746,29 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer11)
 	{
-	case(COLLECTION_SECOND):
-		secondCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::SECOND);
+	case(LAYER11_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer11Pos, BlockSize, Tag::GROUND);
 		break;
 
-	case(COLLECTION_THIRD):
-		thirdCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer11Pos, LightObjectSize, Tag::GROUND, false);
+		break;
+
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer11Pos, Tag::ENEMY, moveEnemyData);
+		break;
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
@@ -642,33 +791,333 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (Layer12)
 	{
-	case(COLLECTION_FIRST):
-		firstCollectionObject = new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::FIRST);
+	case(LAYER12_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer12Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer12SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer12Pos, Tag::ENEMY);
+		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
+		break;
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
 }
 
 /*
-@fn カメラモード変更ポイント生成
-@brief  カメラモード変更ポイントの生成を行う
+@fn レイヤー13クリエイター
+@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
 @param	_indexX 検索するマップデータの添え字X
 @param	_indexY 検索するマップデータの添え字Y
 */
+void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer13 = layer13StageData[_indexY][_indexX];
+	// レイヤー13のマップオブジェクトのポジション
+	Vector3 layer13Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[12]);
+	// レイヤー13のスイッチ系マップオブジェクトのポジション
+	Vector3 layer13SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[12] - ShiftSwitchPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer13)
+	{
+	case(LAYER13_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer13Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer13SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer13Pos, Tag::ENEMY, 600.0f, 1400.0f);
+		break;
+
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer13Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+
+	case(BOMB_PARTS):
+		new ExplosionObject(layer13Pos, Tag::BOMB);
+		break;
+	}
+}
+
+/*
+@fn レイヤー14クリエイター
+@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
+void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer14 = layer14StageData[_indexY][_indexX];
+	// レイヤー14のマップオブジェクトのポジション
+	Vector3 layer14Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[13]);
+	// レイヤー14のスイッチ系マップオブジェクトのポジション
+	Vector3 layer14SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[13] - ShiftSwitchPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer14)
+	{
+	case(LAYER14_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer14Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer14Pos, LightObjectSize, Tag::GROUND, false);
+		break;
+
+	case(NEEDLE_PARTS):
+		// 二ードルオブジェクト生成
+		new NeedlePanelObject(layer14SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
+		break;
+
+	case(JUMP_SWITCH_PARTS):
+		// ジャンプスイッチオブジェクト生成
+		new JumpSwitchObject(layer14SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
+		break;
+
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, 1400.0f);
+		break;
+
+	case(35):
+		// プッシュボード固有のデータ構造体をセット
+		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
+		// ケースごとに方向の違う押し出しボックスの生成
+		new PushBoxObject(layer14Pos, BlockSize, Tag::PUSH_BOX, pushBoxData);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer14Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(COLLECTION_FIRST):
+		// 1番目の収集物を生成
+		firstCollectionObject = new CollectionObject(layer14Pos, Tag::COLLECTION, CollectionTag::FIRST);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer14Pos, Tag::ENEMY);
+		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer14Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+	}
+}
+
+/*
+@fn レイヤー15クリエイター
+@brief  レイヤー15のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
+void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer15 = layer15StageData[_indexY][_indexX];
+	// レイヤー8のマップオブジェクトのポジション
+	Vector3 layer15Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14]);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer15)
+	{
+	case(LAYER15_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer15Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer15Pos, Tag::ENEMY);
+		break;
+
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer15Pos, Tag::ENEMY, moveEnemyData);
+		break;
+
+	case(RIGHT_MOVE_BLOCK_PARTS):
+		SetMoveBlockData(1100.0f, Vector3::UnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+
+	case(LEFT_MOVE_BLOCK_PARTS):
+		SetMoveBlockData(1100.0f, Vector3::NegUnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
+		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+
+	case(BREAK_BLOCK_PARTS):
+		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
+		break;
+	}
+}
+
+/*
+@fn レイヤー16クリエイター
+@brief  レイヤー16のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
+void ThirdStageCreator::CreateLayer16(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer16 = layer16StageData[_indexY][_indexX];
+	// レイヤー16のマップオブジェクトのポジション
+	Vector3 layer16Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[15]);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer16)
+	{
+	case(LAYER16_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer16Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(NORMAL_ENEMY_PARTS):
+		// 動かない敵の生成
+		new NormalEnemyObject(layer16Pos, Tag::ENEMY);
+		break;
+
+	case(RIGHT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 600.0f, MoveEnemyTag::RIGHT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer16Pos, Tag::ENEMY, moveEnemyData);
+		break;
+	}
+}
+
+/*
+@fn レイヤー17クリエイター
+@brief  レイヤー17のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
+void ThirdStageCreator::CreateLayer17(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer17 = layer17StageData[_indexY][_indexX];
+	// レイヤー17のマップオブジェクトのポジション
+	Vector3 layer17Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[16]);
+	// レイヤー17のスイッチ系マップオブジェクトのポジション
+	Vector3 layer17SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[16] - ShiftSwitchPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer17)
+	{
+	case(LAYER17_BLOCK_PARTS):
+		// ブロックオブジェクト生成
+		new GroundObject(layer17Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(LEFT_MOVE_ENEMY_PARTS):
+		// 移動情報をセット
+		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 600.0f, MoveEnemyTag::LEFT_MOVE);
+		// 敵オブジェクト生成
+		new MoveEnemyObject(layer17Pos, Tag::ENEMY, moveEnemyData);
+		break;
+	}
+}
+
+void ThirdStageCreator::CreateLayer18(int _indexX, int _indexY)
+{
+	// ステージデータ配列からマップデータをもらう
+	const unsigned int Layer18 = layer18StageData[_indexY][_indexX];
+	// レイヤー16のマップオブジェクトのポジション
+	Vector3 layer18Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[17]);
+	// レイヤー17のスイッチ系マップオブジェクトのポジション
+	Vector3 layer18SwitchPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[17] - ShiftSwitchPositionZ);
+
+	// マップデータを見てそれぞれのオブジェクトを生成
+	switch (Layer18)
+	{
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer18Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer18Pos, LightObjectSize, Tag::GROUND, false);
+		break;
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new NextSceneObject(layer18Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
+		break;
+
+	case(SECOND_SWITCH_PARTS):
+		// 第二区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer18SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
+		break;
+
+	case(RESPOWN_POINT_PARTS):
+		// リスポーンポイントオブジェクト生成
+		new RespawnPoint(layer18Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(DOWN_MOVE_BLOCK_PARTS):
+		SetMoveBlockData(600.0f, Vector3::NegUnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
+		new MoveBlockObject(layer18Pos, Tag::MOVE_GROUND, moveBlockData);
+		break;
+	}
+}
+
 void ThirdStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
 	// レイヤー1のマップオブジェクトのポジション
 	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
-	AABB aabb = { Vector3(-5000.0f,-2600.0f,0.0f),Vector3(3600.0f,2600.0f,4000.0f) };
+	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
+	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
 
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (CameraDirectingData)
-	{
-	case(17):
-		Vector3 offset = Vector3(0.0f, 900.0f, 700.0f);
-		// ブロックオブジェクト生成
-		new CameraChangePoint(layer1Pos, aabb, offset,Tag::CAMERA_CHANGE_OBLIQUE);
-		break;
-	}
+
 }

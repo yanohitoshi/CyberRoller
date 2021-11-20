@@ -12,7 +12,7 @@ public:
     /*
     @fn コンストラクタ
     */
-    StageSelectSprite(StageSelectSceneUI* _owner,SceneState _state,Vector3& _pos,const std::string& _spriteFileName);
+    StageSelectSprite(StageSelectSceneUI* _owner,SceneState _state,const std::string& _spriteFileName);
 
     /*
     @fn デストラクタ
@@ -32,5 +32,13 @@ private:
     // 背景用スプライトComponent
     SpriteComponent* sprite;
     SceneState myState;
+
+    void MoveLeft();
+    void MoveRight();
+    bool isVisible;
+
+public:
+
+    void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
 };
 

@@ -1,16 +1,9 @@
 #pragma once
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 class CollectionObject;
 class CollectionUI;
 
-/*
-@file ThirdStageUI.h
-@brief ThirdStageのUI表示を行う
-*/
 class ThirdStageUI :
     public GameObject
 {
@@ -22,7 +15,7 @@ public:
     @param	_playerObject プレイヤークラスのポインタ
     */
     ThirdStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
-    
+
     /*
     @fn デストラクタ
     @brief  objectの削除を行う

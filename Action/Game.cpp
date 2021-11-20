@@ -14,11 +14,11 @@
 #include "BaseScene.h"
 #include "TitleScene.h"
 #include "StageSelectScene.h"
+#include "TutorialStageScene.h"
 #include "FirstStageScene.h"
 #include "SecondStageScene.h"
 #include "ThirdStageScene.h"
 #include "FourthStageScene.h"
-#include "FifthStageScene.h"
 #include "FinalStageScene.h"
 #include "ResultScene.h"
 #include "GameObject.h"
@@ -143,20 +143,10 @@ bool Game::Initialize()
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(200.0f, 0.0f, -500.0f), Vector3(200.0f,0.0f, 0.0f),Vector3::UnitY);
 	RENDERER->SetViewMatrix(v);
 
-	//// 最初のシーンステータスの初期化
-	//nowSceneState = TITLE_SCENE;
-	//// 最初のシーンを生成
-	//nowScene = new TitleScene();
-
-	//// 最初のシーンステータスの初期化
-	//nowSceneState = FINAL_STAGE_SCENE;
-	//// 最初のシーンを生成
-	//nowScene = new FinalStageScene();
-
 	// 最初のシーンステータスの初期化
-	nowSceneState = STAGE_SELECT_SCENE;
+	nowSceneState = TITLE_SCENE;
 	// 最初のシーンを生成
-	nowScene = new StageSelectScene();
+	nowScene = new TitleScene();
 
 	// 現在のシーンのステータスをレンダラーに渡す
 	RENDERER->SetNowSceneState(nowSceneState);
@@ -316,6 +306,12 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 	case SceneState::TITLE_SCENE:
 		nowScene = new TitleScene();
 		break;
+	case SceneState::TUTORIAL_SATGE_SCENE:
+		nowScene = new TutorialStageScene();
+		break;
+	case SceneState::STAGE_SELECT_SCENE:
+		nowScene = new StageSelectScene();
+		break;
 	case SceneState::FIRST_SATGE_SCENE:
 		nowScene = new FirstStageScene();
 		break;
@@ -327,9 +323,6 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 		break;
 	case SceneState::FOURTH_SATGE_SCENE:
 		nowScene = new FourthStageScene();
-		break;
-	case SceneState::FIFTH_SATGE_SCENE:
-		nowScene = new FifthStageScene();
 		break;
 	case SceneState::FINAL_STAGE_SCENE:
 		nowScene = new FinalStageScene();

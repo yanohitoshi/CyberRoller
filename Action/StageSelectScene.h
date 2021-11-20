@@ -30,8 +30,18 @@ private:
 
 	void SelectRight();
 	void SelectLeft();
+	void SelectAnalogStick(float _axis);
+
+	bool isAnalogStickSelect;
+	int selectCount;
 
 	SceneState selectState;
+
+	const float InputDeadSpace;
+
+public:
+
+	SceneState GetSelectState() { return selectState; }
 
 };
 

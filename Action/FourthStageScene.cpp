@@ -2,8 +2,8 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "InputSystem.h"
-#include "FourthStageCreator.h"
-#include "FourthStageUI.h"
+#include "ForthStageCreator.h"
+#include "ForthStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
 
@@ -27,23 +27,23 @@ FourthStageScene::FourthStageScene()
 	state = SceneState::FOURTH_SATGE_SCENE;
 
 	// クリエイター生成
-	FourthStageCreator* fourthStageCreator = new FourthStageCreator(false, Tag::OTHER);
+	ForthStageCreator* fifthStageCreator = new ForthStageCreator(false, Tag::OTHER);
 
 	//ステージ情報ファイルを開く
-	if (!fourthStageCreator->OpenFile())
+	if (!fifthStageCreator->OpenFile())
 	{
 		//プレイヤーの生成
-		playerObject = fourthStageCreator->CreatePlayer();
+		playerObject = fifthStageCreator->CreatePlayer();
 		//ステージを生成する
-		fourthStageCreator->CreateStage();
+		fifthStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = fourthStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = fourthStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = fourthStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	CollectionObject* firstCollection = fifthStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = fifthStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = fifthStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
-	// シーンUIを追加
-	new FourthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
+	//シーンUIを追加
+	new ForthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 }
 
 FourthStageScene::~FourthStageScene()
@@ -65,7 +65,7 @@ SceneState FourthStageScene::Update(const InputState& _inputState)
 	// クリアカウントが一定を超えたらシーンを切り替える
 	if (clearCount >= ClearToChangeSceneTime)
 	{
-		state = SceneState::FIFTH_SATGE_SCENE;
+		state = SceneState::FINAL_STAGE_SCENE;
 	}
 
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら
