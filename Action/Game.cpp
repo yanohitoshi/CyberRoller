@@ -140,13 +140,18 @@ bool Game::Initialize()
 	fps = new FPS();
 
 	// ビュー行列を生成してRendererに渡す
-	Matrix4 v = Matrix4::CreateLookAt(Vector3(200.0f, 0.0f, -500.0f), Vector3(200.0f,0.0f, 0.0f),Vector3::UnitY);
+	Matrix4 v = Matrix4::CreateLookAt(Vector3(-800.0f, 0.0f, -200.0f), Vector3(200.0f, 0.0f, 0.0f), Vector3::UnitZ);
 	RENDERER->SetViewMatrix(v);
 
+	//// 最初のシーンステータスの初期化
+	//nowSceneState = TITLE_SCENE;
+	//// 最初のシーンを生成
+	//nowScene = new TitleScene();
+
 	// 最初のシーンステータスの初期化
-	nowSceneState = TITLE_SCENE;
+	nowSceneState = STAGE_SELECT_SCENE;
 	// 最初のシーンを生成
-	nowScene = new TitleScene();
+	nowScene = new StageSelectScene();
 
 	// 現在のシーンのステータスをレンダラーに渡す
 	RENDERER->SetNowSceneState(nowSceneState);

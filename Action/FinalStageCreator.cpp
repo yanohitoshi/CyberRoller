@@ -460,9 +460,25 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
 		break;
 
+	case(FIRST_SWITCH_PARTS):
+		// 第一区画スイッチオブジェクト生成
+		new SwitchBaseObject(layer6SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
+		break;
+
+	case(FIRST_MOVE_WALL_PARTS):
+		// 第一区画の動く壁オブジェクト生成
+		new MoveWallBlock(Vector3(layer6Pos.x, layer6Pos.y + ShiftMoveWallY, layer6Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::FIRST_MOVE_WALL, MoveWallSpeed,
+			Vector3(layer6Pos.x, layer6Pos.y, layer6Pos.z - BigMoveWallSize.z));
+		break;
+
 	case(NORMAL_ENEMY_PARTS):
 		// 動かない敵の生成
 		new NormalEnemyObject(layer6Pos, Tag::ENEMY);
+		break;
+
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer6Pos, Tag::ENEMY, 600.0f, 1200.0f);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -554,12 +570,6 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		new SwitchBaseObject(layer7SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::FIRST_SWITCH);
 		break;
 
-	case(FIRST_MOVE_WALL_PARTS):
-		// 第一区画の動く壁オブジェクト生成
-		new MoveWallBlock(Vector3(layer7Pos.x, layer7Pos.y + ShiftMoveWallY, layer7Pos.z - ShiftMoveWallZ), BigMoveWallSize, Tag::FIRST_MOVE_WALL, MoveWallSpeed,
-			Vector3(layer7Pos.x, layer7Pos.y, layer7Pos.z - BigMoveWallSize.z));
-		break;
-
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer7SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
@@ -586,7 +596,7 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
-		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer7Pos, Tag::ENEMY, moveEnemyData);
 		break;
@@ -594,6 +604,11 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 	case(RESPOWN_POINT_PARTS):
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer7Pos, RespawnBox, Tag::RESPOWN_POINT);
+		break;
+
+	case(CLEAR_OBJECT_PARTS):
+		// ステージクリアオブジェクト生成
+		new ClearPointObject(layer7Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 	}
 }
@@ -636,14 +651,14 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 
 	case(LEFT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
-		SetMoveEnemyData(300.0f, Vector3::NegUnitY, 400.0f, MoveEnemyTag::LEFT_MOVE);
+		SetMoveEnemyData(500.0f, Vector3::NegUnitY, 800.0f, MoveEnemyTag::LEFT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer8Pos, Tag::ENEMY, moveEnemyData);
 		break;
 
-	case(COLLECTION_THIRD):
-		// 3番目の収集物を生成
-		thirdCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::THIRD);
+	case(COLLECTION_SECOND):
+		// 2番目の収集物を生成
+		secondCollectionObject = new CollectionObject(layer8Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 
 	}
@@ -671,9 +686,11 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
-	case(COLLECTION_SECOND):
-		// 2番目の収集物を生成
-		secondCollectionObject = new CollectionObject(layer9Pos, Tag::COLLECTION, CollectionTag::SECOND);
+
+
+	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
+		thirdCollectionObject = new CollectionObject(layer9Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 
 	case(RESPOWN_POINT_PARTS):
@@ -687,7 +704,7 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 
 	case(RIGHT_MOVE_ENEMY_PARTS):
 		// 移動情報をセット
-		SetMoveEnemyData(300.0f, Vector3::UnitY, 400.0f, MoveEnemyTag::RIGHT_MOVE);
+		SetMoveEnemyData(500.0f, Vector3::UnitY, 800.0f, MoveEnemyTag::RIGHT_MOVE);
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer9Pos, Tag::ENEMY, moveEnemyData);
 		break;
@@ -777,6 +794,15 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		new JumpSwitchObject(layer11SwitchPos, JumpSwitchSize, Tag::JUMP_SWITCH);
 		break;
 
+	case(TRACKING_ENEMY_PARTS):
+		// 追跡する敵の生成
+		new TrackingEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, 1200.0f);
+		break;
+
+	case(ENHANCED_ENEMY_PARTS):
+		new EnhancedEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, 1800.0f);
+		break;
+
 	case(NEEDLE_PARTS):
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer11SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
@@ -784,11 +810,6 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
-		break;
-
-	case(CLEAR_OBJECT_PARTS):
-		// ステージクリアオブジェクト生成
-		new ClearPointObject(layer11Pos, Tag::CLEAR_POINT, playerObject, lastMoveWallBlock);
 		break;
 	}
 }
@@ -988,7 +1009,8 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 		// 二ードルオブジェクト生成
 		new NeedlePanelObject(layer17SwitchPos, NeedlePanelSize, Tag::NEEDLE_PANEL);
 		break;
-	case(58):
+
+	case(FOLL_BOMB_AREA):
 		Vector3 area = Vector3(4000.0f, 4000.0f, 4000.0f);
 		new FallExplosionArea(layer17Pos, Tag::OTHER, area, 20);
 		break;
@@ -1011,6 +1033,7 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer18Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(POWERCELLS_LIGHT_PARTS_RIGHT):
 		// パワーセルライトの生成
 		new LightObject(layer18Pos, LightObjectSize, Tag::GROUND, true);
@@ -1021,7 +1044,6 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 		new LightObject(layer18Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
-
 	case(SECOND_SWITCH_PARTS):
 		// 第二区画スイッチオブジェクト生成
 		new SwitchBaseObject(layer18SwitchPos, SwitchBaseSize, Tag::GROUND, Tag::CLEAR_SCENE_SWITCH);
@@ -1031,6 +1053,7 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer18Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
+
 	case(26):
 		SetMoveBlockData(600.0f, Vector3::NegUnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
 		new MoveBlockObject(layer18Pos, Tag::MOVE_GROUND, moveBlockData);

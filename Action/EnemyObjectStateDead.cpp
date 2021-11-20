@@ -85,8 +85,13 @@ void EnemyObjectStateDead::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	frameCount = 0;
 	// ‚Á”ò‚Ô•ûŒü‚ğŒvZ
 	blowAwayDirection = _owner->GetPosition() - _owner->GetDefeatedObjectPosition();
-	// ³‹K‰»
-	blowAwayDirection.Normalize();
+
+	if (!Math::NearZero(blowAwayDirection.Length()))
+	{
+		// ³‹K‰»
+		blowAwayDirection.Normalize();
+	}
+
 	// ã‰º•ûŒü‚ğ0‚ÉŒÅ’è
 	blowAwayDirection.z = 0.0f;
 	// ˆÚ“®‘¬“x‚ğ‰‘¬‚É‚·‚é

@@ -83,8 +83,12 @@ void EnemyObjectStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime
 	firstPosition = _owner->GetFirstPosition();
 	// 今のポジションから初期ポジションへの方向ベクトルを計算
 	repositionRotationVec = firstPosition - _owner->GetPosition();
-	// 正規化
-	repositionRotationVec.Normalize();
+
+	if (!Math::NearZero(repositionRotationVec.Length()))
+	{
+		// 正規化
+		repositionRotationVec.Normalize();
+	}
 
 	// 回転処理
 	RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
