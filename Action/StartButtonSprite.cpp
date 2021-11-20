@@ -11,7 +11,7 @@ StartButtonSprite::StartButtonSprite()
 	// spriteComponentをnewする
 	sprite = new SpriteComponent(this, false);
 	// タイトルのtextureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/test_startButton.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/title/startButton.png");
 	// textureをComponentにセット
 	sprite->SetTexture(tex);
 	// alpha値を初期化

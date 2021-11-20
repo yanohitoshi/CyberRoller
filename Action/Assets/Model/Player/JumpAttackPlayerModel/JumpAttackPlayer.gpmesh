@@ -3,12 +3,12 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Model/Player/PlayerTexture/Player.png"
+		"Assets/Model/Player/texture/Player.png"
 	],
-	"diffusemap":"Assets/Model/Player/PlayerTexture/Player.png",
-	"nomalmap":"Assets/Model/Player/PlayerTexture/MIL_NMR_TX.png",
+	"diffusemap":"Assets/Model/Player/texture/Player.png",
+	"nomalmap":"Assets/Model/Player/texture/MIL_NMR_TX.png",
     "specularmap":"none",
-    "emissivemap":"Assets/Model/Player/PlayerTexture/DEFAULT_EM_TX_BLUE.png",
+    "emissivemap":"Assets/Model/Player/texture/DEFAULT_EM_TX_BLUE.png",
 	"specularPower":100.0,
     "luminance":"5.0",
 	"vertices":[

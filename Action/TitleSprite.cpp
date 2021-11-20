@@ -17,7 +17,7 @@ TitleSprite::TitleSprite()
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
 	// 背景テクスチャをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/Title_test.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/title/Title.png");
 	// 背景テクスチャをセット
 	sprite->SetTexture(tex);
 	// 映す映さないをセット

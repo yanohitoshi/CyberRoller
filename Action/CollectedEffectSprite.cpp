@@ -24,7 +24,7 @@ CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/AuroraRing.png");
+	tex = RENDERER->GetTexture("Assets/sprite/collection/AuroraRing.png");
 	sprite->SetTexture(tex);
 	alpha = 1.0f;
 	sprite->SetAlpha(alpha);

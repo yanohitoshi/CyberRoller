@@ -16,7 +16,7 @@ GameOverSprite::GameOverSprite()
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/gameover.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/information/gameover.png");
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

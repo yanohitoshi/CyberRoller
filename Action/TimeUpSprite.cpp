@@ -20,7 +20,7 @@ TimeUpSprite::TimeUpSprite()
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/timeup.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/information/timeup.png");
 	sprite->SetTexture(tex);
 	sprite->SetVisible(false);
 	sprite->SetAlpha(1.0f);

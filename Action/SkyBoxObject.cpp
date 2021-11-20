@@ -18,7 +18,7 @@ SkyBoxObject::SkyBoxObject(bool _reUseGameObject, const Tag _objectTag)
 	// レンダラーにActiveなキューブマップとしてポインタを渡す
 	RENDERER->SetActiveSkyBox(cubeMapComp);
 	// texture生成
-	cubeMapComp->CreateTexture("Assets/sprite/night/");
+	cubeMapComp->CreateTexture("Assets/sprite/skyBox/night/");
 }
 
 /*

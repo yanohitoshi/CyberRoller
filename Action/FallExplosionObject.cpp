@@ -33,7 +33,7 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/BombObject/bomb.gpmesh"));
+	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/Bomb/model/bomb.gpmesh"));
 	meshComponent->SetEmissiveColor(Color::LightBlue);
 
 	//メッシュ情報取得

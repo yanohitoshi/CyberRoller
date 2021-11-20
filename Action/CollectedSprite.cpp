@@ -24,7 +24,7 @@ CollectedSprite::CollectedSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/Collected.png");
+	tex = RENDERER->GetTexture("Assets/sprite/collection/Collected.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 }

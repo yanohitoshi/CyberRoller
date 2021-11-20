@@ -31,7 +31,7 @@ SwitchBaseObject::SwitchBaseObject(const Vector3& _p, const Vector3& _size, cons
 	isCheckGroundToPlayer = true;
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/switch_model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/Switch/model/S_EnergySwitch.gpmesh"), GeometryInstanceType::G_BASE_SWITCH);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 

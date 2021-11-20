@@ -43,7 +43,7 @@ LightObject::LightObject(const Vector3& _p, const Vector3& _size, const Tag& _ob
 	state = Active;
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/LightObject/PowerCells/SM_PowerCells_Floor.gpmesh"), GeometryInstanceType::G_LIGHT,300);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/Light/model/SM_PowerCells_Floor.gpmesh"), GeometryInstanceType::G_LIGHT,300);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 
