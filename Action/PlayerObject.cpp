@@ -245,6 +245,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	nextState = PlayerState::PLAYER_STATE_IDLE;
 
 	jumpAttackPlayerObject = new JumpAttackPlayerObject(this,Vector3(50.0f, 50.0f, 50.0f), JUMP_ATTACK_PLAYER);
+
 }
 
 /*

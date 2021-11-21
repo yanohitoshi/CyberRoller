@@ -129,11 +129,11 @@ void StageSelectSceneUI::CreatStageSelectSprite()
 	new StageUnSelectIcon(this, SceneState::FOURTH_SATGE_SCENE, "Assets/sprite/icon/forthStage_icon.png");
 	new StageUnSelectIcon(this, SceneState::FINAL_STAGE_SCENE, "Assets/sprite/icon/finalStage_icon.png");
 
-	new StageSelectSprite(this, SceneState::FIRST_SATGE_SCENE, "Assets/sprite/stageSelect/firstStageSprite.png");
+	new StageSelectSprite(this, SceneState::FIRST_SATGE_SCENE, "Assets/sprite/stageSelect/FirstStageSprite.png");
 	new StageSelectSprite(this, SceneState::SECOND_SATGE_SCENE, "Assets/sprite/stageSelect/SecondStageSprite.png");
-	new StageSelectSprite(this, SceneState::THIRD_SATGE_SCENE, "Assets/sprite/stageSelect/thirdStageSprite.png");
-	new StageSelectSprite(this, SceneState::FOURTH_SATGE_SCENE, "Assets/sprite/stageSelect/forthStageSprite.png");
-	new StageSelectSprite(this, SceneState::FINAL_STAGE_SCENE, "Assets/sprite/stageSelect/finalStageSprite.png");
+	new StageSelectSprite(this, SceneState::THIRD_SATGE_SCENE, "Assets/sprite/stageSelect/ThirdStageSprite.png");
+	new StageSelectSprite(this, SceneState::FOURTH_SATGE_SCENE, "Assets/sprite/stageSelect/FourthStageSprite.png");
+	new StageSelectSprite(this, SceneState::FINAL_STAGE_SCENE, "Assets/sprite/stageSelect/FinalStageSprite.png");
 }
 
 void StageSelectSceneUI::SetFirstStageSprite()

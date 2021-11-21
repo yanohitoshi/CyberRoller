@@ -14,9 +14,9 @@ StartCountDownSprite::StartCountDownSprite()
 	, ChangeCount(60)
 {
 	// 4í‚Ìtexture‚ğƒ[ƒh
-	firstTexure = RENDERER->GetTexture("Assets/sprite/information/CountDown3.png");
-	secondTexure = RENDERER->GetTexture("Assets/sprite/information/CountDown2.png");
-	thirdTexure = RENDERER->GetTexture("Assets/sprite/information/CountDown1.png");
+	firstTexure = RENDERER->GetTexture("Assets/sprite/information/Three.png");
+	secondTexure = RENDERER->GetTexture("Assets/sprite/information/Two.png");
+	thirdTexure = RENDERER->GetTexture("Assets/sprite/information/One.png");
 	startTexure = RENDERER->GetTexture("Assets/sprite/information/Start.png");
 
 	// SpriteComponent‚ğ‰Šú‰»

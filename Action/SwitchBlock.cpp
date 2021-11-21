@@ -72,8 +72,8 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	// チュートリアル用のスイッチだったらチュートリアル用のパーティクルを付与
 	if (isTutorialSwitch)
 	{
-		new TutorialSwitchParticlEffect(Vector3(position.x,position.y,position.z + 250.0f),this);
-		new TutorialSwitchOkEffect(Vector3(position.x, position.y, position.z + 250.0f), this);
+		new TutorialSwitchParticlEffect(Vector3(position.x + 100.0f,position.y,position.z + 250.0f),this);
+		new TutorialSwitchOkEffect(Vector3(position.x + 100.0f, position.y, position.z + 250.0f), this);
 	}
 
 	// スイッチ用のエフェクトを付与

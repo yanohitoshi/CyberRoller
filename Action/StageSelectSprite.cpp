@@ -16,29 +16,6 @@ StageSelectSprite::StageSelectSprite(StageSelectSceneUI* _owner, SceneState _sta
 	myState = _state;
 	_owner->AddStageSelectSpriteMap(this, myState);
 	isVisible = true;
-	//switch (myState)
-	//{
-	//case FIRST_SATGE_SCENE:
-	//	// ポジションをセット
-	//	SetPosition(Vector3(0.0f, 100.0f, 0.0f));
-	//	break;
-	//case SECOND_SATGE_SCENE:
-	//	// ポジションをセット
-	//	SetPosition(Vector3(1500.0f, 100.0f, 0.0f));
-	//	break;
-	//case THIRD_SATGE_SCENE:
-	//	// ポジションをセット
-	//	SetPosition(Vector3(2500.0f, 100.0f, 0.0f));
-	//	break;
-	//case FOURTH_SATGE_SCENE:
-	//	// ポジションをセット
-	//	SetPosition(Vector3(3500.0f, 100.0f, 0.0f));
-	//	break;
-	//case FINAL_STAGE_SCENE:
-	//	// ポジションをセット
-	//	SetPosition(Vector3(4500.0f, 100.0f, 0.0f));
-	//	break;
-	//}
 
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
