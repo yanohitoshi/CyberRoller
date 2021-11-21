@@ -27,6 +27,7 @@
 *.exe
 *.out
 *.app
+*.vs
 Action/.vs/
 Action/Debug/
 Action/Release/
