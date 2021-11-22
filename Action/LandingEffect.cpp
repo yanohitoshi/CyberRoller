@@ -12,11 +12,14 @@ LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Player/Jump/Landing.png", true)
 	, AddScale(0.8f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(32.0f)
+	, MoveSpeed(2.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 32.0f;
-	alpha = 1.0f;
-	speed = 2.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);

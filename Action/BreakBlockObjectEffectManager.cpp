@@ -1,13 +1,25 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BreakBlockObjectEffectManager.h"
 #include "BreakBlockObject.h"
 #include "DustEffect.h"
 #include "DebrisEffectObject.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 BreakBlockObjectEffectManager::BreakBlockObjectEffectManager(BreakBlockObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, DustEffectRandValue(250)
 	, CorrectionRandValue(10.0f)
+	, DustMaxEffect(20)
+	, DebrisEffectRandValue(50)
+	, DebrisMaxEffect(20)
 	, LastCorrection(0.1f)
+	, TowFrequency(2)
+	, ThreeFrequency(3)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -17,10 +29,19 @@ BreakBlockObjectEffectManager::BreakBlockObjectEffectManager(BreakBlockObject* _
 	activeCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 BreakBlockObjectEffectManager::~BreakBlockObjectEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
@@ -53,6 +74,9 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void BreakBlockObjectEffectManager::ActiveEffectProcess()
 {
 	// まだ生成されていなかったら
@@ -65,9 +89,12 @@ void BreakBlockObjectEffectManager::ActiveEffectProcess()
 	}
 }
 
+/*
+@fn 土埃エフェクト生産処理関数
+*/
 void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
 {
-	for (int dustEfectCount = 0; dustEfectCount < 20; dustEfectCount++)
+	for (int dustEfectCount = 0; dustEfectCount < DustMaxEffect; dustEfectCount++)
 	{
 		// ランダムな値を生成
 		Vector3 randV((rand() % DustEffectRandValue) / CorrectionRandValue, (rand() % DustEffectRandValue) / CorrectionRandValue, (rand() % DustEffectRandValue) / CorrectionRandValue);
@@ -76,13 +103,13 @@ void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
 		effectVelocity = randV * LastCorrection;
 		effectVelocity.Normalize();
 
-		if (dustEfectCount % 2 == 0)
+		if (dustEfectCount % TowFrequency == 0)
 		{
 			effectVelocity.x *= -1.0f;
 			effectVelocity.z *= -1.0f;
 		}
 
-		if (dustEfectCount % 3 == 0)
+		if (dustEfectCount % ThreeFrequency == 0)
 		{
 			effectVelocity.y *= -1.0f;
 		}
@@ -92,20 +119,23 @@ void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
 	}
 }
 
+/*
+@fn 破片エフェクト生産処理関数
+*/
 void BreakBlockObjectEffectManager::GenerateDebrisEffectProcess()
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < DebrisMaxEffect; i++)
 	{
 		// ランダムな値を生成
-		Vector3 randDir((float)(rand() % 50), (float)(rand() % 50), 1.0f);
+		Vector3 randDir((float)(rand() % DebrisEffectRandValue), (float)(rand() % DebrisEffectRandValue), 1.0f);
 		randDir.Normalize();
 
-		if (i % 2 == 0)
+		if (i % TowFrequency == 0)
 		{
 			randDir.x *= -1.0f;
 		}
 
-		if (i % 3 == 0)
+		if (i % ThreeFrequency == 0)
 		{
 			randDir.y *= -1.0f;
 		}

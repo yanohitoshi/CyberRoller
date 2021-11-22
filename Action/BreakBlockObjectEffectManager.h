@@ -59,8 +59,21 @@ private:
     // particleの状態管理用変数
     ParticleState particleState;
 
-    // 破片用のランダムに用いる値
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
+    // 3の倍数の時にフレームカウントと比較するための定数
+    const int ThreeFrequency;
+
+    // 埃エフェクトの最大数
+    const int DustMaxEffect;
+    // 埃用のランダムに用いる値
     const int DustEffectRandValue;
+
+    // 破片エフェクトの最大数
+    const int DebrisMaxEffect;
+    // 破片用のランダムに用いる値
+    const int DebrisEffectRandValue;
+
     // ランダムの値を作る際の補正値
     const float CorrectionRandValue;
     // ランダムの値に掛ける最後の補正値

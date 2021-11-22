@@ -35,6 +35,12 @@ public:
 
 private:
 
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+    // 速度の初期値
+    const float MoveSpeed;
     // 毎フレーム足すscale値 
     const float AddScale;
     // 毎フレーム引くalpha値

@@ -39,6 +39,9 @@ private:
     const float AddScale;
     // 毎フレーム引くalpha値
     const float SubAlpha;
-
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
 };
 

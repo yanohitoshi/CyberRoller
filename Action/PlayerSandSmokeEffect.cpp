@@ -12,14 +12,17 @@ PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3&
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Player/Run/SandSmoke.png",true)
 	, AddScale(5.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(32.0f)
+	, MoveSpeed(10.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 32.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(0.93f, 0.93f, 0.93f));
-	speed = 10.0f;
 }
 
 /*

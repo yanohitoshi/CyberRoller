@@ -71,5 +71,13 @@ private:
     // 1度に生成するエフェクトの数
     const int MaxEffects;
 
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
+    // 4の倍数の時にフレームカウントと比較するための定数
+    const int FourFrequency;
+    // 6の倍数の時にフレームカウントと比較するための定数
+    const int SixFrequency;
+    // 8の倍数の時にフレームカウントと比較するための定数
+    const int EightFrequency;
 };
 

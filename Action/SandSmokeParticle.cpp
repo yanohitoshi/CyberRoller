@@ -12,10 +12,12 @@ SandSmokeParticle::SandSmokeParticle(const Vector3& _pos, const Vector3& _veloci
 	: ParticleEffectBase(_pos, _velocity, 25, "Assets/Effect/Wall/SandSmoke.png",true)
 	, AddScale(5.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(16.0f)
 {
 	// メンバー変数の初期化
-	scale = 16.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	// 画像に付与する色を指定

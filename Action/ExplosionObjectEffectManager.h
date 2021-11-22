@@ -44,11 +44,6 @@ private:
     void ActiveEffectProcess();
 
     /*
-    @fn エフェクト生産処理関数
-    */
-    void GenerateEffectProcess();
-
-    /*
     @fn 爆発エフェクト生産処理関数
     */
     void GenerateExplosionEffectProcess();
@@ -68,9 +63,16 @@ private:
     const int MaxExplosionEffects;
     // ランダムの範囲
     const int RandValue;
+    // 波紋エフェクトの最大数
+    const int MaxRipplesEffect;
 
     Vector3 effectPosition;
     Vector3 effectVelocity;
     // 1度だけ生成する用の生成フラグ変数
     bool generateExplosionEffectsFlag;
+
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
+    // 3の倍数の時にフレームカウントと比較するための定数
+    const int ThreeFrequency;
 };

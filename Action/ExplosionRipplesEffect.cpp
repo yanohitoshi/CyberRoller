@@ -1,16 +1,27 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ExplosionRipplesEffect.h"
 
+/*
+@fn コンストラクタ
+@param	親となるクラスのポインタ
+@param	ポジション
+*/
 ExplosionRipplesEffect::ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos)
 	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Bomb/Ripple.png", false)
 	, AddScale(96.0f)
 	, SubAlpha(0.03f)
 	, EffectColor(Vector3(1.0f, 1.0f, 1.0f))
 	, RandValue(271)
+	, InitAlpha(1.0f)
+	, InitScale(24.0f)
+	, RotateLowestValue(90)
+	, AxisYAngle(45.0f)
 {
 	// メンバー変数の初期化
-	scale = 24.0f;
-	alpha = 0.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	position = _pos;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
@@ -20,10 +31,19 @@ ExplosionRipplesEffect::ExplosionRipplesEffect(GameObject* _owner, const Vector3
 	RotateEffect();
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ExplosionRipplesEffect::~ExplosionRipplesEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ExplosionRipplesEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -58,10 +78,10 @@ void ExplosionRipplesEffect::UpdateGameObject(float _deltaTime)
 */
 void ExplosionRipplesEffect::RotateEffect()
 {
-	angle = (float)(rand() % RandValue + 90);
+	angle = (float)(rand() % RandValue + RotateLowestValue);
 	Rotation(this, angle, Vector3::UnitX);
-	angle = 45.0f;
+	angle = AxisYAngle;
 	Rotation(this, angle, Vector3::UnitY);
-	angle = (float)(rand() % RandValue + 90);
+	angle = (float)(rand() % RandValue + RotateLowestValue);
 	Rotation(this, angle, Vector3::UnitZ);
 }

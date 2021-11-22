@@ -1,13 +1,21 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyFlinchEffectManager.h"
 #include "EnemyElectricShockEffect.h"
 #include "EnemyObjectBase.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 EnemyFlinchEffectManager::EnemyFlinchEffectManager(EnemyObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, MaxExplosionEffects(10)
 	, RandValue(250)
 	, CorrectionRandValue(10.0f)
 	, LastCorrection(0.1f)
+	, FiveFrequency(5)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -16,10 +24,19 @@ EnemyFlinchEffectManager::EnemyFlinchEffectManager(EnemyObjectBase* _owner)
 	effectFrameCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 EnemyFlinchEffectManager::~EnemyFlinchEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void EnemyFlinchEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
@@ -51,16 +68,22 @@ void EnemyFlinchEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void EnemyFlinchEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
 
-	if (effectFrameCount % 5 == 0)
+	if (effectFrameCount % FiveFrequency == 0)
 	{
 		GenerateEffectProcess();
 	}
 }
 
+/*
+@fn エフェクト生産処理関数
+*/
 void EnemyFlinchEffectManager::GenerateEffectProcess()
 {
 	// ownerのポジションを得る

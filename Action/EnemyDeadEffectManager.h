@@ -75,4 +75,11 @@ private:
     bool generateExplosionEffectsFlag;
     // エフェクトが有効化されてからのフレームを測る
     int effectFrameCount;
+
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
+    // 3の倍数の時にフレームカウントと比較するための定数
+    const int ThreeFrequency;
+    // 5の倍数の時にフレームカウントと比較するための定数
+    const int FiveFrequency;
 };

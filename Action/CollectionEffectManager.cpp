@@ -1,13 +1,24 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CollectionEffectManager.h"
 #include "CollectionObject.h"
 #include "CollectionRipplesEffect.h"
 #include "CollectionLightEffect.h"
 #include "CrystalEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	親クラスのポインタ
+*/
 CollectionEffectManager::CollectionEffectManager(CollectionObject* _owner)
 	:GameObject(false, Tag::PARTICLE)
 	, LightEffectRandValue(100)
 	, MaxLightEffects(24)
+	, TowFrequency(2)
+	, ThreeFrequency(3)
+	, RandValue(100)
+	, ActiveTime(30)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -19,10 +30,19 @@ CollectionEffectManager::CollectionEffectManager(CollectionObject* _owner)
 	activeCount = 0;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CollectionEffectManager::~CollectionEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CollectionEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 親クラスのステータスがActiveだったら
@@ -49,74 +69,90 @@ void CollectionEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		ActiveEffectProcess(_deltaTime);
-
 		break;
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CollectionEffectManager::ActiveEffectProcess(float _deltaTime)
 {
+	// 生成フラグがtrueの時
 	if (generateFlag)
 	{
 		CreationRipplesEffect();
+		// 生成フラグをfalseに変更
 		generateFlag = false;
 	}
 
+	// カウントを数える
 	++activeCount;
-	if (activeCount < 30)
+
+	// エフェクトがActiveとなっていられる時間内だったら
+	if (activeCount < ActiveTime)
 	{
 		CreationLightEffect();
 	}
-
 }
 
-void CollectionEffectManager::GenerateEffectProcess()
-{
-}
-
+/*
+@fn 波紋エフェクト生産処理関数
+*/
 void CollectionEffectManager::CreationRipplesEffect()
 {
+	// オーナーのポジション取得
 	effectPosition = owner->GetPosition();
 	new CollectionRipplesEffect(this, effectPosition, Vector3::Zero);
 }
 
+/*
+@fn 光エフェクト生産処理関数
+*/
 void CollectionEffectManager::CreationLightEffect()
 {
+	// エフェクトの色情報変数
 	CrystalColor color = CrystalColor::WHITE;
 
-	if (colorNum == 0)
+	// 色番号に応じて色情報を変更
+	if (colorNum == CrystalColor::WHITE)
 	{
 		color = CrystalColor::WHITE;
 	}
-	else if (colorNum == 1)
+	else if (colorNum == CrystalColor::RED)
 	{
 		color = CrystalColor::RED;
 	}
-	else if (colorNum == 2)
+	else if (colorNum == CrystalColor::BLUE)
 	{
 		color = CrystalColor::BLUE;
 	}
-	else if (colorNum == 3)
+	else if (colorNum == CrystalColor::GREEN)
 	{
 		color = CrystalColor::GREEN;
 	}
 
+	// 色番号を進める
 	++colorNum;
-	if (colorNum >= 4)
+
+	// 色番号が無になったら
+	if (colorNum >= CrystalColor::NONE)
 	{
+		// 番号を初期状態に戻す
 		colorNum = 0;
 	}
 
 	// ランダムな値を生成
-	Vector3 randDir((float)(rand() % 100), (float)(rand() % 100), 1.0f);
+	Vector3 randDir((float)(rand() % RandValue), (float)(rand() % RandValue), 1.0f);
 	randDir.Normalize();
 
-	if (activeCount % 2 == 0)
+	if (activeCount % TowFrequency == 0)
 	{
 		randDir.x *= -1.0f;
 	}
 	
-	if (activeCount % 3 == 0)
+	if (activeCount % ThreeFrequency == 0)
 	{
 		randDir.y *= -1.0f;
 	}
@@ -124,5 +160,4 @@ void CollectionEffectManager::CreationLightEffect()
 	randDir.z = 1.0f;
 
 	new CollectionLightEffect(this, effectPosition, randDir, color);
-
 }

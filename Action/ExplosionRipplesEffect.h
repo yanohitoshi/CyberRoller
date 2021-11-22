@@ -17,7 +17,6 @@ public:
     @fn コンストラクタ
     @param	親となるクラスのポインタ
     @param	ポジション
-    @param	移動速度
     */
     ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos);
 
@@ -51,5 +50,13 @@ private:
     const float SubAlpha;
     // エフェクトの色
     const Vector3 EffectColor;
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+    // ランダムな速度の最低値
+    const int RotateLowestValue;
+    // Y軸の回転角度
+    const float AxisYAngle;
 };
 

@@ -57,5 +57,8 @@ private:
     int effectCount;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;
+
+    // Z軸をずらす定数
+    const float OffsetPositionZ;
 };
 

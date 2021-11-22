@@ -57,5 +57,7 @@ private:
     int effectFrameCount;
     // ポジションをずらすためのオフセット
     const float PositionOffset;
-};
 
+    // 5の倍数の時にフレームカウントと比較するための定数
+    const int FiveFrequency;
+};

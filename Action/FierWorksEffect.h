@@ -50,6 +50,12 @@ private:
     // フェードインフラグ
     bool inFlag;
 
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+    // 移動速度定数
+    const float MoveSpeed;
     // 速度に減速をかける際の定数
     const float SubSpeed;
     // フェードイン中の毎フレーム足すscale値 

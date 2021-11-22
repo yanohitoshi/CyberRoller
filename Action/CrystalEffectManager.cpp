@@ -23,6 +23,7 @@ CrystalEffectManager::CrystalEffectManager(GameObject* _owner, CrystalColor _cry
 	, DeltaTimeCorrectionValue(10.0f)
 	, LastCorrection(0.1f)
 	, lastMoveWallBlock(_lastMoveWall)
+	, EightFrequency(8)
 {
 	// メンバー変数の初期化	
 	crystalColor = _crystalColor;
@@ -124,7 +125,7 @@ void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
 	// アクティブを制御するカウントを数える
 	++activeFrameCount;
 
-	if (activeFrameCount % 8 == 0)
+	if (activeFrameCount % EightFrequency == 0)
 	{
 		GenerateEffectProcess();
 	}

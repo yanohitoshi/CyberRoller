@@ -1,15 +1,24 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ExplosionEffect.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	移動速度
+*/
 ExplosionEffect::ExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Bomb/Explosion.png", true)
 	, AddScale(64.0f)
 	, SubAlpha(0.01f)
 	, EffectColor(Color::LightBlue)
+	, InitAlpha(1.0f)
+	, InitScale(32.0f)
 {
 	// メンバー変数の初期化
-	scale = 32.0f;
-	alpha = 0.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	position = _pos;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
@@ -18,10 +27,19 @@ ExplosionEffect::ExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ExplosionEffect::~ExplosionEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ExplosionEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン

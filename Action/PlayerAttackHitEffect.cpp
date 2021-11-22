@@ -14,15 +14,18 @@ PlayerAttackHitEffect::PlayerAttackHitEffect(GameObject* _owner,const Vector3& _
 	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Player/JumpAttack/Hit.png", false)
 	, AddScale(32.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(0.0f)
+	, MoveSpeed(25.0f)
 {
 	// ヒットエフェクトの外側の波紋を生成
 	new PlayerAttackHitEffectRipples(_owner, _pos, _velocity);
 
 	// メンバー変数の初期化
 	owner = _owner;
-	scale = 0.0f;
-	alpha = 1.0f;
-	speed = 25.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	position = _pos;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);

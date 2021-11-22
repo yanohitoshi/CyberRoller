@@ -16,11 +16,14 @@ CrystalDefaultEffect::CrystalDefaultEffect(const Vector3& _pos, const Vector3& _
 	, AddAlpha(0.005f)
 	, SubAlpha(0.002f)
 	, MaxAlphaValue(0.6f)
+	, InitAlpha(0.0f)
+	, InitScale(0.0f)
+	, MoveSpeed(20.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 0.0f;
-	alpha = 0.0f;
-	speed = 20.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	inFlag = true;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);

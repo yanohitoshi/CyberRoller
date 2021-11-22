@@ -14,13 +14,15 @@ class MoveWallBlock;
 enum CrystalColor
 {
     // 白色
-    WHITE,
+    WHITE = 0,
     // 赤色
-    RED,
+    RED = 1,
     // 青色
-    BLUE,
+    BLUE = 2,
     // 緑色
-    GREEN,
+    GREEN = 3,
+    // 無
+    NONE = 4
 };
 
 /*
@@ -107,6 +109,7 @@ private:
     const int RandValue;
     // デルタタイムにかける補正
     const float DeltaTimeCorrectionValue;
-
+    // 8の倍数の時にフレームカウントと比較するための定数
+    const int EightFrequency;
 };
 

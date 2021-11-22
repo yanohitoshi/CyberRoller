@@ -21,7 +21,6 @@ public:
     /*
     @fn コンストラクタ
     @param	親クラスのポインタ
-    @param	何色か判定用Tag
     */
     CollectionEffectManager(CollectionObject* _owner);
 
@@ -47,29 +46,41 @@ private:
     void ActiveEffectProcess(float _deltaTime);
 
     /*
-    @fn エフェクト生産処理関数
-    */
-    void GenerateEffectProcess();
-
-    /*
     @fn 波紋エフェクト生産処理関数
     */
     void CreationRipplesEffect();
 
+    /*
+    @fn 光エフェクト生産処理関数
+    */
     void CreationLightEffect();
 
-
-    CollectionObject* owner;
+    // 生成フラグ
     bool generateFlag;
+
+    // 親クラスのポインタ変数
+    CollectionObject* owner;
+    // 生成するエフェクトのポジション
     Vector3 effectPosition;
     // particleの状態管理用変数
     ParticleState particleState;
+    // Activeの時間を数える
     int activeCount;
+    // 色番号変数
     int colorNum;
+
+    // エフェクトがActiveな時間
+    const int ActiveTime;
+    // ランダムの値定数
+    const int RandValue;
     // ランダムの範囲の割合
     const int LightEffectRandValue;
     // 1度に生成するエフェクトの数
     const int MaxLightEffects;
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
+    // 3の倍数の時にフレームカウントと比較するための定数
+    const int ThreeFrequency;
 
 };
 

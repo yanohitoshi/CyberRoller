@@ -105,8 +105,6 @@ void SandSmokeMakeManeger::UpdateGameObject(float _deltaTime)
 
 		break;
 	}
-
-
 }
 
 /*

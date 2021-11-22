@@ -13,6 +13,7 @@ PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, PositionOffset(150.0f)
 	, DistanceOffset(30.0f)
+	, FiveFrequency(5)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -70,7 +71,7 @@ void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
 void PlayerKnockBackEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
-	if (effectFrameCount % 5 == 0)
+	if (effectFrameCount % FiveFrequency == 0)
 	{
 		GenerateEffectProcess();
 	}

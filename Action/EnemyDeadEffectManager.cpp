@@ -17,6 +17,9 @@ EnemyDeadEffectManager::EnemyDeadEffectManager(EnemyObjectBase* _owner)
 	, RandValue(250)
 	, CorrectionRandValue(10.0f)
 	, LastCorrection(0.1f)
+	, TowFrequency(2)
+	, ThreeFrequency(3)
+	, FiveFrequency(5)
 {
 	// ÉÅÉìÉoÅ[ïœêîÇÃèâä˙âª	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -79,7 +82,7 @@ void EnemyDeadEffectManager::ActiveEffectProcess()
 {
 	++effectFrameCount;
 
-	if (effectFrameCount % 5 == 0)
+	if (effectFrameCount % FiveFrequency == 0)
 	{
 		GenerateEffectProcess();
 	}
@@ -123,13 +126,13 @@ void EnemyDeadEffectManager::GenerateExplosionEffectProcess()
 		velocity = randV * LastCorrection;
 		velocity.Normalize();
 
-		if (explosionEfectCount % 2 == 0)
+		if (explosionEfectCount % TowFrequency == 0)
 		{
 			velocity.x *= -1.0f;
 			velocity.z *= -1.0f;
 		}
 
-		if (explosionEfectCount % 3 == 0)
+		if (explosionEfectCount % ThreeFrequency == 0)
 		{
 			velocity.y *= -1.0f;
 		}

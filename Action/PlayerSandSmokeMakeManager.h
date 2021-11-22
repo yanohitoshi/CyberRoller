@@ -72,6 +72,7 @@ private:
     const float GenerateSpeedValue;
     // 足元から出ているように見せるためにずらす値
     const float ShiftPositionValue;
-
+    // 2の倍数の時にフレームカウントと比較するための定数
+    const int TowFrequency;
 };
 

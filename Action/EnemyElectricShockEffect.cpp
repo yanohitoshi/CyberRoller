@@ -14,11 +14,14 @@ EnemyElectricShockEffect::EnemyElectricShockEffect(GameObject* _owner,const Vect
 	, SubAlpha(0.1f)
 	, RandValue(361)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
+	, InitAlpha(1.0f)
+	, InitScale(64.0f)
+	, MoveSpeed(1.5f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 64;
-	alpha = 1.0f;
-	speed = 1.5f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	position = _pos;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);

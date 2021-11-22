@@ -12,10 +12,12 @@ JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity
 	: ParticleEffectBase(_pos, _velocity, 45, "Assets/Effect/Player/JumpAttack/Attack.png", true)
 	, AddScale(1.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(128.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 128.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);

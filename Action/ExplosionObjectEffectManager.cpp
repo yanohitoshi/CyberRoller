@@ -1,15 +1,25 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ExplosionObjectEffectManager.h"
 #include "ExplosionObjectBase.h"
 #include "ExplosionEffect.h"
 #include "ExplosionRipplesEffect.h"
 #include "SplashExplosionEffect.h"
 
+/*
+@fn コンストラクタ
+@param	_owner 親クラスのポインタ
+*/
 ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObjectBase* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, MaxExplosionEffects(10)
 	, RandValue(250)
 	, CorrectionRandValue(10.0f)
 	, LastCorrection(0.1f)
+	, MaxRipplesEffect(2)
+	, TowFrequency(2)
+	, ThreeFrequency(3)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -18,10 +28,19 @@ ExplosionObjectEffectManager::ExplosionObjectEffectManager(ExplosionObjectBase* 
 	generateExplosionEffectsFlag = true;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ExplosionObjectEffectManager::~ExplosionObjectEffectManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 {
 	// 死亡状態だったら有効化
@@ -54,6 +73,9 @@ void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn エフェクトがアクティブ時の処理関数
+*/
 void ExplosionObjectEffectManager::ActiveEffectProcess()
 {
 	
@@ -62,7 +84,7 @@ void ExplosionObjectEffectManager::ActiveEffectProcess()
 		velocity = Vector3::Zero;
 		effectPosition = owner->GetPosition();
 
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < MaxRipplesEffect; i++)
 		{
 			new ExplosionRipplesEffect(this, effectPosition);
 		}
@@ -73,13 +95,12 @@ void ExplosionObjectEffectManager::ActiveEffectProcess()
 	}
 }
 
-void ExplosionObjectEffectManager::GenerateEffectProcess()
-{
-}
-
+/*
+@fn 爆発エフェクト生産処理関数
+*/
 void ExplosionObjectEffectManager::GenerateExplosionEffectProcess()
 {
-	//エフェクトを生成
+	//爆発エフェクトを生成
 	new ExplosionEffect(effectPosition, effectVelocity);
 
 	for (int explosionEfectCount = 0; explosionEfectCount < MaxExplosionEffects; explosionEfectCount++)
@@ -91,13 +112,13 @@ void ExplosionObjectEffectManager::GenerateExplosionEffectProcess()
 		effectVelocity = randV * LastCorrection;
 		effectVelocity.Normalize();
 
-		if (explosionEfectCount % 2 == 0)
+		if (explosionEfectCount % TowFrequency == 0)
 		{
 			effectVelocity.x *= -1.0f;
 			effectVelocity.z *= -1.0f;
 		}
 
-		if (explosionEfectCount % 3 == 0)
+		if (explosionEfectCount % ThreeFrequency == 0)
 		{
 			effectVelocity.y *= -1.0f;
 		}

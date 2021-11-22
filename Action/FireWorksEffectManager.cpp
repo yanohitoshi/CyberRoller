@@ -14,6 +14,10 @@ FireWorksEffectManager::FireWorksEffectManager(GameObject* _owner)
 	, RandValue(100)
 	, MaxEffects(24)
 	, LastCorrection(0.1f)
+	, TowFrequency(2)
+	, FourFrequency(4)
+	, SixFrequency(6)
+	, EightFrequency(8)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -61,11 +65,8 @@ void FireWorksEffectManager::UpdateGameObject(float _deltaTime)
 
 		// エフェクトの生成
 		ActiveEffectProcess();
-
 		break;
-
 	}
-
 }
 
 /*
@@ -124,31 +125,30 @@ void FireWorksEffectManager::SelectEffectColorProcess(int _index,Vector3& _veloc
 {
 	// いろいろな方向にいろいろな色で飛ばしたいので
 	// 2の倍数の時はｘ軸方向にマイナスを掛けて色を赤に設定
-	if (_index % 2 == 0)
+	if (_index % TowFrequency == 0)
 	{
 		_velocity.x *= -1.0f;
 		crystalColor = CrystalColor::RED;
 	}
 
 	// 4の倍数の時はy軸方向にマイナスを掛けて色を青に設定
-	if (_index % 4 == 0)
+	if (_index % FourFrequency == 0)
 	{
 		_velocity.y *= -1.0f;
 		crystalColor = CrystalColor::BLUE;
 	}
 
 	// 6の倍数の時はy軸方向にマイナスを掛けて色を緑に設定
-	if (_index % 6 == 0)
+	if (_index % SixFrequency == 0)
 	{
 		_velocity.y *= -1.0f;
 		crystalColor = CrystalColor::GREEN;
 	}
 
 	// 8の倍数の時はｘ軸方向にマイナスを掛けて色を白に設定
-	if (_index % 8 == 0)
+	if (_index % EightFrequency == 0)
 	{
 		_velocity.x *= -1.0f;
 		crystalColor = CrystalColor::WHITE;
 	}
-
 }

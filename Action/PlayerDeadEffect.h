@@ -56,5 +56,12 @@ private:
     const int RandValue;
     // エフェクトの色
     const Vector3 EffectColor;
+
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+    // 移動速度定数
+    const float MoveSpeed;
 };
 

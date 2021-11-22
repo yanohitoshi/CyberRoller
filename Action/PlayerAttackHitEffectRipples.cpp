@@ -13,12 +13,15 @@ PlayerAttackHitEffectRipples::PlayerAttackHitEffectRipples(GameObject* _owner, c
 	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Player/JumpAttack/Ripple.png", false)
 	, AddScale(128.0f)
 	, SubAlpha(0.01f)
+	, InitAlpha(1.0f)
+	, InitScale(0.0f)
+	, MoveSpeed(25.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	owner = _owner;
-	scale = 0.0f;
-	alpha = 1.0f;
-	speed = 25.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	position = _pos;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);

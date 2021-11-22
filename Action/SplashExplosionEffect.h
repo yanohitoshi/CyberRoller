@@ -42,5 +42,14 @@ private:
     const float SubAlpha;
     // エフェクトの色
     const Vector3 EffectColor;
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+
+    // ランダムな速度を得るための値
+    const int SpeedRandValue;
+    // ランダムな速度の補正値
+    const int SpeedCorrection;
 };
 

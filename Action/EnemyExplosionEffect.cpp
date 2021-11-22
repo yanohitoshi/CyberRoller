@@ -14,14 +14,15 @@ EnemyExplosionEffect::EnemyExplosionEffect(GameObject* _owner, const Vector3& _p
 	, AddScale(8.0f)
 	, SubAlpha(0.02f)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))
+	, SpeedRandValue(50)
+	, SpeedCorrection(10.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	scale = 0.0f;
-	alpha = 0.0f;
 	alpha = 1.0f;
 	position = _pos;
 	velocity = _velocity;
-	speed = rand() % 50 / 10.0f;
+	speed = (float)(rand() % SpeedRandValue / SpeedCorrection);
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(EffectColor);

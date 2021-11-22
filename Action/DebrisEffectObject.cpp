@@ -1,11 +1,25 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "DebrisEffectObject.h"
 #include "MeshComponent.h"
 #include "Renderer.h"
 #include "Mesh.h"
 
+/*
+@fn コンストラクタ
+@param	親となるクラスのポインタ
+@param	方向ベクトル
+*/
 DebrisEffectObject::DebrisEffectObject(const Vector3& _pos, const Vector3& _direction)
 	: GameObject(false,Tag::GROUND)
 	, MovePower(50.0f)
+	, MaxLifeCount(60)
+	, SpeedRandValue(1500)
+	, SpeedLowestValue(1000)
+	, RotateRandValue(361)
+	, RotateLowestValue(50)
+	, FallSpeed(0.05f)
 {
 	//GameObjectメンバ変数の初期化
 	SetPosition(_pos);
@@ -18,7 +32,7 @@ DebrisEffectObject::DebrisEffectObject(const Vector3& _pos, const Vector3& _dire
 
 	direction = _direction;
 	// 生存時間初期化
-	lifeCount = 60;
+	lifeCount = MaxLifeCount;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
@@ -30,18 +44,27 @@ DebrisEffectObject::DebrisEffectObject(const Vector3& _pos, const Vector3& _dire
 	luminance = mesh->GetLuminace();
 
 	// ランダムな速度を得る
-	moveSpeed = (float)(rand() % 1500 + 1000 );
+	moveSpeed = (float)(rand() % SpeedRandValue + SpeedLowestValue);
 
 	// ランダムな値で回転を掛ける
-	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitX);
-	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitY);
-	Rotation(this, (float)(rand() % 361 + 50), Vector3::UnitZ);
+	Rotation(this, (float)(rand() % RotateRandValue + RotateLowestValue), Vector3::UnitX);
+	Rotation(this, (float)(rand() % RotateRandValue + RotateLowestValue), Vector3::UnitY);
+	Rotation(this, (float)(rand() % RotateRandValue + RotateLowestValue), Vector3::UnitZ);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 DebrisEffectObject::~DebrisEffectObject()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void DebrisEffectObject::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間を減らす
@@ -50,7 +73,7 @@ void DebrisEffectObject::UpdateGameObject(float _deltaTime)
 	SetPosition(position + velocity * _deltaTime);
 
 	// z軸方向ベクトルをマイナス方向にしていく
-	direction.z -= 0.05f;
+	direction.z -= FallSpeed;
 
 	// -1.0以下になったら1.0で固定
 	if (direction.z <= -1.0f)
@@ -67,6 +90,9 @@ void DebrisEffectObject::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn 生存時間のカウントダウン
+*/
 void DebrisEffectObject::LifeCountDown()
 {
 	//生存時間がゼロになるとこのオブジェクトを更新終了する

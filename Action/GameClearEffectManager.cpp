@@ -18,6 +18,10 @@ GameClearEffectManager::GameClearEffectManager(GameObject* _owner)
 	, GenerateHeight(5500.0f)
 	, GenerateFrequency(15)
 	, LastCorrection(0.1f)
+	, TowFrequency(2)
+	, ThreeFrequency(3)
+	, FourFrequency(4)
+	, SixFrequency(6)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -131,22 +135,22 @@ void GameClearEffectManager::CalculatingDirectionProcess(int _index, Vector3& _v
 	// いろいろな方向に飛ばしたいため
 	// 2・3の倍数の際速度ベクトルをそれぞれｘもしくはｙを逆方向に変換
 	// 2の倍数の時はｘ、3の倍数の時はｙ
-	if (_index % 2 == 0)
+	if (_index % TowFrequency == 0)
 	{
 		_velocity.x *= -1.0f;
 	}
-	else if (_index % 3 == 0)
+	else if (_index % ThreeFrequency == 0)
 	{
 		_velocity.y *= -1.0f;
 	}
 
 	// 4・6の倍数の際速度ベクトルをそれぞれｘもしくはyを逆方向に変換
 	// 6の倍数の時はｘ、4の倍数の時はｙ
-	if (_index % 4 == 0)
+	if (_index % FourFrequency == 0)
 	{
 		_velocity.y *= -1.0f;
 	}
-	else if (_index % 6 == 0)
+	else if (_index % SixFrequency == 0)
 	{
 		_velocity.x *= -1.0f;
 	}

@@ -47,6 +47,12 @@ private:
 
     // alpha値の最大値
     const float MaxAlphaValue;
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+    // 移動速度定数
+    const float MoveSpeed;
 
     // 毎フレーム足すscale値 
     const float AddScale;

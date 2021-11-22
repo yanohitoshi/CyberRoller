@@ -1,23 +1,38 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CollectionLightEffect.h"
 #include "CrystalEffectManager.h"
 
+/*
+@fn コンストラクタ
+@param	親となるクラスのポインタ
+@param	ポジション
+@param	移動速度
+*/
 CollectionLightEffect::CollectionLightEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _direction, CrystalColor _crystalColor)
 	: ParticleEffectBase(_pos, Vector3::Zero, 60, "Assets/Effect/Collection/Light.png", true)
 	, AddScale(2.0f)
 	, SubAlpha(0.01f)
+	, InitAlpha(1.0f)
+	, InitScale(32.0f)
+	, AddValue(0.1f)
+	, SpeedRandValue(400)
+	, SpeedLowestValue(200)
+	, SinRandValue(180)
 {
 	// メンバー変数の初期化
 	owner = _owner;
-	scale = 32.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	position = _pos;
 	direction = _direction;
 	SetPosition(position);
 
 	// ランダムな速度を得る
-	speed = (float)(rand() % 400 + 200);
+	speed = (float)(rand() % SpeedRandValue + SpeedLowestValue);
 	// ランダムな初期の値を得る
-	value = (float)(rand() % 180);
+	value = (float)(rand() % SinRandValue);
 	sinV = Math::Sin(value);
 
 	particleComponent->SetScale(scale);
@@ -41,13 +56,21 @@ CollectionLightEffect::CollectionLightEffect(GameObject* _owner, const Vector3& 
 	{
 		particleComponent->SetColor(Vector3(0.5f, 1.0f, 0.5f));
 	}
-
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 CollectionLightEffect::~CollectionLightEffect()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void CollectionLightEffect::UpdateGameObject(float _deltaTime)
 {
 	// 生存時間のカウントダウン
@@ -66,7 +89,7 @@ void CollectionLightEffect::UpdateGameObject(float _deltaTime)
 		// alpha値をセット
 		particleComponent->SetAlpha(alpha);
 		
-		value += 0.1f;
+		value += AddValue;
 		sinV = Math::Sin(value);
 
 		// sinの値を足すための変数

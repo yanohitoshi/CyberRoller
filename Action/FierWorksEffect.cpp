@@ -19,6 +19,9 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	, AddAlpha(0.05f)
 	, SubAlpha(0.001f)
 	, SubSpeed(1.0f)
+	, InitAlpha(0.1f)
+	, InitScale(2.0f)
+	, MoveSpeed(200.0f)
 	, VelocityAtFadeOut(40.0f)
 	, ChangeFadeOutTime(190)
 	, WhiteValue(Vector3(0.9f, 0.9f, 0.9f))
@@ -27,9 +30,9 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	, GreenValue(Vector3(0.5f, 1.0f, 0.5f))
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 2.0f;
-	alpha = 0.1f;
-	speed = 200.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
@@ -164,5 +167,4 @@ void FierWorksEffect::CheckSpeedProcess()
 			speed = VelocityAtFadeOut;
 		}
 	}
-
 }

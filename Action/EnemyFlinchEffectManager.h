@@ -1,10 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
 // クラスの前方宣言
 class EnemyObjectBase;
 
+/*
+@file EnemyFlinchEffectManager.h
+@brief エネミーの怯み時のエフェクトの生成を行うクラス
+*/
 class EnemyFlinchEffectManager :
     public GameObject
 {
@@ -60,5 +67,7 @@ private:
 
     // エフェクトが有効化されてからのフレームを測る
     int effectFrameCount;
+    // 5の倍数の時にフレームカウントと比較するための定数
+    const int FiveFrequency;
 };
 

@@ -13,6 +13,7 @@ PlayerSandSmokeMakeManager::PlayerSandSmokeMakeManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, GenerateSpeedValue(600.0f)
 	, ShiftPositionValue(30.0f)
+	, TowFrequency(2)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -104,7 +105,7 @@ void PlayerSandSmokeMakeManager::GenerateEffectProcess()
 	++generateCount;
 
 	// カウントが2の倍数の時は右足に
-	if (generateCount % 2 == 0)
+	if (generateCount % TowFrequency == 0)
 	{
 		ShiftRightEffectPosition();
 	}

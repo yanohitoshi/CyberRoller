@@ -11,6 +11,7 @@
 */
 PlayerTransformEffectManager::PlayerTransformEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
+	, OffsetPositionZ(100.0f)
 {
 	// メンバー変数の初期化	
 	owner = _owner;
@@ -101,7 +102,7 @@ void PlayerTransformEffectManager::GenerateEffectProcess()
 	
 	// ownerのポジションを得る
 	effectPosition = owner->GetPosition();
-	effectPosition.z += 100.0f;
+	effectPosition.z += OffsetPositionZ;
 	new PlayerTransformEffect(owner,effectPosition, velocity);
 	++effectCount;
 }

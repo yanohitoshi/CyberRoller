@@ -13,12 +13,15 @@ PlayerTransformEffect::PlayerTransformEffect(GameObject* _owner, const Vector3& 
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Player/JumpAttack/Transform.png", false)
 	, AddScale(16.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(0.0f)
+	, MoveSpeed(25.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 	owner = _owner;
-	scale = 0.0f;
-	alpha = 1.0f;
-	speed = 25.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	position = _pos;
 	velocity = _velocity;
 	particleComponent->SetScale(scale);

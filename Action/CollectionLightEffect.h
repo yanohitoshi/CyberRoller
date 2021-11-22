@@ -47,7 +47,20 @@ private:
     Vector3 direction;
     // サイン関数に渡す値
     float value;
+    // サイン関数に足す値 
+    const float AddValue;
     // サイン関数から返ってきた値
     float sinV;
+    // alpha値の初期値
+    const float InitAlpha;
+    // scale値の初期値
+    const float InitScale;
+
+    // ランダムな速度を得るための定数
+    const int SpeedRandValue;
+    // ランダムな速度の最低値
+    const int SpeedLowestValue;
+    // ランダムなSin関数に渡す値を得るための定数
+    const int SinRandValue;
 };
 

@@ -12,15 +12,18 @@ SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _
 	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Switch/Star.png",true)
 	, AddScale(1.0f)
 	, SubAlpha(0.02f)
+	, InitAlpha(1.0f)
+	, InitScale(96.0f)
+	, MoveSpeed(20.0f)
 {
 	// ƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
-	scale = 96.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
+	speed = MoveSpeed;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 0.0f));
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
-	speed = 20.0f;
 }
 
 /*

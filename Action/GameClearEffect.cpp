@@ -13,14 +13,17 @@ GameClearEffect::GameClearEffect(const Vector3& _pos, const Vector3& _velocity)
 	: ParticleEffectBase(_pos, _velocity, 10, "Assets/Effect/Clear/GameClear.png",true)
 	, AddScale(10.0f)
 	, SubAlpha(0.05f)
+	, InitAlpha(1.0f)
+	, InitScale(64.0f)
+	, MoveSpeed(400.0f)
 {
 	// メンバー変数の初期化
-	scale = 64.0f;
-	alpha = 1.0f;
+	scale = InitScale;
+	alpha = InitAlpha;
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 0.0f));
-	speed = 400.0f;
+	speed = MoveSpeed;
 
 	// 分岐させるエフェクトのマネージャークラスを追加
 	new FireWorksEffectManager(this);
