@@ -86,7 +86,7 @@ public:
 	@brief  初期化処理
 	@return true : 成功 , false : 失敗
 	*/
-	bool Initialize(float _screenWidth, float _screenHeight, bool _fullScreen);
+	bool Initialize(int _screenWidth, int _screenHeight, bool _fullScreen);
 	/*
 	@brief  終了処理
 	*/
@@ -366,9 +366,9 @@ private:
 	const int TimeFontSize;
 
 	//スクリーンの横幅
-	float screenWidth;
+	int screenWidth;
 	//スクリーンの縦幅
-	float screenHeight;
+	int screenHeight;
 
 	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
 	unsigned int undefineTexID;
@@ -456,13 +456,13 @@ public://ゲッターセッター
 	@brief	スクリーンの横幅を取得する
 	@return	スクリーンの横幅
 	*/
-	float GetScreenWidth() const { return screenWidth; }
+	int GetScreenWidth() const { return screenWidth; }
 
 	/*
 	@brief	スクリーンの縦幅を取得する
 	@return	スクリーンの縦幅
 	*/
-	float GetScreenHeight() const { return screenHeight; }
+	int GetScreenHeight() const { return screenHeight; }
 
 	/*
 	@brief	View行列のgetter

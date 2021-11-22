@@ -35,7 +35,7 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		// 仮ポジション変数
 		Vector3 tmpPosition;
 		// 線形補完をとり変数に保存
-		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTarget->GetPosition(), _deltaTime * 9.0);
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), attackTarget->GetPosition(), _deltaTime * 9.0f);
 		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 	}

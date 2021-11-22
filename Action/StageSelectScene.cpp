@@ -72,6 +72,15 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 		SelectRight();
 	}
 
+	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_A) == Pressed)
+	{
+		SelectLeft();
+	}
+	else if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_D) == Pressed)
+	{
+		SelectRight();
+	}
+
 	// 選択されたら選ばれたシーンを返す
 	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)

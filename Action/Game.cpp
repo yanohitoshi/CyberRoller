@@ -35,13 +35,13 @@ bool Game::continueFlag = false;
 Game::Game()
 	: fps(nullptr)
     , isRunning(true)
-	, screenWidth(0.0f)
-	, screenHeight(0.0f)
+	, screenWidth(0)
+	, screenHeight(0)
 	, isFullScreen(true)
-	, FullScreenWidth(1920.0f)
-	, FullScreenHeight(1080.0f)
-	, WindowScreenWidth(1080.0f)
-	, WindowScreenHeight(800.0f)
+	, FullScreenWidth(1920)
+	, FullScreenHeight(1080)
+	, WindowScreenWidth(1080)
+	, WindowScreenHeight(800)
 {
 }
 

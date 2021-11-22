@@ -41,9 +41,9 @@ void CollectedEffectSprite::UpdateGameObject(float _deltaTime)
 {
 	if (sprite->GetVisible())
 	{
-		scale += 0.1;
+		scale += 0.1f;
 		sprite->SetScale(scale);
-		alpha -= 0.05;
+		alpha -= 0.05f;
 		sprite->SetAlpha(alpha);
 	}
 

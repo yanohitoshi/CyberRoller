@@ -108,7 +108,7 @@ void CollectionEffectManager::CreationLightEffect()
 	}
 
 	// ƒ‰ƒ“ƒ_ƒ€‚È’l‚ğ¶¬
-	Vector3 randDir((rand() % 100), (rand() % 100), 1.0f);
+	Vector3 randDir((float)(rand() % 100), (float)(rand() % 100), 1.0f);
 	randDir.Normalize();
 
 	if (activeCount % 2 == 0)

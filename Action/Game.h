@@ -140,22 +140,22 @@ private:
 	static bool continueFlag;
 
 	// スクリーンの幅
-	float screenWidth;
+	int screenWidth;
 
 	// スクリーンの高さ
-	float screenHeight;
+	int screenHeight;
 
 	// フルスクリーンモードを使用するかどうかフラグ
 	bool isFullScreen;
 
 	// フルスクリーンモードの時のスクリーンの横幅定数
-	const float FullScreenWidth;
+	const int FullScreenWidth;
 	// フルスクリーンモードの時のスクリーンの縦幅定数
-	const float FullScreenHeight;
+	const int FullScreenHeight;
 	// ウィンドウモードの時のスクリーンの横幅定数
-	const float WindowScreenWidth;
+	const int WindowScreenWidth;
 	// ウィンドウモードの時のスクリーンの横幅定数
-	const float WindowScreenHeight;
+	const int WindowScreenHeight;
 
 public:
 

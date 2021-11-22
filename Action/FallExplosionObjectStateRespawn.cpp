@@ -36,8 +36,8 @@ void FallExplosionObjectStateRespawn::SetRandPosition(ExplosionObjectBase* _owne
 	Vector3 fallArea = Vector3::Zero;
 
 	fallArea = _owner->GetFallArea();
-	float randValueX = (rand() % (int)(fallArea.x / 2.0f));
-	float randValueY = (rand() % (int)(fallArea.y / 2.0f));
+	float randValueX = (float)(rand() % (int)(fallArea.x / 2.0f));
+	float randValueY = (float)(rand() % (int)(fallArea.y / 2.0f));
 
 	int plus_minus_value = rand() % 4;
 

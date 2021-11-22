@@ -24,7 +24,7 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectB
 
 		velocity = blowAwayDirection * BlowAwaySpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-		angle += 0.1;
+		angle += 0.1f;
 		RotationProcess(_owner, angle, Vector3::UnitY);
 	}
 

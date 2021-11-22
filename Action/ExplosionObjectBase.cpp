@@ -1,4 +1,5 @@
 #include "ExplosionObjectBase.h"
+#include "ExplosionObjectStateBase.h"
 
 ExplosionObjectBase::ExplosionObjectBase(const Tag _objectTag)
 	: GameObject(false, _objectTag)

@@ -114,6 +114,8 @@ void StartCountDownSprite::ChangeTextureProcess()
 		break;
 	case TimeNum::ONE:
 		sprite->SetTexture(startTexure);
+		// スタートtextureになった時のみ拡大
+		SetScale(2.0f);
 		texChangeFlag = false;
 		break;
 	case TimeNum::ZERO:

@@ -26,6 +26,7 @@ GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	sprite->SetTexture(tex);
 	sprite->SetVisible(false);
 	sprite->SetAlpha(1.0f);
+	SetScale(1.5f);
 	// ƒƒ“ƒo[•Ï”‰Šú‰»
 	frameCount = 0;
 }

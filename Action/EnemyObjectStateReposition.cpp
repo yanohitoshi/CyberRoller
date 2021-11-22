@@ -32,7 +32,7 @@ EnemyState EnemyObjectStateReposition::Update(EnemyObjectBase* _owner, float _de
 		// 仮ポジション変数
 		Vector3 tmpPosition;
 		// 今のポジションと初期ポジションで線形補間を取る
-		tmpPosition = Vector3::Lerp(_owner->GetPosition(), firstPosition, _deltaTime * 1.0);
+		tmpPosition = Vector3::Lerp(_owner->GetPosition(), firstPosition, _deltaTime * 1.0f);
 		// ポジションをセット
 		_owner->SetPosition(tmpPosition);
 	}

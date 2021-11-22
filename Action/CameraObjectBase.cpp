@@ -2,6 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "CameraObjectBase.h"
+#include "CameraObjectStateBase.h"
 
 /*
 @fn コンストラクタ

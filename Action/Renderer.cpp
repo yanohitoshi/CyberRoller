@@ -107,7 +107,7 @@ void Renderer::DeleteInstance()
 @brief  初期化処理
 @return true : 成功 , false : 失敗
 */
-bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScreen)
+bool Renderer::Initialize(int _screenWidth, int _screenHeight, bool _fullScreen)
 {
 	// スクリーンサイズ初期化
 	screenWidth = _screenWidth;
@@ -657,13 +657,13 @@ bool Renderer::LoadShaders()
 	}
 	spriteShader->SetActive();
 	// sprite用ビュー行列の設定
-	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
+	Matrix4 viewProj = Matrix4::CreateSimpleViewProj((float)screenWidth, (float)screenHeight);
 	spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
 	// 3Dモデル用ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
-		screenWidth, screenHeight, CameraProjectionNear, CameraProjectionFar);
+		(float)screenWidth, (float)screenHeight, CameraProjectionNear, CameraProjectionFar);
 
 	// switch用シェーダーの作成(色変更可能シェーダー)
 	switchShader = new Shader();
