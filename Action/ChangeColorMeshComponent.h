@@ -46,7 +46,5 @@ public:// ゲッターセッター
     @param  _color 変更したい色のRGB(Vector3)
     */
     void SetColor(const Vector3& _color) { color = _color; }
-    
-
 };
 

@@ -80,7 +80,7 @@ public: //ゲッターセッター
 	/*
 	@return テクスチャID
 	*/
-	int GetTextureID() { return textureID; }
+	int GetTextureID() const { return textureID; }
 
 	/*
 	@param _texId テクスチャID
@@ -90,7 +90,7 @@ public: //ゲッターセッター
 	/*
 	@return ブレンドタイプ
 	*/
-	PARTICLE_ENUM GetBlendType() { return blendType; }
+	PARTICLE_ENUM GetBlendType() const { return blendType; }
 
 	/*
 	@param _color 画像に乗算する色
@@ -137,7 +137,7 @@ public: //ゲッターセッター
 	/*
 	@return 描画順
 	*/
-	int GetDrawOrder() { return drawOrder; }
+	int GetDrawOrder() const { return drawOrder; }
 
 	/*
 	@param _offset 親オブジェクトの座標と描画位置の差

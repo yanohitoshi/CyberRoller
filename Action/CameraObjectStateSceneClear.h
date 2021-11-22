@@ -1,6 +1,10 @@
 #pragma once
 #include "CameraObjectStateBase.h"
 
+/*
+@file GameObject.h
+@brief ゲームオブジェクトの基底クラス
+*/
 class CameraObjectStateSceneClear :
     public CameraObjectStateBase
 {
@@ -12,7 +16,8 @@ public:
 	CameraObjectStateSceneClear()
 	: GameClearRadius(1000.0f)
 	, AutomaticMoveSpeed(0.02f)
-	, TrackingTime(60){};
+	, TrackingTime(60)
+	, InitYaw(180.0f){};
 
 	/*
 	@fn デストラクタ
@@ -39,6 +44,9 @@ public:
 private:
 
 	float yaw;
+	// ステータス開始時のヨーの値定数
+	const float InitYaw;
+
 	const float GameClearRadius;
 	// 自動回転する際の移動速度
 	const float AutomaticMoveSpeed;

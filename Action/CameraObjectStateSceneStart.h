@@ -1,6 +1,10 @@
 #pragma once
 #include "CameraObjectStateBase.h"
 
+/*
+@file GameObject.h
+@brief ゲームオブジェクトの基底クラス
+*/
 class CameraObjectStateSceneStart :
     public CameraObjectStateBase
 {

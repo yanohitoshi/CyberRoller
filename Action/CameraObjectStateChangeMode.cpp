@@ -1,15 +1,24 @@
-#include "CameraObjectStateLandscape.h"
+#include "CameraObjectStateChangeMode.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 
-CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _deltaTime)
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+@return CameraState　更新終了時のステータスを返す
+*/
+CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float _deltaTime)
 {
 	++startStateCount;
 
+	// 仮ポジション
 	Vector3 tmpMovePos;
+	// 追従するオブジェクトのポジション
 	Vector3 lerpObjectPos;
+	// 追従するオブジェクトのポインタ
 	GameObject* lerpObject = _owner->GetLerpObject();
-
 	// 追従するオブジェクトのポジションを取得
 	lerpObjectPos = lerpObject->GetPosition();
 	// 仮の移動ポジション変数に代入
@@ -18,6 +27,7 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	tmpMovePos.y += offsetPosition.y;
 	tmpMovePos.z += offsetPosition.z;
 
+	// 実際にセットするポジション
 	Vector3 setPosition;
 
 	if (startStateCount <= SlowLrapTime)
@@ -53,9 +63,17 @@ CameraState CameraObjectStateLandscape::Update(CameraObjectBase* _owner, float _
 	return state;
 }
 
-void CameraObjectStateLandscape::Enter(CameraObjectBase* _owner, float _deltaTime)
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
+void CameraObjectStateChangeMode::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
+	// ステータスを画角変更モードに変更
 	state = CameraState::CHANGEMODE;
+	// 変更する画角の間隔情報をもらう
 	offsetPosition = _owner->GetOffsetPosition();
+	// 変数初期化
 	startStateCount = 0;
 }

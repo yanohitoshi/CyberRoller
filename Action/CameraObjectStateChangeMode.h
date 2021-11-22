@@ -1,7 +1,11 @@
 #pragma once
 #include "CameraObjectStateBase.h"
 
-class CameraObjectStateLandscape :
+/*
+@file CameraObjectStateChangeMode.h
+@brief カメラの画角変更モードを更新するクラス
+*/
+class CameraObjectStateChangeMode :
     public CameraObjectStateBase
 {
 public:
@@ -9,20 +13,20 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	CameraObjectStateLandscape()
+	CameraObjectStateChangeMode()
 	: SlowLrapTime(80){};
 
 	/*
 	@fn デストラクタ
 	*/
-	~CameraObjectStateLandscape() {};
+	~CameraObjectStateChangeMode() {};
 
 	/*
 	@fn アップデート
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return CameraState　更新終了時のステータスを返す
 	*/
 	CameraState Update(CameraObjectBase* _owner, float _deltaTime)override;
 

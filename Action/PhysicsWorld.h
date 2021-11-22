@@ -128,7 +128,7 @@ private:
 
 	/*
 	@fn PhysicsWorldのインスタンス生成関数
-	//コンストラクタの隠蔽
+		コンストラクタの隠蔽
 	*/
 	PhysicsWorld();
 

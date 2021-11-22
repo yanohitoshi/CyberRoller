@@ -76,7 +76,7 @@ public://ゲッターセッター
 	/*
 	@return 描画順
 	*/
-	int GetDrawOrder() { return drawOrder; }
+	int GetDrawOrder() const { return drawOrder; }
 
 	/*
 	@brief　描画をするかどうかを設定

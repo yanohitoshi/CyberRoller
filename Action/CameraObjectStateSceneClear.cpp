@@ -45,7 +45,7 @@ CameraState CameraObjectStateSceneClear::Update(CameraObjectBase* _owner, float 
 void CameraObjectStateSceneClear::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
 	state = CameraState::SCENECLEAR;
-	yaw = 0.0f;
+	yaw = InitYaw;
 	trackingCount = 0;
 	stopPisitionZ = 0.0f;
 }

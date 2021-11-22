@@ -57,11 +57,11 @@ public: //ゲッターセッター
 	/*
 	@return 更新順番
 	*/
-	int GetUpdateOder() { return updateOrder; }
+	int GetUpdateOder() const { return updateOrder; }
 
 	/*
 	@return アタッチしているゲームオブジェクトへのポインタ
 	*/
-	GameObject* GetOwner() { return owner; };
+	GameObject* GetOwner() const { return owner; };
 };
 

@@ -154,12 +154,11 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="BreakBlockObject.cpp" />
     <ClCompile Include="BreakBlockObjectEffectManager.cpp" />
     <ClCompile Include="CameraChangePoint.cpp" />
-    <ClCompile Include="CameraObjectStateBase.cpp" />
     <ClCompile Include="CameraObjectStateDance.cpp" />
     <ClCompile Include="CameraObjectStateGameOver.cpp" />
     <ClCompile Include="CameraObjectStateSceneStart.cpp" />
     <ClCompile Include="CameraObjectStateNormal.cpp" />
-    <ClCompile Include="CameraObjectStateLandscape.cpp" />
+    <ClCompile Include="CameraObjectStateChangeMode.cpp" />
     <ClCompile Include="CameraObjectStateSceneClear.cpp" />
     <ClCompile Include="CollectedEffectSprite.cpp" />
     <ClCompile Include="CollectedSprite.cpp" />
@@ -397,7 +396,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="CameraObjectStateGameOver.h" />
     <ClInclude Include="CameraObjectStateSceneStart.h" />
     <ClInclude Include="CameraObjectStateNormal.h" />
-    <ClInclude Include="CameraObjectStateLandscape.h" />
+    <ClInclude Include="CameraObjectStateChangeMode.h" />
     <ClInclude Include="CameraObjectStateSceneClear.h" />
     <ClInclude Include="CollectedEffectSprite.h" />
     <ClInclude Include="CollectedSprite.h" />

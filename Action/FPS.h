@@ -52,6 +52,6 @@ public:
 	@brief 現在のフレームにかかった時間を取得
 	@return 現在のフレームにかかった時間
 	*/
-	float GetDeltaTime() { return deltaTime; }
+	float GetDeltaTime() const { return deltaTime; }
 };
 

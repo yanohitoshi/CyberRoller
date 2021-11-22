@@ -172,6 +172,5 @@ public:
 	@return コンティニューされたかどうかフラグ
 	*/
 	static bool GetContinueFlag() { return continueFlag; }
-
 };
 

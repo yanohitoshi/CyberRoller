@@ -65,6 +65,5 @@ void CubeMapComponent::Draw(Shader* in_shader)
 		glBindVertexArray(0);
 
 		glDepthFunc(GL_LESS);
-
 	}
 }

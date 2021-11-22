@@ -17,6 +17,7 @@ public:
 	@fn コンストラクタ
 	@param	ポジション
 	@param	当たり判定用AABB
+	@param	変更する間隔
 	@param	オブジェクト判別用tag
 	*/
 	CameraChangePoint(const Vector3& _p, const AABB& _box,Vector3& _changeOffset ,const Tag& _objectTag);
@@ -42,9 +43,11 @@ private:
 	@param	当たったGameObjectの当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
+
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
+	// 変更する間隔
 	Vector3 changeOffset;
 };
 

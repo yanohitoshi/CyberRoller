@@ -45,7 +45,9 @@ enum class PhysicsTag
 	NEEDLE_TAG,
 	// 爆弾
 	BOMB_TAG,
+	// 降ってくる爆弾
 	FALL_BOMB_TAG,
+	// 爆弾が降るエリア
 	FALL_BOMB_AREA_TAG,
 	// リスポーンポイント
 	RESPOWN_TAG,
@@ -61,7 +63,6 @@ enum class PhysicsTag
 	EXPLOSION_AREA_TAG,
 	// カメラモードをbehindカメラにするエリア判定
 	CAMERA_MODE_CHANGE_AREA,
-
 };
 
 /*

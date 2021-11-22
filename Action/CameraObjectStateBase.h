@@ -1,17 +1,32 @@
 #pragma once
 #include "CameraObjectBase.h"
 
+/*
+@enum class CameraState
+	カメラの状態
+*/
 enum class CameraState
 {
+	// 通常状態
 	NORMAL,
+	// エリアによる画角変更状態
 	CHANGEMODE,
+	// ダンス中
 	DANCE,
+	// ゲームオーバー状態
 	GAMEOVER,
+	// クリア状態
 	SCENECLEAR,
+	// シーン開始状態
 	SCENESTART,
+	// 状態無し
 	NONE
 };
 
+/*
+@file CameraObjectStateBase.h
+@brief カメラのステータスの基底クラス
+*/
 class CameraObjectStateBase
 {
 public:
@@ -32,7 +47,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return CameraState　更新終了時のステータスを返す
 	*/
 	virtual CameraState Update(CameraObjectBase* _owner, float _deltaTime) = 0;
 
@@ -55,7 +70,9 @@ protected:
 
 	// 線形保管時にデルタタイムをかけるとき用の補正定数
 	const float DeltaCorrection;
+	// ステータス変数
 	CameraState state;
+	// プレイヤーとの間隔
 	Vector3 offsetPosition;
 };
 
