@@ -67,8 +67,8 @@ private:
     bool fadeFlag;
     // alpha値
     float alpha;
-    // 何回fadein・outしたかを数えるカウント
-    int count;
+    // 何回fadeinしたかを数えるカウント
+    int fadeinCount;
 
     // フェードインアウトに用いる値定数
     const float FadeValue;

@@ -33,6 +33,8 @@ CountDownFont::CountDownFont(int _time)
 	new CountDownBackFont(_time);
 	// ŠÔ•\¦textureƒNƒ‰ƒX‚ğ¶¬
 	new TimeSprite();
+
+	new WarningSprite(this);
 }
 
 /*

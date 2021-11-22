@@ -92,9 +92,6 @@
     <ClCompile Include="CountDownFont.cpp">
       <Filter>UI\FontUI</Filter>
     </ClCompile>
-    <ClCompile Include="TimeSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
     <ClCompile Include="JumpTutorialParticl.cpp">
       <Filter>UI\ParticleUI</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="Music.cpp">
       <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="StartCountDownSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
     </ClCompile>
     <ClCompile Include="StageCreatorBase.cpp">
       <Filter>StageCreator</Filter>
@@ -134,26 +128,11 @@
     <ClCompile Include="CountDownBackFont.cpp">
       <Filter>UI\FontUI</Filter>
     </ClCompile>
-    <ClCompile Include="ContinueSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeUpSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameClearSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
     <ClCompile Include="HDRRenderer.cpp">
       <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="WarningSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
     </ClCompile>
     <ClCompile Include="FierWorksEffect.cpp">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
@@ -218,13 +197,7 @@
     <ClCompile Include="RespawnPoint.cpp">
       <Filter>GameObjects\StageObjects\RespawnObject</Filter>
     </ClCompile>
-    <ClCompile Include="ClearSceneUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
     <ClCompile Include="FinalStageUI.cpp">
-      <Filter>UI\SceneUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverSceneUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
     <ClCompile Include="ResultSceneUI.cpp">
@@ -489,16 +462,16 @@
       <Filter>GameObjects\Effect\CollectionEffect</Filter>
     </ClCompile>
     <ClCompile Include="CollectedSprite.cpp">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClCompile>
     <ClCompile Include="UnCollectedSprite.cpp">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClCompile>
     <ClCompile Include="CollectionUI.cpp">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClCompile>
     <ClCompile Include="CollectedEffectSprite.cpp">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClCompile>
     <ClCompile Include="CameraObjectStateSceneStart.cpp">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
@@ -553,9 +526,6 @@
     </ClCompile>
     <ClCompile Include="PlayerObjectStateExplosionBlowAway.cpp">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
-    </ClCompile>
-    <ClCompile Include="StartButtonSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
     </ClCompile>
     <ClCompile Include="EnhancedEnemyObject.cpp">
       <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject</Filter>
@@ -617,9 +587,6 @@
     <ClCompile Include="StageSelectSceneUI.cpp">
       <Filter>UI\SceneUI</Filter>
     </ClCompile>
-    <ClCompile Include="TitleSprite.cpp">
-      <Filter>UI\SpriteUI</Filter>
-    </ClCompile>
     <ClCompile Include="StageSelectSprite.cpp">
       <Filter>UI\SpriteUI\StageSelectSprite</Filter>
     </ClCompile>
@@ -673,6 +640,33 @@
     </ClCompile>
     <ClCompile Include="FirstStageScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCountDownSprite.cpp">
+      <Filter>UI\SpriteUI\StartCountDown</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueSprite.cpp">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverSprite.cpp">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearSprite.cpp">
+      <Filter>UI\SpriteUI\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSprite.cpp">
+      <Filter>UI\SpriteUI\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButtonSprite.cpp">
+      <Filter>UI\SpriteUI\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSprite.cpp">
+      <Filter>UI\SpriteUI\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeUpSprite.cpp">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="WarningSprite.cpp">
+      <Filter>UI\SpriteUI\Warning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -775,9 +769,6 @@
     <ClInclude Include="CountDownFont.h">
       <Filter>UI\FontUI</Filter>
     </ClInclude>
-    <ClInclude Include="TimeSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
     <ClInclude Include="JumpTutorialParticl.h">
       <Filter>UI\ParticleUI</Filter>
     </ClInclude>
@@ -795,9 +786,6 @@
     </ClInclude>
     <ClInclude Include="Music.h">
       <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="StartCountDownSprite.h">
-      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
     <ClInclude Include="StageCreatorBase.h">
       <Filter>StageCreator</Filter>
@@ -817,26 +805,11 @@
     <ClInclude Include="CountDownBackFont.h">
       <Filter>UI\FontUI</Filter>
     </ClInclude>
-    <ClInclude Include="ContinueSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeUpSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
     <ClInclude Include="ResultScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameClearSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
     <ClInclude Include="HDRRenderer.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="WarningSprite.h">
-      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
     <ClInclude Include="FierWorksEffect.h">
       <Filter>GameObjects\Effect\ClearEffect</Filter>
@@ -898,13 +871,7 @@
     <ClInclude Include="RespawnPoint.h">
       <Filter>GameObjects\StageObjects\RespawnObject</Filter>
     </ClInclude>
-    <ClInclude Include="ClearSceneUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
     <ClInclude Include="FinalStageUI.h">
-      <Filter>UI\SceneUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverSceneUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
     <ClInclude Include="ResultSceneUI.h">
@@ -1169,16 +1136,16 @@
       <Filter>GameObjects\Effect\CollectionEffect</Filter>
     </ClInclude>
     <ClInclude Include="CollectedSprite.h">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClInclude>
     <ClInclude Include="UnCollectedSprite.h">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClInclude>
     <ClInclude Include="CollectionUI.h">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClInclude>
     <ClInclude Include="CollectedEffectSprite.h">
-      <Filter>UI\SpriteUI\CollectionUI</Filter>
+      <Filter>UI\SpriteUI\Collection</Filter>
     </ClInclude>
     <ClInclude Include="CameraObjectStateSceneStart.h">
       <Filter>GameObjects\CameraObjects\CameraState</Filter>
@@ -1230,9 +1197,6 @@
     </ClInclude>
     <ClInclude Include="PlayerObjectStateExplosionBlowAway.h">
       <Filter>GameObjects\PlayerObjects\State\KnockBackState</Filter>
-    </ClInclude>
-    <ClInclude Include="StartButtonSprite.h">
-      <Filter>UI\SpriteUI</Filter>
     </ClInclude>
     <ClInclude Include="EnhancedEnemyObject.h">
       <Filter>GameObjects\EnemyObjects\EnhancedEnemyObject</Filter>
@@ -1297,9 +1261,6 @@
     <ClInclude Include="StageSelectSceneUI.h">
       <Filter>UI\SceneUI</Filter>
     </ClInclude>
-    <ClInclude Include="TitleSprite.h">
-      <Filter>UI\SpriteUI</Filter>
-    </ClInclude>
     <ClInclude Include="StageSelectSprite.h">
       <Filter>UI\SpriteUI\StageSelectSprite</Filter>
     </ClInclude>
@@ -1353,6 +1314,33 @@
     </ClInclude>
     <ClInclude Include="FirstStageScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCountDownSprite.h">
+      <Filter>UI\SpriteUI\StartCountDown</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueSprite.h">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverSprite.h">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearSprite.h">
+      <Filter>UI\SpriteUI\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSprite.h">
+      <Filter>UI\SpriteUI\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButtonSprite.h">
+      <Filter>UI\SpriteUI\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSprite.h">
+      <Filter>UI\SpriteUI\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeUpSprite.h">
+      <Filter>UI\SpriteUI\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="WarningSprite.h">
+      <Filter>UI\SpriteUI\Warning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1548,9 +1536,6 @@
     <Filter Include="GameObjects\Effect\CollectionEffect">
       <UniqueIdentifier>{dfd0be4e-d427-4b17-9b7c-1cbb91a0358b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\SpriteUI\CollectionUI">
-      <UniqueIdentifier>{e85f08fa-9667-491e-897d-d20ada9dd502}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{ac649ba1-4208-44c1-878a-5dedf3aecad7}</UniqueIdentifier>
     </Filter>
@@ -1583,6 +1568,27 @@
     </Filter>
     <Filter Include="UI\SpriteUI\StageSelectIcon">
       <UniqueIdentifier>{19a4e744-1c5d-4fca-88eb-8ff13c9d9e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\StartCountDown">
+      <UniqueIdentifier>{e692c9dd-a1bf-40b3-aed5-e67d8c93a800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\GameOver">
+      <UniqueIdentifier>{9941adba-588d-4cdf-b5e5-57191ef835a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\GameClear">
+      <UniqueIdentifier>{57bd0696-3f63-48ee-b30c-1b3fc2451f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\Title">
+      <UniqueIdentifier>{5a415565-4e38-4af7-ac11-ce505f7e8975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\Time">
+      <UniqueIdentifier>{f4bbdec1-95be-4cdf-a87e-c50046d57c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\Warning">
+      <UniqueIdentifier>{82c4976a-d47c-4fd3-9e4b-7e17625ffc7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\SpriteUI\Collection">
+      <UniqueIdentifier>{e85f08fa-9667-491e-897d-d20ada9dd502}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

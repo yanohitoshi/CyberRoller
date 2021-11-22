@@ -22,7 +22,7 @@
 */
 FirstStageUI::FirstStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
-	, SceneTime(200)
+	, SceneTime(40)
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);

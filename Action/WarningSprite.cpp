@@ -20,13 +20,13 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	// 変数の初期化
 	owner = _owner;
 	alpha = 0.1f;
-	count = 0;
+	fadeinCount = 0;
 	fadeFlag = true;
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponentの初期化
 	sprite = new SpriteComponent(this, false);
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/warning.png");
+	Texture* tex = RENDERER->GetTexture("Assets/sprite/information/warning.png");
 	sprite->SetTexture(tex);
 	sprite->SetVisible(true);
 	sprite->SetAlpha(alpha);
@@ -48,21 +48,17 @@ WarningSprite::~WarningSprite()
 void WarningSprite::UpdateGameObject(float _deltaTime)
 {
 	// countが2以下かつownerのフラグがtrueの時
-	if (count <= 2 && owner->GetWarningFlag() == true)
+	if (fadeinCount <= 2 && owner->GetWarningFlag() == true)
 	{
 		// 状態チェックと実際の処理
 		CheckFadeInOutProcess();
 	}
-	else if (count >= 3)	// countが3以上になったらalpha値が0になるまでout
+	else if (fadeinCount >= 3)	// countが3以上になったらalpha値が0になるまでout
 	{
 		// 最後のフェードアウト処理
 		LastFadeOutProcess();
 	}
-	// fadein/outが終わるごとにカウントを追加
-	if (fadeFlag == false && alpha <= 0.1f)
-	{
-		++count;
-	}
+
 	// alpha値をセット
 	sprite->SetAlpha(alpha);
 }
@@ -123,5 +119,6 @@ void WarningSprite::ChangeFadeProcess()
 	{
 		// フラグをout状態であるfalseに変更
 		fadeFlag = false;
+		++fadeinCount;
 	}
 }

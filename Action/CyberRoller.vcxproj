@@ -317,7 +317,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="GameClearEffect.cpp" />
     <ClCompile Include="GameClearEffectManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameOverSceneUI.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="JumpSwitchObject.cpp" />
     <ClCompile Include="JumpTutorialParticl.cpp" />
@@ -345,7 +344,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TutorialStageUI.cpp" />
     <ClCompile Include="RapidJsonHelper.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ClearSceneUI.cpp" />
     <ClCompile Include="SandSmokeMakeManeger.cpp" />
     <ClCompile Include="SandSmokeParticle.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -560,7 +558,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="GameClearEffect.h" />
     <ClInclude Include="GameClearEffectManager.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameOverSceneUI.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="JumpSwitchObject.h" />
     <ClInclude Include="JumpTutorialParticl.h" />
@@ -588,7 +585,6 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TutorialStageUI.h" />
     <ClInclude Include="RapidJsonHelper.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ClearSceneUI.h" />
     <ClInclude Include="SandSmokeMakeManeger.h" />
     <ClInclude Include="SandSmokeParticle.h" />
     <ClInclude Include="Shader.h" />
