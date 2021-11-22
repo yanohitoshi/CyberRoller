@@ -9,7 +9,7 @@
 @param	ˆÚ“®‘¬“x
 */
 JumpAttackEffect::JumpAttackEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 45, "Assets/Effect/Particle7.png", true)
+	: ParticleEffectBase(_pos, _velocity, 45, "Assets/Effect/Player/JumpAttack/Attack.png", true)
 	, AddScale(1.0f)
 	, SubAlpha(0.05f)
 {

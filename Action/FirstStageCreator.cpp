@@ -65,7 +65,7 @@ FirstStageCreator::~FirstStageCreator()
 bool FirstStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(layer1StageData, "Assets/Config/secondStageMap.json", "layer1"))
+	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/secondStageMap.json", "layer1"))
 	{
 		printf("do'nt have Layer/layer1\n");
 		return true;
@@ -76,105 +76,105 @@ bool FirstStageCreator::OpenFile()
 	sizeY = layer1StageData.size();
 
 	// ステージデータ読み込み (layer2) 
-	if (!readTiledJson(layer2StageData, "Assets/Config/secondStageMap.json", "layer2"))
+	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/secondStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer3) 
-	if (!readTiledJson(layer3StageData, "Assets/Config/secondStageMap.json", "layer3"))
+	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/secondStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer4) 
-	if (!readTiledJson(layer4StageData, "Assets/Config/secondStageMap.json", "layer4"))
+	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/secondStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer5) 
-	if (!readTiledJson(layer5StageData, "Assets/Config/secondStageMap.json", "layer5"))
+	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/secondStageMap.json", "layer5"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer6) 
-	if (!readTiledJson(layer6StageData, "Assets/Config/secondStageMap.json", "layer6"))
+	if (!readTiledJson(layer6StageData, "Assets/Config/StageData/secondStageMap.json", "layer6"))
 	{
 		printf("do'nt have Layer/layer6\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer7) 
-	if (!readTiledJson(layer7StageData, "Assets/Config/secondStageMap.json", "layer7"))
+	if (!readTiledJson(layer7StageData, "Assets/Config/StageData/secondStageMap.json", "layer7"))
 	{
 		printf("do'nt have Layer/layer7\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer8) 
-	if (!readTiledJson(layer8StageData, "Assets/Config/secondStageMap.json", "layer8"))
+	if (!readTiledJson(layer8StageData, "Assets/Config/StageData/secondStageMap.json", "layer8"))
 	{
 		printf("do'nt have Layer/layer8\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer9) 
-	if (!readTiledJson(layer9StageData, "Assets/Config/secondStageMap.json", "layer9"))
+	if (!readTiledJson(layer9StageData, "Assets/Config/StageData/secondStageMap.json", "layer9"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer10) 
-	if (!readTiledJson(layer10StageData, "Assets/Config/secondStageMap.json", "layer10"))
+	if (!readTiledJson(layer10StageData, "Assets/Config/StageData/secondStageMap.json", "layer10"))
 	{
 		printf("do'nt have Layer/layer10\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer11) 
-	if (!readTiledJson(layer11StageData, "Assets/Config/secondStageMap.json", "layer11"))
+	if (!readTiledJson(layer11StageData, "Assets/Config/StageData/secondStageMap.json", "layer11"))
 	{
 		printf("do'nt have Layer/layer11\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer12) 
-	if (!readTiledJson(layer12StageData, "Assets/Config/secondStageMap.json", "layer12"))
+	if (!readTiledJson(layer12StageData, "Assets/Config/StageData/secondStageMap.json", "layer12"))
 	{
 		printf("do'nt have Layer/layer12\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer13) 
-	if (!readTiledJson(layer13StageData, "Assets/Config/secondStageMap.json", "layer13"))
+	if (!readTiledJson(layer13StageData, "Assets/Config/StageData/secondStageMap.json", "layer13"))
 	{
 		printf("do'nt have Layer/layer13\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer14) 
-	if (!readTiledJson(layer14StageData, "Assets/Config/secondStageMap.json", "layer14"))
+	if (!readTiledJson(layer14StageData, "Assets/Config/StageData/secondStageMap.json", "layer14"))
 	{
 		printf("do'nt have Layer/layer14\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (player) 
-	if (!readTiledJson(playerData, "Assets/Config/secondStageMap.json", "Player"))
+	if (!readTiledJson(playerData, "Assets/Config/StageData/secondStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (CameraDirecting)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/secondStageMap.json", "CameraDirecting"))
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/secondStageMap.json", "CameraDirecting"))
 	{
 		printf("do'nt have Layer/CameraDirecting\n");
 		return true;

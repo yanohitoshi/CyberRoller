@@ -38,7 +38,7 @@ bool ResultSceneCreator::OpenFile()
 {
 
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(resultMapData, "Assets/Config/ResultScene.json", "BaseLayer"))
+	if (!readTiledJson(resultMapData, "Assets/Config/StageData/ResultScene.json", "BaseLayer"))
 	{
 		printf("do'nt have Layer/BaseLayer\n");
 		return true;
@@ -49,7 +49,7 @@ bool ResultSceneCreator::OpenFile()
 	sizeY = resultMapData.size();
 
 	// ステージデータ読み込み (CameraTarget)
-	if (!readTiledJson(resultCameraData, "Assets/Config/ResultScene.json", "CameraTarget"))
+	if (!readTiledJson(resultCameraData, "Assets/Config/StageData/ResultScene.json", "CameraTarget"))
 	{
 		printf("do'nt have Layer/CameraTarget\n");
 		return true;

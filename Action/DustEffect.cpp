@@ -1,7 +1,7 @@
 #include "DustEffect.h"
 
 DustEffect::DustEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 45, "Assets/Effect/Particle_Soft.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 45, "Assets/Effect/BreakBlock/Dust.png", true)
 	, AddScale(12.0f)
 	, SubAlpha(0.02f)
 	, EffectColor(Vector3(0.93f, 0.93f, 0.93f))

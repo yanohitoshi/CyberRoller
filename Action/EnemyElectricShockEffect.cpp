@@ -9,7 +9,7 @@
 @param	ƒ|ƒWƒVƒ‡ƒ“
 */
 EnemyElectricShockEffect::EnemyElectricShockEffect(GameObject* _owner,const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 10, "Assets/Effect/Thunder_Thin.png", false)
+	: ParticleEffectBase(_pos, Vector3::Zero, 10, "Assets/Effect/Enemy/ElectricShock.png", false)
 	, AddScale(12.0f)
 	, SubAlpha(0.1f)
 	, RandValue(361)

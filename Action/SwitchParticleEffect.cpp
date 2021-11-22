@@ -9,7 +9,7 @@
 @param	ˆÚ“®‘¬“x
 */
 SwitchParticleEffect::SwitchParticleEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Star.png",true)
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Switch/Star.png",true)
 	, AddScale(1.0f)
 	, SubAlpha(0.02f)
 {

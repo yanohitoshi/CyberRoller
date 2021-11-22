@@ -10,7 +10,7 @@
 @param	ˆÚ“®‘¬“x
 */
 EnemyExplosionEffect::EnemyExplosionEffect(GameObject* _owner, const Vector3& _pos,const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Fog3002.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 30, "Assets/Effect/Enemy/Explosion.png", true)
 	, AddScale(8.0f)
 	, SubAlpha(0.02f)
 	, EffectColor(Vector3(0.65f, 0.65f, 1.0f))

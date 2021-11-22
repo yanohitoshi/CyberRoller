@@ -10,7 +10,7 @@
 @param	ˆÚ“®‘¬“x
 */
 PlayerAttackHitEffectRipples::PlayerAttackHitEffectRipples(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Shockwave.png", false)
+	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Player/JumpAttack/Ripple.png", false)
 	, AddScale(128.0f)
 	, SubAlpha(0.01f)
 {

@@ -46,7 +46,7 @@ bool TitleStageCreator::OpenFile()
 {
 
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(titleMapData, "Assets/Config/TitleMap.json", "baselayer"))
+	if (!readTiledJson(titleMapData, "Assets/Config/StageData/TitleMap.json", "baselayer"))
 	{
 		printf("do'nt have Layer/Titlebaselayer\n");
 		return true;
@@ -57,7 +57,7 @@ bool TitleStageCreator::OpenFile()
 	sizeY = titleMapData.size();
 
 	// ステージデータ読み込み (player)
-	if (!readTiledJson(titlePlayerData, "Assets/Config/TitleMap.json", "player"))
+	if (!readTiledJson(titlePlayerData, "Assets/Config/StageData/TitleMap.json", "player"))
 	{
 		printf("do'nt have Layer/Titleplayer\n");
 		return true;

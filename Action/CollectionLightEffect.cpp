@@ -2,7 +2,7 @@
 #include "CrystalEffectManager.h"
 
 CollectionLightEffect::CollectionLightEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _direction, CrystalColor _crystalColor)
-	: ParticleEffectBase(_pos, Vector3::Zero, 60, "Assets/Effect/Particle_Soft.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 60, "Assets/Effect/Collection/Light.png", true)
 	, AddScale(2.0f)
 	, SubAlpha(0.01f)
 {

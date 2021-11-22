@@ -10,7 +10,7 @@
 @param	プレイヤーの体に位置を合わせるための間隔
 */
 PlayerDeadEffect::PlayerDeadEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _distance)
-	: ParticleEffectBase(_pos, Vector3::Zero, 15, "Assets/Effect/Thunder_Thin.png", false)
+	: ParticleEffectBase(_pos, Vector3::Zero, 15, "Assets/Effect/Player/Dead/Dead.png", false)
 	, AddScale(4.0f)
 	, SubAlpha(0.1f)
 	, RandValue(361)

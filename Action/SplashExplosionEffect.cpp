@@ -1,7 +1,7 @@
 #include "SplashExplosionEffect.h"
 
 SplashExplosionEffect::SplashExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/blueSmoke.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Bomb/Splash.png", true)
 	, AddScale(24.0f)
 	, SubAlpha(0.01f)
 	, EffectColor(Color::LightBlue)

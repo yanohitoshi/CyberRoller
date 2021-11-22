@@ -56,7 +56,7 @@ bool TutorialStageCreator::OpenFile()
 {
 
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(layer1StageData, "Assets/Config/firstStageMap.json", "layer1"))
+	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/firstStageMap.json", "layer1"))
 	{
 		printf("do'nt have Layer/layer1\n");
 		return true;
@@ -67,42 +67,42 @@ bool TutorialStageCreator::OpenFile()
 	sizeY = layer1StageData.size();
 
 	// ステージデータ読み込み (layer2) 
-	if (!readTiledJson(layer2StageData, "Assets/Config/firstStageMap.json", "layer2"))
+	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/firstStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer3) 
-	if (!readTiledJson(layer3StageData, "Assets/Config/firstStageMap.json", "layer3"))
+	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/firstStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer4) 
-	if (!readTiledJson(layer4StageData, "Assets/Config/firstStageMap.json", "layer4"))
+	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/firstStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer5) 
-	if (!readTiledJson(layer5StageData, "Assets/Config/firstStageMap.json", "layer5"))
+	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/firstStageMap.json", "layer5"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (player) 
-	if (!readTiledJson(playerData, "Assets/Config/firstStageMap.json", "Player"))
+	if (!readTiledJson(playerData, "Assets/Config/StageData/firstStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (CameraDirecting)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/firstStageMap.json", "CameraDirecting"))
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/firstStageMap.json", "CameraDirecting"))
 	{
 		printf("do'nt have Layer/CameraDirecting\n");
 		return true;

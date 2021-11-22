@@ -10,7 +10,7 @@
 @param	ˆÚ“®‘¬“x
 */
 PlayerTransformEffect::PlayerTransformEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle5.png", false)
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Player/JumpAttack/Transform.png", false)
 	, AddScale(16.0f)
 	, SubAlpha(0.05f)
 {

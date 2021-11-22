@@ -9,7 +9,7 @@
 @param	オーナーとなるGameObject型ポインタ
 */
 TutorialSwitchOkEffect::TutorialSwitchOkEffect(const Vector3& _pos, GameObject* _owner)
-	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/touch_OK.png", 1.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/Tutorial/Switch/touch_OK.png", 1.0f)
 	, InitScale(128.0f)
 {
 	// ParticleComponent初期化

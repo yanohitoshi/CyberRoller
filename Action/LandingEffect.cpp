@@ -9,7 +9,7 @@
 @param	ˆÚ“®‘¬“x
 */
 LandingEffect::LandingEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Particle7.png", true)
+	: ParticleEffectBase(_pos, _velocity, 30, "Assets/Effect/Player/Jump/Landing.png", true)
 	, AddScale(0.8f)
 	, SubAlpha(0.05f)
 {

@@ -11,7 +11,7 @@
 @param	ˆÚ“®‘¬“x
 */
 PlayerAttackHitEffect::PlayerAttackHitEffect(GameObject* _owner,const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Particle04_clear_hard.png", false)
+	: ParticleEffectBase(_pos, _velocity, 5, "Assets/Effect/Player/JumpAttack/Hit.png", false)
 	, AddScale(32.0f)
 	, SubAlpha(0.05f)
 {

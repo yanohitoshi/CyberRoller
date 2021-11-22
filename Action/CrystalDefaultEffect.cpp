@@ -11,7 +11,7 @@
 @param	âΩêFÇ©îªíËópTag
 */
 CrystalDefaultEffect::CrystalDefaultEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
-	: ParticleEffectBase(_pos, _velocity, 100, "Assets/Effect/Particle_Soft.png", true)
+	: ParticleEffectBase(_pos, _velocity, 100, "Assets/Effect/Crystal/Crystal.png", true)
 	, AddScale(2.0f)
 	, AddAlpha(0.005f)
 	, SubAlpha(0.002f)

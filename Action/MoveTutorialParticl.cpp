@@ -8,7 +8,7 @@
 @param	É|ÉWÉVÉáÉì
 */
 MoveTutorialParticl::MoveTutorialParticl(const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/move_tutorial.png", 1.0f)
+	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/Tutorial/Move/move_tutorial.png", 1.0f)
 	, InitScale(512.0f)
 {
 	// ParticleComponentèâä˙âª

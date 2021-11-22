@@ -1,7 +1,7 @@
 #include "CollectionRipplesEffect.h"
 
 CollectionRipplesEffect::CollectionRipplesEffect(GameObject* _owner, const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle5.png", true)
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Collection/Ripple.png", true)
 	, AddScale(32.0f)
 	, SubAlpha(0.01f)
 {

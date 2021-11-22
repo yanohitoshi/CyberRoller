@@ -12,7 +12,7 @@
 @param	âΩêFÇ©îªíËópTag
 */
 FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, CrystalColor _crystalColor)
-	: ParticleEffectBase(_pos, _velocity, 210, "Assets/Effect/Particle_Soft.png",true, true)
+	: ParticleEffectBase(_pos, _velocity, 210, "Assets/Effect/Clear/FierWorks.png",true, true)
 	, FadeInAddScale(2.0f)
 	, FadeOutAddScale(5.0f)
 	, MaxAlpha(0.9f)

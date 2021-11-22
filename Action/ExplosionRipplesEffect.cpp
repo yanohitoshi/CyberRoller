@@ -1,7 +1,7 @@
 #include "ExplosionRipplesEffect.h"
 
 ExplosionRipplesEffect::ExplosionRipplesEffect(GameObject* _owner, const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Shockwave.png", false)
+	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Bomb/Ripple.png", false)
 	, AddScale(96.0f)
 	, SubAlpha(0.03f)
 	, EffectColor(Vector3(1.0f, 1.0f, 1.0f))

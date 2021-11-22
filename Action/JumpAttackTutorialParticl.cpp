@@ -8,7 +8,7 @@
 @param	ƒ|ƒWƒVƒ‡ƒ“
 */
 JumpAttackTutorialParticl::JumpAttackTutorialParticl(const Vector3& _pos)
-	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/jump_attack_tutorial_A.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 100, "Assets/Particle/Tutorial/JumpAttack/jump_attack_tutorial_A.png", true)
 	, InitScale(512.0f)
 {
 	// ParticleComponent‰Šú‰»

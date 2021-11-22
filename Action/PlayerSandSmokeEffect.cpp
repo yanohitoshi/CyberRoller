@@ -9,7 +9,7 @@
 @param	ˆÚ“®‘¬“x
 */
 PlayerSandSmokeEffect::PlayerSandSmokeEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Particle_Soft.png",true)
+	: ParticleEffectBase(_pos, _velocity, 20, "Assets/Effect/Player/Run/SandSmoke.png",true)
 	, AddScale(5.0f)
 	, SubAlpha(0.05f)
 {

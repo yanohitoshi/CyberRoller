@@ -1,7 +1,7 @@
 #include "ExplosionEffect.h"
 
 ExplosionEffect::ExplosionEffect(const Vector3& _pos, const Vector3& _velocity)
-	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/blueBall.png", true)
+	: ParticleEffectBase(_pos, Vector3::Zero, 20, "Assets/Effect/Bomb/Explosion.png", true)
 	, AddScale(64.0f)
 	, SubAlpha(0.01f)
 	, EffectColor(Color::LightBlue)
