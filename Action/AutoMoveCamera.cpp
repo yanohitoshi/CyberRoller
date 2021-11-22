@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "AutoMoveCamera.h"
 #include "Renderer.h"
 #include "CameraObjectStateBase.h"
@@ -15,6 +18,11 @@
 #include "CameraObjectStateSceneClear.h"
 #include "CameraObjectStateSceneStart.h"
 
+/*
+@brief	コンストラクタ
+@param	ポジション
+@param	プレイヤーのポインタ
+*/
 AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	: CameraObjectBase(false, Tag::CAMERA)
 	, NormalOffset(Vector3(-600.0f, 0.0f, 500.0f))
@@ -37,10 +45,13 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	AddStatePoolMap(new CameraObjectStateSceneStart(), CameraState::SCENESTART);
 
 	nowState = CameraState::NONE;
-	//nextState = CameraState::SCENESTART;
 	nextState = CameraState::NORMAL;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 AutoMoveCamera::~AutoMoveCamera()
 {
 	RemoveStatePoolMap(CameraState::NORMAL);
@@ -51,6 +62,11 @@ AutoMoveCamera::~AutoMoveCamera()
 	ClearStatePoolMap();
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 {
 	// プレイヤーがダンス状態だったら
@@ -109,6 +125,11 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 	offSetPosition = NormalOffset;
 }
 
+/*
+@fn 入力を引数で受け取る更新関数
+@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 入力情報
+*/
 void AutoMoveCamera::GameObjectInput(const InputState& _keyState)
 {
 }

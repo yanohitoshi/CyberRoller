@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateBase.h"
 
 /*
@@ -16,7 +19,8 @@ public:
 	CameraObjectStateGameOver()
 		: GameOverRadius(400.0f)
 		, AutomaticMoveSpeed(0.01f)
-		, InitYaw(180.0f) {};
+		, InitYaw(180.0f) 
+		, OffsetZ(600.0f){};
 
 	/*
 	@fn デストラクタ
@@ -49,5 +53,7 @@ private:
 	const float GameOverRadius;
 	// 自動回転する際の移動速度
 	const float AutomaticMoveSpeed;
+	// Z軸の間隔
+	const float OffsetZ;
 };
 

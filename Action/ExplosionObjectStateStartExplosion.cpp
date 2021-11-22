@@ -43,7 +43,11 @@ void ExplosionObjectStateStartExplosion::Enter(ExplosionObjectBase* _owner, floa
 	isHitJumpAttackPlayer = _owner->GetIsHitJumpAttackPlayer();
 
 	blowAwayDirection = _owner->GetPosition() - _owner->GetHitPosition();
-	blowAwayDirection.Normalize();
+
+	if (!Math::NearZero(blowAwayDirection.Length()))
+	{
+		blowAwayDirection.Normalize();
+	}
 	blowAwayDirection.z = 0.0f;
 	isRed = false;
 	colorChangeTime = FirstColorChangeTime;

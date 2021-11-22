@@ -1,11 +1,24 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateNormal.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+@return CameraState　更新終了時のステータスを返す
+*/
 CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _deltaTime)
 {
+	// 仮ポジション
 	Vector3 tmpMovePos;
+	// 追従するオブジェクトのポジション
 	Vector3 lerpObjectPos;
+	// 追従するオブジェクトのポインタ
 	GameObject* lerpObject = _owner->GetLerpObject();
 	// 追従するオブジェクトのポジションを取得
 	lerpObjectPos = lerpObject->GetPosition();
@@ -40,8 +53,15 @@ CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _del
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void CameraObjectStateNormal::Enter(CameraObjectBase* _owner, float _deltaTime)
 {
+	// ステータスを通常状態に変更
 	state = CameraState::NORMAL;
+	// 追従するオブジェクトとの間隔を取得
 	offsetPosition = _owner->GetOffsetPosition();
 }

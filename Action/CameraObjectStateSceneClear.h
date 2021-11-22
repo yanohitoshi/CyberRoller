@@ -1,9 +1,12 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateBase.h"
 
 /*
-@file GameObject.h
-@brief ゲームオブジェクトの基底クラス
+@file CameraObjectStateSceneClear.h
+@brief カメラのシーンクリア状態を更新するクラス
 */
 class CameraObjectStateSceneClear :
     public CameraObjectStateBase
@@ -17,7 +20,8 @@ public:
 	: GameClearRadius(1000.0f)
 	, AutomaticMoveSpeed(0.02f)
 	, TrackingTime(60)
-	, InitYaw(180.0f){};
+	, InitYaw(180.0f)
+	, OffsetZ(400.0f){};
 
 	/*
 	@fn デストラクタ
@@ -29,7 +33,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return CameraState　更新終了時のステータスを返す
 	*/
 	CameraState Update(CameraObjectBase* _owner, float _deltaTime)override;
 
@@ -43,15 +47,21 @@ public:
 
 private:
 
+	// ヨー変数
 	float yaw;
+	// 追跡時間を数えるカウント変数
+	int trackingCount;
+	// 停止するZ軸ポジションを格納する変数
+	float stopPisitionZ;
 	// ステータス開始時のヨーの値定数
 	const float InitYaw;
-
+	// クリア時の回転する際の半径
 	const float GameClearRadius;
 	// 自動回転する際の移動速度
 	const float AutomaticMoveSpeed;
-	int trackingCount;
+	// 追跡する時間
 	const int TrackingTime;
-	float stopPisitionZ;
+	// Z軸の間隔
+	const float OffsetZ;
 };
 

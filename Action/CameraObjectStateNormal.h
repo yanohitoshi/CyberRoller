@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateBase.h"
 
 /*
@@ -25,7 +28,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return CameraState　更新終了時のステータスを返す
 	*/
 	CameraState Update(CameraObjectBase* _owner, float _deltaTime)override;
 
@@ -35,5 +38,8 @@ public:
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void Enter(CameraObjectBase* _owner, float _deltaTime)override;
+
+private:
+
 };
 

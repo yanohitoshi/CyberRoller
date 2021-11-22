@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateBase.h"
 
 /*
@@ -14,7 +17,8 @@ public:
 	@fn コンストラクタ
 	*/
 	CameraObjectStateChangeMode()
-	: SlowLrapTime(80){};
+	: SlowLrapTime(80)
+	, SlowLrapCorrection(2.0f){};
 
 	/*
 	@fn デストラクタ
@@ -41,6 +45,9 @@ private:
 
 	// ステータス開始以降のカウントを数える
 	int startStateCount;
+	// 線形補間の数値が小さい時間
 	const int SlowLrapTime;
+	// 線形補間の数値が小さい時間の時に用いる補正値定数
+	const float SlowLrapCorrection;
 };
 

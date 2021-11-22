@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectBase.h"
 
+/*
+@file AutoMoveCamera.h
+@brief 自動移動するカメラクラス
+*/
 class AutoMoveCamera :
     public CameraObjectBase
 {
@@ -35,6 +42,7 @@ public:
 
 private:
 
+	// 通常時の追従するオブジェクトとの間隔
 	const Vector3 NormalOffset;
 };
 

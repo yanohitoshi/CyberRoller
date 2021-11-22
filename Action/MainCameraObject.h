@@ -11,7 +11,7 @@ class BoxCollider;
 
 /*
 @file MainCameraObject.h
-@brief メインカメラ ゲーム中のオブジェクトを映す
+@brief 手動で回転させることが出来るカメラクラス
 */
 class MainCameraObject :
 	public CameraObjectBase

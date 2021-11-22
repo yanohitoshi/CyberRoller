@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class CameraObjectStateBase;
 enum class CameraState;
 
@@ -84,6 +85,7 @@ protected:
     float yaw;
     float pitch;
 
+    // 間隔
     Vector3 offSetPosition;
 
     // 今のenemyのstate状態を保存するための変数
@@ -93,40 +95,54 @@ protected:
     // 全stateが格納されるマップ
     std::unordered_map<CameraState, CameraObjectStateBase*> statePoolMap;
 
-private:
-
-
 public:
     
     /*
     @brief カメラの前方ベクトルを得るためのgetter
     @return カメラの前方ベクトル
     */
-    Vector3 GetCameraVec() { return forwardVec; }
+    Vector3 GetCameraVec() const { return forwardVec; }
 
     /*
     @brief 追従するオブジェクトのポインタを得るためのgetter
     @return 追従するオブジェクトのポインタ
     */
-    PlayerObject* GetLerpObject() { return playerObject; }
+    PlayerObject* GetLerpObject() const { return playerObject; }
 
     /*
-    @brief player以外のものを注視する場合のポジション得るためのgetter
+    @brief 注視するオブジェクトのポジションのgetter
     @return 注視点
     */
-    Vector3 GetLerpObjectPos() { return lerpObjectPos; }
+    Vector3 GetLerpObjectPos() const { return lerpObjectPos; }
 
     /*
-    @brief	player以外のものを注視する際に使うsetter
+    @brief 追従するオブジェクトのとの間隔を取得
+    @return 間隔
+    */
+    Vector3 GetOffsetPosition() const { return offSetPosition; }
+
+    /*
+    @brief	注視するオブジェクトのポジションをセット
     @param 見る対象物のポジション
     */
     void SetLerpObjectPos(const Vector3& _pos) { lerpObjectPos = _pos; }
 
-    Vector3 GetOffsetPosition() { return offSetPosition; }
-
+    /*
+    @brief	注視するオブジェクトのポジションをセット
+    @param 見る対象物のポジション
+    */
     void SetOffsetPosition(Vector3 _offset) { offSetPosition = _offset; }
 
+    /*
+    @brief	次のステータスをセット
+    @param _nextState 次のステータス
+    */
     void SetNextState(CameraState _nextState) { nextState = _nextState; }
+
+    /*
+    @brief	前方ベクトルをセット
+    @param _nextForward 次の前方ベクトル
+    */
     void SetCameraVec(Vector3 _nextForward) { forwardVec = _nextForward; }
 };
 

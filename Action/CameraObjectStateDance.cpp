@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateDance.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
@@ -25,7 +28,7 @@ CameraState CameraObjectStateDance::Update(CameraObjectBase* _owner, float _delt
 	// ポジションの更新をプレイヤーが踊っている時用の半径で行う
 	tmpMovePos.x = DanceRadius * cosf(yaw) + lerpObjectPos.x;
 	tmpMovePos.y = DanceRadius * sinf(yaw) + lerpObjectPos.y;
-	tmpMovePos.z = lerpObjectPos.z + 600.0f;
+	tmpMovePos.z = lerpObjectPos.z + OffsetZ;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間

@@ -42,6 +42,11 @@ void CameraObjectBase::GameObjectInput(const InputState& _keyState)
 {
 }
 
+/*
+@brief ステートプール用マップにステートクラスを追加する関数
+@param	_state 追加するステートクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
 void CameraObjectBase::AddStatePoolMap(CameraObjectStateBase* _state, CameraState _stateTag)
 {
 	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
@@ -58,11 +63,18 @@ void CameraObjectBase::AddStatePoolMap(CameraObjectStateBase* _state, CameraStat
 	}
 }
 
+/*
+@brief ステートプール用マップからステートクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
 void CameraObjectBase::RemoveStatePoolMap(CameraState _stateTag)
 {
 	delete statePoolMap[_stateTag];
 }
 
+/*
+@brief ステートプール用マップをクリアする
+*/
 void CameraObjectBase::ClearStatePoolMap()
 {
 	statePoolMap.clear();

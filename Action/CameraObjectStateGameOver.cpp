@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "CameraObjectStateGameOver.h"
 #include "Renderer.h"
 #include "PlayerObject.h"
@@ -25,7 +28,7 @@ CameraState CameraObjectStateGameOver::Update(CameraObjectBase* _owner, float _d
 	// ポジションの更新をプレイヤーが踊っている時用の半径で行う
 	tmpMovePos.x = GameOverRadius * cosf(yaw) + lerpObjectPos.x;
 	tmpMovePos.y = GameOverRadius * sinf(yaw) + lerpObjectPos.y;
-	tmpMovePos.z = lerpObjectPos.z + 600.0f;
+	tmpMovePos.z = lerpObjectPos.z + OffsetZ;
 
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
