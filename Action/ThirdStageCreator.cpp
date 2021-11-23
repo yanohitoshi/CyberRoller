@@ -725,6 +725,9 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 	case(BREAK_BLOCK_PARTS):
 		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
+	case(BOMB_PARTS):
+		new ExplosionObject(layer10Pos, Tag::BOMB);
+		break;
 	}
 }
 
