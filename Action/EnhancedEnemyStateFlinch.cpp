@@ -49,14 +49,22 @@ void EnhancedEnemyStateFlinch::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_FLINCH));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_FLINCH;
+
+	// ステータスを無効状態にする
 	_owner->SetState(State::Disabling);
 
 	// カウント初期化
 	flinchCount = 0;
 	// 吹っ飛ぶ方向を計算
 	blowAwayDirection = _owner->GetPosition() - _owner->GetDefeatedObjectPosition();
-	// 正規化
-	blowAwayDirection.Normalize();
+
+	// 長さが0に近くなかったら
+	if (!Math::NearZero(blowAwayDirection.Length()))
+	{
+		// 正規化
+		blowAwayDirection.Normalize();
+	}
+
 	// 上下方向を0に固定
 	blowAwayDirection.z = 0.0f;
 	// 移動速度を初速にする

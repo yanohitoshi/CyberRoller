@@ -188,10 +188,6 @@ protected:
 	// 全stateが格納されるマップ
 	std::unordered_map<EnemyState, EnemyObjectStateBase*> statePoolMap;
 
-private:
-
-
-
 public:// ゲッターセッター
 
 	/*
@@ -199,12 +195,6 @@ public:// ゲッターセッター
 	@return SkeletalMeshComponent　SkeletalMeshComponentクラスのポインタを返す
 	*/
 	SkeletalMeshComponent* GetSkeletalMeshComponent() { return skeltalMeshComponent; }
-
-	///*
-	//@fn trackingObjectのgetter関数
-	//@return trackingObject　追跡するオブジェクトのポインタを返す
-	//*/
-	//GameObject* GetTrackingObject(){ return trackingObject; }
 
 	/*
 	@fn Animationのgetter関数
@@ -326,12 +316,6 @@ public:// ゲッターセッター
 	@return MoveEnemyTag moveEnemyTag 移動方向を指すTagを返す
 	*/
 	MoveEnemyTag GetMoveEnemyTag() { return moveEnemyTag; }
-
-	///*
-	//@fn trackingObjectのgetter関数
-	//@param 追跡するオブジェクトのポインタをセット
-	//*/
-	//void SetTrackingObject(GameObject* _trackingObject) { trackingObject = _trackingObject; }
 
 	/*
 	@fn charaForwardVecのsetter関数

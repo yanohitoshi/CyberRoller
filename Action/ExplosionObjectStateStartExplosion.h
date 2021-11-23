@@ -18,7 +18,8 @@ public:
 	*/
 	ExplosionObjectStateStartExplosion()
 	: BlowAwaySpeed(1600.0f)
-	, FirstColorChangeTime(15){};
+	, FirstColorChangeTime(15)
+	, ExplosionStartTime(180){};
 
 	/*
 	@fn デストラクタ
@@ -30,7 +31,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return ExplosionObjectState　更新終了時のステータスを返す
 	*/
 	ExplosionObjectState Update(ExplosionObjectBase* _owner, float _deltaTime);
 
@@ -48,14 +49,23 @@ private:
 	*/
 	void Flashing();
 
+	// ジャンプアタックプレイヤーに当たったかどうか
 	bool isHitJumpAttackPlayer;
 	// 吹っ飛ぶ方向ベクトル
 	Vector3 blowAwayDirection;
 
+	// 爆発開始時間をカウント
 	int explosionStart;
 
+	// 色を変更する時間
 	int colorChangeTime;
+	// 赤かどうか
 	bool isRed;
+	// 吹っ飛ぶスピード定数
 	const float BlowAwaySpeed;
+	//最初の色変更する時間
 	const int FirstColorChangeTime;
+
+	// 爆発開始時間
+	const int ExplosionStartTime;
 };

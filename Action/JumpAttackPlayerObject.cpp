@@ -22,6 +22,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	, Rotation(10.0f)
 	, ShiftPositionZ(100.0f)
 {
+	// 変数初期化
 	ownerObject = _ownerObject;
 	position = ownerObject->GetPosition();
 	position.z += ShiftPositionZ;
@@ -34,6 +35,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 	SetScale(_size);
 	SetState(State::Disabling);
 
+	// メッシュ読み込み
 	meshComponent = new MeshComponent(this, false, false);
 	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 	//メッシュ情報取得
@@ -67,20 +69,28 @@ JumpAttackPlayerObject::~JumpAttackPlayerObject()
 */
 void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 {
+	// オーナーがジャンプアタック状態だったら
 	if (ownerObject->GetNowState() == PlayerState::PLAYER_STATE_JUMP_ATTACK)
 	{
+		// 自分のステータスをActiveにセット
 		SetState(State::Active);
+		// 描画On
 		meshComponent->SetVisible(true);
 	}
 	else
 	{
+		// 自分のステータスをDisablingにセット
 		SetState(State::Disabling);
+		// 描画Off
 		meshComponent->SetVisible(false);
+		// ヒットフラグ初期化
 		isHIt = false;
 	}
 
+	// 自分がActiveで何にもヒットしていなかったら
 	if (state == State::Active && !isHIt)
 	{
+		// 回転処理
 		rotationAngle += Rotation;
 		//Z軸を指定角度回転させる
 		float radian = Math::ToRadians(rotationAngle);
@@ -90,8 +100,9 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 		SetRotation(target);
 	}
 
+	// ポジション更新
 	position = ownerObject->GetPosition();
-	position.z += 100.0f;
+	position.z += ShiftPositionZ;
 	SetPosition(position);
 }
 
@@ -102,9 +113,10 @@ void JumpAttackPlayerObject::UpdateGameObject(float _deltaTime)
 */
 void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	bool isHitTarget = _hitObject.GetTag() == Tag::ENEMY || _physicsTag == PhysicsTag::SWITCH_TAG ||
+		_physicsTag == PhysicsTag::BOMB_TAG;
 	// 追跡対象に当たったら
-	if (_hitObject.GetTag() == Tag::ENEMY || _physicsTag == PhysicsTag::SWITCH_TAG ||
-		_physicsTag == PhysicsTag::BOMB_TAG)
+	if (isHitTarget)
 	{
 		// ヒットフラグをtrueに
 		isHIt = true;

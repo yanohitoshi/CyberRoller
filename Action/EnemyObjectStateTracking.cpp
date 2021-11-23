@@ -114,6 +114,7 @@ void EnemyObjectStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// ã‰ºˆÚ“®‚Í‚³‚¹‚È‚¢‚Ì‚Å0‚ÅŒÅ’è
 	trackingRotationVec.z = 0.0f;
 
+	// ’·‚³‚ª0‚É‹ß‚­‚È‚©‚Á‚½‚ç
 	if (!Math::NearZero(trackingRotationVec.Length()))
 	{
 		// ³‹K‰»

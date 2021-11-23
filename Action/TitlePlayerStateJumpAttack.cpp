@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TitlePlayerStateJumpAttack.h"
 #include "TitlePlayerObject.h"
 #include "TitleJumpAttackPlayerObject.h"

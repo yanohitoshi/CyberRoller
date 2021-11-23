@@ -56,8 +56,10 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
 
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	return state;
@@ -77,7 +79,9 @@ void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 	// 一度ジャンプ攻撃使用不可にセット
 	_owner->SetIsAvailableJumpAttck(false);
 
+	// オーナーからターゲットを捉えているかを取得
 	isSelectingTargetEnemy = _owner->GetIsSelectingTargetObject();
+
 	// ターゲットを捉えているか判定
 	if (isSelectingTargetEnemy && _owner->GetAttackTargetEnemy()->GetState() == State::Active)
 	{

@@ -99,6 +99,7 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 */
 TrackingEnemyObject::~TrackingEnemyObject()
 {
+	// Map‚ÌŒã•Ð•t‚¯
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_IDLE);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_DEAD);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_RESPAWN);

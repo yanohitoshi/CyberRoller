@@ -37,6 +37,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	// プレイヤーのポインタを保存
 	playerObject = _playerObject;
 
+	// ステータスクラスの追加
 	AddStatePoolMap(new CameraObjectStateNormal(), CameraState::NORMAL);
 	AddStatePoolMap(new CameraObjectStateChangeMode(), CameraState::CHANGEMODE);
 	AddStatePoolMap(new CameraObjectStateDance(), CameraState::DANCE);
@@ -44,6 +45,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	AddStatePoolMap(new CameraObjectStateSceneClear(), CameraState::SCENECLEAR);
 	AddStatePoolMap(new CameraObjectStateSceneStart(), CameraState::SCENESTART);
 
+	// ステータス変数初期化
 	nowState = CameraState::NONE;
 	nextState = CameraState::NORMAL;
 }
@@ -54,6 +56,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 */
 AutoMoveCamera::~AutoMoveCamera()
 {
+	// Mapの後片付け
 	RemoveStatePoolMap(CameraState::NORMAL);
 	RemoveStatePoolMap(CameraState::CHANGEMODE);
 	RemoveStatePoolMap(CameraState::DANCE);
@@ -76,6 +79,7 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 		nextState = CameraState::DANCE;
 	}
 
+	// タイムオーバーになっていたら
 	if (CountDownFont::GetTimeOverFlag())
 	{
 		// ゲームオーバーカメラに変更

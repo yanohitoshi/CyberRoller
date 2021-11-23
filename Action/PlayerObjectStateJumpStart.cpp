@@ -14,6 +14,7 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	, SwitchJumpTime(15)
 	, JumpAccelPower(100.0f)
 	, SwitchJumpAccelPower(120.0f)
+	, Deceleration(0.5f)
 {
 }
 
@@ -67,8 +68,9 @@ PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _delt
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
-
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// 更新されたstateを返す
@@ -111,8 +113,7 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 	// ownerの速度ベクトルをもらう
 	velocity = _owner->GetVelocity();
 	// ownerの速度をもらう
-	moveSpeed = _owner->GetMoveSpeed() * 0.5f;
-	//moveSpeed = _owner->GetFirstAirMovePower();
+	moveSpeed = _owner->GetMoveSpeed() * Deceleration;
 
 	// state終了フラグを初期化
 	endFlag = false;

@@ -16,7 +16,9 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	FallExplosionObjectStateRespawn() {};
+	FallExplosionObjectStateRespawn()
+	: MaxFallSpeed(1000.0f)
+	, LowestFallSpeed(300.0f){};
 
 	/*
 	@fn デストラクタ
@@ -28,7 +30,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return ExplosionObjectState　更新終了時のステータスを返す
 	*/
 	ExplosionObjectState Update(ExplosionObjectBase* _owner, float _deltaTime);
 
@@ -41,11 +43,26 @@ public:
 
 private:
 
+	/*
+	@fn ランダムなポジションをセット
+	@param	_owner 親クラスのポインタ
+	*/
 	void SetRandPosition(ExplosionObjectBase* _owner);
+
+	/*
+	@fn ランダムな落下速度をセット
+	@param	_owner 親クラスのポインタ
+	*/
 	void SetRandFallSpeed(ExplosionObjectBase* _owner);
 
 	// リスポーン中のカウント変数
 	int respawnCount;
+	// 初期ポジション
 	Vector3 firstPosition;
+
+	// 最大落下速度
+	const float MaxFallSpeed;
+	// 落下速度の最低値
+	const float LowestFallSpeed;
 };
 

@@ -32,8 +32,13 @@ EnemyState EnemyObjectStateRespawn::Update(EnemyObjectBase* _owner, float _delta
 	nowPosition = _owner->GetPosition();
 	// 今のポジションから初期ポジションへ向かう方向ベクトルを作成
 	moveDirection = _owner->GetFirstPosition() - nowPosition;
-	// 正規化
-	moveDirection.Normalize();
+	// 長さが0に近くなかったら
+	if (!Math::NearZero(moveDirection.Length()))
+	{
+		// 正規化
+		moveDirection.Normalize();
+	}
+
 	// 速度を計算ン
 	velocity = moveDirection * RespawnMoveSpeed;
 	// positionに速度を足してキャラクターを動かす
@@ -62,11 +67,13 @@ void EnemyObjectStateRespawn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// 描画をONに設定
 	skeletalMeshComponent->SetVisible(true);
+	// 描画をOn
 	_owner->SetIsVisible(true);
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_RESPAWN;
 	// 死亡フラグをfalseにセット
 	_owner->SetIsDead(false);
+	// 攻撃状態かどうかをfalseにセット
 	_owner->SetIsAttack(false);
 	// positionをリスポーンする場所にセット
 	_owner->SetPosition(_owner->GetRespawnPosition());

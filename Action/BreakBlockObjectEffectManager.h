@@ -85,6 +85,6 @@ private:
     // エフェクト本体に渡す速度
     Vector3 effectVelocity;
     // 1度だけ生成する用の生成フラグ変数
-    bool generateExplosionEffectsFlag;
+    bool generateEffectsFlag;
 };
 

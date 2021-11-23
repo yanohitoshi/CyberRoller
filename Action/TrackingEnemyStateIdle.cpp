@@ -27,13 +27,19 @@ TrackingEnemyStateIdle::~TrackingEnemyStateIdle()
 EnemyState TrackingEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
-	if (_owner->GetIsTracking() && !_owner->GetIsDead() && frameCount > StayTime)
+	// 追跡開始の条件がそろっているか
+	bool isStartTracking = _owner->GetIsTracking() && !_owner->GetIsDead() && frameCount > StayTime;
+	// 追跡開始の条件がそろっていたら
+	if (isStartTracking)
 	{
+		// 追跡状態へ遷移
 		state = EnemyState::ENEMY_STATE_TRACKING;
 	}
 
+	// もし死んでいたら
 	if (_owner->GetIsDead())
 	{
+		// 死亡状態へ遷移
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}
 
@@ -53,6 +59,8 @@ void TrackingEnemyStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_IDLE;
+	// ステータスを有効化
 	_owner->SetState(State::Active);
+	// 変数初期化
 	frameCount = 0;
 }

@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "FallExplosionObject.h"
 #include "FallExplosionArea.h"
 #include "Renderer.h"
@@ -46,6 +49,7 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 	AABB aabb = { Vector3(-100.0f,-100.0f,-100.0f),Vector3(100.0f,100.0f,100.0f) };
 	boxCollider->SetObjectBox(aabb);
 
+	// mapにステートパターンクラスを追加
 	AddStatePoolMap(new FallExplosionObjectStateIdle(), ExplosionObjectState::IDLE);
 	AddStatePoolMap(new ExplosionObjectStateFall(), ExplosionObjectState::FALL);
 	AddStatePoolMap(new ExplosionObjectStateExplosion(), ExplosionObjectState::EXPLOSION);
@@ -60,6 +64,7 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 
 FallExplosionObject::~FallExplosionObject()
 {
+	// Mapの後片付け
 	RemoveStatePoolMap(ExplosionObjectState::IDLE);
 	RemoveStatePoolMap(ExplosionObjectState::FALL);
 	RemoveStatePoolMap(ExplosionObjectState::EXPLOSION);
@@ -69,8 +74,10 @@ FallExplosionObject::~FallExplosionObject()
 
 void FallExplosionObject::UpdateGameObject(float _deltaTime)
 {
+	// オーナーの落下開始フラグがtrueだったら
 	if (owner->GetIsFallStart())
 	{
+		// trueにする
 		isFallStart = true;
 	}
 	else
@@ -114,8 +121,11 @@ void FallExplosionObject::UpdateGameObject(float _deltaTime)
 
 void FallExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
-	if (_physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
-		_physicsTag == PhysicsTag::BREAK_GROUND_TAG || _physicsTag == PhysicsTag::ENEMY_TAG)
+	// 触れたら爆発するオブジェクトか判定
+	bool isHitExplosion = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
+		_physicsTag == PhysicsTag::BREAK_GROUND_TAG || _physicsTag == PhysicsTag::ENEMY_TAG;
+
+	if (isHitExplosion)
 	{
 		isHitExplosionObject = true;
 	}

@@ -43,6 +43,7 @@ private:
 
 	// リスポーン中のカウント変数
 	int respawnCount;
+	// 初期ポジション
 	Vector3 firstPosition;
 };
 

@@ -57,8 +57,4 @@ private:
 
 	// ‰ñ“]Šp“x
 	const float Angle;
-
-public:
-
 };
-

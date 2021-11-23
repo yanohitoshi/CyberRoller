@@ -59,8 +59,10 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 		state = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
 
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// ownerの変数を更新

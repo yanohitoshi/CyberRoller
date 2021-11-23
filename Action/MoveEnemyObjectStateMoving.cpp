@@ -76,13 +76,16 @@ void MoveEnemyObjectStateMoving::Enter(EnemyObjectBase* _owner, float _deltaTime
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_MOVING;
+	// ステータスを有効化
 	_owner->SetState(State::Active);
 
+	// オーナーからデータをもらう
 	moveDirection = _owner->GetMoveDirection();
 	moveDistance = _owner->GetMoveDistance();
 	moveSpeed = _owner->GetMoveSpeed();
 	firstPosition = _owner->GetFirstPosition();
 
+	// 回転処理
 	RotationProcess(_owner, moveDirection, _owner->GetCharaForwardVec());
 }
 

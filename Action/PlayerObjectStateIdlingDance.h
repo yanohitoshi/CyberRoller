@@ -55,7 +55,6 @@ public:
 private:
 
 	// ダンス状態かどうかを表すフラグ変数
-	// ※カメラ側でも使用したかったのでstaticを使用してます
 	static bool isDancing;
 };
 

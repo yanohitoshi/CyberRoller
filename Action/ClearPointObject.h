@@ -78,4 +78,3 @@ private:
 	// ˆÚ“®‘¬“x‚Ì’è”
 	const float MoveSpeed;
 };
-

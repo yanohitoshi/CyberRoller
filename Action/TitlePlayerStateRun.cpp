@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TitlePlayerStateRun.h"
 #include "TitlePlayerObject.h"
 #include "SkeletalMeshComponent.h"

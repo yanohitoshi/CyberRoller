@@ -25,8 +25,10 @@ NormalEnemyObjectStateIdle::~NormalEnemyObjectStateIdle()
 */
 EnemyState NormalEnemyObjectStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
+	// 死亡状態だったら
 	if (_owner->GetIsDead())
 	{
+		// ステータスを死亡状態に
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}
 
@@ -46,5 +48,6 @@ void NormalEnemyObjectStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_IDLE;
+	// ステータスを有効化
 	_owner->SetState(State::Active);
 }

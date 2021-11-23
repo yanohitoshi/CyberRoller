@@ -24,9 +24,6 @@ public:
 	@fn コンストラクタ
 	@param	ポジション
 	@param	オブジェクト判別用tag
-	@param	移動速度
-	@param	追跡するオブジェクトのポインタ
-	@param	追跡エリアの値
 	*/
 	ExplosionObject(const Vector3& _pos, const Tag _objectTag);
 
@@ -51,6 +48,9 @@ private:
 	@param	当たり判定タグ
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
+
+	// Z軸をずらす定数
+	const float ShiftPositionZ;
 
 public:
 

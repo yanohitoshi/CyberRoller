@@ -54,8 +54,11 @@ private:
 	Vector3 initPosition;
 	// ジャンプ可能か
 	bool isAvailableJump;
+	// ジャンプ待ち時間を数える
 	int jumpDelayCount;
-	int jumpCount;
+	// ジャンプ待ち時間
 	const int JumpDelayTime;
+	// ジャンプ時間を数えるカウント
+	int jumpCount;
 };
 

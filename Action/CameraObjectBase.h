@@ -88,10 +88,11 @@ protected:
     // 間隔
     Vector3 offSetPosition;
 
-    // 今のenemyのstate状態を保存するための変数
+    // 今のcameraのstate状態を保存するための変数
     CameraState nowState;
-    // 変更された次のenemyのstate状態を保存するための変数
+    // 変更された次のcameraのstate状態を保存するための変数
     CameraState nextState;
+
     // 全stateが格納されるマップ
     std::unordered_map<CameraState, CameraObjectStateBase*> statePoolMap;
 

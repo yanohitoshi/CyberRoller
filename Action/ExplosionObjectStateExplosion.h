@@ -16,7 +16,8 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateExplosion(){};
+	ExplosionObjectStateExplosion()
+	: ExplosionTime(10){};
 
 	/*
 	@fn デストラクタ
@@ -43,5 +44,7 @@ private:
 
 	// 爆発の時間をカウントする変数
 	int explosionCount;
+	// 爆発持続時間
+	const int ExplosionTime;
 };
 

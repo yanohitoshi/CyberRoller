@@ -33,12 +33,13 @@ CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float 
 	// 実際にセットするポジション
 	Vector3 setPosition;
 
+	// ゆっくりLrapする時間内だったら
 	if (startStateCount <= SlowLrapTime)
 	{
 		// 仮のポジションと現在のポジションで線形補間
 		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * SlowLrapCorrection);
 	}
-	else
+	else // それ以外
 	{
 		// 仮のポジションと現在のポジションで線形補間
 		setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * DeltaCorrection);

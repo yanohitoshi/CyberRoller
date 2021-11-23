@@ -49,9 +49,4 @@ private:
 	@param	“–‚½‚Á‚½GameObject
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
-
-public:
-
-
 };
-

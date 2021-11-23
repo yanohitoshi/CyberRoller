@@ -164,6 +164,7 @@ void PlayerObjectStateBase::InputMovableProcess(PlayerObject* _owner, Vector3 _a
 	// 方向キーの入力値とカメラの向きから、移動方向を決定
 	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
 
+	// 長さが0に近くなかったら
 	if (!Math::NearZero(forward.Length()))
 	{
 		forward.Normalize();

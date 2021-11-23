@@ -254,6 +254,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 */
 PlayerObject::~PlayerObject()
 {
+	// mapの後片付け
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_IDLE);
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_IDLE_DANCE);
 	RemoveStatePoolMap(PlayerState::PLAYER_STATE_RUN);
@@ -545,6 +546,7 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 		if (!isJumpAttck && _hitObject.GetState() == State::Active)
 		{
 			isHitEnemy = true;
+			// ノックバックさせられたオブジェクトのポジションを取得
 			hitKnockBackObjectPosition = _hitObject.GetPosition();
 		}
 	}
@@ -580,8 +582,9 @@ void PlayerObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _p
 
 	if (_physicsTag == PhysicsTag::EXPLOSION_AREA_TAG && !isHitExplosion)
 	{
-		// 死亡フラグをtureにセット
+		// 爆発ヒットフラグをtureにセット
 		isHitExplosion = true;
+		// ノックバックさせられたオブジェクトのポジションを取得
 		hitKnockBackObjectPosition = _hitObject.GetPosition();
 	}
 }

@@ -51,8 +51,9 @@ PlayerState PlayerObjectStateJumpEndToIdle::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_RUN_START;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
-
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// ownerに速度をセット

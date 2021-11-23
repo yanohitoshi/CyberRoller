@@ -94,6 +94,7 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 
 EnhancedEnemyObject::~EnhancedEnemyObject()
 {
+	// Mapの後片付け
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_IDLE);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_DEAD);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_RESPAWN);
@@ -110,16 +111,19 @@ void EnhancedEnemyObject::UpdateGameObject(float _deltaTime)
 	// AABBを更新
 	aabb = boxCollider->GetWorldBox();
 
+	// 攻撃状態に入るか判定
 	if (isAttack && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_ATTACK;
 	}
 
+	// 怯み状態に入るか判定
 	if (isFlinch && !isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_FLINCH;
 	}
 
+	// 死亡しているか判定
 	if (isDead)
 	{
 		nextState = EnemyState::ENEMY_STATE_DEAD;
@@ -199,6 +203,7 @@ void EnhancedEnemyObject::OnCollision(const GameObject& _hitObject, const Physic
 		FixCollision(aabb, _hitObject.GetAabb());
 	}
 
+	// 押し戻しを行う相手か判定
 	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
 		_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::SWITCH_BASE_TAG ||
 		_physicsTag == PhysicsTag::SWITCH_TAG;

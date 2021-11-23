@@ -53,9 +53,7 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)override;
 
-
-public:
-
+	// オーナーとなる爆発物落下エリアクラスのポインタ変数
 	FallExplosionArea* owner;
 
 };

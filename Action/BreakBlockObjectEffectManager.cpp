@@ -25,7 +25,7 @@ BreakBlockObjectEffectManager::BreakBlockObjectEffectManager(BreakBlockObject* _
 	particleState = ParticleState::PARTICLE_DISABLE;
 	owner = _owner;
 	position = Vector3(0.0f, 0.0f, 0.0f);
-	generateExplosionEffectsFlag = true;
+	generateEffectsFlag = true;
 	activeCount = 0;
 }
 
@@ -62,7 +62,7 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 		// 無効状態だったらbreak
 	case (PARTICLE_DISABLE):
 		activeCount = 0;
-		generateExplosionEffectsFlag = true;
+		generateEffectsFlag = true;
 		break;
 
 		// 有効状態だったら
@@ -80,12 +80,16 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 void BreakBlockObjectEffectManager::ActiveEffectProcess()
 {
 	// まだ生成されていなかったら
-	if (generateExplosionEffectsFlag)
+	if (generateEffectsFlag)
 	{
+		// ポジション取得
 		effectPosition = owner->GetPosition();
+		// 埃エフェクト生成
 		GenerateDustEffectProcess();
+		// 破片エフェクト生成
 		GenerateDebrisEffectProcess();
-		generateExplosionEffectsFlag = false;
+		// 生成フラグをfalseに変更
+		generateEffectsFlag = false;
 	}
 }
 

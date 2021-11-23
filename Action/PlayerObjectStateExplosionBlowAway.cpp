@@ -6,6 +6,7 @@ PlayerObjectStateExplosionBlowAway::PlayerObjectStateExplosionBlowAway()
 	: knockBackFrameCount(0)
 	, KnockBackPower(20.0f)
 	, KnockBackTime(10)
+	, FallDeadPositonZ(-500.0f)
 {
 }
 
@@ -25,7 +26,7 @@ PlayerState PlayerObjectStateExplosionBlowAway::Update(PlayerObject* _owner, flo
 		velocity.z -= PlayerObject::GetGravity() * _deltaTime;
 	}
 
-	// ノックバック時間を過ぎたら
+	// ノックバック時間を過ぎていなかったら
 	if (knockBackFrameCount <= KnockBackTime)
 	{
 		knockBackSpeed += KnockBackPower;
@@ -36,27 +37,35 @@ PlayerState PlayerObjectStateExplosionBlowAway::Update(PlayerObject* _owner, flo
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
+	// 接地中にノックバック時間が過ぎたら
 	if (_owner->GetOnGround() && knockBackFrameCount >= KnockBackTime)
 	{
+		// 速度初期化
 		velocity = Vector3::Zero;
 		_owner->SetVelocity(velocity);
-		// 
+		// 爆発にヒットしたかどうかをfalseにセット
 		_owner->SetIsHitExplosion(false);
 		// stateをアイドリングに変更
 		state = PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE;
 	}
 
-	if (-500.0f >= _owner->GetPosition().z)
+	// 落下死亡地点に到達したら
+	if (FallDeadPositonZ >= _owner->GetPosition().z)
 	{
+		// 速度初期化
 		velocity = Vector3::Zero;
 		_owner->SetVelocity(velocity);
+		// 爆発にヒットしたかどうかをfalseにセット
 		_owner->SetIsHitExplosion(false);
+		// ジャンプループ状態のアニメーションを再生
 		skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(PlayerState::PLAYER_STATE_JUMPLOOP));
+		// ステータスを落下死亡に遷移
 		state = PlayerState::PLAYER_STATE_FALL_DEAD;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
-
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// 更新されたstateを返す
@@ -84,6 +93,7 @@ void PlayerObjectStateExplosionBlowAway::Enter(PlayerObject* _owner, float _delt
 	// ノックバックする方向ベクトルを計算
 	knockBackDirection = _owner->GetPosition() - hitEnemyPosition;
 
+	// 長さが0に近くなかったら
 	if (!Math::NearZero(knockBackDirection.Length()))
 	{
 		// 正規化

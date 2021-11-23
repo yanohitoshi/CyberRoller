@@ -62,13 +62,17 @@ PlayerState PlayerObjectStateKnockBack::Update(PlayerObject* _owner, float _delt
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	_owner->SetVelocity(velocity);
 	
+	// 爆発に当たったら
 	if (_owner->GetIsHitExplosion())
 	{
+		// 吹っ飛び状態に遷移
 		state = PlayerState::PLAYER_STATE_BLOWAWAY;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
 
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// 更新されたstateを返す
@@ -99,6 +103,7 @@ void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 	// ノックバックする方向ベクトルを計算
 	knockBackDirection = _owner->GetPosition() - hitEnemyPosition;
 
+	// 長さが0に近くなかったら
 	if (!Math::NearZero(knockBackDirection.Length()))
 	{
 		// 正規化

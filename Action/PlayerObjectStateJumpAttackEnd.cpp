@@ -55,8 +55,10 @@ PlayerState PlayerObjectStateJumpAttackEnd::Update(PlayerObject* _owner, float _
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
 
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
     return state;
@@ -107,6 +109,7 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 	endFlag = false;
 	jumpFrameCount = 0;
 
+	// オーナーのターゲットオブジェクトを一度nullに初期化
 	_owner->SetAttackTargetObject(nullptr);
 
 	// オーナーの移動速度を得る

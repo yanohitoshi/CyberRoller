@@ -44,5 +44,7 @@ private:
 	const float KnockBackPower;
 	// ノックバックする時間定数
 	const int KnockBackTime;
+	// 落下死亡ポジション
+	const float FallDeadPositonZ;
 };
 

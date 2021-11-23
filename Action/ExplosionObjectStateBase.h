@@ -40,7 +40,15 @@ public:
 	ExplosionObjectStateBase()
 	: VerticalMoveSpeed(200.0f)
 	, EmissiveColorRed(Color::Red)
-	, EmissiveColorBlue(Color::LightBlue){};
+	, EmissiveColorBlue(Color::LightBlue)
+	, OriginalScale(0.5f)
+	, SubScale(0.5f)
+	, RespownTime(240)
+	, ChangeRateTime(45)
+	, SecondColorChangeTime(7)
+	, ThirdColorChangeTime(3)
+	, FirstChangeRateTime(60)
+	, SecondChangeRateTime(120) {};
 
 	/*
 	@fn デストラクタ
@@ -70,7 +78,12 @@ public:
 	@param	_tmpForward 前のフレームの前方ベクトル
 	*/
 	void RotationProcess(ExplosionObjectBase* _owner,float _angle, Vector3 _axis);
-
+	
+	/*
+	@fn 垂直移動処理
+	@param	_owner 親クラスのポインタ
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
 	void VerticalMove(ExplosionObjectBase* _owner, float _deltaTime);
 
 protected:
@@ -90,10 +103,35 @@ protected:
 	float rate;
 	// 角度
 	float angle;
+
+	// レートを変更するタイミング
+	const int ChangeRateTime;
+
 	// 縦移動する際の移動速度定数
 	const float VerticalMoveSpeed;
+
+	// エミッシブの色情報(赤)
 	const Vector3 EmissiveColorRed;
+	// エミッシブの色情報(青)
 	const Vector3 EmissiveColorBlue;
+
+	// 元もscale値
+	const float OriginalScale;
+	// scaleの減算値
+	const float SubScale;
+
+	// リスポーンするまでの時間
+	const int RespownTime;
+
+	// 二番目の色を変えるタイミング
+	const int SecondColorChangeTime;
+	// 三番目の色を変えるタイミング
+	const int ThirdColorChangeTime;
+
+	// 最初の色を変えるタイミングを変更する時間
+	const int FirstChangeRateTime;
+	// 二番目の色を変えるタイミングを変更する時間
+	const int SecondChangeRateTime;
 
 private:
 

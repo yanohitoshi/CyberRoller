@@ -75,6 +75,7 @@ void EnemyObjectStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_IDLE));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_REPOSITION;
+	// ステータスをActiveにする
 	_owner->SetState(State::Active);
 
 	// オーナーの移動速度を得る
@@ -84,6 +85,7 @@ void EnemyObjectStateReposition::Enter(EnemyObjectBase* _owner, float _deltaTime
 	// 今のポジションから初期ポジションへの方向ベクトルを計算
 	repositionRotationVec = firstPosition - _owner->GetPosition();
 
+	// 長さが0に近くなかったら
 	if (!Math::NearZero(repositionRotationVec.Length()))
 	{
 		// 正規化

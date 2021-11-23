@@ -40,6 +40,7 @@ EnemyState EnemyObjectStateAttack::Update(EnemyObjectBase* _owner, float _deltaT
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
+	// オーナーが死亡状態か判定
 	if (_owner->GetIsDead())
 	{
 		state = EnemyState::ENEMY_STATE_DEAD;
@@ -62,16 +63,20 @@ void EnemyObjectStateAttack::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_ATTACK;
 
+	// ステータスをActiveにする
 	_owner->SetState(State::Active);
 
-	//// 追跡ターゲットのポインタを得る
-	//trackingObject = _owner->GetTrackingObject();
 	// 今のポジションから追跡ターゲットのポジションへの方向ベクトルを計算
 	trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
 	// 上下移動させないので0で固定
 	trackingRotationVec.z = 0.0f;
-	// 正規化
-	trackingRotationVec.Normalize();
+
+	// 長さが0に近くなかったら
+	if (!Math::NearZero(trackingRotationVec.Length()))
+	{
+		// 正規化
+		trackingRotationVec.Normalize();
+	}
 
 	// 回転処理
 	RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());

@@ -21,9 +21,8 @@ public:
 	@fn コンストラクタ
 	@param	ポジション
 	@param	オブジェクト判別用tag
-	@param	移動速度
-	@param	追跡するオブジェクトのポインタ
-	@param	追跡エリアの値
+	@param	エリアの広さ
+	@param	爆発物の数
 	*/
 	FallExplosionArea(const Vector3& _pos, const Tag _objectTag, Vector3& _area, int _quantity);
 

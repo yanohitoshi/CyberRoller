@@ -22,11 +22,7 @@ public:
 
 	/*
 	@fn コンストラクタ
-	@param	ポジション
 	@param	オブジェクト判別用tag
-	@param	移動速度
-	@param	追跡するオブジェクトのポインタ
-	@param	追跡エリアの値
 	*/
 	ExplosionObjectBase(const Tag _objectTag);
 
@@ -95,7 +91,7 @@ protected:
 	bool isHitJumpAttackPlayer;
 	// 落下開始するか
 	bool isFallStart;
-	// プレイヤーが当たった時のプレイヤーのポジション
+	// 当たった時の当たったオブジェクトのポジション
 	Vector3 hitPosition;
 	// 初期ポジション
 	Vector3 firstPosition;
@@ -111,22 +107,82 @@ public:
 
 	MeshComponent* GetMeshComponent() { return meshComponent; }
 
+	/*
+	@brief　爆発したかフラグのgetter
+	@return	isExplode
+	*/
 	bool GetIsExplode() { return isExplode; }
+	
+	/*
+	@brief　爆発開始状態かフラグのgetter
+	@return	isStartExplosion
+	*/
 	bool GetIsStartExplosion() { return isStartExplosion; }
+	
+	/*
+	@brief　ヒットした相手がジャンプアタック状態のプレイヤーかどうかフラグのgetter
+	@return	isHitJumpAttackPlayer
+	*/
 	bool GetIsHitJumpAttackPlayer() { return isHitJumpAttackPlayer; }
+	
+	/*
+	@brief　爆発するオブジェクトに当たったかフラグのgetter
+	@return	isHitExplosionObject
+	*/
 	bool GetIsHitExplosionObject() { return isHitExplosionObject; }
+
+	/*
+	@brief　落下開始するかフラグのgetter
+	@return	isFallStart
+	*/
 	bool GetIsFallStart() { return isFallStart; }
 
+	/*
+	@brief　当たった時の当たったオブジェクトのポジションのgetter
+	@return	hitPosition
+	*/
 	Vector3 GetHitPosition() { return hitPosition; }
+	
+	/*
+	@brief　降るエリアのgetter
+	@return	fallArea
+	*/
 	Vector3 GetFallArea() { return fallArea; }
+	
+	/*
+	@brief　初期ポジションのgetter
+	@return	firstPosition
+	*/
 	Vector3 GetFirstPosition() { return firstPosition; }
 
+	/*
+	@brief　落下速度のgetter
+	@return	fallSpeed
+	*/
 	float GetFallSpeed() { return fallSpeed; }
 
+	/*
+	@brief isExplodeのsetter関数
+	@param	_isExplode 爆発しているか
+	*/
 	void SetIsExplode(bool _isExplode) { isExplode = _isExplode; }
+	
+	/*
+	@brief isStartExplosionのsetter関数
+	@param	_isStartExplosion 爆発開始状態か
+	*/
 	void SetIsStartExplosion(bool _isStartExplosion) { isStartExplosion = _isStartExplosion; }
+	
+	/*
+	@brief isHitExplosionObjectのsetter関数
+	@param	_isHitExplosionObject 爆発するオブジェクトに触れたか
+	*/
 	void SetIsHitExplosionObject(bool _isHitExplosionObject) { isHitExplosionObject = _isHitExplosionObject; }
 
+	/*
+	@brief fallSpeedのsetter関数
+	@param	_fallSpeed 落下速度
+	*/
 	void SetFallSpeed(float _fallSpeed) { fallSpeed = _fallSpeed; }
 };
 

@@ -167,11 +167,13 @@ void PlayerObjectStateJumpLoop::CheckInputProcess(PlayerObject* _owner, const In
 		// ターゲットを選択しているまたはジャンプアタック中でなくかつターゲットを選択していない時
 		if (_owner->GetIsSelectingTargetObject() || !_owner->GetIsJumpAttck() && !_owner->GetIsSelectingTargetObject())
 		{
-			// キー入力があれば
-			if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+			bool isPressed = _keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
-				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed)
+				_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_Y) == Pressed;
+
+			// キー入力があれば
+			if (isPressed)
 			{
 				// ジャンプアタックフラグをtrueにセット
 				_owner->SetIsJumpAttck(true);

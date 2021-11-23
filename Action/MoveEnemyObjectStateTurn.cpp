@@ -35,8 +35,10 @@ EnemyState MoveEnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _delt
 		state = EnemyState::ENEMY_STATE_MOVING;
 	}
 
+	// €–Só‘Ô‚©”»’è
 	if (_owner->GetIsDead())
 	{
+		// €–Só‘Ô‚É‘JˆÚ
 		state = EnemyState::ENEMY_STATE_DEAD;
 	}
 

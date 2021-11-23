@@ -349,8 +349,8 @@ public:// ゲッターセッター
 	Vector3 GetRespownPos() { return respownPos; }
 
 	/*
-	@fn hitEnemyPositionのgetter関数
-	@return respownPosを返す
+	@fn hitKnockBackObjectPositionのgetter関数
+	@return hitKnockBackObjectPositionを返す
 	*/
 	Vector3 GetHitKnockBackObjectPosition() { return hitKnockBackObjectPosition; }
 

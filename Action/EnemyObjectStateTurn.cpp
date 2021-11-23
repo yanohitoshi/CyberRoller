@@ -53,5 +53,6 @@ void EnemyObjectStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	skeletalMeshComponent->PlayAnimation(_owner->GetAnimation(EnemyState::ENEMY_STATE_TURN));
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_TURN;
+	// ステータスをActiveにset
 	_owner->SetState(State::Active);
 }

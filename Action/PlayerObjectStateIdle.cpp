@@ -42,8 +42,9 @@ PlayerState PlayerObjectStateIdle::Update(PlayerObject* _owner, float _deltaTime
 		state = PlayerState::PLAYER_STATE_IDLE_DANCE;
 	}
 
+	// 死亡状態チェック
 	CheckDeadFlag(_owner);
-
+	// 時間切れチェック
 	CheckTimeOverFlag();
 
 	// 更新されたstateを返す

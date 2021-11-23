@@ -86,6 +86,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Move
 */
 MoveEnemyObject::~MoveEnemyObject()
 {
+	// Mapの後片付け
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_IDLE);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_DEAD);
 	RemoveStatePoolMap(EnemyState::ENEMY_STATE_RESPAWN);
@@ -166,16 +167,20 @@ void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 */
 void MoveEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
+	// ジャンプアタックプレイヤーまたは爆発に当たったら
 	if (_hitObject.GetTag() == Tag::JUMP_ATTACK_PLAYER || _physicsTag == PhysicsTag::EXPLOSION_AREA_TAG)
 	{
+		// 死亡状態にする
 		isDead = true;
 		defeatedObjectPosition = _hitObject.GetPosition();
 	}
 
+	// 当たった相手が押し戻す相手か判定
 	bool isPushBack = _physicsTag == PhysicsTag::GROUND_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG ||
 		_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::SWITCH_BASE_TAG ||
 		_physicsTag == PhysicsTag::SWITCH_TAG;
 
+	// 当たった相手が押し戻す相手だったら
 	if (isPushBack)
 	{
 		aabb = boxCollider->GetWorldBox();

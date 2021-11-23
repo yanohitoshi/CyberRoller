@@ -30,7 +30,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	@return PlayerState　更新終了時のステータスを返す
+	@return ExplosionObjectState　更新終了時のステータスを返す
 	*/
 	ExplosionObjectState Update(ExplosionObjectBase* _owner, float _deltaTime);
 
@@ -43,8 +43,11 @@ public:
 
 private:
 
-	int stayCount;
-	const int StayTime;
+	// scale値を保存する変数
 	float nowScaleZ;
+	// 待機時間を計測するカウント変数
+	int stayCount;
+	// 待機時間定数
+	const int StayTime;
 };
 

@@ -72,8 +72,10 @@ void EnemyAttackArea::OnCollision(const GameObject& _hitObject, const PhysicsTag
 		return;
 	}
 
+	// ヒットした相手がプレイヤーか判定
+	bool isHitPlayer = _hitObject.GetTag() == Tag::PLAYER && _physicsTag == PhysicsTag::PLAYER_TAG && isEnable;
 	// プレイヤーを見つけたら
-	if (_hitObject.GetTag() == Tag::PLAYER && _physicsTag == PhysicsTag::PLAYER_TAG && isEnable)
+	if (isHitPlayer)
 	{
 		// 親クラスを攻撃状態にセット
 		ownerEnemy->SetIsAttack(true);

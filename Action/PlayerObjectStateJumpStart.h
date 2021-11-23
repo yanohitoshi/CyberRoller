@@ -92,5 +92,7 @@ private:
 	const int JumpTime;
 	// スイッチジャンプ利用可能タイム
 	const int SwitchJumpTime;
+	// 初期化時にオーナーの速度に減速を掛ける定数
+	const float Deceleration;
 };
 

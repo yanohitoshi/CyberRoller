@@ -16,6 +16,7 @@ PlayerTrackingArea::PlayerTrackingArea(const Tag& _objectTag, EnemyObjectBase* _
 	:GameObject(false, _objectTag)
 	, owner(_ownerEnemy)
 {
+	// オーナーのポジションをセット
 	SetPosition(owner->GetPosition());
 
 	//ジャンプ攻撃判定用のsphereCollider

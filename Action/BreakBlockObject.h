@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 // クラスの前方宣言
@@ -6,6 +9,10 @@ class MeshComponent;
 class BoxCollider;
 class Mesh;
 
+/*
+@file BreakBlockObject.h
+@brief 壊れるblockの生成と更新処理を行う
+*/
 class BreakBlockObject :
     public GameObject
 {
