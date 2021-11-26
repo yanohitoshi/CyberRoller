@@ -19,10 +19,19 @@
 @fn コンストラクタ
 @brief  objectの生成を行う
 @param	_playerObject プレイヤークラスのポインタ
+@param	_first 1つ目の収集物オブジェクトのポインタ
+@param	_second 2つ目の収集物オブジェクトのポインタ
+@param	_third 3つ目の収集物オブジェクトのポインタ
 */
 FirstStageUI::FirstStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(200)
+	, FirstDrawTime(120)
+	, SecondDrawTime(180)
+	, ThirdDrawTime(240)
+	, FirstCollectionPosition(Vector3(-150.0f, -200.0f, 0.0f))
+	, SecondCollectionPosition(Vector3(0.0f, -200.0f, 0.0f))
+	, ThirdCollectionPosition(Vector3(150.0f, -200.0f, 0.0f))
 {
 	// カウントダウン
 	new CountDownFont(SceneTime);
@@ -62,40 +71,46 @@ FirstStageUI::~FirstStageUI()
 */
 void FirstStageUI::UpdateGameObject(float _deltaTime)
 {
+	// シーンをクリアしたら
 	if (playerObject->GetClearFlag())
 	{
+		// カウントを数える
 		++clearCount;
 
+		// ポジションが結果を出す場所に移動していなかったら
 		if (!isChangePosition)
 		{
-			firstCollectionUI->SetDrawPosition(Vector3(-150.0f, -200.0f, 0.0f));
+			// それぞれポジションをセットして描画状態をリセット
+			firstCollectionUI->SetDrawPosition(FirstCollectionPosition);
 			firstCollectionUI->ResetDraw();
 
-			secondCollectionUI->SetDrawPosition(Vector3(0.0f, -200.0f, 0.0f));
+			secondCollectionUI->SetDrawPosition(SecondCollectionPosition);
 			secondCollectionUI->ResetDraw();
 
-			thirdCollectionUI->SetDrawPosition(Vector3(150.0f, -200.0f, 0.0f));
+			thirdCollectionUI->SetDrawPosition(ThirdCollectionPosition);
 			thirdCollectionUI->ResetDraw();
 			isChangePosition = true;
 		}
 
-		if (clearCount >= 120)
+		// それぞれ時間が来たら描画する
+		if (clearCount >= FirstDrawTime)
 		{
 			firstCollectionUI->DrawInGame();
 		}
 
-		if (clearCount >= 180)
+		if (clearCount >= SecondDrawTime)
 		{
 			secondCollectionUI->DrawInGame();
 		}
 
-		if (clearCount >= 240)
+		if (clearCount >= ThirdDrawTime)
 		{
 			thirdCollectionUI->DrawInGame();
 		}
 	}
 	else
 	{
+		// 描画する
 		firstCollectionUI->DrawInGame();
 		secondCollectionUI->DrawInGame();
 		thirdCollectionUI->DrawInGame();

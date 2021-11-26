@@ -17,6 +17,7 @@ public:
     /*
     @fn コンストラクタ
     @brief  objectの生成を行う
+    @param _owner 親クラスとなるsceneクラスのポインタ
     */
     StageSelectSceneUI(StageSelectScene* _owner);
 
@@ -84,12 +85,34 @@ private:
     */
     void ClearAllSpriteMap();
 
+    /*
+    @brief 全てのspriteマップを生成する
+    */
     void CreatStageSelectSprite();
 
-    void SetFirstStageSprite(); 
+    /*
+    @brief 第1stageが選ばれている時の描画状態をセットする
+    */
+    void SetFirstStageSprite();     
+   
+    /*
+    @brief 第2stageが選ばれている時の描画状態をセットする
+    */
     void SetSecondStageSprite();
+    
+    /*
+    @brief 第3stageが選ばれている時の描画状態をセットする
+    */
     void SetThirdStageSprite();
+    
+    /*
+    @brief 第4stageが選ばれている時の描画状態をセットする
+    */
     void SetFourthStageSprite();
+    
+    /*
+    @brief 第5stageが選ばれている時の描画状態をセットする
+    */
     void SetFinalStageSprite();
 
     // StageSelectIconSpriteを格納するMap

@@ -5,8 +5,8 @@
 #include "StageCreatorBase.h"
 
 /*
-@file ThirdStageCreator.h
-@brief ThirdStageを生成する
+@file SecondStageCreator.h
+@brief SecondStageを生成する
 */
 class SecondStageCreator 
     : public StageCreatorBase
@@ -152,7 +152,7 @@ private:
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
 	
-	// 第三ステージデータ
+	// 第2ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;

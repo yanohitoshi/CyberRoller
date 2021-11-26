@@ -32,11 +32,21 @@ private:
     // 背景用スプライトComponent
     SpriteComponent* sprite;
     SceneState myState;
-
+    // 描画するかどうか
     bool isVisible;
 
+    // 各ステージアイコンのポジション
+    const Vector3 FirstStagePosition;
+    const Vector3 SecondStagePosition;
+    const Vector3 ThirdStagePosition;
+    const Vector3 FourthStagePosition;
+    const Vector3 FinalStagePosition;
 public:
-
+    
+    /*
+    @brief	描画するかどうかをセット
+    @param	_isVisible 描画するかどうか
+    */
     void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
 };
 

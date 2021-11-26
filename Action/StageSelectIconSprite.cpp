@@ -5,9 +5,14 @@
 
 StageSelectIconSprite::StageSelectIconSprite(StageSelectSceneUI* _owner, SceneState _state, const std::string& _spriteFileName)
 	: GameObject(false, Tag::UI)
+	, FirstStagePosition(Vector3(-800.0f, -300.0f, 0.0f))
+	, SecondStagePosition(Vector3(-400.0f, -300.0f, 0.0f))
+	, ThirdStagePosition(Vector3(0.0f, -300.0f, 0.0f))
+	, FourthStagePosition(Vector3(400.0f, -300.0f, 0.0f))
+	, FinalStagePosition(Vector3(800.0f, -300.0f, 0.0f))
 {
 	// ポジションをセット
-	SetPosition(Vector3(0.0f, -300.0f, 0.0f));
+	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
 	myState = _state;
@@ -18,23 +23,23 @@ StageSelectIconSprite::StageSelectIconSprite(StageSelectSceneUI* _owner, SceneSt
 	{
 	case FIRST_SATGE_SCENE:
 		// ポジションをセット
-		SetPosition(Vector3(-800.0f, -300.0f, 0.0f));
+		SetPosition(FirstStagePosition);
 		break;
 	case SECOND_SATGE_SCENE:
 		// ポジションをセット
-		SetPosition(Vector3(-400.0f, -300.0f, 0.0f));
+		SetPosition(SecondStagePosition);
 		break;
 	case THIRD_SATGE_SCENE:
 		// ポジションをセット
-		SetPosition(Vector3(0.0f, -300.0f, 0.0f));
+		SetPosition(ThirdStagePosition);
 		break;
 	case FOURTH_SATGE_SCENE:
 		// ポジションをセット
-		SetPosition(Vector3(400.0f, -300.0f, 0.0f));
+		SetPosition(FourthStagePosition);
 		break;
 	case FINAL_STAGE_SCENE:
 		// ポジションをセット
-		SetPosition(Vector3(800.0f, -300.0f, 0.0f));
+		SetPosition(FinalStagePosition);
 		break;
 	}
 

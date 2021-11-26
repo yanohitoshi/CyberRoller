@@ -323,7 +323,9 @@ void SecondStageCreator::CreateLayer4(int _indexX, int _indexY)
 		// ブロックオブジェクト生成
 		new GroundObject(layer4Pos, BlockSize, Tag::GROUND);
 		break;
+
 	case(RIGHT_MOVE_BLOCK_PARTS):
+		// 右に動くblockを生成
 		SetMoveBlockData(1600.0f,Vector3::UnitY,400.0f,Vector3(600.0f, 1200.0f,100.0f),MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer4Pos,Tag::MOVE_GROUND,moveBlockData);
 		break;
@@ -364,6 +366,7 @@ void SecondStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 
 	case(LEFT_MOVE_BLOCK_PARTS):
+		// 左に動くblockを生成
 		SetMoveBlockData(1600.0f, Vector3::NegUnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer5Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -399,6 +402,7 @@ void SecondStageCreator::CreateLayer6(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
+		// 右に動くblockを生成
 		SetMoveBlockData(1600.0f, Vector3::UnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer6Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -429,6 +433,7 @@ void SecondStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(LEFT_MOVE_BLOCK_PARTS):
+		// 左に動くblockを生成
 		SetMoveBlockData(1600.0f, Vector3::NegUnitY, 400.0f, Vector3(600.0f, 1200.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer7Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -615,10 +620,12 @@ void SecondStageCreator::CreateLayer11(int _indexX, int _indexY)
 	switch (Layer11)
 	{
 	case(COLLECTION_SECOND):
+		// 2番目の収集物を生成
 		secondCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::SECOND);
 		break;
 
 	case(COLLECTION_THIRD):
+		// 3番目の収集物を生成
 		thirdCollectionObject = new CollectionObject(layer11Pos, Tag::COLLECTION, CollectionTag::THIRD);
 		break;
 	}
@@ -643,6 +650,7 @@ void SecondStageCreator::CreateLayer12(int _indexX, int _indexY)
 	switch (Layer12)
 	{
 	case(COLLECTION_FIRST):
+		// 1番目の収集物を生成
 		firstCollectionObject = new CollectionObject(layer12Pos, Tag::COLLECTION, CollectionTag::FIRST);
 		break;
 	}
@@ -665,9 +673,9 @@ void SecondStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (CameraDirectingData)
 	{
-	case(17):
+	case(CAMERA_CHANGE_AREA):
 		Vector3 offset = Vector3(0.0f, 900.0f, 700.0f);
-		// ブロックオブジェクト生成
+		// 画角変更ポイントオブジェクト生成
 		new CameraChangePoint(layer1Pos, aabb, offset,Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}

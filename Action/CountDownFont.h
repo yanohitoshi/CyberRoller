@@ -94,6 +94,6 @@ public://ゲッターセッター
     @brief	warningFlagを取得
     @return	WarningSpriteClassを起動するかどうかフラグ
     */
-    bool GetWarningFlag() { return warningFlag; }
+    bool GetWarningFlag() const { return warningFlag; }
 
 };

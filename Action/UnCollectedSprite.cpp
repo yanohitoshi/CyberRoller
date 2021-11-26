@@ -5,20 +5,23 @@
 
 UnCollectedSprite::UnCollectedSprite(CollectionTag collectionTag)
 	: GameObject(false, Tag::UI)
+	, FirstCollectionPosition(Vector3(-850.0f, 480.0f, 0.0f))
+	, SecondCollectionPosition(Vector3(-700.0f, 480.0f, 0.0f))
+	, ThirdCollectionPosition(Vector3(-550.0f, 480.0f, 0.0f))
 {
 	switch (collectionTag)
 	{
 	case CollectionTag::FIRST:
 		// ポジションをセット
-		SetPosition(Vector3(-850.0f, 480.0f, 0.0f));
+		SetPosition(FirstCollectionPosition);
 		break;
 	case CollectionTag::SECOND:
 		// ポジションをセット
-		SetPosition(Vector3(-700.0f, 480.0f, 0.0f));
+		SetPosition(SecondCollectionPosition);
 		break;
 	case CollectionTag::THIRD:
 		// ポジションをセット
-		SetPosition(Vector3(-550.0f, 480.0f, 0.0f));
+		SetPosition(ThirdCollectionPosition);
 		break;
 	}
 

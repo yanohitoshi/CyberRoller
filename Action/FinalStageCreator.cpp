@@ -244,8 +244,7 @@ void FinalStageCreator::CreateStage()
 			CreateLayer16(ix, iy);
 			// Layer17内を検索
 			CreateLayer17(ix, iy);
-			//// Layer18内を検索
-			//CreateLayer18(ix, iy);
+			// 画角変更ポイントを検索
 			CreateCameraDirecting(ix, iy);
 		}
 	}
@@ -519,6 +518,7 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
+		// 右に動くblockを生成
 		SetMoveBlockData(2600.0f, Vector3::UnitY, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer7Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -580,10 +580,12 @@ void FinalStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(ENHANCED_ENEMY_PARTS):
+		// 強化された敵を生成
 		new EnhancedEnemyObject(layer7Pos, Tag::ENEMY, 600.0f, 1800.0f);
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるブロックを生成
 		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -635,10 +637,12 @@ void FinalStageCreator::CreateLayer8(int _indexX, int _indexY)
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer8Pos, Tag::BOMB);
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるブロックを生成
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -680,7 +684,6 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		new GroundObject(layer9Pos, BlockSize, Tag::GROUND);
 		break;
 
-
 	case(COLLECTION_THIRD):
 		// 3番目の収集物を生成
 		thirdCollectionObject = new CollectionObject(layer9Pos, Tag::COLLECTION, CollectionTag::THIRD);
@@ -692,6 +695,7 @@ void FinalStageCreator::CreateLayer9(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるブロックを生成
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -728,16 +732,19 @@ void FinalStageCreator::CreateLayer10(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
+		// 右に動くblockを生成
 		SetMoveBlockData(2600.0f, Vector3::UnitY, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(FRONT_MOVE_BLOCK_PARTS):
+		// 奥に動くblockを生成
 		SetMoveBlockData(2400.0f, Vector3::UnitX, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_X);
 		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(BACK_MOVE_BLOCK_PARTS):
+		// 手前に動くblockを生成
 		SetMoveBlockData(2400.0f, Vector3::NegUnitX, 600.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_X);
 		new MoveBlockObject(layer10Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -778,6 +785,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(LEFT_MOVE_BLOCK_PARTS):
+		// 左に動くblockを生成
 		SetMoveBlockData(2600.0f, Vector3::NegUnitY, 800.0f, Vector3(600.0f, 600.0f, 100.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer11Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
@@ -793,6 +801,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(ENHANCED_ENEMY_PARTS):
+		// 強化された敵を生成
 		new EnhancedEnemyObject(layer11Pos, Tag::ENEMY, 600.0f, 1800.0f);
 		break;
 
@@ -802,6 +811,7 @@ void FinalStageCreator::CreateLayer11(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -841,10 +851,12 @@ void FinalStageCreator::CreateLayer12(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer12Pos, Tag::BOMB);
 		break;
 	}
@@ -874,10 +886,12 @@ void FinalStageCreator::CreateLayer13(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるブロックを生成
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
@@ -922,6 +936,7 @@ void FinalStageCreator::CreateLayer14(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるブロックを生成
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -1004,6 +1019,7 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 		break;
 
 	case(FOLL_BOMB_AREA):
+		// 爆発物が落下するエリアオブジェクトを生成
 		Vector3 area = Vector3(4000.0f, 4000.0f, 4000.0f);
 		new FallExplosionArea(layer17Pos, Tag::OTHER, area, 20);
 		break;
@@ -1046,11 +1062,6 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer18Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
-
-	case(26):
-		SetMoveBlockData(600.0f, Vector3::NegUnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
-		new MoveBlockObject(layer18Pos, Tag::MOVE_GROUND, moveBlockData);
-		break;
 	}
 }
 
@@ -1063,11 +1074,11 @@ void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 
 	switch (CameraDirectingData)
 	{
-	case(16):
+	case(CAMERA_CHANGE_AREA_FINAL):
 		Vector3 aabbPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14]);
 		AABB aabb = { Vector3(-1200.0f,-600.0f,-600.0f),Vector3(1800.0f,600.0f,250.0f) };
 		Vector3 offset = Vector3(-600.0f, 0.0f, 200.0f);
-		// ブロックオブジェクト生成
+		// 画角変更ポイントオブジェクト生成
 		new CameraChangePoint(aabbPos, aabb, offset, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}

@@ -229,6 +229,7 @@ void TutorialStageCreator::CreateLayer2(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer2Pos, BlockSize,Tag::BREAK_GROUND);
 		break;
 	}
@@ -273,10 +274,12 @@ void TutorialStageCreator::CreateLayer3(int _indexX, int _indexY)
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer3Pos, Tag::BOMB);
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -318,6 +321,7 @@ void TutorialStageCreator::CreateLayer4(int _indexX, int _indexY)
 		new RespawnPoint(layer4Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -385,24 +389,8 @@ void TutorialStageCreator::CreateLayer5(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer5Pos, BlockSize, Tag::BREAK_GROUND);
-		break;
-	}
-}
-
-void TutorialStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
-	// レイヤー1のマップオブジェクトのポジション
-	Vector3 cameraPos = Vector3(Offset * _indexX, -Offset * _indexY, 3000.0f);
-
-	// マップデータを見てそれぞれのオブジェクトを生成
-	switch (CameraDirectingData)
-	{
-	case(17):
-		// メインカメラ生成と同時にプレイヤーオブジェクトのポインタを渡す
-		GameObject::CreateMainCamera(cameraPos, playerObject);
 		break;
 	}
 }

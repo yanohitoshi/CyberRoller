@@ -49,12 +49,12 @@ PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _del
 
 
 	// ジャンプアタック成功またはジャンプアタックの時間が終了していたらステータスを変更
-	if (_owner->GetIsJumpAttackSuccess() || unSelectTargetEnemyFrameCount > UnSelectTargetAttackTime /*||
-		_owner->GetIsJumpAttackCancel()*/)
+	if (_owner->GetIsJumpAttackSuccess() || unSelectTargetEnemyFrameCount > UnSelectTargetAttackTime)
 	{
 		_owner->SetMoveSpeed(AttackSpeed);
 		state = PlayerState::PLAYER_STATE_JUMP_ATTACK_END;
 	}
+
 
 	// 死亡状態チェック
 	CheckDeadFlag(_owner);

@@ -243,6 +243,6 @@ private:
 	int sizeX;
 	//配置するオブジェクトの間隔Y
 	int sizeY;
-	
+
 };
 

@@ -206,7 +206,6 @@ void ForthStageCreator::CreateStage()
 			CreateLayer12(ix, iy);
 			// Layer13内を検索
 			CreateLayer13(ix, iy);
-			//CreateCameraDirecting(ix, iy);
 		}
 	}
 }
@@ -383,10 +382,12 @@ void ForthStageCreator::CreateLayer3(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer3Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer3Pos, Tag::BOMB);
 		break;
 	}
@@ -416,6 +417,7 @@ void ForthStageCreator::CreateLayer4(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer4Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -715,16 +717,4 @@ void ForthStageCreator::CreateLayer13(int _indexX, int _indexY)
 		break;
 
 	}
-}
-
-void ForthStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
-	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
-	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
-	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
-
-
 }

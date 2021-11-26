@@ -20,6 +20,9 @@ public:
     @fn コンストラクタ
     @brief  objectの生成を行う
     @param	_playerObject プレイヤークラスのポインタ
+    @param	_first 1つ目の収集物オブジェクトのポインタ
+    @param	_second 2つ目の収集物オブジェクトのポインタ
+    @param	_third 3つ目の収集物オブジェクトのポインタ
     */
     FirstStageUI(PlayerObject* _playerObject,CollectionObject* _first, CollectionObject* _second, CollectionObject* _third);
     
@@ -45,11 +48,24 @@ private:
 
     PlayerObject* playerObject;
 
+    // 各収集物のUIクラスのポインタ
     CollectionUI* firstCollectionUI;
     CollectionUI* secondCollectionUI;
     CollectionUI* thirdCollectionUI;
 
+    // それぞれの収集物の結果を表示する時間
+    const int FirstDrawTime;
+    const int SecondDrawTime;
+    const int ThirdDrawTime;
+
+    // それぞれの収集物の結果を表示する場所
+    const Vector3 FirstCollectionPosition;
+    const Vector3 SecondCollectionPosition;
+    const Vector3 ThirdCollectionPosition;
+
+    // クリア後のカウントを数える変数
     int clearCount;
+    // ポジションが変更されているかどうか
     bool isChangePosition;
 };
 

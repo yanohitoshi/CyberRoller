@@ -45,6 +45,11 @@ private:
     // フレームカウント変数
     int frameCount;
 
+    // 各収集物UIのポジション
+    const Vector3 FirstCollectionPosition;
+    const Vector3 SecondCollectionPosition;
+    const Vector3 ThirdCollectionPosition;
+
 public:
     
     /*

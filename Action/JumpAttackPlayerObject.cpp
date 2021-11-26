@@ -123,10 +123,4 @@ void JumpAttackPlayerObject::OnCollision(const GameObject& _hitObject, const Phy
 		// ジャンプアタック成功状態にする
 		ownerObject->SetIsJumpAttackSuccess(true);
 	}
-
-	//if (_physicsTag == PhysicsTag::BREAK_GROUND_TAG ||
-	//	_physicsTag == PhysicsTag::WALL_TAG || _physicsTag == PhysicsTag::MOVE_GROUND_TAG)
-	//{
-	//	ownerObject->SetIsJumpAttackCancel(true);
-	//}
 }

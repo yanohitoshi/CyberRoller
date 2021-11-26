@@ -26,7 +26,13 @@ enum StagePartsName
 	BREAK_BLOCK_PARTS = 59,
 	// 爆発物パーツ
 	BOMB_PARTS = 60,
+	// 爆発物落下エリア
 	FOLL_BOMB_AREA = 58,
+
+	// 第一ステージと第二ステージの画角変更エリアパーツ
+	CAMERA_CHANGE_AREA = 17,
+	// 最終ステージ画角変更エリアパーツ
+	CAMERA_CHANGE_AREA_FINAL = 16,
 
 	// 右寄せのパワーセルライトパーツ
 	POWERCELLS_LIGHT_PARTS_RIGHT = 1,

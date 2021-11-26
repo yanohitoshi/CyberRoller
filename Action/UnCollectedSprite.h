@@ -43,6 +43,11 @@ private:
     // texture
     Texture* tex;
 
+    // 各収集物UIのポジション
+    const Vector3 FirstCollectionPosition;
+    const Vector3 SecondCollectionPosition;
+    const Vector3 ThirdCollectionPosition;
+
 public:
     
     /*

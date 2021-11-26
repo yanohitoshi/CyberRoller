@@ -5,20 +5,25 @@
 
 CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 	: GameObject(false, Tag::UI)
+	, FirstCollectionPosition(Vector3(-850.0f, 480.0f, 0.0f))
+	, SecondCollectionPosition(Vector3(-700.0f, 480.0f, 0.0f))
+	, ThirdCollectionPosition(Vector3(-550.0f, 480.0f, 0.0f))
+	, AddScale(0.1f)
+	, SubAlpha(0.05f)
 {
 	switch (collectionTag)
 	{
 	case CollectionTag::FIRST:
 		// ポジションをセット
-		SetPosition(Vector3(-850.0f, 480.0f, 0.0f));
+		SetPosition(FirstCollectionPosition);
 		break;
 	case CollectionTag::SECOND:
 		// ポジションをセット
-		SetPosition(Vector3(-700.0f, 480.0f, 0.0f));
+		SetPosition(SecondCollectionPosition);
 		break;
 	case CollectionTag::THIRD:
 		// ポジションをセット
-		SetPosition(Vector3(-550.0f, 480.0f, 0.0f));
+		SetPosition(ThirdCollectionPosition);
 		break;
 	}
 
@@ -41,9 +46,9 @@ void CollectedEffectSprite::UpdateGameObject(float _deltaTime)
 {
 	if (sprite->GetVisible())
 	{
-		scale += 0.1f;
+		scale += AddScale;
 		sprite->SetScale(scale);
-		alpha -= 0.05f;
+		alpha -= SubAlpha;
 		sprite->SetAlpha(alpha);
 	}
 

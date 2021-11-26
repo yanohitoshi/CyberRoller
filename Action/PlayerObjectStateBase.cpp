@@ -216,7 +216,12 @@ void PlayerObjectStateBase::InputJumpMovableProcess(PlayerObject* _owner, Vector
 
 	// 方向キーの入力値とカメラの向きから、移動方向を決定
 	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
-	forward.Normalize();
+
+	// 長さが0に近くなかったら
+	if (!Math::NearZero(forward.Length()))
+	{
+		forward.Normalize();
+	}
 
 	// 空中用の移動力の定数を足す
 	moveSpeed += _owner->GetAirMovePower();

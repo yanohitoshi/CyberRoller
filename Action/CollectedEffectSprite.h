@@ -46,6 +46,17 @@ private:
     int frameCount;
     float scale;
     float alpha;
+
+    // 各収集物UIのポジション
+    const Vector3 FirstCollectionPosition;
+    const Vector3 SecondCollectionPosition;
+    const Vector3 ThirdCollectionPosition;
+
+    // 追加する拡大値
+    const float AddScale;
+    // 減らすalpha値
+    const float SubAlpha;
+
 public:
 
     /*

@@ -220,8 +220,11 @@ void FirstStageCreator::CreateStage()
 			CreateLayer11(ix, iy);
 			// Layer12内を検索
 			CreateLayer12(ix, iy);
+			// Layer13内を検索
 			CreateLayer13(ix, iy);
+			// Layer14内を検索
 			CreateLayer14(ix, iy);
+			// カメラの画角レイヤーを検索
 			CreateCameraDirecting(ix, iy);
 		}
 	}
@@ -303,7 +306,6 @@ void FirstStageCreator::CreateLayer2(int _indexX, int _indexY)
 		new LightObject(layer2Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 	}
-
 }
 
 /*
@@ -779,10 +781,10 @@ void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 	// マップデータを見てそれぞれのオブジェクトを生成
 	switch (CameraDirectingData)
 	{
-	case(17):
+	case(CAMERA_CHANGE_AREA):
 		AABB aabb = { Vector3(-1000.0f,-1200.0f,-1000.0f),Vector3(1000.0f,1000.0f,1000.0f) };
 		Vector3 offset = Vector3(0.0f, -900.0f, 700.0f);
-		// ブロックオブジェクト生成
+		// 画角変更ポイントオブジェクト生成
 		new CameraChangePoint(layer11Pos, aabb, offset,Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}

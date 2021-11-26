@@ -58,8 +58,7 @@ SceneState TitleScene::Update(const InputState& _inputState)
 	float leftTrigger = _inputState.Controller.GetLeftTrigger();
 	float rightTrigger = _inputState.Controller.GetRightTrigger();
 
-	// 入力を見てシーン遷移
-	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed ||
+	bool isPressedButton = _inputState.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_X) == Pressed ||
@@ -74,7 +73,10 @@ SceneState TitleScene::Update(const InputState& _inputState)
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
 		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
-		leftTrigger == 1.0f || rightTrigger == 1.0f)
+		leftTrigger == 1.0f || rightTrigger == 1.0f;
+
+	// 入力を見てシーン遷移
+	if (isPressedButton)
 	{
 		state = SceneState::TUTORIAL_SATGE_SCENE;
 	}

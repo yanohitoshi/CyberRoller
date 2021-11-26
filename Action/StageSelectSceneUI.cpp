@@ -5,6 +5,11 @@
 #include "StageSelectSprite.h"
 #include "SkyBoxObject.h"
 
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param _owner 親クラスとなるsceneクラスのポインタ
+*/
 StageSelectSceneUI::StageSelectSceneUI(StageSelectScene* _owner)
 	: GameObject(false, UI)
 	, owner(_owner)
@@ -15,14 +20,25 @@ StageSelectSceneUI::StageSelectSceneUI(StageSelectScene* _owner)
 	skyBox = new SkyBoxObject(false, Tag::UI);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 StageSelectSceneUI::~StageSelectSceneUI()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void StageSelectSceneUI::UpdateGameObject(float _deltaTime)
 {
+	// 選ばれているsceneのステータスを取得
 	SceneState select = owner->GetSelectState();
 
+	// 選ばれているsceneごとに描画をセット
 	switch (select)
 	{
 	case FIRST_SATGE_SCENE:
@@ -48,6 +64,11 @@ void StageSelectSceneUI::UpdateGameObject(float _deltaTime)
 
 }
 
+/*
+@brief 選択されている状態のアイコン用マップにスプライトクラスを追加する関数
+@param	_state 追加するスプライトクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::AddSelectIconSpriteMap(StageSelectIconSprite* _sprite, SceneState _stateTag)
 {
 	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
@@ -63,11 +84,20 @@ void StageSelectSceneUI::AddSelectIconSpriteMap(StageSelectIconSprite* _sprite, 
 	}
 }
 
+/*
+@brief 選択されている状態のアイコン用マップからスプライトクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::RemoveSelectIconSpriteMap(SceneState _stateTag)
 {
 	delete selectIconSpriteMap[_stateTag];
 }
 
+/*
+@brief 選択されていない状態のアイコン用マップにスプライトクラスを追加する関数
+@param	_state 追加するスプライトクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::AddUnSelectIconSpriteMap(StageUnSelectIcon* _sprite, SceneState _stateTag)
 {
 	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
@@ -83,11 +113,20 @@ void StageSelectSceneUI::AddUnSelectIconSpriteMap(StageUnSelectIcon* _sprite, Sc
 	}
 }
 
+/*
+@brief 選択されていない状態のアイコン用マップからスプライトクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::RemoveUnSelectIconSpriteMap(SceneState _stateTag)
 {
 	delete unSelectIconMap[_stateTag];
 }
 
+/*
+@brief stage選択画面のスプライトクラス用マップにスプライトクラスを追加する関数
+@param	_state 追加するスプライトクラスのポインタ
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::AddStageSelectSpriteMap(StageSelectSprite* _sprite, SceneState _stateTag)
 {
 	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
@@ -103,18 +142,29 @@ void StageSelectSceneUI::AddStageSelectSpriteMap(StageSelectSprite* _sprite, Sce
 	}
 }
 
+/*
+@brief 選択されていない状態のアイコン用マップからスプライトクラスを削除する関数
+@param	_stateTag 鍵となるタグ
+*/
 void StageSelectSceneUI::RemoveStageSelectSpriteMap(SceneState _stateTag)
 {
 	delete selectSpriteMap[_stateTag];
 }
 
+/*
+@brief 全てのspriteマップをクリアする
+*/
 void StageSelectSceneUI::ClearAllSpriteMap()
 {
+	// マップの後片付け
 	selectIconSpriteMap.clear();
 	unSelectIconMap.clear();
 	selectSpriteMap.clear();
 }
 
+/*
+@brief 全てのspriteマップを生成する
+*/
 void StageSelectSceneUI::CreatStageSelectSprite()
 {
 	new StageSelectIconSprite(this, SceneState::FIRST_SATGE_SCENE, "Assets/sprite/icon/firstStage_icon_select.png");
@@ -136,6 +186,9 @@ void StageSelectSceneUI::CreatStageSelectSprite()
 	new StageSelectSprite(this, SceneState::FINAL_STAGE_SCENE, "Assets/sprite/stageSelect/FinalStageSprite.png");
 }
 
+/*
+@brief 第1stageが選ばれている時の描画状態をセットする
+*/
 void StageSelectSceneUI::SetFirstStageSprite()
 {
 	selectIconSpriteMap[FIRST_SATGE_SCENE]->SetIsVisible(true);
@@ -152,6 +205,9 @@ void StageSelectSceneUI::SetFirstStageSprite()
 
 }
 
+/*
+@brief 第2stageが選ばれている時の描画状態をセットする
+*/
 void StageSelectSceneUI::SetSecondStageSprite()
 {
 	selectIconSpriteMap[SECOND_SATGE_SCENE]->SetIsVisible(true);
@@ -167,6 +223,9 @@ void StageSelectSceneUI::SetSecondStageSprite()
 	selectSpriteMap[FINAL_STAGE_SCENE]->SetIsVisible(false);
 }
 
+/*
+@brief 第3stageが選ばれている時の描画状態をセットする
+*/
 void StageSelectSceneUI::SetThirdStageSprite()
 {
 	selectIconSpriteMap[THIRD_SATGE_SCENE]->SetIsVisible(true);
@@ -182,6 +241,9 @@ void StageSelectSceneUI::SetThirdStageSprite()
 	selectSpriteMap[FINAL_STAGE_SCENE]->SetIsVisible(false);
 }
 
+/*
+@brief 第4stageが選ばれている時の描画状態をセットする
+*/
 void StageSelectSceneUI::SetFourthStageSprite()
 {
 	selectIconSpriteMap[FOURTH_SATGE_SCENE]->SetIsVisible(true);
@@ -197,6 +259,9 @@ void StageSelectSceneUI::SetFourthStageSprite()
 	selectSpriteMap[FINAL_STAGE_SCENE]->SetIsVisible(false);
 }
 
+/*
+@brief 第5stageが選ばれている時の描画状態をセットする
+*/
 void StageSelectSceneUI::SetFinalStageSprite()
 {
 	selectIconSpriteMap[FINAL_STAGE_SCENE]->SetIsVisible(true);

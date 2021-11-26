@@ -2,8 +2,8 @@
 #include "StageCreatorBase.h"
 
 /*
-@file FifthStageCreator.h
-@brief FifthStageを生成する
+@file ForthStageCreator.h
+@brief ForthStageを生成する
 */
 class ForthStageCreator :
     public StageCreatorBase
@@ -145,22 +145,13 @@ private:
 	*/
 	void CreateLayer13(int _indexX, int _indexY);
 
-
-	/*
-	@fn カメラモード変更ポイント生成
-	@brief  カメラモード変更ポイントの生成を行う
-	@param	_indexX 検索するマップデータの添え字X
-	@param	_indexY 検索するマップデータの添え字Y
-	*/
-	void CreateCameraDirecting(int _indexX, int _indexY);
-
 	// 最終ステージのレイヤーの最大定数
 	const int MaxLayerNumber;
 
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
 
-	// 最終ステージデータ
+	// 第4ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;
 	std::vector<std::vector<int>> layer1StageData;
 	std::vector<std::vector<int>> layer2StageData;

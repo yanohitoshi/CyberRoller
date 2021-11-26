@@ -252,7 +252,6 @@ void ThirdStageCreator::CreateStage()
 			CreateLayer17(ix, iy);
 			// Layer18内を検索
 			CreateLayer18(ix, iy);
-			//CreateCameraDirecting(ix, iy);
 		}
 	}
 }
@@ -582,6 +581,7 @@ void ThirdStageCreator::CreateLayer7(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer7Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -610,6 +610,7 @@ void ThirdStageCreator::CreateLayer8(int _indexX, int _indexY)
 		new GroundObject(layer8Pos, BlockSize, Tag::GROUND);
 		break;
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer8Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
@@ -673,11 +674,14 @@ void ThirdStageCreator::CreateLayer9(int _indexX, int _indexY)
 		// リスポーンポイントオブジェクト生成
 		new RespawnPoint(layer9Pos, RespawnBox, Tag::RESPOWN_POINT);
 		break;
+
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer9Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer9Pos, Tag::BOMB);
 		break;
 	}
@@ -722,10 +726,13 @@ void ThirdStageCreator::CreateLayer10(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer10Pos, Tag::ENEMY, moveEnemyData);
 		break;
+
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer10Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer10Pos, Tag::BOMB);
 		break;
 	}
@@ -770,7 +777,9 @@ void ThirdStageCreator::CreateLayer11(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer11Pos, Tag::ENEMY, moveEnemyData);
 		break;
+
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer11Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -815,7 +824,9 @@ void ThirdStageCreator::CreateLayer12(int _indexX, int _indexY)
 		// 敵オブジェクト生成
 		new MoveEnemyObject(layer12Pos, Tag::ENEMY, moveEnemyData);
 		break;
+
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer12Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -862,10 +873,12 @@ void ThirdStageCreator::CreateLayer13(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer13Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 
 	case(BOMB_PARTS):
+		// 爆発物を生成
 		new ExplosionObject(layer13Pos, Tag::BOMB);
 		break;
 	}
@@ -919,7 +932,7 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		new TrackingEnemyObject(layer14Pos, Tag::ENEMY, 600.0f, 1400.0f);
 		break;
 
-	case(35):
+	case(LEFT_PUSH_BOX_NUMBER_3):
 		// プッシュボード固有のデータ構造体をセット
 		SetPushBoxData(Vector3(0.0f, -1200.0f, 0.0f), Vector3::NegUnitY, 1500.0f, 0.3f, MoveDirectionTag::MOVE_Y);
 		// ケースごとに方向の違う押し出しボックスの生成
@@ -949,6 +962,7 @@ void ThirdStageCreator::CreateLayer14(int _indexX, int _indexY)
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer14Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -988,16 +1002,19 @@ void ThirdStageCreator::CreateLayer15(int _indexX, int _indexY)
 		break;
 
 	case(RIGHT_MOVE_BLOCK_PARTS):
+		// 右に動くblockを生成
 		SetMoveBlockData(1100.0f, Vector3::UnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(LEFT_MOVE_BLOCK_PARTS):
+		// 左に動くblockを生成
 		SetMoveBlockData(1100.0f, Vector3::NegUnitY, 900.0f, Vector3(50.0f, 900.0f, 1000.0f), MoveDirectionTag::MOVE_Y);
 		new MoveBlockObject(layer15Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 
 	case(BREAK_BLOCK_PARTS):
+		// 壊れるblockを生成
 		new BreakBlockObject(layer15Pos, BlockSize, Tag::BREAK_GROUND);
 		break;
 	}
@@ -1107,20 +1124,9 @@ void ThirdStageCreator::CreateLayer18(int _indexX, int _indexY)
 		break;
 
 	case(DOWN_MOVE_BLOCK_PARTS):
+		// 下に動くblockを生成
 		SetMoveBlockData(600.0f, Vector3::NegUnitZ, 500.0f, Vector3(50.0f, 1000.0f, 600.0f), MoveDirectionTag::MOVE_Z);
 		new MoveBlockObject(layer18Pos, Tag::MOVE_GROUND, moveBlockData);
 		break;
 	}
-}
-
-void ThirdStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
-{
-	// ステージデータ配列からマップデータをもらう
-	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
-	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer1Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[0]);
-	AABB aabb = { Vector3(-5000.0f,-1800.0f,0.0f),Vector3(2000.0f,1800.0f,4000.0f) };
-	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
-
-
 }
