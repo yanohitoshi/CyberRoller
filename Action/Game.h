@@ -84,7 +84,7 @@ public:
 	@brief  ゲームオブジェクトの入力処理
 	@param	_keyState 入力情報
 	*/
-	friend void ProcessInputs(const InputState& _state);
+	friend void GameObjectInputs(const InputState& _state);
 
 private:
 
@@ -94,15 +94,23 @@ private:
 	// シーンの状態を保存する変数
 	SceneState nowSceneState;
 	
+	// シーン更新後の状態を保存する変数
+	SceneState nextSceneState;
+
 	/*
 	@brief  入力関連の処理
 	*/
-    void UpdateInput();
+    void UpdateInputSystem();
 
 	/*
 	@brief  sceneの更新処理
 	*/
 	void UpdateScene();
+
+	/*
+	@brief  ゲームオブジェクトの入力処理
+	*/
+	void UpdateGameObjectsInput();
 	
 	/*
 	@brief  描画関連の処理
@@ -126,6 +134,16 @@ private:
 	@param _scene 進行中のシーンのポインタ
 	*/
 	void ChangeScene(SceneState _state,BaseScene* _scene);
+
+	/*
+	@fn シーンの生成を行う関数
+	*/
+	void CreateScene(SceneState _state);
+
+	/*
+	@fn シーンの削除を行う関数
+	*/
+	void RemoveScene(BaseScene* _scene);
 
 	// FPS計測クラス
 	FPS* fps;

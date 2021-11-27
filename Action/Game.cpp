@@ -65,6 +65,7 @@ bool Game::Initialize()
 
     //入力管理クラスの初期化
 	inputSystem = new InputSystem();
+
 	// 初期化と成功したか失敗したかのチェック
 	if (!inputSystem->Initialize())
 	{
@@ -87,10 +88,10 @@ bool Game::Initialize()
 
 	}
 
-	//レンダラーの初期化
+	// レンダラーの初期化
 	RenderingObjectManager::CreateInstance();
 
-	//画面作成
+	// 画面作成
 	// 初期化と成功したか失敗したかのチェック
 	if (!RENDERING_OBJECT_MANAGER->Initialize(screenWidth, screenHeight, isFullScreen))
 	{
@@ -156,14 +157,21 @@ void Game::Termination()
 {
 	// 今のシーンを解放
 	delete nowScene;
+
     //データのアンロード
 	UnloadData();
+
     //スタティッククラスの解放処理
+	// 描画クラスの解放処理
 	RenderingObjectManager::DeleteInstance();
+	// 当たり判定クラスを解放処理
 	PhysicsWorld::DeleteInstance();
-    //クラスの解放処理
+
+    //FPSクラスの解放処理
     delete fps;
+	// 入力クラスの解放処理
     delete inputSystem;
+
     //サブシステムの終了
 	SDL_Quit();
 }
@@ -173,14 +181,16 @@ void Game::Termination()
 */
 void Game::GameLoop()
 {
-	// isRunningがtrueの間ループ
+	// ゲームを続ける状態の間ループ
 	while (isRunning)
 	{
 		// 入力更新
-		UpdateInput();
-		// シーンの更新
+		UpdateInputSystem();
+		// ゲームオブジェクトクラスの入力を更新
+		UpdateGameObjectsInput();
+		// シーンクラスの更新
 		UpdateScene();
-		// ゲームのアップデート
+		// ゲームオブジェクトのアップデート
 		UpdateGame();
 		// 描画更新
 		DrawGame();
@@ -195,7 +205,7 @@ void Game::GameLoop()
 */
 void Game::UnloadData()
 {
-	// Rendererがnullptrじゃなかったら
+	// RenderindObjectManagerがnullptrじゃなかったら
 	if (RENDERING_OBJECT_MANAGER != nullptr)
 	{
 		// データをアンロード
@@ -208,7 +218,7 @@ void Game::UnloadData()
 /*
 @brief  入力関連の処理
 */
-void Game::UpdateInput()
+void Game::UpdateInputSystem()
 {
 	// inputSystemのUpdateの準備をする（SDL_PollEventsの直前に呼ぶ）
 	inputSystem->PrepareForUpdate();
@@ -252,24 +262,28 @@ void Game::UpdateScene()
 		isRunning = false;
 	}
 
-	// 次のシーンのステータス状態保存用変数生成
-	SceneState tmpSceneState;
-
 	// シーンのアップデート
-	tmpSceneState = nowScene->Update(state);
-
-	// もしシーン遷移が行われない場合オブジェクトに入力状態を渡して更新
-	if (tmpSceneState == nowSceneState && Game::GetContinueFlag() == false)
-	{
-		ProcessInputs(state);
-	}
+	nextSceneState = nowScene->Update(state);
 
 	// 今のシーンと次のシーンが違うまたはコンテニューが選択されたら
-	if (tmpSceneState != nowSceneState || Game::GetContinueFlag())
+	if (nextSceneState != nowSceneState || Game::GetContinueFlag())
 	{
 		// 今のシーンステータスに次のシーンステータスを入れる
-		nowSceneState = tmpSceneState;
+		nowSceneState = nextSceneState;
+		// シーンの切り替えを行う
 		ChangeScene(nowSceneState, nowScene);
+	}
+}
+
+/*
+@brief  ゲームオブジェクトの入力処理
+*/
+void Game::UpdateGameObjectsInput()
+{
+	// もしシーン遷移が行われない場合オブジェクトに入力状態を渡して更新
+	if (nextSceneState == nowSceneState && Game::GetContinueFlag() == false)
+	{
+		GameObjectInputs(inputSystem->GetState());
 	}
 }
 
@@ -281,16 +295,17 @@ void Game::UpdateScene()
 */
 void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 {
+	// 現在のシーンの削除を行う
+	RemoveScene(_scene);
+	// 次のシーンを生成する
+	CreateScene(_state);
+}
 
-	// シーン変更があった際に全ての使用済みオブジェクトを削除
-	GameObject::RemoveUsedGameObject();
-	// シーンのメモリをdelete
-	delete _scene;
-
-	RENDERING_OBJECT_MANAGER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
-	// シーン遷移判定に使用するフラグを初期化
-	continueFlag = false;
-
+/*
+@fn シーンの生成を行う関数
+*/
+void Game::CreateScene(SceneState _state)
+{
 	// _stateを参照して必要なシーンを生成
 	switch (_state)
 	{
@@ -322,6 +337,22 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 		nowScene = new ResultScene();
 		break;
 	}
+}
+
+/*
+@fn シーンの削除を行う関数
+*/
+void Game::RemoveScene(BaseScene* _scene)
+{
+	// シーン変更があった際に全ての使用済みオブジェクトを削除
+	GameObject::RemoveUsedGameObject();
+	// シーンのメモリをdelete
+	delete _scene;
+
+	// ジオメトリインスタンスにマップに格納されているゲームオブジェクトクラスを削除
+	RENDERING_OBJECT_MANAGER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
+	// シーン遷移判定に使用するフラグを初期化
+	continueFlag = false;
 }
 
 /*
@@ -365,7 +396,8 @@ void UpdateGameObjects(float _deltaTime)
 	}
 
 	// 途中追加されたobjectの更新処理
-	// ※ループ中でgameObjectMapに合流させてしまうと添え字がずれて例外をスローしてしまうので一度別のvector内で更新してその後合流させる
+	// ※ループ中にgameObjectMapへ合流させてしまうと添え字がずれて例外をスローしてしまうので、
+	// 一度別のvector内で更新してその後合流させる
 	for (auto pending : GameObject::pendingGameObjects)
 	{
 		// 更新処理
@@ -377,12 +409,16 @@ void UpdateGameObjects(float _deltaTime)
 		auto gameObjects = GameObject::gameObjectMap.find(pending->GetTag());
 		if (gameObjects != GameObject::gameObjectMap.end())
 		{
+			// コンテナが見つかったらそのコンテナに追加
 			gameObjects->second.emplace_back(pending);
 		}
 		else  
 		{
+			// コンテナが見つからなかった場合の一時保存コンテナ
 			std::vector<GameObject*> tmpVector;
+			// 一時保存コンテナに追加
 			tmpVector.emplace_back(pending);
+			// 一時的に保存していたコンテナをmapに追加する
 			GameObject::gameObjectMap[pending->GetTag()] = tmpVector;
 		}
 
@@ -425,7 +461,7 @@ void UpdateGameObjects(float _deltaTime)
 @brief  ゲームオブジェクトの入力処理
 @param	_keyState 入力情報
 */
-void ProcessInputs(const InputState& _state)
+void GameObjectInputs(const InputState& _state)
 {
 	// オブジェクトの更新フラグをtrueに
 	GameObject::updatingGameObject = true;
@@ -442,5 +478,4 @@ void ProcessInputs(const InputState& _state)
 	
 	// 更新フラグをfalseに
 	GameObject::updatingGameObject = false;
-
 }

@@ -343,7 +343,7 @@ private:
 	/*
 	@brief  ゲームオブジェクトの入力処理
 	*/
-	friend void ProcessInputs(const InputState & _state);
+	friend void GameObjectInputs(const InputState & _state);
 	
 public://ゲッターセッター
 
