@@ -98,6 +98,11 @@ private:
 	SceneState nextSceneState;
 
 	/*
+	@brief  入力関連の更新処理
+	*/
+	void UpdateInput();
+
+	/*
 	@brief  入力関連の処理
 	*/
     void UpdateInputSystem();

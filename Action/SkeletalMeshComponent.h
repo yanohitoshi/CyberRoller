@@ -71,7 +71,7 @@ protected:
 	*/
 	void SetTextureToShader(Shader* _shader);
 
-public://ゲッターセッター
+public: //ゲッターセッター
 
 	/*
 	@param _skeleton スケルトンデータ

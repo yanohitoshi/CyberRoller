@@ -17,7 +17,6 @@ FPS::FPS()
     , beforetickCount(0)
 	, deltaTime(0)
 {
-
 }
 
 /*

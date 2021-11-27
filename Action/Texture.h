@@ -97,6 +97,5 @@ public://ゲッターセッター
 	@return テクスチャのID
 	*/
 	int GetTextureID() const { return textureID; }
-
 };
 

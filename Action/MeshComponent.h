@@ -104,6 +104,4 @@ public: //ゲッターセッター
 	@return カラーチェンジを用いるか
 	*/
 	bool GetIsColorChange()const { return isColorChange; }
-	
 };
-

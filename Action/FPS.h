@@ -44,7 +44,7 @@ private:
 	//現在のフレームのかかった時間
 	float deltaTime;
 
-public://ゲッターセッター
+public: //ゲッターセッター
 
 	/*
 	@fn デルタタイムのgetter関数
@@ -53,4 +53,3 @@ public://ゲッターセッター
 	*/
 	float GetDeltaTime() const { return deltaTime; }
 };
-

@@ -68,13 +68,13 @@ public: // ゲッターセッター
 	@brief	当たり判定タグをセット
 	@param	_tag 当たり判定の種類を判別するためのタグ
 	*/
-	void SetBoxTag(const PhysicsTag _tag) { mTag = _tag; }
+	void SetBoxTag(const PhysicsTag _tag) { tag = _tag; }
 
 	/*
 	@brief	当たり判定タグを取得する
 	@return mTag 当たり判定の種類を判別するためのタグ
 	*/
-	PhysicsTag GetBoxTag() const{ return mTag; }
+	PhysicsTag GetBoxTag() const{ return tag; }
 
 };
 

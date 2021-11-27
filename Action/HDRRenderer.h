@@ -124,12 +124,12 @@ public://ゲッターセッター
 	@fn ColorTexureIDのgetter関数
 	@return unsigned int hdrColorBuffers[0]
 	*/
-	unsigned int GetColorTexID() { return hdrColorBuffers[0]; }
+	unsigned int GetColorTexID() const { return hdrColorBuffers[0]; }
 
 	/*
 	@fn ColorTexureIDのgetter関数
 	@return unsigned int hdrColorBuffers[1]
 	*/
-	unsigned int GetHDRTexID() { return hdrColorBuffers[1]; }
+	unsigned int GetHDRTexID() const { return hdrColorBuffers[1]; }
 };
 

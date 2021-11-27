@@ -21,7 +21,7 @@ ContinueSprite::ContinueSprite()
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/continue.png");
+	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/continue.png");
 	// SpriteComponentを初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

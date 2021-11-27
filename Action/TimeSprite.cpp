@@ -16,7 +16,7 @@ TimeSprite::TimeSprite()
 	SetPosition(Vector3(700.0f, 480.0f, 0.0f));
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/time/Time_UI.png");
+	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/time/Time_UI.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 	// ƒƒ“ƒo[•Ï”‰Šú‰»

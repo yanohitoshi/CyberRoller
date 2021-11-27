@@ -25,7 +25,7 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	state = Active;
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/JumpSwitch/model/jumpSwitch.gpmesh"), GeometryInstanceType::G_JUMP_SWITCH);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/JumpSwitch/model/jumpSwitch.gpmesh"), GeometryInstanceType::G_JUMP_SWITCH);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 

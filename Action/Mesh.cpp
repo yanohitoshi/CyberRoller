@@ -127,15 +127,15 @@ bool Mesh::Load(const std::string & _fileName, RenderingObjectManager* _renderer
 	{
 		// すでにロードされたテクスチャじゃないか調べる
 		std::string texName = readTextures[i].GetString();
-		Texture* t = _renderer->GetTexture(texName);
+		Texture* t = _renderer->CreateTexture(texName);
 		if (t == nullptr)
 		{
 			// テクスチャをロードする
-			t = _renderer->GetTexture(texName);
+			t = _renderer->CreateTexture(texName);
 			if (t == nullptr)
 			{
 				// テクスチャがロードできなかった場合、デフォルトのテクスチャを使用
-				t = _renderer->GetTexture("Assets/Default.png");
+				t = _renderer->CreateTexture("Assets/Default.png");
 			}
 		}
 		textures.emplace_back(t);
@@ -317,11 +317,11 @@ int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, con
 		if (texName != noneTexture)
 		{
 			// texturenameでのtexture読み込み
-			t = RENDERING_OBJECT_MANAGER->GetTexture(texName);
+			t = RENDERING_OBJECT_MANAGER->CreateTexture(texName);
 			// tがnullptrの場合デフォルトを入れる
 			if (t == nullptr)
 			{
-				t = RENDERING_OBJECT_MANAGER->GetTexture("Assets/Default.png");
+				t = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/Default.png");
 			}
 			// IDを返す
 			return t->GetTextureID();

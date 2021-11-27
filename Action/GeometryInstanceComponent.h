@@ -49,4 +49,3 @@ private:
 	//メッシュのポインタ
 	class Mesh* mesh;
 };
-

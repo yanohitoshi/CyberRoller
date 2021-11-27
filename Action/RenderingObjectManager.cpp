@@ -187,7 +187,7 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 	}
 
 
-	undefineTexID = GetTexture("Assets/sprite/noneTexture.png")->GetTextureID();
+	undefineTexID = CreateTexture("Assets/sprite/noneTexture.png")->GetTextureID();
 
 	//　HDRrendererの生成
 	hdrRenderer = new HDRRenderer(screenWidth, screenHeight,4);
@@ -283,10 +283,10 @@ void RenderingObjectManager::Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// デプスマップレンダリング
-	DepthRendering();
+	BakeDepthMap();
 
 	//シャドウマップ描画
-	DrawShadow();
+	DrawShadowMap();
 
 	// particle描画
 	DrawParticle();
@@ -494,7 +494,7 @@ void RenderingObjectManager::RemoveMeshComponent(MeshComponent* _meshComponent)
 @param _fileName モデルへのアドレス
 @return スケルトンモデルの取得
 */
-const Skeleton * RenderingObjectManager::GetSkeleton(const char * _fileName)
+const Skeleton * RenderingObjectManager::CreateSkeleton(const char * _fileName)
 {
 	//すでに作成されてないか調べる
 	std::string file(_fileName);
@@ -523,7 +523,7 @@ const Skeleton * RenderingObjectManager::GetSkeleton(const char * _fileName)
 @param _fileName アニメーションへのアドレス
 @return スケルトンアニメーションの取得
 */
-const Animation * RenderingObjectManager::GetAnimation(const char * _fileName, bool _loop)
+const Animation * RenderingObjectManager::CreateAnimation(const char * _fileName, bool _loop)
 {
 	//すでに作成されてないか調べる
 	auto iter = anims.find(_fileName);
@@ -552,7 +552,7 @@ const Animation * RenderingObjectManager::GetAnimation(const char * _fileName, b
 @param	_fileName　取得したいテクスチャのファイル名
 @return Textureクラスのポインタ
 */
-Texture* RenderingObjectManager::GetTexture(const std::string& _fileName)
+Texture* RenderingObjectManager::CreateTexture(const std::string& _fileName)
 {
 	Texture* texture = nullptr;
 	//すでに作成されてないか調べる
@@ -584,7 +584,7 @@ Texture* RenderingObjectManager::GetTexture(const std::string& _fileName)
 @param	_fileName　取得したいフォントのファイル名
 @return Fontクラスのポインタ
 */
-Font* RenderingObjectManager::GetFont(const std::string& _fileName)
+Font* RenderingObjectManager::CreateFont(const std::string& _fileName)
 {
 	Font* font = nullptr;
 	//すでに作成されてないか調べる
@@ -616,7 +616,7 @@ Font* RenderingObjectManager::GetFont(const std::string& _fileName)
 @param	_fileName 取得したいメッシュのファイル名
 @return Meshクラスのポインタ
 */
-Mesh* RenderingObjectManager::GetMesh(const std::string &_fileName)
+Mesh* RenderingObjectManager::CreateMesh(const std::string &_fileName)
 {
 	Mesh* m = nullptr;
 	//すでに作成されてないか調べる
@@ -796,7 +796,7 @@ void RenderingObjectManager::CreateCubeVerts()
 void RenderingObjectManager::CreateTimeFontTexture(int _value, int _fontSize)
 {
 	// フォントの生成
-	Font* font = GetFont("Assets/Config/Fonts/impact.ttf");
+	Font* font = CreateFont("Assets/Config/Fonts/impact.ttf");
 	// 格納する可変長配列をリサイズ
 	timeFontTextures.resize(_value);
 	timeBlackFontTextures.resize(_value);
@@ -861,7 +861,7 @@ Texture* RenderingObjectManager::GetTimeRedTexture(int _time)
 /*
 @brief  シャドウマップの本描画関数
 */
-void RenderingObjectManager::DrawShadow()
+void RenderingObjectManager::DrawShadowMap()
 {
 
 	/* HDRとシャドウマップの処理開始 */
@@ -1015,9 +1015,8 @@ void RenderingObjectManager::DrawShadow()
 /*
 @brief  デプスマップ焼きこみ描画
 */
-void RenderingObjectManager::DepthRendering()
+void RenderingObjectManager::BakeDepthMap()
 {
-
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
 	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + ShiftLightPositionZ);
 
@@ -1116,7 +1115,6 @@ void RenderingObjectManager::DrawBackGround()
 
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
-
 }
 
 /*

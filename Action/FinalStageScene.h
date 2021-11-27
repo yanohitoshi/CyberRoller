@@ -6,7 +6,7 @@
 
 /*
 @file FinalStageScene.h
-@brief 最終ステージの初期化と生成、次のシーンへのシーン遷移を行う
+@brief 最終ステージの管理と更新を行う
 */
 class FinalStageScene :
     public BaseScene
@@ -38,6 +38,4 @@ private:
 	// クリアした時のシーンが遷移するまでのカウント
 	// 最終ステージのみ演出が長いので別で定義
 	const int FinalClearToChangeScene;
-
 };
-

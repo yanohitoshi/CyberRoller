@@ -8,7 +8,7 @@
 /*
 @fn シーン開始時のライトアップ関数
 */
-void BaseScene::StartSceneLightUpProcess()
+void BaseScene::StartSceneLightUp()
 {
 	// ライトの数値を明るくする
 	light += ChangeLightSpeed;
@@ -29,7 +29,7 @@ void BaseScene::StartSceneLightUpProcess()
 @fn クリアしたかのチェックとクリアカウントを数える処理関数
 @param _playerObject シーンに存在するプレイヤーのポインタ
 */
-void BaseScene::SceneClearCountProcess(PlayerObject* _playerObject)
+void BaseScene::SceneClearCount(PlayerObject* _playerObject)
 {
 	if (_playerObject->GetClearFlag() == true)
 	{
@@ -43,7 +43,7 @@ void BaseScene::SceneClearCountProcess(PlayerObject* _playerObject)
 @fn コンティニュー選択処理関数
 @param _inputState 入力情報
 */
-void BaseScene::ContinueSelectProcess(const InputState& state)
+void BaseScene::ContinueSelect(const InputState& state)
 {
 	// ライト固定
 	light = TimeoversLight;

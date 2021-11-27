@@ -55,7 +55,7 @@ protected:
 	// 背景用spriteかどうか
 	bool isBackGround;
 
-public://ゲッターセッター
+public: //ゲッターセッター
 
 	/*
 	@fn テクスチャをセットし縦横の長さを計算する
@@ -113,6 +113,4 @@ public://ゲッターセッター
 	@return	_alpha 設定するAlpha値の値(float)
 	*/
 	void SetScale(float _scale) { scale = _scale; }
-
 };
-

@@ -65,7 +65,6 @@ public: // ゲッターセッター
 	@brief	当たり判定タグを取得する
 	@return mTag 当たり判定の種類を判別するためのタグ
 	*/
-	PhysicsTag GetSphereTag() const { return mTag; }
-
+	PhysicsTag GetSphereTag() const { return tag; }
 };
 

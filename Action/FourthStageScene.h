@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+/*
+@file FourthStageScene.h
+@brief 第4ステージの管理と更新を行う
+*/
 class FourthStageScene :
     public BaseScene
 {
@@ -29,4 +36,3 @@ public:
 private:
 
 };
-

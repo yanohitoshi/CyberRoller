@@ -63,4 +63,3 @@ private:
 	// •`‰æ‚·‚é‚©‚µ‚È‚¢‚©‚Ìƒtƒ‰ƒO
 	bool isVisible;
 };
-

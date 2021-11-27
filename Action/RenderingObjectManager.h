@@ -204,12 +204,12 @@ private:
 	/*
 	@brief  シャドウマップの本描画関数
 	*/
-	void DrawShadow();
+	void DrawShadowMap();
 
 	/*
 	@brief  デプスマップ焼きこみ描画
 	*/
-	void DepthRendering();
+	void BakeDepthMap();
 
 	/*
 	@brief  背景の描画
@@ -290,9 +290,10 @@ private:
 
 	// キューブマップ
 	class CubeMapComponent* activeSkyBox; // 有効な(描画する)スカイボックス
-	//クラスのポインタ
-	//スプライト
+
+	// スプライトシェーダー
 	Shader* spriteShader;
+	// スプライトの頂点配列
 	VertexArray* spriteVerts;
 
 	// スカイボックス用シェーダ
@@ -302,22 +303,22 @@ private:
 	Shader* switchShader;
 	// ジオメトリインスタンス用シェーダー
 	Shader* geometryInstanceShader;
-	//スキンメッシュ
+	// スキンメッシュ
 	Shader*  mSkinnedShader;  
 
-	//shadowマップ関連シェーダー
-	//shadow用（メッシュ）
+	// shadowマップ関連シェーダー
+	// shadowMap用（メッシュ）
 	Shader* depthMapShader;
 	Shader* shadowMapShader;
 
-	//shadow用（スキンメッシュ）
+	// shadowMap用（スキンメッシュ）
 	Shader* skinnedDepthMapShader;
 	Shader* skinnedShadowMapShader;
 
-	//デバック用シェーダー
+	// デバック用シェーダー
 	Shader* debugShader;
 
-	//パーティクル
+	// パーティクルシェーダー
 	Shader* particleShader;
 	// パーティクル用頂点定義
 	VertexArray* particleVertex;
@@ -350,7 +351,6 @@ private:
 	// ライトの位置のX軸をプレイヤーの位置からずらす値
 	const float ShiftLightPositionX;
 
-	// ライトプロジェクション行列生成用定数
 	// ライトプロジェクションの幅の定数
 	const float LightProjectionWhidth;
 	// ライトプロジェクションの高さの定数
@@ -401,7 +401,7 @@ private:
 	Matrix4 billboardMat;
 
 
-public://ゲッターセッター
+public: //ゲッターセッター
 
 	/*
 	@brief  テクスチャの取得
@@ -415,35 +415,35 @@ public://ゲッターセッター
 	@param	_fileName　取得したいテクスチャのファイル名
 	@return Textureクラスのポインタ
 	*/
-	Texture* GetTexture(const std::string& _fileName);
+	Texture* CreateTexture(const std::string& _fileName);
 
 	/*
 	@brief  フォントの取得
 	@param	_fileName　取得したいフォントのファイル名
 	@return Fontクラスのポインタ
 	*/
-	Font* GetFont(const std::string& _fileName);
+	Font* CreateFont(const std::string& _fileName);
 
 	/*
 	@brief  スケルトンモデルの取得
 	@param _fileName モデルへのアドレス
 	@return スケルトンモデルクラスのポインタ
 	*/
-	const class Skeleton* GetSkeleton(const char* _fileName);
+	const class Skeleton* CreateSkeleton(const char* _fileName);
 	
 	/*
 	@brief  アニメーションの取得
 	@param _fileName アニメーションへのアドレス
 	@return スケルトンアニメーションクラスのポインタ
 	*/
-	const class Animation* GetAnimation(const char* _fileName, bool _loop);
+	const class Animation* CreateAnimation(const char* _fileName, bool _loop);
 
 	/*
 	@brief  メッシュの取得
 	@param	_fileName 取得したいメッシュのファイル名
 	@return Meshクラスのポインタ
 	*/
-	Mesh* GetMesh(const std::string& _fileName);
+	Mesh* CreateMesh(const std::string& _fileName);
 
 	/*
 	@brief	平行光源の構造体を取得する
@@ -474,14 +474,14 @@ public://ゲッターセッター
 	@brief	Projection行列のgetter
 	@return Projection行列
 	*/
-	Matrix4 GetProjectionMatrix() { return projection; }
+	Matrix4 GetProjectionMatrix() const { return projection; }
 
 	/*
 	@brief  SDL_Rendererを取得する
 	@return SDL_Rendererクラスのポインタ
 	*/
-	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
-	unsigned int GetUndefineTexID() { return undefineTexID; }
+	SDL_Renderer* GetSDLRenderer() const { return sdlRenderer; }
+	unsigned int GetUndefineTexID() const { return undefineTexID; }
 
 	/*
 	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
@@ -521,10 +521,10 @@ public://ゲッターセッター
 	@param	プレイヤーのポジション
 	*/
 	void SetPlayerPositon(Vector3 _pos) { playerPos = _pos; }
+
 	/*
 	@brief	カメラの前方ベクトルをセットするsetter
 	@param	カメラの前方ベクトル
 	*/
 	void SetCameraForawrd(Vector3 _vec) { cameraForwardVec = _vec; }
-
 };

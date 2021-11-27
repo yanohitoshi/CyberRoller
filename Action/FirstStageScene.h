@@ -5,8 +5,8 @@
 #include "BaseScene.h"
 
 /*
-@file SecondStageScene.h
-@brief 第二ステージの初期化と生成、次のシーンへのシーン遷移を行う
+@file FirstStageScene.h
+@brief 第1ステージの管理と更新を行う
 */
 class FirstStageScene :
     public BaseScene
@@ -35,4 +35,3 @@ public:
 private:
 
 };
-

@@ -7,7 +7,7 @@
 
 /*
 @file TitleScene.h
-@brief タイトルシーンの初期化と生成、次のシーンへのシーン遷移を行う
+@brief タイトルシーンの管理と更新を行う
 */
 class TitleScene : public BaseScene
 {
@@ -36,4 +36,3 @@ public:
 private:
 
 };
-

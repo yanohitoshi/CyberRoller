@@ -53,6 +53,8 @@ FinalStageScene::FinalStageScene()
 	// シーンUIを追加
 	new FinalStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 
+	// 生成の役割を終えたのでクリエイターの状態をdeadにし片づける
+	finalStageCreator->SetState(State::Dead);
 }
 
 /*
@@ -75,7 +77,7 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 	if (startScene == true)
 	{
 		// シーン開始時のライトアップ処理
-		StartSceneLightUpProcess();
+		StartSceneLightUp();
 	}
 
 	// 最終ステージではライトを落とさないためクリアカウントのみ数える
@@ -95,7 +97,7 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 	if (CountDownFont::GetTimeOverFlag() == true && lightDownFlag == true)
 	{
 		// コンティニュー選択処理
-		ContinueSelectProcess(_inputState);
+		ContinueSelect(_inputState);
 	}
 
 	// コンテニューかゲームオーバーが選択されたら

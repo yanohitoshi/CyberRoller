@@ -47,19 +47,19 @@ protected:
 	/*
 	@fn シーン開始時のライトアップ関数
 	*/
-	void StartSceneLightUpProcess();
+	void StartSceneLightUp();
 
 	/*
 	@fn クリアしたかのチェックとクリアカウントを数える処理関数
 	@param _playerObject シーンに存在するプレイヤーのポインタ
 	*/
-	void SceneClearCountProcess(PlayerObject* _playerObject);
+	void SceneClearCount(PlayerObject* _playerObject);
 
 	/*
 	@fn コンティニュー選択処理関数
 	@param _inputState 入力情報
 	*/
-	void ContinueSelectProcess(const InputState& _inputState);
+	void ContinueSelect(const InputState& _inputState);
 
 	/*
 	@fn コンティニュー選択時のライト遷移関数

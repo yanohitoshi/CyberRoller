@@ -1,6 +1,13 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+/*
+@file StageSelectScene.h
+@brief ステージ選択シーンの管理と更新を行う
+*/
 class StageSelectScene :
     public BaseScene
 {
@@ -41,7 +48,6 @@ private:
 
 public:
 
-	SceneState GetSelectState() { return selectState; }
+	SceneState GetSelectState() const { return selectState; }
 
 };
-

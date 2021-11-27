@@ -92,7 +92,7 @@ private:
 protected:
 
 	// 当たり判定を行うかどうかの判定用Tag
-	PhysicsTag mTag;
+	PhysicsTag tag;
 
 public: // ゲッターセッター
 	

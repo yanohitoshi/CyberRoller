@@ -20,7 +20,7 @@ StageSelectSprite::StageSelectSprite(StageSelectSceneUI* _owner, SceneState _sta
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
 	// 背景テクスチャをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture(_spriteFileName);
+	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture(_spriteFileName);
 	// 背景テクスチャをセット
 	sprite->SetTexture(tex);
 	// 映す映さないをセット

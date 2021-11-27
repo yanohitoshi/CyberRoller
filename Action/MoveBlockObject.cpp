@@ -36,7 +36,7 @@ MoveBlockObject::MoveBlockObject(const Vector3& _p, const Tag& _objectTag, MoveB
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"));
 
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();

@@ -39,6 +39,9 @@ ResultScene::ResultScene()
 	state = SceneState::RESULT_SCENE;
 	// シーンUI追加
 	new ResultSceneUI();
+
+	// クリエイターの状態をdeadにし片づける
+	resultSceneCreator->SetState(State::Dead);
 }
 
 /*

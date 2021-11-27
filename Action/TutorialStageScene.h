@@ -6,7 +6,7 @@
 
 /*
 @file FirstStageScene.h
-@brief 第一ステージ(チュートリアル)の初期化と生成、次のシーンへのシーン遷移を行う
+@brief チュートリアルシーン管理と更新を行う
 */
 class TutorialStageScene : public BaseScene
 {

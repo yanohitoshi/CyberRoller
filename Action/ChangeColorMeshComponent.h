@@ -47,4 +47,3 @@ public:// ゲッターセッター
     */
     void SetColor(const Vector3& _color) { color = _color; }
 };
-

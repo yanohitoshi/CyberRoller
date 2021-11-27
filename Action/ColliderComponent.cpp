@@ -16,6 +16,6 @@ ColliderComponent::ColliderComponent(GameObject* _owner, PhysicsTag tag, int _up
 	: Component(_owner, _updateOrder),
 	isTrigger(false),
 	collisionOrder(_collisionOrder),
-	mTag(tag)
+	tag(tag)
 {
 }

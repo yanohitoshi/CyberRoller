@@ -64,4 +64,3 @@ public: //ゲッターセッター
 	*/
 	GameObject* GetOwner() const { return owner; };
 };
-

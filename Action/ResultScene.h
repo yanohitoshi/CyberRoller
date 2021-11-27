@@ -6,7 +6,7 @@
 
 /*
 @file ResultScene.h
-@brief リザルトシーンの初期化と生成、次のシーンへのシーン遷移を行う
+@brief リザルトシーンの管理と更新を行う
 */
 class ResultScene :
     public BaseScene
@@ -35,4 +35,3 @@ public:
 private:
 
 };
-

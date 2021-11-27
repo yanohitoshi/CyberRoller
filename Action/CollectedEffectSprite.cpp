@@ -29,7 +29,7 @@ CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/collection/AuroraRing.png");
+	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/collection/AuroraRing.png");
 	sprite->SetTexture(tex);
 	alpha = 1.0f;
 	sprite->SetAlpha(alpha);

@@ -359,7 +359,11 @@ void GameObject::RotateToNewForward(const Vector3& forward)
 	{
 		// 軸ベクトルとforwardとの外積から回転軸をもとめ、回転させる
 		Vector3 axis = Vector3::Cross(Vector3::UnitX, forward);
-		axis.Normalize();
+		// ベクトルの長さが0に近くなかったら
+		if (!Math::NearZero(axis.Length()))
+		{
+			axis.Normalize();
+		}
 		SetRotation(Quaternion(axis, angle));
 	}
 }

@@ -65,7 +65,11 @@ public://ゲッターセッター
 	*/
 	unsigned int GetNumVerts() const { return numVerts; }
 
+	/*
+	@fn vertexArrayのgetter関数
+	@brief	頂点配列オブジェクトのOpenGLIDを取得する
+	@return vertexArray
+	*/
 	unsigned int GetVertexArray() const { return vertexArray; }
-
 };
 

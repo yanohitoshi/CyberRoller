@@ -26,7 +26,7 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponent‚Ì‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/warning.png");
+	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/warning.png");
 	sprite->SetTexture(tex);
 	sprite->SetVisible(true);
 	sprite->SetAlpha(alpha);

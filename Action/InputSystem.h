@@ -89,7 +89,7 @@ private:
 	// 相対マウスモードかどうか
 	bool isRelative;
 
-public://ゲッターセッター
+public: //ゲッターセッター
 
 	/*
 	@brief	相対マウスモードかどうかを取得する
@@ -131,8 +131,10 @@ public://ゲッターセッター
 class ControllerState
 {
 public:
+
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
+
 private:
 
 	//現在のボタンの入力状態
@@ -198,7 +200,6 @@ public://ゲッターセッター
 	@return 右トリガーの入力情報
 	*/
 	const float& GetRightTrigger() const { return rightTriggerAxis; }
-
 };
 
 /*
@@ -219,6 +220,7 @@ struct InputState
 class InputSystem
 {
 public:
+
 	/*
 	@brief  初期化処理
 	@return true : 成功 , false : 失敗
@@ -262,7 +264,6 @@ private:
 	*/
 	float Filter1D(int _input);
 
-
 	//各入力機器の入力状態をまとめたラッパー構造体
 	InputState state;
 	//SDLでコントローラーを認識するためのクラスポインタ
@@ -270,7 +271,8 @@ private:
 	//コントローラーが接続されたか
 	static bool controllerConnected;
 
-public://ゲッターセッター
+public: //ゲッターセッター
+
 	/*
 	@brief  現在の入力状態を取得する
 	@return （InputState）各入力情報をまとめた構造体

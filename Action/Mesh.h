@@ -82,7 +82,7 @@ public: //ゲッターセッター
 	@brief	VertexArrayのgetter関数
 	@return	VertexArray型のポインタ
 	*/
-	VertexArray* GetVertexArray() { return vertexArray; }
+	VertexArray* GetVertexArray() const { return vertexArray; }
 
 	/*
 	@brief	Textureクラスのgetter関数
@@ -131,6 +131,4 @@ public: //ゲッターセッター
 	@return 頂点データ
 	*/
 	std::vector<Vector3> GetVerts() { return verts; }
-
-
 };

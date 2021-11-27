@@ -40,6 +40,9 @@ TutorialStageScene::TutorialStageScene()
 
 	// シーンUIを追加
 	new TutorialStageUI();
+
+	// クリエイターの状態をdeadにし片づける
+	tutorialStageCreator->SetState(State::Dead);
 }
 
 /*
@@ -62,11 +65,11 @@ SceneState TutorialStageScene::Update(const InputState& _inputState)
 	if (startScene == true)
 	{
 		// シーン開始時のライトアップ処理
-		StartSceneLightUpProcess();
+		StartSceneLightUp();
 	}
 
 	// クリアしたかのチェックとクリアカウントを数える処理関数
-	SceneClearCountProcess(playerObject);
+	SceneClearCount(playerObject);
 
 	// クリアカウントが一定を超えたらシーンを切り替える
 	if (clearCount >= ClearToChangeSceneTime)

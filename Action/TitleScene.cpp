@@ -36,6 +36,9 @@ TitleScene::TitleScene()
 
 	// シーンUIを追加
 	new TitleSceneUI();
+
+	// クリエイターの状態をdeadにし片づける
+	titleStageCreator->SetState(State::Dead);
 }
 
 /*

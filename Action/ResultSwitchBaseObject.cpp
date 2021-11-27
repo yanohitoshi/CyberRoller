@@ -25,7 +25,7 @@ ResultSwitchBaseObject::ResultSwitchBaseObject(const Vector3& _p, const Vector3&
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Switch/model/S_EnergySwitch.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Switch/model/S_EnergySwitch.gpmesh"));
 
 	//Z軸を90度回転させる
 	float radian = Math::ToRadians(Angle);

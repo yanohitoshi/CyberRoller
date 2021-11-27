@@ -49,6 +49,7 @@ public:
 
 private:
 
+	// 親クラスのポインタ
 	GameObject* owner;
 	//親オブジェクトクラスと画像を描画する位置の差
 	Vector3 offset;
@@ -148,7 +149,6 @@ public: //ゲッターセッター
 	@param _flag 反転を行うか
 	*/
 	void SetReverce(bool _flag) { reverce = _flag; }
-
 };
 
 /*

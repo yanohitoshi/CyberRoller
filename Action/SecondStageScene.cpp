@@ -51,6 +51,9 @@ SecondStageScene::SecondStageScene()
 
 	// シーンUIを追加
 	new SecondStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
+
+	// クリエイターの状態をdeadにし片づける
+	thirdStageCreator->SetState(State::Dead);
 }
 
 /*
@@ -73,11 +76,11 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	if (startScene == true)
 	{
 		// シーン開始時のライトアップ処理
-		StartSceneLightUpProcess();
+		StartSceneLightUp();
 	}
 
 	// クリアしたかのチェックとクリアカウントを数える処理関数
-	SceneClearCountProcess(playerObject);
+	SceneClearCount(playerObject);
 
 	// クリアカウントが一定を超えたらシーンを切り替える
 	if (clearCount >= ClearToChangeSceneTime)
@@ -89,7 +92,7 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	if (CountDownFont::GetTimeOverFlag() == true && lightDownFlag == true)
 	{
 		// コンティニュー選択処理
-		ContinueSelectProcess(_inputState);
+		ContinueSelect(_inputState);
 	}
 
 	 // コンテニューかゲームオーバーが選択されたら

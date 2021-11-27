@@ -27,7 +27,7 @@ UnCollectedSprite::UnCollectedSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/collection/UnCollected.png");
+	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/collection/UnCollected.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 }

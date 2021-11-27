@@ -27,7 +27,7 @@ BreakBlockObject::BreakBlockObject(const Vector3& _p, const Vector3& _size, cons
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Ground/model/breakGround.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Ground/model/breakGround.gpmesh"));
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得

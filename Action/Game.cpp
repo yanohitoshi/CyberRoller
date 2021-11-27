@@ -184,15 +184,13 @@ void Game::GameLoop()
 	// ゲームを続ける状態の間ループ
 	while (isRunning)
 	{
-		// 入力更新
-		UpdateInputSystem();
-		// ゲームオブジェクトクラスの入力を更新
-		UpdateGameObjectsInput();
-		// シーンクラスの更新
+		// 入力関連の更新
+		UpdateInput();
+		// シーンの更新
 		UpdateScene();
-		// ゲームオブジェクトのアップデート
+		// ゲームオブジェクトの更新
 		UpdateGame();
-		// 描画更新
+		// 描画の更新
 		DrawGame();
 		// デルタタイムの更新
 		fps->Update();
@@ -213,6 +211,17 @@ void Game::UnloadData()
 		// Rendererの後片付けを行う
 		RENDERING_OBJECT_MANAGER->Shutdown();
 	}
+}
+
+/*
+@brief  入力関連の更新処理
+*/
+void Game::UpdateInput()
+{
+	// 入力更新
+	UpdateInputSystem();
+	// ゲームオブジェクトクラスの入力を更新
+	UpdateGameObjectsInput();
 }
 
 /*

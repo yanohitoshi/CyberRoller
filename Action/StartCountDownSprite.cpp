@@ -14,10 +14,10 @@ StartCountDownSprite::StartCountDownSprite()
 	, ChangeCount(60)
 {
 	// 4í‚Ìtexture‚ğƒ[ƒh
-	firstTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Three.png");
-	secondTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Two.png");
-	thirdTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/One.png");
-	startTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Start.png");
+	firstTexure = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/Three.png");
+	secondTexure = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/Two.png");
+	thirdTexure = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/One.png");
+	startTexure = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/Start.png");
 
 	// SpriteComponent‚ğ‰Šú‰»
 	sprite = new SpriteComponent(this, false);
