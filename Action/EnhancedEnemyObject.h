@@ -19,7 +19,6 @@ public:
 	@param	ポジション
 	@param	オブジェクト判別用tag
 	@param	移動速度
-	@param	追跡するオブジェクトのポインタ
 	@param	追跡エリアの値
 	*/
 	EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue);

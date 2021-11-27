@@ -44,4 +44,3 @@ private:
 	// í«ê’Ç≈Ç«Ç±Ç‹Ç≈ãﬂÇ√Ç≠Ç©ÇÃíl
 	const float TrackingLengthValue;
 };
-

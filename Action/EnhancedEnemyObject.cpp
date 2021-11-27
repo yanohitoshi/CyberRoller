@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnhancedEnemyObject.h"
 #include "Renderer.h"
 #include "SkeletalMeshComponent.h"
@@ -16,6 +19,13 @@
 #include "EnemyFlinchEffectManager.h"
 #include "EnemyAttackArea.h"
 
+/*
+@fn コンストラクタ
+@param	ポジション
+@param	オブジェクト判別用tag
+@param	移動速度
+@param	追跡エリアの値
+*/
 EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectTag, float _moveSpeed, float _areaValue)
 	: EnemyObjectBase(_pos, false, _objectTag, _moveSpeed)
 	, Angle(180.0f)
@@ -92,6 +102,10 @@ EnhancedEnemyObject::EnhancedEnemyObject(const Vector3& _pos, const Tag _objectT
 	SetRotation(target);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 EnhancedEnemyObject::~EnhancedEnemyObject()
 {
 	// Mapの後片付け
@@ -106,6 +120,11 @@ EnhancedEnemyObject::~EnhancedEnemyObject()
 	ClearStatePoolMap();
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void EnhancedEnemyObject::UpdateGameObject(float _deltaTime)
 {
 	// AABBを更新
@@ -166,6 +185,11 @@ void EnhancedEnemyObject::UpdateGameObject(float _deltaTime)
 	forwardVec = charaForwardVec;
 }
 
+/*
+@fn めり込み判定
+@param	自分のAABB
+@param	相手のAABB
+*/
 void EnhancedEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 	// 仮速度変数
@@ -177,6 +201,11 @@ void EnhancedEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 	SetPosition(position + ment);
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たり判定タグ
+*/
 void EnhancedEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// ジャンプアタックプレイヤーだったら

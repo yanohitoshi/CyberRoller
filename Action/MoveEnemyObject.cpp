@@ -150,6 +150,11 @@ void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 	isAttack = false;
 }
 
+/*
+@fn ‚ß‚è‚İ”»’è
+@param	©•ª‚ÌAABB
+@param	‘Šè‚ÌAABB
+*/
 void MoveEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 	// ‰¼‘¬“x•Ï”

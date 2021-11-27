@@ -45,7 +45,6 @@ private:
     */
     void GenerateEffectProcess();
 
-
     // e‚ÌGameObject•Û‘¶—p•Ï”
     GameObject* owner;
     // particle‚Ìó‘ÔŠÇ——p•Ï”

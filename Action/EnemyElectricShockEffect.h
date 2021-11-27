@@ -64,6 +64,5 @@ private:
     const float InitScale;
     // ˆÚ“®‘¬“x’è”
     const float MoveSpeed;
-
 };
 

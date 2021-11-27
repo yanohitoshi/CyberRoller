@@ -54,4 +54,3 @@ private:
     // 1度に生成するエフェクトの数
     const int MaxEffects;
 };
-

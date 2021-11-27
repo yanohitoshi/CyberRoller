@@ -97,4 +97,3 @@ private:
     // 小さい壁の場合の1度に生成するエフェクトの数
     const int BigWallMaxEffect;
 };
-

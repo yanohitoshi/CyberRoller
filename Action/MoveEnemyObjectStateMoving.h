@@ -55,4 +55,3 @@ private:
 	Vector3 firstPosition;
 
 };
-

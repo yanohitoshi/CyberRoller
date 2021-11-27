@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
 class EnemyObjectStateAttack :
@@ -42,4 +45,3 @@ private:
 	// 攻撃速度
 	const float AttackSpeed;
 };
-

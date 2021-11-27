@@ -44,4 +44,3 @@ private:
     // scale’l‚Ì‰Šú’l
     const float InitScale;
 };
-

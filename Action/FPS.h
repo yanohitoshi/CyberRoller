@@ -44,9 +44,8 @@ private:
 	//現在のフレームのかかった時間
 	float deltaTime;
 
-public:
+public://ゲッターセッター
 
-	//ゲッターセッター
 	/*
 	@fn デルタタイムのgetter関数
 	@brief 現在のフレームにかかった時間を取得

@@ -59,6 +59,12 @@ private:
 
 protected:
 	
+	/*
+	@fn 回転処理関数
+	@param _owner 回転するオブジェクトのポインタ
+	@param _angle 回転する角度
+	@param _axis 回転する軸
+	*/
 	void Rotation(GameObject* _owner,const float _angle , const Vector3 _axis);
 
 	/*
@@ -72,7 +78,6 @@ protected:
 	// particleの状態管理変数
 	ParticleState particleState;
 
-
 	// 親のGameObject保存用変数
 	GameObject* owner;
 	// 透過度
@@ -81,5 +86,4 @@ protected:
 	float scale;
 	// 速度
 	float speed;
-
 };

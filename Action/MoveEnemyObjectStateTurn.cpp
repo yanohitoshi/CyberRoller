@@ -60,4 +60,3 @@ void MoveEnemyObjectStateTurn::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	state = EnemyState::ENEMY_STATE_TURN;
 	_owner->SetState(State::Active);
 }
-

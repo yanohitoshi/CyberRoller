@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnhancedEnemyStateFlinch.h"
 
 EnhancedEnemyStateFlinch::EnhancedEnemyStateFlinch()

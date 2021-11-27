@@ -46,4 +46,3 @@ private:
 	// ¡‚Ìƒ|ƒWƒVƒ‡ƒ“
 	Vector3 nowPosition;
 };
-

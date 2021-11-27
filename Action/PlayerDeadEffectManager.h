@@ -64,4 +64,3 @@ private:
     // z²‚ğ­‚µ‚¸‚ç‚·‚½‚ß‚Ì’è”
     const float ShiftPositionZ;
 };
-

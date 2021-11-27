@@ -66,7 +66,9 @@ private:
     // 波紋エフェクトの最大数
     const int MaxRipplesEffect;
 
+    // 生成するエフェクトのポジション
     Vector3 effectPosition;
+    // 生成するエフェクトの速度
     Vector3 effectVelocity;
     // 1度だけ生成する用の生成フラグ変数
     bool generateExplosionEffectsFlag;

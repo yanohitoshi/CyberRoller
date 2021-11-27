@@ -87,4 +87,3 @@ private:
     // 1度だけ生成する用の生成フラグ変数
     bool generateEffectsFlag;
 };
-

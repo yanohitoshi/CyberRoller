@@ -96,7 +96,7 @@ protected:
     // 全stateが格納されるマップ
     std::unordered_map<CameraState, CameraObjectStateBase*> statePoolMap;
 
-public:
+public: //ゲッターセッター
     
     /*
     @brief カメラの前方ベクトルを得るためのgetter
@@ -146,4 +146,3 @@ public:
     */
     void SetCameraVec(Vector3 _nextForward) { forwardVec = _nextForward; }
 };
-

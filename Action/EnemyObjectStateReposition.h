@@ -43,4 +43,3 @@ private:
 	// アイドリングへ移行する規定値
 	const float IdlingLength;
 };
-

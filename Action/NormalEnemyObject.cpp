@@ -168,6 +168,11 @@ void NormalEnemyObject::OnCollision(const GameObject& _hitObject, const PhysicsT
 	}
 }
 
+/*
+@fn ‚ß‚è‚İ”»’è
+@param	©•ª‚ÌAABB
+@param	‘Šè‚ÌAABB
+*/
 void NormalEnemyObject::FixCollision(AABB& myAABB, const AABB& pairAABB)
 {
 	// ‰¼‘¬“x•Ï”
