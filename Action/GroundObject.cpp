@@ -4,7 +4,7 @@
 #include "GroundObject.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "BoxCollider.h"
 #include "GeometryInstanceComponent.h"
 
@@ -29,7 +29,7 @@ GroundObject::GroundObject(const Vector3& _p, const Vector3& _size, const Tag& _
 	isPushBackToCamera = true;
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/Ground/model/normalGround.gpmesh"), GeometryInstanceType::G_GROUND,1500);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Ground/model/normalGround.gpmesh"), GeometryInstanceType::G_GROUND,1500);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 

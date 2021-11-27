@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "StartCountDownSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
@@ -14,10 +14,10 @@ StartCountDownSprite::StartCountDownSprite()
 	, ChangeCount(60)
 {
 	// 4種のtextureをロード
-	firstTexure = RENDERER->GetTexture("Assets/sprite/information/Three.png");
-	secondTexure = RENDERER->GetTexture("Assets/sprite/information/Two.png");
-	thirdTexure = RENDERER->GetTexture("Assets/sprite/information/One.png");
-	startTexure = RENDERER->GetTexture("Assets/sprite/information/Start.png");
+	firstTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Three.png");
+	secondTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Two.png");
+	thirdTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/One.png");
+	startTexure = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/Start.png");
 
 	// SpriteComponentを初期化
 	sprite = new SpriteComponent(this, false);

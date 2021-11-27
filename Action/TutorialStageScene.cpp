@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TutorialStageScene.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 #include "InputSystem.h"
 #include "TutorialStageUI.h"
@@ -16,8 +16,8 @@ TutorialStageScene::TutorialStageScene()
 {
 	// ライト情報初期化
 	light = Vector3(0.1f, 0.1f, 0.1f);
-	RENDERER->SetAmbientLight(light);
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
+	RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
+	DirectionalLight& dir = RENDERING_OBJECT_MANAGER->GetDirectionalLight();
 	dir.direction = Vector3(0.5f, 0.5f, 0.8f);
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);

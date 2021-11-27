@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "AutoMoveCamera.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "CameraObjectStateBase.h"
 #include "ColliderComponent.h"
 #include "InputSystem.h"

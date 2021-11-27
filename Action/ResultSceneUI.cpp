@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ResultSceneUI.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SkyBoxObject.h"
 
 /*

@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TimeSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
@@ -16,7 +16,7 @@ TimeSprite::TimeSprite()
 	SetPosition(Vector3(700.0f, 480.0f, 0.0f));
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/time/Time_UI.png");
+	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/time/Time_UI.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 	// メンバー変数初期化

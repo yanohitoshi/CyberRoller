@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TitleSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 
 /*
@@ -17,7 +17,7 @@ TitleSprite::TitleSprite()
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
 	// 背景テクスチャをロード
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/title/Title.png");
+	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/title/Title.png");
 	// 背景テクスチャをセット
 	sprite->SetTexture(tex);
 	// 映す映さないをセット

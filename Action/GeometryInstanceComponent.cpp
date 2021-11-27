@@ -1,5 +1,5 @@
 #include "GeometryInstanceComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Game.h"
 
 /*
@@ -12,7 +12,7 @@
 */
 GeometryInstanceComponent::GeometryInstanceComponent(GameObject* _owner, Mesh* _mesh, GeometryInstanceType _type, const unsigned int _maxInstanceNum)
 	:Component(_owner)
-	, geometryInstanceManager(RENDERER->GetGeometryInstanceManager())
+	, geometryInstanceManager(RENDERING_OBJECT_MANAGER->GetGeometryInstanceManager())
 	, geometryInstanceType(_type)
 	, mesh(_mesh)
 

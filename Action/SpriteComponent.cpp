@@ -6,7 +6,7 @@
 #include "Shader.h"
 #include "GameObject.h"
 #include "Game.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @fn コンストラクタ
@@ -26,7 +26,7 @@ SpriteComponent::SpriteComponent(GameObject * _owner, bool _isBackGround,int _dr
 {
 
 		//レンダラーにポインターを送る
-	RENDERER->AddSprite(this);
+	RENDERING_OBJECT_MANAGER->AddSprite(this);
 }
 
 /*
@@ -36,7 +36,7 @@ SpriteComponent::SpriteComponent(GameObject * _owner, bool _isBackGround,int _dr
 SpriteComponent::~SpriteComponent()
 {
 	//レンダラーからポインタを削除する
-	RENDERER->RemoveSprite(this);
+	RENDERING_OBJECT_MANAGER->RemoveSprite(this);
 }
 
 /*

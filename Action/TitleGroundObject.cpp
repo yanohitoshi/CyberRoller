@@ -5,7 +5,7 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include <string>
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @fn コンストラクタ

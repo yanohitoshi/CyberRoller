@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "MainCameraObject.h"
 #include "CameraObjectBase.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "ColliderComponent.h"
 #include "InputSystem.h"
 #include "PlayerObject.h"
@@ -266,7 +266,7 @@ void MainCameraObject::CalculationViewMatrix()
 	// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(position, viewPosition, Vector3::UnitZ);
 	// 更新したview行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 }
 
 /*
@@ -278,7 +278,7 @@ void MainCameraObject::GameClearProcess(float _deltaTime)
 	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
 	// view行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 }
 
 /*
@@ -303,7 +303,7 @@ void MainCameraObject::GameOverProcess(float _deltaTime)
 	// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
 	// 更新したview行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 }
 
 /*
@@ -328,7 +328,7 @@ void MainCameraObject::PlayerInDanceProcess(float _deltaTime)
 	// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(position, lerpObjectPos, Vector3::UnitZ);
 	// 更新したview行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 
 }
 

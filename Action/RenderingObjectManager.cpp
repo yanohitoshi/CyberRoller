@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Texture.h"
 #include "Mesh.h"
 #include <algorithm>
@@ -25,7 +25,7 @@
 #include "GeometryInstanceManager.h"
 #include "PhysicsWorld.h"
 
-RenderingObjectManager* RenderingObjectManager::renderer = nullptr;
+RenderingObjectManager* RenderingObjectManager::renderingObjectManager = nullptr;
 
 /*
 @brief	Particle用頂点データのセット関数
@@ -83,9 +83,9 @@ RenderingObjectManager::~RenderingObjectManager()
 void RenderingObjectManager::CreateInstance()
 {
 	// 作られていなかったら生成
-	if (renderer == nullptr)
+	if (renderingObjectManager == nullptr)
 	{
-		renderer = new RenderingObjectManager();
+		renderingObjectManager = new RenderingObjectManager();
 	}
 }
 
@@ -95,10 +95,10 @@ void RenderingObjectManager::CreateInstance()
 void RenderingObjectManager::DeleteInstance()
 {
 	// 削除されていなかったら削除
-	if (renderer != nullptr)
+	if (renderingObjectManager != nullptr)
 	{
-		delete renderer;
-		renderer = nullptr;
+		delete renderingObjectManager;
+		renderingObjectManager = nullptr;
 	}
 }
 

@@ -5,7 +5,7 @@
 #include "SkeletalMeshComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Skeleton.h"
 #include <string>
 #include "BoxCollider.h"
@@ -42,7 +42,7 @@ MoveWallBlock::MoveWallBlock(const Vector3& _p, const Vector3& _size, const Tag&
 	SetCheckSwitchTag(tag);
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/MoveWall/model/moveWallBox.gpmesh"), GeometryInstanceType::G_MOVE_WALL);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/MoveWall/model/moveWallBox.gpmesh"), GeometryInstanceType::G_MOVE_WALL);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 

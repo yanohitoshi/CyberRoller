@@ -8,7 +8,7 @@
 #include "BoxCollider.h"
 #include "GameObject.h"
 #include "ColliderComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Shader.h"
 
 PhysicsWorld* PhysicsWorld::physics = nullptr;
@@ -441,8 +441,8 @@ void PhysicsWorld::DebugShowBox()
 
 	// AABB描画準備
 	Matrix4 scale, trans, world, view, proj, viewProj;
-	view = RENDERER->GetViewMatrix();
-	proj = RENDERER->GetProjectionMatrix();
+	view = RENDERING_OBJECT_MANAGER->GetViewMatrix();
+	proj = RENDERING_OBJECT_MANAGER->GetProjectionMatrix();
 	viewProj = view * proj;
 	lineShader->SetActive();
 	lineShader->SetMatrixUniform("uViewProj", viewProj);

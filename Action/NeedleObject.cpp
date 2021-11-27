@@ -5,7 +5,7 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include <string>
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "BoxCollider.h"
 #include "GeometryInstanceComponent.h"
 
@@ -27,7 +27,7 @@ NeedleObject::NeedleObject(GameObject* _owner ,const Vector3& _offset, const Vec
 	state = Active;
 	owner = _owner;
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERER->GetMesh("Assets/Model/Environment/Needle/model/needles.gpmesh"), GeometryInstanceType::G_NEEDLE,300);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Needle/model/needles.gpmesh"), GeometryInstanceType::G_NEEDLE,300);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 }

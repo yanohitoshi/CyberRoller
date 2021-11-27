@@ -7,7 +7,7 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "MainCameraObject.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Skeleton.h"
 #include "Animation.h"
 #include "InputSystem.h"
@@ -140,9 +140,9 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
-	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/model/SK_Rob.gpmesh"));
+	skeltalMeshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Player/model/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
-	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/Player/model/SK_Rob.gpskel"));
+	skeltalMeshComponent->SetSkeleton(RENDERING_OBJECT_MANAGER->GetSkeleton("Assets/Model/Player/model/SK_Rob.gpskel"));
 	// mesh情報を取得
 	mesh = skeltalMeshComponent->GetMesh();
 	// 輝度情報を取得
@@ -154,37 +154,37 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 
 	//-----------アニメーションを読み込み-----------------//
 	// アイドリングアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Happy_Idle_Anim.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Happy_Idle_Anim.gpanim", true);
 	// 一定以上入力がなかった際のアイドリングアニメーション（ダンス）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Tut_Hip_Hop_Dance.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE_DANCE)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Tut_Hip_Hop_Dance.gpanim", true);
 	// 走りアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Running.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Running.gpanim", true);
 	// 走りだしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Idle_To_Sprint_2.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_START)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Idle_To_Sprint_2.gpanim", false);
 	// 走り終わりアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Run_To_Stop.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_STOP)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Run_To_Stop.gpanim", false);
 	// 走り中の切り替えしアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Change_Direction.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_RUN_TURN)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Change_Direction.gpanim", false);
 	// 敵に当たった際のノックバックアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_KNOCKBACK)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Receiving_An_Uppercut.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_KNOCKBACK)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Receiving_An_Uppercut.gpanim", false);
 	// ジャンプループアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Floating.gpanim", true);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPLOOP)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Floating.gpanim", true);
 	// ジャンプ開始アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Jump_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPSTART)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Jump_up.gpanim", false);
 	// 次の状態が待機の時の着地アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Landing.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Landing.gpanim", false);
 	// 次の状態が走りの時の着地アニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Falling_To_Roll.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_JUMPEND_TO_RUN)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Falling_To_Roll.gpanim", false);
 	// タイムオーバー時のアニメーション（start）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Praying_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWNSTART)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Praying_down.gpanim", false);
 	// タイムオーバー時のアニメーション（loop）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Praying_Idle.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_LOOP)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Praying_Idle.gpanim", false);
 	// タイムオーバー時のアニメーション（コンティニュー）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Praying_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_UP)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Praying_up.gpanim", false);
 	// タイムオーバー時のアニメーション（ゲームオーバー）
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERER->GetAnimation("Assets/Model/Player/animation/over_down.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DOWN_OVER)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/over_down.gpanim", false);
 	// 死亡時のアニメーション
-	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Stunned.gpanim", false);
+	animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_DEAD)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Stunned.gpanim", false);
 
 	//anim変数を速度1.0fで再生
 	skeltalMeshComponent->PlayAnimation(animTypes[static_cast<unsigned int>(PlayerState::PLAYER_STATE_IDLE)], 1.0f);
@@ -354,7 +354,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	}
 
 	// RENDERERに現在のポジションを送る
-	RENDERER->SetPlayerPositon(position);
+	RENDERING_OBJECT_MANAGER->SetPlayerPositon(position);
 	
 	// フレームの最後に接地判定と押されている速度を初期化
 	onGround = false;

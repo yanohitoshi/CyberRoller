@@ -1,5 +1,5 @@
 #include "StageSelectSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "StageSelectSceneUI.h"
 
@@ -20,7 +20,7 @@ StageSelectSprite::StageSelectSprite(StageSelectSceneUI* _owner, SceneState _sta
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
 	// 背景テクスチャをロード
-	Texture* tex = RENDERER->GetTexture(_spriteFileName);
+	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture(_spriteFileName);
 	// 背景テクスチャをセット
 	sprite->SetTexture(tex);
 	// 映す映さないをセット

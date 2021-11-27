@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "WarningSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
@@ -26,7 +26,7 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponentの初期化
 	sprite = new SpriteComponent(this, false);
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/information/warning.png");
+	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/warning.png");
 	sprite->SetTexture(tex);
 	sprite->SetVisible(true);
 	sprite->SetAlpha(alpha);

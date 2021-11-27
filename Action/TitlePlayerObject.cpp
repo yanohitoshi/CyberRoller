@@ -5,7 +5,7 @@
 #include "SkeletalMeshComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 #include "TitlePlayerStateBase.h"
 #include "TitleJumpAttackPlayerObject.h"
@@ -34,9 +34,9 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
-	skeltalMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/model/SK_Rob.gpmesh"));
+	skeltalMeshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Player/model/SK_Rob.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
-	skeltalMeshComponent->SetSkeleton(RENDERER->GetSkeleton("Assets/Model/Player/model/SK_Rob.gpskel"));
+	skeltalMeshComponent->SetSkeleton(RENDERING_OBJECT_MANAGER->GetSkeleton("Assets/Model/Player/model/SK_Rob.gpskel"));
 	//メッシュ情報取得
 	mesh = skeltalMeshComponent->GetMesh();
 	// 輝度情報を取得
@@ -46,9 +46,9 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	//アニメ―ション用の可変長配列をリサイズ
 	animTypes.resize(static_cast<unsigned int>(TitlePlayerState::STATE_NUM));
 	//アニメーションを読み込み
-	animTypes[static_cast<unsigned int>(TitlePlayerState::RUN)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Running.gpanim", true);
-	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_LOOP)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Floating.gpanim", true);
-	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_START)] = RENDERER->GetAnimation("Assets/Model/Player/animation/Jump_up.gpanim", false);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::RUN)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Running.gpanim", true);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_LOOP)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Floating.gpanim", true);
+	animTypes[static_cast<unsigned int>(TitlePlayerState::JUMP_START)] = RENDERING_OBJECT_MANAGER->GetAnimation("Assets/Model/Player/animation/Jump_up.gpanim", false);
 
 	AddStatePoolMap(new TitlePlayerStateJumpAttack, TitlePlayerState::JUMP_ATTACK);
 	AddStatePoolMap(new TitlePlayerStateJumpLoop, TitlePlayerState::JUMP_LOOP);
@@ -86,7 +86,7 @@ TitlePlayerObject::~TitlePlayerObject()
 void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 {
 	// Rendererにポジションを送る
-	RENDERER->SetPlayerPositon(position);
+	RENDERING_OBJECT_MANAGER->SetPlayerPositon(position);
 
 
 	// ステート外部からステート変更があったか？

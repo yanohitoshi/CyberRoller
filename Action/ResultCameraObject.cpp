@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ResultCameraObject.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @brief	コンストラクタ
@@ -36,5 +36,5 @@ void ResultCameraObject::UpdateGameObject(float _deltaTime)
 	//view行列を生成
 	view = Matrix4::CreateLookAt(position, target, Vector3::UnitZ);
 	//レンダラーのview行列にセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 }

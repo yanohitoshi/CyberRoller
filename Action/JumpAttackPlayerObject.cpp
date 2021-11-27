@@ -4,7 +4,7 @@
 #include "JumpAttackPlayerObject.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 #include "BoxCollider.h"
 #include "SphereCollider.h"
@@ -37,7 +37,7 @@ JumpAttackPlayerObject::JumpAttackPlayerObject(PlayerObject* _ownerObject, const
 
 	// メッシュ読み込み
 	meshComponent = new MeshComponent(this, false, false);
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得

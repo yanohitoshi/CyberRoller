@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TimeUpSprite.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 
@@ -20,7 +20,7 @@ TimeUpSprite::TimeUpSprite()
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this, false);
-	Texture* tex = RENDERER->GetTexture("Assets/sprite/information/timeup.png");
+	Texture* tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/information/timeup.png");
 	sprite->SetTexture(tex);
 	sprite->SetVisible(false);
 	sprite->SetAlpha(1.0f);

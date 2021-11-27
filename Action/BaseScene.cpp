@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "BaseScene.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 
 /*
@@ -13,7 +13,7 @@ void BaseScene::StartSceneLightUpProcess()
 	// ライトの数値を明るくする
 	light += ChangeLightSpeed;
 	// レンダラーに値をセット
-	RENDERER->SetAmbientLight(light);
+	RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 
 	// ライトの数値が一定以上になったら
 	if (light.x >= MaxLight)
@@ -21,7 +21,7 @@ void BaseScene::StartSceneLightUpProcess()
 		// シーン開始フラグをfalseに変更
 		startScene = false;
 		// 最終の値をセット
-		RENDERER->SetAmbientLight(light);
+		RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 	}
 }
 
@@ -35,7 +35,7 @@ void BaseScene::SceneClearCountProcess(PlayerObject* _playerObject)
 	{
 		++clearCount;
 		light -= ChangeLightSpeed;
-		RENDERER->SetAmbientLight(light);
+		RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 	}
 }
 
@@ -47,7 +47,7 @@ void BaseScene::ContinueSelectProcess(const InputState& state)
 {
 	// ライト固定
 	light = TimeoversLight;
-	RENDERER->SetAmbientLight(light);
+	RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 
 	// Aボタンが押されたら
 	if (state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
@@ -82,13 +82,13 @@ void BaseScene::LightTransitionAtContinue()
 		{
 			// ライトアップ
 			light += ChangeLightSpeed;
-			RENDERER->SetAmbientLight(light);
+			RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 		}
 		else if (endFlag == true)
 		{
 			// ライトダウン
 			light -= ChangeLightSpeed;
-			RENDERER->SetAmbientLight(light);
+			RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 		}
 
 	}

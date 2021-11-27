@@ -5,7 +5,7 @@
 #include "Skeleton.h"
 #include "ChangeColorMeshComponent.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Shader.h"
 #include "BoxCollider.h"
 #include "MainCameraObject.h"
@@ -47,7 +47,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	//モデル描画用のコンポーネント
 	meshComponent = new ChangeColorMeshComponent(this,false,true);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/Switch/model/S_EnergyCube.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Switch/model/S_EnergyCube.gpmesh"));
 
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();

@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "FallExplosionObject.h"
 #include "FallExplosionArea.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Mesh.h"
 #include "MeshComponent.h"
 #include "BoxCollider.h"
@@ -36,7 +36,7 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/Bomb/model/bomb.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Bomb/model/bomb.gpmesh"));
 	meshComponent->SetEmissiveColor(Color::LightBlue);
 
 	//メッシュ情報取得

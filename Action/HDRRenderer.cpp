@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "HDRRenderer.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Shader.h"
 
 /*
@@ -234,7 +234,7 @@ void HDRRenderer::HdrTonemapAndBrightBlurCombine()
 	}
 
 	// Activeテクスチャにsetした内容を黒色テクスチャで無効にする
-	unsigned int texNone = RENDERER->GetUndefineTexID();
+	unsigned int texNone = RENDERING_OBJECT_MANAGER->GetUndefineTexID();
 	for (unsigned int i = 0; i < bloomBufferLevel; i++)
 	{
 		glActiveTexture(GL_TEXTURE1 + i);

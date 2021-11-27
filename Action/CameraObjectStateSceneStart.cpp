@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "CameraObjectStateSceneStart.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 
 /*
@@ -34,7 +34,7 @@ CameraState CameraObjectStateSceneStart::Update(CameraObjectBase* _owner, float 
 	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(_owner->GetPosition(), lerpObjectPos, Vector3::UnitZ);
 	// view行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 
 	return state;
 }

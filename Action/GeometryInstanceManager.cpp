@@ -4,7 +4,7 @@
 #include <glew.h>
 #include "Shader.h"
 #include "Texture.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "GameObject.h"
 
 // マトリックスサイズ(16)

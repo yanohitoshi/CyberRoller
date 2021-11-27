@@ -3,10 +3,10 @@
 //-----------------------------------------------------------------------------
 #include "CubeMapComponent.h"
 #include "Texture.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Shader.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "VertexArray.h"
 
 /*
@@ -57,7 +57,7 @@ void CubeMapComponent::Draw(Shader* in_shader)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, texture->GetTextureID());
 		// キューブマップ用頂点配列のアクティブ化
-		RENDERER->GetCubeMapVerts()->SetActive();
+		RENDERING_OBJECT_MANAGER->GetCubeMapVerts()->SetActive();
 		// 描画
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 

@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FinalStageUI.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "CountDownFont.h"
 #include "StartCountDownSprite.h"
 #include "TimeUpSprite.h"

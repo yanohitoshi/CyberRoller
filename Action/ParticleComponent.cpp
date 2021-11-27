@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "ParticleComponent.h"
 #include "Shader.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "GameObject.h"
 
 // ビルボード行列
@@ -31,13 +31,13 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _useStaticBillboar
 	, owner(_owner)
 {
 	//レンダラーにポインターを送る
-	RENDERER->AddParticle(this);
+	RENDERING_OBJECT_MANAGER->AddParticle(this);
 }
 
 ParticleComponent::~ParticleComponent()
 {
 	//レンダラーからポインタを削除する
-	RENDERER->RemoveParticle(this);
+	RENDERING_OBJECT_MANAGER->RemoveParticle(this);
 }
 
 /*
@@ -73,7 +73,7 @@ void ParticleComponent::Draw(Shader* _shader)
 	_shader->SetFloatUniform("uAlpha", alpha);
 	_shader->SetVectorUniform("uColor", color);
 
-	RENDERER->SetParticleVertex();
+	RENDERING_OBJECT_MANAGER->SetParticleVertex();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
@@ -101,7 +101,7 @@ bool ParticleComponent::operator>(const ParticleComponent& rhs) const
 Matrix4 GetBillboardMatrix()
 {
 	Matrix4 ret;
-	ret = RENDERER->GetViewMatrix();
+	ret = RENDERING_OBJECT_MANAGER->GetViewMatrix();
 	ret.mat[3][0] = ret.mat[3][1] = ret.mat[3][2] = 0.0f;
 	ret.Transpose();
 	ret.mat[2][2] *= -1;

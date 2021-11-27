@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "Shader.h"
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "VertexArray.h"
 #include "Texture.h"
 
@@ -24,13 +24,13 @@ MeshComponent::MeshComponent(GameObject* _owner, bool _skelton,bool _color)
 	, emissiveColor(Vector3(1.0f, 1.0f, 1.0f))
 {
 	//レンダラーにポインターを送る
-	RENDERER->AddMeshComponent(this);
+	RENDERING_OBJECT_MANAGER->AddMeshComponent(this);
 }
 
 MeshComponent::~MeshComponent()
 {
 	//レンダラーからポインタを削除する
-	RENDERER->RemoveMeshComponent(this);
+	RENDERING_OBJECT_MANAGER->RemoveMeshComponent(this);
 }
 
 /*

@@ -6,7 +6,7 @@
 #include "Mesh.h"
 #include "GameObject.h"
 #include "Game.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Texture.h"
 #include "VertexArray.h"
 #include "Animation.h"

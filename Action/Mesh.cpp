@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "Mesh.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Texture.h"
 #include "VertexArray.h"
 #include <fstream>
@@ -317,11 +317,11 @@ int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, con
 		if (texName != noneTexture)
 		{
 			// texturenameでのtexture読み込み
-			t = RENDERER->GetTexture(texName);
+			t = RENDERING_OBJECT_MANAGER->GetTexture(texName);
 			// tがnullptrの場合デフォルトを入れる
 			if (t == nullptr)
 			{
-				t = RENDERER->GetTexture("Assets/Default.png");
+				t = RENDERING_OBJECT_MANAGER->GetTexture("Assets/Default.png");
 			}
 			// IDを返す
 			return t->GetTextureID();

@@ -1,7 +1,7 @@
 #include "StageSelectScene.h"
 #include "InputSystem.h"
 #include "GameObject.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "SkyBoxObject.h"
 #include "StageSelectSceneUI.h"
 
@@ -10,8 +10,8 @@ StageSelectScene::StageSelectScene()
 {
 	// ƒ‰ƒCƒgî•ñ‰Šú‰»
 	light = Vector3(0.8f, 0.8f, 0.8f);
-	RENDERER->SetAmbientLight(light);
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
+	RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
+	DirectionalLight& dir = RENDERING_OBJECT_MANAGER->GetDirectionalLight();
 	dir.direction = Vector3(1.0f, 0.7f, 1.0f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);

@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ParticleEffectBase.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Texture.h"
 
 /*
@@ -21,7 +21,7 @@ ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velo
 	velocity = _velocity;
 	SetPosition(_pos);
 	particleComponent = new ParticleComponent(this, _useStaticBillboardMat);
-	particleComponent->SetTextureID(RENDERER->GetTexture(_spriteFileName)->GetTextureID());
+	particleComponent->SetTextureID(RENDERING_OBJECT_MANAGER->GetTexture(_spriteFileName)->GetTextureID());
 	particleComponent->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 	particleComponent->SetScale(_scale);
 }

@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "DebrisEffectObject.h"
 #include "MeshComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Mesh.h"
 
 /*
@@ -37,7 +37,7 @@ DebrisEffectObject::DebrisEffectObject(const Vector3& _pos, const Vector3& _dire
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Environment/Ground/model/debrisGround.gpmesh"));
+	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->GetMesh("Assets/Model/Environment/Ground/model/debrisGround.gpmesh"));
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得

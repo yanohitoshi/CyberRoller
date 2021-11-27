@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "SkyBoxObject.h"
 #include "CubeMapComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @fn コンストラクタ
@@ -16,7 +16,7 @@ SkyBoxObject::SkyBoxObject(bool _reUseGameObject, const Tag _objectTag)
 	// キューブマップコンポーネントを生成
 	cubeMapComp = new CubeMapComponent(this);
 	// レンダラーにActiveなキューブマップとしてポインタを渡す
-	RENDERER->SetActiveSkyBox(cubeMapComp);
+	RENDERING_OBJECT_MANAGER->SetActiveSkyBox(cubeMapComp);
 	// texture生成
 	cubeMapComp->CreateTexture("Assets/sprite/skyBox/night/");
 }

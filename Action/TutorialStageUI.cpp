@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TutorialStageUI.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "CountDownFont.h"
 #include "JumpTutorialParticl.h"
 #include "MoveTutorialParticl.h"

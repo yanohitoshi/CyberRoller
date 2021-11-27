@@ -1,6 +1,6 @@
 #include "CollectedSprite.h"
 #include "SpriteComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "CollectionObject.h"
 
 CollectedSprite::CollectedSprite(CollectionTag collectionTag)
@@ -27,7 +27,7 @@ CollectedSprite::CollectedSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/collection/Collected.png");
+	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/collection/Collected.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 }

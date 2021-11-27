@@ -5,7 +5,7 @@
 #include <glew.h>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include <iostream>
 
 /*
@@ -44,7 +44,7 @@ bool Texture::Load(const std::string& _fileName)
 	}
 
 	//サーフェスからテクスチャを作る
-	tex = SDL_CreateTextureFromSurface(RENDERER->GetSDLRenderer(), surf);
+	tex = SDL_CreateTextureFromSurface(RENDERING_OBJECT_MANAGER->GetSDLRenderer(), surf);
 	if (!tex)
 	{
 		printf("サーフェスからテクスチャの作成に失敗 : %s", _fileName.c_str());

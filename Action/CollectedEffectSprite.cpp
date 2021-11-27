@@ -1,6 +1,6 @@
 #include "CollectedEffectSprite.h"
 #include "SpriteComponent.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "CollectionObject.h"
 
 CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
@@ -29,7 +29,7 @@ CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERER->GetTexture("Assets/sprite/collection/AuroraRing.png");
+	tex = RENDERING_OBJECT_MANAGER->GetTexture("Assets/sprite/collection/AuroraRing.png");
 	sprite->SetTexture(tex);
 	alpha = 1.0f;
 	sprite->SetAlpha(alpha);

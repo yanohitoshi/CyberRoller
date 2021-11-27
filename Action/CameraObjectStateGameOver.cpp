@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "CameraObjectStateGameOver.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 
 /*
@@ -42,7 +42,7 @@ CameraState CameraObjectStateGameOver::Update(CameraObjectBase* _owner, float _d
 	// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(_owner->GetPosition(), lerpObjectPos, Vector3::UnitZ);
 	// 更新したview行列をセット
-	RENDERER->SetViewMatrix(view);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 
 	return state;
 }

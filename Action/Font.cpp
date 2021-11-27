@@ -5,7 +5,7 @@
 #include "Texture.h"
 #include <vector>
 #include "Game.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @fn コンストラクタ

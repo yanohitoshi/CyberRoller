@@ -11,7 +11,7 @@
 #include "GameObject.h"
 
 // シングルトンなのでインスタンスのgetterを静的領域にdefineで定義
-#define RENDERER RenderingObjectManager::GetInstance()
+#define RENDERING_OBJECT_MANAGER RenderingObjectManager::GetInstance()
 
 //平行光源用の構造体
 struct DirectionalLight
@@ -70,7 +70,7 @@ public:
 	@brief  インスタンスを取得する
 	@return Rendererクラスのインスタンス
 	*/
-	static RenderingObjectManager* GetInstance() { return renderer; }
+	static RenderingObjectManager* GetInstance() { return renderingObjectManager; }
 
 	/*
 	@brief  インスタンスを作成する
@@ -166,7 +166,7 @@ private:
 	SceneState nowSceneState;
 
 	//自分のインスタンス
-	static RenderingObjectManager* renderer;
+	static RenderingObjectManager* renderingObjectManager;
 	SDL_Renderer* sdlRenderer;
 
 	// HDR レンダラー

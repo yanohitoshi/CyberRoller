@@ -6,7 +6,7 @@
 #include "Mesh.h"
 #include "GameObject.h"
 #include "Shader.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 /*
 @fn コンストラクタ

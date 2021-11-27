@@ -7,7 +7,7 @@
 #include <glew.h>
 #include <algorithm>
 #include "FPS.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "AudioManager.h"
 #include "InputSystem.h"
 #include "PhysicsWorld.h"
@@ -94,7 +94,7 @@ bool Game::Initialize()
 
 	//画面作成
 	// 初期化と成功したか失敗したかのチェック
-	if (!RENDERER->Initialize(screenWidth, screenHeight, isFullScreen))
+	if (!RENDERING_OBJECT_MANAGER->Initialize(screenWidth, screenHeight, isFullScreen))
 	{
 		SDL_Log("Failed to initialize renderer");
 		RenderingObjectManager::DeleteInstance();
@@ -141,7 +141,7 @@ bool Game::Initialize()
 
 	// ビュー行列を生成してRendererに渡す
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(-800.0f, 0.0f, -200.0f), Vector3(200.0f, 0.0f, 0.0f), Vector3::UnitZ);
-	RENDERER->SetViewMatrix(v);
+	RENDERING_OBJECT_MANAGER->SetViewMatrix(v);
 
 	// 最初のシーンステータスの初期化
 	nowSceneState = TITLE_SCENE;
@@ -154,7 +154,7 @@ bool Game::Initialize()
 	//nowScene = new StageSelectScene();
 
 	// 現在のシーンのステータスをレンダラーに渡す
-	RENDERER->SetNowSceneState(nowSceneState);
+	RENDERING_OBJECT_MANAGER->SetNowSceneState(nowSceneState);
 
 	return true;
 }
@@ -210,12 +210,12 @@ void Game::GameLoop()
 void Game::UnloadData()
 {
 	// Rendererがnullptrじゃなかったら
-	if (RENDERER != nullptr)
+	if (RENDERING_OBJECT_MANAGER != nullptr)
 	{
 		// データをアンロード
-		RENDERER->UnloadData();
+		RENDERING_OBJECT_MANAGER->UnloadData();
 		// Rendererの後片付けを行う
-		RENDERER->Shutdown();
+		RENDERING_OBJECT_MANAGER->Shutdown();
 	}
 }
 
@@ -300,7 +300,7 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 	// シーンのメモリをdelete
 	delete _scene;
 
-	RENDERER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
+	RENDERING_OBJECT_MANAGER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
 	// シーン遷移判定に使用するフラグを初期化
 	isChangeScene = false;
 	continueFlag = false;
@@ -337,7 +337,7 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 		break;
 	}
 
-	RENDERER->SetNowSceneState(nowSceneState);
+	RENDERING_OBJECT_MANAGER->SetNowSceneState(nowSceneState);
 }
 
 /*
@@ -346,7 +346,7 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 void Game::GenerateOutput()
 {
 	// 描画処理
-	RENDERER->Draw();
+	RENDERING_OBJECT_MANAGER->Draw();
 }
 
 /*

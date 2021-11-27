@@ -6,7 +6,7 @@
 #include <string>
 #include "Math.h"
 #include "Collision.h"
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾
 class RenderingObjectManager;
