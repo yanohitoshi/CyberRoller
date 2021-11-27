@@ -342,7 +342,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="TutorialStageScene.cpp" />
     <ClCompile Include="TutorialStageUI.cpp" />
     <ClCompile Include="RapidJsonHelper.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderingObjectManager.cpp" />
     <ClCompile Include="SandSmokeMakeManeger.cpp" />
     <ClCompile Include="SandSmokeParticle.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -583,7 +583,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="TutorialStageScene.h" />
     <ClInclude Include="TutorialStageUI.h" />
     <ClInclude Include="RapidJsonHelper.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderingObjectManager.h" />
     <ClInclude Include="SandSmokeMakeManeger.h" />
     <ClInclude Include="SandSmokeParticle.h" />
     <ClInclude Include="Shader.h" />

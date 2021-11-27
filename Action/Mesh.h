@@ -9,7 +9,7 @@
 #include "Renderer.h"
 
 // クラスの前方宣言
-class Renderer;
+class RenderingObjectManager;
 class VertexArray;
 class Texture;
 
@@ -39,7 +39,7 @@ public:
 	@param	_renderer Rendererクラスのポインタ
 	@return true : 成功 , false : 失敗
 	*/
-    bool Load(const std::string& _fileName, Renderer* _renderer);
+    bool Load(const std::string& _fileName, RenderingObjectManager* _renderer);
 
 	/*
 	@brief  ロードしたメッシュデータの解放

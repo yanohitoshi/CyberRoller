@@ -58,7 +58,7 @@ Mesh::~Mesh()
 @param _renderer Rendererクラスのポインタ
 @return true : 成功 , false : 失敗
 */
-bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
+bool Mesh::Load(const std::string & _fileName, RenderingObjectManager* _renderer)
 {
 	std::ifstream file(_fileName);
 	if (!file.is_open())

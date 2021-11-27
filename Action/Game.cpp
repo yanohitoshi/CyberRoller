@@ -90,14 +90,14 @@ bool Game::Initialize()
 	}
 
 	//レンダラーの初期化
-	Renderer::CreateInstance();
+	RenderingObjectManager::CreateInstance();
 
 	//画面作成
 	// 初期化と成功したか失敗したかのチェック
 	if (!RENDERER->Initialize(screenWidth, screenHeight, isFullScreen))
 	{
 		SDL_Log("Failed to initialize renderer");
-		Renderer::DeleteInstance();
+		RenderingObjectManager::DeleteInstance();
 		return false;
 	}
 
@@ -169,7 +169,7 @@ void Game::Termination()
     //データのアンロード
 	UnloadData();
     //スタティッククラスの解放処理
-	Renderer::DeleteInstance();
+	RenderingObjectManager::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
     //クラスの解放処理
     delete fps;

@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-#include "Renderer.h"
+#include "RenderingObjectManager.h"
 #include "Texture.h"
 #include "Mesh.h"
 #include <algorithm>
@@ -25,12 +25,12 @@
 #include "GeometryInstanceManager.h"
 #include "PhysicsWorld.h"
 
-Renderer* Renderer::renderer = nullptr;
+RenderingObjectManager* RenderingObjectManager::renderer = nullptr;
 
 /*
 @brief	Particle用頂点データのセット関数
 */
-void Renderer::SetParticleVertex()
+void RenderingObjectManager::SetParticleVertex()
 {
 	particleVertex->SetActive();
 }
@@ -38,7 +38,7 @@ void Renderer::SetParticleVertex()
 /*
 @brief  コンストラクタ
 */
-Renderer::Renderer()
+RenderingObjectManager::RenderingObjectManager()
 	: hdrRenderer(nullptr)
 	, spriteShader(nullptr)
 	, spriteVerts(nullptr)
@@ -73,26 +73,26 @@ Renderer::Renderer()
 /*
 @brief  デストラクタ
 */
-Renderer::~Renderer()
+RenderingObjectManager::~RenderingObjectManager()
 {
 }
 
 /*
 @brief  インスタンスを作成する
 */
-void Renderer::CreateInstance()
+void RenderingObjectManager::CreateInstance()
 {
 	// 作られていなかったら生成
 	if (renderer == nullptr)
 	{
-		renderer = new Renderer();
+		renderer = new RenderingObjectManager();
 	}
 }
 
 /*
 @brief  インスタンスを削除する
 */
-void Renderer::DeleteInstance()
+void RenderingObjectManager::DeleteInstance()
 {
 	// 削除されていなかったら削除
 	if (renderer != nullptr)
@@ -106,7 +106,7 @@ void Renderer::DeleteInstance()
 @brief  初期化処理
 @return true : 成功 , false : 失敗
 */
-bool Renderer::Initialize(int _screenWidth, int _screenHeight, bool _fullScreen)
+bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, bool _fullScreen)
 {
 	// スクリーンサイズ初期化
 	screenWidth = _screenWidth;
@@ -205,7 +205,7 @@ bool Renderer::Initialize(int _screenWidth, int _screenHeight, bool _fullScreen)
 /*
 @brief  終了処理
 */
-void Renderer::Shutdown()
+void RenderingObjectManager::Shutdown()
 {
 	//shaderとvertexの後片付け
 	delete particleVertex;
@@ -240,7 +240,7 @@ void Renderer::Shutdown()
 /*
 @brief  ロードしたデータの解放
 */
-void Renderer::UnloadData()
+void RenderingObjectManager::UnloadData()
 {
 	// すべてのテクスチャのデータを解放
 	for (auto i : textures)
@@ -275,7 +275,7 @@ void Renderer::UnloadData()
 /*
 @brief  描画処理
 */
-void Renderer::Draw()
+void RenderingObjectManager::Draw()
 {
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
@@ -323,7 +323,7 @@ void Renderer::Draw()
 @brief  スプライトの追加
 @param	_spriteComponent　追加するSpriteComponentクラスのポインタ
 */
-void Renderer::AddSprite(SpriteComponent* _spriteComponent)
+void RenderingObjectManager::AddSprite(SpriteComponent* _spriteComponent)
 {
 	// 背景かどうかを取得
 	bool isBackGround = _spriteComponent->GetIsBackGround();
@@ -377,7 +377,7 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 @brief スプライトの削除
 @param	_spriteComponent　削除するSpriteComponentクラスのポインタ
 */
-void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
+void RenderingObjectManager::RemoveSprite(SpriteComponent* _spriteComponent)
 {
 	// 背景かどうかを取得
 	bool isBackGround = _spriteComponent->GetIsBackGround();
@@ -404,7 +404,7 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 @brief  パーティクルの追加
 @param	_particleComponent　追加するParticleObjectクラスのポインタ
 */
-void Renderer::AddParticle(ParticleComponent * _particleComponent)
+void RenderingObjectManager::AddParticle(ParticleComponent * _particleComponent)
 {
 	// 描画順を取得
 	int myDrawOrder = _particleComponent->GetDrawOrder();
@@ -429,7 +429,7 @@ void Renderer::AddParticle(ParticleComponent * _particleComponent)
 @brief  スプライトの削除
 @param	削除するParticleObjectクラスのポインタ
 */
-void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
+void RenderingObjectManager::RemoveParticle(ParticleComponent * _particleComponent)
 {
 	// パーティクルコンテナから探して削除
 	auto iter = std::find(particles.begin(), particles.end(), _particleComponent);
@@ -440,7 +440,7 @@ void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
 @brief  メッシュコンポーネントの追加
 @param	_meshComponent　追加するMeshComponentクラスのポインタ
 */
-void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
+void RenderingObjectManager::AddMeshComponent(MeshComponent* _meshComponent)
 {
 	//メッシュデータにスケルトンデータがあれば
 	if (_meshComponent->GetIsSkeltal())
@@ -466,7 +466,7 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 @brief  メッシュコンポーネントの削除
 @param	_meshComponent　削除するMeshComponentクラスのポインタ
 */
-void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
+void RenderingObjectManager::RemoveMeshComponent(MeshComponent* _meshComponent)
 {
 	//メッシュデータにスケルトンデータがあれば
 	if (_meshComponent->GetIsSkeltal())
@@ -494,7 +494,7 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 @param _fileName モデルへのアドレス
 @return スケルトンモデルの取得
 */
-const Skeleton * Renderer::GetSkeleton(const char * _fileName)
+const Skeleton * RenderingObjectManager::GetSkeleton(const char * _fileName)
 {
 	//すでに作成されてないか調べる
 	std::string file(_fileName);
@@ -523,7 +523,7 @@ const Skeleton * Renderer::GetSkeleton(const char * _fileName)
 @param _fileName アニメーションへのアドレス
 @return スケルトンアニメーションの取得
 */
-const Animation * Renderer::GetAnimation(const char * _fileName, bool _loop)
+const Animation * RenderingObjectManager::GetAnimation(const char * _fileName, bool _loop)
 {
 	//すでに作成されてないか調べる
 	auto iter = anims.find(_fileName);
@@ -552,7 +552,7 @@ const Animation * Renderer::GetAnimation(const char * _fileName, bool _loop)
 @param	_fileName　取得したいテクスチャのファイル名
 @return Textureクラスのポインタ
 */
-Texture* Renderer::GetTexture(const std::string& _fileName)
+Texture* RenderingObjectManager::GetTexture(const std::string& _fileName)
 {
 	Texture* texture = nullptr;
 	//すでに作成されてないか調べる
@@ -584,7 +584,7 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 @param	_fileName　取得したいフォントのファイル名
 @return Fontクラスのポインタ
 */
-Font* Renderer::GetFont(const std::string& _fileName)
+Font* RenderingObjectManager::GetFont(const std::string& _fileName)
 {
 	Font* font = nullptr;
 	//すでに作成されてないか調べる
@@ -616,7 +616,7 @@ Font* Renderer::GetFont(const std::string& _fileName)
 @param	_fileName 取得したいメッシュのファイル名
 @return Meshクラスのポインタ
 */
-Mesh* Renderer::GetMesh(const std::string &_fileName)
+Mesh* RenderingObjectManager::GetMesh(const std::string &_fileName)
 {
 	Mesh* m = nullptr;
 	//すでに作成されてないか調べる
@@ -646,7 +646,7 @@ Mesh* Renderer::GetMesh(const std::string &_fileName)
 @brief  シェーダーの読み込み
 @return true : 成功 , false : 失敗
 */
-bool Renderer::LoadShaders()
+bool RenderingObjectManager::LoadShaders()
 {
 	// スプライトシェーダーの作成
 	spriteShader = new Shader();
@@ -743,7 +743,7 @@ bool Renderer::LoadShaders()
 /*
 @brief  Sprite用の頂点バッファとインデックスバッファの作成
 */
-void Renderer::CreateSpriteVerts()
+void RenderingObjectManager::CreateSpriteVerts()
 {
 	float vertices[] = {
 		-0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // 左上
@@ -763,7 +763,7 @@ void Renderer::CreateSpriteVerts()
 /*
 @brief  Particle用の頂点バッファとインデックスバッファの作成
 */
-void Renderer::CreateParticleVerts()
+void RenderingObjectManager::CreateParticleVerts()
 {
 	float vertices[] = {
 		-0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
@@ -782,7 +782,7 @@ void Renderer::CreateParticleVerts()
 /*
 @brief  キューブマップ(スカイボックス用)頂点配列定義
 */
-void Renderer::CreateCubeVerts()
+void RenderingObjectManager::CreateCubeVerts()
 {
 	cubeVerts = new VertexArray();
 	cubeVerts->CreateCubeVerts();
@@ -793,7 +793,7 @@ void Renderer::CreateCubeVerts()
 @param	_value　最大値
 @param _fontSize　フォントサイズ
 */
-void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
+void RenderingObjectManager::CreateTimeFontTexture(int _value, int _fontSize)
 {
 	// フォントの生成
 	Font* font = GetFont("Assets/Config/Fonts/impact.ttf");
@@ -833,7 +833,7 @@ void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
 @param	カウントダウンタイム
 @return カウントダウンタイムごとのTimeTexture
 */
-Texture* Renderer::GetTimeTexture(int _time)
+Texture* RenderingObjectManager::GetTimeTexture(int _time)
 {
 	return timeFontTextures[_time + 1];
 }
@@ -843,7 +843,7 @@ Texture* Renderer::GetTimeTexture(int _time)
 @param	カウントダウンタイム
 @return カウントダウンタイムごとのTimeTexture
 */
-Texture* Renderer::GetTimeBlackTexture(int _time)
+Texture* RenderingObjectManager::GetTimeBlackTexture(int _time)
 {
 	return timeBlackFontTextures[_time + 1];
 }
@@ -853,7 +853,7 @@ Texture* Renderer::GetTimeBlackTexture(int _time)
 @param	カウントダウンタイム
 @return カウントダウンタイムごとのTimeTexture
 */
-Texture* Renderer::GetTimeRedTexture(int _time)
+Texture* RenderingObjectManager::GetTimeRedTexture(int _time)
 {
 	return timeRedFontTextures[_time + 1];
 }
@@ -861,7 +861,7 @@ Texture* Renderer::GetTimeRedTexture(int _time)
 /*
 @brief  シャドウマップの本描画関数
 */
-void Renderer::DrawShadow()
+void RenderingObjectManager::DrawShadow()
 {
 
 	/* HDRとシャドウマップの処理開始 */
@@ -1025,7 +1025,7 @@ void Renderer::DrawShadow()
 /*
 @brief  デプスマップ焼きこみ描画
 */
-void Renderer::DepthRendering()
+void RenderingObjectManager::DepthRendering()
 {
 
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
@@ -1097,7 +1097,7 @@ void Renderer::DepthRendering()
 /*
 @brief  背景の描画
 */
-void Renderer::DrawBackGround()
+void RenderingObjectManager::DrawBackGround()
 {
 	// アルファブレンディングを有効にする
 	glEnable(GL_BLEND);
@@ -1132,7 +1132,7 @@ void Renderer::DrawBackGround()
 /*
 @brief  Particle用の頂点バッファとインデックスバッファの作成
 */
-void Renderer::DrawParticle()
+void RenderingObjectManager::DrawParticle()
 {
 	// particleのコンテナをソート
 	std::sort(particles.begin(), particles.end(), std::greater<ParticleComponent*>());
@@ -1220,7 +1220,7 @@ void Renderer::DrawParticle()
 @brief  光源情報をシェーダーの変数にセットする
 @param _shader セットするShaderクラスのポインタ
 */
-void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
+void RenderingObjectManager::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 {
 	// ビュー行列を逆行列にする
 	Matrix4 invView = _view;
@@ -1241,7 +1241,7 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 @brief  particleのブレンドモードを変更する
 @param  blendType　変更するモード
 */
-void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
+void RenderingObjectManager::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
 {
 	// PARTICLE_BLEND_ENUMのタイプを参照
 	switch (_blendType)
@@ -1264,7 +1264,7 @@ void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType
 @brief  textureを変更する
 @param  changeTextureID　変更するtextureのID
 */
-void Renderer::ChangeTexture(int changeTextureID)
+void RenderingObjectManager::ChangeTexture(int changeTextureID)
 {
 	// textureIDをバインド
 	glBindTexture(GL_TEXTURE_2D, changeTextureID);
@@ -1273,7 +1273,7 @@ void Renderer::ChangeTexture(int changeTextureID)
 /*
 @brief  ワールド空間のカメラ座標を計算
 */
-Vector3 Renderer::CalcCameraPos()
+Vector3 RenderingObjectManager::CalcCameraPos()
 {
 	// ビュー行列よりワールドでのカメラ位置算出
 	Matrix4 transMat = view;
@@ -1295,7 +1295,7 @@ Vector3 Renderer::CalcCameraPos()
 @brief  画面全体を覆う頂点の定義
 @param  vao Vertex Buffer Object
 */
-void Renderer::screenVAOSetting(unsigned int& vao)
+void RenderingObjectManager::screenVAOSetting(unsigned int& vao)
 {
 	unsigned int vbo;
 	float quadVertices[] = {
