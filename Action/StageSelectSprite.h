@@ -1,9 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 class SpriteComponent;
 class StageSelectSceneUI;
 
+/*
+@file StageSelectSprite.h
+@brief 選択されているstage画像を表示する
+*/
 class StageSelectSprite :
     public GameObject
 {
@@ -33,12 +40,15 @@ private:
     SpriteComponent* sprite;
     SceneState myState;
 
-    void MoveLeft();
-    void MoveRight();
+    // 描画を行うか否か
     bool isVisible;
 
 public:
 
+    /*
+    @fn 描画を行うか否かをセットする
+    @param _isVisible　描画するかどうか
+    */
     void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
 };
 

@@ -1,9 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 class SpriteComponent;
 class StageSelectSceneUI;
 
+/*
+@file StageSelectIconSprite.h
+@brief stage選択アイコン画像を表示する
+*/
 class StageSelectIconSprite :
     public GameObject
 {

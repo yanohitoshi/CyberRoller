@@ -1,9 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
 class SpriteComponent;
 class StageSelectSceneUI;
 
+/*
+@file StageUnSelectIcon.h
+@brief 選択されていないstage選択アイコン画像を表示する
+*/
 class StageUnSelectIcon :
     public GameObject
 {

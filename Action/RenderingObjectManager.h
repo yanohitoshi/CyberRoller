@@ -61,7 +61,9 @@ enum SceneState;
 
 /*
 @file Renderer.h
-@brief 描画の進行を行うクラス
+@brief 描画の進行とリソース管理を行うクラス
+	   本来ならば、描画の進行とリソース管理はクラスを分けて管理するべきだが、
+	   今回は、高速化のため1つのクラスにまとめて実装しました。
 */
 class RenderingObjectManager
 {

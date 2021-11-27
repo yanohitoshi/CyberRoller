@@ -47,11 +47,3 @@ void StageSelectSprite::UpdateGameObject(float _deltaTime)
 	// ‰f‚·‰f‚³‚È‚¢‚ðƒZƒbƒg
 	sprite->SetVisible(isVisible);
 }
-
-void StageSelectSprite::MoveLeft()
-{
-}
-
-void StageSelectSprite::MoveRight()
-{
-}
