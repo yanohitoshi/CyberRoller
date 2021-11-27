@@ -86,11 +86,6 @@ public:
 	*/
 	friend void ProcessInputs(const InputState& _state);
 
-
-	// シーン遷移が行われるかどうかフラグ
-	static bool isChangeScene;
-
-
 private:
 
 	// ゲームプレイ中のシーン
@@ -102,12 +97,17 @@ private:
 	/*
 	@brief  入力関連の処理
 	*/
-    void ProcessInput();
+    void UpdateInput();
+
+	/*
+	@brief  sceneの更新処理
+	*/
+	void UpdateScene();
 	
 	/*
 	@brief  描画関連の処理
 	*/
-    void GenerateOutput();
+    void DrawGame();
 
 	/*
 	@brief  ゲームのアップデート処理

@@ -24,8 +24,6 @@
 #include "GameObject.h"
 #include "GeometryInstanceManager.h"
 
-// シーンチェンジを行うかフラグの初期化
-bool Game::isChangeScene = false;
 // ゲーム全体で見るコンティニューされたかどうかの判定フラグの初期化
 bool Game::continueFlag = false;
 
@@ -148,14 +146,6 @@ bool Game::Initialize()
 	// 最初のシーンを生成
 	nowScene = new TitleScene();
 
-	//// 最初のシーンステータスの初期化
-	//nowSceneState = STAGE_SELECT_SCENE;
-	//// 最初のシーンを生成
-	//nowScene = new StageSelectScene();
-
-	// 現在のシーンのステータスをレンダラーに渡す
-	RENDERING_OBJECT_MANAGER->SetNowSceneState(nowSceneState);
-
 	return true;
 }
 
@@ -187,19 +177,15 @@ void Game::GameLoop()
 	while (isRunning)
 	{
 		// 入力更新
-		ProcessInput();
+		UpdateInput();
+		// シーンの更新
+		UpdateScene();
 		// ゲームのアップデート
 		UpdateGame();
 		// 描画更新
-		GenerateOutput();
+		DrawGame();
 		// デルタタイムの更新
 		fps->Update();
-		// シーン遷移が行われる場合
-		if (isChangeScene == true)
-		{
-			// シーンの変更
-			ChangeScene(nowSceneState, nowScene);
-		}
 	}
 }
 
@@ -222,7 +208,7 @@ void Game::UnloadData()
 /*
 @brief  入力関連の処理
 */
-void Game::ProcessInput()
+void Game::UpdateInput()
 {
 	// inputSystemのUpdateの準備をする（SDL_PollEventsの直前に呼ぶ）
 	inputSystem->PrepareForUpdate();
@@ -246,7 +232,10 @@ void Game::ProcessInput()
 
 	// 入力状態のアップデート
 	inputSystem->Update();
+}
 
+void Game::UpdateScene()
+{
 	// 入力状態を保存
 	const InputState& state = inputSystem->GetState();
 
@@ -270,7 +259,7 @@ void Game::ProcessInput()
 	tmpSceneState = nowScene->Update(state);
 
 	// もしシーン遷移が行われない場合オブジェクトに入力状態を渡して更新
-	if (isChangeScene == false && Game::GetContinueFlag() == false)
+	if (tmpSceneState == nowSceneState && Game::GetContinueFlag() == false)
 	{
 		ProcessInputs(state);
 	}
@@ -280,9 +269,7 @@ void Game::ProcessInput()
 	{
 		// 今のシーンステータスに次のシーンステータスを入れる
 		nowSceneState = tmpSceneState;
-
-		// シーン変更フラグをtrueに
-		isChangeScene = true;
+		ChangeScene(nowSceneState, nowScene);
 	}
 }
 
@@ -302,7 +289,6 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 
 	RENDERING_OBJECT_MANAGER->GetGeometryInstanceManager()->ClearGeometryInstanceGameObjectMap();
 	// シーン遷移判定に使用するフラグを初期化
-	isChangeScene = false;
 	continueFlag = false;
 
 	// _stateを参照して必要なシーンを生成
@@ -336,14 +322,12 @@ void Game::ChangeScene(SceneState _state, BaseScene* _scene)
 		nowScene = new ResultScene();
 		break;
 	}
-
-	RENDERING_OBJECT_MANAGER->SetNowSceneState(nowSceneState);
 }
 
 /*
 @brief  描画関連の処理
 */
-void Game::GenerateOutput()
+void Game::DrawGame()
 {
 	// 描画処理
 	RENDERING_OBJECT_MANAGER->Draw();

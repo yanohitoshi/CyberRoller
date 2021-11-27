@@ -868,13 +868,6 @@ void RenderingObjectManager::DrawShadow()
 	// HDRレコーディング開始
 	hdrRenderer->HdrRecordBegin();
 
-	// シーンがタイトルだったら
-	if (nowSceneState == SceneState::TITLE_SCENE)
-	{
-		// タイトルの背景を描画
-		DrawBackGround();
-	}
-
 	// スカイボックス描画
 	if (activeSkyBox != nullptr)
 	{
@@ -956,9 +949,6 @@ void RenderingObjectManager::DrawShadow()
 			mc->Draw(shadowMapShader);
 		}
 	}
-
-
-
 
 	//シャドウマップshaderをアクティブ(skinnend)
 	skinnedShadowMapShader->SetActive();

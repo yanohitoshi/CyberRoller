@@ -150,8 +150,6 @@ public:
 	class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
 	class VertexArray* GetCubeMapVerts() { return cubeVerts; }
 
-	void SetNowSceneState(SceneState _nowSceneState) { nowSceneState = _nowSceneState; }
-
 private:
 
 	//コンストラクタ、デストラクタの隠蔽
@@ -164,8 +162,6 @@ private:
 	@brief  デストラクタ
 	*/
 	~RenderingObjectManager();
-
-	SceneState nowSceneState;
 
 	//自分のインスタンス
 	static RenderingObjectManager* renderingObjectManager;
@@ -217,6 +213,7 @@ private:
 
 	/*
 	@brief  背景の描画
+			スカイボックスの実装により使用しなくなりました。
 	*/
 	void DrawBackGround();
 
