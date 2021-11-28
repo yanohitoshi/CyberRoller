@@ -83,7 +83,6 @@ public:
     */
 	ColliderComponent(GameObject* _owner, PhysicsTag tag, int _updateOrder = 200,int _collisionOrder = 100);
 
-
 private:
 
 	bool isTrigger;			//実体を伴う当たり判定をするかどうか

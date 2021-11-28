@@ -5,6 +5,8 @@
 #include "BaseScene.h"
 #include "GameObject.h"
 
+class MusicComponent;
+
 /*
 @file TitleScene.h
 @brief タイトルシーンの管理と更新を行う
@@ -34,5 +36,7 @@ public:
 	SceneState Update(const InputState& _inputState)override;
 
 private:
+
+	MusicComponent* titleBgm;
 
 };

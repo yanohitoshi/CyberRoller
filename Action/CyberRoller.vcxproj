@@ -148,7 +148,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AudioComponent.cpp" />
+    <ClCompile Include="AudioResourceManager.cpp" />
     <ClCompile Include="AutoMoveCamera.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="BreakBlockObject.cpp" />
@@ -195,6 +196,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="ForthStageCreator.cpp" />
     <ClCompile Include="FourthStageScene.cpp" />
     <ClCompile Include="ForthStageUI.cpp" />
+    <ClCompile Include="MusicComponent.cpp" />
+    <ClCompile Include="SoundEffectComponent.cpp" />
     <ClCompile Include="ThirdStageCreator.cpp" />
     <ClCompile Include="ThirdStageScene.cpp" />
     <ClCompile Include="ThirdStageUI.cpp" />
@@ -386,7 +389,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="WarningSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AudioComponent.h" />
+    <ClInclude Include="AudioResourceManager.h" />
     <ClInclude Include="AutoMoveCamera.h" />
     <ClInclude Include="BreakBlockObject.h" />
     <ClInclude Include="BreakBlockObjectEffectManager.h" />
@@ -435,6 +439,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="ForthStageCreator.h" />
     <ClInclude Include="FourthStageScene.h" />
     <ClInclude Include="ForthStageUI.h" />
+    <ClInclude Include="MusicComponent.h" />
+    <ClInclude Include="SoundEffectComponent.h" />
     <ClInclude Include="ThirdStageCreator.h" />
     <ClInclude Include="ThirdStageScene.h" />
     <ClInclude Include="ThirdStageUI.h" />

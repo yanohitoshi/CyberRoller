@@ -8,7 +8,7 @@
 #include <algorithm>
 #include "FPS.h"
 #include "RenderingObjectManager.h"
-#include "AudioManager.h"
+#include "AudioResourceManager.h"
 #include "InputSystem.h"
 #include "PhysicsWorld.h"
 #include "BaseScene.h"
@@ -102,7 +102,7 @@ bool Game::Initialize()
 
 	// ※サウンド系統未実装
 	// オーディオ管理クラスの生成
-	AudioManager::CreateInstance();
+	AudioResourceManager::CreateInstance();
 
 	// サウンドの初期化
 	if (!Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG))
@@ -166,7 +166,8 @@ void Game::Termination()
 	RenderingObjectManager::DeleteInstance();
 	// 当たり判定クラスを解放処理
 	PhysicsWorld::DeleteInstance();
-
+	// サウンドのリソースクラスを削除
+	AudioResourceManager::DeleteInstance();
     //FPSクラスの解放処理
     delete fps;
 	// 入力クラスの解放処理

@@ -12,6 +12,8 @@ class TitleJumpAttackPlayerObject;
 class TitlePlayerStateBase;
 enum class TitlePlayerState;
 
+class MusicComponent;
+
 /*
 @file TitlePlayerObject.h
 @brief タイトルシーン中でのプレイヤー
@@ -101,6 +103,8 @@ private:
 
     // 回転角定数
     const float RotationAngle;
+
+    MusicComponent* title;
 
 public:
 

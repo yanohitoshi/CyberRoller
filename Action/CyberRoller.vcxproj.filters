@@ -98,9 +98,6 @@
     <ClCompile Include="TutorialSwitchParticlEffect.cpp">
       <Filter>UI\ParticleUI</Filter>
     </ClCompile>
-    <ClCompile Include="AudioManager.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
@@ -665,6 +662,18 @@
     <ClCompile Include="RenderingObjectManager.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicComponent.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEffectComponent.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioResourceManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -771,9 +780,6 @@
     </ClInclude>
     <ClInclude Include="TutorialSwitchParticlEffect.h">
       <Filter>UI\ParticleUI</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Sound</Filter>
@@ -1339,6 +1345,18 @@
     <ClInclude Include="RenderingObjectManager.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEffectComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioResourceManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1586,6 +1604,9 @@
     </Filter>
     <Filter Include="UI\SpriteUI\Collection">
       <UniqueIdentifier>{e85f08fa-9667-491e-897d-d20ada9dd502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Audio">
+      <UniqueIdentifier>{2a51072d-d3b4-41b2-9305-3845c0036e67}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
