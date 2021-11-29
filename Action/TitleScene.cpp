@@ -7,7 +7,6 @@
 #include "GameObject.h"
 #include "RenderingObjectManager.h"
 #include "TitleStageCreator.h"
-#include "MusicComponent.h"
 
 /*
 @fn コンストラクタ
@@ -40,7 +39,6 @@ TitleScene::TitleScene()
 
 	// クリエイターの状態をdeadにし片づける
 	titleStageCreator->SetState(State::Dead);
-
 }
 
 /*

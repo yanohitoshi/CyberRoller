@@ -1,7 +1,14 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "Component.h"
 #include <String>
 
+/*
+@file AudioComponent.h
+@brief Componentクラスを継承したオーディオ関連Componentクラスの基底のクラス
+*/
 class AudioComponent :
     public Component
 {
@@ -10,12 +17,14 @@ public:
 	/*
 	@brief	コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
-	@param	なんのColliderなのか判定用Tag(PhysicsTag)
+	@param	読み込むサウンドファイルのパス
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
-	@param  当たり判定時に、めり込みから動かす処理の優先度を決める数値
 	*/
 	AudioComponent(GameObject* _owner, const std::string& _fileName,int _updateOrder = 200);
 
+	/*
+	@brief	デストラクタ
+	*/
 	~AudioComponent()override {};
 
 protected:

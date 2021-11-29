@@ -1,18 +1,27 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "AudioComponent.h"
 
+// classの前方宣言
 class Music;
 
+/*
+@file MusicComponent.h
+@brief BGMを更新するクラス
+*/
 class MusicComponent :
     public AudioComponent
 {
 public:
 
-	/*
-	@fn コンストラクタ
-	@param	アタッチするゲームオブジェクトのポインタ
-	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
-	*/
+    /*
+    @brief	コンストラクタ
+    @param	アタッチするゲームオブジェクトのポインタ
+    @param	読み込むサウンドファイルのパス
+    @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
+    */
 	MusicComponent(GameObject* _owner, const std::string& _fileName, int _updateOrder = 100);
 
 	/*
@@ -26,7 +35,7 @@ public:
     @brief ミュージックのフェードイン再生を行う
     @param fadeInTime　フェードインにかける時間
     */
-    void PlayFadeIn(int fadeInTime);
+    void PlayFadeIn(int _fadeInTime);
 
     /*
     @fn 再生関数(ミュージック)
@@ -39,7 +48,7 @@ public:
     @brief 再生中のミュージックのフェードアウトを行う
     @param fadeOutTime　フェードアウトにかける時間
     */
-    void FadeOut(int fadeOutTime);
+    void FadeOut(int _fadeOutTime);
 
     /*
     @fn 停止関数(ミュージック)
@@ -56,7 +65,6 @@ public:
 
 private:
 
+    // 自分が担当するMusicクラスのポインタ
 	Music* myMusic;
-
 };
-

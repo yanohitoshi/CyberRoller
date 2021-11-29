@@ -1,8 +1,16 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "AudioComponent.h"
 
+// classの前方宣言
 class Sound;
 
+/*
+@file SoundEffectComponent.h
+@brief サウンドエフェクトを更新するクラス
+*/
 class SoundEffectComponent :
     public AudioComponent
 {
@@ -43,5 +51,6 @@ public:
 
 private:
 
+    // 自分が担当するSoundクラスのポインタ
 	Sound* mySound;
 };

@@ -14,8 +14,6 @@
 #include "TitlePlayerStateJumpStart.h"
 #include "TitlePlayerStateRun.h"
 
-#include "MusicComponent.h"
-
 /*
 @fn コンストラクタ
 @param	ポジション
@@ -66,9 +64,6 @@ TitlePlayerObject::TitlePlayerObject(const Vector3& _pos, bool _reUseGameObject,
 	// ステータスの初期化
 	nowState = TitlePlayerState::STATE_NUM;
 	nextState = TitlePlayerState::RUN;
-
-
-	title = new MusicComponent(this, "Assets/Sound/Bgm/Cyber01.mp3");
 }
 
 /*
@@ -92,12 +87,6 @@ void TitlePlayerObject::UpdateGameObject(float _deltaTime)
 {
 	// Rendererにポジションを送る
 	RENDERING_OBJECT_MANAGER->SetPlayerPositon(position);
-
-	if (!title->IsPlaying())
-	{
-		title->Play();
-	}
-
 
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
