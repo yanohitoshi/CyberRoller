@@ -109,7 +109,7 @@ bool Game::Initialize()
 	{
 		return false;
 	}
-
+	
 	// SDLMixer API初期化　44100:音源の周波数 2:ステレオ 4096:内部バッファサイズ
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 	{
@@ -142,15 +142,10 @@ bool Game::Initialize()
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(-800.0f, 0.0f, -200.0f), Vector3(200.0f, 0.0f, 0.0f), Vector3::UnitZ);
 	RENDERING_OBJECT_MANAGER->SetViewMatrix(v);
 
-	//// 最初のシーンステータスの初期化
-	//nowSceneState = TITLE_SCENE;
-	//// 最初のシーンを生成
-	//nowScene = new TitleScene();
-
 	// 最初のシーンステータスの初期化
-	nowSceneState = STAGE_SELECT_SCENE;
+	nowSceneState = TITLE_SCENE;
 	// 最初のシーンを生成
-	nowScene = new StageSelectScene();
+	nowScene = new TitleScene();
 
 	return true;
 }

@@ -235,7 +235,7 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	AddStatePoolMap(new PlayerObjectStateDownLoop, PlayerState::PLAYER_STATE_DOWN_LOOP);
 	AddStatePoolMap(new PlayerObjectStateDownUp, PlayerState::PLAYER_STATE_DOWN_UP);
 	AddStatePoolMap(new PlayerObjectStateDownOver, PlayerState::PLAYER_STATE_DOWN_OVER);
-	AddStatePoolMap(new PlayerObjectStateDead, PlayerState::PLAYER_STATE_DEAD);
+	AddStatePoolMap(new PlayerObjectStateDead(this), PlayerState::PLAYER_STATE_DEAD);
 	AddStatePoolMap(new PlayerObjectStateFallDead, PlayerState::PLAYER_STATE_FALL_DEAD);
 	AddStatePoolMap(new PlayerObjectStateRespown, PlayerState::PLAYER_STATE_RESPAWN);
 	AddStatePoolMap(new PlayerObjectStateExplosionBlowAway, PlayerState::PLAYER_STATE_BLOWAWAY);

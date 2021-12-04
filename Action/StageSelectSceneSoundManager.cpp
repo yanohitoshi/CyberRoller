@@ -9,11 +9,12 @@ StageSelectSceneSoundManager::StageSelectSceneSoundManager()
 	// 変数初期化
 	isAnalogStickSelect = false;
 	selectCount = 0;
-	isEndDecisionSound = false;
-
+	isPlayDecisionSound = false;
+	isPushDecisionSceneButton = false;
+	isAvailableSelectInput = true;
 	bgm = new MusicComponent(this, "Assets/Sound/Bgm/Cyber02.wav");
-	changeSelectSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button.wav");
-	sceneDecisionSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button2.wav");
+	changeSelectSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button2.wav");
+	sceneDecisionSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button.wav");
 }
 
 StageSelectSceneSoundManager::~StageSelectSceneSoundManager()
@@ -26,16 +27,27 @@ void StageSelectSceneSoundManager::UpdateGameObject(float _deltaTime)
 
 void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 {
-	// シーン決定ボタンが押されているか
-	bool pushDecisionSceneButton = _keyState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed;
-
-	if (pushDecisionSceneButton)
+	// シーン決定ボタンが使用可能か
+	if (isAvailableSelectInput)
 	{
-		sceneDecisionSound->Play();
+		// 入力状態を判定
+		isPushDecisionSceneButton = _keyState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed;
+
+		// 入力されていたら
+		if (isPushDecisionSceneButton)
+		{
+			// サウンドを鳴らす
+			sceneDecisionSound->Play();
+			// 入力不可状態に変更
+			isAvailableSelectInput = false;
+		}
 	}
 
-	isEndDecisionSound = sceneDecisionSound->IsPlaying();
+	if (isPushDecisionSceneButton)
+	{
+		isPlayDecisionSound = sceneDecisionSound->IsPlaying();
+	}
 
 	if (isAnalogStickSelect)
 	{
@@ -51,7 +63,7 @@ void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 	// アナログスティックが傾いているかどうか
 	bool inclineSelectSceneStick = false;
 
-	if (!isAnalogStickSelect)
+	if (!isAnalogStickSelect && isAvailableSelectInput)
 	{
 		// コントローラのアナログスティックの入力情報を計算する
 		float ALX = _keyState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
@@ -73,10 +85,14 @@ void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 	}
 
 	// シーン選択ボタンが傾いているかどうか
-	bool pushSelectSceneButton = _keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
-		_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
-		_keyState.Keyboard.GetKeyState(SDL_SCANCODE_A) == Pressed ||
-		_keyState.Keyboard.GetKeyState(SDL_SCANCODE_D) == Pressed;
+	bool pushSelectSceneButton = false;
+	if (isAvailableSelectInput)
+	{
+		pushSelectSceneButton = _keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed ||
+			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
+			_keyState.Keyboard.GetKeyState(SDL_SCANCODE_A) == Pressed ||
+			_keyState.Keyboard.GetKeyState(SDL_SCANCODE_D) == Pressed;
+	}
 
 	// シーン選択ボタンが押されるかStickが傾いていたら
 	if (pushSelectSceneButton || inclineSelectSceneStick)

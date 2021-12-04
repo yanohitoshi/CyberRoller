@@ -19,14 +19,21 @@ FirstSceneSoundManager::~FirstSceneSoundManager()
 
 void FirstSceneSoundManager::UpdateGameObject(float _deltaTime)
 {
-	if (!bgm->IsPlaying() && !isCountDownPlay)
-	{
-		bgm->Play();
-	}
-
 	if (!owner->GetStartScene() && isCountDownPlay)
 	{
 		countDown->Play();
 		isCountDownPlay = false;
+	}
+
+	bool isPlayBgm = !bgm->IsPlaying() && !isCountDownPlay && !owner->GetIsSceneClear();
+
+	if (isPlayBgm)
+	{
+		bgm->Play();
+	}
+
+	if (owner->GetIsSceneClear())
+	{
+		bgm->Stop();
 	}
 }

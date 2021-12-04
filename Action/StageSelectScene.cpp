@@ -28,6 +28,7 @@ StageSelectScene::StageSelectScene()
 	stageSelectSceneSoundManager = new StageSelectSceneSoundManager();
 	isAnalogStickSelect = false;
 	selectCount = 0;
+	isSceneSelect = false;
 }
 
 StageSelectScene::~StageSelectScene()
@@ -48,7 +49,7 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 		}
 	}
 
-	if (!isAnalogStickSelect)
+	if (!isAnalogStickSelect && !isSceneSelect)
 	{
 		// コントローラのアナログスティックの入力情報を計算する
 		float ALX = _inputState.Controller.GetAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
@@ -68,27 +69,36 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 		}
 	}
 
-	if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed)
+	if (!isSceneSelect)
 	{
-		SelectLeft();
-	}
-	else if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed)
-	{
-		SelectRight();
+		if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == Pressed)
+		{
+			SelectLeft();
+		}
+		else if (_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed)
+		{
+			SelectRight();
+		}
+
+		if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_A) == Pressed)
+		{
+			SelectLeft();
+		}
+		else if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_D) == Pressed)
+		{
+			SelectRight();
+		}
 	}
 
-	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_A) == Pressed)
+
+	if (!isSceneSelect)
 	{
-		SelectLeft();
-	}
-	else if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_D) == Pressed)
-	{
-		SelectRight();
+		isSceneSelect = _inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
+			_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed;
 	}
 
 	// 選択されたら選ばれたシーンを返す
-	bool isPushDecisionSceneButton = _inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed && stageSelectSceneSoundManager->GetIsEndDecisionSound() ||
-		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed && stageSelectSceneSoundManager->GetIsEndDecisionSound();
+	bool isPushDecisionSceneButton = isSceneSelect && !stageSelectSceneSoundManager->GetIsPlayDecisionSound();
 
 	if (isPushDecisionSceneButton)
 	{

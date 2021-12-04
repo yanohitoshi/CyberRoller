@@ -131,6 +131,11 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 		_owner->SetIsAvailableJumpAttck(true);
 		velocity = Vector3::Zero;
 
+		if (soundEffect->IsPlaying())
+		{
+			soundEffect->Stop();
+		}
+
 		// サウンドエフェクトを鳴らす
 		soundEffect->Play();
 	}

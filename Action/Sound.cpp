@@ -35,6 +35,11 @@ bool Sound::IsPlaying()
     return channel >= 0 && Mix_Playing(channel);
 }
 
+void Sound::SetChannelVolume(int _volume)
+{
+    Mix_Volume(channel, _volume);
+}
+
 /*
 @fn デストラクタ
 @brief サウンドの解放を行う

@@ -6,7 +6,7 @@
 #include "GameObject.h"
 
 class MusicComponent;
-
+class TitleSceneSoundManager;
 /*
 @file TitleScene.h
 @brief タイトルシーンの管理と更新を行う
@@ -37,6 +37,8 @@ public:
 
 private:
 
-	MusicComponent* titleBgm;
+	TitleSceneSoundManager* titleSceneSoundManager;
 
+	// シーンが決定されたかどうか
+	bool isGameStart;
 };

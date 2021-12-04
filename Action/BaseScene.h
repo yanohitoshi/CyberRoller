@@ -25,6 +25,7 @@ public:
 	, ContinueToChangeScene(360)
 	, TimeoversLight(Vector3(0.3f, 0.3f, 0.3f))
 	, ChangeLightSpeed(Vector3(0.01f, 0.01f, 0.01f))
+	, isSceneClear(false)
 	{};
 
 	/*
@@ -92,6 +93,8 @@ protected:
 	bool endFlag;
 	// ライトを落とすかどうかフラグ
 	bool lightDownFlag;
+	// シーンをクリアしたかどうか
+	bool isSceneClear;
 
 	// ライトの強さの最大値
 	const float MaxLight;
@@ -109,6 +112,7 @@ protected:
 public:
 
 	bool GetStartScene() { return startScene; }
+	bool GetIsSceneClear() { return isSceneClear; }
 
 };
 

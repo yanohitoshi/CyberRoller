@@ -31,7 +31,8 @@ void BaseScene::StartSceneLightUp()
 */
 void BaseScene::SceneClearCount(PlayerObject* _playerObject)
 {
-	if (_playerObject->GetClearFlag() == true)
+	isSceneClear = _playerObject->GetClearFlag();
+	if (isSceneClear)
 	{
 		++clearCount;
 		light -= ChangeLightSpeed;

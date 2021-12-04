@@ -52,6 +52,8 @@ public:
     */
     bool IsPlaying();
 
+    void SetChannelVolume(int _volume);
+
 private:
 
     // サウンドデータ

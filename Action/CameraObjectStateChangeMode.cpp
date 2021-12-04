@@ -57,8 +57,13 @@ CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float 
 	Vector3 nextForwardVec;
 	// プレイヤー側に渡す前方ベクトルを生成
 	nextForwardVec = lerpObjectPos - _owner->GetPosition();
-	// 正規化
-	nextForwardVec.Normalize();
+
+	if (!Math::NearZero(nextForwardVec.Length()))
+	{
+		// 正規化
+		nextForwardVec.Normalize();
+	}
+
 	// Z軸を固定
 	nextForwardVec.z = 0.0f;
 

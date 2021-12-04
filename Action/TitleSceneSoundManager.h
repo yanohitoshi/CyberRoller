@@ -2,6 +2,7 @@
 #include "GameObject.h"
 
 class MusicComponent;
+class SoundEffectComponent;
 
 class TitleSceneSoundManager :
     public GameObject
@@ -26,9 +27,32 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
+	/*
+	@fn 入力を引数で受け取る更新関数
+	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 入力情報
+	*/
+	void GameObjectInput(const InputState& _keyState);
+
 private:
 
 	// Meshを管理するクラス
 	MusicComponent* bgm;
+	SoundEffectComponent* startSceneSound;
+	// 決定ボタンが押されたかどうか
+	bool isPushDecisionSceneButton;
+	// 入力が利用可能かどうか
+	bool isAvailableSelectInput;
+
+	// stage決定時のサウンドがなり終わったかどうか
+	bool isPlayDecisionSound;
+
+public:
+	
+	/*
+	@brief	stage決定時のサウンドがなり終わったかどうかを取得
+	@return	isEndDecisionSound stage決定時のサウンドの再生が終わったかどうか
+	*/
+	bool GetIsPlayDecisionSound() { return isPlayDecisionSound; }
 };
 

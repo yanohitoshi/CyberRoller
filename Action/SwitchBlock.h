@@ -65,6 +65,11 @@ private:
 	void CheckOnFlag(Tag& _Tag);
 
 	/*
+	@fn スイッチをOnにする
+	*/
+	void OnSwitch();
+
+	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 		動く床と接している時にその速度をもらうための
 	@param	当たったGameObject

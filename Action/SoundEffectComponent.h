@@ -49,6 +49,7 @@ public:
     */
     bool IsPlaying();
 
+    void SetVolume(int _volume);
 private:
 
     // 自分が担当するSoundクラスのポインタ

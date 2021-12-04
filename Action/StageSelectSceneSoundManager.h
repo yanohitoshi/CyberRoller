@@ -43,11 +43,18 @@ private:
 	SoundEffectComponent* changeSelectSceneSound;
 	SoundEffectComponent* sceneDecisionSound;
 
+	// アナログスティックによる選択シーン変更が可能かどうか
 	bool isAnalogStickSelect;
+	// アナログスティックによる選択の再使用可能になるまでのカウントを数える
 	int selectCount;
 
+	// 決定ボタンが押されたかどうか
+	bool isPushDecisionSceneButton;
+	// 入力が利用可能かどうか
+	bool isAvailableSelectInput;
+
 	// stage決定時のサウンドがなり終わったかどうか
-	bool isEndDecisionSound;
+	bool isPlayDecisionSound;
 
 	// デッドスペース定数
 	const float InputDeadSpace;
@@ -56,9 +63,8 @@ public:
 
 	/*
 	@brief	stage決定時のサウンドがなり終わったかどうかを取得
-	@return	isEndDecisionSound stage決定時のサウンドがなり終わったかどうか
+	@return	isEndDecisionSound stage決定時のサウンドの再生が終わったかどうか
 	*/
-	bool GetIsEndDecisionSound() { return isEndDecisionSound; }
-
+	bool GetIsPlayDecisionSound() { return isPlayDecisionSound; }
 };
 

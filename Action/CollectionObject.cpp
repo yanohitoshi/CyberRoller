@@ -9,6 +9,7 @@
 #include "CollectionEffectManager.h"
 #include "CrystalEffectManager.h"
 #include "CollectionUI.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
@@ -55,6 +56,11 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 	boxCollider->SetObjectBox(aabb);
 
 	new CollectionEffectManager(this);
+
+	// サウンドエフェクトを生成
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Collection/get.wav");
+
+	isPlaySoundEffect = true;
 }
 
 /*
@@ -156,6 +162,12 @@ void CollectionObject::Collected(float _deltaTime)
 	if (collectedCount >= CollectedVisibleTime)
 	{
 		meshComponent->SetVisible(false);
+	}
+
+	if (isPlaySoundEffect)
+	{
+		soundEffectComponent->Play();
+		isPlaySoundEffect = false;
 	}
 }
 

@@ -42,8 +42,13 @@ private:
 	void SelectLeft();
 	void SelectAnalogStick(float _axis);
 
+	// アナログスティックによる選択シーン変更が可能かどうか
 	bool isAnalogStickSelect;
+	// アナログスティックによる選択の再使用可能になるまでのカウントを数える
 	int selectCount;
+
+	// シーンが決定されたかどうか
+	bool isSceneSelect;
 
 	// 選択されているシーンステータス
 	SceneState selectState;

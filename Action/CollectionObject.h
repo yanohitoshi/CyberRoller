@@ -8,6 +8,7 @@
 class MeshComponent;
 class BoxCollider;
 class Mesh;
+class SoundEffectComponent;
 
 /*
 @enum CollectionTag 何番目の収集物か判別するタグ
@@ -80,6 +81,8 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+	// サウンドエフェクトクラス
+	SoundEffectComponent* soundEffectComponent;
 	BoxCollider* boxCollider;
 	CollectionTag collectionTag;
 
@@ -100,6 +103,8 @@ private:
 	float collectedRotationAngle;
 	// 収集されたかどうか
 	bool isCollected;
+	// サウンドエフェクトを再生するかどうか
+	bool isPlaySoundEffect;
 	// 収集されてからのカウントを数える
 	int collectedCount;
 	// フレームカウントを数える

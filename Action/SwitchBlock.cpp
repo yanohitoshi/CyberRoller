@@ -80,8 +80,8 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	// スイッチ用のエフェクトを付与
 	new SwitchEffectMakeManeger(this);
 
-	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Switch/switch.wav");
-
+	// サウンドエフェクトを生成
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Switch/switch4.wav");
 }
 
 /*
@@ -177,16 +177,29 @@ void SwitchBlock::ColorChangeProcess()
 		// スイッチの利用が可能状態だったら
 		if (isAvailableSwitch == true)
 		{
-			// スイッチがOFFだったら
-			if (onFlag == false)
-			{
-				state = State::Disabling;
-				onFlag = true;
-			}
+			OnSwitch();
 		}
 	}
 
 	SetColorProcess();
+}
+
+/*
+@fn スイッチをOnにする
+*/
+void SwitchBlock::OnSwitch()
+{
+	// スイッチがOFFだったら
+	if (onFlag == false)
+	{
+		state = State::Disabling;
+		onFlag = true;
+		if (soundEffectComponent->IsPlaying())
+		{
+			soundEffectComponent->Stop();
+		}
+		soundEffectComponent->Play();
+	}
 }
 
 /*
@@ -199,7 +212,6 @@ void SwitchBlock::SetColorProcess()
 	{
 		luminance = 0.2f;
 		meshComponent->SetColor(OnColor);
-		soundEffectComponent->Play();
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{

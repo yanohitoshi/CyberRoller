@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateDead();
+	PlayerObjectStateDead(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ

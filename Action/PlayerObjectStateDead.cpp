@@ -6,13 +6,14 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateDead.h"
 #include "SkeletalMeshComponent.h"
-
+#include "SoundEffectComponent.h"
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateDead::PlayerObjectStateDead()
+PlayerObjectStateDead::PlayerObjectStateDead(PlayerObject* _owner)
 	: RespawnTime(120)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Down.wav");
 }
 
 /*
@@ -69,6 +70,8 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力可能フラグをfalseにセット
 	_owner->SetIsAvailableInput(false);
+
+	soundEffect->Play();
 }
 
 /*

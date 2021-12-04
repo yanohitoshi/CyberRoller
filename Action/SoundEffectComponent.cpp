@@ -56,3 +56,8 @@ bool SoundEffectComponent::IsPlaying()
 
 	return 	mySound->IsPlaying();
 }
+
+void SoundEffectComponent::SetVolume(int _volume)
+{
+	mySound->SetChannelVolume(_volume);
+}

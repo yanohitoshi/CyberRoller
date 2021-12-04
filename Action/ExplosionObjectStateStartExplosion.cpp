@@ -10,7 +10,7 @@ ExplosionObjectStateStartExplosion::ExplosionObjectStateStartExplosion(Explosion
 	, FirstColorChangeTime(15)
 	, ExplosionStartTime(180)
 {
-	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion2.wav");
+	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Blinking/Blinking2.wav");
 }
 
 /*
@@ -24,6 +24,11 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectB
 {
 	// 時間計測
 	++explosionStart;
+
+	if (!soundEffectComponent->IsPlaying())
+	{
+		soundEffectComponent->Play();
+	}
 
 	// ジャンプアタックプレイヤーに降れていなければ
 	if (!isHitJumpAttackPlayer)
@@ -42,7 +47,13 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectB
 		// 時間がくるもしくは当たったら即爆発するオブジェクトに触れたら
 		if (explosionStart > ExplosionStartTime || _owner->GetIsHitExplosionObject())
 		{
-			// 爆発
+
+			if (soundEffectComponent->IsPlaying())
+			{
+				soundEffectComponent->Stop();
+			}
+
+			// 爆発状態に切り替える
 			state = ExplosionObjectState::EXPLOSION;
 			return state;
 		}
@@ -88,8 +99,8 @@ void ExplosionObjectStateStartExplosion::Enter(ExplosionObjectBase* _owner, floa
 	angle = 0;
 	_owner->SetState(State::Disabling);
 
-	//// 効果音を鳴らす
-	//soundEffectComponent->Play();
+	// 効果音を鳴らす
+	soundEffectComponent->Play();
 
 }
 
