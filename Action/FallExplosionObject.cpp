@@ -52,7 +52,7 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 	// mapにステートパターンクラスを追加
 	AddStatePoolMap(new FallExplosionObjectStateIdle(), ExplosionObjectState::IDLE);
 	AddStatePoolMap(new ExplosionObjectStateFall(), ExplosionObjectState::FALL);
-	AddStatePoolMap(new ExplosionObjectStateExplosion(), ExplosionObjectState::EXPLOSION);
+	AddStatePoolMap(new ExplosionObjectStateExplosion(this), ExplosionObjectState::EXPLOSION);
 	AddStatePoolMap(new FallExplosionObjectStateRespawn(), ExplosionObjectState::RESPAWN);
 
 	nowState = ExplosionObjectState::NUM;

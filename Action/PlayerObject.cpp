@@ -220,17 +220,17 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	// stateをstatePool用マップに追加
 	AddStatePoolMap(new PlayerObjectStateIdle, PlayerState::PLAYER_STATE_IDLE);
 	AddStatePoolMap(new PlayerObjectStateIdlingDance, PlayerState::PLAYER_STATE_IDLE_DANCE);
-	AddStatePoolMap(new PlayerObjectStateRun, PlayerState::PLAYER_STATE_RUN);
+	AddStatePoolMap(new PlayerObjectStateRun(this), PlayerState::PLAYER_STATE_RUN);
 	AddStatePoolMap(new PlayerObjectStateRunStart, PlayerState::PLAYER_STATE_RUN_START);
 	AddStatePoolMap(new PlayerObjectStateRunStop, PlayerState::PLAYER_STATE_RUN_STOP);
 	AddStatePoolMap(new PlayerObjectStateRunTurn, PlayerState::PLAYER_STATE_RUN_TURN);
 	AddStatePoolMap(new PlayerObjectStateKnockBack, PlayerState::PLAYER_STATE_KNOCKBACK);
 	AddStatePoolMap(new PlayerObjectStateJumpLoop, PlayerState::PLAYER_STATE_JUMPLOOP);
-	AddStatePoolMap(new PlayerObjectStateJumpStart, PlayerState::PLAYER_STATE_JUMPSTART);
-	AddStatePoolMap(new PlayerObjectStateJumpEndToIdle, PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE);
+	AddStatePoolMap(new PlayerObjectStateJumpStart(this), PlayerState::PLAYER_STATE_JUMPSTART);
+	AddStatePoolMap(new PlayerObjectStateJumpEndToIdle(this), PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE);
 	AddStatePoolMap(new PlayerObjectStateJunpEndToRun, PlayerState::PLAYER_STATE_JUMPEND_TO_RUN);
-	AddStatePoolMap(new PlayerObjectStateJumpAttack, PlayerState::PLAYER_STATE_JUMP_ATTACK);
-	AddStatePoolMap(new PlayerObjectStateJumpAttackEnd, PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
+	AddStatePoolMap(new PlayerObjectStateJumpAttack(this), PlayerState::PLAYER_STATE_JUMP_ATTACK);
+	AddStatePoolMap(new PlayerObjectStateJumpAttackEnd(this), PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
 	AddStatePoolMap(new PlayerObjectStateDownStart, PlayerState::PLAYER_STATE_DOWNSTART);
 	AddStatePoolMap(new PlayerObjectStateDownLoop, PlayerState::PLAYER_STATE_DOWN_LOOP);
 	AddStatePoolMap(new PlayerObjectStateDownUp, PlayerState::PLAYER_STATE_DOWN_UP);

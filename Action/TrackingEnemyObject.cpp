@@ -69,11 +69,11 @@ TrackingEnemyObject::TrackingEnemyObject(const Vector3& _pos, const Tag _objectT
 
 	// stateをstatePool用マップに追加
 	AddStatePoolMap(new TrackingEnemyStateIdle, EnemyState::ENEMY_STATE_IDLE);
-	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
+	AddStatePoolMap(new EnemyObjectStateDead(this), EnemyState::ENEMY_STATE_DEAD);
 	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
 	AddStatePoolMap(new EnemyObjectStateAttack, EnemyState::ENEMY_STATE_ATTACK);
 	AddStatePoolMap(new EnemyObjectStateTurn, EnemyState::ENEMY_STATE_TURN);
-	AddStatePoolMap(new EnemyObjectStateTracking, EnemyState::ENEMY_STATE_TRACKING);
+	AddStatePoolMap(new EnemyObjectStateTracking(this), EnemyState::ENEMY_STATE_TRACKING);
 	AddStatePoolMap(new EnemyObjectStateReposition, EnemyState::ENEMY_STATE_REPOSITION);
 
 	//anim変数を速度1.0fで再生

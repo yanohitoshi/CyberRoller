@@ -10,6 +10,7 @@
 #include "FirstStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
+#include "FirstSceneSoundManager.h"
 
 /*
 @fn コンストラクタ
@@ -55,6 +56,8 @@ FirstStageScene::FirstStageScene()
 
 	// クリエイターの状態をdeadにし片づける
 	secondStageCreator->SetState(State::Dead);
+
+	new FirstSceneSoundManager(this);
 }
 
 /*

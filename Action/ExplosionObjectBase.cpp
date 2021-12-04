@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "ExplosionObjectBase.h"
 #include "ExplosionObjectStateBase.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ

@@ -2,13 +2,15 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "EnemyObjectStateTracking.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-EnemyObjectStateTracking::EnemyObjectStateTracking()
-	:TrackingLengthValue(50.0f)
+EnemyObjectStateTracking::EnemyObjectStateTracking(EnemyObjectBase* _owner)
+	: TrackingLengthValue(50.0f)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Enemy/tracking.wav");
 }
 
 /*
@@ -123,4 +125,6 @@ void EnemyObjectStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 
 	// 回転処理
 	RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
+
+	soundEffect->Play();
 }

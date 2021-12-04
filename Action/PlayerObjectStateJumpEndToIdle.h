@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateJumpEndToIdle();
+	PlayerObjectStateJumpEndToIdle(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ

@@ -674,6 +674,15 @@
     <ClCompile Include="AudioResourceManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="TitleSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1357,6 +1366,15 @@
     <ClInclude Include="AudioResourceManager.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="TitleSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -1607,6 +1625,9 @@
     </Filter>
     <Filter Include="Components\Audio">
       <UniqueIdentifier>{2a51072d-d3b4-41b2-9305-3845c0036e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\SoundManager">
+      <UniqueIdentifier>{5939512b-1be4-456d-98da-28e790bf098a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateJumpStart();
+	PlayerObjectStateJumpStart(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ
@@ -50,7 +50,7 @@ public:
 	void Enter(PlayerObject* _owner, float _deltaTime)override;
 
 private:
-	
+
 	/*
 	@fn 入力チェック関数処理関数
 	@param	_owner 親クラスのポインタ
@@ -94,5 +94,8 @@ private:
 	const int SwitchJumpTime;
 	// 初期化時にオーナーの速度に減速を掛ける定数
 	const float Deceleration;
+
+	// ステータスが切り替わった時に鳴らすサウンドエフェクトクラス
+	SoundEffectComponent* switchJumpSoundEffect;
 };
 

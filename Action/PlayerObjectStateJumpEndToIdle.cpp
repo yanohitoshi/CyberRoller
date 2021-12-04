@@ -3,12 +3,14 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpEndToIdle.h"
 #include "SkeletalMeshComponent.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateJumpEndToIdle::PlayerObjectStateJumpEndToIdle()
+PlayerObjectStateJumpEndToIdle::PlayerObjectStateJumpEndToIdle(PlayerObject* _owner)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Jump.wav");
 }
 
 /*
@@ -109,4 +111,7 @@ void PlayerObjectStateJumpEndToIdle::Enter(PlayerObject* _owner, float _deltaTim
 
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
+
+	// サウンドエフェクトを鳴らす
+	soundEffect->Play();
 }

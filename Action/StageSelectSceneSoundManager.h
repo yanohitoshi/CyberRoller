@@ -1,0 +1,64 @@
+#pragma once
+#include "GameObject.h"
+
+class MusicComponent;
+class SoundEffectComponent;
+
+class StageSelectSceneSoundManager :
+    public GameObject
+{
+public:
+
+	/*
+	@fn コンストラクタ
+	*/
+	StageSelectSceneSoundManager();
+
+	/*
+	@fn デストラクタ
+	@brief  objectの削除を行う
+	*/
+	~StageSelectSceneSoundManager()override;
+
+	/*
+	@fn アップデート関数
+	@brief	更新処理を行う
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
+	void UpdateGameObject(float _deltaTime)override;
+
+	/*
+	@fn 入力を引数で受け取る更新関数
+	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 入力情報
+	*/
+	void GameObjectInput(const InputState& _keyState);
+
+private:
+
+	BaseScene* owner;
+
+	// BGMを管理するクラス
+	MusicComponent* bgm;
+	SoundEffectComponent* changeSelectSceneSound;
+	SoundEffectComponent* sceneDecisionSound;
+
+	bool isAnalogStickSelect;
+	int selectCount;
+
+	// stage決定時のサウンドがなり終わったかどうか
+	bool isEndDecisionSound;
+
+	// デッドスペース定数
+	const float InputDeadSpace;
+
+public:
+
+	/*
+	@brief	stage決定時のサウンドがなり終わったかどうかを取得
+	@return	isEndDecisionSound stage決定時のサウンドがなり終わったかどうか
+	*/
+	bool GetIsEndDecisionSound() { return isEndDecisionSound; }
+
+};
+

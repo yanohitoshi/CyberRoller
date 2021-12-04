@@ -2,15 +2,16 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpAttackEnd.h"
-
+#include "SoundEffectComponent.h"
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd()
+PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd(PlayerObject* _owner)
 	: SuccessJumpTime(6)
 	, SuccessJumpAccelPower(80.0f)
 	, JumpAttackSuccessFirstPower(1500.0f)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Attack/attack.wav");
 }
 
 /*
@@ -129,6 +130,9 @@ void PlayerObjectStateJumpAttackEnd::Enter(PlayerObject* _owner, float _deltaTim
 		_owner->SetJumpPower(JumpAttackSuccessFirstPower);
 		_owner->SetIsAvailableJumpAttck(true);
 		velocity = Vector3::Zero;
+
+		// サウンドエフェクトを鳴らす
+		soundEffect->Play();
 	}
 	else
 	{

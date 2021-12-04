@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateRun();
+	PlayerObjectStateRun(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ

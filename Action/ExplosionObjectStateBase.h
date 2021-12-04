@@ -6,6 +6,7 @@
 
 // クラスの前方宣言
 class MeshComponent;
+class SoundEffectComponent;
 
 /*
 @enum　ExplosionObjectState 爆発物のステータス判別用
@@ -92,6 +93,10 @@ protected:
 	MeshComponent* meshComponent;
 	// stateの遷移を行うための変数
 	ExplosionObjectState state;
+
+	// サウンドエフェクトクラス
+	SoundEffectComponent* soundEffectComponent;
+
 	// 速度をポジションに作用する速度を格納するためのVector3変数
 	Vector3 velocity;
 	// 速度を格納するための変数

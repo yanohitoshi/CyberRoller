@@ -3,14 +3,16 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpAttack.h"
 #include "SkeletalMeshComponent.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack()
+PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack(PlayerObject* _owner)
 	: AttackSpeed(3000.0f)
 	, UnSelectTargetAttackTime(15)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/fastMove.wav");
 }
 
 /*
@@ -91,4 +93,7 @@ void PlayerObjectStateJumpAttack::Enter(PlayerObject* _owner, float _deltaTime)
 	{
 		jumpAttackDirection = _owner->GetCharaForwardVec();
 	}
+
+	// サウンドエフェクトを鳴らす
+	soundEffect->Play();
 }

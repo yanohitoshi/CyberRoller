@@ -64,7 +64,7 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Move
 
 	// stateをstatePool用マップに追加
 	AddStatePoolMap(new MoveEnemyObjectStateIdle, EnemyState::ENEMY_STATE_IDLE);
-	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
+	AddStatePoolMap(new EnemyObjectStateDead(this), EnemyState::ENEMY_STATE_DEAD);
 	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
 	AddStatePoolMap(new EnemyObjectStateAttack, EnemyState::ENEMY_STATE_ATTACK);
 	AddStatePoolMap(new MoveEnemyObjectStateMoving, EnemyState::ENEMY_STATE_MOVING);

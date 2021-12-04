@@ -5,6 +5,7 @@
 #include "RenderingObjectManager.h"
 #include "Mesh.h"
 #include "MeshComponent.h"
+#include "SoundEffectComponent.h"
 #include "BoxCollider.h"
 #include "ExplosionObjectStateBase.h"
 #include "ExplosionObjectStateIdle.h"
@@ -56,8 +57,8 @@ ExplosionObject::ExplosionObject(const Vector3& _pos, const Tag _objectTag)
 
 	// ステートマップにstateクラスを追加
 	AddStatePoolMap(new ExplosionObjectStateIdle(), ExplosionObjectState::IDLE);
-	AddStatePoolMap(new ExplosionObjectStateStartExplosion(), ExplosionObjectState::EXPLOSION_START);
-	AddStatePoolMap(new ExplosionObjectStateExplosion(), ExplosionObjectState::EXPLOSION);
+	AddStatePoolMap(new ExplosionObjectStateStartExplosion(this), ExplosionObjectState::EXPLOSION_START);
+	AddStatePoolMap(new ExplosionObjectStateExplosion(this), ExplosionObjectState::EXPLOSION);
 	AddStatePoolMap(new ExplosionObjectStateRespawn(), ExplosionObjectState::RESPAWN);
 
 	nowState = ExplosionObjectState::NUM;

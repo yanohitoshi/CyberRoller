@@ -16,10 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateStartExplosion()
-	: BlowAwaySpeed(1600.0f)
-	, FirstColorChangeTime(15)
-	, ExplosionStartTime(180){};
+	ExplosionObjectStateStartExplosion(ExplosionObjectBase* _owner);
 
 	/*
 	@fn デストラクタ

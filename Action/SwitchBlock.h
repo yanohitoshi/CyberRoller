@@ -9,6 +9,7 @@
 class BoxCollider;
 class Mesh;
 class ChangeColorMeshComponent;
+class SoundEffectComponent;
 
 /*
 @file SwitchBlock.h
@@ -73,6 +74,9 @@ private:
 
 	// 色変更機能付きMeshComponent
 	ChangeColorMeshComponent* meshComponent;
+
+	// サウンドエフェクトクラス
+	SoundEffectComponent* soundEffectComponent;
 	// 動く床と接している時にその速度をもらうためのCollider
 	BoxCollider* boxCollider;
 	// プレイヤーとの足元判定用Collider

@@ -3,6 +3,13 @@
 //-----------------------------------------------------------------------------
 #include "ExplosionObjectStateExplosion.h"
 #include "MeshComponent.h"
+#include "SoundEffectComponent.h"
+
+ExplosionObjectStateExplosion::ExplosionObjectStateExplosion(ExplosionObjectBase* _owner)
+	: ExplosionTime(10)
+{
+	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion2.wav");
+}
 
 /*
 @fn アップデート
@@ -37,4 +44,7 @@ void ExplosionObjectStateExplosion::Enter(ExplosionObjectBase* _owner, float _de
 	meshComponent->SetVisible(false);
 	_owner->SetIsStartExplosion(false);
 	_owner->SetIsExplode(true);
+
+	// 効果音を鳴らす
+	soundEffectComponent->Play();
 }

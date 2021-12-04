@@ -11,6 +11,8 @@ class Mesh;
 class PlayerObject;
 class MoveWallBlock;
 class GeometryInstanceComponent;
+class SoundEffectComponent;
+
 
 /*
 @file ClearPointObject.h
@@ -66,12 +68,17 @@ private:
 	// 3Dモデルの描画を行うクラス
 	MeshComponent* meshComponent;
 	Mesh* mesh;
+
+	// サウンドエフェクトクラス
+	SoundEffectComponent* soundEffectComponent;
 	// プレイヤーのポインタを持つためのポインタ変数
 	PlayerObject* playerObject;
 	// シーン最後の動く壁を持つためのポインタ変数
 	MoveWallBlock* lastMoveWallBlock;
 	// 当たり判定を行うクラス
 	BoxCollider* boxCollider;
+	// クリアサウンドエフェクトを鳴らすかどうか
+	bool playClearSound;
 
 	// 回転する際の角度
 	const float Angle;

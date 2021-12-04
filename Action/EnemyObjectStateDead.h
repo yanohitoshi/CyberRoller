@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	EnemyObjectStateDead();
+	EnemyObjectStateDead(EnemyObjectBase* _owner);
 
 	/*
 	@fn デストラクタ

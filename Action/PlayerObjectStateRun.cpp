@@ -4,12 +4,14 @@
 #include "PlayerObjectStateRun.h"
 #include "SkeletalMeshComponent.h"
 #include "GameObject.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateRun::PlayerObjectStateRun()
+PlayerObjectStateRun::PlayerObjectStateRun(PlayerObject* _owner)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Run.wav");
 }
 
 /*
@@ -28,12 +30,21 @@ PlayerObjectStateRun::~PlayerObjectStateRun()
 PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 {
 
+	if (!soundEffect->IsPlaying())
+	{
+		soundEffect->Play();
+	}
+
 	// 移動速度にデルタタイムを掛けてそれをポジションに追加して更新
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
 	// ジャンプフラグがfalseかつ接地状態でも無ければ
 	if (!_owner->GetJumpFlag() && !_owner->GetOnGround())
 	{
+		if (soundEffect->IsPlaying())
+		{
+			soundEffect->Stop();
+		}
 		// ステータスをジャンプループにする
 		state = PlayerState::PLAYER_STATE_JUMPLOOP;
 	}
@@ -41,6 +52,10 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	// 移動入力が無ければ
 	if (!_owner->GetInputFlag())
 	{
+		if (soundEffect->IsPlaying())
+		{
+			soundEffect->Stop();
+		}
 		// ステータスを走り終わりにする
 		state = PlayerState::PLAYER_STATE_RUN_STOP;
 	}
@@ -48,6 +63,10 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	// ジャンプフラグもしくはスイッチジャンプフラグがtrueだったら
 	if (_owner->GetJumpFlag() || _owner->GetSwitchJumpFlag())
 	{
+		if (soundEffect->IsPlaying())
+		{
+			soundEffect->Stop();
+		}
 		// ステータスをジャンプ開始状態にする
 		state = PlayerState::PLAYER_STATE_JUMPSTART;
 	}
@@ -55,6 +74,10 @@ PlayerState PlayerObjectStateRun::Update(PlayerObject* _owner,float _deltaTime)
 	// 走りながら壁に当たったら
 	if (_owner->GetIsHitEnemy())
 	{
+		if (soundEffect->IsPlaying())
+		{
+			soundEffect->Stop();
+		}
 		// ステータスを怯み状態にする
 		state = PlayerState::PLAYER_STATE_KNOCKBACK;
 	}
@@ -109,4 +132,7 @@ void PlayerObjectStateRun::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
+
+	// サウンドエフェクトを鳴らす
+	soundEffect->Play();
 }

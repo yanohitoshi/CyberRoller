@@ -8,6 +8,7 @@
 // クラスの前方宣言
 class EnemyObjectBase;
 class SkeletalMeshComponent;
+class SoundEffectComponent;
 
 /*
 @enum　EnemyState 敵オブジェクトのステータス判別用
@@ -85,6 +86,8 @@ protected:
 
 	// 親クラスのポインタを格納するためのSkeletalMeshComponentのポインタ変数
 	SkeletalMeshComponent* skeletalMeshComponent;
+	// ステータスが切り替わった時に鳴らすサウンドエフェクトクラス
+	SoundEffectComponent* soundEffect;
 	// stateの遷移を行うための変数
 	EnemyState state;
 	// 速度をポジションに作用する速度を格納するためのVector3変数

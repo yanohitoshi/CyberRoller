@@ -7,6 +7,7 @@
 #include "RenderingObjectManager.h"
 #include "SkyBoxObject.h"
 #include "StageSelectSceneUI.h"
+#include "StageSelectSceneSoundManager.h"
 
 StageSelectScene::StageSelectScene()
 	: InputDeadSpace(0.3f)
@@ -24,8 +25,9 @@ StageSelectScene::StageSelectScene()
 	selectState = SceneState::FIRST_SATGE_SCENE;
 
 	new StageSelectSceneUI(this);
-
+	stageSelectSceneSoundManager = new StageSelectSceneSoundManager();
 	isAnalogStickSelect = false;
+	selectCount = 0;
 }
 
 StageSelectScene::~StageSelectScene()
@@ -85,8 +87,10 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 	}
 
 	// 選択されたら選ばれたシーンを返す
-	if (_inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed ||
-		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed)
+	bool isPushDecisionSceneButton = _inputState.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == Pressed && stageSelectSceneSoundManager->GetIsEndDecisionSound() ||
+		_inputState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed && stageSelectSceneSoundManager->GetIsEndDecisionSound();
+
+	if (isPushDecisionSceneButton)
 	{
 		return selectState;
 	}
@@ -115,7 +119,7 @@ void StageSelectScene::SelectRight()
 		break;
 
 	case FINAL_STAGE_SCENE:
-		selectState = SceneState::FINAL_STAGE_SCENE;
+		selectState = SceneState::FIRST_SATGE_SCENE;
 		break;
 	}
 }
@@ -125,7 +129,7 @@ void StageSelectScene::SelectLeft()
 	switch (selectState)
 	{
 	case FIRST_SATGE_SCENE:
-		selectState = SceneState::FIRST_SATGE_SCENE;
+		selectState = SceneState::FINAL_STAGE_SCENE;
 		break;
 
 	case SECOND_SATGE_SCENE:

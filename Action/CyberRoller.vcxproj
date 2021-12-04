@@ -86,7 +86,7 @@
       <AdditionalLibraryDirectories>..\external\SDL\lib\win\x86;..\external\GLEW\lib\win\x86;..\external\SOIL\lib\win\x86</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -193,11 +193,13 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FallExplosionArea.cpp" />
     <ClCompile Include="FallExplosionObject.cpp" />
     <ClCompile Include="FallExplosionObjectStateRespawn.cpp" />
+    <ClCompile Include="FirstSceneSoundManager.cpp" />
     <ClCompile Include="ForthStageCreator.cpp" />
     <ClCompile Include="FourthStageScene.cpp" />
     <ClCompile Include="ForthStageUI.cpp" />
     <ClCompile Include="MusicComponent.cpp" />
     <ClCompile Include="SoundEffectComponent.cpp" />
+    <ClCompile Include="StageSelectSceneSoundManager.cpp" />
     <ClCompile Include="ThirdStageCreator.cpp" />
     <ClCompile Include="ThirdStageScene.cpp" />
     <ClCompile Include="ThirdStageUI.cpp" />
@@ -255,6 +257,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FinalStageCreator.cpp" />
     <ClCompile Include="FinalStageScene.cpp" />
     <ClCompile Include="FinalStageUI.cpp" />
+    <ClCompile Include="TitleSceneSoundManager.cpp" />
     <ClCompile Include="TutorialStageCreator.cpp" />
     <ClCompile Include="GameClearSprite.cpp" />
     <ClCompile Include="GameOverSprite.cpp" />
@@ -436,11 +439,13 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FallExplosionArea.h" />
     <ClInclude Include="FallExplosionObject.h" />
     <ClInclude Include="FallExplosionObjectStateRespawn.h" />
+    <ClInclude Include="FirstSceneSoundManager.h" />
     <ClInclude Include="ForthStageCreator.h" />
     <ClInclude Include="FourthStageScene.h" />
     <ClInclude Include="ForthStageUI.h" />
     <ClInclude Include="MusicComponent.h" />
     <ClInclude Include="SoundEffectComponent.h" />
+    <ClInclude Include="StageSelectSceneSoundManager.h" />
     <ClInclude Include="ThirdStageCreator.h" />
     <ClInclude Include="ThirdStageScene.h" />
     <ClInclude Include="ThirdStageUI.h" />
@@ -499,6 +504,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FinalStageCreator.h" />
     <ClInclude Include="FinalStageScene.h" />
     <ClInclude Include="FinalStageUI.h" />
+    <ClInclude Include="TitleSceneSoundManager.h" />
     <ClInclude Include="TutorialStageCreator.h" />
     <ClInclude Include="GameClearSprite.h" />
     <ClInclude Include="GameOverSprite.h" />

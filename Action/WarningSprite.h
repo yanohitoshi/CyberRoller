@@ -7,6 +7,7 @@
 // クラスの前方宣言
 class SpriteComponent;
 class CountDownFont;
+class SoundEffectComponent;
 
 /*
 @file WarningSprite.h
@@ -63,6 +64,8 @@ private:
     CountDownFont* owner;
     // SpriteComponentのポインタ変数
     SpriteComponent* sprite;
+    // サウンドエフェクトクラス
+    SoundEffectComponent* soundEffect;
     // fadein・outを切り替えるフラグ
     bool fadeFlag;
     // alpha値

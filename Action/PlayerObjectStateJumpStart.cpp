@@ -3,11 +3,12 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpStart.h"
 #include "SkeletalMeshComponent.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
+PlayerObjectStateJumpStart::PlayerObjectStateJumpStart(PlayerObject* _owner)
 	: JumpCorrection(80.0f)
 	, SwitchJumpCorrection(160.0f)
 	, JumpTime(8)
@@ -16,6 +17,8 @@ PlayerObjectStateJumpStart::PlayerObjectStateJumpStart()
 	, SwitchJumpAccelPower(120.0f)
 	, Deceleration(0.5f)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Jump.wav");
+	switchJumpSoundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/switchJump.wav");
 }
 
 /*
@@ -120,6 +123,16 @@ void PlayerObjectStateJumpStart::Enter(PlayerObject* _owner, float _deltaTime)
 
 	// 入力が入らない値をもらう
 	inputDeadSpace = _owner->GetDeadSpace();
+	// スイッチジャンプの場合スイッチジャンプをそうでない場合踏切り音を鳴らす
+	if (_owner->GetSwitchJumpFlag())
+	{
+		switchJumpSoundEffect->Play();
+	}
+	else
+	{
+		// サウンドエフェクトを鳴らす
+		soundEffect->Play();
+	}
 }
 
 /*

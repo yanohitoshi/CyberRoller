@@ -60,7 +60,7 @@ NormalEnemyObject::NormalEnemyObject(const Vector3& _pos, const Tag _objectTag)
 
 	// stateをstatePool用マップに追加
 	AddStatePoolMap(new NormalEnemyObjectStateIdle, EnemyState::ENEMY_STATE_IDLE);
-	AddStatePoolMap(new EnemyObjectStateDead, EnemyState::ENEMY_STATE_DEAD);
+	AddStatePoolMap(new EnemyObjectStateDead(this), EnemyState::ENEMY_STATE_DEAD);
 	AddStatePoolMap(new EnemyObjectStateRespawn, EnemyState::ENEMY_STATE_RESPAWN);
 	AddStatePoolMap(new EnemyObjectStateAttack, EnemyState::ENEMY_STATE_ATTACK);
 

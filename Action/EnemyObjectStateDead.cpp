@@ -2,17 +2,19 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "EnemyObjectStateDead.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-EnemyObjectStateDead::EnemyObjectStateDead()
+EnemyObjectStateDead::EnemyObjectStateDead(EnemyObjectBase* _owner)
 	: RespawnTime(200)
 	, InvisibleTime(50)
 	, FirstBlowAwayPower(100.0f)
 	, BlowAwayPower(1.2f)
 	, MaxSpeed(2000.0f)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion.wav");
 }
 
 /*
@@ -48,16 +50,12 @@ EnemyState EnemyObjectStateDead::Update(EnemyObjectBase* _owner, float _deltaTim
 	// positionに速度を足してキャラクターを動かす
 	_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 
-	// 時間が来たら描画を切る
+	// 時間が来たら描画を切りリスポーン状態に遷移
 	if (frameCount >= InvisibleTime)
 	{
 		_owner->SetIsVisible(false);
 		skeletalMeshComponent->SetVisible(false);
-	}
-
-	// 時間が来たらリスポーン
-	if (frameCount >= RespawnTime)
-	{
+		soundEffect->Play();
 		state = EnemyState::ENEMY_STATE_RESPAWN;
 	}
 

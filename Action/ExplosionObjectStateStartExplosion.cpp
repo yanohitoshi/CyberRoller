@@ -3,6 +3,15 @@
 //-----------------------------------------------------------------------------
 #include "ExplosionObjectStateStartExplosion.h"
 #include "MeshComponent.h"
+#include "SoundEffectComponent.h"
+
+ExplosionObjectStateStartExplosion::ExplosionObjectStateStartExplosion(ExplosionObjectBase* _owner)
+	: BlowAwaySpeed(1600.0f)
+	, FirstColorChangeTime(15)
+	, ExplosionStartTime(180)
+{
+	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion2.wav");
+}
 
 /*
 @fn アップデート
@@ -78,6 +87,9 @@ void ExplosionObjectStateStartExplosion::Enter(ExplosionObjectBase* _owner, floa
 	explosionStart = 0;
 	angle = 0;
 	_owner->SetState(State::Disabling);
+
+	//// 効果音を鳴らす
+	//soundEffectComponent->Play();
 
 }
 

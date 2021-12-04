@@ -109,6 +109,8 @@ enum Tag
 	RESULT_OBJECT,
 	// パーティクル
 	PARTICLE,
+	// オーディオ
+	AUDIO,
 };
 
 /*

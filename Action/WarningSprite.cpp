@@ -5,6 +5,7 @@
 #include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
@@ -30,6 +31,8 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	sprite->SetTexture(tex);
 	sprite->SetVisible(true);
 	sprite->SetAlpha(alpha);
+
+	soundEffect = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Time/silen.wav");
 }
 
 /*
@@ -47,8 +50,14 @@ WarningSprite::~WarningSprite()
 */
 void WarningSprite::UpdateGameObject(float _deltaTime)
 {
+
+	if (owner->GetWarningFlag())
+	{
+		soundEffect->Play();
+	}
+
 	// countが2以下かつownerのフラグがtrueの時
-	if (fadeinCount <= 2 && owner->GetWarningFlag() == true)
+	if (fadeinCount <= 2 && owner->GetWarningFlag())
 	{
 		// 状態チェックと実際の処理
 		CheckFadeInOutProcess();
@@ -101,6 +110,15 @@ void WarningSprite::LastFadeOutProcess()
 	{
 		// 値を引く
 		alpha -= FadeValue;
+	}
+	else // alpha値が0.0f以下の時
+	{
+		// サウンドが鳴っていたら
+		if (soundEffect->IsPlaying())
+		{
+			// サウンドを停止する
+			soundEffect->Stop();
+		}
 	}
 }
 

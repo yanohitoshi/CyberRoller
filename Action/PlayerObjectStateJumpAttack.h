@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateJumpAttack();
+	PlayerObjectStateJumpAttack(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ

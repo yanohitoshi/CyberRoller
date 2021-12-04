@@ -9,6 +9,7 @@
 #include "PlayerObject.h"
 #include "MainCameraObject.h"
 #include "CrystalEffectManager.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
@@ -33,6 +34,7 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	tag = _objectTag;
 	state = Active;
 	velocity = Vector3(0.0f, 0.0f, 0.0f);
+	playClearSound = true;
 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
@@ -53,6 +55,8 @@ NextSceneObject::NextSceneObject(const Vector3& _pos, const Tag& _objectTag, Pla
 	new CrystalEffectManager(this, CrystalColor::RED, lastMoveWallBlock);
 	new CrystalEffectManager(this, CrystalColor::BLUE, lastMoveWallBlock);
 	new CrystalEffectManager(this, CrystalColor::GREEN, lastMoveWallBlock);
+
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Clear/stageClear.wav");
 }
 
 /*
@@ -83,6 +87,12 @@ void NextSceneObject::UpdateGameObject(float _deltaTime)
 
 		// カメラに注視させるのでポジションを渡す
 		mainCamera->SetLerpObjectPos(position);
+
+		if (playClearSound)
+		{
+			soundEffectComponent->Play();
+			playClearSound = false;
+		}
 	}
 }
 

@@ -106,8 +106,9 @@ protected:
 	// ライトアップ・ダウン時の変更速度
 	const Vector3 ChangeLightSpeed;
 
-private:
+public:
 
+	bool GetStartScene() { return startScene; }
 
 };
 

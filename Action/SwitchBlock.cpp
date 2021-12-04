@@ -13,6 +13,7 @@
 #include "TutorialSwitchOkEffect.h"
 #include "SwitchEffectMakeManeger.h"
 #include "FirstStageUI.h"
+#include "SoundEffectComponent.h"
 #include <string>
 
 /*
@@ -78,6 +79,8 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 
 	// スイッチ用のエフェクトを付与
 	new SwitchEffectMakeManeger(this);
+
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Switch/switch.wav");
 
 }
 
@@ -196,6 +199,7 @@ void SwitchBlock::SetColorProcess()
 	{
 		luminance = 0.2f;
 		meshComponent->SetColor(OnColor);
+		soundEffectComponent->Play();
 	}
 	else if (onFlag == false && isAvailableSwitch == true)
 	{

@@ -13,7 +13,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	EnemyObjectStateTracking();
+	EnemyObjectStateTracking(EnemyObjectBase* _owner);
 
 	/*
 	@fn デストラクタ

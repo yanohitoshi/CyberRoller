@@ -30,9 +30,10 @@ public:
 protected:
 
 	// 当たり判定を行うかどうかの判定用Tag
-	const std::string& myFileName;
+	std::string myFileName;
 
 public: // ゲッターセッター
 
+	const std::string& GetFileName() { return myFileName; }
 
 };

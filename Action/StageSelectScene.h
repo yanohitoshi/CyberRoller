@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+// クラスの前方宣言
+class StageSelectSceneSoundManager;
+
 /*
 @file StageSelectScene.h
 @brief ステージ選択シーンの管理と更新を行う
@@ -42,8 +45,13 @@ private:
 	bool isAnalogStickSelect;
 	int selectCount;
 
+	// 選択されているシーンステータス
 	SceneState selectState;
 
+	// stage選択画面のサウンドを管理しているクラス
+	StageSelectSceneSoundManager* stageSelectSceneSoundManager;
+
+	// デッドスペース定数
 	const float InputDeadSpace;
 
 public:

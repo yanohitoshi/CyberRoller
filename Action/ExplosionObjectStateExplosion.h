@@ -16,8 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	ExplosionObjectStateExplosion()
-	: ExplosionTime(10){};
+	ExplosionObjectStateExplosion(ExplosionObjectBase* _owner);
 
 	/*
 	@fn デストラクタ
