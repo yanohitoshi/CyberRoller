@@ -25,17 +25,13 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectB
 	// 時間計測
 	++explosionStart;
 
-	if (!soundEffectComponent->IsPlaying())
-	{
-		soundEffectComponent->Play();
-	}
-
 	// ジャンプアタックプレイヤーに降れていなければ
 	if (!isHitJumpAttackPlayer)
 	{
 		// 時間が来るまでその場で停止
 		if (explosionStart > ExplosionStartTime)
 		{
+			soundEffectComponent->Stop();
 			// 時間が来たら爆発
 			state = ExplosionObjectState::EXPLOSION;
 			return state;
@@ -47,16 +43,13 @@ ExplosionObjectState ExplosionObjectStateStartExplosion::Update(ExplosionObjectB
 		// 時間がくるもしくは当たったら即爆発するオブジェクトに触れたら
 		if (explosionStart > ExplosionStartTime || _owner->GetIsHitExplosionObject())
 		{
-
-			if (soundEffectComponent->IsPlaying())
-			{
-				soundEffectComponent->Stop();
-			}
+			soundEffectComponent->Stop();
 
 			// 爆発状態に切り替える
 			state = ExplosionObjectState::EXPLOSION;
 			return state;
 		}
+
 		// 時間内は回転しながら移動
 		velocity = blowAwayDirection * BlowAwaySpeed;
 		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);

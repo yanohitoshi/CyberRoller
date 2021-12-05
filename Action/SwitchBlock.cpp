@@ -81,7 +81,7 @@ SwitchBlock::SwitchBlock(GameObject* _owner, const Vector3& _size, const Tag& _o
 	new SwitchEffectMakeManeger(this);
 
 	// サウンドエフェクトを生成
-	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Switch/switch4.wav");
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Switch/switch.wav");
 }
 
 /*

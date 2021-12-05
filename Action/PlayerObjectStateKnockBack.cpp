@@ -4,15 +4,17 @@
 #include "PlayerObjectStateKnockBack.h"
 #include "SkeletalMeshComponent.h"
 #include "CountDownFont.h"
+#include "SoundEffectComponent.h"
 
 /*
 @fn コンストラクタ
 */
-PlayerObjectStateKnockBack::PlayerObjectStateKnockBack()
+PlayerObjectStateKnockBack::PlayerObjectStateKnockBack(PlayerObject* _owner)
 	: knockBackFrameCount(0)
 	, KnockBackSpeed(70.0f)
 	, KnockBackTime(22)
 {
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/metal.wav");
 }
 
 /*
@@ -113,4 +115,6 @@ void PlayerObjectStateKnockBack::Enter(PlayerObject* _owner, float _deltaTime)
 	// 回転処理
 	// ノックバック時動く方向と逆の方向を向かせるのでx,y軸に-1.0をかける
 	RotationProcess(_owner,Vector3(knockBackDirection.x * -1.0f, knockBackDirection.y * -1.0f,0.0f) ,_owner->GetCharaForwardVec());
+
+	soundEffect->Play();
 }

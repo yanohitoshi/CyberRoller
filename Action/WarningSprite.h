@@ -66,6 +66,9 @@ private:
     SpriteComponent* sprite;
     // サウンドエフェクトクラス
     SoundEffectComponent* soundEffect;
+
+    // サウンドエフェクトを再生するかどうか
+    bool isPlaySound;
     // fadein・outを切り替えるフラグ
     bool fadeFlag;
     // alpha値

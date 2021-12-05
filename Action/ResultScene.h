@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 #include "BaseScene.h"
 
+// クラスの前方宣言
+class ResultSceneSoundManager;
+
 /*
 @file ResultScene.h
 @brief リザルトシーンの管理と更新を行う
@@ -34,4 +37,7 @@ public:
 
 private:
 
+	ResultSceneSoundManager* resultSceneSoundManager;
+
+	bool isSceneEnd;
 };

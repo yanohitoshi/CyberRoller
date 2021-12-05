@@ -9,6 +9,7 @@
 #include "SecondStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
+#include "SecondSceneSoundManager.h"
 
 /*
 @fn コンストラクタ
@@ -29,7 +30,7 @@ SecondStageScene::SecondStageScene()
 	changeCount = 0;
 	startScene = true;
 	isContinueFlag = false;
-	endFlag = false;
+	isEndFlag = false;
 	lightDownFlag = true;
 	state = SceneState::SECOND_SATGE_SCENE;
 
@@ -54,6 +55,8 @@ SecondStageScene::SecondStageScene()
 
 	// クリエイターの状態をdeadにし片づける
 	thirdStageCreator->SetState(State::Dead);
+
+	new SecondSceneSoundManager(this);
 }
 
 /*
@@ -96,7 +99,7 @@ SceneState SecondStageScene::Update(const InputState& _inputState)
 	}
 
 	 // コンテニューかゲームオーバーが選択されたら
-	if (isContinueFlag == true || endFlag == true)
+	if (isContinueFlag == true || isEndFlag == true)
 	{
 		// コンティニュー選択時のライト遷移処理
 		LightTransitionAtContinue();

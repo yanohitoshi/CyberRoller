@@ -218,27 +218,27 @@ PlayerObject::PlayerObject(const Vector3& _pos, bool _reUseGameObject, const Tag
 	new PlayerDeadEffectManager(this);
 
 	// stateをstatePool用マップに追加
-	AddStatePoolMap(new PlayerObjectStateIdle, PlayerState::PLAYER_STATE_IDLE);
-	AddStatePoolMap(new PlayerObjectStateIdlingDance, PlayerState::PLAYER_STATE_IDLE_DANCE);
+	AddStatePoolMap(new PlayerObjectStateIdle(), PlayerState::PLAYER_STATE_IDLE);
+	AddStatePoolMap(new PlayerObjectStateIdlingDance(), PlayerState::PLAYER_STATE_IDLE_DANCE);
 	AddStatePoolMap(new PlayerObjectStateRun(this), PlayerState::PLAYER_STATE_RUN);
-	AddStatePoolMap(new PlayerObjectStateRunStart, PlayerState::PLAYER_STATE_RUN_START);
-	AddStatePoolMap(new PlayerObjectStateRunStop, PlayerState::PLAYER_STATE_RUN_STOP);
-	AddStatePoolMap(new PlayerObjectStateRunTurn, PlayerState::PLAYER_STATE_RUN_TURN);
-	AddStatePoolMap(new PlayerObjectStateKnockBack, PlayerState::PLAYER_STATE_KNOCKBACK);
-	AddStatePoolMap(new PlayerObjectStateJumpLoop, PlayerState::PLAYER_STATE_JUMPLOOP);
+	AddStatePoolMap(new PlayerObjectStateRunStart(), PlayerState::PLAYER_STATE_RUN_START);
+	AddStatePoolMap(new PlayerObjectStateRunStop(), PlayerState::PLAYER_STATE_RUN_STOP);
+	AddStatePoolMap(new PlayerObjectStateRunTurn(), PlayerState::PLAYER_STATE_RUN_TURN);
+	AddStatePoolMap(new PlayerObjectStateKnockBack(this), PlayerState::PLAYER_STATE_KNOCKBACK);
+	AddStatePoolMap(new PlayerObjectStateJumpLoop(), PlayerState::PLAYER_STATE_JUMPLOOP);
 	AddStatePoolMap(new PlayerObjectStateJumpStart(this), PlayerState::PLAYER_STATE_JUMPSTART);
 	AddStatePoolMap(new PlayerObjectStateJumpEndToIdle(this), PlayerState::PLAYER_STATE_JUMPEND_TO_IDLE);
-	AddStatePoolMap(new PlayerObjectStateJunpEndToRun, PlayerState::PLAYER_STATE_JUMPEND_TO_RUN);
+	AddStatePoolMap(new PlayerObjectStateJunpEndToRun(), PlayerState::PLAYER_STATE_JUMPEND_TO_RUN);
 	AddStatePoolMap(new PlayerObjectStateJumpAttack(this), PlayerState::PLAYER_STATE_JUMP_ATTACK);
 	AddStatePoolMap(new PlayerObjectStateJumpAttackEnd(this), PlayerState::PLAYER_STATE_JUMP_ATTACK_END);
-	AddStatePoolMap(new PlayerObjectStateDownStart, PlayerState::PLAYER_STATE_DOWNSTART);
-	AddStatePoolMap(new PlayerObjectStateDownLoop, PlayerState::PLAYER_STATE_DOWN_LOOP);
-	AddStatePoolMap(new PlayerObjectStateDownUp, PlayerState::PLAYER_STATE_DOWN_UP);
-	AddStatePoolMap(new PlayerObjectStateDownOver, PlayerState::PLAYER_STATE_DOWN_OVER);
+	AddStatePoolMap(new PlayerObjectStateDownStart(), PlayerState::PLAYER_STATE_DOWNSTART);
+	AddStatePoolMap(new PlayerObjectStateDownLoop(), PlayerState::PLAYER_STATE_DOWN_LOOP);
+	AddStatePoolMap(new PlayerObjectStateDownUp(), PlayerState::PLAYER_STATE_DOWN_UP);
+	AddStatePoolMap(new PlayerObjectStateDownOver(), PlayerState::PLAYER_STATE_DOWN_OVER);
 	AddStatePoolMap(new PlayerObjectStateDead(this), PlayerState::PLAYER_STATE_DEAD);
-	AddStatePoolMap(new PlayerObjectStateFallDead, PlayerState::PLAYER_STATE_FALL_DEAD);
-	AddStatePoolMap(new PlayerObjectStateRespown, PlayerState::PLAYER_STATE_RESPAWN);
-	AddStatePoolMap(new PlayerObjectStateExplosionBlowAway, PlayerState::PLAYER_STATE_BLOWAWAY);
+	AddStatePoolMap(new PlayerObjectStateFallDead(), PlayerState::PLAYER_STATE_FALL_DEAD);
+	AddStatePoolMap(new PlayerObjectStateRespown(), PlayerState::PLAYER_STATE_RESPAWN);
+	AddStatePoolMap(new PlayerObjectStateExplosionBlowAway(), PlayerState::PLAYER_STATE_BLOWAWAY);
 
 	// stateを初期化
 	nowState = PlayerState::PLAYER_STATE_IDLE;

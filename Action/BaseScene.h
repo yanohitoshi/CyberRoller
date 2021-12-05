@@ -90,11 +90,13 @@ protected:
 	// コンテニューされたかフラグ
 	bool isContinueFlag;
 	// 終了フラグ
-	bool endFlag;
+	bool isEndFlag;
 	// ライトを落とすかどうかフラグ
 	bool lightDownFlag;
 	// シーンをクリアしたかどうか
 	bool isSceneClear;
+	// タイムオーバーになったか
+	bool isTimeOver;
 
 	// ライトの強さの最大値
 	const float MaxLight;
@@ -111,8 +113,33 @@ protected:
 
 public:
 
+	/*
+	@fn シーンが始まったかどうかフラグのgetter
+	@return シーンが始まったかどうか
+	*/
 	bool GetStartScene() { return startScene; }
+
+	/*
+	@fn シーンをクリアしたかどうかフラグのgetter
+	@return シーンをクリアしたかどうか
+	*/
 	bool GetIsSceneClear() { return isSceneClear; }
 
-};
+	/*
+	@fn タイムオーバーになったかフラグのgetter
+	@return タイムオーバーになったか
+	*/
+	bool GetIsTimeOver() { return isTimeOver; }
 
+	/*
+	@fn コンテニューされたかフラグのgetter
+	@return コンテニューされたか
+	*/
+	bool GetIsContinueFlag() { return isContinueFlag; }
+
+	/*
+	@fn 終了フラグのgetter
+	@return 終了しているかどうか
+	*/
+	bool GetIsEndFlag() { return isEndFlag; }
+};

@@ -23,6 +23,8 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	alpha = 0.1f;
 	fadeinCount = 0;
 	fadeFlag = true;
+	isPlaySound = true;
+
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// SpriteComponentの初期化
@@ -32,7 +34,8 @@ WarningSprite::WarningSprite(CountDownFont* _owner)
 	sprite->SetVisible(true);
 	sprite->SetAlpha(alpha);
 
-	soundEffect = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Time/silen.wav");
+	// サウンドエフェクトを生成
+	soundEffect = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Time/Warning.wav");
 }
 
 /*
@@ -50,10 +53,13 @@ WarningSprite::~WarningSprite()
 */
 void WarningSprite::UpdateGameObject(float _deltaTime)
 {
-
-	if (owner->GetWarningFlag())
+	// サウンドを再生する条件を判定
+	if (owner->GetWarningFlag() && isPlaySound)
 	{
+		// サウンドを再生
 		soundEffect->Play();
+		// 再生しない状態にする
+		isPlaySound = false;
 	}
 
 	// countが2以下かつownerのフラグがtrueの時
@@ -64,6 +70,12 @@ void WarningSprite::UpdateGameObject(float _deltaTime)
 	}
 	else if (fadeinCount >= 3)	// countが3以上になったらalpha値が0になるまでout
 	{
+		// サウンドが鳴っていたら
+		if (soundEffect->IsPlaying())
+		{
+			// サウンドを停止する
+			soundEffect->Stop();
+		}
 		// 最後のフェードアウト処理
 		LastFadeOutProcess();
 	}
@@ -110,15 +122,6 @@ void WarningSprite::LastFadeOutProcess()
 	{
 		// 値を引く
 		alpha -= FadeValue;
-	}
-	else // alpha値が0.0f以下の時
-	{
-		// サウンドが鳴っていたら
-		if (soundEffect->IsPlaying())
-		{
-			// サウンドを停止する
-			soundEffect->Stop();
-		}
 	}
 }
 

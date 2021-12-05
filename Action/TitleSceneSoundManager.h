@@ -1,9 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class MusicComponent;
 class SoundEffectComponent;
 
+/*
+@file TitleSceneSoundManager.h
+@brief タイトルシーンのサウンドを管理するクラス
+*/
 class TitleSceneSoundManager :
     public GameObject
 {

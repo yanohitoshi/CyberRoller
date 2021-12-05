@@ -9,6 +9,7 @@
 #include "FinalStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
+#include "FinalSceneSoundManager.h"
 
 /*
 @fn コンストラクタ
@@ -30,7 +31,7 @@ FinalStageScene::FinalStageScene()
 	changeCount = 0;
 	startScene = true;
 	isContinueFlag = false;
-	endFlag = false;
+	isEndFlag = false;
 	lightDownFlag = true;
 	state = SceneState::FINAL_STAGE_SCENE;
 
@@ -55,6 +56,8 @@ FinalStageScene::FinalStageScene()
 
 	// 生成の役割を終えたのでクリエイターの状態をdeadにし片づける
 	finalStageCreator->SetState(State::Dead);
+
+	new FinalSceneSoundManager(this);
 }
 
 /*
@@ -80,8 +83,10 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 		StartSceneLightUp();
 	}
 
+	isSceneClear = playerObject->GetClearFlag();
+
 	// 最終ステージではライトを落とさないためクリアカウントのみ数える
-	if (playerObject->GetClearFlag() == true)
+	if (isSceneClear)
 	{
 		// クリアカウント
 		++clearCount;
@@ -94,14 +99,14 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 	}
 
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら
-	if (CountDownFont::GetTimeOverFlag() == true && lightDownFlag == true)
+	if (CountDownFont::GetTimeOverFlag() && lightDownFlag)
 	{
 		// コンティニュー選択処理
 		ContinueSelect(_inputState);
 	}
 
 	// コンテニューかゲームオーバーが選択されたら
-	if (isContinueFlag == true || endFlag == true)
+	if (isContinueFlag || isEndFlag)
 	{
 		// コンティニュー選択時のライト遷移処理
 		LightTransitionAtContinue();
@@ -114,7 +119,7 @@ SceneState FinalStageScene::Update(const InputState& _inputState)
 		SceneStateChangeAtContinue(SceneState::FINAL_STAGE_SCENE);
 	}
 	// 一定時間操作がなかったらタイトルへ
-	if (playerObject->GetRestartFlag() == true)
+	if (playerObject->GetRestartFlag())
 	{
 		state = SceneState::TITLE_SCENE;
 	}

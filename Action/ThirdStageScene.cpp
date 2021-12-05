@@ -6,6 +6,7 @@
 #include "ThirdStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
+#include "ThirdSceneSoundManager.h"
 
 ThirdStageScene::ThirdStageScene()
 {
@@ -22,7 +23,7 @@ ThirdStageScene::ThirdStageScene()
 	changeCount = 0;
 	startScene = true;
 	isContinueFlag = false;
-	endFlag = false;
+	isEndFlag = false;
 	lightDownFlag = true;
 	state = SceneState::THIRD_SATGE_SCENE;
 
@@ -47,6 +48,8 @@ ThirdStageScene::ThirdStageScene()
 
 	// クリエイターの状態をdeadにし片づける
 	fourthStageCreator->SetState(State::Dead);
+
+	new ThirdSceneSoundManager(this);
 }
 
 ThirdStageScene::~ThirdStageScene()
@@ -79,7 +82,7 @@ SceneState ThirdStageScene::Update(const InputState& _inputState)
 	}
 
 	// コンテニューかゲームオーバーが選択されたら
-	if (isContinueFlag == true || endFlag == true)
+	if (isContinueFlag == true || isEndFlag == true)
 	{
 		// コンティニュー選択時のライト遷移処理
 		LightTransitionAtContinue();

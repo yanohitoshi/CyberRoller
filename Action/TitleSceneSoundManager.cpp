@@ -1,29 +1,54 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "TitleSceneSoundManager.h"
 #include "AudioResourceManager.h"
 #include "MusicComponent.h"
 #include "SoundEffectComponent.h"
 
+/*
+@fn コンストラクタ
+@param 親クラスのシーンクラスのポインタ
+*/
 TitleSceneSoundManager::TitleSceneSoundManager()
 	: GameObject(false,Tag::AUDIO)
 {
-	bgm = new MusicComponent(this, "Assets/Sound/Bgm/Cyber01.wav");
-	startSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button.wav");
+	// 変数初期化
 	isAvailableSelectInput = true;
 	isPlayDecisionSound = false;
+
+	// BGMを生成
+	bgm = new MusicComponent(this, "Assets/Sound/Bgm/Title/Title.wav");
+
+	// サウンドエフェクトを生成
+	startSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button.wav");
+
+	// 再生する
 	bgm->Play();
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 TitleSceneSoundManager::~TitleSceneSoundManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void TitleSceneSoundManager::UpdateGameObject(float _deltaTime)
 {
-	if (!bgm->IsPlaying())
-	{
-	}
 }
 
+/*
+@fn 入力を引数で受け取る更新関数
+@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 入力情報
+*/
 void TitleSceneSoundManager::GameObjectInput(const InputState& _keyState)
 {
 	// シーン決定ボタンが使用可能か
@@ -52,7 +77,7 @@ void TitleSceneSoundManager::GameObjectInput(const InputState& _keyState)
 			_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == Pressed ||
 			leftTrigger == 1.0f || rightTrigger == 1.0f;
 
-		// 入力されていたら
+		// 入力があったら
 		if (isPushDecisionSceneButton)
 		{
 			// サウンドを鳴らす
@@ -66,8 +91,10 @@ void TitleSceneSoundManager::GameObjectInput(const InputState& _keyState)
 		}
 	}
 
+	// 入力された状態の時
 	if (isPushDecisionSceneButton)
 	{
+		// 再生中かを更新
 		isPlayDecisionSound = startSceneSound->IsPlaying();
 	}
 }

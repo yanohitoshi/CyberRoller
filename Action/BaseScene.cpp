@@ -63,7 +63,7 @@ void BaseScene::ContinueSelect(const InputState& state)
 	{
 		lightDownFlag = false;
 		// ゲームオーバー状態にする
-		endFlag = true;
+		isEndFlag = true;
 	}
 }
 
@@ -85,7 +85,7 @@ void BaseScene::LightTransitionAtContinue()
 			light += ChangeLightSpeed;
 			RENDERING_OBJECT_MANAGER->SetAmbientLight(light);
 		}
-		else if (endFlag == true)
+		else if (isEndFlag == true)
 		{
 			// ライトダウン
 			light -= ChangeLightSpeed;
@@ -109,7 +109,7 @@ void BaseScene::SceneStateChangeAtContinue(SceneState _nowScene)
 		Game::SetContinueFlag(true);
 		state = _nowScene;
 	}
-	else if (endFlag == true)
+	else if (isEndFlag == true)
 	{
 		state = SceneState::RESULT_SCENE;
 	}

@@ -14,7 +14,7 @@ EnemyObjectStateDead::EnemyObjectStateDead(EnemyObjectBase* _owner)
 	, BlowAwayPower(1.2f)
 	, MaxSpeed(2000.0f)
 {
-	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion.wav");
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Enemy/Explosion.wav");
 }
 
 /*

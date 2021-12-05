@@ -7,6 +7,7 @@
 #include "InputSystem.h"
 #include "TutorialStageUI.h"
 #include "TutorialStageCreator.h"
+#include "TutorialSceneSoundManager.h"
 
 /*
 @fn コンストラクタ
@@ -43,6 +44,8 @@ TutorialStageScene::TutorialStageScene()
 
 	// クリエイターの状態をdeadにし片づける
 	tutorialStageCreator->SetState(State::Dead);
+
+	new TutorialSceneSoundManager(this);
 }
 
 /*

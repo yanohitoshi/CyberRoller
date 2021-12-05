@@ -60,7 +60,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 	new CrystalEffectManager(this, CrystalColor::BLUE, lastMoveWallBlock);
 	new CrystalEffectManager(this, CrystalColor::GREEN, lastMoveWallBlock);
 
-	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Clear/stageClear2.wav");
+	soundEffectComponent = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Clear/finalStageClear.wav");
 }
 
 /*

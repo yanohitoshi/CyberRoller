@@ -29,6 +29,8 @@ StageSelectScene::StageSelectScene()
 	isAnalogStickSelect = false;
 	selectCount = 0;
 	isSceneSelect = false;
+
+	new StageSelectSceneSoundManager();
 }
 
 StageSelectScene::~StageSelectScene()

@@ -1,7 +1,14 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "StageSelectSceneSoundManager.h"
 #include "SoundEffectComponent.h"
 #include "MusicComponent.h"
 
+/*
+@fn コンストラクタ
+@param 親クラスのシーンクラスのポインタ
+*/
 StageSelectSceneSoundManager::StageSelectSceneSoundManager()
 	: GameObject(false, Tag::AUDIO)
 	, InputDeadSpace(0.3f)
@@ -12,19 +19,43 @@ StageSelectSceneSoundManager::StageSelectSceneSoundManager()
 	isPlayDecisionSound = false;
 	isPushDecisionSceneButton = false;
 	isAvailableSelectInput = true;
-	bgm = new MusicComponent(this, "Assets/Sound/Bgm/Cyber02.wav");
-	changeSelectSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button2.wav");
+
+	// BGMを生成
+	bgm = new MusicComponent(this, "Assets/Sound/Bgm/StageSelect/StageSelect.wav");
+
+	// サウンドエフェクトを生成
+	changeSelectSceneSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/Cursor.wav");
 	sceneDecisionSound = new SoundEffectComponent(this, "Assets/Sound/SoundEffect/Button/button.wav");
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 StageSelectSceneSoundManager::~StageSelectSceneSoundManager()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void StageSelectSceneSoundManager::UpdateGameObject(float _deltaTime)
 {
+	// 再生されていなかったら
+	if (!bgm->IsPlaying())
+	{
+		// 再生する
+		bgm->Play();
+	}
 }
 
+/*
+@fn 入力を引数で受け取る更新関数
+@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 入力情報
+*/
 void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 {
 	// シーン決定ボタンが使用可能か
@@ -44,8 +75,10 @@ void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 		}
 	}
 
+	// 決定ボタンが押されていたら
 	if (isPushDecisionSceneButton)
 	{
+		// 再生されているかを更新
 		isPlayDecisionSound = sceneDecisionSound->IsPlaying();
 	}
 
@@ -105,5 +138,4 @@ void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 		// サウンドを鳴らす
 		changeSelectSceneSound->Play();
 	}
-
 }

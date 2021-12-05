@@ -8,7 +8,7 @@
 ExplosionObjectStateExplosion::ExplosionObjectStateExplosion(ExplosionObjectBase* _owner)
 	: ExplosionTime(10)
 {
-	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion2.wav");
+	soundEffectComponent = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Explosion/Explosion.wav");
 }
 
 /*

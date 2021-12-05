@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "PlayerObjectStateJumpAttackEnd.h"
 #include "SoundEffectComponent.h"
+
 /*
 @fn コンストラクタ
 */
@@ -11,7 +12,7 @@ PlayerObjectStateJumpAttackEnd::PlayerObjectStateJumpAttackEnd(PlayerObject* _ow
 	, SuccessJumpAccelPower(80.0f)
 	, JumpAttackSuccessFirstPower(1500.0f)
 {
-	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Attack/attack.wav");
+	soundEffect = new SoundEffectComponent(_owner, "Assets/Sound/SoundEffect/Player/Attack/attack2.wav");
 }
 
 /*

@@ -683,6 +683,24 @@
     <ClCompile Include="StageSelectSceneSoundManager.cpp">
       <Filter>Scene\SoundManager</Filter>
     </ClCompile>
+    <ClCompile Include="FinalSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialSceneSoundManager.cpp">
+      <Filter>Scene\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1369,10 +1387,28 @@
     <ClInclude Include="TitleSceneSoundManager.h">
       <Filter>Scene\SoundManager</Filter>
     </ClInclude>
+    <ClInclude Include="StageSelectSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
     <ClInclude Include="FirstSceneSoundManager.h">
       <Filter>Scene\SoundManager</Filter>
     </ClInclude>
-    <ClInclude Include="StageSelectSceneSoundManager.h">
+    <ClInclude Include="FinalSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdSceneSoundManager.h">
+      <Filter>Scene\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialSceneSoundManager.h">
       <Filter>Scene\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>

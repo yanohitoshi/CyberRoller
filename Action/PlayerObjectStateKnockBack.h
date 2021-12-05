@@ -16,7 +16,7 @@ public:
 	/*
 	@fn コンストラクタ
 	*/
-	PlayerObjectStateKnockBack();
+	PlayerObjectStateKnockBack(PlayerObject* _owner);
 
 	/*
 	@fn デストラクタ

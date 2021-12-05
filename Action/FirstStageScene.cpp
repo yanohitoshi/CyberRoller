@@ -31,7 +31,7 @@ FirstStageScene::FirstStageScene()
 	changeCount = 0;
 	startScene = true;
 	isContinueFlag = false;
-	endFlag = false;
+	isEndFlag = false;
 	lightDownFlag = true;
 	state = SceneState::FIRST_SATGE_SCENE;
 
@@ -93,15 +93,17 @@ SceneState FirstStageScene::Update(const InputState& _inputState)
 		state = SceneState::SECOND_SATGE_SCENE;
 	}
 
+	isTimeOver = CountDownFont::GetTimeOverFlag();
+
 	// タイムオーバー状態かつライトを一定まで落とす状態だったら
-	if (CountDownFont::GetTimeOverFlag() == true && lightDownFlag == true)
+	if (isTimeOver && lightDownFlag)
 	{
 		// コンティニュー選択処理
 		ContinueSelect(_inputState);
 	}
 
 	// コンテニューかゲームオーバーが選択されたら
-	if (isContinueFlag == true || endFlag == true)
+	if (isContinueFlag || isEndFlag)
 	{
 		// コンティニュー選択時のライト遷移処理
 		LightTransitionAtContinue();
@@ -115,7 +117,7 @@ SceneState FirstStageScene::Update(const InputState& _inputState)
 	}
 
 	// 一定時間操作がなかったらタイトルへ
-	if (playerObject->GetRestartFlag() == true)
+	if (playerObject->GetRestartFlag())
 	{
 		state = SceneState::TITLE_SCENE;
 	}
