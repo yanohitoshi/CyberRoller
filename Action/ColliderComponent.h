@@ -85,8 +85,10 @@ public:
 
 private:
 
-	bool isTrigger;			//実体を伴う当たり判定をするかどうか
-	int	 collisionOrder;	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない)
+	//実体を伴う当たり判定をするかどうか
+	bool isTrigger;
+	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない)
+	int	 collisionOrder;
 
 protected:
 
@@ -102,4 +104,3 @@ public: // ゲッターセッター
 	int GetCollisionOrder() const { return collisionOrder; }
 
 };
-

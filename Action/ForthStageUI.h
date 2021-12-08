@@ -1,9 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class CollectionObject;
 class CollectionUI;
 
+/*
+@file ForthStageUI.h
+@brief ForthStageのUI表示を行う
+*/
 class ForthStageUI :
     public GameObject
 {
@@ -40,6 +48,7 @@ private:
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 
+    // プレイヤーのポインタ
     PlayerObject* playerObject;
 
     // 各収集物のUIクラスのポインタ

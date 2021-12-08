@@ -108,7 +108,7 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクト生成
-		ActiveEffectProcess(_deltaTime);
+		ActiveEffect(_deltaTime);
 		break;
 	}
 }
@@ -117,7 +117,7 @@ void CrystalEffectManager::UpdateGameObject(float _deltaTime)
 @fn エフェクトがアクティブ時の処理関数
 @param	_deltaTime 前のフレームでかかった時間
 */
-void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
+void CrystalEffectManager::ActiveEffect(float _deltaTime)
 {
 	// 発生場所の回転処理
 	RotationProcess(_deltaTime);
@@ -127,14 +127,14 @@ void CrystalEffectManager::ActiveEffectProcess(float _deltaTime)
 
 	if (activeFrameCount % EightFrequency == 0)
 	{
-		GenerateEffectProcess();
+		GenerateEffect();
 	}
 }
 
 /*
 @fn エフェクト生産処理関数
 */
-void CrystalEffectManager::GenerateEffectProcess()
+void CrystalEffectManager::GenerateEffect()
 {
 	// 速度を一時保存する変数
 	Vector3 vel;

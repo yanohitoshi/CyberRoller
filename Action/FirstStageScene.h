@@ -12,6 +12,7 @@ class FirstStageScene :
     public BaseScene
 {
 public:
+
 	/*
 	@fn コンストラクタ
 	@brief  Sceneの生成を行う

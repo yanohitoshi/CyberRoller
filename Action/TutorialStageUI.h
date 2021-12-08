@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "SDL_TTF.h"
 
+// クラスの前方宣言
 class PlayerObject;
 
 /*
@@ -46,5 +47,3 @@ private:
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 };
-
-

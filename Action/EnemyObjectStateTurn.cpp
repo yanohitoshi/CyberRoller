@@ -22,6 +22,7 @@ EnemyObjectStateTurn::~EnemyObjectStateTurn()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return EnemyState 次のステータス
 */
 EnemyState EnemyObjectStateTurn::Update(EnemyObjectBase* _owner, float _deltaTime)
 {

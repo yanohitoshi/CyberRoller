@@ -70,10 +70,10 @@ public:
 
 protected:
 
-    //移動先position
+    // 移動先position
     Vector3 tmpMovePos;
     Vector3 tmpPosition;
-    //追従先のオブジェクト座標
+    // 追従先のオブジェクト座標
     Vector3 lerpObjectPos;
     // view行列
     Matrix4 view;
@@ -81,9 +81,12 @@ protected:
     PlayerObject* playerObject;
     // 線形保管時にデルタタイムをかけるとき用の補正定数
     const float DeltaCorrection;
-    //カメラ回転計算用のヨーとピッチ
+    // カメラ回転計算用のヨーとピッチ
     float yaw;
     float pitch;
+
+    // 画角を変更するかどうか
+    bool isChangeMode;
 
     // 間隔
     Vector3 offSetPosition;
@@ -96,7 +99,7 @@ protected:
     // 全stateが格納されるマップ
     std::unordered_map<CameraState, CameraObjectStateBase*> statePoolMap;
 
-public: //ゲッターセッター
+public: // ゲッターセッター
     
     /*
     @brief カメラの前方ベクトルを得るためのgetter
@@ -123,6 +126,12 @@ public: //ゲッターセッター
     Vector3 GetOffsetPosition() const { return offSetPosition; }
 
     /*
+    @brief 追従するオブジェクトのとの間隔を取得
+    @return 間隔
+    */
+    bool GetIsChangeMode() const { return isChangeMode; }
+
+    /*
     @brief	注視するオブジェクトのポジションをセット
     @param 見る対象物のポジション
     */
@@ -138,7 +147,7 @@ public: //ゲッターセッター
     @brief	次のステータスをセット
     @param _nextState 次のステータス
     */
-    void SetNextState(CameraState _nextState) { nextState = _nextState; }
+    void SetIsChangeMode(bool _isChangeMode) { isChangeMode = _isChangeMode; }
 
     /*
     @brief	前方ベクトルをセット

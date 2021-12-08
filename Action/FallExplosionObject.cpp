@@ -15,6 +15,12 @@
 #include "ExplosionObjectEffectManager.h"
 #include "ExplosionArea.h"
 
+/*
+@fn コンストラクタ
+@param	親クラスのポインタ
+@param	ポジション
+@param	オブジェクト判別用tag
+*/
 FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector3& _pos, const Tag _objectTag)
 	: ExplosionObjectBase(_objectTag)
 {
@@ -62,6 +68,10 @@ FallExplosionObject::FallExplosionObject(FallExplosionArea* _owner, const Vector
 	new ExplosionArea(Tag::EXPLOSION_AREA, this);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 FallExplosionObject::~FallExplosionObject()
 {
 	// Mapの後片付け
@@ -72,6 +82,11 @@ FallExplosionObject::~FallExplosionObject()
 	ClearStatePoolMap();
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void FallExplosionObject::UpdateGameObject(float _deltaTime)
 {
 	// オーナーの落下開始フラグがtrueだったら
@@ -119,6 +134,11 @@ void FallExplosionObject::UpdateGameObject(float _deltaTime)
 	}
 }
 
+/*
+@fn 当たり判定が行われHitした際に呼ばれる関数
+@param	当たったGameObject
+@param	当たり判定タグ
+*/
 void FallExplosionObject::OnCollision(const GameObject& _hitObject, const PhysicsTag _physicsTag)
 {
 	// 触れたら爆発するオブジェクトか判定

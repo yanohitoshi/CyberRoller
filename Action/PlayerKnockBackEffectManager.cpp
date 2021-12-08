@@ -12,7 +12,7 @@
 PlayerKnockBackEffectManager::PlayerKnockBackEffectManager(PlayerObject* _owner)
 	: GameObject(false, Tag::PARTICLE)
 	, PositionOffset(150.0f)
-	, DistanceOffset(30.0f)
+	, KnockBackOffset(30.0f)
 	, FiveFrequency(5)
 {
 	// メンバー変数の初期化	
@@ -60,7 +60,7 @@ void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -68,19 +68,19 @@ void PlayerKnockBackEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void PlayerKnockBackEffectManager::ActiveEffectProcess()
+void PlayerKnockBackEffectManager::ActiveEffect()
 {
 	++effectFrameCount;
 	if (effectFrameCount % FiveFrequency == 0)
 	{
-		GenerateEffectProcess();
+		GenerateEffect();
 	}
 }
 
 /*
 @fn エフェクト生産処理関数
 */
-void PlayerKnockBackEffectManager::GenerateEffectProcess()
+void PlayerKnockBackEffectManager::GenerateEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -90,7 +90,7 @@ void PlayerKnockBackEffectManager::GenerateEffectProcess()
 	// 正規化
 	distance.Normalize();
 	// 速度を正規化したものに定数を掛ける
-	distance *= DistanceOffset;
+	distance *= KnockBackOffset;
 	//particleを生成
 	new PlayerKnockBackEffect(owner, position, distance);
 }

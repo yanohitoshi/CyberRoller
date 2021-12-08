@@ -2,8 +2,8 @@
 #include "EnemyObjectStateBase.h"
 
 /*
-@file TrackingEnemyStateTracking.h
-@brief 追跡する敵オブジェクトの追跡状態を管理するクラス
+@file EnemyObjectStateTracking.h
+@brief 敵オブジェクトの追跡状態を管理するクラス
 */
 class EnemyObjectStateTracking :
     public EnemyObjectStateBase
@@ -25,6 +25,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return EnemyState 次のステータス
 	*/
 	EnemyState Update(EnemyObjectBase* _owner, float _deltaTime)override;
 
@@ -36,6 +37,13 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
+
+	/*
+	@brief	追跡中の移動処理
+	@param	_owner 親クラスのポインタ
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	void TrackingMove(EnemyObjectBase* _owner, float _deltaTime);
 
 	// 追跡方向のベクトルの
 	Vector3 trackingRotationVec;

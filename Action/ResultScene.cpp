@@ -24,6 +24,9 @@ ResultScene::ResultScene()
 	dir.diffuseColor = Vector3(0.36f, 0.44f, 0.5f);
 	dir.specColor = Vector3(1.0f, 1.0f, 1.0f);
 
+	// 変数初期化
+	isSceneEnd = false;
+
 	// シーンステータス初期化
 	state = SceneState::RESULT_SCENE;
 
@@ -44,9 +47,8 @@ ResultScene::ResultScene()
 	// クリエイターの状態をdeadにし片づける
 	resultSceneCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	resultSceneSoundManager = new ResultSceneSoundManager();
-
-	isSceneEnd = false;
 }
 
 /*

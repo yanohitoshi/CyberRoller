@@ -3,16 +3,29 @@
 //-----------------------------------------------------------------------------
 #include "EnhancedEnemyStateIdle.h"
 
+/*
+@fn コンストラクタ
+*/
 EnhancedEnemyStateIdle::EnhancedEnemyStateIdle()
 	: StayTime(40)
 {
 }
 
+/*
+@fn デストラクタ
+*/
 EnhancedEnemyStateIdle::~EnhancedEnemyStateIdle()
 {
 
 }
 
+/*
+@fn アップデート
+@brief	stateに応じてアップデートを行う
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+@return EnemyState 次のステータス
+*/
 EnemyState EnhancedEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
 	++frameCount;
@@ -36,6 +49,11 @@ EnemyState EnhancedEnemyStateIdle::Update(EnemyObjectBase* _owner, float _deltaT
 	return state;
 }
 
+/*
+@fn state変更時の初期化
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void EnhancedEnemyStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime)
 {
 	// ownerからownerのskeletalMeshComponentのポインタをもらう

@@ -23,11 +23,9 @@ public:
 
 	/*
 	@fn コンストラクタ
+	@param	親クラスのポインタ
 	@param	ポジション
 	@param	オブジェクト判別用tag
-	@param	移動速度
-	@param	追跡するオブジェクトのポインタ
-	@param	追跡エリアの値
 	*/
 	FallExplosionObject(FallExplosionArea* _owner, const Vector3& _pos, const Tag _objectTag);
 

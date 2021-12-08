@@ -46,6 +46,7 @@ private:
 
 	// Meshを管理するクラス
 	MusicComponent* bgm;
+	// SoundEffectComponentクラスのポインタ
 	SoundEffectComponent* startSceneSound;
 	// 決定ボタンが押されたかどうか
 	bool isPushDecisionSceneButton;
@@ -59,7 +60,7 @@ public:
 	
 	/*
 	@brief	stage決定時のサウンドがなり終わったかどうかを取得
-	@return	isEndDecisionSound stage決定時のサウンドの再生が終わったかどうか
+	@return	isPlayDecisionSound stage決定時のサウンドの再生が終わったかどうか
 	*/
 	bool GetIsPlayDecisionSound() { return isPlayDecisionSound; }
 };

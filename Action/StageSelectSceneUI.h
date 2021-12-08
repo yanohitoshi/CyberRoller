@@ -1,4 +1,7 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 #include <unordered_map>
 
@@ -9,6 +12,10 @@ class StageSelectIconSprite;
 class StageUnSelectIcon;
 class StageSelectSprite;
 
+/*
+@file StageSelectSceneUI.h
+@brief StageSelectSceneのUI表示を行う
+*/
 class StageSelectSceneUI :
     public GameObject
 {
@@ -78,6 +85,7 @@ private:
     // スカイボックスクラスのポインタ
     SkyBoxObject* skyBox;
 
+    // オーナーのポインタ
     StageSelectScene* owner;
 
     /*

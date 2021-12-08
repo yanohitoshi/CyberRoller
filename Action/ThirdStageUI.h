@@ -1,9 +1,17 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class CollectionObject;
 class CollectionUI;
 
+/*
+@file ThirdStageUI.h
+@brief ThirdStageのUI表示を行う
+*/
 class ThirdStageUI :
     public GameObject
 {
@@ -32,7 +40,6 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
 
-
 private:
 
     // シーンの時間制限の値
@@ -40,6 +47,7 @@ private:
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 
+    // プレイヤーのポインタ
     PlayerObject* playerObject;
 
     // 各収集物のUIクラスのポインタ

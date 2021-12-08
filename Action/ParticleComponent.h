@@ -131,16 +131,19 @@ public: //ゲッターセッター
 	bool GetVisible() const { return visible; }
 
 	/*
+	@fn 描画順をセット
 	@param _drawOrder 描画順
 	*/
 	void SetDrawOrder(int _drawOrder) { drawOrder = _drawOrder; }
 
 	/*
+	@fn 描画順のgetter
 	@return 描画順
 	*/
 	int GetDrawOrder() const { return drawOrder; }
 
 	/*
+	@fn 親オブジェクトの座標と描画位置の差をセット
 	@param _offset 親オブジェクトの座標と描画位置の差
 	*/
 	void SetOffSet(Vector3 _offset) { offset = _offset; };

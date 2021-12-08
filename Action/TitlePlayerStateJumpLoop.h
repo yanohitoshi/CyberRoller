@@ -44,10 +44,11 @@ private:
 
 	// 作用するジャンプ力
 	float jumpPower;
+	// ジャンプ時間を数えるカウント
 	int jumpFrameCount;
 	// 接地判定を取る座標値定数
 	const float OnGroundCoordinate;
-
+	// タイトル画面でのジャンプアタックプレイヤークラスのポインタ
 	TitleJumpAttackPlayerObject* titleJumpAttackPlayerObject;
 };
 

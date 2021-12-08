@@ -20,6 +20,7 @@ public:
 
     /*
     @brief	コンストラクタ
+    @param 何番目の収集物かのタグ
     */
     CollectedSprite(CollectionTag collectionTag);
 

@@ -37,7 +37,8 @@ public:
 
 private:
 
+	// サウンドマネージャークラスのポインタ
 	ResultSceneSoundManager* resultSceneSoundManager;
-
+	// シーンが終了するかどうか
 	bool isSceneEnd;
 };

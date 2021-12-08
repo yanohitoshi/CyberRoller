@@ -151,6 +151,11 @@ private:
 	const int MaxLayerNumber;
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
+
+	// 画角変更ポイントのAABB定数
+	const AABB CameraChangeAabb;
+	// 画角変更ポイントが持つプレイヤーとの間隔定数
+	const Vector3 CameraChangeOffset;
 	
 	// 第2ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;

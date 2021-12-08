@@ -195,7 +195,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FallExplosionObjectStateRespawn.cpp" />
     <ClCompile Include="FinalSceneSoundManager.cpp" />
     <ClCompile Include="FirstSceneSoundManager.cpp" />
-    <ClCompile Include="ForthStageCreator.cpp" />
+    <ClCompile Include="FourthStageCreator.cpp" />
     <ClCompile Include="FourthSceneSoundManager.cpp" />
     <ClCompile Include="FourthStageScene.cpp" />
     <ClCompile Include="ForthStageUI.cpp" />
@@ -447,7 +447,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FallExplosionObjectStateRespawn.h" />
     <ClInclude Include="FinalSceneSoundManager.h" />
     <ClInclude Include="FirstSceneSoundManager.h" />
-    <ClInclude Include="ForthStageCreator.h" />
+    <ClInclude Include="FourthStageCreator.h" />
     <ClInclude Include="FourthSceneSoundManager.h" />
     <ClInclude Include="FourthStageScene.h" />
     <ClInclude Include="ForthStageUI.h" />

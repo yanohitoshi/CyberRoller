@@ -77,4 +77,3 @@ public: // ゲッターセッター
 	PhysicsTag GetBoxTag() const{ return tag; }
 
 };
-

@@ -214,6 +214,16 @@ private:
 
 	// ライトのZ軸ポジション
 	const float LightPointPositionZ;
+
+	// 1つ目の画角変更ポイントのAABB定数
+	const AABB CameraChangeAabb;
+	// 1つ目の画角変更ポイントが持つプレイヤーとの間隔定数
+	const Vector3 CameraChangeOffset;
+
+	// 2つ目の画角変更ポイントのAABB定数
+	const AABB CameraChangeFinalAabb;
+	// 2つ目の画角変更ポイントが持つプレイヤーとの間隔定数
+	const Vector3 CameraChangeFinalOffset;
 	
 	// 最終ステージデータ
 	std::vector<std::vector<int>> cameraDirectingData;

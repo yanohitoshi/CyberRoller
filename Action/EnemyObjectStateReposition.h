@@ -1,9 +1,12 @@
 #pragma once
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
 /*
-@file TrackingEnemyStateReposition.h
-@brief 追跡する敵オブジェクトの追跡場所から元の位置に戻るまでを管理するクラス
+@file EnemyObjectStateReposition.h
+@brief 敵オブジェクトの追跡場所から元の位置に戻るまでを管理するクラス
 */
 class EnemyObjectStateReposition :
     public EnemyObjectStateBase
@@ -25,6 +28,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return EnemyState 次のステータス
 	*/
 	EnemyState Update(EnemyObjectBase* _owner, float _deltaTime)override;
 

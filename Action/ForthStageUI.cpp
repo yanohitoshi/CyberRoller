@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "ForthStageUI.h"
 #include "RenderingObjectManager.h"
 #include "CountDownFont.h"
@@ -12,6 +15,15 @@
 #include "CollectionUI.h"
 #include "CollectionObject.h"
 
+
+/*
+@fn コンストラクタ
+@brief  objectの生成を行う
+@param	_playerObject プレイヤークラスのポインタ
+@param	_first 1つ目の収集物オブジェクトのポインタ
+@param	_second 2つ目の収集物オブジェクトのポインタ
+@param	_third 3つ目の収集物オブジェクトのポインタ
+*/
 ForthStageUI::ForthStageUI(PlayerObject* _playerObject, CollectionObject* _first, CollectionObject* _second, CollectionObject* _third)
 	: GameObject(false, Tag::UI)
 	, SceneTime(300)
@@ -45,10 +57,19 @@ ForthStageUI::ForthStageUI(PlayerObject* _playerObject, CollectionObject* _first
 	isChangePosition = false;
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ForthStageUI::~ForthStageUI()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void ForthStageUI::UpdateGameObject(float _deltaTime)
 {
 	// シーンをクリアしたら

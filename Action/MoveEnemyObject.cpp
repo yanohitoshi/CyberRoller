@@ -146,7 +146,6 @@ void MoveEnemyObject::UpdateGameObject(float _deltaTime)
 		nowState = nextState;
 	}
 
-
 	isAttack = false;
 }
 

@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "StageSelectSceneUI.h"
 #include "StageSelectScene.h"
 #include "StageSelectIconSprite.h"
@@ -202,7 +205,6 @@ void StageSelectSceneUI::SetFirstStageSprite()
 	selectSpriteMap[THIRD_SATGE_SCENE]->SetIsVisible(false);
 	selectSpriteMap[FOURTH_SATGE_SCENE]->SetIsVisible(false);
 	selectSpriteMap[FINAL_STAGE_SCENE]->SetIsVisible(false);
-
 }
 
 /*

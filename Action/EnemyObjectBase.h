@@ -50,7 +50,6 @@ public:
 	@param	ポジション
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
-	@param	追跡対象
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag);
 
@@ -60,9 +59,7 @@ public:
 	@param	ポジション
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
-	@param	移動速度
-	@param	移動方向
-	@param	移動距離
+	@param	移動する敵のデータ構造体
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, MoveEnemyData _moveEnemyData);
 
@@ -73,7 +70,6 @@ public:
 	@param	再利用するかフラグ
 	@param	オブジェクト判別用tag
 	@param	移動速度
-	@param	追跡対象
 	*/
 	EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed);
 
@@ -383,4 +379,3 @@ public:// ゲッターセッター
 	*/
 	void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
 };
-

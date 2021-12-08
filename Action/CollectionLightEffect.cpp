@@ -97,7 +97,6 @@ void CollectionLightEffect::UpdateGameObject(float _deltaTime)
 		dir = direction;
 		dir.x += sinV;
 		dir.y += sinV;
-		//dir.Normalize();
 		velocity = dir * speed;
 
 		SetPosition(position + velocity * _deltaTime);

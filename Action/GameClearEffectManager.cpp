@@ -68,7 +68,7 @@ void GameClearEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 
 		break;
 
@@ -79,7 +79,7 @@ void GameClearEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void GameClearEffectManager::ActiveEffectProcess()
+void GameClearEffectManager::ActiveEffect()
 {
 	// フレームカウントを数える
 	++frameCount;
@@ -90,7 +90,7 @@ void GameClearEffectManager::ActiveEffectProcess()
 	if (frameCount % GenerateFrequency == 0 && generateCount <= MaxGenerateCount)
 	{
 		// エフェクトの生産処理
-		GenerateEffectProcess();
+		GenerateEffect();
 
 		// 1ループ終わってからカウント追加
 		++generateCount;
@@ -100,7 +100,7 @@ void GameClearEffectManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void GameClearEffectManager::GenerateEffectProcess()
+void GameClearEffectManager::GenerateEffect()
 {
 	// 10個のエフェクトを生成
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)

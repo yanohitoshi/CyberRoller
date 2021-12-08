@@ -46,6 +46,7 @@ private:
 
 	// Meshを管理するクラス
 	MusicComponent* bgm;
+	// SoundEffectComponentクラスのポインタ
 	SoundEffectComponent* startSceneSound;
 	// 決定ボタンが押されたかどうか
 	bool isPushDecisionSceneButton;

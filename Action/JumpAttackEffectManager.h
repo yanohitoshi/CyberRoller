@@ -38,12 +38,12 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
 
     /*
     @fn エフェクト生産処理関数
     */
-    void GenerateEffectProcess();
+    void GenerateEffect();
 
     // 親のGameObject保存用変数
     GameObject* owner;

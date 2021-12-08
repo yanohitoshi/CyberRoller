@@ -25,6 +25,10 @@ ExplosionArea::ExplosionArea(const Tag& _objectTag, ExplosionObjectBase* _owner)
 	sphereCollider->SetObjectSphere(sphere);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 ExplosionArea::~ExplosionArea()
 {
 }

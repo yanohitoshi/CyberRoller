@@ -64,4 +64,3 @@ private:
 	// ZŽ²‚ÌŠÔŠu
 	const float OffsetZ;
 };
-

@@ -68,7 +68,7 @@ void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -76,7 +76,7 @@ void ExplosionObjectEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void ExplosionObjectEffectManager::ActiveEffectProcess()
+void ExplosionObjectEffectManager::ActiveEffect()
 {
 	
 	if (generateExplosionEffectsFlag)

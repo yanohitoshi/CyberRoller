@@ -47,12 +47,13 @@ private:
 	// 親となるクラスのポインタ
 	EnemyObjectBase* ownerEnemy;
 
-	// 攻撃エリアのサイズ
-	const float AttackArea;
+	// 無効化状態の時間を数えるカウント
 	int disableCount;
 	// 攻撃判定エリアが有効かどうか
 	bool isEnable;
+
+	// 攻撃エリアのサイズ
+	const float AttackArea;
 	// 有効に切り替える時間
 	const int EnableTime;
 };
-

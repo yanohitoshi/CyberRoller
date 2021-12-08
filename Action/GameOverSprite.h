@@ -46,6 +46,4 @@ private:
     const int DrawCount;
     // フレームカウント
     int frameCount;
-
 };
-

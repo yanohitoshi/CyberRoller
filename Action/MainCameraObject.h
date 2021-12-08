@@ -74,8 +74,6 @@ public:
 	*/
 	Vector3 GetlerpObjectPos() { return lerpObjectPos; }
 
-
-
 private:
 
 	/*

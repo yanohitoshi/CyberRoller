@@ -23,6 +23,9 @@ TitleScene::TitleScene()
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
+	// 変数初期化
+	isGameStart = false;
+
 	// シーンステータス初期化
 	state = SceneState::TITLE_SCENE;
 
@@ -41,9 +44,9 @@ TitleScene::TitleScene()
 	// クリエイターの状態をdeadにし片づける
 	titleStageCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	titleSceneSoundManager = new TitleSceneSoundManager();
 
-	isGameStart = false;
 }
 
 /*

@@ -38,8 +38,20 @@ public:
 
 private:
 
+	/*
+	@fn 右が選択されたときの処理
+	*/
 	void SelectRight();
+	
+	/*
+	@fn 左が選択されたときの処理
+	*/
 	void SelectLeft();
+
+	/*
+	@fn アナログスティックで選択されたときの処理
+	@param アナログスティックの傾き角度
+	*/
 	void SelectAnalogStick(float _axis);
 
 	// アナログスティックによる選択シーン変更が可能かどうか
@@ -61,6 +73,10 @@ private:
 
 public:
 
+	/*
+	@fn 選択されているステータスのgetter
+	@return 選択されているステータス
+	*/
 	SceneState GetSelectState() const { return selectState; }
 
 };

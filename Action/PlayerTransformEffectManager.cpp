@@ -61,7 +61,7 @@ void PlayerTransformEffectManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		ActiveEffectProcess();
+		ActiveEffect();
 
 		break;
 	}
@@ -70,7 +70,7 @@ void PlayerTransformEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void PlayerTransformEffectManager::ActiveEffectProcess()
+void PlayerTransformEffectManager::ActiveEffect()
 {
 
 	// 生成フラグがtrueだったら
@@ -80,7 +80,7 @@ void PlayerTransformEffectManager::ActiveEffectProcess()
 		if (frameCount % 2 == 0)
 		{
 			// エフェクト生産関数
-			GenerateEffectProcess();
+			GenerateEffect();
 		}
 
 		if (effectCount >= 3)
@@ -97,7 +97,7 @@ void PlayerTransformEffectManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void PlayerTransformEffectManager::GenerateEffectProcess()
+void PlayerTransformEffectManager::GenerateEffect()
 {
 	
 	// ownerのポジションを得る

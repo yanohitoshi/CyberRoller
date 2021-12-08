@@ -69,7 +69,7 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -77,7 +77,7 @@ void BreakBlockObjectEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void BreakBlockObjectEffectManager::ActiveEffectProcess()
+void BreakBlockObjectEffectManager::ActiveEffect()
 {
 	// まだ生成されていなかったら
 	if (generateEffectsFlag)
@@ -85,9 +85,9 @@ void BreakBlockObjectEffectManager::ActiveEffectProcess()
 		// ポジション取得
 		effectPosition = owner->GetPosition();
 		// 埃エフェクト生成
-		GenerateDustEffectProcess();
+		GenerateDustEffect();
 		// 破片エフェクト生成
-		GenerateDebrisEffectProcess();
+		GenerateDebrisEffect();
 		// 生成フラグをfalseに変更
 		generateEffectsFlag = false;
 	}
@@ -96,7 +96,7 @@ void BreakBlockObjectEffectManager::ActiveEffectProcess()
 /*
 @fn 土埃エフェクト生産処理関数
 */
-void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
+void BreakBlockObjectEffectManager::GenerateDustEffect()
 {
 	for (int dustEfectCount = 0; dustEfectCount < DustMaxEffect; dustEfectCount++)
 	{
@@ -126,7 +126,7 @@ void BreakBlockObjectEffectManager::GenerateDustEffectProcess()
 /*
 @fn 破片エフェクト生産処理関数
 */
-void BreakBlockObjectEffectManager::GenerateDebrisEffectProcess()
+void BreakBlockObjectEffectManager::GenerateDebrisEffect()
 {
 	for (int i = 0; i < DebrisMaxEffect; i++)
 	{

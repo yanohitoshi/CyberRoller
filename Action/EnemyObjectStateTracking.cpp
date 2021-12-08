@@ -25,6 +25,7 @@ EnemyObjectStateTracking::~EnemyObjectStateTracking()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return EnemyState 次のステータス
 */
 EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
@@ -41,32 +42,7 @@ EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _delt
 	// 追跡ターゲットがいるとき
 	if (_owner->GetIsTracking())
 	{
-		// オーナーから追跡対象へ向かうベクトル
-		trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
-		trackingRotationVec.z = 0.0f;
-		float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
-
-		// 規定値まで近づくまで追跡
-		if (ownerPosToTrackingObjectLength >= TrackingLengthValue)
-		{
-			if (!Math::NearZero(trackingRotationVec.Length()))
-			{
-				trackingRotationVec.Normalize();
-			}
-
-			velocity = trackingRotationVec * moveSpeed;
-
-			// positionに速度を足してキャラクターを動かす
-			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-
-			RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
-		}
-		else
-		{
-			velocity = Vector3::Zero;
-			// positionに速度を足してキャラクターを動かす
-			_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
-		}
+		TrackingMove(_owner, _deltaTime);
 	}
 	else if (!_owner->GetIsTracking()) // 追跡ターゲットが居なくなったとき
 	{
@@ -79,12 +55,6 @@ EnemyState EnemyObjectStateTracking::Update(EnemyObjectBase* _owner, float _delt
 		{
 			state = EnemyState::ENEMY_STATE_TURN;
 		}
-	}
-	else
-	{
-		velocity = Vector3::Zero;
-		// positionに速度を足してキャラクターを動かす
-		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
 	}
 
 	return state;
@@ -126,5 +96,41 @@ void EnemyObjectStateTracking::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// 回転処理
 	RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
 
+	// 効果音を再生
 	soundEffect->Play();
+}
+
+/*
+@brief	追跡中の移動処理
+@param	_owner 親クラスのポインタ
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
+void EnemyObjectStateTracking::TrackingMove(EnemyObjectBase* _owner, float _deltaTime)
+{
+	// オーナーから追跡対象へ向かうベクトル
+	trackingRotationVec = _owner->GetAttackObjectPosition() - _owner->GetPosition();
+	trackingRotationVec.z = 0.0f;
+	float ownerPosToTrackingObjectLength = trackingRotationVec.Length();
+
+	// 規定値まで近づくまで追跡
+	if (ownerPosToTrackingObjectLength >= TrackingLengthValue)
+	{
+		if (!Math::NearZero(trackingRotationVec.Length()))
+		{
+			trackingRotationVec.Normalize();
+		}
+
+		velocity = trackingRotationVec * moveSpeed;
+
+		// positionに速度を足してキャラクターを動かす
+		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+
+		RotationProcess(_owner, trackingRotationVec, _owner->GetCharaForwardVec());
+	}
+	else
+	{
+		velocity = Vector3::Zero;
+		// positionに速度を足してキャラクターを動かす
+		_owner->SetPosition(_owner->GetPosition() + velocity * _deltaTime);
+	}
 }

@@ -66,7 +66,7 @@ void PlayerSandSmokeMakeManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		ActiveEffectProcess();
+		ActiveEffect();
 
 		break;
 	}
@@ -76,7 +76,7 @@ void PlayerSandSmokeMakeManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void PlayerSandSmokeMakeManager::ActiveEffectProcess()
+void PlayerSandSmokeMakeManager::ActiveEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -90,7 +90,7 @@ void PlayerSandSmokeMakeManager::ActiveEffectProcess()
 		frameCount % 10 == 0 && owner->GetVelocity().x < -GenerateSpeedValue||
 		frameCount % 10 == 0 && owner->GetVelocity().y < -GenerateSpeedValue )
 	{
-		GenerateEffectProcess();
+		GenerateEffect();
 	}
 
 
@@ -99,7 +99,7 @@ void PlayerSandSmokeMakeManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void PlayerSandSmokeMakeManager::GenerateEffectProcess()
+void PlayerSandSmokeMakeManager::GenerateEffect()
 {
 	// 生成した数を数える
 	++generateCount;

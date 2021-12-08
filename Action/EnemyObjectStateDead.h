@@ -28,6 +28,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return EnemyState 次のステータス
 	*/
 	EnemyState Update(EnemyObjectBase* _owner, float _deltaTime)override;
 
@@ -39,6 +40,11 @@ public:
 	void Enter(EnemyObjectBase* _owner, float _deltaTime)override;
 
 private:
+
+	// playerのポインタを保存するポインタ変数
+	GameObject* playerObject;
+	// 吹っ飛ぶ方向ベクトル
+	Vector3 blowAwayDirection;
 
 	// 死亡状態の時間をカウント
 	int frameCount;
@@ -52,8 +58,4 @@ private:
 	const float FirstBlowAwayPower;
 	// 最大速度
 	const float MaxSpeed;
-	// playerのポインタを保存するポインタ変数
-	GameObject* playerObject;
-	// 吹っ飛ぶ方向ベクトル
-	Vector3 blowAwayDirection;
 };

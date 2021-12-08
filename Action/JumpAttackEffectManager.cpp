@@ -54,7 +54,7 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 
@@ -63,15 +63,15 @@ void JumpAttackEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void JumpAttackEffectManager::ActiveEffectProcess()
+void JumpAttackEffectManager::ActiveEffect()
 {
-	GenerateEffectProcess();
+	GenerateEffect();
 }
 
 /*
 @fn エフェクト生産処理関数
 */
-void JumpAttackEffectManager::GenerateEffectProcess()
+void JumpAttackEffectManager::GenerateEffect()
 {
 	// ownerのポジションを得る
 	effectPosition = owner->GetPosition();

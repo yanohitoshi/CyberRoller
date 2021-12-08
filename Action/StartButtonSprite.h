@@ -31,6 +31,4 @@ private:
 
     // スプライトComponent
     SpriteComponent* sprite;
-
 };
-

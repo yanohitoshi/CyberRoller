@@ -38,12 +38,12 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
 
     /*
     @fn エフェクト生産処理関数
     */
-    void GenerateEffectProcess();
+    void GenerateEffect();
 
     // 親のGameObject保存用変数
     PlayerObject* owner;
@@ -52,7 +52,7 @@ private:
     // エフェクトの位置をプレイヤーの体に合わせるための間隔
     Vector3 distance;
     // エフェクトの位置をプレイヤーの体に合わせるための間隔を計算するためのオフセット定数
-    const float DistanceOffset;
+    const float KnockBackOffset;
     // 死亡状態になってからの時間を数える
     int generationCount;
     // エフェクトを発生させ始める時間

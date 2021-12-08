@@ -43,7 +43,9 @@ public:
 private:
 	// 作用するジャンプ力
 	float jumpPower;
+	// ジャンプ時間を数えるカウント
 	int jumpFrameCount;
+	// ジャンプした回数
 	int jumpCount;
 };
 

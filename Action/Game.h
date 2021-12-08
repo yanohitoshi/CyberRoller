@@ -196,4 +196,3 @@ public:
 	*/
 	static bool GetContinueFlag() { return continueFlag; }
 };
-

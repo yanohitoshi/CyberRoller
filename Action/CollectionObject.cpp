@@ -52,7 +52,7 @@ CollectionObject::CollectionObject(const Vector3& _pos, const Tag& _objectTag, C
 
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::COLLECTION_TAG, GetOnCollisionFunc());
-	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,15.0f) };
+	AABB aabb = { Vector3(-5.0f,-5.0f,-5.0f),Vector3(5.0f,5.0f,5.0f) };
 	boxCollider->SetObjectBox(aabb);
 
 	new CollectionEffectManager(this);

@@ -43,7 +43,7 @@ private:
     @fn エフェクトがアクティブ時の処理関数
     @param	_deltaTime 前のフレームでかかった時間
     */
-    void ActiveEffectProcess(float _deltaTime);
+    void ActiveEffect(float _deltaTime);
 
     /*
     @fn 波紋エフェクト生産処理関数

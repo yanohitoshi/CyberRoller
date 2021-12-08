@@ -15,6 +15,7 @@ public:
 
 	/*
 	@fn コンストラクタ
+	@param _owner 親クラスのポインタ
 	*/
 	PlayerObjectStateRun(PlayerObject* _owner);
 
@@ -28,6 +29,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return PlayerState　更新終了時のステータスを返す
 	*/
 	PlayerState Update(PlayerObject* _owner,float _deltaTime)override;
 
@@ -49,4 +51,3 @@ public:
 private:
 
 };
-

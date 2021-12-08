@@ -39,17 +39,17 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
 
     /*
     @fn エフェクト生産処理関数
     */
-    void GenerateEffectProcess();
+    void GenerateEffect();
 
     /*
     @fn エフェクトの色と向きを設定する関数
     */
-    void SelectEffectColorProcess(int _index,Vector3& _velocity);
+    void SelectEffectColor(int _index,Vector3& _velocity);
 
     // 親のGameObject保存用変数
     GameObject* owner;
@@ -57,6 +57,7 @@ private:
     ParticleState particleState;
     // クリスタルeffectの色を管理する変数
     CrystalColor crystalColor;
+    // 時間をカウントする変数
     int frameCount;
     // 1度だけ生成する用の生成フラグ変数
     bool generateFlag;

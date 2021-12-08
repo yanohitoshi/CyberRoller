@@ -1,8 +1,17 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "StageUnSelectIcon.h"
 #include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "StageSelectSceneUI.h"
 
+/*
+@fn コンストラクタ
+@parma 親クラスのポインタ
+@parma シーンのステータス
+@parma 描画する画像のファイルネーム
+*/
 StageUnSelectIcon::StageUnSelectIcon(StageSelectSceneUI* _owner, SceneState _state, const std::string& _spriteFileName)
 	: GameObject(false, Tag::UI)
 	, FirstStagePosition(Vector3(-800.0f, -300.0f, 0.0f))
@@ -56,10 +65,19 @@ StageUnSelectIcon::StageUnSelectIcon(StageSelectSceneUI* _owner, SceneState _sta
 	sprite->SetAlpha(1.0f);
 }
 
+/*
+@fn デストラクタ
+@brief  objectの削除を行う
+*/
 StageUnSelectIcon::~StageUnSelectIcon()
 {
 }
 
+/*
+@fn アップデート関数
+@brief	更新処理を行う
+@param	_deltaTime 前のフレームでかかった時間
+*/
 void StageUnSelectIcon::UpdateGameObject(float _deltaTime)
 {
 	// 映す映さないをセット

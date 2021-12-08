@@ -28,6 +28,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return EnemyState 次のステータス
 	*/
 	EnemyState Update(EnemyObjectBase* _owner, float _deltaTime)override;
 
@@ -53,5 +54,4 @@ private:
 	float moveDistance;
 	// 初期ポジション
 	Vector3 firstPosition;
-
 };

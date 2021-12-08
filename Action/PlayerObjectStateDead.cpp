@@ -1,14 +1,12 @@
 //-----------------------------------------------------------------------------
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
 #include "PlayerObjectStateDead.h"
 #include "SkeletalMeshComponent.h"
 #include "SoundEffectComponent.h"
 /*
 @fn コンストラクタ
+@param _owner 親クラスのポインタ
 */
 PlayerObjectStateDead::PlayerObjectStateDead(PlayerObject* _owner)
 	: RespawnTime(120)
@@ -28,6 +26,7 @@ PlayerObjectStateDead::~PlayerObjectStateDead()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateDead::Update(PlayerObject* _owner, float _deltaTime)
 {
@@ -71,6 +70,7 @@ void PlayerObjectStateDead::Enter(PlayerObject* _owner, float _deltaTime)
 	// 入力可能フラグをfalseにセット
 	_owner->SetIsAvailableInput(false);
 
+	// 効果音を再生
 	soundEffect->Play();
 }
 

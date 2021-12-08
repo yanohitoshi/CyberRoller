@@ -30,6 +30,8 @@ FirstStageCreator::FirstStageCreator(bool _reUseGameObject, const Tag _objectTag
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(12)
 	, LightPointPositionZ(4800.0f)
+	, CameraChangeAabb(Vector3(-1000.0f, -1200.0f, -1000.0f), Vector3(1000.0f, 1000.0f, 2000.0f))
+	, CameraChangeOffset(Vector3(0.0f, -900.0f, 700.0f))
 {
 }
 
@@ -65,7 +67,7 @@ FirstStageCreator::~FirstStageCreator()
 bool FirstStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/secondStageMap.json", "layer1"))
+	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/FirstStageMap.json", "layer1"))
 	{
 		printf("do'nt have Layer/layer1\n");
 		return true;
@@ -76,105 +78,105 @@ bool FirstStageCreator::OpenFile()
 	sizeY = layer1StageData.size();
 
 	// ステージデータ読み込み (layer2) 
-	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/secondStageMap.json", "layer2"))
+	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/FirstStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer3) 
-	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/secondStageMap.json", "layer3"))
+	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/FirstStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer4) 
-	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/secondStageMap.json", "layer4"))
+	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/FirstStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer5) 
-	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/secondStageMap.json", "layer5"))
+	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/FirstStageMap.json", "layer5"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer6) 
-	if (!readTiledJson(layer6StageData, "Assets/Config/StageData/secondStageMap.json", "layer6"))
+	if (!readTiledJson(layer6StageData, "Assets/Config/StageData/FirstStageMap.json", "layer6"))
 	{
 		printf("do'nt have Layer/layer6\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer7) 
-	if (!readTiledJson(layer7StageData, "Assets/Config/StageData/secondStageMap.json", "layer7"))
+	if (!readTiledJson(layer7StageData, "Assets/Config/StageData/FirstStageMap.json", "layer7"))
 	{
 		printf("do'nt have Layer/layer7\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer8) 
-	if (!readTiledJson(layer8StageData, "Assets/Config/StageData/secondStageMap.json", "layer8"))
+	if (!readTiledJson(layer8StageData, "Assets/Config/StageData/FirstStageMap.json", "layer8"))
 	{
 		printf("do'nt have Layer/layer8\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer9) 
-	if (!readTiledJson(layer9StageData, "Assets/Config/StageData/secondStageMap.json", "layer9"))
+	if (!readTiledJson(layer9StageData, "Assets/Config/StageData/FirstStageMap.json", "layer9"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer10) 
-	if (!readTiledJson(layer10StageData, "Assets/Config/StageData/secondStageMap.json", "layer10"))
+	if (!readTiledJson(layer10StageData, "Assets/Config/StageData/FirstStageMap.json", "layer10"))
 	{
 		printf("do'nt have Layer/layer10\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer11) 
-	if (!readTiledJson(layer11StageData, "Assets/Config/StageData/secondStageMap.json", "layer11"))
+	if (!readTiledJson(layer11StageData, "Assets/Config/StageData/FirstStageMap.json", "layer11"))
 	{
 		printf("do'nt have Layer/layer11\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer12) 
-	if (!readTiledJson(layer12StageData, "Assets/Config/StageData/secondStageMap.json", "layer12"))
+	if (!readTiledJson(layer12StageData, "Assets/Config/StageData/FirstStageMap.json", "layer12"))
 	{
 		printf("do'nt have Layer/layer12\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer13) 
-	if (!readTiledJson(layer13StageData, "Assets/Config/StageData/secondStageMap.json", "layer13"))
+	if (!readTiledJson(layer13StageData, "Assets/Config/StageData/FirstStageMap.json", "layer13"))
 	{
 		printf("do'nt have Layer/layer13\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer14) 
-	if (!readTiledJson(layer14StageData, "Assets/Config/StageData/secondStageMap.json", "layer14"))
+	if (!readTiledJson(layer14StageData, "Assets/Config/StageData/FirstStageMap.json", "layer14"))
 	{
 		printf("do'nt have Layer/layer14\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (player) 
-	if (!readTiledJson(playerData, "Assets/Config/StageData/secondStageMap.json", "Player"))
+	if (!readTiledJson(playerData, "Assets/Config/StageData/FirstStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (CameraDirecting)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/secondStageMap.json", "CameraDirecting"))
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/FirstStageMap.json", "CameraDirecting"))
 	{
 		printf("do'nt have Layer/CameraDirecting\n");
 		return true;
@@ -715,6 +717,12 @@ void FirstStageCreator::CreateLayer12(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー13クリエイター
+@brief  レイヤー13のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer13(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -742,6 +750,12 @@ void FirstStageCreator::CreateLayer13(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー14クリエイター
+@brief  レイヤー14のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateLayer14(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -771,21 +785,25 @@ void FirstStageCreator::CreateLayer14(int _indexX, int _indexY)
 
 }
 
+/*
+@fn カメラモード変更ポイント生成
+@brief  カメラモード変更ポイントの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FirstStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
-	// レイヤー1のマップオブジェクトのポジション
-	Vector3 layer11Pos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[10]);
+	// 画角変更ポイント用レイヤーのデータを元にポジションを得る
+	Vector3 cameraChangePos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[10]);
 
-	// マップデータを見てそれぞれのオブジェクトを生成
+	// レイヤーのデータを見てそれぞれのオブジェクトを生成
 	switch (CameraDirectingData)
 	{
 	case(CAMERA_CHANGE_AREA):
-		AABB aabb = { Vector3(-1000.0f,-1200.0f,-1000.0f),Vector3(1000.0f,1000.0f,1000.0f) };
-		Vector3 offset = Vector3(0.0f, -900.0f, 700.0f);
 		// 画角変更ポイントオブジェクト生成
-		new CameraChangePoint(layer11Pos, aabb, offset,Tag::CAMERA_CHANGE_OBLIQUE);
+		new CameraChangePoint(cameraChangePos, CameraChangeAabb, CameraChangeOffset,Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }

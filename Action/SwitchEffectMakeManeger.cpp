@@ -69,7 +69,7 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 		//particleが発生するフレームの条件式を書く
 		if (generateFlag == true)
 		{
-			ActiveEffectProcess();
+			ActiveEffect();
 
 			// 生成フラグをfalseに
 			generateFlag = false;
@@ -89,7 +89,7 @@ void SwitchEffectMakeManeger::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void SwitchEffectMakeManeger::ActiveEffectProcess()
+void SwitchEffectMakeManeger::ActiveEffect()
 {
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
 	{

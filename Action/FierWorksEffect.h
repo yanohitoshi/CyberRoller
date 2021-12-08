@@ -40,12 +40,12 @@ private:
     /*
     @fn フェードイン関数
     */
-    void FadeInProcess();
+    void FadeIn();
 
     /*
     @fn 速度抑制関数
     */
-    void CheckSpeedProcess();
+    void CheckSpeed();
 
     // フェードインフラグ
     bool inFlag;
@@ -83,4 +83,3 @@ private:
     // 緑色の場合の色の値定数
     const Vector3 GreenValue;
 };
-

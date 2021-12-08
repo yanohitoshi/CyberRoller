@@ -59,7 +59,7 @@ void PlayerAttackHitEffectManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		ActiveEffectProcess();
+		ActiveEffect();
 
 		break;
 	}
@@ -68,13 +68,13 @@ void PlayerAttackHitEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void PlayerAttackHitEffectManager::ActiveEffectProcess()
+void PlayerAttackHitEffectManager::ActiveEffect()
 {
 	// 生成フラグがtrueだったら
 	if (generateFlag == true)
 	{
 		// エフェクト生産関数
-		GenerateEffectProcess();
+		GenerateEffect();
 		generateFlag = false;
 	}
 }
@@ -82,7 +82,7 @@ void PlayerAttackHitEffectManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void PlayerAttackHitEffectManager::GenerateEffectProcess()
+void PlayerAttackHitEffectManager::GenerateEffect()
 {
 	// ポジション計算
 	effectPosition = owner->GetPosition() + owner->GetForwardVec() * CorrectionPosition;

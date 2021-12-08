@@ -33,13 +33,15 @@ CameraState CameraObjectStateNormal::Update(CameraObjectBase* _owner, float _del
 
 	// 線形補間したポジションをセット
 	_owner->SetPosition(setPosition);
-
+	
+	// ビュー行列
 	Matrix4 view;
 	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(_owner->GetPosition(), lerpObjectPos, Vector3::UnitZ);
 	// view行列をセット
 	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 
+	// 次のフレームでの前方ベクトル
 	Vector3 nextForwardVec;
 	// プレイヤー側に渡す前方ベクトルを生成
 	nextForwardVec = lerpObjectPos - _owner->GetPosition();

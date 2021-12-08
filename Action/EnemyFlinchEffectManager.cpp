@@ -63,7 +63,7 @@ void EnemyFlinchEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -71,20 +71,20 @@ void EnemyFlinchEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void EnemyFlinchEffectManager::ActiveEffectProcess()
+void EnemyFlinchEffectManager::ActiveEffect()
 {
 	++effectFrameCount;
 
 	if (effectFrameCount % FiveFrequency == 0)
 	{
-		GenerateEffectProcess();
+		GenerateEffect();
 	}
 }
 
 /*
 @fn エフェクト生産処理関数
 */
-void EnemyFlinchEffectManager::GenerateEffectProcess()
+void EnemyFlinchEffectManager::GenerateEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();

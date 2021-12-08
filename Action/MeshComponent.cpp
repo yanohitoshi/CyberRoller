@@ -39,6 +39,7 @@ MeshComponent::~MeshComponent()
 */
 void MeshComponent::Draw(Shader* _shader)
 {
+	// オーナーのstateがDeadじゃなければ
 	if (owner->GetState() != State::Dead)
 	{
 		if (mesh)

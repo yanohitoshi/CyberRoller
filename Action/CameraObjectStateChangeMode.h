@@ -50,4 +50,3 @@ private:
 	// 線形補間の数値が小さい時間の時に用いる補正値定数
 	const float SlowLrapCorrection;
 };
-

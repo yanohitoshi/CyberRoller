@@ -23,6 +23,7 @@ PlayerObjectStateDownLoop::~PlayerObjectStateDownLoop()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _deltaTime)
 {
@@ -58,18 +59,23 @@ PlayerState PlayerObjectStateDownLoop::Update(PlayerObject* _owner, float _delta
 */
 void PlayerObjectStateDownLoop::Input(PlayerObject* _owner, const InputState& _keyState)
 {
-	// もし、コントローラーのAボタンまたはキーボードのCボタンが押されたら
-	if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
-		_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true)
+	// コンティニューボタンが押されたか判定
+	bool isPushContinue = _keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Pressed ||
+		_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_C) == true;
+
+	// ゲーム終了ボタンが押されたか判定
+	bool isPushGameEnd = _keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
+		_keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true;
+
+	// コンティニューボタンが押されていたら
+	if (isPushContinue)
 	{
 		// 入力フラグをtrueに変更
 		isInput = true;
 		// コンティニューフラグをtrueに変更
 		isContinue = true;
 	}
-	// もし、コントローラーのBボタンまたはキーボードのZボタンが押されたら
-	else if (_keyState.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Pressed ||
-			 _keyState.Keyboard.GetKeyDownValue(SDL_SCANCODE_Z) == true)
+	else if (isPushGameEnd) // ゲーム終了ボタンが押されていたら
 	{
 		// 入力フラグのみをtrueに変更
 		isInput = true;

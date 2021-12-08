@@ -12,7 +12,7 @@
 @param	変更する間隔
 @param	オブジェクト判別用tag
 */
-CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box, Vector3& _changeOffset,const Tag& _objectTag)
+CameraChangePoint::CameraChangePoint(const Vector3& _p, const AABB& _box,const Vector3& _changeOffset,const Tag& _objectTag)
 	: GameObject(false, _objectTag)
 {
 	// ポジションの初期化
@@ -53,7 +53,7 @@ void CameraChangePoint::OnCollision(const GameObject& _hitObject, const PhysicsT
 	// プレイヤーと当たったら
 	if (_physicsTag == PhysicsTag::PLAYER_TAG)
 	{
-		mainCamera->SetNextState(CameraState::CHANGEMODE);
+		mainCamera->SetIsChangeMode(true);
 		mainCamera->SetOffsetPosition(changeOffset);
 	}
 }

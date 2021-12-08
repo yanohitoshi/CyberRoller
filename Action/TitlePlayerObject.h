@@ -11,7 +11,6 @@ class Animation;
 class TitleJumpAttackPlayerObject;
 class TitlePlayerStateBase;
 enum class TitlePlayerState;
-
 class MusicComponent;
 
 /*

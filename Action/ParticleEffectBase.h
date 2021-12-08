@@ -6,7 +6,6 @@
 #include "ParticleComponent.h"
 #include <string>
 
-
 /*
 @enum particle‚Ìó‘Ô‚Ì—ñ‹“
 */
@@ -15,7 +14,6 @@ enum ParticleState
 	PARTICLE_ACTIVE,
 	PARTICLE_DISABLE,
 };
-
 
 /*
 @file ParticleEffectBase.h
@@ -48,7 +46,6 @@ public:
 	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
 	*/
 	void UpdateGameObject(float _deltaTime)override;
-
 
 private:
 	

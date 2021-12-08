@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
-
 // クラスの前方宣言
 class BoxCollider;
 
+/*
+@file CameraChangePoint.h
+@brief カメラの画角を変更する場所を管理するクラス
+*/
 class CameraChangePoint :
     public GameObject
 {
@@ -20,7 +23,7 @@ public:
 	@param	変更する間隔
 	@param	オブジェクト判別用tag
 	*/
-	CameraChangePoint(const Vector3& _p, const AABB& _box,Vector3& _changeOffset ,const Tag& _objectTag);
+	CameraChangePoint(const Vector3& _p, const AABB& _box,const Vector3& _changeOffset ,const Tag& _objectTag);
 
 	/*
 	@fn デストラクタ
@@ -50,4 +53,3 @@ private:
 	// 変更する間隔
 	Vector3 changeOffset;
 };
-

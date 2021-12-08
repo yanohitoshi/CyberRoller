@@ -33,7 +33,7 @@ CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float 
 	// 実際にセットするポジション
 	Vector3 setPosition;
 
-	// ゆっくりLrapする時間内だったら
+	// ゆっくり補間する時間内だったら
 	if (startStateCount <= SlowLrapTime)
 	{
 		// 仮のポジションと現在のポジションで線形補間
@@ -48,13 +48,16 @@ CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float 
 	// 線形補間したポジションをセット
 	_owner->SetPosition(setPosition);
 
+	// ビュー行列
 	Matrix4 view;
 	// 注視先がクリア用オブジェクトに変わっているのでそのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(_owner->GetPosition(), lerpObjectPos, Vector3::UnitZ);
 	// view行列をセット
 	RENDERING_OBJECT_MANAGER->SetViewMatrix(view);
 
+	// 次のフレームでの前方ベクトル
 	Vector3 nextForwardVec;
+
 	// プレイヤー側に渡す前方ベクトルを生成
 	nextForwardVec = lerpObjectPos - _owner->GetPosition();
 
@@ -68,6 +71,12 @@ CameraState CameraObjectStateChangeMode::Update(CameraObjectBase* _owner, float 
 	nextForwardVec.z = 0.0f;
 
 	_owner->SetCameraVec(nextForwardVec);
+
+	// 画角切り替えフラグがfalseだったら
+	if (!_owner->GetIsChangeMode())
+	{
+		state = CameraState::NORMAL;
+	}
 
 	return state;
 }

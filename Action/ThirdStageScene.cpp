@@ -28,27 +28,29 @@ ThirdStageScene::ThirdStageScene()
 	state = SceneState::THIRD_SATGE_SCENE;
 
 	// クリエイター生成
-	ThirdStageCreator* fourthStageCreator = new ThirdStageCreator(false, Tag::OTHER);
+	ThirdStageCreator* thirdStageCreator = new ThirdStageCreator(false, Tag::OTHER);
 
 	//ステージ情報ファイルを開く
-	if (!fourthStageCreator->OpenFile())
+	if (!thirdStageCreator->OpenFile())
 	{
 		//プレイヤーの生成
-		playerObject = fourthStageCreator->CreatePlayer();
+		playerObject = thirdStageCreator->CreatePlayer();
 		//ステージを生成する
-		fourthStageCreator->CreateStage();
+		thirdStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = fourthStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = fourthStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = fourthStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	// クリエイターから収集物クラスのポインタをもらう
+	CollectionObject* firstCollection = thirdStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = thirdStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = thirdStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
 	// シーンUIを追加
 	new ThirdStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 
 	// クリエイターの状態をdeadにし片づける
-	fourthStageCreator->SetState(State::Dead);
+	thirdStageCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	new ThirdSceneSoundManager(this);
 }
 

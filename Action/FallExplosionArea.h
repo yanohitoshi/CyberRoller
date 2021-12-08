@@ -57,14 +57,24 @@ private:
 	// エリアに降る個数
 	int quantity;
 
+	// 落下開始フラグ
 	bool isFallStart;
 
+	// 落下する爆発物を格納するコンテナ
 	std::vector<FallExplosionObject*> fallExplosionObjects;
 
 public:
 
+	/*
+	@fn 落下開始フラグのgetter
+	@return 落下開始フラグ
+	*/
 	bool GetIsFallStart() { return isFallStart; }
 
+	/*
+	@fn 落下エリアのgetter
+	@return 落下エリア
+	*/
 	Vector3 GetArea() { return area; }
 };
 

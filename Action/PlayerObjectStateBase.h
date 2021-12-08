@@ -203,4 +203,3 @@ private:
 	*/
 	void JumpTransitionProcess(PlayerObject* _owner);
 };
-

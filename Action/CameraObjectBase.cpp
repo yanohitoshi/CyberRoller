@@ -49,15 +49,15 @@ void CameraObjectBase::GameObjectInput(const InputState& _keyState)
 */
 void CameraObjectBase::AddStatePoolMap(CameraObjectStateBase* _state, CameraState _stateTag)
 {
-	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	// マップの中に追加するアクターのコンテナがあるかどうかを調べる
 	auto stateMaps = statePoolMap.find(_stateTag);
 
-	//あるとき
+	// あるとき
 	if (stateMaps != statePoolMap.end())
 	{
 		return;
 	}
-	else //ないとき
+	else // ないとき
 	{
 		statePoolMap[_stateTag] = _state;
 	}

@@ -44,6 +44,7 @@ public:
 
 private:
 
+	// オーナークラスのポインタ
 	BaseScene* owner;
 
 	// BGMを管理するクラス

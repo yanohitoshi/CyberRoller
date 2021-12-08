@@ -25,6 +25,7 @@ PlayerObjectStateJunpEndToRun::~PlayerObjectStateJunpEndToRun()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateJunpEndToRun::Update(PlayerObject* _owner, float _deltaTime)
 {
@@ -172,7 +173,11 @@ void PlayerObjectStateJunpEndToRun::InputMovableProcess(PlayerObject* _owner, Ve
 
 	// 方向キーの入力値とカメラの向きから、移動方向を決定
 	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
-	forward.Normalize();
+	if (!Math::NearZero(forward.Length()))
+	{
+		// 正規化
+		forward.Normalize();
+	}
 
 	// 移動速度に加速度定数を足す
 	moveSpeed += _owner->GetMovePower();

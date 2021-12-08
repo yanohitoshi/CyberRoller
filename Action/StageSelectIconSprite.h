@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class SpriteComponent;
 class StageSelectSceneUI;
 
@@ -18,6 +19,9 @@ public:
 
     /*
     @fn コンストラクタ
+    @parma 親クラスのポインタ
+    @parma シーンのステータス
+    @parma 描画する画像のファイルネーム
     */
     StageSelectIconSprite(StageSelectSceneUI* _owner, SceneState _state, const std::string& _spriteFileName);
 
@@ -38,6 +42,7 @@ private:
 
     // 背景用スプライトComponent
     SpriteComponent* sprite;
+    // 自分のシーンステータス
     SceneState myState;
     // 描画するかどうか
     bool isVisible;
@@ -56,6 +61,4 @@ public:
     @param	_isVisible 描画するかどうか
     */
     void SetIsVisible(bool _isVisible) { isVisible = _isVisible; }
-
 };
-

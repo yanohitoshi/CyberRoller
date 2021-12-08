@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
+// 前方宣言
 enum class PlayerState;
 
 /*
@@ -40,12 +41,12 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
     
     /*
     @fn エフェクト生産処理関数
     */
-    void GenerateEffectProcess();
+    void GenerateEffect();
 
     /*
     @fn エフェクトのポジションを右にずらす関数
@@ -59,6 +60,7 @@ private:
 
     // 親のGameObject保存用変数
     PlayerObject* owner;
+    // 親クラスのステータス
     PlayerState ownerState;
     // particleの状態管理用変数
     ParticleState particleState;

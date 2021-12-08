@@ -7,6 +7,7 @@
 
 /*
 @fn コンストラクタ
+@param _owner 親クラスのポインタ
 */
 PlayerObjectStateJumpAttack::PlayerObjectStateJumpAttack(PlayerObject* _owner)
 	: AttackSpeed(3000.0f)
@@ -27,6 +28,7 @@ PlayerObjectStateJumpAttack::~PlayerObjectStateJumpAttack()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateJumpAttack::Update(PlayerObject* _owner, float _deltaTime)
 {

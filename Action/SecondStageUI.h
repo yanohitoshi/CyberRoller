@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class CollectionObject;
 class CollectionUI;
 
@@ -39,7 +40,6 @@ public:
     */
     void UpdateGameObject(float _deltaTime)override;
 
-
 private:
 
     // シーンの時間制限の値
@@ -47,6 +47,7 @@ private:
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 
+    // プレイヤーのポインタ
     PlayerObject* playerObject;
 
     // 各収集物のUIクラスのポインタ

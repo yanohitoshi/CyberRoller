@@ -67,4 +67,3 @@ public: // ゲッターセッター
 	*/
 	PhysicsTag GetSphereTag() const { return tag; }
 };
-

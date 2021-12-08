@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include "GameObject.h"
 
+// クラスの前方宣言
 class CollectionObject;
 class CollectionUI;
 
@@ -46,6 +47,7 @@ private:
     // スカイボックスクラスのポインタ変数
     class SkyBoxObject* skyBox;
 
+    // プレイヤーのポインタ
     PlayerObject* playerObject;
 
     // 各収集物のUIクラスのポインタ

@@ -41,23 +41,32 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
 
     /*
     @fn 土埃エフェクト生産処理関数
     */
-    void GenerateDustEffectProcess();
+    void GenerateDustEffect();
 
     /*
     @fn 破片エフェクト生産処理関数
     */
-    void GenerateDebrisEffectProcess();
+    void GenerateDebrisEffect();
 
     // 親のGameObject保存用変数
     BreakBlockObject* owner;
 
     // particleの状態管理用変数
     ParticleState particleState;
+
+    // Activeになってからのカウントを数える
+    int activeCount;
+    // エフェクト本体に渡すポジション
+    Vector3 effectPosition;
+    // エフェクト本体に渡す速度
+    Vector3 effectVelocity;
+    // 1度だけ生成する用の生成フラグ変数
+    bool generateEffectsFlag;
 
     // 2の倍数の時にフレームカウントと比較するための定数
     const int TowFrequency;
@@ -78,12 +87,5 @@ private:
     const float CorrectionRandValue;
     // ランダムの値に掛ける最後の補正値
     const float LastCorrection;
-    // Activeになってからのカウントを数える
-    int activeCount;
-    // エフェクト本体に渡すポジション
-    Vector3 effectPosition;
-    // エフェクト本体に渡す速度
-    Vector3 effectVelocity;
-    // 1度だけ生成する用の生成フラグ変数
-    bool generateEffectsFlag;
+
 };

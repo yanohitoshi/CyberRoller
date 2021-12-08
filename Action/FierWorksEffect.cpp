@@ -33,11 +33,13 @@ FierWorksEffect::FierWorksEffect(const Vector3& _pos, const Vector3& _velocity, 
 	scale = InitScale;
 	alpha = InitAlpha;
 	speed = MoveSpeed;
+	// 最初はフェードイン状態に初期化
+	inFlag = true;
+
+	// particleComponent初期化
 	particleComponent->SetScale(scale);
 	particleComponent->SetAlpha(alpha);
 	particleComponent->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD);
-	// 最初はフェードイン状態に初期化
-	inFlag = true;
 
 	// マネージャークラスの色情報を参照して色を設定
 	if (_crystalColor == CrystalColor::WHITE)
@@ -79,7 +81,8 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 	// ライフカウントがフェードイン・アウトの切り替えタイミングに到達していなかったら
 	if (lifeCount > ChangeFadeOutTime)
 	{
-		FadeInProcess();
+		// フェードイン処理
+		FadeIn();
 
 		// 定数を足して拡大
 		scale += FadeInAddScale;
@@ -107,7 +110,7 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 		velocity.y = 0.0f;
 
 		// 速度をチェック
-		CheckSpeedProcess();
+		CheckSpeed();
 
 		// scale値をセット
 		particleComponent->SetAlpha(alpha);
@@ -131,7 +134,7 @@ void FierWorksEffect::UpdateGameObject(float _deltaTime)
 /*
 @fn フェードイン関数
 */
-void FierWorksEffect::FadeInProcess()
+void FierWorksEffect::FadeIn()
 {
 	// フェードイン状態だったら
 	if (inFlag == true)
@@ -146,13 +149,12 @@ void FierWorksEffect::FadeInProcess()
 			inFlag = false;
 		}
 	}
-
 }
 
 /*
 @fn 速度抑制関数
 */
-void FierWorksEffect::CheckSpeedProcess()
+void FierWorksEffect::CheckSpeed()
 {
 	// 速度が定数より大きかったらだったら
 	if (speed > VelocityAtFadeOut)

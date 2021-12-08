@@ -43,6 +43,7 @@ CameraState CameraObjectStateSceneClear::Update(CameraObjectBase* _owner, float 
 		tmpMovePos.z = stopPisitionZ;
 	}
 
+	// 実際にセットするポジション
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
 	setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * DeltaCorrection);
@@ -50,6 +51,7 @@ CameraState CameraObjectStateSceneClear::Update(CameraObjectBase* _owner, float 
 	// 線形補間したポジションをセット
 	_owner->SetPosition(setPosition);
 
+	// ビュー行列
 	Matrix4 view;
 	// 更新したポジションと追従するオブジェクトのポジションを用いてview行列を更新
 	view = Matrix4::CreateLookAt(_owner->GetPosition(), lerpObjectPos, Vector3::UnitZ);

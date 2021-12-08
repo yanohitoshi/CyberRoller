@@ -21,6 +21,7 @@ public:
     
     /*
     @brief	コンストラクタ
+    @param 親クラスのポインタ
     */
     CollectionUI(CollectionObject* _owner);
 

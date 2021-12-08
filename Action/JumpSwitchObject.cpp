@@ -34,12 +34,9 @@ JumpSwitchObject::JumpSwitchObject(const Vector3& _p, const Vector3& _size, cons
 	mesh = geometryInstanceComponent->GetMesh();
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::JUMP_SWITCH_TAG, GetOnCollisionFunc());
-	AABB a = { mesh->GetBox() };
-	//a.max.z += 5.0f;
-	a.min.z -= 5.0f;
-	boxCollider->SetObjectBox(a);
-	//boxCollider->SetObjectBox(mesh->GetBox());
-
+	AABB aabb = { mesh->GetBox() };
+	aabb.min.z -= 5.0f;
+	boxCollider->SetObjectBox(aabb);
 }
 
 /*

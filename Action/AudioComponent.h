@@ -29,11 +29,15 @@ public:
 
 protected:
 
-	// 当たり判定を行うかどうかの判定用Tag
+	// 自分のサウンドのファイルネーム
 	std::string myFileName;
 
 public: // ゲッターセッター
 
+	/*
+	@fn 自分のファイルネームのgetter
+	@return 自分のファイルネームを返す
+	*/
 	const std::string& GetFileName() { return myFileName; }
 
 };

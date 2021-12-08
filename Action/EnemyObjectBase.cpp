@@ -86,7 +86,6 @@ EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, con
 @param	再利用するかフラグ
 @param	オブジェクト判別用tag
 @param	移動速度
-@param	追跡対象
 */
 EnemyObjectBase::EnemyObjectBase(const Vector3& _pos, bool _reUseGameObject, const Tag _objectTag, float _moveSpeed)
 	: GameObject(_reUseGameObject, _objectTag)

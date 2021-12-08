@@ -37,6 +37,7 @@ public:
 
 private:
 
+	// サウンドマネージャークラスのポインタ
 	TitleSceneSoundManager* titleSceneSoundManager;
 
 	// シーンが決定されたかどうか

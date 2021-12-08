@@ -30,6 +30,7 @@ CameraState CameraObjectStateDance::Update(CameraObjectBase* _owner, float _delt
 	tmpMovePos.y = DanceRadius * sinf(yaw) + lerpObjectPos.y;
 	tmpMovePos.z = lerpObjectPos.z + OffsetZ;
 
+	// 実際にセットするポジション
 	Vector3 setPosition;
 	// 仮のポジションと現在のポジションで線形補間
 	setPosition = Vector3::Lerp(_owner->GetPosition(), tmpMovePos, _deltaTime * DeltaCorrection);

@@ -70,7 +70,7 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -78,20 +78,20 @@ void EnemyDeadEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void EnemyDeadEffectManager::ActiveEffectProcess()
+void EnemyDeadEffectManager::ActiveEffect()
 {
 	++effectFrameCount;
 
 	if (effectFrameCount % FiveFrequency == 0)
 	{
-		GenerateEffectProcess();
+		GenerateEffect();
 	}
 }
 
 /*
 @fn エフェクト生産処理関数
 */
-void EnemyDeadEffectManager::GenerateEffectProcess()
+void EnemyDeadEffectManager::GenerateEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();

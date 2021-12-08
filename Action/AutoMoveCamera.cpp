@@ -36,6 +36,7 @@ AutoMoveCamera::AutoMoveCamera(const Vector3 _pos, PlayerObject* _playerObject)
 	offSetPosition = NormalOffset;
 	// プレイヤーのポインタを保存
 	playerObject = _playerObject;
+	isChangeMode = false;
 
 	// ステータスクラスの追加
 	AddStatePoolMap(new CameraObjectStateNormal(), CameraState::NORMAL);
@@ -72,6 +73,13 @@ AutoMoveCamera::~AutoMoveCamera()
 */
 void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 {
+
+	if (isChangeMode)
+	{
+		// ダンスカメラに変更
+		nextState = CameraState::CHANGEMODE;
+	}
+
 	// プレイヤーがダンス状態だったら
 	if (playerObject->GetIsDancing())
 	{
@@ -95,7 +103,7 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 	// ステート外部からステート変更があったか？
 	if (nowState != nextState)
 	{
-		//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+		// マップの中に追加するアクターのコンテナがあるかどうかを調べる
 		auto state = statePoolMap.find(nextState);
 		if (state != statePoolMap.end())
 		{
@@ -107,7 +115,7 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 	}
 
 	// ステート実行
-	//マップの中に追加するアクターのコンテナがあるかどうかを調べる
+	// マップの中に追加するアクターのコンテナがあるかどうかを調べる
 	auto state = statePoolMap.find(nowState);
 	if (state != statePoolMap.end())
 	{
@@ -125,8 +133,13 @@ void AutoMoveCamera::UpdateGameObject(float _deltaTime)
 		nowState = nextState;
 	}
 
-	nextState = CameraState::NORMAL;
-	offSetPosition = NormalOffset;
+	// 画角切り替えモードがtrueだったら
+	if (isChangeMode)
+	{
+		// 当たり判定で切り替えるか判定を判定しているので一度通常状態に切り替える
+		isChangeMode = false;
+		offSetPosition = NormalOffset;
+	}
 }
 
 /*

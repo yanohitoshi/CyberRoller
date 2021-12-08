@@ -45,12 +45,18 @@ public:
 
 private:
 
+	// タイトル画面でのジャンプアタックプレイヤークラスのポインタ
 	TitleJumpAttackPlayerObject* titleJumpAttackPlayerObject;
 
+	// stateに入ってきたときのポジション
 	Vector3 enterPosition;
+	// 回転角度
 	float rotationAngle;
+	// フレーム時間を数えるカウント
 	int frameCount;
+	// 間隔
 	const float Offset;
+	// ジャンプ攻撃する時間
 	const int JumpAttackTime;
 	// 回転角定数
 	const float JumpAttackRotationAngle;

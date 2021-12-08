@@ -38,7 +38,7 @@ private:
     /*
     @fn エフェクトがアクティブ時の処理関数
     */
-    void ActiveEffectProcess();
+    void ActiveEffect();
 
     /*
     @fn エフェクトを飛ばす方向計算処理関数

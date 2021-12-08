@@ -45,6 +45,4 @@ private:
     const float AddScale;
     // –ˆƒtƒŒ[ƒ€ˆø‚­alpha’l
     const float SubAlpha;
-
 };
-

@@ -14,7 +14,7 @@ PlayerDeadEffectManager::PlayerDeadEffectManager(PlayerObject* _owner)
 	, PositionOffset(50.0f)
 	, ShiftPositionZ(40.0f)
 	, GenerationTime(30)
-	, DistanceOffset(30.0f)
+	, KnockBackOffset(30.0f)
 {
 	// メンバー変数の初期化	
 	particleState = ParticleState::PARTICLE_DISABLE;
@@ -62,7 +62,7 @@ void PlayerDeadEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -70,7 +70,7 @@ void PlayerDeadEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void PlayerDeadEffectManager::ActiveEffectProcess()
+void PlayerDeadEffectManager::ActiveEffect()
 {
 	// 発生までの時間を数える
 	++generationCount;
@@ -83,7 +83,7 @@ void PlayerDeadEffectManager::ActiveEffectProcess()
 		if (effectFrameCount % 5 == 0)
 		{
 			// 生成処理
-			GenerateEffectProcess();
+			GenerateEffect();
 		}
 	}
 }
@@ -91,7 +91,7 @@ void PlayerDeadEffectManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void PlayerDeadEffectManager::GenerateEffectProcess()
+void PlayerDeadEffectManager::GenerateEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -106,7 +106,7 @@ void PlayerDeadEffectManager::GenerateEffectProcess()
 	// 正規化
 	distance.Normalize();
 	// 速度を正規化したものに定数を掛ける
-	distance *= DistanceOffset;
+	distance *= KnockBackOffset;
 	//particleを生成
 	new PlayerDeadEffect(owner, position, distance);
 }

@@ -23,6 +23,7 @@ EnemyObjectStateReposition::~EnemyObjectStateReposition()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return EnemyState 次のステータス
 */
 EnemyState EnemyObjectStateReposition::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
@@ -45,8 +46,12 @@ EnemyState EnemyObjectStateReposition::Update(EnemyObjectBase* _owner, float _de
 	repositionRotationVec = firstPosition - _owner->GetPosition();
 	// 初期位置までの長さを得るために変数へ保存
 	Vector3 checkReposition = repositionRotationVec;
-	// 正規化
-	repositionRotationVec.Normalize();
+
+	if (!Math::NearZero(repositionRotationVec.Length()))
+	{
+		// 正規化
+		repositionRotationVec.Normalize();
+	}
 	// 回転処理
 	RotationProcess(_owner, repositionRotationVec, _owner->GetCharaForwardVec());
 

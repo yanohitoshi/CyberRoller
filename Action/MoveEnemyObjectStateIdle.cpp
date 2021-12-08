@@ -22,6 +22,7 @@ MoveEnemyObjectStateIdle::~MoveEnemyObjectStateIdle()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return EnemyState 次のステータス
 */
 EnemyState MoveEnemyObjectStateIdle::Update(EnemyObjectBase* _owner, float _deltaTime)
 {
@@ -52,5 +53,4 @@ void MoveEnemyObjectStateIdle::Enter(EnemyObjectBase* _owner, float _deltaTime)
 	// stateを待機状態にして保存
 	state = EnemyState::ENEMY_STATE_IDLE;
 	_owner->SetState(State::Active);
-
 }

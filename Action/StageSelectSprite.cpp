@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "StageSelectSprite.h"
 #include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
@@ -5,6 +8,9 @@
 
 /*
 @fn コンストラクタ
+@parma 親クラスのポインタ
+@parma シーンのステータス
+@parma 描画する画像のファイルネーム
 */
 StageSelectSprite::StageSelectSprite(StageSelectSceneUI* _owner, SceneState _state,const std::string& _spriteFileName)
 	: GameObject(false, Tag::UI)

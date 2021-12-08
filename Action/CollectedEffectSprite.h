@@ -20,6 +20,7 @@ public:
 
     /*
     @brief	コンストラクタ
+    @param 何番目の収集物かのタグ
     */
     CollectedEffectSprite(CollectionTag collectionTag);
 
@@ -44,7 +45,9 @@ private:
     Texture* tex;
     // フレームカウント変数
     int frameCount;
+    // 拡大縮小値
     float scale;
+    // アルファ値
     float alpha;
 
     // 各収集物UIのポジション
@@ -65,6 +68,9 @@ public:
     */
     SpriteComponent* GetSpriteComponent() { return sprite; }
 
+    /*
+    @fn 初期化関数
+    */
     void Reset();
 };
 

@@ -7,6 +7,7 @@
 
 /*
 @fn コンストラクタ
+@param _owner 親クラスのポインタ
 */
 PlayerObjectStateJumpStart::PlayerObjectStateJumpStart(PlayerObject* _owner)
 	: JumpCorrection(80.0f)
@@ -33,6 +34,7 @@ PlayerObjectStateJumpStart::~PlayerObjectStateJumpStart()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateJumpStart::Update(PlayerObject* _owner, float _deltaTime)
 {

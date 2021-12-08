@@ -4,6 +4,10 @@
 //-----------------------------------------------------------------------------
 #include "EnemyObjectStateBase.h"
 
+/*
+@file EnemyObjectStateAttack.h
+@brief 敵オブジェクトの攻撃状態を管理するクラス
+*/
 class EnemyObjectStateAttack :
     public EnemyObjectStateBase
 {
@@ -24,6 +28,7 @@ public:
 	@brief	stateに応じてアップデートを行う
 	@param	_owner 親クラスのポインタ
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	@return EnemyState 次のステータス
 	*/
 	EnemyState Update(EnemyObjectBase* _owner, float _deltaTime)override;
 

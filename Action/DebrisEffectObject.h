@@ -53,9 +53,11 @@ private:
     Vector3 direction;
     // ¶‘¶ŠÔ
     int lifeCount;
-    const int MaxLifeCount;
     // ˆÚ“®‘¬“x
     float moveSpeed;
+
+    // ¶‘¶ŠÔ‚ÌÅ‘å’l’è”
+    const int MaxLifeCount;
     // ‘¬“x‚É‘«‚·—Í
     const float MovePower;
 

@@ -82,6 +82,4 @@ private:
     const float ChangeFadeInValue;
     // フェードアウトに切り替える規定値定数
     const float ChangeFadeOutValue;
-
 };
-

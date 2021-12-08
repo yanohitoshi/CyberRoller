@@ -39,4 +39,3 @@ private:
     const float InitScale;
 
 };
-

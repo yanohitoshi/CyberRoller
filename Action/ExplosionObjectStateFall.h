@@ -47,10 +47,13 @@ private:
 	*/
 	void Flashing();
 
+	// 落下速度
 	float fallSpeed;
-
+	// 落下時間
 	int fallCount;
+	// 色を変える時間
 	int colorChangeTime;
+	// 赤色にするかどうか
 	bool isRed;
 	// 最初の色を変えるタイミング
 	const int FirstColorChangeTime;

@@ -58,6 +58,4 @@ public://ゲッターセッター
     @return	bool 描画されているかフラグ
     */
     static bool GetDrawFlag() { return drawFlag; }
-
 };
-

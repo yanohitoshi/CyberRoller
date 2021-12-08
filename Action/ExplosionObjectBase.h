@@ -78,7 +78,9 @@ protected:
 	// AABBの当たり判定を行うクラス
 	BoxCollider* boxCollider;
 
+	// オブジェクトの現在のステータス
 	ExplosionObjectState nowState;
+	// オブジェクトの次のステータス
 	ExplosionObjectState nextState;
 
 	// 爆発開始状態か
@@ -98,6 +100,7 @@ protected:
 	// 降るエリア
 	Vector3 fallArea;
 
+	// 落下速度
 	float fallSpeed;
 
 	// 全stateが格納されるマップ
@@ -105,6 +108,10 @@ protected:
 
 public:
 
+	/*
+	@fn meshComponentのgetter
+	@return meshComponentのポインタ
+	*/
 	MeshComponent* GetMeshComponent() { return meshComponent; }
 
 	/*

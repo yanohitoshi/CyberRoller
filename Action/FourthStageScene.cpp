@@ -1,13 +1,20 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "FourthStageScene.h"
 #include "RenderingObjectManager.h"
 #include "PlayerObject.h"
 #include "InputSystem.h"
-#include "ForthStageCreator.h"
+#include "FourthStageCreator.h"
 #include "ForthStageUI.h"
 #include "CountDownFont.h"
 #include "CollectionObject.h"
 #include "FourthSceneSoundManager.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 FourthStageScene::FourthStageScene()
 {
 	// ライト情報初期化
@@ -28,34 +35,46 @@ FourthStageScene::FourthStageScene()
 	state = SceneState::FOURTH_SATGE_SCENE;
 
 	// クリエイター生成
-	ForthStageCreator* fifthStageCreator = new ForthStageCreator(false, Tag::OTHER);
+	FourthStageCreator* fourthStageCreator = new FourthStageCreator(false, Tag::OTHER);
 
 	//ステージ情報ファイルを開く
-	if (!fifthStageCreator->OpenFile())
+	if (!fourthStageCreator->OpenFile())
 	{
 		//プレイヤーの生成
-		playerObject = fifthStageCreator->CreatePlayer();
+		playerObject = fourthStageCreator->CreatePlayer();
 		//ステージを生成する
-		fifthStageCreator->CreateStage();
+		fourthStageCreator->CreateStage();
 	}
 
-	CollectionObject* firstCollection = fifthStageCreator->FindCollectionObject(CollectionTag::FIRST);
-	CollectionObject* secondCollection = fifthStageCreator->FindCollectionObject(CollectionTag::SECOND);
-	CollectionObject* thirdCollection = fifthStageCreator->FindCollectionObject(CollectionTag::THIRD);
+	// クリエイターから収集物クラスのポインタをもらう
+	CollectionObject* firstCollection = fourthStageCreator->FindCollectionObject(CollectionTag::FIRST);
+	CollectionObject* secondCollection = fourthStageCreator->FindCollectionObject(CollectionTag::SECOND);
+	CollectionObject* thirdCollection = fourthStageCreator->FindCollectionObject(CollectionTag::THIRD);
 
 	//シーンUIを追加
 	new ForthStageUI(playerObject, firstCollection, secondCollection, thirdCollection);
 
 	// クリエイターの状態をdeadにし片づける
-	fifthStageCreator->SetState(State::Dead);
+	fourthStageCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	new FourthSceneSoundManager(this);
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 FourthStageScene::~FourthStageScene()
 {
 }
 
+/*
+@fn　シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState FourthStageScene::Update(const InputState& _inputState)
 {
 	// シーンが始まったらライトを強くする

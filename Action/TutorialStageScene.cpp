@@ -45,6 +45,7 @@ TutorialStageScene::TutorialStageScene()
 	// クリエイターの状態をdeadにし片づける
 	tutorialStageCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	new TutorialSceneSoundManager(this);
 }
 

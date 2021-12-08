@@ -40,8 +40,6 @@ public:
     */
     void GameObjectInput(const InputState& _keyState)override;
 
-
-
 private:
 
     /*
@@ -80,6 +78,4 @@ public://ゲッターセッター
     @return	コンテニューしたかどうかフラグ
     */
     static bool GetContinueFlag() { return continueFlag; }
-
 };
-

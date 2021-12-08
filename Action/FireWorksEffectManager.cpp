@@ -64,7 +64,7 @@ void FireWorksEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -72,7 +72,7 @@ void FireWorksEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void FireWorksEffectManager::ActiveEffectProcess()
+void FireWorksEffectManager::ActiveEffect()
 {
 	// ownerのポジションを得る
 	position = owner->GetPosition();
@@ -81,7 +81,7 @@ void FireWorksEffectManager::ActiveEffectProcess()
 	if (generateFlag == true)
 	{
 		// エフェクト生産関数
-		GenerateEffectProcess();
+		GenerateEffect();
 
 		// 生成フラグをfalseに
 		generateFlag = false;
@@ -92,7 +92,7 @@ void FireWorksEffectManager::ActiveEffectProcess()
 /*
 @fn エフェクト生産処理関数
 */
-void FireWorksEffectManager::GenerateEffectProcess()
+void FireWorksEffectManager::GenerateEffect()
 {
 	for (int efectCount = 0; efectCount < MaxEffects; efectCount++)
 	{
@@ -111,7 +111,7 @@ void FireWorksEffectManager::GenerateEffectProcess()
 		vel.z *= -1.0f;
 
 		// エフェクトの色の設定と向きを調整
-		SelectEffectColorProcess(efectCount, vel);
+		SelectEffectColor(efectCount, vel);
 
 		//particleを生成
 		new FierWorksEffect(position, vel, crystalColor);
@@ -121,7 +121,7 @@ void FireWorksEffectManager::GenerateEffectProcess()
 /*
 @fn エフェクトの色と向きを設定する関数
 */
-void FireWorksEffectManager::SelectEffectColorProcess(int _index,Vector3& _velocity)
+void FireWorksEffectManager::SelectEffectColor(int _index,Vector3& _velocity)
 {
 	// いろいろな方向にいろいろな色で飛ばしたいので
 	// 2の倍数の時はｘ軸方向にマイナスを掛けて色を赤に設定

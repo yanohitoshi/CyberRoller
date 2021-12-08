@@ -9,6 +9,10 @@
 #include "StageSelectSceneUI.h"
 #include "StageSelectSceneSoundManager.h"
 
+/*
+@fn コンストラクタ
+@brief  Sceneの生成を行う
+*/
 StageSelectScene::StageSelectScene()
 	: InputDeadSpace(0.3f)
 {
@@ -20,23 +24,35 @@ StageSelectScene::StageSelectScene()
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	// シーンステータス初期化
-	state = SceneState::STAGE_SELECT_SCENE;
-	selectState = SceneState::FIRST_SATGE_SCENE;
-
-	new StageSelectSceneUI(this);
-	stageSelectSceneSoundManager = new StageSelectSceneSoundManager();
+	// 変数初期化
 	isAnalogStickSelect = false;
 	selectCount = 0;
 	isSceneSelect = false;
 
-	new StageSelectSceneSoundManager();
+	// シーンステータス初期化
+	state = SceneState::STAGE_SELECT_SCENE;
+	selectState = SceneState::FIRST_SATGE_SCENE;
+
+	// シーンUIを追加
+	new StageSelectSceneUI(this);
+	// サウンドマネージャークラスを生成
+	stageSelectSceneSoundManager = new StageSelectSceneSoundManager();
 }
 
+/*
+@fn デストラクタ
+@brief  sceneの削除を行う
+*/
 StageSelectScene::~StageSelectScene()
 {
 }
 
+/*
+@fn     シーンのアップデート関数
+@brief	シーンの更新処理を行う
+@param	入力情報
+@return シーンの遷移を判定するためのenum型のSceneState
+*/
 SceneState StageSelectScene::Update(const InputState& _inputState)
 {
 
@@ -110,6 +126,9 @@ SceneState StageSelectScene::Update(const InputState& _inputState)
 	return state;
 }
 
+/*
+@fn 右が選択されたときの処理
+*/
 void StageSelectScene::SelectRight()
 {
 	switch (selectState)
@@ -136,6 +155,9 @@ void StageSelectScene::SelectRight()
 	}
 }
 
+/*
+@fn 左が選択されたときの処理
+*/
 void StageSelectScene::SelectLeft()
 {
 	switch (selectState)
@@ -162,16 +184,23 @@ void StageSelectScene::SelectLeft()
 	}
 }
 
+/*
+@fn アナログスティックで選択されたときの処理
+@param アナログスティックの傾き角度
+*/
 void StageSelectScene::SelectAnalogStick(float _axis)
 {
+	// 軸が0.0より小さい時
 	if (_axis < 0.0f)
 	{
+		// 右移動の処理を行う
 		SelectRight();
 		isAnalogStickSelect = true;
 		return;
 	}
-	else if (_axis > 0.0f)
+	else if (_axis > 0.0f) // 軸が0.0より大きい時
 	{
+		// 左移動の処理を行う
 		SelectLeft();
 		isAnalogStickSelect = true;
 		return;

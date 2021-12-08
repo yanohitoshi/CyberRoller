@@ -58,7 +58,7 @@ void LandingEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		// エフェクトの生成
-		ActiveEffectProcess();
+		ActiveEffect();
 		break;
 	}
 }
@@ -66,7 +66,7 @@ void LandingEffectManager::UpdateGameObject(float _deltaTime)
 /*
 @fn エフェクトがアクティブ時の処理関数
 */
-void LandingEffectManager::ActiveEffectProcess()
+void LandingEffectManager::ActiveEffect()
 {
 	if (generateEffectsFlag)
 	{

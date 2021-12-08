@@ -68,7 +68,7 @@ void CollectionEffectManager::UpdateGameObject(float _deltaTime)
 		// 有効状態だったら
 	case PARTICLE_ACTIVE:
 
-		ActiveEffectProcess(_deltaTime);
+		ActiveEffect(_deltaTime);
 		break;
 	}
 }
@@ -77,7 +77,7 @@ void CollectionEffectManager::UpdateGameObject(float _deltaTime)
 @fn エフェクトがアクティブ時の処理関数
 @param	_deltaTime 前のフレームでかかった時間
 */
-void CollectionEffectManager::ActiveEffectProcess(float _deltaTime)
+void CollectionEffectManager::ActiveEffect(float _deltaTime)
 {
 	// 生成フラグがtrueの時
 	if (generateFlag)

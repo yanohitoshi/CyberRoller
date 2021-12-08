@@ -72,6 +72,7 @@ void PlayerObjectStateIdle::Input(PlayerObject* _owner, const InputState& _keySt
 @fn state変更時の初期化
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 void PlayerObjectStateIdle::Enter(PlayerObject* _owner, float _deltaTime)
 {

@@ -24,6 +24,7 @@ PlayerObjectStateRunTurn::~PlayerObjectStateRunTurn()
 @brief	stateに応じてアップデートを行う
 @param	_owner 親クラスのポインタ
 @param	_deltaTime 最後のフレームを完了するのに要した時間
+@return PlayerState　更新終了時のステータスを返す
 */
 PlayerState PlayerObjectStateRunTurn::Update(PlayerObject* _owner, float _deltaTime)
 {
@@ -171,8 +172,12 @@ void PlayerObjectStateRunTurn::InputMovableProcess(PlayerObject* _owner, Vector3
 {
 	// 方向キーの入力値とカメラの向きから、移動方向を決定
 	Vector3 forward = _owner->GetForwardVec() * _axis.x + _owner->GetRightVec() * _axis.y;
-	// ベクトルの正規化
-	forward.Normalize();
+
+	if (!Math::NearZero(forward.Length()))
+	{
+		// ベクトルの正規化
+		forward.Normalize();
+	}
 	// 前方ベクトルの更新
 	_owner->SetCharaForwardVec(forward);
 	// 入力フラグをtrueに

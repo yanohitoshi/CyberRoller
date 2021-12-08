@@ -47,6 +47,7 @@ FinalStageScene::FinalStageScene()
 		finalStageCreator->CreateStage();
 	}
 
+	// クリエイターから収集物クラスのポインタをもらう
 	CollectionObject* firstCollection = finalStageCreator->FindCollectionObject(CollectionTag::FIRST);
 	CollectionObject* secondCollection = finalStageCreator->FindCollectionObject(CollectionTag::SECOND);
 	CollectionObject* thirdCollection = finalStageCreator->FindCollectionObject(CollectionTag::THIRD);
@@ -57,6 +58,7 @@ FinalStageScene::FinalStageScene()
 	// 生成の役割を終えたのでクリエイターの状態をdeadにし片づける
 	finalStageCreator->SetState(State::Dead);
 
+	// サウンドマネージャークラスを生成
 	new FinalSceneSoundManager(this);
 }
 

@@ -33,6 +33,10 @@ FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(17)
 	, LightPointPositionZ(7000.0f)
+	, CameraChangeAabb(Vector3(-4600.0f,-3000.0f,0.0f),Vector3(4200.0f,3000.0f,4000.0f))
+	, CameraChangeOffset(Vector3(0.0f, 900.0f, 700.0f))
+	, CameraChangeFinalAabb(Vector3(-1200.0f, -600.0f, -600.0f), Vector3(1800.0f, 600.0f, 250.0f))
+	, CameraChangeFinalOffset(Vector3(-600.0f, 0.0f, 200.0f))
 {
 }
 
@@ -75,7 +79,7 @@ FinalStageCreator::~FinalStageCreator()
 bool FinalStageCreator::OpenFile()
 {
 	// ステージデータ読み込み (baseLayer)
-	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/finalStageMap.json", "layer1"))
+	if (!readTiledJson(layer1StageData, "Assets/Config/StageData/FinalStageMap.json", "layer1"))
 	{
 		printf("do'nt have Layer/layer1\n");
 		return true;
@@ -86,112 +90,112 @@ bool FinalStageCreator::OpenFile()
 	sizeY = layer1StageData.size();
 
 	// ステージデータ読み込み (layer2) 
-	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/finalStageMap.json", "layer2"))
+	if (!readTiledJson(layer2StageData, "Assets/Config/StageData/FinalStageMap.json", "layer2"))
 	{
 		printf("do'nt have Layer/layer2\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer3) 
-	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/finalStageMap.json", "layer3"))
+	if (!readTiledJson(layer3StageData, "Assets/Config/StageData/FinalStageMap.json", "layer3"))
 	{
 		printf("do'nt have Layer/layer3\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer4) 
-	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/finalStageMap.json", "layer4"))
+	if (!readTiledJson(layer4StageData, "Assets/Config/StageData/FinalStageMap.json", "layer4"))
 	{
 		printf("do'nt have Layer/layer4\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer5) 
-	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/finalStageMap.json", "layer5"))
+	if (!readTiledJson(layer5StageData, "Assets/Config/StageData/FinalStageMap.json", "layer5"))
 	{
 		printf("do'nt have Layer/layer5\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (layer6) 
-	if (!readTiledJson(layer6StageData, "Assets/Config/StageData/finalStageMap.json", "layer6"))
+	if (!readTiledJson(layer6StageData, "Assets/Config/StageData/FinalStageMap.json", "layer6"))
 	{
 		printf("do'nt have Layer/layer6\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer7) 
-	if (!readTiledJson(layer7StageData, "Assets/Config/StageData/finalStageMap.json", "layer7"))
+	if (!readTiledJson(layer7StageData, "Assets/Config/StageData/FinalStageMap.json", "layer7"))
 	{
 		printf("do'nt have Layer/layer7\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer8) 
-	if (!readTiledJson(layer8StageData, "Assets/Config/StageData/finalStageMap.json", "layer8"))
+	if (!readTiledJson(layer8StageData, "Assets/Config/StageData/FinalStageMap.json", "layer8"))
 	{
 		printf("do'nt have Layer/layer8\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer9) 
-	if (!readTiledJson(layer9StageData, "Assets/Config/StageData/finalStageMap.json", "layer9"))
+	if (!readTiledJson(layer9StageData, "Assets/Config/StageData/FinalStageMap.json", "layer9"))
 	{
 		printf("do'nt have Layer/layer9\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer10) 
-	if (!readTiledJson(layer10StageData, "Assets/Config/StageData/finalStageMap.json", "layer10"))
+	if (!readTiledJson(layer10StageData, "Assets/Config/StageData/FinalStageMap.json", "layer10"))
 	{
 		printf("do'nt have Layer/layer10\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer11) 
-	if (!readTiledJson(layer11StageData, "Assets/Config/StageData/finalStageMap.json", "layer11"))
+	if (!readTiledJson(layer11StageData, "Assets/Config/StageData/FinalStageMap.json", "layer11"))
 	{
 		printf("do'nt have Layer/layer11\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer12) 
-	if (!readTiledJson(layer12StageData, "Assets/Config/StageData/finalStageMap.json", "layer12"))
+	if (!readTiledJson(layer12StageData, "Assets/Config/StageData/FinalStageMap.json", "layer12"))
 	{
 		printf("do'nt have Layer/layer12\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer13) 
-	if (!readTiledJson(layer13StageData, "Assets/Config/StageData/finalStageMap.json", "layer13"))
+	if (!readTiledJson(layer13StageData, "Assets/Config/StageData/FinalStageMap.json", "layer13"))
 	{
 		printf("do'nt have Layer/layer13\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer14) 
-	if (!readTiledJson(layer14StageData, "Assets/Config/StageData/finalStageMap.json", "layer14"))
+	if (!readTiledJson(layer14StageData, "Assets/Config/StageData/FinalStageMap.json", "layer14"))
 	{
 		printf("do'nt have Layer/layer14\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer15) 
-	if (!readTiledJson(layer15StageData, "Assets/Config/StageData/finalStageMap.json", "layer15"))
+	if (!readTiledJson(layer15StageData, "Assets/Config/StageData/FinalStageMap.json", "layer15"))
 	{
 		printf("do'nt have Layer/layer15\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer16) 
-	if (!readTiledJson(layer16StageData, "Assets/Config/StageData/finalStageMap.json", "layer16"))
+	if (!readTiledJson(layer16StageData, "Assets/Config/StageData/FinalStageMap.json", "layer16"))
 	{
 		printf("do'nt have Layer/layer16\n");
 		return true;
 	}
 	// ステージデータ読み込み (layer17) 
-	if (!readTiledJson(layer17StageData, "Assets/Config/StageData/finalStageMap.json", "layer17"))
+	if (!readTiledJson(layer17StageData, "Assets/Config/StageData/FinalStageMap.json", "layer17"))
 	{
 		printf("do'nt have Layer/layer17\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (player) 
-	if (!readTiledJson(playerData, "Assets/Config/StageData/finalStageMap.json", "Player"))
+	if (!readTiledJson(playerData, "Assets/Config/StageData/FinalStageMap.json", "Player"))
 	{
 		printf("do'nt have Layer/Player\n");
 		return true;
 	}
 
 	// ステージデータ読み込み (CameraDirecting)
-	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/finalStageMap.json", "CameraDirecting"))
+	if (!readTiledJson(cameraDirectingData, "Assets/Config/StageData/FinalStageMap.json", "CameraDirecting"))
 	{
 		printf("do'nt have Layer/CameraDirecting\n");
 		return true;
@@ -450,6 +454,16 @@ void FinalStageCreator::CreateLayer6(int _indexX, int _indexY)
 	case(LAYER6_BLOCK_PARTS):
 		// ブロックオブジェクト生成
 		new GroundObject(layer6Pos, BlockSize, Tag::GROUND);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_RIGHT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, true);
+		break;
+
+	case(POWERCELLS_LIGHT_PARTS_LEFT):
+		// パワーセルライトの生成
+		new LightObject(layer6Pos, LightObjectSize, Tag::GROUND, false);
 		break;
 
 	case(FIRST_SWITCH_PARTS):
@@ -1026,6 +1040,12 @@ void FinalStageCreator::CreateLayer17(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn レイヤー18クリエイター
+@brief  レイヤー18のマップデータに含まれるオブジェクトの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
@@ -1065,21 +1085,32 @@ void FinalStageCreator::CreateLayer18(int _indexX, int _indexY)
 	}
 }
 
+/*
+@fn カメラモード変更ポイント生成
+@brief  カメラモード変更ポイントの生成を行う
+@param	_indexX 検索するマップデータの添え字X
+@param	_indexY 検索するマップデータの添え字Y
+*/
 void FinalStageCreator::CreateCameraDirecting(int _indexX, int _indexY)
 {
 	// ステージデータ配列からマップデータをもらう
 	const unsigned int CameraDirectingData = cameraDirectingData[_indexY][_indexX];
-	// レイヤー1のマップオブジェクトのポジション
-	AABB aabb2 = { Vector3(-4400.0f,-1800.0f,0.0f),Vector3(1800.0f,1800.0f,4000.0f) };
+	// 1つ目のカメラチェンジエリアのポジション
+	Vector3 cameraChangePos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[6]);
+	// 2つ目のカメラチェンジエリアのポジション
+	Vector3 cameraChangeFinalPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14]);
 
+	// データを元に画角変更ポイントを生成
 	switch (CameraDirectingData)
 	{
 	case(CAMERA_CHANGE_AREA_FINAL):
-		Vector3 aabbPos = Vector3(Offset * _indexX, -Offset * _indexY, objectPositionZ[14]);
-		AABB aabb = { Vector3(-1200.0f,-600.0f,-600.0f),Vector3(1800.0f,600.0f,250.0f) };
-		Vector3 offset = Vector3(-600.0f, 0.0f, 200.0f);
 		// 画角変更ポイントオブジェクト生成
-		new CameraChangePoint(aabbPos, aabb, offset, Tag::CAMERA_CHANGE_OBLIQUE);
+		new CameraChangePoint(cameraChangeFinalPos, CameraChangeFinalAabb, CameraChangeFinalOffset, Tag::CAMERA_CHANGE_OBLIQUE);
+		break;
+
+	case(CAMERA_CHANGE_AREA):
+		// 画角変更ポイントオブジェクト生成
+		new CameraChangePoint(cameraChangePos, CameraChangeAabb, CameraChangeOffset, Tag::CAMERA_CHANGE_OBLIQUE);
 		break;
 	}
 }
