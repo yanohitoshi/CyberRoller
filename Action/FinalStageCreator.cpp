@@ -33,7 +33,7 @@ FinalStageCreator::FinalStageCreator(bool _reUseGameObject, const Tag _objectTag
 	: StageCreatorBase(_reUseGameObject, _objectTag)
 	, MaxLayerNumber(17)
 	, LightPointPositionZ(7000.0f)
-	, CameraChangeAabb(Vector3(-4600.0f,-3000.0f,0.0f),Vector3(4200.0f,3000.0f,4000.0f))
+	, CameraChangeAabb(Vector3(-4600.0f,-4000.0f,0.0f),Vector3(4200.0f,4000.0f,4000.0f))
 	, CameraChangeOffset(Vector3(0.0f, 900.0f, 700.0f))
 	, CameraChangeFinalAabb(Vector3(-1200.0f, -600.0f, -600.0f), Vector3(1800.0f, 600.0f, 250.0f))
 	, CameraChangeFinalOffset(Vector3(-600.0f, 0.0f, 200.0f))
