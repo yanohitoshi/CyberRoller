@@ -199,6 +199,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="FourthSceneSoundManager.cpp" />
     <ClCompile Include="FourthStageScene.cpp" />
     <ClCompile Include="ForthStageUI.cpp" />
+    <ClCompile Include="GraphicsResourceManager.cpp" />
     <ClCompile Include="MusicComponent.cpp" />
     <ClCompile Include="ResultSceneSoundManager.cpp" />
     <ClCompile Include="SecondSceneSoundManager.cpp" />
@@ -451,6 +452,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="FourthSceneSoundManager.h" />
     <ClInclude Include="FourthStageScene.h" />
     <ClInclude Include="ForthStageUI.h" />
+    <ClInclude Include="GraphicsResourceManager.h" />
     <ClInclude Include="MusicComponent.h" />
     <ClInclude Include="ResultSceneSoundManager.h" />
     <ClInclude Include="SecondSceneSoundManager.h" />

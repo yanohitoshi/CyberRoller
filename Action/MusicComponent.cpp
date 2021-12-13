@@ -26,6 +26,11 @@ MusicComponent::~MusicComponent()
 {
 	// リソースの削除を管理者ファイルネームを渡し行う
 	AUDIO_RESOURCE->RemoveMusic(myFileName);
+
+	if (myMusic != nullptr)
+	{
+		myMusic = nullptr;
+	}
 }
 
 /*

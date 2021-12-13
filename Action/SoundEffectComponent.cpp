@@ -26,6 +26,11 @@ SoundEffectComponent::~SoundEffectComponent()
 {
 	// リソースの削除を管理者ファイルネームを渡し行う
 	AUDIO_RESOURCE->RemoveSound(myFileName);
+
+	if (mySound != nullptr)
+	{
+		mySound = nullptr;
+	}
 }
 
 /*

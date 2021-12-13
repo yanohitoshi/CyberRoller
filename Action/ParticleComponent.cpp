@@ -13,8 +13,11 @@ Vector3 ParticleComponent::staticCameraWorldPos;
 
 /*
 @fn コンストラクタ
+@param _owner 親クラスのポインタ
+@param _useStaticBillboardMat ビルボード行列を使用するかどうか
 @param _offset 親オブジェクトクラスと画像を描画する位置の差
 @param _scale 画像の描画サイズ
+@param _updateOrder 描画順を入れ替える際に用いる数値
 */
 ParticleComponent::ParticleComponent(GameObject* _owner, bool _useStaticBillboardMat,const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
@@ -34,6 +37,10 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _useStaticBillboar
 	RENDERING_OBJECT_MANAGER->AddParticle(this);
 }
 
+/*
+@fn デストラクタ
+@brief  Componentの削除を行う
+*/
 ParticleComponent::~ParticleComponent()
 {
 	//レンダラーからポインタを削除する

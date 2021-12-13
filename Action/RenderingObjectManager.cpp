@@ -172,6 +172,28 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 		return false;
 	}
 
+	// 3Dモデル用ビュー行列の設定
+	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
+	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
+		(float)screenWidth, (float)screenHeight, CameraProjectionNear, CameraProjectionFar);
+
+	// シャドウ用フレームバッファオブジェクトを作成・デプスマップを生成し、シャドウバッファにアタッチ
+	glGenFramebuffers(1, &depthMapFBO);
+	glGenTextures(1, &depthMap);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+		ShadowWidth, ShadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// depthMapFBOにデプステクスチャをアタッチする
+	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 	//スプライト用の頂点配列を作成
 	CreateSpriteVerts();
 
@@ -305,6 +327,9 @@ void RenderingObjectManager::Draw()
 
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
 	spriteShader->SetActive();
+	// sprite用ビュー行列の設定
+	Matrix4 viewProj = Matrix4::CreateSimpleViewProj((float)screenWidth, (float)screenHeight);
+	spriteShader->SetMatrixUniform("uViewProj", viewProj);
 	spriteVerts->SetActive();
 	// すべてのスプライトの描画
 	for (auto sprite : sprites)
@@ -349,27 +374,6 @@ void RenderingObjectManager::AddSprite(SpriteComponent* _spriteComponent)
 
 		// 検索した場所のiterの場所に挿入
 		sprites.insert(iter, _spriteComponent);
-	}
-
-	// 背景だったら背景用ののコンテナに格納
-	if (isBackGround == true)
-	{
-		// 描画順に沿って追加
-		// 今あるスプライトから挿入する場所の検索
-		// (DrawOrderが小さい順番に描画するため)
-		auto iter = backGroundSprites.begin();
-		for (;
-			iter != backGroundSprites.end();
-			++iter)
-		{
-			if (myDrawOrder < (*iter)->GetDrawOrder())
-			{
-				break;
-			}
-		}
-
-		// 検索した場所のiterの場所に挿入
-		backGroundSprites.insert(iter, _spriteComponent);
 	}
 }
 
@@ -654,15 +658,6 @@ bool RenderingObjectManager::LoadShaders()
 	{
 		return false;
 	}
-	spriteShader->SetActive();
-	// sprite用ビュー行列の設定
-	Matrix4 viewProj = Matrix4::CreateSimpleViewProj((float)screenWidth, (float)screenHeight);
-	spriteShader->SetMatrixUniform("uViewProj", viewProj);
-
-	// 3Dモデル用ビュー行列の設定
-	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
-	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
-		(float)screenWidth, (float)screenHeight, CameraProjectionNear, CameraProjectionFar);
 
 	// switch用シェーダーの作成(色変更可能シェーダー)
 	switchShader = new Shader();
@@ -670,8 +665,6 @@ bool RenderingObjectManager::LoadShaders()
 	{
 		return false;
 	}
-	switchShader->SetActive();
-	switchShader->SetMatrixUniform("uViewProj", view * projection);
 
 	skyboxShader = new Shader();
 	if (!skyboxShader->Load("Shaders/gBuffer_SkyBox.vert", "Shaders/gBuffer_SkyBox.frag"))
@@ -685,23 +678,6 @@ bool RenderingObjectManager::LoadShaders()
 	{
 		printf("シェーダー読み込み失敗\n");
 	}
-
-	// シャドウ用フレームバッファオブジェクトを作成・デプスマップを生成し、シャドウバッファにアタッチ
-	glGenFramebuffers(1, &depthMapFBO);
-	glGenTextures(1, &depthMap);
-	glBindTexture(GL_TEXTURE_2D, depthMap);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-		ShadowWidth, ShadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// depthMapFBOにデプステクスチャをアタッチする
-	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-	glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	// デプスマップ焼き用シェーダ(アニメーションなし)
 	depthMapShader = new Shader();

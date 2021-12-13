@@ -291,10 +291,10 @@ private:
 	// キューブマップ
 	class CubeMapComponent* activeSkyBox; // 有効な(描画する)スカイボックス
 
-	// スプライトシェーダー
-	Shader* spriteShader;
 	// スプライトの頂点配列
 	VertexArray* spriteVerts;
+	// スプライトシェーダー
+	Shader* spriteShader;
 
 	// スカイボックス用シェーダ
 	Shader* skyboxShader;
@@ -303,9 +303,6 @@ private:
 	Shader* switchShader;
 	// ジオメトリインスタンス用シェーダー
 	Shader* geometryInstanceShader;
-	// スキンメッシュ
-	Shader*  mSkinnedShader;  
-
 	// shadowマップ関連シェーダー
 	// shadowMap用（メッシュ）
 	Shader* depthMapShader;
@@ -322,6 +319,7 @@ private:
 	Shader* particleShader;
 	// パーティクル用頂点定義
 	VertexArray* particleVertex;
+
 	// キューブ頂点配列
 	VertexArray* cubeVerts;
 
@@ -404,9 +402,8 @@ private:
 public: //ゲッターセッター
 
 	/*
-	@brief  テクスチャの取得
-	@param	_fileName　取得したいテクスチャのファイル名
-	@return Textureクラスのポインタ
+	@brief  ジオメトリインスタンスを管理しているクラスを取得
+	@return ジオメトリインスタンスを管理しているクラスのポインタ
 	*/
 	GeometryInstanceManager* GetGeometryInstanceManager() { return geometryInstanceManager; }
 

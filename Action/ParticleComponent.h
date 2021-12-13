@@ -24,8 +24,11 @@ public:
 
 	/*
 	@fn コンストラクタ
+	@param _owner 親クラスのポインタ
+	@param _useStaticBillboardMat ビルボード行列を使用するかどうか
 	@param _offset 親オブジェクトクラスと画像を描画する位置の差
 	@param _scale 画像の描画サイズ
+	@param _updateOrder 描画順を入れ替える際に用いる数値
 	*/
 	ParticleComponent(GameObject* _owner, bool _useStaticBillboardMat ,const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
 	
