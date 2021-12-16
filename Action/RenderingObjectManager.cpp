@@ -265,6 +265,7 @@ void RenderingObjectManager::Draw()
 	Shader* useShader = nullptr;
 	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SPRITE);
 	useShader->SetActive();
+	spriteVerts->SetActive();
 	useShader->SetMatrixUniform("uViewProj", viewProj);
 	// すべてのスプライトの描画
 	for (auto sprite : spriteComponents)
