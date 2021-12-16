@@ -24,6 +24,7 @@
 #include "HDRRenderer.h"
 #include "GeometryInstanceManager.h"
 #include "PhysicsWorld.h"
+#include "GraphicsResourceManager.h"
 
 RenderingObjectManager* RenderingObjectManager::renderingObjectManager = nullptr;
 
@@ -40,15 +41,8 @@ void RenderingObjectManager::SetParticleVertex()
 */
 RenderingObjectManager::RenderingObjectManager()
 	: hdrRenderer(nullptr)
-	, spriteShader(nullptr)
 	, spriteVerts(nullptr)
-	, particleShader(nullptr)
 	, particleVertex(nullptr)
-	, depthMapShader(nullptr)
-	, switchShader(nullptr)
-	, shadowMapShader(nullptr)
-	, skinnedDepthMapShader(nullptr)
-	, skinnedShadowMapShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
@@ -65,8 +59,6 @@ RenderingObjectManager::RenderingObjectManager()
 	, LightProjectionFar(20000.0f)
 	, ShiftLightPositionZ(7000.0f)
 	, ShiftLightPositionX(500.0f)
-	, MaxTimeFontTextures(501)
-	, TimeFontSize(72)
 {
 }
 
@@ -165,13 +157,6 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 	// 一部のプラットフォームで出る無害なエラーコードをクリアする
 	glGetError();
 
-	// シェーダーのロード
-	if (!LoadShaders())
-	{
-		SDL_Log("Failed to load shaders.");
-		return false;
-	}
-
 	// 3Dモデル用ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(CameraProjectionFov),
@@ -209,7 +194,7 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 	}
 
 
-	undefineTexID = CreateTexture("Assets/sprite/noneTexture.png")->GetTextureID();
+	//undefineTexID = CreateTexture("Assets/sprite/noneTexture.png")->GetTextureID();
 
 	//　HDRrendererの生成
 	hdrRenderer = new HDRRenderer(screenWidth, screenHeight,4);
@@ -217,9 +202,6 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 	// カリングのモード設定
 	glFrontFace(GL_CCW);
 	glEnable(GL_FRONT_FACE);
-
-	// カウントダウンタイム用texture生成
-	CreateTimeFontTexture(MaxTimeFontTextures, TimeFontSize);
 
 	return true;
 }
@@ -229,32 +211,12 @@ bool RenderingObjectManager::Initialize(int _screenWidth, int _screenHeight, boo
 */
 void RenderingObjectManager::Shutdown()
 {
-	//shaderとvertexの後片付け
+	// vertexの後片付け
 	delete particleVertex;
-	particleShader->Unload();
-	delete particleShader;
-
 	delete spriteVerts;
+	delete cubeVerts;
 
-	spriteShader->Unload();
-	delete spriteShader;
-
-	switchShader->Unload();
-	delete switchShader;
-
-	depthMapShader->Unload();
-	delete depthMapShader;
-
-	shadowMapShader->Unload();
-	delete shadowMapShader;
-
-	skinnedDepthMapShader->Unload();
-	delete skinnedDepthMapShader;
-
-	skinnedShadowMapShader->Unload();
-	delete skinnedShadowMapShader;
-
-	//コンテキストとwindowの後片付け
+	// コンテキストとwindowの後片付け
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 }
@@ -264,34 +226,6 @@ void RenderingObjectManager::Shutdown()
 */
 void RenderingObjectManager::UnloadData()
 {
-	// すべてのテクスチャのデータを解放
-	for (auto i : textures)
-	{
-		i.second->Unload();
-		delete i.second;
-	}
-	textures.clear();
-
-	// すべてのメッシュのデータを解放
-	for (auto i : meshes)
-	{
-		i.second->Unload();
-		delete i.second;
-	}
-	// スケルトンの解放
-	for (auto s : skeletons)
-	{
-		delete s.second;
-	}
-	// アニメーションの解放
-	for (auto a : anims)
-	{
-		delete a.second;
-	}
-
-	meshes.clear();
-	skeletons.clear();
-	anims.clear();
 }
 
 /*
@@ -326,17 +260,18 @@ void RenderingObjectManager::Draw()
 	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
-	spriteShader->SetActive();
 	// sprite用ビュー行列の設定
 	Matrix4 viewProj = Matrix4::CreateSimpleViewProj((float)screenWidth, (float)screenHeight);
-	spriteShader->SetMatrixUniform("uViewProj", viewProj);
-	spriteVerts->SetActive();
+	Shader* useShader = nullptr;
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SPRITE);
+	useShader->SetActive();
+	useShader->SetMatrixUniform("uViewProj", viewProj);
 	// すべてのスプライトの描画
-	for (auto sprite : sprites)
+	for (auto sprite : spriteComponents)
 	{
 		if (sprite->GetVisible())
 		{
-			sprite->Draw(spriteShader);
+			sprite->Draw(useShader);
 		}
 	}
 
@@ -361,9 +296,9 @@ void RenderingObjectManager::AddSprite(SpriteComponent* _spriteComponent)
 		// 描画順に沿って追加
 		// 今あるスプライトから挿入する場所の検索
 		// (DrawOrderが小さい順番に描画するため)
-		auto iter = sprites.begin();
+		auto iter = spriteComponents.begin();
 		for (;
-			iter != sprites.end();
+			iter != spriteComponents.end();
 			++iter)
 		{
 			if (myDrawOrder < (*iter)->GetDrawOrder())
@@ -373,7 +308,7 @@ void RenderingObjectManager::AddSprite(SpriteComponent* _spriteComponent)
 		}
 
 		// 検索した場所のiterの場所に挿入
-		sprites.insert(iter, _spriteComponent);
+		spriteComponents.insert(iter, _spriteComponent);
 	}
 }
 
@@ -390,16 +325,8 @@ void RenderingObjectManager::RemoveSprite(SpriteComponent* _spriteComponent)
 	if (isBackGround == false)
 	{
 		// 通常コンテナから探して削除
-		auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
-		sprites.erase(iter);
-	}
-
-	// 背景だったら
-	if (isBackGround == true)
-	{
-		// 背景コンテナから探して削除
-		auto iter = std::find(backGroundSprites.begin(), backGroundSprites.end(), _spriteComponent);
-		backGroundSprites.erase(iter);
+		auto iter = std::find(spriteComponents.begin(), spriteComponents.end(), _spriteComponent);
+		spriteComponents.erase(iter);
 	}
 
 }
@@ -415,9 +342,9 @@ void RenderingObjectManager::AddParticle(ParticleComponent * _particleComponent)
 	// 描画順に沿って追加
 	// 今あるパーティクルから挿入する場所の検索
 	// (DrawOrderが小さい順番に描画するため)
-	auto iter = particles.begin();
+	auto iter = particleComponents.begin();
 	for (;
-		iter != particles.end();
+		iter != particleComponents.end();
 		++iter)
 	{
 		if (myDrawOrder < (*iter)->GetDrawOrder())
@@ -426,7 +353,7 @@ void RenderingObjectManager::AddParticle(ParticleComponent * _particleComponent)
 		}
 	}
 	// 検索した場所のiterの場所に挿入
-	particles.insert(iter, _particleComponent);
+	particleComponents.insert(iter, _particleComponent);
 }
 
 /*
@@ -436,8 +363,8 @@ void RenderingObjectManager::AddParticle(ParticleComponent * _particleComponent)
 void RenderingObjectManager::RemoveParticle(ParticleComponent * _particleComponent)
 {
 	// パーティクルコンテナから探して削除
-	auto iter = std::find(particles.begin(), particles.end(), _particleComponent);
-	particles.erase(iter);
+	auto iter = std::find(particleComponents.begin(), particleComponents.end(), _particleComponent);
+	particleComponents.erase(iter);
 }
 
 /*
@@ -451,7 +378,7 @@ void RenderingObjectManager::AddMeshComponent(MeshComponent* _meshComponent)
 	{
 		// スキニングモデルとして生成
 		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
-		skeletalMeshes.emplace_back(sk);
+		skeletalMeshComponents.emplace_back(sk);
 	}
 	else if(_meshComponent->GetIsColorChange() == true) // 途中で色の変更をおこなうメッシュだったら
 	{
@@ -477,8 +404,8 @@ void RenderingObjectManager::RemoveMeshComponent(MeshComponent* _meshComponent)
 	{
 		// スキニングモデルコンテナから探して削除
 		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
-		auto iter = std::find(skeletalMeshes.begin(), skeletalMeshes.end(), sk);
-		skeletalMeshes.erase(iter);
+		auto iter = std::find(skeletalMeshComponents.begin(), skeletalMeshComponents.end(), sk);
+		skeletalMeshComponents.erase(iter);
 	}
 	else if (_meshComponent->GetIsColorChange()) // 途中で色の変更をおこなうメッシュだったら
 	{
@@ -492,228 +419,6 @@ void RenderingObjectManager::RemoveMeshComponent(MeshComponent* _meshComponent)
 		auto iter = std::find(meshComponents.begin(), meshComponents.end(), _meshComponent);
 		meshComponents.erase(iter);
 	}
-}
-
-/*
-@param _fileName モデルへのアドレス
-@return スケルトンモデルの取得
-*/
-const Skeleton * RenderingObjectManager::CreateSkeleton(const char * _fileName)
-{
-	//すでに作成されてないか調べる
-	std::string file(_fileName);
-	auto iter = skeletons.find(file);
-	if (iter != skeletons.end())
-	{
-		return iter->second;
-	}
-	else 	//作成済みでない場合、新しくスケルトンを作成
-	{
-		Skeleton* sk = new Skeleton();
-		if (sk->Load(file))
-		{
-			skeletons.emplace(file, sk);
-		}
-		else
-		{
-			delete sk;
-			sk = nullptr;
-		}
-		return sk;
-	}
-}
-
-/*
-@param _fileName アニメーションへのアドレス
-@return スケルトンアニメーションの取得
-*/
-const Animation * RenderingObjectManager::CreateAnimation(const char * _fileName, bool _loop)
-{
-	//すでに作成されてないか調べる
-	auto iter = anims.find(_fileName);
-	if (iter != anims.end())
-	{
-		return iter->second;
-	}
-	else 	//作成済みでない場合、新しくアニメーションを作成
-	{
-		Animation* anim = new Animation();
-		if (anim->Load(_fileName,_loop))
-		{
-			anims.emplace(_fileName, anim);
-		}
-		else
-		{
-			delete anim;
-			anim = nullptr;
-		}
-		return anim;
-	}
-}
-
-/*
-@brief  テクスチャの取得
-@param	_fileName　取得したいテクスチャのファイル名
-@return Textureクラスのポインタ
-*/
-Texture* RenderingObjectManager::CreateTexture(const std::string& _fileName)
-{
-	Texture* texture = nullptr;
-	//すでに作成されてないか調べる
-	auto itr = textures.find(_fileName);
-	if (itr != textures.end())
-	{
-		texture = itr->second;
-	}
-	//作成済みでない場合、新しくテクスチャを作成
-	else
-	{
-		texture = new Texture();
-		if (texture->Load(_fileName))
-		{
-			textures.emplace(_fileName, texture);
-		}
-		else
-		{
-			delete texture;
-			texture = nullptr;
-		}
-	}
-
-	return texture;
-}
-
-/*
-@brief  フォントの取得
-@param	_fileName　取得したいフォントのファイル名
-@return Fontクラスのポインタ
-*/
-Font* RenderingObjectManager::CreateFont(const std::string& _fileName)
-{
-	Font* font = nullptr;
-	//すでに作成されてないか調べる
-	auto itr = fonts.find(_fileName);
-	if (itr != fonts.end())
-	{
-		font = itr->second;
-	}
-	//作成済みでない場合、新しくフォントを作成
-	else
-	{
-		font = new Font();
-		if (font->Load(_fileName))
-		{
-			fonts.emplace(_fileName, font);
-		}
-		else
-		{
-			delete font;
-			font = nullptr;
-		}
-	}
-
-	return font;
-}
-
-/*
-@brief  メッシュの取得
-@param	_fileName 取得したいメッシュのファイル名
-@return Meshクラスのポインタ
-*/
-Mesh* RenderingObjectManager::CreateMesh(const std::string &_fileName)
-{
-	Mesh* m = nullptr;
-	//すでに作成されてないか調べる
-	auto iter = meshes.find(_fileName);
-	if (iter != meshes.end())
-	{
-		m = iter->second;
-	}
-	//作成済みでない場合、新しくメッシュを作成
-	else
-	{
-		m = new Mesh();
-		if (m->Load(_fileName, this))
-		{
-			meshes.emplace(_fileName, m);
-		}
-		else
-		{
-			delete m;
-			m = nullptr;
-		}
-	}
-	return m;
-}
-
-/*
-@brief  シェーダーの読み込み
-@return true : 成功 , false : 失敗
-*/
-bool RenderingObjectManager::LoadShaders()
-{
-	// スプライトシェーダーの作成
-	spriteShader = new Shader();
-	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
-	{
-		return false;
-	}
-
-	// switch用シェーダーの作成(色変更可能シェーダー)
-	switchShader = new Shader();
-	if (!switchShader->Load("Shaders/shadowmap.vert", "Shaders/switch.frag"))
-	{
-		return false;
-	}
-
-	skyboxShader = new Shader();
-	if (!skyboxShader->Load("Shaders/gBuffer_SkyBox.vert", "Shaders/gBuffer_SkyBox.frag"))
-	{
-		return false;
-	}
-
-	//particleシェーダー
-	particleShader = new Shader();
-	if (!particleShader->Load("Shaders/Phong.vert", "Shaders/Particle.frag"))
-	{
-		printf("シェーダー読み込み失敗\n");
-	}
-
-	// デプスマップ焼き用シェーダ(アニメーションなし)
-	depthMapShader = new Shader();
-	if (!depthMapShader->Load("Shaders/depthmap.vert", "Shaders/depthmap.frag"))
-	{
-		printf("シェーダー読み込み失敗\n");
-	}
-
-	// ジオメトリインスタンスを適用した描画用シェーダ作成
-	geometryInstanceShader = new Shader();
-	if (!geometryInstanceShader->Load("Shaders/GeometryInstance.vert", "Shaders/shadowmap.frag"))
-	{
-		printf("シェーダー読み込み失敗\n");
-	}
-
-	// シャドウを適用した描画用シェーダ作成(アニメーションなし)
-	shadowMapShader = new Shader();
-	if (!shadowMapShader->Load("Shaders/shadowmap.vert", "Shaders/shadowmap.frag"))
-	{
-		printf("シェーダー読み込み失敗\n");
-	}
-
-	// デプスマップ焼き用シェーダ (アニメーションあり)
-	skinnedDepthMapShader = new Shader();
-	if (!skinnedDepthMapShader->Load("Shaders/SkinnedDepth.vert", "Shaders/depthmap.frag"))
-	{
-		printf("シェーダー読み込み失敗depth\n");
-	}
-	// シャドウを適用した描画用シェーダ作成 (アニメーションあり)
-	skinnedShadowMapShader = new Shader();
-	if (!skinnedShadowMapShader->Load("Shaders/SkinnedShadow.vert", "Shaders/SkinnedShadow.frag"))
-	{
-		printf("シェーダー読み込み失敗shadow\n");
-	}
-
-	return true;
 }
 
 /*
@@ -765,80 +470,12 @@ void RenderingObjectManager::CreateCubeVerts()
 }
 
 /*
-@brief	時間制限用textureの生成
-@param	_value　最大値
-@param _fontSize　フォントサイズ
-*/
-void RenderingObjectManager::CreateTimeFontTexture(int _value, int _fontSize)
-{
-	// フォントの生成
-	Font* font = CreateFont("Assets/Config/Fonts/impact.ttf");
-	// 格納する可変長配列をリサイズ
-	timeFontTextures.resize(_value);
-	timeBlackFontTextures.resize(_value);
-	timeRedFontTextures.resize(_value);
-
-	// 最大値を用いてフォントの色ごとにその枚数textureを生成
-	// 白色
-	for (int i = 0; i < _value; i++)
-	{
-		std::string str;
-		str = std::to_string(i);
-		timeFontTextures[i] = font->RenderText(str,Color::White, _fontSize);
-	}
-
-	// 黒色（バックフォント用（文字の影））
-	for (int i = 0; i < _value; i++)
-	{
-		std::string str;
-		str = std::to_string(i);
-		timeBlackFontTextures[i] = font->RenderText(str, Color::Black, _fontSize);
-	}
-
-	// 赤色
-	for (int i = 0; i < _value; i++)
-	{
-		std::string str;
-		str = std::to_string(i);
-		timeRedFontTextures[i] = font->RenderText(str, Color::Red, _fontSize);
-	}
-}
-
-/*
-@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
-@param	カウントダウンタイム
-@return カウントダウンタイムごとのTimeTexture
-*/
-Texture* RenderingObjectManager::GetTimeTexture(int _time)
-{
-	return timeFontTextures[_time + 1];
-}
-
-/*
-@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
-@param	カウントダウンタイム
-@return カウントダウンタイムごとのTimeTexture
-*/
-Texture* RenderingObjectManager::GetTimeBlackTexture(int _time)
-{
-	return timeBlackFontTextures[_time + 1];
-}
-
-/*
-@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
-@param	カウントダウンタイム
-@return カウントダウンタイムごとのTimeTexture
-*/
-Texture* RenderingObjectManager::GetTimeRedTexture(int _time)
-{
-	return timeRedFontTextures[_time + 1];
-}
-
-/*
 @brief  シャドウマップの本描画関数
 */
 void RenderingObjectManager::DrawShadowMap()
 {
+
+	Shader* useShader = nullptr;
 
 	/* HDRとシャドウマップの処理開始 */
 	// HDRレコーディング開始
@@ -847,73 +484,78 @@ void RenderingObjectManager::DrawShadowMap()
 	// スカイボックス描画
 	if (activeSkyBox != nullptr)
 	{
-		skyboxShader->SetActive();
+		useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SKYBOX);
+		useShader->SetActive();
 		
 		// ゲームの空間に合わせるためのオフセット行列をセット
 		Matrix4 offset = Matrix4::CreateRotationX(Math::ToRadians(90.0f));
-		skyboxShader->SetMatrixUniform("u_offset", offset);
+		useShader->SetMatrixUniform("u_offset", offset);
 
 		// Uniformに逆行列をセット
 		Matrix4 InvView = view;
 		InvView.Invert();
 		InvView.Transpose();
-		skyboxShader->SetMatrixUniform("u_invView", InvView);
-		skyboxShader->SetMatrixUniform("u_projection", projection);
-		skyboxShader->SetIntUniform("u_skybox", 0);
+		useShader->SetMatrixUniform("u_invView", InvView);
+		useShader->SetMatrixUniform("u_projection", projection);
+		useShader->SetIntUniform("u_skybox", 0);
 
-		activeSkyBox->Draw(skyboxShader);
+		activeSkyBox->Draw(useShader);
 	}
 
 	// 当たり判定デバッグBoxの表示
 	PHYSICS->DebugShowBox();
 
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::GEOMETRY_INSTANCE);
 	//シャドウマップshaderをアクティブ
-	geometryInstanceShader->SetActive();
+	useShader->SetActive();
 	// ライトのカメラ情報
-	geometryInstanceShader->SetVectorUniform("uCameraPos", lightViewPos);
+	useShader->SetVectorUniform("uCameraPos", lightViewPos);
 	// アンビエントライト
-	geometryInstanceShader->SetVectorUniform("uAmbientLight", ambientLight);
-	geometryInstanceShader->SetFloatUniform("uLuminance", 1.0f);
+	useShader->SetVectorUniform("uAmbientLight", ambientLight);
+	useShader->SetFloatUniform("uLuminance", 1.0f);
 
 	// ディレクショナルライト
-	geometryInstanceShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	geometryInstanceShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	geometryInstanceShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+	useShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	useShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	useShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
 
-	geometryInstanceShader->SetMatrixUniform("view", view);
-	geometryInstanceShader->SetMatrixUniform("projection", projection);
+	useShader->SetMatrixUniform("view", view);
+	useShader->SetMatrixUniform("projection", projection);
 
 	// デプスマップをセット（メッシュ用）
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
-	geometryInstanceShader->SetIntUniform("depthMap", 4);
-	geometryInstanceShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
+	useShader->SetIntUniform("depthMap", 4);
+	useShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 	geometryInstanceManager->PrepareModelMatrice();
-	geometryInstanceManager->Draw(geometryInstanceShader);
+	geometryInstanceManager->Draw(useShader);
 
+
+
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SHADOW);
 
 	//シャドウマップshaderをアクティブ
-	shadowMapShader->SetActive();
+	useShader->SetActive();
 	// ライトのカメラ情報
-	shadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
+	useShader->SetVectorUniform("uCameraPos", lightViewPos);
 	// アンビエントライト
-	shadowMapShader->SetVectorUniform("uAmbientLight", ambientLight);
-	shadowMapShader->SetFloatUniform("uLuminance", 1.0f);
+	useShader->SetVectorUniform("uAmbientLight", ambientLight);
+	useShader->SetFloatUniform("uLuminance", 1.0f);
 
 	// ディレクショナルライト
-	shadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	shadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	shadowMapShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+	useShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	useShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	useShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
 
-	shadowMapShader->SetMatrixUniform("view", view);
-	shadowMapShader->SetMatrixUniform("projection", projection);
+	useShader->SetMatrixUniform("view", view);
+	useShader->SetMatrixUniform("projection", projection);
 
 	// デプスマップをセット（メッシュ用）
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
-	shadowMapShader->SetIntUniform("depthMap", 4);
+	useShader->SetIntUniform("depthMap", 4);
 
-	shadowMapShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
+	useShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 
 
 	// シェーダーに渡すライティング情報を更新する
@@ -922,55 +564,60 @@ void RenderingObjectManager::DrawShadowMap()
 	{
 		if (mc->GetVisible())
 		{
-			mc->Draw(shadowMapShader);
+			mc->Draw(useShader);
 		}
 	}
 
+
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SKINNED_SHADOW);
 	//シャドウマップshaderをアクティブ(skinnend)
-	skinnedShadowMapShader->SetActive();
+	useShader->SetActive();
 	// ライトのカメラ情報
-	skinnedShadowMapShader->SetVectorUniform("uCameraPos", lightViewPos);
+	useShader->SetVectorUniform("uCameraPos", lightViewPos);
 	// アンビエントライト
-	skinnedShadowMapShader->SetVectorUniform("uAmbientLight", ambientLight);
+	useShader->SetVectorUniform("uAmbientLight", ambientLight);
 	// ディレクショナルライト
-	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	skinnedShadowMapShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	skinnedShadowMapShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
-	skinnedShadowMapShader->SetFloatUniform("uLuminance", 1.0f);
-	skinnedShadowMapShader->SetMatrixUniform("uViewProj", view * projection);
+	useShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	useShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	useShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+	useShader->SetFloatUniform("uLuminance", 1.0f);
+	useShader->SetMatrixUniform("uViewProj", view * projection);
 	// デプスマップをセット（スキニング用）
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
-	skinnedShadowMapShader->SetIntUniform("depthMap", 4);
-	skinnedShadowMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
+	useShader->SetIntUniform("depthMap", 4);
+	useShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
 
-	for (auto sk : skeletalMeshes)
+	for (auto sk : skeletalMeshComponents)
 	{
 		if (sk->GetVisible())
 		{
-			sk->Draw(skinnedShadowMapShader);
+			sk->Draw(useShader);
 		}
 	}
 
-	switchShader->SetActive();
-	switchShader->SetMatrixUniform("uViewProj", view* projection);
-	// ライトのカメラ情報
-	switchShader->SetVectorUniform("uCameraPos", lightViewPos);
-	// アンビエントライト
-	switchShader->SetVectorUniform("uAmbientLight", ambientLight);
-	// ディレクショナルライト
-	switchShader->SetVectorUniform("uDirLight.mDirection", LightDir);
-	switchShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
-	switchShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
 
-	switchShader->SetMatrixUniform("view", view);
-	switchShader->SetMatrixUniform("projection", projection);
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SWITCH);
+
+	useShader->SetActive();
+	useShader->SetMatrixUniform("uViewProj", view* projection);
+	// ライトのカメラ情報
+	useShader->SetVectorUniform("uCameraPos", lightViewPos);
+	// アンビエントライト
+	useShader->SetVectorUniform("uAmbientLight", ambientLight);
+	// ディレクショナルライト
+	useShader->SetVectorUniform("uDirLight.mDirection", LightDir);
+	useShader->SetVectorUniform("uDirLight.mDiffuseColor", dirLight.diffuseColor);
+	useShader->SetVectorUniform("uDirLight.mSpecColor", dirLight.specColor);
+
+	useShader->SetMatrixUniform("view", view);
+	useShader->SetMatrixUniform("projection", projection);
 
 	for (auto mc : colorChangeMeshComponents)
 	{
 		if (mc->GetVisible())
 		{
-			mc->Draw(switchShader);
+			mc->Draw(useShader);
 		}
 	}
 
@@ -993,6 +640,8 @@ void RenderingObjectManager::DrawShadowMap()
 */
 void RenderingObjectManager::BakeDepthMap()
 {
+	Shader* useShader = nullptr;
+
 	// プレイヤーのポジションを参照してライト空間を作成する際のポジションを計算
 	LightPos = Vector3(playerPos.x , playerPos.y , playerPos.z + ShiftLightPositionZ);
 
@@ -1014,10 +663,12 @@ void RenderingObjectManager::BakeDepthMap()
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::DEPTH);
 	// デプスマップ焼き用シェーダを有効化し、必要な値をシェーダにセット・シャドウをつけたいオブジェクトを描画する
 	// メッシュモデルシェーダーアクティブ
-	depthMapShader->SetActive();
-	depthMapShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
+	useShader->SetActive();
+	useShader->SetMatrixUniform("lightSpaceMatrix", lightSpeceMatrix);
 
 	// メッシュモデルの描画
 	for (auto mc : meshComponents)
@@ -1028,7 +679,7 @@ void RenderingObjectManager::BakeDepthMap()
 
 		if (mc->GetVisible() && checkTag != Tag::WALL)
 		{
-			mc->Draw(depthMapShader);
+			mc->Draw(useShader);
 		}
 	}
 
@@ -1039,16 +690,18 @@ void RenderingObjectManager::BakeDepthMap()
 	// ライト空間行列を計算
 	lightSpeceMatrix = lightView * lightProjection;
 
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::SKINNED_DEPTH);
+
 	// スキニングモデルシェーダーアクティブ
-	skinnedDepthMapShader->SetActive();
-	skinnedDepthMapShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
+	useShader->SetActive();
+	useShader->SetMatrixUniform("uLightSpaceMat", lightSpeceMatrix);
 
 	// スキニングモデルの描画
-	for (auto sk : skeletalMeshes)
+	for (auto sk : skeletalMeshComponents)
 	{
 		if (sk->GetVisible())
 		{
-			sk->Draw(skinnedDepthMapShader);
+			sk->Draw(useShader);
 		}
 	}
 
@@ -1056,41 +709,6 @@ void RenderingObjectManager::BakeDepthMap()
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
-
-}
-
-/*
-@brief  背景の描画
-*/
-void RenderingObjectManager::DrawBackGround()
-{
-	// アルファブレンディングを有効にする
-	glEnable(GL_BLEND);
-	glDisable(GL_DEPTH_TEST);
-
-	// RGB成分とα成分のブレンディング方法を別々に設定
-	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-	// RGB成分とアルファ成分に別々の混合係数を設定
-	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-	// スプライトコンポーネントの描画(背景)
-	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
-	spriteShader->SetActive();
-	spriteVerts->SetActive();
-	glActiveTexture(GL_TEXTURE0);
-	spriteShader->SetIntUniform("uTexture", 0);
-
-	// すべてのスプライトの描画
-	for (auto sprite : backGroundSprites)
-	{
-		if (sprite->GetVisible())
-		{
-			sprite->Draw(spriteShader);
-		}
-	}
-
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
 }
 
 /*
@@ -1099,17 +717,17 @@ void RenderingObjectManager::DrawBackGround()
 void RenderingObjectManager::DrawParticle()
 {
 	// particleのコンテナをソート
-	std::sort(particles.begin(), particles.end(), std::greater<ParticleComponent*>());
+	std::sort(particleComponents.begin(), particleComponents.end(), std::greater<ParticleComponent*>());
 
 	// particleが0だったらスキップ
-	if (particles.size() == 0)
+	if (particleComponents.size() == 0)
 	{
 		return;
 	}
 
 	// ブレンドモード初期状態取得
 	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
-	auto itr = particles.begin();
+	auto itr = particleComponents.begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
 	// テクスチャID初期状態取得
@@ -1120,9 +738,12 @@ void RenderingObjectManager::DrawParticle()
 	Matrix4 viewProjectionMat;
 	viewProjectionMat = view * projection;
 
+	Shader* useShader = nullptr;
+
+	useShader = GRAPHICS_RESOURCE->FindUseShader(ShaderTag::PARTICLE);
 	// シェーダーON
-	particleShader->SetActive();
-	particleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+	useShader->SetActive();
+	useShader->SetMatrixUniform("uViewProj", viewProjectionMat);
 
 	// 全てのパーティクルのビルボード行列をセット
 	(*itr)->SetBillboardMat(GetBillboardMatrix());
@@ -1133,7 +754,7 @@ void RenderingObjectManager::DrawParticle()
 
 	// すべてのパーティクルを描画
 	glActiveTexture(GL_TEXTURE0);
-	particleShader->SetIntUniform("uTexture", 0);
+	useShader->SetIntUniform("uTexture", 0);
 
 	// ブレンドモードの変更
 	ChangeBlendMode(blendType);
@@ -1141,7 +762,7 @@ void RenderingObjectManager::DrawParticle()
 	ChangeTexture(nowTexture);
 
 	// particleを描画
-	for (auto particle : particles)
+	for (auto particle : particleComponents)
 	{
 		// 描画する状態だったら
 		if (particle->GetVisible())
@@ -1153,7 +774,7 @@ void RenderingObjectManager::DrawParticle()
 			if (blendType != prevType)
 			{
 				glActiveTexture(GL_TEXTURE0);
-				particleShader->SetIntUniform("uTexture", 0);
+				useShader->SetIntUniform("uTexture", 0);
 				ChangeBlendMode(blendType);
 			}
 
@@ -1163,12 +784,12 @@ void RenderingObjectManager::DrawParticle()
 			if (nowTexture != prevTexture)
 			{
 				glActiveTexture(GL_TEXTURE0);
-				particleShader->SetIntUniform("uTexture", 0);
+				useShader->SetIntUniform("uTexture", 0);
 				ChangeTexture(nowTexture);
 			}
 
 			// パーティクル描画
-			particle->Draw(particleShader);
+			particle->Draw(useShader);
 
 			// 前回描画状態として保存
 			prevType = blendType;

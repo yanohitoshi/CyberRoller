@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "CountDownBackFont.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 #include "Font.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
@@ -56,12 +56,12 @@ void CountDownBackFont::UpdateGameObject(float _deltaTime)
 	// 1以上の時は黒色で描画
 	if (time >= 1)
 	{
-		sprite->SetTexture(RENDERING_OBJECT_MANAGER->GetTimeBlackTexture(time - 1));
+		sprite->SetTexture(GRAPHICS_RESOURCE->GetTimeBlackTexture(time - 1));
 	}
 	// textureを先に作ってvector配列に格納している都合上0を描画するときnullにアクセスしてしまうのを回避
 	if (time == 0)
 	{
-		sprite->SetTexture(RENDERING_OBJECT_MANAGER->GetTimeBlackTexture(-1));
+		sprite->SetTexture(GRAPHICS_RESOURCE->GetTimeBlackTexture(-1));
 	}
 
 	// timeが-1以下になったらタイムオーバーにする

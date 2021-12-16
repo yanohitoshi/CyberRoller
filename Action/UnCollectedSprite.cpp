@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "UnCollectedSprite.h"
 #include "SpriteComponent.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 #include "CollectionObject.h"
 
 /*
@@ -34,7 +34,7 @@ UnCollectedSprite::UnCollectedSprite(CollectionTag collectionTag)
 
 	// SpriteComponent‰Šú‰»
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/collection/UnCollected.png");
+	tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/collection/UnCollected.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 }

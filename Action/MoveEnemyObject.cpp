@@ -2,7 +2,6 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "MoveEnemyObject.h"
-#include "RenderingObjectManager.h"
 #include "SkeletalMeshComponent.h"
 #include "Mesh.h"
 #include "EnemyObjectStateBase.h"
@@ -36,9 +35,9 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Move
 	//モデル描画用のコンポーネント
 	skeltalMeshComponent = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMes hをセット(.gpmesh)
-	skeltalMeshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Enemy/model/SK_Dron_01.gpmesh"));
+	skeltalMeshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Enemy/model/SK_Dron_01.gpmesh"));
 	//Rendererクラス内のSkeletonデータ読み込み関数を利用してSkeletonをセット(.gpskel)
-	skeltalMeshComponent->SetSkeleton(RENDERING_OBJECT_MANAGER->CreateSkeleton("Assets/Model/Enemy/model/SK_Dron_01.gpskel"));
+	skeltalMeshComponent->SetSkeleton(GRAPHICS_RESOURCE->CreateSkeleton("Assets/Model/Enemy/model/SK_Dron_01.gpskel"));
 	// mesh情報を取得
 	mesh = skeltalMeshComponent->GetMesh();
 	// 輝度情報を取得
@@ -50,13 +49,13 @@ MoveEnemyObject::MoveEnemyObject(const Vector3& _pos, const Tag _objectTag, Move
 
 	//-----------アニメーションを読み込み-----------------//
 	// アイドリングアニメーション
-	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = RENDERING_OBJECT_MANAGER->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Idle.gpanim", true);
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_IDLE)] = GRAPHICS_RESOURCE->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Idle.gpanim", true);
 	// 死亡時のアニメーション
-	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = RENDERING_OBJECT_MANAGER->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Dead.gpanim", false);
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_DEAD)] = GRAPHICS_RESOURCE->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Dead.gpanim", false);
 	// ターンアニメーション
-	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = RENDERING_OBJECT_MANAGER->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_rotatation_180_L.gpanim", false);
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_TURN)] = GRAPHICS_RESOURCE->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_rotatation_180_L.gpanim", false);
 	// 攻撃アニメーション
-	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = RENDERING_OBJECT_MANAGER->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Attack.gpanim", false);
+	animTypes[static_cast<unsigned int>(EnemyState::ENEMY_STATE_ATTACK)] = GRAPHICS_RESOURCE->CreateAnimation("Assets/Model/Enemy/animation/Dron_01_Attack.gpanim", false);
 	//当たり判定用のコンポーネント
 	boxCollider = new BoxCollider(this, PhysicsTag::ENEMY_TAG, GetOnCollisionFunc());
 	enemyBox = { BoxMin,BoxMax };

@@ -9,6 +9,7 @@
 #include "FPS.h"
 #include "RenderingObjectManager.h"
 #include "AudioResourceManager.h"
+#include "GraphicsResourceManager.h"
 #include "InputSystem.h"
 #include "PhysicsWorld.h"
 #include "BaseScene.h"
@@ -100,8 +101,10 @@ bool Game::Initialize()
 		return false;
 	}
 
-	// ※サウンド系統未実装
-	// オーディオ管理クラスの生成
+	// 描画系Resource管理クラス生成
+	GraphicsResourceManager::CreateInstance();
+
+	// オーディオResource管理クラスの生成
 	AudioResourceManager::CreateInstance();
 
 	// サウンドの初期化
@@ -161,13 +164,13 @@ void Game::Termination()
     //データのアンロード
 	UnloadData();
 
-    //スタティッククラスの解放処理
 	// 描画クラスの解放処理
 	RenderingObjectManager::DeleteInstance();
 	// 当たり判定クラスを解放処理
 	PhysicsWorld::DeleteInstance();
 	// サウンドのリソースクラスを削除
 	AudioResourceManager::DeleteInstance();
+	GraphicsResourceManager::DeleteInstance();
     //FPSクラスの解放処理
     delete fps;
 	// 入力クラスの解放処理

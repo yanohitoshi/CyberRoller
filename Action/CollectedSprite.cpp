@@ -3,9 +3,8 @@
 //-----------------------------------------------------------------------------
 #include "CollectedSprite.h"
 #include "SpriteComponent.h"
-#include "RenderingObjectManager.h"
 #include "CollectionObject.h"
-
+#include "GraphicsResourceManager.h"
 /*
 @brief	コンストラクタ
 @param 何番目の収集物かのタグ
@@ -34,7 +33,7 @@ CollectedSprite::CollectedSprite(CollectionTag collectionTag)
 
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/collection/Collected.png");
+	tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/collection/Collected.png");
 	sprite->SetTexture(tex);
 	sprite->SetAlpha(1.0f);
 }

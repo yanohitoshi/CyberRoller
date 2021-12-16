@@ -5,7 +5,6 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include <string>
-#include "RenderingObjectManager.h"
 #include "BoxCollider.h"
 #include "PushBoardObject.h"
 
@@ -35,7 +34,7 @@ PushBoxObject::PushBoxObject(const Vector3& _p, const Vector3& _size, const Tag&
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"));
+	meshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"));
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();

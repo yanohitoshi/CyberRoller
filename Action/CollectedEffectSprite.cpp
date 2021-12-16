@@ -3,8 +3,8 @@
 //-----------------------------------------------------------------------------
 #include "CollectedEffectSprite.h"
 #include "SpriteComponent.h"
-#include "RenderingObjectManager.h"
 #include "CollectionObject.h"
+#include "GraphicsResourceManager.h"
 
 /*
 @brief	コンストラクタ
@@ -36,7 +36,7 @@ CollectedEffectSprite::CollectedEffectSprite(CollectionTag collectionTag)
 
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this, false);
-	tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/collection/AuroraRing.png");
+	tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/collection/AuroraRing.png");
 	sprite->SetTexture(tex);
 	alpha = 1.0f;
 	sprite->SetAlpha(alpha);

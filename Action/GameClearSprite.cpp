@@ -2,9 +2,9 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "GameClearSprite.h"
-#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "PlayerObject.h"
+#include "GraphicsResourceManager.h"
 
 /*
 @brief	コンストラクタ
@@ -20,7 +20,7 @@ GameClearSprite::GameClearSprite(PlayerObject* _playerObject)
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/gameclear.png");
+	Texture* tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/information/gameclear.png");
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

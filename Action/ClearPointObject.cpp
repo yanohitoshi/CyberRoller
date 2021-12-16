@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "ClearPointObject.h"
 #include "MeshComponent.h"
-#include "RenderingObjectManager.h"
 #include "BoxCollider.h"
 #include "Mesh.h"
 #include "PlayerObject.h"
@@ -38,7 +37,7 @@ ClearPointObject::ClearPointObject(const Vector3& _pos, const Tag& _objectTag,Pl
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this, false, false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Collection/model/SM_Big_Gems.gpmesh"));
+	meshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Environment/Collection/model/SM_Big_Gems.gpmesh"));
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();
 	// 輝度情報を取得

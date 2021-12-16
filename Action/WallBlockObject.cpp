@@ -6,7 +6,6 @@
 #include "MeshComponent.h"
 #include "MainCameraObject.h"
 #include <string>
-#include "RenderingObjectManager.h"
 #include "Skeleton.h"
 #include "BoxCollider.h"
 #include  "Mesh.h"
@@ -30,7 +29,7 @@ WallBlockObject::WallBlockObject(const Vector3& _p, const Vector3& _size, const 
 	//モデル描画用のコンポーネント
 	meshComponent = new MeshComponent(this,false,false);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/wall_model/wallBox.gpmesh"));
+	meshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Environment/wall_model/wallBox.gpmesh"));
 
 	//メッシュからAABBで使うx,y,zのminとmaxを取得する
 	mesh = new Mesh();

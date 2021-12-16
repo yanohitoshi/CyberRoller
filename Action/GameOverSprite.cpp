@@ -2,9 +2,9 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "GameOverSprite.h"
-#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "ContinueSprite.h"
+#include "GraphicsResourceManager.h"
 
 /*
 @brief	コンストラクタ
@@ -16,7 +16,7 @@ GameOverSprite::GameOverSprite()
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/gameover.png");
+	Texture* tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/information/gameover.png");
 	// SpriteComponent初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

@@ -16,6 +16,7 @@ class ParticleComponent;
 class Texture;
 class VertexArray;
 class Shader;
+class Font;
 
 /*
 enum class シェーダーの種類を判別するタグ
@@ -57,50 +58,39 @@ public:
     static void DeleteInstance();
 
     /*
-    @brief  スプライトの追加
-    @param	_spriteComponent　追加するSpriteComponentクラスのポインタ
+    @brief  テクスチャの取得
+    @param	_fileName　取得したいテクスチャのファイル名
+    @return Textureクラスのポインタ
     */
-    void AddSpriteComponent(SpriteComponent* _spriteComponent);
+    Texture* CreateTexture(const std::string& _fileName);
 
     /*
-    @brief スプライトの削除
-    @param	_spriteComponent　削除するSpriteComponentクラスのポインタ
+    @brief  フォントの取得
+    @param	_fileName　取得したいフォントのファイル名
+    @return Fontクラスのポインタ
     */
-    void RemoveSpriteComponent(SpriteComponent* _spriteComponent);
+    Font* CreateFont(const std::string& _fileName);
 
     /*
-    @brief  パーティクルの追加
-    @param	_particleComponent　追加するParticleObjectクラスのポインタ
+    @brief  スケルトンモデルの取得
+    @param _fileName モデルへのアドレス
+    @return スケルトンモデルクラスのポインタ
     */
-    void AddParticleComponent(ParticleComponent* _particleComponent);
+    const class Skeleton* CreateSkeleton(const char* _fileName);
 
     /*
-    @brief  スプライトの削除
-    @param	削除するParticleObjectクラスのポインタ
+    @brief  アニメーションの取得
+    @param _fileName アニメーションへのアドレス
+    @return スケルトンアニメーションクラスのポインタ
     */
-    void RemoveParticleComponent(ParticleComponent* _particleComponent);
+    const class Animation* CreateAnimation(const char* _fileName, bool _loop);
 
     /*
-    @brief  メッシュコンポーネントの追加
-    @param	_meshComponent　追加するMeshComponentクラスのポインタ
+    @brief  メッシュの取得
+    @param	_fileName 取得したいメッシュのファイル名
+    @return Meshクラスのポインタ
     */
-    void AddMeshComponent(MeshComponent* _meshComponent);
-
-    /*
-    @brief  メッシュコンポーネントの削除
-    @param	_meshComponent　削除するMeshComponentクラスのポインタ
-    */
-    void RemoveMeshComponent(MeshComponent* _meshComponent);
-
-    /*
-    @brief	Particle用頂点データのセット関数
-    */
-    void SetParticleVertex();
-
-    // アクティブスカイボックス
-    void SetActiveSkyBox(class CubeMapComponent* in_skyBox) { activeSkyBox = in_skyBox; }
-    class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
-    class VertexArray* GetCubeMapVerts() { return cubeVerts; }
+    Mesh* CreateMesh(const std::string& _fileName);
 
     /*
     @brief  シェーダーの読み込み
@@ -127,6 +117,14 @@ private:
     */
     ~GraphicsResourceManager();
 
+    /*
+    @brief	時間制限用textureの生成
+    @param	_value　最大値
+    @param _fontSize　フォントサイズ
+    */
+    void CreateTimeFontTexture(int _value, int _fontSize);
+
+
     //自分のインスタンス
     static GraphicsResourceManager* graphicsResource;
 
@@ -138,32 +136,11 @@ private:
     //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
 
-    //メッシュコンポーネントのポインタの可変長コンテナ
-    std::vector<MeshComponent*> meshComponents;
-    //カラーチェンジコンポーネントのポインタの可変長コンテナ
-    std::vector<MeshComponent*> colorChangeMeshComponents;
-    //スプライトコンポーネントのポインタの可変長コンテナ
-    std::vector<SpriteComponent*> sprites;
-    //パーティクルのポインタ
-    std::vector<ParticleComponent*> particles;
     //ファイル名でテクスチャを取得するための連想配列
     std::unordered_map<std::string, Texture*>textures;
-    // スケルトンメッシュの描画に使われる
-    std::vector<class SkeletalMeshComponent*>skeletalMeshes;
-    // 色を変えるメッシュの描画に使われる
-    std::vector<class ChangeColorMeshComponent*>changeColorMeshes;
 
     // 使用する全種類のシェーダーを格納するコンテナ
     std::unordered_map<ShaderTag, Shader*> shaders;
-
-    // スプライトの頂点配列
-    VertexArray* spriteVerts;
-
-    // パーティクル用頂点定義
-    VertexArray* particleVertex;
-
-    // キューブ頂点配列
-    VertexArray* cubeVerts;
 
     // フォントマップ
     std::unordered_map<std::string, class Font*> fonts;
@@ -188,6 +165,36 @@ private:
     @param	_shaderTag 鍵となるシェーダーの種類を判別するタグ
     */
     void AddShaderMap(Shader* _shader, ShaderTag _shaderTag);
+
+    // 制限時間用フォントtextureの最大数（作りたい数字の最大値）
+    const int MaxTimeFontTextures;
+    // 制限時間用フォントのサイズ
+    const int TimeFontSize;
+
+public:
+
+    /*
+    @brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
+    @param	カウントダウンタイム
+    @return カウントダウンタイムごとのTimeTexture
+    */
+    Texture* GetTimeTexture(int _time);
+
+    /*
+    @brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
+    @param	カウントダウンタイム
+    @return カウントダウンタイムごとのTimeTexture
+    */
+    Texture* GetTimeBlackTexture(int _time);
+
+    /*
+    @brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
+    @param	カウントダウンタイム
+    @return カウントダウンタイムごとのTimeTexture
+    */
+    Texture* GetTimeRedTexture(int _time);
+
+    Shader* FindUseShader(ShaderTag _shaderTag);
 
 };
 

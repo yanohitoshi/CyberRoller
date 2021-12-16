@@ -15,6 +15,7 @@ class GameObject;
 class InputSystem;
 class GameScene;
 class BaseScene;
+class RenderingObjectManager;
 
 /*
 @enum　シーンの状態を示すタグ

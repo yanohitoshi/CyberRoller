@@ -5,7 +5,6 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include <string>
-#include "RenderingObjectManager.h"
 #include "BoxCollider.h"
 #include "NeedleObject.h"
 #include "GeometryInstanceComponent.h"
@@ -26,7 +25,7 @@ NeedlePanelObject::NeedlePanelObject(const Vector3& _p, const Vector3& _size, co
 	state = Active;
 
 	// ジオメトリインスタンスコンポーネントを生成
-	geometryInstanceComponent = new GeometryInstanceComponent(this, RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"), GeometryInstanceType::G_NEEDLE_PANEL);
+	geometryInstanceComponent = new GeometryInstanceComponent(this, GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Environment/Ground/model/lightGround.gpmesh"), GeometryInstanceType::G_NEEDLE_PANEL);
 	// ジオメトリインスタンスマネージャークラスに追加
 	geometryInstanceComponent->AddGeometryInstanceManager();
 	//当たり判定用のコンポーネント

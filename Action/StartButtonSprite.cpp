@@ -1,6 +1,6 @@
 #include "StartButtonSprite.h"
 #include "SpriteComponent.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 
 StartButtonSprite::StartButtonSprite()
 	:GameObject(false, Tag::UI)
@@ -11,7 +11,7 @@ StartButtonSprite::StartButtonSprite()
 	// spriteComponentをnewする
 	sprite = new SpriteComponent(this, false);
 	// タイトルのtextureをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/title/startButton.png");
+	Texture* tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/title/startButton.png");
 	// textureをComponentにセット
 	sprite->SetTexture(tex);
 	// alpha値を初期化

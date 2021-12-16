@@ -24,22 +24,6 @@ struct DirectionalLight
 	Vector3 specColor;
 };
 
-/*
-@enum textureステージの列挙
-*/
-enum class TextureStage
-{
-	// ディフーズマップ
-	DIFFUSE_MAP,
-	// ノーマルマップ
-	NORMAL_MAP,
-	// スペキュラマップ
-	SPECULAR_MAP,
-	// エミッシブマップ
-	EMISSIVE_MAP,
-	// シャドウマップ
-	SHADOW_MAP
-};
 
 // クラスの前方宣言
 class SpriteComponent;
@@ -145,14 +129,8 @@ public:
 	*/
 	void SetParticleVertex();
 
-	// アクティブスカイボックス
-	void SetActiveSkyBox(class CubeMapComponent* in_skyBox) { activeSkyBox = in_skyBox; }
-	class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
-	class VertexArray* GetCubeMapVerts() { return cubeVerts; }
-
 private:
 
-	//コンストラクタ、デストラクタの隠蔽
 	/*
 	@brief  コンストラクタ
 	*/
@@ -174,12 +152,6 @@ private:
 	GeometryInstanceManager* geometryInstanceManager;
 
 	/*
-	@brief  シェーダーの読み込み
-	@return true : 成功 , false : 失敗
-	*/
-	bool LoadShaders();
-	
-	/*
 	@brief  Sprite用の頂点バッファとインデックスバッファの作成
 	*/
 	void CreateSpriteVerts();
@@ -194,12 +166,6 @@ private:
 	*/
 	void CreateCubeVerts();
 
-	/*
-	@brief	時間制限用textureの生成
-	@param	_value　最大値
-	@param _fontSize　フォントサイズ
-	*/
-	void CreateTimeFontTexture(int _value,int _fontSize);
 
 	/*
 	@brief  シャドウマップの本描画関数
@@ -210,12 +176,6 @@ private:
 	@brief  デプスマップ焼きこみ描画
 	*/
 	void BakeDepthMap();
-
-	/*
-	@brief  背景の描画
-			スカイボックスの実装により使用しなくなりました。
-	*/
-	void DrawBackGround();
 
 	/*
 	@brief  Particle用の頂点バッファとインデックスバッファの作成
@@ -251,75 +211,24 @@ private:
 	*/
 	Vector3 CalcCameraPos();
 
-	// スケルトンデータ
-	std::unordered_map<std::string, class Skeleton*> skeletons;
-	// アニメーションデータ
-	std::unordered_map<std::string, class Animation*> anims;    
-
-	//ファイル名でメッシュを取得するための連想配列
-	std::unordered_map<std::string, Mesh*> meshes;
 
 	//メッシュコンポーネントのポインタの可変長コンテナ
 	std::vector<MeshComponent*> meshComponents;
 	//カラーチェンジコンポーネントのポインタの可変長コンテナ
 	std::vector<MeshComponent*> colorChangeMeshComponents;
 	//スプライトコンポーネントのポインタの可変長コンテナ
-	std::vector<SpriteComponent*> sprites;
-	//背景画像用スプライトコンポーネントのポインタの可変長コンテナ
-	std::vector<SpriteComponent*> backGroundSprites;
-
+	std::vector<SpriteComponent*> spriteComponents;
 	//パーティクルのポインタ
-	std::vector<ParticleComponent*> particles;
-	//ファイル名でテクスチャを取得するための連想配列
-	std::unordered_map<std::string, Texture*>textures;
+	std::vector<ParticleComponent*> particleComponents;
 	// スケルトンメッシュの描画に使われる
-	std::vector<class SkeletalMeshComponent*>skeletalMeshes;   
-	// 色を変えるメッシュの描画に使われる
-	std::vector<class ChangeColorMeshComponent*>changeColorMeshes;
-
-	// フォントマップ
-	std::unordered_map<std::string, class Font*> fonts;
-
-	// 時間表示用のフォントtexture
-	// 白色
-	std::vector<Texture*> timeFontTextures;
-	// 黒色
-	std::vector<Texture*> timeBlackFontTextures;
-	// 赤色
-	std::vector<Texture*> timeRedFontTextures;
-
+	std::vector<class SkeletalMeshComponent*>skeletalMeshComponents;
 	// キューブマップ
 	class CubeMapComponent* activeSkyBox; // 有効な(描画する)スカイボックス
 
 	// スプライトの頂点配列
 	VertexArray* spriteVerts;
-	// スプライトシェーダー
-	Shader* spriteShader;
-
-	// スカイボックス用シェーダ
-	Shader* skyboxShader;
-
-	// スイッチ用シェーダー
-	Shader* switchShader;
-	// ジオメトリインスタンス用シェーダー
-	Shader* geometryInstanceShader;
-	// shadowマップ関連シェーダー
-	// shadowMap用（メッシュ）
-	Shader* depthMapShader;
-	Shader* shadowMapShader;
-
-	// shadowMap用（スキンメッシュ）
-	Shader* skinnedDepthMapShader;
-	Shader* skinnedShadowMapShader;
-
-	// デバック用シェーダー
-	Shader* debugShader;
-
-	// パーティクルシェーダー
-	Shader* particleShader;
 	// パーティクル用頂点定義
 	VertexArray* particleVertex;
-
 	// キューブ頂点配列
 	VertexArray* cubeVerts;
 
@@ -357,10 +266,7 @@ private:
 	const float LightProjectionNear;
 	// ライトプロジェクションの遠距離の定数
 	const float LightProjectionFar;
-	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
-	const int MaxTimeFontTextures;
-	// 制限時間用フォントのサイズ
-	const int TimeFontSize;
+
 
 	//スクリーンの横幅
 	int screenWidth;
@@ -408,41 +314,6 @@ public: //ゲッターセッター
 	GeometryInstanceManager* GetGeometryInstanceManager() { return geometryInstanceManager; }
 
 	/*
-	@brief  テクスチャの取得
-	@param	_fileName　取得したいテクスチャのファイル名
-	@return Textureクラスのポインタ
-	*/
-	Texture* CreateTexture(const std::string& _fileName);
-
-	/*
-	@brief  フォントの取得
-	@param	_fileName　取得したいフォントのファイル名
-	@return Fontクラスのポインタ
-	*/
-	Font* CreateFont(const std::string& _fileName);
-
-	/*
-	@brief  スケルトンモデルの取得
-	@param _fileName モデルへのアドレス
-	@return スケルトンモデルクラスのポインタ
-	*/
-	const class Skeleton* CreateSkeleton(const char* _fileName);
-	
-	/*
-	@brief  アニメーションの取得
-	@param _fileName アニメーションへのアドレス
-	@return スケルトンアニメーションクラスのポインタ
-	*/
-	const class Animation* CreateAnimation(const char* _fileName, bool _loop);
-
-	/*
-	@brief  メッシュの取得
-	@param	_fileName 取得したいメッシュのファイル名
-	@return Meshクラスのポインタ
-	*/
-	Mesh* CreateMesh(const std::string& _fileName);
-
-	/*
 	@brief	平行光源の構造体を取得する
 	@return	DirectionalLight（平行光源の構造体）
 	*/
@@ -481,27 +352,6 @@ public: //ゲッターセッター
 	unsigned int GetUndefineTexID() const { return undefineTexID; }
 
 	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeTexture(int _time);
-
-	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（黒）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeBlackTexture(int _time);
-
-	/*
-	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（赤）
-	@param	カウントダウンタイム
-	@return カウントダウンタイムごとのTimeTexture
-	*/
-	Texture* GetTimeRedTexture(int _time);
-
-	/*
 	@brief	ビュー行列を設定する
 	@param	_view ビュー行列
 	*/
@@ -524,4 +374,19 @@ public: //ゲッターセッター
 	@param	カメラの前方ベクトル
 	*/
 	void SetCameraForawrd(Vector3 _vec) { cameraForwardVec = _vec; }
+	
+	// アクティブスカイボックス
+	void SetActiveSkyBox(class CubeMapComponent* in_skyBox) { activeSkyBox = in_skyBox; }
+
+	/*
+	@brief	使用するCubeMapComponentクラスのポインタを取得
+	@return	使用するCubeMapComponentクラスのポインタ
+	*/
+	class CubeMapComponent* GetSkyBox() { return activeSkyBox; }
+
+	/*
+	@brief	キューブマップで使用するVertexArrayを取得
+	@param	キューブマップで使用するVertexArray
+	*/
+	class VertexArray* GetCubeMapVerts() { return cubeVerts; }
 };

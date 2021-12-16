@@ -2,9 +2,9 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "StageUnSelectIcon.h"
-#include "RenderingObjectManager.h"
 #include "SpriteComponent.h"
 #include "StageSelectSceneUI.h"
+#include "GraphicsResourceManager.h"
 
 /*
 @fn コンストラクタ
@@ -56,7 +56,7 @@ StageUnSelectIcon::StageUnSelectIcon(StageSelectSceneUI* _owner, SceneState _sta
 	// spriteComponenをnewする
 	sprite = new SpriteComponent(this, false);
 	// 背景テクスチャをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture(_spriteFileName);
+	Texture* tex = GRAPHICS_RESOURCE->CreateTexture(_spriteFileName);
 	// 背景テクスチャをセット
 	sprite->SetTexture(tex);
 	// 映す映さないをセット

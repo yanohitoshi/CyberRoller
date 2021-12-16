@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "Mesh.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 #include "Texture.h"
 #include "VertexArray.h"
 #include <fstream>
@@ -58,7 +58,7 @@ Mesh::~Mesh()
 @param _renderer Rendererクラスのポインタ
 @return true : 成功 , false : 失敗
 */
-bool Mesh::Load(const std::string & _fileName, RenderingObjectManager* _renderer)
+bool Mesh::Load(const std::string & _fileName, GraphicsResourceManager* _renderer)
 {
 	std::ifstream file(_fileName);
 	if (!file.is_open())
@@ -317,11 +317,11 @@ int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, con
 		if (texName != noneTexture)
 		{
 			// texturenameでのtexture読み込み
-			t = RENDERING_OBJECT_MANAGER->CreateTexture(texName);
+			t = GRAPHICS_RESOURCE->CreateTexture(texName);
 			// tがnullptrの場合デフォルトを入れる
 			if (t == nullptr)
 			{
-				t = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/Default.png");
+				t = GRAPHICS_RESOURCE->CreateTexture("Assets/Default.png");
 			}
 			// IDを返す
 			return t->GetTextureID();

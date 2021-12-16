@@ -2,10 +2,10 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ResultSwitchObject.h"
+#include "GraphicsResourceManager.h"
 #include "Skeleton.h"
 #include "ChangeColorMeshComponent.h"
 #include "Mesh.h"
-#include "RenderingObjectManager.h"
 #include "Shader.h"
 #include "BoxCollider.h"
 #include "MainCameraObject.h"
@@ -14,6 +14,7 @@
 #include "SwitchEffectMakeManeger.h"
 #include "FirstStageUI.h"
 #include <string>
+
 
 /*
 @fn コンストラクタ
@@ -38,7 +39,7 @@ ResultSwitchObject::ResultSwitchObject(GameObject* _owner, const Vector3& _size,
 	//モデル描画用のコンポーネント
 	meshComponent = new ChangeColorMeshComponent(this, false, true);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Environment/Switch/model/S_EnergyCube.gpmesh"));
+	meshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Environment/Switch/model/S_EnergyCube.gpmesh"));
 	luminance = 0.2f;
 	//Z軸を90度回転させる
 	float radian = Math::ToRadians(_angle);

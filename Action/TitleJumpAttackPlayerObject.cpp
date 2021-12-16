@@ -4,9 +4,9 @@
 #include "TitleJumpAttackPlayerObject.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-#include "RenderingObjectManager.h"
 #include "TitlePlayerObject.h"
 #include "JumpAttackEffectManager.h"
+#include "GraphicsResourceManager.h"
 
 /*
 @fn コンストラクタ
@@ -25,7 +25,7 @@ TitleJumpAttackPlayerObject::TitleJumpAttackPlayerObject(TitlePlayerObject* _own
 	SetScale(_size);
 
 	meshComponent = new MeshComponent(this, false, false);
-	meshComponent->SetMesh(RENDERING_OBJECT_MANAGER->CreateMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
+	meshComponent->SetMesh(GRAPHICS_RESOURCE->CreateMesh("Assets/Model/Player/JumpAttackPlayerModel/JumpAttackPlayer.gpmesh"));
 	meshComponent->SetVisible(false);
 	//メッシュ情報取得
 	mesh = meshComponent->GetMesh();

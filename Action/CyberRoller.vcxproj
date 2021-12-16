@@ -333,7 +333,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="JumpSwitchObject.cpp" />
     <ClCompile Include="JumpTutorialParticl.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainCameraObject.cpp" />
+    <ClCompile Include="MainCameraObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
@@ -586,7 +589,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="JumpSwitchObject.h" />
     <ClInclude Include="JumpTutorialParticl.h" />
-    <ClInclude Include="MainCameraObject.h" />
+    <ClInclude Include="MainCameraObject.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Math.h" />
     <ClInclude Include="MatrixPalette.h" />
     <ClInclude Include="Mesh.h" />

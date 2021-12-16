@@ -18,7 +18,7 @@ class BaseScene
 public:
 
 	// コンストラクタ
-	BaseScene() 
+	BaseScene()
 	: MaxLight(0.8f)
 	, ClearToChangeSceneTime(360)
 	, ChoiceContinueCount(90)

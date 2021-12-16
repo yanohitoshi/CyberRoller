@@ -2,7 +2,7 @@
 //	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "ContinueSprite.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 #include "SpriteComponent.h"
 #include "CountDownFont.h"
 #include "TimeUpSprite.h"
@@ -21,7 +21,7 @@ ContinueSprite::ContinueSprite()
 	// ポジションをセット
 	SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	// textureをロード
-	Texture* tex = RENDERING_OBJECT_MANAGER->CreateTexture("Assets/sprite/information/continue.png");
+	Texture* tex = GRAPHICS_RESOURCE->CreateTexture("Assets/sprite/information/continue.png");
 	// SpriteComponentを初期化
 	sprite = new SpriteComponent(this,false);
 	sprite->SetTexture(tex);

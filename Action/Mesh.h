@@ -6,12 +6,29 @@
 #include <string>
 #include "Math.h"
 #include "Collision.h"
-#include "RenderingObjectManager.h"
+#include "GraphicsResourceManager.h"
 
 // クラスの前方宣言
-class RenderingObjectManager;
+class GraphicsResourceManager;
 class VertexArray;
 class Texture;
+
+/*
+@enum textureステージの列挙
+*/
+enum class TextureStage
+{
+	// ディフーズマップ
+	DIFFUSE_MAP,
+	// ノーマルマップ
+	NORMAL_MAP,
+	// スペキュラマップ
+	SPECULAR_MAP,
+	// エミッシブマップ
+	EMISSIVE_MAP,
+	// シャドウマップ
+	SHADOW_MAP
+};
 
 /*
 @file Mesh.h
@@ -39,7 +56,7 @@ public:
 	@param	_renderer Rendererクラスのポインタ
 	@return true : 成功 , false : 失敗
 	*/
-    bool Load(const std::string& _fileName, RenderingObjectManager* _renderer);
+    bool Load(const std::string& _fileName, GraphicsResourceManager* _renderer);
 
 	/*
 	@brief  ロードしたメッシュデータの解放
