@@ -266,6 +266,8 @@ private:
 	const float LightProjectionNear;
 	// ライトプロジェクションの遠距離の定数
 	const float LightProjectionFar;
+	// ライト空間行列を作る際にプレイヤーの位置から少しずらすための値定数
+	const float LightViewInclineValue;
 
 
 	//スクリーンの横幅

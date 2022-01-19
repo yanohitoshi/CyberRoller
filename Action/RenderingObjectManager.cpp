@@ -57,6 +57,7 @@ RenderingObjectManager::RenderingObjectManager()
 	, LightProjectionHight(20000.0f)
 	, LightProjectionNear(1.0f)
 	, LightProjectionFar(20000.0f)
+	, LightViewInclineValue(10.0f)
 	, ShiftLightPositionZ(7000.0f)
 	, ShiftLightPositionX(500.0f)
 {
@@ -653,7 +654,7 @@ void RenderingObjectManager::BakeDepthMap()
 	// ライト用プロジェクション作成
 	lightProjection = Matrix4::CreateOrtho(LightProjectionWhidth, LightProjectionHight, LightProjectionNear, LightProjectionFar);
 	// ビュー行列の更新
-	lightView = Matrix4::CreateLookAt(LightPos, Vector3(playerPos.x - 10.0f, playerPos.y - 10.0f, playerPos.z), Vector3::UnitX);
+	lightView = Matrix4::CreateLookAt(LightPos, Vector3(playerPos.x - LightViewInclineValue, playerPos.y - LightViewInclineValue, playerPos.z), Vector3::UnitX);
 	// ライト空間行列を計算
 	lightSpeceMatrix = lightView * lightProjection;
 

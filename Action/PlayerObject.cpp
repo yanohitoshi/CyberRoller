@@ -40,7 +40,7 @@
 #include "PlayerObjectStateFallDead.h"
 #include "PlayerObjectStateExplosionBlowAway.h"
 #include "JumpAttackPlayerObject.h"
-
+#include "RenderingObjectManager.h"
 #include "ParticleComponent.h"
 
 // 定数と静的メンバーの初期化
@@ -352,8 +352,8 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		mainCamera->ResetCamera();
 	}
 
-	//// RENDERERに現在のポジションを送る
-	//GRAPHICS_RESOURCE->SetPlayerPositon(position);
+	// RENDERERに現在のポジションを送る
+	RENDERING_OBJECT_MANAGER->SetPlayerPositon(position);
 	
 	// フレームの最後に接地判定と押されている速度を初期化
 	onGround = false;

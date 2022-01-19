@@ -44,7 +44,6 @@ public:
     @brief  インスタンスを取得する
     @return AudioManagerクラスのインスタンス
     */
-
     static GraphicsResourceManager* GetInstance() { return graphicsResource; }
 
     /*
@@ -156,7 +155,11 @@ private:
     // キューブマップ
     class CubeMapComponent* activeSkyBox; // 有効な(描画する)スカイボックス
 
-
+    /*
+    @brief シェーダ読み込み処理
+    @param	_vertName 読み込むvertexシェーダーのファイル名
+    @param	_fragName 読み込むfragmentシェーダーのファイル名
+    */
     Shader* LoadShader(const std::string& _vertName, const std::string& _fragName);
 
     /*
@@ -194,6 +197,11 @@ public:
     */
     Texture* GetTimeRedTexture(int _time);
 
+    /*
+    @brief	使用するシェーダーを取得する
+    @param	使用するシェーダーの種類を判別するタグ
+    @return 使用するシェーダー
+    */
     Shader* FindUseShader(ShaderTag _shaderTag);
 
 };

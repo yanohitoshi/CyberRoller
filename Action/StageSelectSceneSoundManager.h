@@ -67,6 +67,8 @@ private:
 
 	// デッドスペース定数
 	const float InputDeadSpace;
+	// 連続でステージの選択が切り替わらないようにするための待ち時間定数
+	const int SelectDelay;
 
 public:
 

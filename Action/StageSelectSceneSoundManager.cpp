@@ -12,6 +12,7 @@
 StageSelectSceneSoundManager::StageSelectSceneSoundManager()
 	: GameObject(false, Tag::AUDIO)
 	, InputDeadSpace(0.3f)
+	, SelectDelay(30)
 {
 	// •Ï”‰Šú‰»
 	isAnalogStickSelect = false;
@@ -86,7 +87,7 @@ void StageSelectSceneSoundManager::GameObjectInput(const InputState& _keyState)
 	{
 		++selectCount;
 
-		if (selectCount >= 30)
+		if (selectCount >= SelectDelay)
 		{
 			isAnalogStickSelect = false;
 			selectCount = 0;

@@ -701,7 +701,9 @@
     <ClCompile Include="FourthStageCreator.cpp">
       <Filter>StageCreator</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsResourceManager.cpp" />
+    <ClCompile Include="GraphicsResourceManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -1412,7 +1414,9 @@
     <ClInclude Include="FourthStageCreator.h">
       <Filter>StageCreator</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsResourceManager.h" />
+    <ClInclude Include="GraphicsResourceManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

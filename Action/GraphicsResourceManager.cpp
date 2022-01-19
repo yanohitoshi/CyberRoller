@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "GraphicsResourceManager.h"
 #include "Shader.h"
 #include "VertexArray.h"
@@ -14,6 +17,9 @@
 
 GraphicsResourceManager* GraphicsResourceManager::graphicsResource = nullptr;
 
+/*
+@brief  インスタンスを作成する
+*/
 void GraphicsResourceManager::CreateInstance()
 {
 	// 作られていなかったら生成
@@ -23,6 +29,9 @@ void GraphicsResourceManager::CreateInstance()
 	}
 }
 
+/*
+@brief  インスタンスを削除する
+*/
 void GraphicsResourceManager::DeleteInstance()
 {
 	// 削除されていなかったら削除
@@ -33,6 +42,10 @@ void GraphicsResourceManager::DeleteInstance()
 	}
 }
 
+/*
+@fn 終了処理関数
+@brief 生成したMusic・Soundの解放処理を行う
+*/
 void GraphicsResourceManager::ShutDown()
 {
 	// すべてのテクスチャのデータを解放
@@ -75,6 +88,9 @@ void GraphicsResourceManager::ShutDown()
 	shaders.clear();
 }
 
+/*
+@fn コンストラクタ
+*/
 GraphicsResourceManager::GraphicsResourceManager()
 	: MaxTimeFontTextures(501)
 	, TimeFontSize(72)
@@ -84,19 +100,27 @@ GraphicsResourceManager::GraphicsResourceManager()
 	if (!LoadShaders())
 	{
 		SDL_Log("Failed to load shaders.");
-		//return false;
 	}
 
 	// カウントダウンタイム用texture生成
 	CreateTimeFontTexture(MaxTimeFontTextures, TimeFontSize);
 }
 
+/*
+@fn デストラクタ
+@brife 保持している全てのResourceを解放する
+*/
 GraphicsResourceManager::~GraphicsResourceManager()
 {
 	// 後片付け
 	ShutDown();
 }
 
+/*
+@brief	時間制限用textureの生成
+@param	_value　最大値
+@param _fontSize　フォントサイズ
+*/
 void GraphicsResourceManager::CreateTimeFontTexture(int _value, int _fontSize)
 {
 	// フォントの生成
@@ -132,6 +156,11 @@ void GraphicsResourceManager::CreateTimeFontTexture(int _value, int _fontSize)
 	}
 }
 
+/*
+@brief  テクスチャの取得
+@param	_fileName　取得したいテクスチャのファイル名
+@return Textureクラスのポインタ
+*/
 Texture* GraphicsResourceManager::CreateTexture(const std::string& _fileName)
 {
 	Texture* texture = nullptr;
@@ -160,6 +189,11 @@ Texture* GraphicsResourceManager::CreateTexture(const std::string& _fileName)
 	return texture;
 }
 
+/*
+@brief  フォントの取得
+@param	_fileName　取得したいフォントのファイル名
+@return Fontクラスのポインタ
+*/
 Font* GraphicsResourceManager::CreateFont(const std::string& _fileName)
 {
 	Font* font = nullptr;
@@ -188,6 +222,11 @@ Font* GraphicsResourceManager::CreateFont(const std::string& _fileName)
 	return font;
 }
 
+/*
+@brief  スケルトンモデルの取得
+@param _fileName モデルへのアドレス
+@return スケルトンモデルクラスのポインタ
+*/
 const Skeleton* GraphicsResourceManager::CreateSkeleton(const char* _fileName)
 {
 	//すでに作成されてないか調べる
@@ -213,6 +252,11 @@ const Skeleton* GraphicsResourceManager::CreateSkeleton(const char* _fileName)
 	}
 }
 
+/*
+@brief  アニメーションの取得
+@param _fileName アニメーションへのアドレス
+@return スケルトンアニメーションクラスのポインタ
+*/
 const Animation* GraphicsResourceManager::CreateAnimation(const char* _fileName, bool _loop)
 {
 	//すでに作成されてないか調べる
@@ -237,7 +281,11 @@ const Animation* GraphicsResourceManager::CreateAnimation(const char* _fileName,
 	}
 }
 
-
+/*
+@brief  メッシュの取得
+@param	_fileName 取得したいメッシュのファイル名
+@return Meshクラスのポインタ
+*/
 Mesh* GraphicsResourceManager::CreateMesh(const std::string& _fileName)
 {
 	Mesh* m = nullptr;
@@ -264,57 +312,133 @@ Mesh* GraphicsResourceManager::CreateMesh(const std::string& _fileName)
 	return m;
 }
 
+/*
+@brief  シェーダーの読み込み
+@return true : 成功 , false : 失敗
+*/
 bool GraphicsResourceManager::LoadShaders()
 {
 	// 格納用シェーダー
 	Shader* shader = nullptr;
+
+	// スプライトシェーダー
 	shader = LoadShader("Shaders/Sprite.vert", "Shaders/Sprite.frag");
+
+	if (shader == nullptr)
+	{
+		printf("スプライトシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SPRITE);
 
+
 	// switch用シェーダーの作成(色変更可能シェーダー)
 	shader = LoadShader("Shaders/shadowmap.vert", "Shaders/switch.frag");
+
+	if (shader == nullptr)
+	{
+		printf("switch用シェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SWITCH);
 
+
 	// スカイボックス用シェーダーをロード
 	shader = LoadShader("Shaders/gBuffer_SkyBox.vert", "Shaders/gBuffer_SkyBox.frag");
+
+	if (shader == nullptr)
+	{
+		printf("スカイボックス用シェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SKYBOX);
 
 	//particleシェーダーをロード
 	shader = LoadShader("Shaders/Phong.vert", "Shaders/Particle.frag");
+
+	if (shader == nullptr)
+	{
+		printf("particleシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::PARTICLE);
 
 	// ジオメトリインスタンスを適用した描画用シェーダをロード
 	shader = LoadShader("Shaders/GeometryInstance.vert", "Shaders/shadowmap.frag");
+	
+	if (shader == nullptr)
+	{
+		printf("ジオメトリインスタンスシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::GEOMETRY_INSTANCE);
 
 	// デプスマップ焼き用シェーダをロード(アニメーションなし)
 	shader = LoadShader("Shaders/depthmap.vert", "Shaders/depthmap.frag");
+	
+	if (shader == nullptr)
+	{
+		printf("デプスマップシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::DEPTH);
 
 	// シャドウを適用した描画用シェーダをロード(アニメーションなし)
 	shader = LoadShader("Shaders/shadowmap.vert", "Shaders/shadowmap.frag");
+	
+	if (shader == nullptr)
+	{
+		printf("シャドウマップシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SHADOW);
 
 	// デプスマップ焼き用シェーダをロード (アニメーションあり)
 	shader = LoadShader("Shaders/SkinnedDepth.vert", "Shaders/depthmap.frag");
+	
+	if (shader == nullptr)
+	{
+		printf("スケルタルデプスマップシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SKINNED_DEPTH);
 
 	// シャドウを適用した描画用シェーダをロード(アニメーションあり)
 	shader = LoadShader("Shaders/SkinnedShadow.vert", "Shaders/SkinnedShadow.frag");
+	
+	if (shader == nullptr)
+	{
+		printf("スケルタルシャドウシェーダー読み込み失敗\n");
+		return false;
+	}
+
 	// 格納
 	AddShaderMap(shader, ShaderTag::SKINNED_SHADOW);
 
 	return true;
 }
 
+/*
+@brief シェーダ読み込み処理
+@param	_vertName 読み込むvertexシェーダーのファイル名
+@param	_fragName 読み込むfragmentシェーダーのファイル名
+*/
 Shader* GraphicsResourceManager::LoadShader(const std::string& _vertName, const std::string& _fragName)
 {
 	// 生成用シェーダー
@@ -330,6 +454,11 @@ Shader* GraphicsResourceManager::LoadShader(const std::string& _vertName, const 
 	return shader;
 }
 
+/*
+@brief シェーダをまとめているコンテナに格納する
+@param	_shader 追加するシェーダークラスのポインタ
+@param	_shaderTag 鍵となるシェーダーの種類を判別するタグ
+*/
 void GraphicsResourceManager::AddShaderMap(Shader* _shader, ShaderTag _shaderTag)
 {
 	//マップの中に追加するシェーダーのコンテナがあるかどうかを調べる
@@ -377,6 +506,11 @@ Texture* GraphicsResourceManager::GetTimeRedTexture(int _time)
 	return timeRedFontTextures[_time + 1];
 }
 
+/*
+@brief	使用するシェーダーを取得する
+@param	使用するシェーダーの種類を判別するタグ
+@return 使用するシェーダー
+*/
 Shader* GraphicsResourceManager::FindUseShader(ShaderTag _shaderTag)
 {
 	//マップの中に追加するシェーダーのコンテナがあるかどうかを調べる
