@@ -7,6 +7,7 @@
 #include "SpriteComponent.h"
 #include "CountDownBackFont.h"
 #include "WarningSprite.h"
+#include "PlayerObject.h"
 
 // 静的メンバーの初期化
 bool CountDownFont::timeOverFlag = false;
@@ -16,7 +17,7 @@ bool CountDownFont::countStartFlag = false;
 @brief	コンストラクタ
 @param	カウントする時間
 */
-CountDownFont::CountDownFont(int _time)
+CountDownFont::CountDownFont(PlayerObject* _playerObject,int _time)
 	: GameObject(false,Tag::UI)
 	, AddTimeCount(60)
 	, ChangeColorCount(30)
@@ -28,9 +29,10 @@ CountDownFont::CountDownFont(int _time)
 	// SpriteComponentの初期化
 	sprite = new SpriteComponent(this,false,110);
 	sprite->SetAlpha(1.0f);
-
+	playerObject = _playerObject;
+	isCountDown = false;
 	// カウントダウンフォントの影を作るためのバックフォントを生成
-	new CountDownBackFont(_time);
+	new CountDownBackFont(this,_time);
 	// 時間表示textureクラスを生成
 	new TimeSprite();
 
@@ -55,8 +57,10 @@ CountDownFont::~CountDownFont()
 */
 void CountDownFont::UpdateGameObject(float _deltaTime)
 {
+	isCountDown = countStartFlag == true && !playerObject->GetClearFlag();
+
 	// ゲームスタートしたらカウント開始
-	if (countStartFlag == true)
+	if (isCountDown)
 	{
 		// フレームカウントを数える
 		frameCount++;

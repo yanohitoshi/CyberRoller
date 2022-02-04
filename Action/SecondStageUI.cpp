@@ -34,7 +34,7 @@ SecondStageUI::SecondStageUI(PlayerObject* _playerObject, CollectionObject* _fir
 	, ThirdCollectionPosition(Vector3(150.0f, -200.0f, 0.0f))
 {
 	// カウントダウン
-	new CountDownFont(SceneTime);
+	new CountDownFont(_playerObject, SceneTime);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

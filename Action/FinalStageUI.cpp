@@ -33,7 +33,7 @@ FinalStageUI::FinalStageUI(PlayerObject* _playerObject, CollectionObject* _first
 	, ThirdCollectionPosition(Vector3(150.0f, -200.0f, 0.0f))
 {
 	// カウントダウン
-	new CountDownFont(SceneTime);
+	new CountDownFont(_playerObject,SceneTime);
 	// start時のカウントダウン
 	new StartCountDownSprite();
 	// タイムアップ時のsprite

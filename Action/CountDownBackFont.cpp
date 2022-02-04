@@ -11,7 +11,7 @@
 @brief	コンストラクタ
 @param	カウントする時間
 */
-CountDownBackFont::CountDownBackFont(int _time)
+CountDownBackFont::CountDownBackFont(CountDownFont* _owner,int _time)
 	: GameObject(false, Tag::UI)
 	, AddTimeCount(60)
 {
@@ -22,6 +22,7 @@ CountDownBackFont::CountDownBackFont(int _time)
 	sprite->SetAlpha(1.0f);
 	// メンバー変数初期化
 	time = _time;
+	owner = _owner;
 }
 
 /*
@@ -40,7 +41,7 @@ CountDownBackFont::~CountDownBackFont()
 void CountDownBackFont::UpdateGameObject(float _deltaTime)
 {
 	// ゲームスタートしたらカウント開始
-	if (CountDownFont::GetCountStartFlag() == true)
+	if (owner->GetIsCountDown())
 	{
 		// フレームカウントを数える
 		frameCount++;

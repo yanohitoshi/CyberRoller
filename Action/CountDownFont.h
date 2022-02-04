@@ -22,7 +22,7 @@ public:
     @brief	コンストラクタ
     @param	カウントする時間
     */
-    CountDownFont(int _time);
+    CountDownFont(PlayerObject* _playerObject,int _time);
     
     /*
     @fn デストラクタ
@@ -46,13 +46,14 @@ private:
 
     // SpriteComponent変数
     SpriteComponent* sprite;
+    PlayerObject* playerObject;
     // フレームカウント
     int frameCount;
     // 計測する時間
     int time;
     // WarningSpriteClassを起動するかどうかフラグ
     bool warningFlag;
-
+    bool isCountDown;
     // 時間を1進めるタイミングを比較する定数
     const int AddTimeCount;
     // 時間制限の色を変更するタイミングを比較する定数
@@ -94,5 +95,12 @@ public://ゲッターセッター
     @return	WarningSpriteClassを起動するかどうかフラグ
     */
     bool GetWarningFlag() const { return warningFlag; }
+
+    /*
+    @fn isCountDownのgetter関数
+    @brief	isCountDownを取得
+    @return	カウントダウンを行うかどうか
+    */
+    bool GetIsCountDown() const { return isCountDown; }
 
 };

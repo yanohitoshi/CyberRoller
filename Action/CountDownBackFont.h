@@ -8,6 +8,7 @@
 class SpriteComponent;
 class Texture;
 class Font;
+class CountDownFont;
 
 /*
 @file CountDownBackFont.h
@@ -22,7 +23,7 @@ public:
     @brief	コンストラクタ
     @param	カウントする時間
     */
-    CountDownBackFont(int _time);
+    CountDownBackFont(CountDownFont* _owner,int _time);
     
     /*
     @fn デストラクタ
@@ -41,6 +42,7 @@ private:
 
     // SpriteComponent変数
     SpriteComponent* sprite;
+    CountDownFont* owner;
     // フレームカウント
     int frameCount;
     // 計測する時間
